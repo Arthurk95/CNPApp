@@ -3,11 +3,35 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <br>
     <p>Hello World</p>
+    <label id='test' >predb</label>
+    <script>
+      function httpGetAsync(theUrl, callback)
+      {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+          {
+              console.log(xmlHttp);
+              callback(xmlHttp.responseText);
+          }
+        }
+        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+        xmlHttp.send(null);
+      }
+      httpGetAsync(window.location.href+"myvar",reportData);
+      function reportData(datum)
+      {
+        console.log("hello");
+        console.log(datum);
+        document.getElementById('test').innerHTML = datum;
+      }
+    </script>
   </body>
 </html>
