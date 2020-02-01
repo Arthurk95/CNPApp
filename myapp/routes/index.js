@@ -11,7 +11,7 @@ router.get('/myvar', function(req, res){
   var sql = "SELECT * from customers;";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    res.send(JSON.stringify(result));
+    res.send(result);
   });
  });
 module.exports = router;
