@@ -5,4 +5,30 @@ body {
 a {
   color: #00B7FF; }
 
+#bt {
+  text-align: center;
+}  
+
+.bt-students {
+  display: inline-block;
+}
+
+.bt-act {
+  display: inline-block;
+}
+
+.bt-email {
+  display: inline-block;
+}
+
+.bt-admin {
+  display: inline-block;
+}
+
+button {
+  float: center;
+  height: 300px; width: 300px;
+  font-size: 30px;
+  }
+
 /*# sourceMappingURL=style.css.map */
