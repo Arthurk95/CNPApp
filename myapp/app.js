@@ -9,7 +9,7 @@ con = sql.createConnection({host:"67.187.241.191",user:"hannah",password:"passwo
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var studentsRouter = require('./router/students');
+var studentsRouter = require('./routes/students');
 
 var app = express();
 
