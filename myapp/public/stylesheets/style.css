@@ -1,34 +1,50 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
+}
 
-a {
-  color: #00B7FF; }
-
-#bt {
+/* Base button style class. No background with a colored border.
+    Each button (<a> tag) should use this as the base */
+.mainButtonStyle {
+  background-color:white;
+  text-decoration: none;
+  border-radius:20px;
+  padding: 30% 0;
+  border: 3px solid;
+  border-color: #25333F;
+  color:black;
+  font-size: 40px;
+  font-family:sans-serif;
   text-align: center;
-}  
-
-.bt-students {
-  display: inline-block;
 }
 
-.bt-act {
-  display: inline-block;
+.mainButtonStyle:hover {
+  background: #25333F;
+  color: white; }
+
+/* Classes below change the color of buttons from default */
+.button1 {border-color: #652E2E; }
+.button1:hover {background: #652E2E; color: white; }
+
+.button2 { border-color: #72572A; }
+.button2:hover { background: #72572A; color: white; }
+
+.button3 { border-color: #1C5946; }
+.button3:hover { background: #1C5946; color: white; }
+
+.button4 { border-color: #1B5614; }
+.button4:hover { background: #1B5614; color: white; }
+
+.buttonAreaGrid{
+  display: grid;
+  grid-template-rows: 400px 400px;
+  grid-template-columns: 400px 400px;
+  grid-gap: 1em;
+  justify-items: stretch;
+  justify-content: center;
+  align-items: center;
 }
 
-.bt-email {
-  display: inline-block;
-}
 
-.bt-admin {
-  display: inline-block;
-}
-
-button {
-  float: center;
-  height: 300px; width: 300px;
-  font-size: 30px;
-  }
 
 /*# sourceMappingURL=style.css.map */

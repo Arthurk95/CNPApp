@@ -2,5 +2,53 @@ body
   padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 
-a
-  color: #00B7FF
+/* Base button style class. No background with a colored border.
+    Each button (<a> tag) should use this as the base */
+.mainButtonStyle
+  transition: 0.4s all
+  background: white
+  padding: 4em 4em
+  font-family: "Arial", sans-serif
+  font-weight: 600
+  border-radius: 20px /* Adds rounded borders */
+  border: 2px solid
+  border-color: #25333F
+  color: black /* Text color */
+  width: 4em
+  height: 4em
+  text-decoration: none /* Remove default <a> tag styling */
+  margin: 10px
+
+
+.mainButtonStyle:hover
+  background: #25333F 
+  color: white
+
+/* Classes below change the color of buttons from default */
+.button1 
+  border-color: #652E2E
+.button1:hover
+  background: #652E2E
+  color: white
+
+.button2
+  border-color: #72572A
+.button2:hover
+  background: #72572A
+  color: white
+
+.button3 
+  border-color: #1C5946
+.button3:hover
+  background: #1C5946
+  color: white
+
+.button4
+  border-color: #1B5614
+.button4:hover
+  background: #1B5614
+  color: white
+
+.buttonArea
+  text-align: center
+  display: block
