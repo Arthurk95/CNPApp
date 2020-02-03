@@ -9,9 +9,9 @@ body {
   background-color:white;
   text-decoration: none;
   border-radius:20px;
-  padding: 30% 0;
   border: 3px solid;
   border-color: #25333F;
+  padding: 40% 0;
   color:black;
   font-size: 40px;
   font-family:sans-serif;
@@ -37,12 +37,12 @@ body {
 
 .buttonAreaGrid{
   display: grid;
-  grid-template-rows: 400px 400px;
-  grid-template-columns: 400px 400px;
+  grid-template-rows: 20em 20em;
+  grid-template-columns: 20em 20em;
   grid-gap: 1em;
   justify-items: stretch;
   justify-content: center;
-  align-items: center;
+
 }
 
 
