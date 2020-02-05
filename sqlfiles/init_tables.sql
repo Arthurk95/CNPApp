@@ -17,7 +17,7 @@ CREATE TABLE Relatives (
 
 CREATE TABLE ClassSession (
     StudentId INT NOT NULL,
-    CurrentDate DATE DEFAULT (getdate()),
+    CurrentDate DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (StudentId) REFERENCES Students(StudentId),
     PRIMARY KEY(StudentId, CurrentDate)
 );
@@ -32,17 +32,20 @@ CREATE TABLE DailyActivites (
     StudentId INT NOT NULL,
     CurrentDate DATE NOT NULL,
     ActivityId INT NOT NULL,
-    CurrentTime DATETIME DEFAULT (getdate()),
-    FOREIGN KEY (CurrentDate) REFERENCES ClassSession(CurrentDate),
-    FOREIGN KEY (StudentID) REFERENCES Students(StudentId),
+    CurrentTime TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
+    FOREIGN KEY (StudentId, CurrentDate) REFERENCES ClassSession(StudentId, CurrentDate),
     FOREIGN KEY (ActivityId) REFERENCES Activities(ActivityId),
-    PRIMARY KEY(StudentID, CurrentDate, CurrentTime)
+    PRIMARY KEY(StudentId, CurrentDate, CurrentTime)
 );
 
 CREATE TABLE Behavior (
 	StudentId INT NOT NULL,
     CurrentDate DATE NOT NULL,
-    FOREIGN KEY (StudentId) REFERENCES Students(StudentId),
+    SleepingPattern VARCHAR(255),
+    EatingHabits VARCHAR(255),
+    Attitude VARCHAR(255),
+    RestRoomActivity VARCHAR(255),
+    FOREIGN KEY (StudentId, CurrentDate) REFERENCES ClassSession(StudentId, CurrentDate),
     PRIMARY KEY(StudentId, CurrentDate)
 );
 
@@ -51,8 +54,7 @@ CREATE TABLE DailyStudentNotes (
     CurrentDate DATE NOT NULL,
     StudentNoteId INT NOT NULL AUTO_INCREMENT,
     NoteContent VARCHAR(512),
-    FOREIGN KEY (StudentId) REFERENCES Students(StudentId),
-    FOREIGN KEY (CurrentDate) REFERENCES ClassSession(CurrentDate),
+    FOREIGN KEY (StudentId, CurrentDate) REFERENCES ClassSession(StudentId, CurrentDate),
     PRIMARY KEY (StudentId, CurrentDate, StudentNoteId)
 );
 
