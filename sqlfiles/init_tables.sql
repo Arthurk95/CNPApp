@@ -52,7 +52,7 @@ CREATE TABLE Behavior (
 CREATE TABLE DailyStudentNotes (
 	StudentId INT NOT NULL,
     CurrentDate DATE NOT NULL,
-    StudentNoteId INT NOT NULL AUTO_INCREMENT,
+    StudentNoteId INT NOT NULL,
     NoteContent VARCHAR(512),
     FOREIGN KEY (StudentId, CurrentDate) REFERENCES ClassSession(StudentId, CurrentDate),
     PRIMARY KEY (StudentId, CurrentDate, StudentNoteId)
@@ -83,8 +83,8 @@ CREATE TABLE Administer (
 
 CREATE TABLE AdminNotes(
 	AdminId INT NOT NULL,
-	CurrentTime DATETIME NOT NULL DEFAULT (getdate()),
-    AdminNoteId INT NOT NULL AUTO_INCREMENT,
+	CurrentTime DATETIME NOT NULL DEFAULT (CURRENT_DATE),
+    AdminNoteId INT NOT NULL,
     NoteContent VARCHAR(512),
     FOREIGN KEY (AdminId) REFERENCES Administer(AdminId),
     PRIMARY KEY (AdminId, AdminNoteId)
