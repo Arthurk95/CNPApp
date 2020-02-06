@@ -25,6 +25,7 @@ CREATE TABLE ClassSession (
 CREATE TABLE Activities(
     ActivityId INT NOT NULL AUTO_INCREMENT,
     ActivityName VARCHAR(255) NOT NULL,
+	Hidden BOOL NOT NULL DEFAULT 0,
     PRIMARY KEY (ActivityID)
 );
 
