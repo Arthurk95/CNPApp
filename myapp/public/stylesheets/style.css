@@ -1,39 +1,42 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
+  background-color: #93BD59;
 }
 
 /* Base button style class. No background with a colored border.
     Each button (<a> tag) should use this as the base */
-.mainButtonStyle {
-  background-color:white;
+.mainButtonStyle{
+  background-color: #25333F;
   text-decoration: none;
   border-radius:20px;
-  border: 3px solid;
-  border-color: #25333F;
+  border: none;
   padding: 40% 0;
-  color:black;
+  color:white;
   font-size: 40px;
   font-family:sans-serif;
   text-align: center;
+  box-shadow: 0 0 8px 2px #2f2f2f;
 }
 
 .mainButtonStyle:hover {
   background: #25333F;
-  color: white; }
+  color: #F1F1F1;
+  transition: 0.4s background-color;
+}
 
 /* Classes below change the color of buttons from default */
-.button1 {border-color: #652E2E; }
-.button1:hover {background: #652E2E; color: white; }
+.button1 {background: #652E2E}
+.button1:hover { background: #401E1E }
 
-.button2 { border-color: #72572A; }
-.button2:hover { background: #72572A; color: white; }
+.button2 { background: #72572A; }
+.button2:hover { background: #3D2F17; }
 
-.button3 { border-color: #1C5946; }
-.button3:hover { background: #1C5946; color: white; }
+.button3 { background: #1C5946; }
+.button3:hover { background: #11352A; }
 
-.button4 { border-color: #1B5614; }
-.button4:hover { background: #1B5614; color: white; }
+.button4 { background: #1B5614; }
+.button4:hover { background: #143F0F; }
 
 .buttonAreaGrid{
   display: grid;
