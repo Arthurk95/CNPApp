@@ -13,5 +13,13 @@ router.get('/myvar', function(req, res){
     if (err) throw err;
     res.send(result);
   });
- });
+});
+
+/* GET home page. */
+router.get('/activities', function(req, res, next) {
+  res.render('activities', { title: 'CNP Activities'});
+});
+
+
+
 module.exports = router;
