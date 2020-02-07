@@ -3,8 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// var sql = require('mysql');
-// con = sql.createConnection({host:"67.187.241.191",user:"hannah",password:"password",database:"cnp_data"});
+var sql = require('mysql');
+con = sql.createConnection({host:"67.187.241.191",user:"hannah",password:"password",database:"cnp_data"});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,10 +12,10 @@ var studentsRouter = require('./routes/students');
 
 var app = express();
 
-//con.connect(function(err){
-//  if (err) throw err;
-//  console.log("connected!");
-//});
+con.connect(function(err){
+  if (err) throw err;
+  console.log("connected!");
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
