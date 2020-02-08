@@ -4,8 +4,31 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
-    <h1 style="text-align:center"></h1><%= title %></h1>
+    <p><a href="/">Home</a></p>
+        <% if (activities.length > 0) {%>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Activities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% activities.forEach((activity, index) => { %>
+                    <tr>
+                        <th scope="row"><%= activity.ActivityId %></th>
+                        <td><%= activity.ActivityName %></td>
+                        <td>
+                            <a href="activities/delete/<%= activity.ActivityId %>" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <h2>no activitie</h2>
+    <% } %>
   </body>
 </html>

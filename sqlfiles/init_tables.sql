@@ -2,7 +2,6 @@ CREATE TABLE Students (
     StudentId INT NOT NULL AUTO_INCREMENT,
     StudentName VARCHAR(255) NOT NULL,
     Img LONGBLOB,
-    RelativeName VARCHAR(255) NOT NULL,
     AbsentToday BOOL NOT NULL DEFAULT 0,
     PRIMARY KEY (StudentId)
 );

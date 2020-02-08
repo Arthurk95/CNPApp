@@ -8,17 +8,21 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/myvar', function(req, res){
-  var sql = "SELECT * from customers;";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
 /* GET home page. */
 router.get('/activities', function(req, res, next) {
-  res.render('activities', { title: 'CNP Activities'});
+  var activity_query = "SELECT * FROM Activities";
+  con.query(activity_query, function (err, result) {
+    if (err) throw err;
+    res.render('activities.ejs', { title: 'CNP Activities', activities: result });
+  })
+});
+
+router.get('/activities/add', function(req, res, next) {
+  res.render('students', { title: 'Add Activity'});
+});
+
+router.get('activities/delete', function(req, res, next) {
+  res.render('students', { title: 'Delete Activity'});
 });
 
 module.exports = router;
