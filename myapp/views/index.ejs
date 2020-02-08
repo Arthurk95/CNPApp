@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
+  <nav><%- include header.ejs %></nav>
   <head>
-    <!-- <title><%= title %></title> -->
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
     <script>
       function httpGetAsync(theUrl, callback)
       {
@@ -27,7 +25,6 @@
         document.getElementById('test').innerHTML = datum;
       }
     </script>
-    <h1 style="text-align:center">Creative Nature Playschool</h1>
   </head>
   <body> 
     <div class="buttonAreaGrid">
