@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+   <link rel='stylesheet' href='/stylesheets/style.css' />
+   <nav>
+      <ul class="headerStyle">
+         <li><a href="/">Home</a></li>
+         <li><a href="/students">Students</a></li>
+         <li><a href="/activities">Activities</a></li>
+         <li><a href="/admin">Admin</a></li>
+      </ul>
+   </nav>
+   <script>
+      function httpGetAsync(theUrl, callback)
+      {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() { 
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+          {
+              console.log(xmlHttp);
+              callback(xmlHttp.responseText);
+          }
+        }
+        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+        xmlHttp.send(null);
+      }
+      httpGetAsync(window.location.href+"myvar",reportData);
+      function reportData(datum)
+      {
+        console.log(datum);
+        document.getElementById('test').innerHTML = datum;
+      }
+    </script>
+</html>
