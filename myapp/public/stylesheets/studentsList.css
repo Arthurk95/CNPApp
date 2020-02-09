@@ -1,3 +1,5 @@
+/* List container for the students. 
+    Removes default list style and sets width. */
 .studentsList{
     display: block;  /* Remove bullet points; allow greater control of positioning */
     padding: 0;      /* Override defaults for lists */
@@ -7,7 +9,7 @@
     text-align: center;
 }
 
-
+/* Image in each listing with border around it */
 .studentsList img{
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #494949;
@@ -18,15 +20,17 @@
     border-spacing: 20px 20px;
 }
 
+/* This is the actual student listing itself,
+   which contains multiple elements */
 .studentsList li {
     transition: box-shadow 0.2s !important;
     transition: opacity 0.3s ease-in-out;
     background: var(--listBackgroundColor);
     border-radius: 20px;
     margin: 5px;
-    display: inline-block; /* Get all images to show in a row */
-    width: 250px;            /* Show 4 logos per row */
-    text-align: center;    /* Centre align the images */ 
+    display: inline-block;
+    width: 250px;
+    text-align: center;    
     box-shadow: 0px 0px 10px 1px #494949;
     box-shadow: inset 0px 0px 0px var(--mainBackgroundColor);
 }
@@ -34,7 +38,7 @@
 .studentsList li:hover{
     cursor: pointer;
     opacity: 0.9;
-    box-shadow: inset 0px 0px 10px var(--mainBackgroundColor);
+    box-shadow: inset 0px 0px 5px var(--mainBackgroundColor);
 }
 
 @media (max-width: 680px) {
@@ -52,11 +56,7 @@
 
 .selectedStudent{
     background-color: var(--listSecondaryBackgroundColor) !important;
-    box-shadow: inset 0px 0px 15px var(--mainBackgroundColor) !important;
-}
-
-.selectedStudent .imageOverlay{
-    opacity: 0.5;
+    box-shadow: inset 0px 0px 5px 2px var(--mainBackgroundColor) !important;
 }
 
 .imageContainer{
@@ -64,6 +64,7 @@
     width: 100%;
 }
 
+/* Green overlay that's displayed when a student is selected */
 .imageOverlay {
     border-radius: 20px;
     position: absolute;
@@ -76,11 +77,14 @@
     transition: 0.2s;
     background-color: var(--selectedStudentColor);
   }
-  
+
+  .selectedStudent .imageOverlay{ opacity: 0.5; }
+
+  /* The checkmark that's displayed over selected students */
   .icon {
     text-decoration: none;
     color: white;
-    font-size: 100px;
+    font-size: 200px;
     position: absolute;
     top: 50%;
     left: 50%;
