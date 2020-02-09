@@ -2,9 +2,9 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Roboto";
+  font-family: "Arial";
   font-size: 16px;
-  background-color: #AAAAAA;
+  background-color: #3a3a3a;
 }
 
 /* --------------- Header Styling --------------- */
@@ -51,7 +51,7 @@ body {
   font-size: 40px;
   font-family:sans-serif;
   text-align: center;
-  box-shadow: 0 0 8px 2px #2f2f2f;
+  box-shadow: 0 0 8px 2px #4f4f4f;
 }
 
 .mainButtonStyle:hover {
@@ -61,17 +61,17 @@ body {
 }
 
 /* Classes below change the color of buttons from default */
-.button1 {background: #652E2E}
-.button1:hover { background: #401E1E }
+.button1 {background: rgb(155, 71, 71)}
+.button1:hover { background: rgb(197, 92, 92) }
 
-.button2 { background: #72572A; }
-.button2:hover { background: #3D2F17; }
+.button2 { background: rgb(179, 137, 65); }
+.button2:hover { background: rgb(209, 161, 79); }
 
-.button3 { background: #1C5946; }
-.button3:hover { background: #11352A; }
+.button3 { background: rgb(49, 151, 119); }
+.button3:hover { background: rgb(66, 206, 164); }
 
-.button4 { background: #1B5614; }
-.button4:hover { background: #143F0F; }
+.button4 { background: rgb(39, 124, 29); }
+.button4:hover { background: rgb(63, 197, 48); }
 
 .buttonAreaGrid{
   display: grid;
