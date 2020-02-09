@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
    <link rel='stylesheet' href='/stylesheets/style.css' />
+   
+<body>
    <nav>
       <ul class="headerStyle">
          <li><a href="/">Home</a></li>
@@ -9,6 +11,7 @@
          <li><a href="/admin">Admin</a></li>
       </ul>
    </nav>
+  </body>
    <script>
       function httpGetAsync(theUrl, callback)
       {
@@ -30,4 +33,13 @@
         document.getElementById('test').innerHTML = datum;
       }
     </script>
+    <script>
+      let current_url = document.location;
+      var aTags = document.getElementsByTagName("a");
+      for(var i = 0; i < aTags.length; i++){
+        if(aTags[i].href == current_url){
+          aTags[i].classList += "currentPage";
+        }
+      }
+  </script>
 </html>

@@ -4,7 +4,7 @@ body {
   margin: 0px;
   font-family: "Roboto";
   font-size: 16px;
-  background-color: #93BD59;
+  background-color: #AAAAAA;
 }
 
 /* --------------- Header Styling --------------- */
@@ -28,10 +28,14 @@ body {
   color: #EEEEEE;
   text-decoration: none;
   padding: 12px 30px;
-  
 }
 
 .headerStyle a:hover{
+  background-color: #48657F;
+}
+
+/* hopefully a temporary solution. Would like to re-use the above a:hover for this */
+.currentPage {
   background-color: #48657F;
 }
 
