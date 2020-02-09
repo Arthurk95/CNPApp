@@ -3,25 +3,24 @@
   <nav><%- include header.ejs %></nav>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/students.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
-    <p><a href="/">Home</a></p>
         <% if (activities.length > 0) {%>
         <table>
             <thead>
                 <tr>
-                    <th scope="col">Activities</th>
+                    <th scope="row" colspan="3" style="text-align: center;">Activities</th>
                 </tr>
             </thead>
             <tbody>
                 <% activities.forEach((activity, index) => { %>
                     <tr>
-                        <th scope="row"><%= activity.ActivityId %></th>
+                        <td scope="row"><%= activity.ActivityId %></th>
                         <td><%= activity.ActivityName %></td>
-                        <td>
-                            <a href="activities/delete/<%= activity.ActivityId %>" class="btn btn-sm btn-danger">Delete</a>
+                        <td class="optionsColumn">
+                            <a href="activities/delete/<%= activity.ActivityId %>">Delete</a>
                         </td>
                     </tr>
                 <% }) %>
@@ -31,4 +30,12 @@
         <h2>no activitie</h2>
     <% } %>
   </body>
+  <script>
+    rows = document.getElementsByTagName("tr");
+    for(var i = 2; i < rows.length; i++){
+        if(i % 2 == 0){
+            rows[i].classList += " grayRow";
+        }
+    }
+  </script>
 </html>
