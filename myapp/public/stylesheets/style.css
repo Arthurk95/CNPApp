@@ -1,42 +1,27 @@
+:root{
+  --mainBackgroundColor: #3a3a3a; 
+  --mainTableColor: #89AA86;
+  --headerBackgroundColor: #2f2f2f;
+  --headerHoverColor: #48657F;
+  --lightTextColor: #EEEEEE;
+  
+  --listBackgroundColor: #EEEEEE;
+  --listSecondaryBackgroundColor: #e0e0e0;
+
+  --primaryShadowColor: ##494949;
+
+  --adminButtonColor: #4B4F7E;
+  --adminButtonHoverColor: #3D4067;
+  
+  --selectedStudentColor: #00A719;
+}
 
 body {
   padding: 0px;
   margin: 0px;
   font-family: "Arial";
   font-size: 16px;
-  background-color: #3a3a3a;
-}
-
-/* --------------- Header Styling --------------- */
-.headerStyle {
-  background-color: #2f2f2f;
-  font-size: 18px;
-  font-weight: 400;
-  list-style-type: none;
-  text-align: center;
-  margin-top: 0px;
-  margin-bottom: 30px;
-}
-
-.headerStyle li{
-  display: inline;
-}
-
-.headerStyle a {
-  transition: 0.2s background-color;
-  display: inline-block;
-  color: #EEEEEE;
-  text-decoration: none;
-  padding: 12px 30px;
-}
-
-.headerStyle a:hover{
-  background-color: #48657F;
-}
-
-/* hopefully a temporary solution. Would like to re-use the above a:hover for this */
-.currentPage {
-  background-color: #48657F;
+  background-color: var(--mainBackgroundColor);
 }
 
 /* Base button style class. No background with a colored border.
@@ -47,7 +32,7 @@ body {
   border-radius:20px;
   border: none;
   padding: 40% 0;
-  color:white;
+  color:var(--lightTextColor);
   font-size: 40px;
   font-family:sans-serif;
   text-align: center;
@@ -56,7 +41,7 @@ body {
 
 .mainButtonStyle:hover {
   background: #25333F;
-  color: #F1F1F1;
+  color: var(--lightTextColor);
   transition: 0.2s background-color;
 }
 
@@ -84,14 +69,14 @@ body {
 
 .adminButton{
   padding: 8px 25px;
-  background-color: #4B4F7E;
+  background-color: var(--adminButtonColor);
   border-radius: 15px;
   margin-right: 10px;
-  color: #e5e5e5;
+  color: var(--lightTextColor);
 }
 
 .adminButton:hover{
-  background-color: #3D4067;
+  background-color: var(--adminButtonHoverColor);
   cursor: pointer;
 }
 
