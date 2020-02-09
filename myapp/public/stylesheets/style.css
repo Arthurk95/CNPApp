@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap');
 :root{
   --mainBackgroundColor: #3a3a3a; 
   --mainTableColor: #89AA86;
@@ -8,18 +9,18 @@
   --listBackgroundColor: #EEEEEE;
   --listSecondaryBackgroundColor: #e0e0e0;
 
-  --primaryShadowColor: ##494949;
+  --primaryShadowColor: #494949;
 
   --adminButtonColor: #4B4F7E;
   --adminButtonHoverColor: #3D4067;
   
   --selectedStudentColor: #00A719;
+  font-family: 'Roboto Slab', sans-serif;
 }
 
 body {
   padding: 0px;
   margin: 0px;
-  font-family: "Arial";
   font-size: 16px;
   background-color: var(--mainBackgroundColor);
 }
@@ -27,36 +28,31 @@ body {
 /* Base button style class. No background with a colored border.
     Each button (<a> tag) should use this as the base */
 .mainButtonStyle{
-  background-color: #25333F;
   text-decoration: none;
   border-radius:20px;
   border: none;
   padding: 40% 0;
   color:var(--lightTextColor);
   font-size: 40px;
-  font-family:sans-serif;
   text-align: center;
   box-shadow: 0 0 8px 2px var(--primaryShadowColor);
+  box-shadow: inset 0px 0px 0px var(--mainBackgroundColor);
 }
 
 .mainButtonStyle:hover {
-  background: #25333F;
   color: var(--lightTextColor);
-  transition: 0.2s background-color;
+  opacity: 0.9;
+  box-shadow: inset 0px 0px 15px 2px var(--mainBackgroundColor);
 }
 
 /* Classes below change the color of buttons from default */
-.button1 {background: rgb(155, 71, 71)}
-.button1:hover { background: rgb(197, 92, 92) }
+.button1 {background: #86AAA7;}
 
-.button2 { background: rgb(179, 137, 65); }
-.button2:hover { background: rgb(209, 161, 79); }
+.button2 { background: #868DAA; }
 
-.button3 { background: rgb(49, 151, 119); }
-.button3:hover { background: rgb(66, 206, 164); }
+.button3 { background: #AA8689; }
 
-.button4 { background: rgb(39, 124, 29); }
-.button4:hover { background: rgb(63, 197, 48); }
+.button4 { background: #86AA87; }
 
 .buttonAreaGrid{
   display: grid;
