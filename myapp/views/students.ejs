@@ -3,48 +3,39 @@
   <nav><%- include header.ejs %></nav>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/students.css' />
+    <link rel='stylesheet' href='/stylesheets/studentsList.css' />
   </head>
   <body>
-    <p><a href="/">Back to Directory</a></p>
         <% if (students.length > 0) {%>
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Parent/Guardian</th>
-                    <th scope="col">Attending</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
+            <ul class="studentsList">
                 <% students.forEach((student, index) => { %>
+                <li onclick="selectedStudent(this)"><table>
+                    <th><img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png"></th>
                     <tr>
-                        <td scope="row"><%= student.StudentId %></th>
-                        <td><img src="/assets/img/<%= student.Img %>" class="rounded-circle player-img" alt=""></td>
                         <td><%= student.StudentName %></td>
-                        <td><%= student.RelativeName %></td>
-                        <td><%= student.AbsentToday %></td>
-                        <td>
-                            <a href="/edit/<%= student.StudentId %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
-                            <a href="/delete/<%= student.StudentId %>" class="btn btn-sm btn-danger">Delete</a>
-                        </td>
                     </tr>
+                </table></li>
                 <% }) %>
-            </tbody>
-        </table>
+            </ul>
+        
     <% } else { %>
         <h2>no students</h2>
     <% } %>
   </body>
   <script>
-      rows = document.getElementsByTagName("tr");
-      for(var i = 2; i < rows.length; i++){
-          if(i % 2 == 0){
-              rows[i].classList += " grayRow";
+      var numSelectedStudents = 0; // for use in footer later
+      // will be able to get all elements with "selectedStudent"
+      // class to add to some list of students
+      function selectedStudent(element){
+          if(element.classList.contains("selectedStudent")){
+              element.classList.remove("selectedStudent");
+              numSelectedStudents--;
           }
+          else {
+              element.classList += " selectedStudent";
+              numSelectedStudents++;
+          }
+        
       }
   </script>
 </html>
