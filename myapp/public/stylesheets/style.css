@@ -80,7 +80,19 @@ body {
   grid-gap: 1em;
   justify-items: stretch;
   justify-content: center;
+}
 
+.adminButton{
+  padding: 8px 25px;
+  background-color: #4B4F7E;
+  border-radius: 15px;
+  margin-right: 10px;
+  color: #e5e5e5;
+}
+
+.adminButton:hover{
+  background-color: #3D4067;
+  cursor: pointer;
 }
 
 /*-------------- CUSTOM DROP DOWN CLASSES --------------*/
@@ -123,4 +135,12 @@ option:hover {
   color: white !important;
 }
 
+input{
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.mainBlock div{
+  padding: 30px;
+}
 /*# sourceMappingURL=style.css.map */
