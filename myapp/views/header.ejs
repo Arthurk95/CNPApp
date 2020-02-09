@@ -12,27 +12,6 @@
       </ul>
    </nav>
   </body>
-   <script>
-      function httpGetAsync(theUrl, callback)
-      {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() { 
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-          {
-              console.log(xmlHttp);
-              callback(xmlHttp.responseText);
-          }
-        }
-        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-        xmlHttp.send(null);
-      }
-      httpGetAsync(window.location.href+"myvar",reportData);
-      function reportData(datum)
-      {
-        console.log(datum);
-        document.getElementById('test').innerHTML = datum;
-      }
-    </script>
     <script>
       let current_url = document.location;
       var aTags = document.getElementsByTagName("a");

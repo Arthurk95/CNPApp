@@ -4,34 +4,17 @@
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-      function httpGetAsync(theUrl, callback)
-      {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() { 
-          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-          {
-              console.log(xmlHttp);
-              callback(xmlHttp.responseText);
-          }
-        }
-        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-        xmlHttp.send(null);
-      }
-      httpGetAsync(window.location.href+"myvar",reportData);
-      function reportData(datum)
-      {
-        console.log(datum);
-        document.getElementById('test').innerHTML = datum;
-      }
-    </script>
+  </head>
+  <body>
+    
+    <h1 style="text-align:center">Creative Nature Playschool</h1>
   </head>
   <body> 
     <div class="buttonAreaGrid">
       <a href="/students" class="mainButtonStyle button1">Students</a>
       <a href="/activities" class="mainButtonStyle button2">Activities</a>
       <a href="" class="mainButtonStyle button3">Email</a>
-      <a href="" class="mainButtonStyle button4">Admin</a>
+      <a href="/admin" class="mainButtonStyle button4">Admin</a>
     </div>
   </body>
 </html>

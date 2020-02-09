@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div>
+        <a class="button1" id="addStu">Add student</a>
+        <a class="button2" id="addAct">Add activity</a>
+    </div>
+    <div class="main-block">
+        <form id="newStudent" style="visibility:hidden">
+          <div class="input">
+            <input type="text" id="newStudentName" placeholder="Student name">
+            <input type="text" id="newStudentContact" placeholder="Primary contact name">
+            <input type="text" id="newStudentEmail" placeholder="Primary contact email">
+          </div>
+          <a class="button3" id="newStudentSubmit">Submit </a><label id="stuStatus" style="visibility:hidden"></label>
+        </form>
+        <form id="newActivity" style="visibility:hidden">
+          <div class="input">
+            <input type="text" id="newActivityName" placeholder="Activity name">
+          </div>
+          <a class="button3" id="newActivitySubmit">Submit </a><label id="actStatus" style="visibility:hidden"></label>
+      </form>
+    </div>
+    <a class="button4" href="/">Return home</a>
+  </body>
+  <script src="/javascripts/adminScripts.js"></script>
+</html>
