@@ -7,11 +7,4 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express'});
 });
 
-router.get('/myvar', function(req, res){
-  var sql = "SELECT * from customers;";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    res.send(result);
-  });
- });
 module.exports = router;
