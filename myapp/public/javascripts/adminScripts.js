@@ -45,8 +45,12 @@ function uActStatus(datum)
 function openStudent(){
     document.getElementById("newStudent").style.visibility = "visible";
     document.getElementById("newActivity").style.visibility = "hidden";
+    document.getElementById("actStatus").style.visibility = "hidden";
+    document.getElementById("stuStatus").style.visibility = "hidden";
 }
 function openActivity(){
     document.getElementById("newActivity").style.visibility = "visible";
     document.getElementById("newStudent").style.visibility = "hidden";
+    document.getElementById("actStatus").style.visibility = "hidden";
+    document.getElementById("stuStatus").style.visibility = "hidden";
 }
