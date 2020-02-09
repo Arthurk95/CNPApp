@@ -3,10 +3,9 @@
   <nav><%- include header.ejs %></nav>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/students.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
     <p><a href="/">Back to Directory</a></p>
         <% if (students.length > 0) {%>
         <table>
@@ -17,12 +16,13 @@
                     <th scope="col">Name</th>
                     <th scope="col">Parent/Guardian</th>
                     <th scope="col">Attending</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <% students.forEach((student, index) => { %>
                     <tr>
-                        <th scope="row"><%= student.StudentId %></th>
+                        <td scope="row"><%= student.StudentId %></th>
                         <td><img src="/assets/img/<%= student.Img %>" class="rounded-circle player-img" alt=""></td>
                         <td><%= student.StudentName %></td>
                         <td><%= student.RelativeName %></td>
@@ -39,4 +39,12 @@
         <h2>no students</h2>
     <% } %>
   </body>
+  <script>
+      rows = document.getElementsByTagName("tr");
+      for(var i = 2; i < rows.length; i++){
+          if(i % 2 == 0){
+              rows[i].classList += " grayRow";
+          }
+      }
+  </script>
 </html>
