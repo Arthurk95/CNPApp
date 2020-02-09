@@ -2,7 +2,6 @@ CREATE TABLE Students (
     StudentId INT NOT NULL AUTO_INCREMENT,
     StudentName VARCHAR(255) NOT NULL,
     Img LONGBLOB,
-    AbsentToday BOOL NOT NULL DEFAULT 0,
     PRIMARY KEY (StudentId)
 );
 
@@ -17,6 +16,7 @@ CREATE TABLE Relatives (
 CREATE TABLE ClassSession (
     StudentId INT NOT NULL,
     CurrentDate DATE NOT NULL DEFAULT (CURRENT_DATE),
+	Absent BOOL NOT NULL DEFAULT 0,
     FOREIGN KEY (StudentId) REFERENCES Students(StudentId),
     PRIMARY KEY(StudentId, CurrentDate)
 );
