@@ -37,6 +37,7 @@ body {
   text-align: center;
   box-shadow: 0 0 8px 2px var(--primaryShadowColor);
   box-shadow: inset 0px 0px 0px var(--mainBackgroundColor);
+  --aspect-ratio: 1;
 }
 
 .mainButtonStyle:hover {
@@ -55,12 +56,25 @@ body {
 .button4 { background: #86AA87; }
 
 .buttonAreaGrid{
+  max-width: 900px;
+  width: 80%;
+  margin: 0 auto;
   display: grid;
-  grid-template-rows: 20em 20em;
-  grid-template-columns: 20em 20em;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  --aspect-ratio: 1;
   grid-gap: 1em;
   justify-items: stretch;
   justify-content: center;
+}
+
+@media (max-width: 700px) {
+
+  .buttonAreaGrid{
+    --aspect-ratio: 1/1;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+  }
 }
 
 .adminButton{
@@ -72,8 +86,13 @@ body {
 }
 
 .adminButton:hover{
-  background-color: var(--adminButtonHoverColor);
+  box-shadow: inset 0px 0px 7px var(--mainBackgroundColor);
   cursor: pointer;
+}
+
+.adminButton:active{
+  opacity: 0.95;
+  box-shadow: inset 0px 0px 15px var(--mainBackgroundColor);
 }
 
 /*-------------- CUSTOM DROP DOWN CLASSES --------------*/
@@ -119,6 +138,12 @@ option:hover {
 input{
   padding: 8px 10px;
   border-radius: 8px;
+  border-style: none;
+  outline: none;
+}
+
+input:focus{
+  box-shadow: inset 0px 0px 4px var(--selectedStudentColor);
 }
 
 .mainBlock div{
