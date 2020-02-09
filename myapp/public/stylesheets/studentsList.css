@@ -16,7 +16,7 @@
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #494949;
     width: 100%;
-    background-color: #EEEEEE;
+    background-color: var(--listBackgroundColor);
 }
 
 .studentsList table{
@@ -25,7 +25,7 @@
 
 .studentsList li {
     transition: 0.2s background;
-    background: #EEEEEE;
+    background: var(--listBackgroundColor);
     border-radius: 20px;
     margin: 5px;
     display: inline-block; /* Get all images to show in a row */
@@ -49,7 +49,39 @@
 }
 
 .selectedStudent{
-    margin: 1px !important;
-    border: 4px solid green;
-    background-color: #e0e0e0 !important;
+    background-color: var(--listSecondaryBackgroundColor) !important;
 }
+
+.selectedStudent .imageOverlay{
+    opacity: 0.5;
+}
+
+.imageContainer{
+    position: relative;
+    width: 100%;
+}
+
+.imageOverlay {
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    transition: .2s ease;
+    background-color: var(--selectedStudentColor);
+  }
+  
+  .icon {
+    text-decoration: none;
+    color: white;
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
