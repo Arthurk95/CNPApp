@@ -19,11 +19,11 @@ table{
   }
 
 .grayRow{
-    background-color: #EFEFEF
+    background-color: var(--listSecondaryBackgroundColor);
 }
 
 tr{
-    background-color: #F9F9F9;
+    background-color: var(--listBackgroundColor);
 }
 
 
