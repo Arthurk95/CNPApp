@@ -10,6 +10,8 @@
             <ul class="studentsList">
                 <% students.forEach((student, index) => { %>
                 <li onclick="selectedStudent(this)"><table>
+                    <!-- Image below is just to test. Old text:
+                        /assets/img/<%= student.Img %> -->
                     <th><img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png"></th>
                     <tr>
                         <td><%= student.StudentName %></td>
