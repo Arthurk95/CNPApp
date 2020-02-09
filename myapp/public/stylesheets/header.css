@@ -1,4 +1,12 @@
 .headerStyle {
+    /* -- Remove default ul styling -- */
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0px;
+    /* ------------------------------ -*/
+
     background-color: var(--headerBackgroundColor);
     font-size: 18px;
     font-weight: 400;
@@ -6,8 +14,16 @@
     text-align: center;
     margin-top: 0px;
     margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
+  @media (max-width: 700px){
+      .headerStyle{
+          font-size: 12px;
+      }
+  }
+
   .headerStyle li{
     display: inline;
   }
