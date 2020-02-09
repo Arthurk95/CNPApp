@@ -1,0 +1,31 @@
+.headerStyle {
+    background-color: var(--headerBackgroundColor);
+    font-size: 18px;
+    font-weight: 400;
+    list-style-type: none;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 30px;
+  }
+  
+  .headerStyle li{
+    display: inline;
+  }
+  
+  .headerStyle a {
+    transition: 0.2s background-color;
+    display: inline-block;
+    color: var(--lightTextColor);
+    text-decoration: none;
+    padding: 12px 30px;
+  }
+
+.headerStyle a:hover{
+    background-color: var(--headerHoverColor);
+  }
+
+  /* hopefully a temporary solution. Would like to re-use the above a:hover for this */
+.currentPage {
+    background-color: var(--headerHoverColor);
+  }
+  
