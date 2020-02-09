@@ -7,16 +7,11 @@
     text-align: center;
 }
 
-.studentsList li:hover{
-    cursor: pointer;
-    background-color: #e0e0e0;
-}
 
 .studentsList img{
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #494949;
     width: 100%;
-    background-color: var(--listBackgroundColor);
 }
 
 .studentsList table{
@@ -24,15 +19,22 @@
 }
 
 .studentsList li {
-    transition: 0.2s background;
+    transition: box-shadow 0.2s !important;
+    transition: opacity 0.3s ease-in-out;
     background: var(--listBackgroundColor);
     border-radius: 20px;
     margin: 5px;
     display: inline-block; /* Get all images to show in a row */
     width: 250px;            /* Show 4 logos per row */
-    text-align: center;    /* Centre align the images */
-    
-    box-shadow: 0px 0px 10px 1px #494949
+    text-align: center;    /* Centre align the images */ 
+    box-shadow: 0px 0px 10px 1px #494949;
+    box-shadow: inset 0px 0px 0px var(--mainBackgroundColor);
+}
+
+.studentsList li:hover{
+    cursor: pointer;
+    opacity: 0.9;
+    box-shadow: inset 0px 0px 10px var(--mainBackgroundColor);
 }
 
 @media (max-width: 680px) {
@@ -50,6 +52,7 @@
 
 .selectedStudent{
     background-color: var(--listSecondaryBackgroundColor) !important;
+    box-shadow: inset 0px 0px 15px var(--mainBackgroundColor) !important;
 }
 
 .selectedStudent .imageOverlay{
@@ -70,7 +73,7 @@
     right: 0;
     width: 100%;
     opacity: 0;
-    transition: .2s ease;
+    transition: 0.2s;
     background-color: var(--selectedStudentColor);
   }
   
