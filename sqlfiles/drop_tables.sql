@@ -1,0 +1,10 @@
+DROP TABLE Activities;
+DROP TABLE DailyActivities;
+DROP TABLE DailyStudentNotes;
+DROP TABLE Behavior;
+DROP TABLE ClassSession;
+DROP TABLE Relatives;
+DROP TABLE Schedual;
+DROP TABLE Students;
+DROP TABLE AdminNotes;
+DROP TABLE Administer;

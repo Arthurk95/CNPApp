@@ -1,7 +1,7 @@
 DELIMITER $$
-CREATE PROCEDURE `cnp_data`.`PullUnhiddenActivities` (OUT ActivityName   VARCHAR(255))  
+CREATE PROCEDURE `cnp_data`.`PullUnhiddenActivities` ()  
 BEGIN
-SELECT ActivityName INTO @AvtivityName 
+SELECT ActivityId, ActivityName
 FROM Activities
 	WHERE Hidden = 0;
 END $$

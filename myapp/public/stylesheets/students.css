@@ -1,0 +1,40 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Arial";
+    font-size: 16px;
+    background-color: #ECECEC;
+  }
+
+table, tr, th, td{
+    text-align: left;
+}
+
+table{
+    width: 95%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+
+.grayRow{
+    background-color: #DDDDDD
+}
+
+tr{
+    background-color: #F9F9F9;
+}
+
+th{
+    padding: 20px 30px;
+    font-weight: 500;
+    min-width: 50%;
+    background-color: #404040;
+    color: #D9D9D9;
+}
+
+td{
+    padding: 15px 25px;
+}
