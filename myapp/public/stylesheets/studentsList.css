@@ -23,22 +23,21 @@
 /* This is the actual student listing itself,
    which contains multiple elements */
 .studentsList li {
-    transition: box-shadow 0.2s !important;
-    transition: opacity 0.3s ease-in-out;
+    transition: box-shadow 0.1s !important;
+    transition: opacity 0.2s ease-in;
     background: var(--listBackgroundColor);
     border-radius: 20px;
     margin: 5px;
     display: inline-block;
     width: 250px;
-    text-align: center;    
-    box-shadow: 0px 0px 10px 1px #494949;
-    box-shadow: inset 0px 0px 0px var(--mainBackgroundColor);
+    text-align: center;
+    box-shadow: inset 0px 0px 0px var(--buttonInsetShadowColor);
 }
 
 .studentsList li:hover{
     cursor: pointer;
     opacity: 0.9;
-    box-shadow: inset 0px 0px 5px var(--mainBackgroundColor);
+    box-shadow: inset 0px 0px 3px var(--buttonInsetShadowColor);
 }
 
 @media (max-width: 680px) {
@@ -56,7 +55,7 @@
 
 .selectedStudent{
     background-color: var(--listSecondaryBackgroundColor) !important;
-    box-shadow: inset 0px 0px 5px 2px var(--mainBackgroundColor) !important;
+    box-shadow: inset 0px 0px 6px 3px var(--buttonInsetShadowColor) !important;
 }
 
 .imageContainer{
@@ -74,7 +73,7 @@
     right: 0;
     width: 100%;
     opacity: 0;
-    transition: 0.2s;
+    transition: 0.1s;
     background-color: var(--selectedStudentColor);
   }
 
@@ -84,7 +83,8 @@
   .icon {
     text-decoration: none;
     color: white;
-    font-size: 200px;
+    font-size: 150px;
+    font-weight: 700;
     position: absolute;
     top: 50%;
     left: 50%;
