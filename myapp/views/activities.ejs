@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <nav><%- include header.ejs %></nav>
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -20,7 +21,8 @@
                         <td scope="row"><%= activity.ActivityId %></th>
                         <td><%= activity.ActivityName %></td>
                         <td class="optionsColumn">
-                            <a href="activities/delete/<%= activity.ActivityId %>">Delete</a>
+                            <a class="adminButton" value="<%= activity.ActivityId %>" id="deleteActivityButton<%= activity.ActivityId %>">Delete</a>
+                            <script>document.getElementById("deleteActivityButton<%= activity.ActivityId %>").addEventListener("click", function() { httpPostAsync("deleteActivity<%= activity.ActivityId %>");}, false);</script>
                         </td>
                     </tr>
                 <% }) %>
