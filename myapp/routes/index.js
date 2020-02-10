@@ -21,8 +21,11 @@ router.get('/activities/add', function(req, res, next) {
   res.render('students', { title: 'Add Activity'});
 });
 
-router.get('activities/delete', function(req, res, next) {
-  res.render('students', { title: 'Delete Activity'});
+router.post('/activities/delete', function(req, res, next) {
+  var sql = "delete from cnp_data.Activities where ActivityId = " + req.body.actNum + ";";
+  con.query(sql, function (err, result) {
+    
+  });
 });
 
 router.get('/admin', function(req, res, next) {
