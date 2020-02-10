@@ -24,7 +24,8 @@ router.get('/activities/add', function(req, res, next) {
 router.post('/activities/delete', function(req, res, next) {
   var sql = "delete from cnp_data.Activities where ActivityId = " + req.body.actNum + ";";
   con.query(sql, function (err, result) {
-    
+    if (err) res.send("failure to add");
+    res.send("added succesfully");
   });
 });
 
