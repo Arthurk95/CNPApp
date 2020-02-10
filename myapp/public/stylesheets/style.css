@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap');
+
+/* Global variables. Changing one will change color of multiple
+   elements */
 :root{
   --mainBackgroundColor: #3a3a3a; 
   --mainTableColor: #89AA86;
@@ -9,6 +12,8 @@
   --listBackgroundColor: #EEEEEE;
   --listSecondaryBackgroundColor: #e0e0e0;
 
+  --buttonInsetShadowColor: #2a2a2a;
+
   --primaryShadowColor: #494949;
 
   --adminButtonColor: #4B4F7E;
@@ -16,7 +21,31 @@
   
   --selectedStudentColor: #00A719;
   font-family: 'Roboto Slab', sans-serif;
+
+  --footerNextColor: #48657F;
+  --footerNextHoverColor: #48657F;
 }
+
+/*IE9*/
+*::selection 
+{
+    background-color:transparent;
+} 
+*::-moz-selection
+{
+    background-color:transparent;
+}
+*
+{        
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    /*IE10*/
+    -ms-user-select: none;
+    user-select: none;
+
+    /*You just need this if you are only concerned with android and not desktop browsers.*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}  
 
 body {
   padding: 0px;
@@ -68,7 +97,7 @@ body {
   justify-content: center;
 }
 
-@media (max-width: 700px) {
+@media screen and (max-width: 700px) {
 
   .buttonAreaGrid{
     --aspect-ratio: 1/1;
@@ -86,13 +115,13 @@ body {
 }
 
 .adminButton:hover{
-  box-shadow: inset 0px 0px 7px var(--mainBackgroundColor);
+  box-shadow: inset 0px 0px 2px var(--buttonInsetShadowColor);
   cursor: pointer;
 }
 
 .adminButton:active{
   opacity: 0.95;
-  box-shadow: inset 0px 0px 15px var(--mainBackgroundColor);
+  box-shadow: inset 0px 0px 2px 1px var(--buttonInsetShadowColor);
 }
 
 /*-------------- CUSTOM DROP DOWN CLASSES --------------*/
