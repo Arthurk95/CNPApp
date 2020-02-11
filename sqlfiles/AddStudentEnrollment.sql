@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE PROCEDURE `cnp_data`.`AddStudentEnrollment` (IN Student   VARCHAR(255),  
-													IN Mon  BOOL,
+													IN Mon BOOL,
 													IN Tue BOOL,
                                                     IN Wed BOOL,
                                                     IN Thu BOOL,
