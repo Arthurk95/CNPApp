@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-    res.render('admin', { title: 'admin Page'});
-  });
   router.post('/addstudent', function(req, res){
     var sql = "CALL CreateNewStudent('" + req.body.name + "','" + req.body.contact + "','" + req.body.email + "');";
     con.query(sql, function (err, result) {
@@ -22,4 +19,12 @@ router.get('/', function(req, res, next) {
     
   });
 
+  /* GET home page. */
+router.get('/', function(req, res, next) {
+  var student_query = "SELECT * FROM Students";
+  con.query(student_query, function (err, result) {
+    if (err) throw err;
+    res.render('admin.ejs', { title: 'Admin', students: result });
+  })
+});
 module.exports = router;
