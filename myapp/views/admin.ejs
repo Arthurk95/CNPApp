@@ -3,6 +3,7 @@
   <head>
     <nav><%- include header.ejs %></nav>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/students-admin.css' />
   </head>
   <body>
     <div>
@@ -25,6 +26,44 @@
           <a class="adminButton" id="newActivitySubmit">Submit </a><label id="actStatus" style="visibility:hidden"></label>
       </form>
     </div>
+
+    <% if (students.length > 0) {%>
+      <ul class="adminStudents">
+          <% students.forEach((student, index) => { %>
+            <li>
+              <table>
+                  <tbody>
+                      <tr>
+                          <td class="studentImage"><img  src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png"></img></td>
+                          <td>
+                            <table class="inputTable">
+                              <tbody>
+                                <tr><td><label>Student's Name</label>
+                                  <input placeholder="<%= student.StudentName %>"></td></tr>
+                                <tr><td><label>Relative's Name</label>
+                                  <input placeholder="<%= student.RelativeName %>"></td></tr>
+                                <tr><td><label>Relative's Email</label>
+                                  <input placeholder="<%= student.RelativeEmail %>"></td></tr>
+                              </tbody>
+                            </table>
+                            <ul class="week">
+                                <li class="attending">M</li>
+                                <li>T</li>
+                                <li>W</li>
+                                <li>R</li>
+                                <li>F</li>
+                              </ul>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+            </li>
+          <% }) %>
+      </ul>
+      <% } else { %>
+        <h2>no students</h2>
+    <% } %>
+
   </body>
   <script src="/javascripts/adminScripts.js"></script>
 </html>
