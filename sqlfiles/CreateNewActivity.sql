@@ -1,6 +1,6 @@
 DELIMITER $$
-CREATE PROCEDURE `cnp_data`.`CreateNewActivity` (IN ActivityName   VARCHAR(255))  
+CREATE PROCEDURE `cnp_data`.`CreateNewActivity` (IN ActivityN   VARCHAR(255))
 BEGIN
 	INSERT INTO `Activities`(ActivityName)
-		VALUES (@ActivityName);
+		VALUES (ActivityN);
 END $$
