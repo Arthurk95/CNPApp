@@ -24,6 +24,9 @@
 
   --footerNextColor: #48657F;
   --footerNextHoverColor: #48657F;
+
+  --weekdayText: #B6B6B6;
+  --weekdayColor: #4196E3;
 }
 
 /*IE9*/
@@ -169,6 +172,10 @@ input{
   border-radius: 8px;
   border-style: none;
   outline: none;
+  padding-left: 10px;
+  padding-right: 0;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
 input:focus{
