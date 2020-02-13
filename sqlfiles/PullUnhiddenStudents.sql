@@ -1,15 +1,12 @@
 DELIMITER $$
-CREATE PROCEDURE `cnp_data`.`PullUnhiddenStudents` (IN DayOfWeek VARCHAR(255))  
+
+CREATE PROCEDURE `PullUnhiddenStudents`()
 BEGIN
 
-SET @DayName = DAYNAME(CURRENT_DATE);
-SET @sqlstm = CONCAT("SELECT Students.StudentId, Students.StudentName
-					  FROM Students
-					  INNER JOIN Schedual
-					  ON Students.StudentId=Schedual.StudentId
-					  WHERE `", @DayName, "` = 1;");
-PREPARE stmt FROM @sqlstm;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
+SET @DayDate = CURRENT_DATE;
+	SELECT Students.StudentId, Students.StudentName
+		FROM `Students`
+			JOIN `ClassSession`
+				ON Students.StudentId=ClassSession.StudentId
+					WHERE `CurrentDate` = @DayDate AND `Absent` = 0;
 END $$
