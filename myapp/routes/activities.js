@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    var activity_query = "SELECT * FROM Activities";
+    var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
     con.query(activity_query, function (err, result) {
       if (err) throw err;
       res.render('activities.ejs', { title: 'CNP Activities', activities: result });
