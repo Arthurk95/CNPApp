@@ -8,5 +8,6 @@ SET @DayDate = CURRENT_DATE;
 		FROM `Students`
 			JOIN `ClassSession`
 				ON Students.StudentId=ClassSession.StudentId
-					WHERE `CurrentDate` = @DayDate AND `Absent` = 0;
+					WHERE `CurrentDate` = @DayDate AND `Absent` = 0
+					ORDER BY Students.StudentName ASC;
 END $$
