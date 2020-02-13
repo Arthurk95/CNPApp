@@ -15,10 +15,6 @@
     text-align: center;
 }
 
-.adminStudents td{
-    vertical-align: top;
-}
-
 .adminStudents li{
     background-color: var(--headerBackgroundColor);
     display: inline-block;
@@ -26,40 +22,35 @@
     margin: 15px;
     padding: 20px;
     border-radius: 15px;
+    box-shadow: inset 0px 0px 5px 1px #2A2A2A;
+}
+
+.adminStudents td{
+    padding: 0px;
+    vertical-align: top;
 }
 
 .studentImage img{
-    width: 200px;
+    width: 100px;
     border: 1px solid var(--lightTextColor);
     margin-right: 15px;
-    margin-bottom: 30px;
 }
 
 .inputTable {
     display: block;
-    width: 300px;
+    width: 250px;
     margin: 0px;
     padding: 0px;
     border-spacing: 0px;
     border-collapse: collapse;
 }
 
-.inputTable tr, td{
-    display: block;
-    width: 100%;
-}
-
-.inputTable tbody{
-    display: block;
-    width: 100%;
-}
-
 .inputTable label{
-    font-size: 0.9em;
+    font-size: 1.3em;
     text-align: left;
     display: block;
     color: var(--lightTextColor);
-    margin-bottom: 2px;
+    margin-bottom: 15px;
     font-weight: 200 !important;
 }
 
