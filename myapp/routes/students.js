@@ -3,8 +3,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  /* Prob not the best way to do this */
   var student_query = "SELECT * FROM Students ORDER BY StudentName"; 
+  /* Students of current day */
+  /* var student_query = "CALL PullUnhiddenStudents();"; */
+
+  /* All students [for testing purposes right now] */
+  /* var student_query = "CALL ShowAllStudents();"; */
+
   con.query(student_query, function (err, result) {
     if (err) throw err;
     res.render('students.ejs', { title: 'Student Page', students: result });
