@@ -21,7 +21,7 @@ var router = express.Router();
 
   /* GET home page. */
 router.get('/', function(req, res, next) {
-  var student_query = "SELECT * FROM Students";
+  var student_query = "SELECT * FROM Students ORDER BY StudentName ASC";
   con.query(student_query, function (err, result) {
     if (err) throw err;
     res.render('admin.ejs', { title: 'Admin', students: result });
