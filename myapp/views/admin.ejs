@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/students-admin.css' />
     <link rel='stylesheet' href='/stylesheets/studentsList.css' />
+    <link rel='stylesheet' href='/stylesheets/student-form.css' />
   </head>
   <body>
     <div>
@@ -62,11 +63,34 @@
               </tr>
               </table>
               <div class="checkmarkOverlay">
-                  <a class="plusIcon" title="Create Student">&#43</a>
+                  <a onclick="addStudent()" class="plusIcon" title="Create Student">&#43</a>
               </div>
             </div>
           </li>
       </ul>
+
+      <div id="newStudentForm" class="studentForm">
+        <!-- newStudentForm content -->
+        <div class="studentForm-content">
+          <span class="close">&times;</span>
+            <table>
+            <th>New Student</th>
+            <tr>
+              <td><label>Student Name</label></td>
+              <td><input type="text" id="newStudentName" placeholder="Student name"></td>
+            </tr>
+            <tr>
+              <td><label>Gaurdian Name</label></td>
+              <td><input type="text" id="newStudentContact" placeholder="Primary Guardian Name"></td>
+            </tr>
+            <tr>
+              <td><label>Guardian Email</label></td>
+              <td><input type="text" id="newStudentEmail" placeholder="Primary Guardian Email"></td>
+            </tr>
+          </table>
+        </div>
+      
+      </div>
   
 <% } else { %>
   <h2>no students</h2>
@@ -75,6 +99,27 @@
   </body>
   <script src="/javascripts/adminScripts.js"></script>
   <script>
+    // Get the modal
+    var formElement = document.getElementById("newStudentForm");
 
+    // Get the <span> element that closes the modal
+    var closeButton = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    function addStudent() {
+      formElement.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeButton.onclick = function() {
+      formElement.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == formElement) {
+        formElement.style.display = "none";
+      }
+    }
   </script>
 </html>
