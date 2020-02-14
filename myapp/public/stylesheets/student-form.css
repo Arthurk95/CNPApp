@@ -19,6 +19,7 @@
     margin: 15% auto; /* 15% from the top and centered */
     width: 40%; /* Could be more or less, depending on screen size */
     padding: 30px;
+    box-shadow: 0px 0px 15px 1px var(--darkGray2);
   }
 
   .studentForm-content ul{
@@ -41,15 +42,18 @@
   }
 
   .formTitle{
-    font-size: 3em;
+    font-size: 2em;
     color: var(--darkGray3);
   }
 
   .studentForm input{
-    box-shadow: inset 0px 0px 3px 0px var(--darkGray3);
-    font-size: 1.5em;
+    box-shadow: inset 0px 0px 3px 0px var(--darkGray2);
+    font-size: 1.2em;
     display: table-cell;
-    width: 90%;
+    color: var(--darkGray2);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 95%;
   }
 
   .studentForm input:focus{
@@ -57,22 +61,29 @@
   }
 
   .studentForm a{
+    transition: 0.2s background-color;
     cursor: pointer;
+    display: inline-block;
     text-decoration: none;
-    padding: 10px 30px;
+    width: 40%;
+    padding: 10px;
     font-size: 2em;
-    background: var(--adminColor);
-    box-shadow: inset 0px 0px 2px var(--darkGray2);
     border-radius: 2px;
-    color: var(--lightGray1);
+    color: var(--adminColor);
+    border: 2px solid var(--adminColor);
+    margin-top: 20px;
   }
 
   .studentForm a:hover{
-    background: var(--adminColorDark);
+    background: var(--adminColor);
+    color: var(--lightGray1);
+    border: none;
+    padding: 12px;
   }
 
   .studentForm a:active{
     box-shadow: inset 0px 0px 4px var(--darkGray2);
+    opacity: 0.8;
   }
 
   /* The Close Button */
@@ -80,7 +91,6 @@
     color: var(--darkGray3);
     float: right;
     font-size: 50px;
-    padding: 10px;
     font-weight: bold;
     line-height: 0;
   }
@@ -92,4 +102,16 @@
     color: var(--adminColor);
     text-decoration: none;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 1200px){
+    .studentForm-content{
+      width: 85%;
+    }
+    .studentForm a{
+      width: 90%;
+      font-size: 5em;
+    }
+
+    
   }
