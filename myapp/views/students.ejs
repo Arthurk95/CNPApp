@@ -18,12 +18,12 @@
             <ul class="studentsList">
                 <% students.forEach((student, index) => { %>
                 <li onclick="selectedStudent(this, <%= student.StudentId %>)">
-                    <div class="imageContainer">
+                    <div class="studentContainer">
                         <table>
                         <!-- Image below is just to test. Old text:
                             /assets/img/<%= student.Img %> -->
                         <th>
-                            <div class="imageContainer">
+                            <div>
                                 <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
                             </div>
                             </th>
@@ -31,8 +31,8 @@
                             <td><%= student.StudentName %></td>
                         </tr>
                         </table>
-                        <div class="imageOverlay">
-                            <a class="icon" title="User Profile">&#10003</a>
+                        <div class="checkmarkOverlay">
+                            <a class="checkmark" title="Select Student">&#10003</a>
                         </div>
                     </div>
                 </li>
@@ -47,41 +47,6 @@
             <li><a href="/activities">Next</a></li>
         </ul>
     </footer>
-
-    
   </body>
-  <script>
-      var selectedStudentIDs = [];
-      var numSelectedStudents = 0; // for use in footer later
-      // will be able to get all elements with "selectedStudent"
-      // class to add to some list of students
-
-      var footer = document.getElementById("footer");
-      
-      
-
-      function selectedStudent(element, studentID){
-          if(element.classList.contains("selectedStudent")){
-              element.classList.remove("selectedStudent");
-              numSelectedStudents--;
-              var indexOf = selectedStudentIDs.indexOf(studentID);
-              selectedStudentIDs.splice(indexOf, 1);
-              if(numSelectedStudents == 0){
-                $(function(){
-                    $("footer").children().fadeOut("fast");
-                })  
-              }
-          }
-          else {
-              element.classList += " selectedStudent";
-              numSelectedStudents++;
-              selectedStudentIDs.push(studentID);
-              if(numSelectedStudents == 1){
-                $(function(){
-                    $("footer").children().fadeIn("fast");
-                })  
-              }
-          }
-      }
-  </script>
+  <script src="/javascripts/studentSelection.js"></script>
 </html>
