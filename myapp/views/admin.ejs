@@ -8,27 +8,6 @@
     <link rel='stylesheet' href='/stylesheets/student-form.css' />
   </head>
   <body>
-    <div>
-        <a class="adminButton" id="addStu">Add student</a>
-        <a class="adminButton" id="addAct">Add activity</a>
-    </div>
-    <div class="mainBlock">
-        <form id="newStudent" style="visibility:hidden">
-          <div class="input">
-            <input type="text" id="newStudentName" placeholder="Student name">
-            <input type="text" id="newStudentContact" placeholder="Primary contact name">
-            <input type="text" id="newStudentEmail" placeholder="Primary contact email">
-          </div>
-          <a class="adminButton" id="newStudentSubmit">Submit </a><label id="stuStatus" style="visibility:hidden"></label>
-        </form>
-        <form id="newActivity" style="visibility:hidden">
-          <div class="input">
-            <input type="text" id="newActivityName" placeholder="Activity name">
-          </div>
-          <a class="adminButton" id="newActivitySubmit">Submit </a><label id="actStatus" style="visibility:hidden"></label>
-      </form>
-    </div>
-
     <% if (students.length > 0) {%>
       <ul class="studentsList">
           <% students.forEach((student, index) => { %>
@@ -63,7 +42,7 @@
               </tr>
               </table>
               <div class="checkmarkOverlay">
-                  <a onclick="addStudent()" class="plusIcon" title="Create Student">&#43</a>
+                <a onclick="addStudent()" class="plusIcon" title="Create Student">&#43;</a>
               </div>
             </div>
           </li>
@@ -73,23 +52,14 @@
         <!-- newStudentForm content -->
         <div class="studentForm-content">
           <span class="close">&times;</span>
-            <table>
-            <th>New Student</th>
-            <tr>
-              <td><label>Student Name</label></td>
-              <td><input type="text" id="newStudentName" placeholder="Student name"></td>
-            </tr>
-            <tr>
-              <td><label>Gaurdian Name</label></td>
-              <td><input type="text" id="newStudentContact" placeholder="Primary Guardian Name"></td>
-            </tr>
-            <tr>
-              <td><label>Guardian Email</label></td>
-              <td><input type="text" id="newStudentEmail" placeholder="Primary Guardian Email"></td>
-            </tr>
-          </table>
-        </div>
-      
+          <ul>
+            <li class="formTitle">Add a Student</li>
+            <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
+            <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
+            <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+            <li style="text-align: center;"><a id="createStudent">Create</a></li>
+          </ul>
+      </div>
       </div>
   
 <% } else { %>
