@@ -1,21 +1,34 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap');
 
 /* Global variables. Changing one will change color of multiple
-   elements */
+   elements. */
 :root{
-  --mainBackgroundColor: #3a3a3a; 
-  --mainTableColor: #89AA86;
-  --headerBackgroundColor: #2f2f2f;
+  /* Dark Grays (used in backgrounds,shadows, and text)
+     darkGray1: darkest; darkGray3: lightest */
+  --darkGray1: #2a2a2a;
+  --darkGray2: #2f2f2f;
+  --darkGray3: #3a3a3a; 
+  --darkGray4: #494949;
+
+  /* Page Theme Colors: */
+  --studentsColor: #86AAA7;
+  --studentsColorDark: #425452;
+  --emailColor: #AA8689;
+  --emailColorDark: #574446;
+  --adminColor: #86AA87;
+  --adminColorDark: #3E4E3E;
+
+  /* Button Colors */
+
+  /* Light Grays (Mostly in text or light backgrounds)
+     lightGray1: lightest; lightGray2: darkest */
+  --lightGray1: #EEEEEE;
+  --lightGray2: #e0e0e0;
+  --lightGray3: #B6B6B6;
+
+
   --headerHoverColor: #48657F;
-  --lightTextColor: #EEEEEE;
   
-  --listBackgroundColor: #EEEEEE;
-  --listSecondaryBackgroundColor: #e0e0e0;
-
-  --buttonInsetShadowColor: #2a2a2a;
-
-  --primaryShadowColor: #494949;
-
   --adminButtonColor: #4B4F7E;
   --adminButtonHoverColor: #3D4067;
   
@@ -25,7 +38,6 @@
   --footerNextColor: #48657F;
   --footerNextHoverColor: #48657F;
 
-  --weekdayText: #B6B6B6;
   --weekdayColor: #4196E3;
 }
 
@@ -54,7 +66,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background-color: var(--mainBackgroundColor);
+  background-color: var(--darkGray3);
 }
 
 /* Base button style class. No background with a colored border.
@@ -64,18 +76,18 @@ body {
   border-radius:20px;
   border: none;
   padding: 40% 0;
-  color:var(--lightTextColor);
-  font-size: 40px;
+  color:var(--lightGray1);
   text-align: center;
-  box-shadow: 0 0 8px 2px var(--primaryShadowColor);
-  box-shadow: inset 0px 0px 0px var(--mainBackgroundColor);
+  font-size: 4vw;
+  box-shadow: 0 0 8px 2px var(--darkGray4);
+  box-shadow: inset 0px 0px 0px var(--darkGray3);
   --aspect-ratio: 1;
 }
 
 .mainButtonStyle:hover {
-  color: var(--lightTextColor);
+  color: var(--lightGray1);
   opacity: 0.9;
-  box-shadow: inset 0px 0px 15px 2px var(--mainBackgroundColor);
+  box-shadow: inset 0px 0px 15px 2px var(--darkGray3);
 }
 
 /* Classes below change the color of buttons from default */
@@ -88,24 +100,28 @@ body {
 .button4 { background: #86AA87; }
 
 .buttonAreaGrid{
-  max-width: 900px;
-  width: 80%;
-  margin: 0 auto;
+  width: 90%;
+  margin: 30px auto;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows:24vw 24vw;
+  grid-template-columns: 24vw 24vw;
   --aspect-ratio: 1;
   grid-gap: 1em;
   justify-items: stretch;
   justify-content: center;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1200px) {
 
   .buttonAreaGrid{
-    --aspect-ratio: 1/1;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
+    justify-items: stretch;
+    justify-content: center;
+  }
+
+  .mainButtonStyle{
+    font-size: 12vw;
   }
 }
 
@@ -114,17 +130,17 @@ body {
   background-color: var(--adminButtonColor);
   border-radius: 15px;
   margin-right: 10px;
-  color: var(--lightTextColor);
+  color: var(--lightGray1);
 }
 
 .adminButton:hover{
-  box-shadow: inset 0px 0px 2px var(--buttonInsetShadowColor);
+  box-shadow: inset 0px 0px 2px var(--darkGray1);
   cursor: pointer;
 }
 
 .adminButton:active{
   opacity: 0.95;
-  box-shadow: inset 0px 0px 2px 1px var(--buttonInsetShadowColor);
+  box-shadow: inset 0px 0px 2px 1px var(--darkGray1);
 }
 
 /*-------------- CUSTOM DROP DOWN CLASSES --------------*/
