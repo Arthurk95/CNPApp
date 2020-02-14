@@ -4,6 +4,7 @@
     <nav><%- include header.ejs %></nav>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/students-admin.css' />
+    <link rel='stylesheet' href='/stylesheets/studentsList.css' />
   </head>
   <body>
     <div>
@@ -28,31 +29,52 @@
     </div>
 
     <% if (students.length > 0) {%>
-      <ul class="adminStudents">
+      <ul class="studentsList">
           <% students.forEach((student, index) => { %>
-            <li>
-              <table>
-                  <tbody>
-                      <tr>
-                          <td class="studentImage"><img  src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png"></img></td>
-                          <td>
-                            <table class="inputTable">
-                              <tbody>
-                                <tr><td><label><%= student.StudentName %></label></td></tr>
-                                <tr><td style="text-align: left;"><a href="" class="adminButton">Edit</a></td></tr>
-                              </tbody>
-                            </table>
-                          </td>
-                      </tr>
-                  </tbody>
-              </table>
-            </li>
+            <% studentSpl = student.StudentName.split(" "); %>
+          <li onclick="selectedStudent(this, <%= student.StudentId %>)">
+              <a href="/admin/profile/<%= student.StudentId %>" class="imageContainer">
+                  <table>
+                  <th>
+                      <div>
+                          <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+                      </div>
+                      </th>
+                  <tr>
+                      <td><%= studentSpl[0] %>
+                          <br /><%= studentSpl[1] %></td>
+                  </tr>
+                  </table>
+                </a>
+          </li>
           <% }) %>
+          <li class="addStudent">
+            <div class="studentContainer">
+              <table>
+                <th>
+                  <div>
+                      <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+                  </div>
+                </th>
+              <tr>
+                  <td>a<br />
+                  a</td>
+              </tr>
+              </table>
+              <div class="checkmarkOverlay">
+                  <a class="plusIcon" title="Create Student">&#43</a>
+              </div>
+            </div>
+          </li>
       </ul>
-      <% } else { %>
-        <h2>no students</h2>
-    <% } %>
+  
+<% } else { %>
+  <h2>no students</h2>
+<% } %>
 
   </body>
   <script src="/javascripts/adminScripts.js"></script>
+  <script>
+
+  </script>
 </html>
