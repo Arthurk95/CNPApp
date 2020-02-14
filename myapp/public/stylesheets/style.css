@@ -123,6 +123,12 @@ body {
   .mainButtonStyle{
     font-size: 12vw;
   }
+
+  input{
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    font-size: 2em !important;
+  }
 }
 
 .adminButton{
@@ -184,14 +190,10 @@ option:hover {
 }
 
 input{
-  padding: 8px 10px;
   border-radius: 8px;
   border-style: none;
   outline: none;
-  padding-left: 10px;
-  padding-right: 0;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding: 7px 0px 7px 15px;
 }
 
 input:focus{
