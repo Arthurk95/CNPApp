@@ -14,32 +14,82 @@
   
   /* Modal Content/Box */
   .studentForm-content {
-    border-radius: 20px;
+    border-radius: 4px;
     background-color: var(--lightGray1);
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: 70%; /* Could be more or less, depending on screen size */
+    width: 40%; /* Could be more or less, depending on screen size */
+    padding: 30px;
   }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+
+  .studentForm-content ul{
+    /* -- Remove default ul styling -- */
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0px;
+    /* ------------------------------ -*/
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
   }
-  
+
+  .studentForm-content li{
+    display: block;
+    padding: 15px 40px;
+  }
+
+  .formTitle{
+    font-size: 3em;
+    color: var(--darkGray3);
+  }
+
   .studentForm input{
-      box-shadow: inset 0px 0px 3px 0px var(--lightGray3);
+    box-shadow: inset 0px 0px 3px 0px var(--darkGray3);
+    font-size: 1.5em;
+    display: table-cell;
+    width: 90%;
   }
 
   .studentForm input:focus{
-    box-shadow: inset 0px 0px 4px var(--adminColor);
+    box-shadow: inset 0px 0px 4px 2px var(--adminColor);
   }
+
+  .studentForm a{
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 30px;
+    font-size: 2em;
+    background: var(--adminColor);
+    box-shadow: inset 0px 0px 2px var(--darkGray2);
+    border-radius: 2px;
+    color: var(--lightGray1);
+  }
+
+  .studentForm a:hover{
+    background: var(--adminColorDark);
+  }
+
+  .studentForm a:active{
+    box-shadow: inset 0px 0px 4px var(--darkGray2);
+  }
+
+  /* The Close Button */
+  .close {
+    color: var(--darkGray3);
+    float: right;
+    font-size: 50px;
+    padding: 10px;
+    font-weight: bold;
+    line-height: 0;
+  }
+  
+ 
 
   .close:hover,
   .close:focus {
-    color: black;
+    color: var(--adminColor);
     text-decoration: none;
     cursor: pointer;
   }
