@@ -17,6 +17,7 @@
         <% if (students.length > 0) {%>
             <ul class="studentsList">
                 <% students.forEach((student, index) => { %>
+                    <% studentSpl = student.StudentName.split(" "); %>
                 <li onclick="selectedStudent(this, <%= student.StudentId %>)">
                     <div class="studentContainer">
                         <table>
@@ -28,7 +29,8 @@
                             </div>
                             </th>
                         <tr>
-                            <td><%= student.StudentName %></td>
+                            <td><%= studentSpl[0] %>
+                                <br /><%= studentSpl[1] %></td>
                         </tr>
                         </table>
                         <div class="checkmarkOverlay">
