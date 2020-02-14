@@ -25,46 +25,51 @@
 .studentsList li {
     transition: box-shadow 0.1s !important;
     transition: opacity 0.2s ease-in;
-    background: var(--listBackgroundColor);
+    background: var(--lightGray1);
     border-radius: 20px;
     margin: 5px;
     display: inline-block;
     width: 250px;
     text-align: center;
-    box-shadow: inset 0px 0px 0px var(--buttonInsetShadowColor);
+    box-shadow: inset 0px 0px 0px var(--darkGray1);
 }
 
 .studentsList li:hover{
     cursor: pointer;
     opacity: 0.9;
-    box-shadow: inset 0px 0px 3px var(--buttonInsetShadowColor);
+    box-shadow: inset 0px 0px 3px var(--darkGray1);
 }
 
-@media (max-width: 680px) {
-    .studentsList li { width: 45%; } /* On small screens, show one logo per row */
+/* On small screens, show three students per row */
+@media screen and (max-width: 1200px) {
+    .studentsList li { 
+        width: 45%; 
+        font-size: 3vw;
+    } 
 }
+
 
 .studentsList th{
     column-span: 2;
 }
 
 .studentsList td{
-    color: #0A0a0a;
-    font-size: 1.2em;
+    color: var(--darkGray4);
+    font-size: 1.7em;
 }
 
 .selectedStudent{
-    background-color: var(--listSecondaryBackgroundColor) !important;
-    box-shadow: inset 0px 0px 6px 3px var(--buttonInsetShadowColor) !important;
+    background-color: var(--lightGray3) !important;
+    box-shadow: inset 0px 0px 6px 3px var(--darkGray1) !important;
 }
 
-.imageContainer{
+.studentContainer{
     position: relative;
     width: 100%;
 }
 
 /* Green overlay that's displayed when a student is selected */
-.imageOverlay {
+.checkmarkOverlay {
     border-radius: 20px;
     position: absolute;
     top: 0;
@@ -77,13 +82,13 @@
     background-color: var(--selectedStudentColor);
   }
 
-  .selectedStudent .imageOverlay{ opacity: 0.5; }
+  .selectedStudent .checkmarkOverlay{ opacity: 0.3; }
 
   /* The checkmark that's displayed over selected students */
-  .icon {
+  .checkmark {
     text-decoration: none;
     color: white;
-    font-size: 150px;
+    font-size: 15em;
     font-weight: 700;
     position: absolute;
     top: 50%;
