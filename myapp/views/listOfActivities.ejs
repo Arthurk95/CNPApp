@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<body>
+    <ul id="activities" class="blockList activitiesList">
+        <% activities.forEach((activity, index) => { %>
+        <li onclick="selectedActivity(this, <%= activity.ActivityId %>)">
+            <div class="studentContainer">
+                <p><%= activity.ActivityName %></p>
+                <div class="checkmarkOverlay">
+                    
+                </div>
+            </div>
+        </li>
+        <% }) %>
+    </ul>
+</body>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+    <ul id="students" class="blockList">
+        <% students.forEach((student, index) => { %>
+            <% studentSpl = student.StudentName.split(" "); %>
+        <li onclick="selectedStudent(this, <%= student.StudentId %>)">
+            <div class="studentContainer">
+                <table>
+                <!-- Image below is just to test. Old text:
+                    /assets/img/<%= student.Img %> -->
+                <th>
+                    <div>
+                        <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+                    </div>
+                    </th>
+                <tr>
+                    <td><%= studentSpl[0] %>
+                        <br /><%= studentSpl[1] %></td>
+                </tr>
+                </table>
+                <div class="checkmarkOverlay">
+                    <a class="checkmark" title="Select Student">&#10003</a>
+                </div>
+            </div>
+        </li>
+        <% }) %>
