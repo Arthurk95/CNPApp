@@ -24,6 +24,10 @@
     background: var(--weekdayColor) !important;
 }
 
+.studentsList{
+    display: block;
+}
+
 .imageContainer{
     text-decoration: none;
 }
@@ -36,14 +40,23 @@
     opacity: 0;
 }
 
-.checkmarkOverlay{
+.addStudentOverlay{
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transition: 0.1s;
+    background-color: var(--selectedStudentColor);
     box-shadow: 0px 0px 4px 1px var(--adminColor);
     background: var(--lightGray2) !important;
     opacity: 0.8 !important;
     transition: 0.1s all;
 }
 
-.checkmarkOverlay:hover{
+.addStudentOverlay:hover{
     opacity: 1 !important;
     box-shadow: 0px 0px 5px 2px var(--adminColor);
     padding: 2px;
@@ -51,7 +64,7 @@
     background: var(--lightGray1) !important;
 }
 
-.checkmarkOverlay:hover .plusIcon{
+.addStudentOverlay:hover .plusIcon{
     color: var(--adminColor) !important;
     font-size: 20em;
     line-height: 100%
@@ -82,7 +95,7 @@
         font-size: 40vw;
     }
 
-    .checkmarkOverlay:hover .plusIcon{
+    .addStudentOverlay:hover .plusIcon{
         font-size: 42vw;
     }
 
@@ -91,3 +104,10 @@
     }
 }
 
+.checkMarkOverlay{
+    display: none;
+}
+
+.checkMark{
+    display: none;
+}
