@@ -1,7 +1,7 @@
 /* List container for the students. 
     Removes default list style and sets width. */
-.studentsList{
-    display: block;  /* Remove bullet points; allow greater control of positioning */
+.blockList{
+    display: none;  /* Remove bullet points; allow greater control of positioning */
     padding: 0;      /* Override defaults for lists */
     margin: 0;       /* Override defaults for lists */
     width: 100%;
@@ -10,19 +10,19 @@
 }
 
 /* Image in each listing with border around it */
-.studentsList img{
+.blockList img{
     border-radius: 10px;
     box-shadow: 0px 0px 10px 1px #494949;
     width: 100%;
 }
 
-.studentsList table{
+.blockList table{
     border-spacing: 20px 20px;
 }
 
 /* This is the actual student listing itself,
    which contains multiple elements */
-.studentsList li {
+.blockList li {
     transition: box-shadow 0.1s !important;
     transition: opacity 0.2s ease-in;
     background: var(--lightGray1);
@@ -34,7 +34,7 @@
     box-shadow: inset 0px 0px 0px var(--darkGray1);
 }
 
-.studentsList li:hover{
+.blockList li:hover{
     cursor: pointer;
     opacity: 0.9;
     box-shadow: inset 0px 0px 3px var(--darkGray1);
@@ -42,18 +42,21 @@
 
 /* On small screens, show three students per row */
 @media screen and (max-width: 1200px) {
-    .studentsList li { 
+    .blockList li { 
         width: 28%; 
         font-size: 3vw;
     } 
+    
+    .activitiesList li{
+        width: 90% !important;
+    }
 }
 
-
-.studentsList th{
+.blockList th{
     column-span: 2;
 }
 
-.studentsList td{
+.blockList td{
     color: var(--darkGray4);
     font-size: 1.7em;
 }
@@ -88,7 +91,7 @@
   .checkmark {
     text-decoration: none;
     color: white;
-    font-size: 15em;
+    font-size: 10em;
     font-weight: 700;
     position: absolute;
     top: 50%;
@@ -96,4 +99,67 @@
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
+  }
+
+  .selectionButtons{
+      display: block;
+      list-style: none;
+      margin: 0;
+      margin-top: 50px !important;
+      width: 100%;
+      padding: 0;
+      text-align: center;
+  }
+
+  .selectionButtons li{
+    display: inline-block;
+    width: 80%;
+    margin-bottom: 30px;
+  }
+
+  .selectionButtons a{
+    transition: 0.1s all;
+    color: var(--lightGray1);
+    background: var(--darkGray2);
+    font-size: 6em;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .selectionButtons a:hover{
+      box-shadow: inset 0px 0px 10px 2px var(--darkGray1) !important;
+  }
+
+  #studentButton{
+      box-shadow: inset 0px 0px 40px 0px var(--studentsColor);
+  }
+
+  #studentButton:hover{
+      background: var(--studentsColor);
+  }
+
+  #activitiesButton{
+    box-shadow: inset 0px 0px 40px 0px var(--tasksColor);
+  }
+
+  #activitiesButton:hover{
+      background: var(--tasksColor);
+  }
+
+  .activitiesList .studentContainer p{
+      padding: 20px;
+      margin: 0;
+      font-size: 3em !important;
+      color: var(--darkGray3);
+  }
+
+ .activitiesList li{
+      width: 40%;
+  }
+
+  .activitiesList .checkmark{
+      font-size: 4em;
   }
