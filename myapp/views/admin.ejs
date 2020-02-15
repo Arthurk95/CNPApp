@@ -4,30 +4,12 @@
     <nav><%- include header.ejs %></nav>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/students-admin.css' />
-    <link rel='stylesheet' href='/stylesheets/studentsList.css' />
+    <link rel='stylesheet' href='/stylesheets/blockList.css' />
     <link rel='stylesheet' href='/stylesheets/student-form.css' />
   </head>
   <body>
     <% if (students.length > 0) {%>
-      <ul class="studentsList">
-          <% students.forEach((student, index) => { %>
-            <% studentSpl = student.StudentName.split(" "); %>
-          <li onclick="selectedStudent(this, <%= student.StudentId %>)">
-              <a href="/admin/profile/<%= student.StudentId %>" class="imageContainer">
-                  <table>
-                  <th>
-                      <div>
-                          <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
-                      </div>
-                      </th>
-                  <tr>
-                      <td><%= studentSpl[0] %>
-                          <br /><%= studentSpl[1] %></td>
-                  </tr>
-                  </table>
-                </a>
-          </li>
-          <% }) %>
+      <%- include listOfStudents.ejs %>
           <li class="addStudent">
             <div class="studentContainer">
               <table>
@@ -41,12 +23,12 @@
                   a</td>
               </tr>
               </table>
-              <div class="checkmarkOverlay">
+              <div class="addStudentOverlay">
                 <a onclick="addStudent()" class="plusIcon" title="Create Student">&#43;</a>
               </div>
             </div>
           </li>
-      </ul>
+        </ul>
 
       <div id="newStudentForm" class="studentForm">
         <!-- newStudentForm content -->
@@ -57,7 +39,7 @@
             <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
             <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
             <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-            <li style="text-align: center;"><a id="createStudent">Create</a></li>
+            <li style="text-align: center;"><a id="newStudentSubmit">Create</a></li>
           </ul>
       </div>
       </div>
@@ -72,6 +54,12 @@
     // Get the modal
     var formElement = document.getElementById("newStudentForm");
 
+    // opens student profile in same tab when a student is clicked
+    function selectedStudent(element, studentID){
+      window.open("/admin/profile/" + studentID,"_self");
+    }
+
+    document.getElementById("students").style.display = "block";
     // Get the <span> element that closes the modal
     var closeButton = document.getElementsByClassName("close")[0];
 
