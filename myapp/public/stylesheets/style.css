@@ -17,6 +17,7 @@
   --emailColorDark: #574446;
   --adminColor: #86AA87;
   --adminColorDark: #3E4E3E;
+  --tasksColor: #868DAA;
 
   /* Button Colors */
 
@@ -69,9 +70,28 @@ body {
   background-color: var(--darkGray3);
 }
 
+/* Use this for any buttons */
+.customButton{
+  padding: 8px 25px;
+  background-color: var(--adminButtonColor);
+  border-radius: 15px;
+  margin-right: 10px;
+  color: var(--lightGray1);
+}
+
+.customButton:hover{
+  box-shadow: inset 0px 0px 2px var(--darkGray1);
+  cursor: pointer;
+}
+
+.customButton:active{
+  opacity: 0.95;
+  box-shadow: inset 0px 0px 2px 1px var(--darkGray1);
+}
+
 /* Base button style class. No background with a colored border.
     Each button (<a> tag) should use this as the base */
-.mainButtonStyle{
+.homeButton{
   text-decoration: none;
   border-radius:20px;
   border: none;
@@ -84,21 +104,19 @@ body {
   --aspect-ratio: 1;
 }
 
-.mainButtonStyle:hover {
+.homeButton:hover {
   color: var(--lightGray1);
   opacity: 0.9;
   box-shadow: inset 0px 0px 15px 2px var(--darkGray3);
 }
 
 /* Classes below change the color of buttons from default */
-.button1 {background: #86AAA7;}
+.studentButton {background: var(--studentsColor);}
+.tasksButton { background: var(--tasksColor); }
+.emailButton { background: var(--emailColor); }
+.adminButton { background: var(--adminColor); }
 
-.button2 { background: #868DAA; }
-
-.button3 { background: #AA8689; }
-
-.button4 { background: #86AA87; }
-
+/* Container for home page buttons */
 .buttonAreaGrid{
   width: 90%;
   margin: 30px auto;
@@ -111,6 +129,7 @@ body {
   justify-content: center;
 }
 
+/* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
 
   .buttonAreaGrid{
@@ -120,7 +139,7 @@ body {
     justify-content: center;
   }
 
-  .mainButtonStyle{
+  .homeButton{
     font-size: 12vw;
   }
 
@@ -131,23 +150,6 @@ body {
   }
 }
 
-.adminButton{
-  padding: 8px 25px;
-  background-color: var(--adminButtonColor);
-  border-radius: 15px;
-  margin-right: 10px;
-  color: var(--lightGray1);
-}
-
-.adminButton:hover{
-  box-shadow: inset 0px 0px 2px var(--darkGray1);
-  cursor: pointer;
-}
-
-.adminButton:active{
-  opacity: 0.95;
-  box-shadow: inset 0px 0px 2px 1px var(--darkGray1);
-}
 
 /*-------------- CUSTOM DROP DOWN CLASSES --------------*/
 
