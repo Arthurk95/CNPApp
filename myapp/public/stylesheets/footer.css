@@ -21,20 +21,20 @@
 
 .studentFooter li{
     display: inline;
+    transition: opacity 0.2s ease-in-out;
 }
 
 /*<span class="arrow">&#10132</span>*/
 .studentFooter a{
     position: relative;
     text-decoration: none;
-    display: inline-block;
+    display: none;
     font-size: 3em;
     width: 30vw;
     padding: 12px 80px;
     color: var(--lightGray1);
     background-color: var(--studentsColorDark);
     box-shadow: 0px 0px 8px 2px var(--lightGray3);
-    transition: all 0.2s ease-in-out;
 }
 
 .studentFooter a:hover{
@@ -52,9 +52,13 @@
 }
 
 @media screen and (max-width: 1200px){
+    .studentFooter{
+        padding-bottom: 10px;
+    }
+
     .studentFooter a{
         font-size: 10vw;
-        width: 80vw;
+        width: 80%;
     }
     .studentFooter a:hover{
         font-size: 10.1vw;
