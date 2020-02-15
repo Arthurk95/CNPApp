@@ -4,51 +4,34 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/studentsList.css' />
+    <link rel='stylesheet' href='/stylesheets/blockList.css' />
     <link rel='stylesheet' href='/stylesheets/footer.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/javascripts/studentSelection.js"></script>
   </head>
-  <script>
-    $(function(){
-        $("footer").children().hide();
-    })  
-</script>
   <body>
-        <% if (students.length > 0) {%>
-            <ul class="studentsList">
-                <% students.forEach((student, index) => { %>
-                    <% studentSpl = student.StudentName.split(" "); %>
-                <li onclick="selectedStudent(this, <%= student.StudentId %>)">
-                    <div class="studentContainer">
-                        <table>
-                        <!-- Image below is just to test. Old text:
-                            /assets/img/<%= student.Img %> -->
-                        <th>
-                            <div>
-                                <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
-                            </div>
-                            </th>
-                        <tr>
-                            <td><%= studentSpl[0] %>
-                                <br /><%= studentSpl[1] %></td>
-                        </tr>
-                        </table>
-                        <div class="checkmarkOverlay">
-                            <a class="checkmark" title="Select Student">&#10003</a>
-                        </div>
-                    </div>
-                </li>
-                <% }) %>
-            </ul>
-        
+    <ul class="selectionButtons">
+        <li><a id="studentButton" onclick="startWithStudents()">Students</a></li>
+        <li><a id="activitiesButton" onclick="startWithActivities()">Activities</a></li>
+    </ul>
+      
+    <% if (students.length > 0) {%>
+        <%- include listOfStudents.ejs %>
+    </ul>
     <% } else { %>
-        <h2>no students</h2>
+        <h2>No students</h2>
+    <% } %>
+
+    <% if (activities.length > 0) {%>
+        <%- include listOfActivities.ejs %>
+    <% } else { %>
+        <h2>No activities</h2>
     <% } %>
     <footer>
         <ul id="footer" class="studentFooter">
-            <li><a href="/activities">Next</a></li>
+            <li><a id="selectButton" onclick="selectionMade()">Select</a></li>
+            <li><a id="submitButton" onclick="submitToDB()">Submit</a></li>
         </ul>
     </footer>
   </body>
-  <script src="/javascripts/studentSelection.js"></script>
 </html>
