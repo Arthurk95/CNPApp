@@ -17,26 +17,33 @@ router.get('/', function(req, res, next) {
       if (err) throw err;
 
       for(var i = 0; i < (dailyStudents[0].length); i++){
-        Students.push(Student);
-        Students[i].id = dailyStudents[0][i].StudentId;
-        Students[i].name = dailyStudents[0][i].StudentName;
+        Student.id = dailyStudents[0][i].StudentId;
+        Student.name = dailyStudents[0][i].StudentName;
+        Students.push({
+          id: Student.id,
+          name: Student.name,
+          listOfActivities: Student.listOfActivities
+        });
         console.log(Students);
         var today = '"2020-02-16"';
-        activities_query = "CALL ShowStudentDailyActivities(" + Students[i].id + 
-          ", " + today + ");";
         numStudents++;
       }
 
-      console.log(Students);
+      for(var i = 0; i < Students.length; i++){
+        activities_query = "CALL ShowStudentDailyActivities(" + Students[i].id + 
+          ", " + today + ");";
 
-      con.query(activities_query, function(err, activities){
-        if(err) throw err;
-        for(var i = 0; i < numStudents; i++){
-          for(var j = 0; j < activities[0].length; j++){
-            Students[i].listOfActivities.push(activities[0][j].ActivityName);
+        con.query(activities_query, function(err, activities){
+          if(err) throw err;
+          for(var j = 0; j < numStudents; j++){
+            for(var k = 0; k < activities[0].length; k++){
+              Students[j].listOfActivities.push(activities[0][k].ActivityName);
+            }
           }
-        }
-      }) 
+        }) 
+      }
+      console.log(Students);
+     
       res.render('reports.ejs', { title: 'CNP Daily Report', report: Students });
     })
   });
