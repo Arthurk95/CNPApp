@@ -9,3 +9,5 @@ router.get('/', function(req, res, next) {
       res.render('reports.ejs', { title: 'CNP Daily Report', reports: result });
     })
   });
+
+  module.exports = router;
