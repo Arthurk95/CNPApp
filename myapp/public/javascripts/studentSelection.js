@@ -56,13 +56,16 @@ function showButton(buttonText){
 
 /* Activity <li> element clicked, either make it green or de-select it */
 function selectedActivity(element, activityId){
+    // activity is already selected, deselect it
     if(element.classList.contains("selectedStudent")){
         element.classList.remove("selectedStudent");
         selectedActivityID = undefined;
         hideElement(submitButton);
+        hideElement(selectButton);
     }
+    // activity is not selected
     else{
-        if(selectedActivityID != undefined){
+        if(selectedActivityID != undefined){ // another is selected -
             clearActivitySelection();
         }
         
@@ -99,8 +102,7 @@ function startWithStudents(){
 }
 
 function hideButtons(){
-    document.getElementById("studentButton").style.display = "none";
-    document.getElementById("activitiesButton").style.display = "none";
+    document.getElementById("selectionButtons").style.display = "none";
 }
 
 // The "Activities" button was pushed when first coming to the page
