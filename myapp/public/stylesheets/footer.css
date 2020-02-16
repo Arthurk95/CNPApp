@@ -33,32 +33,26 @@
     width: 30vw;
     padding: 12px 80px;
     color: var(--lightGray1);
-    background-color: var(--studentsColorDark);
-    box-shadow: 0px 0px 8px 2px var(--lightGray3);
+    background-color: var(--studentsColor);
 }
 
 .studentFooter a:hover{
     background-color: var(--studentsColor);
-    color: var(--darkGray2);
-    padding: 14px 84px;
-    margin-bottom: -2px;
-    font-size: 3.2em;
-    box-shadow: 0px 0px 12px 4px var(--lightGray1);
 }
 
 .studentFooter a:active{
-    box-shadow: 0px 0px 8px 2px var(--selectedStudentColor);
     background-color: var(--footerNextHoverColor);
 }
 
 @media screen and (max-width: 1200px){
     .studentFooter{
-        padding-bottom: 10px;
+        padding-bottom: 0;
     }
 
     .studentFooter a{
         font-size: 10vw;
-        width: 80%;
+        padding: 4vh 0 4vh 0;
+        width: 100%;
     }
     .studentFooter a:hover{
         font-size: 10.1vw;

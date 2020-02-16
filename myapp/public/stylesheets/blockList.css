@@ -50,6 +50,10 @@
     .activitiesList li{
         width: 90% !important;
     }
+
+    .selectionButtons a{
+        padding: 15vh 0px 15vh 0px !important;
+    }
 }
 
 .blockList th{
@@ -122,8 +126,7 @@
     color: var(--lightGray1);
     background: var(--darkGray2);
     font-size: 6em;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 10vh 0px 10vh 0px;
     display: block;
     text-decoration: none;
     cursor: pointer;
@@ -131,22 +134,15 @@
 
   .selectionButtons a:hover{
       box-shadow: inset 0px 0px 10px 2px var(--darkGray1) !important;
+      opacity: 0.9;
   }
 
   #studentButton{
-      box-shadow: inset 0px 0px 40px 0px var(--studentsColor);
-  }
-
-  #studentButton:hover{
       background: var(--studentsColor);
   }
 
   #activitiesButton{
-    box-shadow: inset 0px 0px 40px 0px var(--tasksColor);
-  }
-
-  #activitiesButton:hover{
-      background: var(--tasksColor);
+    background: var(--tasksColor);
   }
 
   .activitiesList .studentContainer p{
@@ -158,8 +154,4 @@
 
  .activitiesList li{
       width: 40%;
-  }
-
-  .activitiesList .checkmark{
-      font-size: 4em;
   }

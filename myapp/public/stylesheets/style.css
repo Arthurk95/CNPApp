@@ -18,6 +18,7 @@
   --adminColor: #86AA87;
   --adminColorDark: #3E4E3E;
   --tasksColor: #868DAA;
+  --tasksColorDark: #4E5263;
 
   /* Button Colors */
 
@@ -68,6 +69,10 @@ body {
   margin: 0px;
   font-size: 16px;
   background-color: var(--darkGray3);
+}
+
+a{
+  cursor: pointer;
 }
 
 /* Use this for any buttons */
