@@ -12,6 +12,7 @@ $(document).ready(function(){
     submitButton = document.getElementById("submitButton");
 })
 
+sessionStorage.setItem("favoriteMovie", favoritemovie);
 
 function selectedStudent(studentElement, studentID){
     // the passed student is being de-selected
@@ -129,6 +130,7 @@ function selectionMade(){
 // activity and student(s) chosen, submit to database
 function submitToDB(){
     // do something database-y with selectedStudentIDs and selectedActivityID
+    con.query()
 }
 
 function hideElement(element) { 

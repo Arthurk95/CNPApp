@@ -3,9 +3,23 @@
     <head>
         <nav><%- include header.ejs %></nav>
         <link rel='stylesheet' href='/stylesheets/style.css' />
-        <link rel='stylesheet' href='/stylesheets/profile.css' />
+        <link rel='stylesheet' href='/stylesheets/tabs.css' />
     </head>
     <body>
-        
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'profile')">Profile</button>
+            <button class="tablinks" onclick="openTab(event, 'schedule')">Schedule</button>
+          </div>
+          
+          <!-- Tab content -->
+          <div id="profile" class="tabcontent">
+            <h3>London</h3>
+            <p>London is the capital city of England.</p>
+          </div>
+          
+          <div id="schedule" class="tabcontent">
+            <h3>Paris</h3>
+            <p>Paris is the capital of France.</p>
+          </div>
     </body>
 </html>

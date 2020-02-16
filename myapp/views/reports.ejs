@@ -6,3 +6,23 @@
     <link rel='stylesheet' href='/stylesheets/students.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
+  <body>
+    <% if(reports.length > 0) {%>
+      <% reports.forEach((report, index) => {%>
+        <table>
+          <thead>
+            <tr><% report.name %></tr>
+          </thead>
+          <tbody>
+            <% report.listOfActivities.forEach((activity, index) => {%>
+              <tr><% activity %></tr>
+            <% }) %>
+            <tr></tr>
+          </tbody>
+        </table>
+      <% }) %>
+    <% } else {%>
+      <h2>no reports</h2>
+    <% } %>
+  </body>
+  </html>

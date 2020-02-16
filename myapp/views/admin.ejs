@@ -5,49 +5,72 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/students-admin.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
+    <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/student-form.css' />
   </head>
   <body>
-    <% if (students.length > 0) {%>
-      <%- include listOfStudents.ejs %>
-          <li class="addStudent">
-            <div class="studentContainer">
-              <table>
-                <th>
-                  <div>
-                      <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
-                  </div>
-                </th>
-              <tr>
-                  <td>a<br />
-                  a</td>
-              </tr>
-              </table>
-              <div onclick="addStudent()" class="addStudentOverlay">
-                <a  class="plusIcon" title="Create Student">&#43;</a>
+
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'studentsTab')">Students</button>
+      <button class="tablinks" onclick="openTab(event, 'activitiesTab')">Activities</button>
+    </div>
+
+    <div id="studentsTab" class="tabContent">
+      <% if (students.length > 0) {%>
+        <%- include listOfStudents.ejs %>
+            <li class="addStudent">
+              <div class="studentContainer">
+                <table>
+                  <th>
+                    <div>
+                        <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+                    </div>
+                  </th>
+                <tr>
+                    <td>a<br />
+                    a</td>
+                </tr>
+                </table>
+                <div onclick="addStudent()" class="addStudentOverlay">
+                  <a  class="plusIcon" title="Create Student">&#43;</a>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-
-      <div id="newStudentForm" class="studentForm">
-        <!-- newStudentForm content -->
-        <div class="studentForm-content">
-          <span class="close">&times;</span>
-          <ul>
-            <li class="formTitle">Add a Student</li>
-            <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
-            <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
-            <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-            <li style="text-align: center;"><a id="newStudentSubmit">Create</a></li>
+            </li>
           </ul>
-      </div>
-      </div>
   
-<% } else { %>
-  <h2>no students</h2>
-<% } %>
+        <div id="newStudentForm" class="studentForm">
+          <!-- newStudentForm content -->
+          <div class="studentForm-content">
+            <span class="close">&times;</span>
+            <ul>
+              <li class="formTitle">Add a Student</li>
+              <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
+              <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
+              <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+              <li style="text-align: center;"><a id="newStudentSubmit">Create</a></li>
+            </ul>
+          </div>
+        </div>
+      <% } else { %>
+        <h2>No students</h2>
+      <% } %>
+    </div>
 
+    <div id="activitiesTab" class="tabContent">
+      <% if (activities.length > 0) {%>
+        <%- include listOfActivities.ejs %>
+        <li class="addStudent">
+          <div class="studentContainer">
+            <div onclick="addStudent()" class="addStudentOverlay">
+              <a  class="plusIcon" title="Create Student">&#43;</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <% } else { %>
+        <h2>No activities</h2>
+      <% } %>
+    </div>
   </body>
   <script src="/javascripts/adminScripts.js"></script>
   <script>
@@ -78,6 +101,27 @@
       if (event.target == formElement) {
         formElement.style.display = "none";
       }
+    }
+
+    function openTab(evt, tabName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabContent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
     }
   </script>
 </html>

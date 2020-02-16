@@ -22,10 +22,18 @@ var router = express.Router();
   /* GET home page. */
 router.get('/', function(req, res, next) {
   var student_query = "SELECT * FROM Students ORDER BY StudentName ASC"; 
+  var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
+
+
   /* var student_query = "CALL ShowAllStudents();"; */ 
-  con.query(student_query, function (err, result) {
+  con.query(student_query, function (err, sQuery) {
     if (err) throw err;
-    res.render('admin.ejs', { title: 'Admin', students: result });
+    console.log(sQuery);
+    con.query(activity_query, function (err, aQuery) {
+      if (err) throw err;
+      res.render('admin.ejs', {title: 'Admin Page', students: sQuery,  activities: aQuery});
+    })
   })
 });
 module.exports = router;
+
