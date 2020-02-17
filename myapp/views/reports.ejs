@@ -8,9 +8,9 @@
     <script src="/javascripts/reportScripts.js"></script>
   </head>
   <body>
-    <a id="test" style="visibility: hidden;"><%= report %></a>
-    <% if(report.length > 0) {%>
-      <% report.forEach((report, index) => {%>
+    <a id="test"><%= reports %></a>
+    <% if(reports.length > 0) {%>
+      <% reports.forEach((report, index) => {%>
         <table>
           <thead>
             <tr><%= report.name %></tr>
