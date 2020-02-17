@@ -11,8 +11,10 @@
       <% reports.forEach((report, index) => {%>
         <table>
           <thead>
+            
           </thead>
           <tbody>
+            <tr> <%= report.name %></tr>
             <% report.listOfActivities.forEach((activity, index) => {%>
               <tr> .<%= activity.ActivityName %>.</tr>
             <% }) %>
