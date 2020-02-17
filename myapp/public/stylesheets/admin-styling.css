@@ -111,3 +111,7 @@
 .checkMark{
     display: none;
 }
+
+.blockList{
+    display: block !important;
+  }

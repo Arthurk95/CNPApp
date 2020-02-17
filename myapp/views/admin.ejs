@@ -3,7 +3,7 @@
   <head>
     <nav><%- include header.ejs %></nav>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/students-admin.css' />
+    <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/student-form.css' />
@@ -11,7 +11,6 @@
   <body>
 
     <div class="tab">
-      <script>openTab(event, 'studentsTab');</script>
       <button class="tablinks" onclick="openTab(event, 'studentsTab')">Students</button>
       <button class="tablinks" onclick="openTab(event, 'activitiesTab')">Activities</button>
     </div>
@@ -60,9 +59,9 @@
     <div id="activitiesTab" class="tabContent">
       <% if (activities.length > 0) {%>
         <%- include listOfActivities.ejs %>
-        <li class="addStudent">
+        <li class="addActivity">
           <div class="studentContainer">
-            <div onclick="addStudent()" class="addStudentOverlay">
+            <div onclick="addStudent()" class="addActivityOverlay">
               <a  class="plusIcon" title="Create Student">&#43;</a>
             </div>
           </div>
@@ -80,7 +79,7 @@
 
     // opens student profile in same tab when a student is clicked
     function selectedStudent(element, studentID){
-      window.open("/admin/profile/" + studentID,"_self");
+      window.open("/admin/" + studentID,"_self");
     }
 
     document.getElementById("students").style.display = "block";

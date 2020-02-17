@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var activities = [];
 
 var Students = [];
 var numStudents = 0;
@@ -15,7 +16,7 @@ router.get('/', function(req, res, next) {
     var daily_query = "CALL PullUnhiddenStudents();";
     con.query(daily_query, function (err, dailyStudents) {
       if (err) throw err;
-
+      
       for(var i = 0; i < (dailyStudents[0].length); i++){
         Student.id = dailyStudents[0][i].StudentId;
         Student.name = dailyStudents[0][i].StudentName;
@@ -24,26 +25,25 @@ router.get('/', function(req, res, next) {
           name: Student.name,
           listOfActivities: Student.listOfActivities
         });
-        console.log(Students);
-        var today = '"2020-02-16"';
         numStudents++;
       }
+      var today = '"2020-02-16"';
 
       for(var i = 0; i < Students.length; i++){
         activities_query = "CALL ShowStudentDailyActivities(" + Students[i].id + 
-          ", " + today + ");";
+            ", " + today + ");";
 
-        con.query(activities_query, function(err, activities){
+        con.query(activities_query, function(err, act){
           if(err) throw err;
-          for(var j = 0; j < numStudents; j++){
-            for(var k = 0; k < activities[0].length; k++){
-              Students[j].listOfActivities.push(activities[0][k].ActivityName);
-            }
-          }
-          res.render('reports.ejs', { title: 'CNP Daily Report', report: Students });
-        }) 
+          activities = act[0];
+        })
+        console.log(activities);
+        Students[i].listOfActivities.push(activities[0]);
+        
+        activities = [];
+
       }
-      console.log(Students);
+      res.render('reports.ejs', { title: 'CNP Daily Report', reports: Students });
      
       
     })

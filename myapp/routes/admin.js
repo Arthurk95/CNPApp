@@ -28,12 +28,16 @@ router.get('/', function(req, res, next) {
   /* var student_query = "CALL ShowAllStudents();"; */ 
   con.query(student_query, function (err, sQuery) {
     if (err) throw err;
-    console.log(sQuery);
     con.query(activity_query, function (err, aQuery) {
       if (err) throw err;
       res.render('admin.ejs', {title: 'Admin Page', students: sQuery,  activities: aQuery});
     })
   })
+});
+
+router.get('/admin/:', function(req, res, next) {
+  
+  res.render('admin.ejs');
 });
 module.exports = router;
 

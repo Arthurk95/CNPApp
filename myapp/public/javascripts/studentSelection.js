@@ -21,6 +21,7 @@ function selectedStudent(studentElement, studentID){
         removeStudentFromList(studentID);
         if(numSelectedStudents == 0){
             hideElement(selectButton);
+            hideElement(submitButton);
         }
     }
     // the passed student is being selected
