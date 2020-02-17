@@ -44,7 +44,28 @@ router.get('/', function(req, res, next) {
         activities = [];
 
       }
-      res.render('reports.ejs', { title: 'CNP Daily Report', reports: Students });
+      TempStudents = []
+      var Student1 = {
+        id: 1,
+        name: "Bob",
+        listOfActivities: ['slide', 'chickens']
+      };
+      TempStudents.push(Student1)
+      var Student2 = {
+        id: 2,
+        name: "Sue",
+        listOfActivities: ['paint', 'bike']
+      };
+      TempStudents.push(Student2)
+      var Student3 = {
+        id: 3,
+        name: "Lilly",
+        listOfActivities: ['bike', 'chickens']
+      };
+      TempStudents.push(Student3)
+      
+
+      res.render('reports.ejs', { title: 'CNP Daily Report', reports: TempStudents });
      
       
     })
