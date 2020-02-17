@@ -1,3 +1,7 @@
+body{
+    background: var(--lightGray1) !important;
+}
+
 .week{
     color: var(--weekdayText);
     padding: 0;
@@ -115,3 +119,21 @@
 .blockList{
     display: block !important;
   }
+
+.activitiesList .studentContainer p{
+    font-size: 2em !important;
+}
+
+.activitiesList li{
+    width: 20% !important;
+}
+
+.activitiesList .studentContainer a{
+    padding: 20px;
+    font-size: 2em;
+}
+
+.addActivity{
+    background: var(--adminColor) !important;
+    color: var(--lightGray1) !important;
+}

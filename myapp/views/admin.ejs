@@ -10,67 +10,79 @@
   </head>
   <body>
 
-    <div class="tab">
-      <button class="tablinks" onclick="openTab(event, 'studentsTab')">Students</button>
-      <button class="tablinks" onclick="openTab(event, 'activitiesTab')">Activities</button>
-    </div>
-
-    <div id="studentsTab" class="tabContent">
-      <% if (students.length > 0) {%>
-        <%- include listOfStudents.ejs %>
-            <li class="addStudent">
-              <div class="studentContainer">
-                <table>
-                  <th>
-                    <div>
-                        <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
-                    </div>
-                  </th>
-                <tr>
-                    <td>a<br />
-                    a</td>
-                </tr>
-                </table>
-                <div onclick="addStudent()" class="addStudentOverlay">
-                  <a  class="plusIcon" title="Create Student">&#43;</a>
-                </div>
-              </div>
-            </li>
-          </ul>
-  
-        <div id="newStudentForm" class="studentForm">
-          <!-- newStudentForm content -->
-          <div class="studentForm-content">
-            <span class="close">&times;</span>
+    <table class="tabAreaTable">
+      <tr>
+        <td class="tab">
+          <div class="tabsContainer">
             <ul>
-              <li class="formTitle">Add a Student</li>
-              <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
-              <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
-              <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-              <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPost()">Create</a></li>
+              <li><button class="tablinks" onclick="openTab(event, 'studentsTab')">Students</button></li>
+              <li><button class="tablinks" onclick="openTab(event, 'activitiesTab')">Activities</button></li>
             </ul>
           </div>
-        </div>
-      <% } else { %>
-        <h2>No students</h2>
-      <% } %>
-    </div>
+          
+        </td>
 
-    <div id="activitiesTab" class="tabContent">
-      <% if (activities.length > 0) {%>
-        <%- include listOfActivities.ejs %>
-        <li class="addActivity">
-          <div class="studentContainer">
-            <div onclick="addStudent()" class="addActivityOverlay">
-              <a  class="plusIcon" title="Create Student">&#43;</a>
-            </div>
+        <td class="tabContentArea">
+          <div id="studentsTab" class="tabContent">
+            <% if (students.length > 0) {%>
+              <%- include listOfStudents.ejs %>
+                  <li class="addStudent">
+                    <div class="studentContainer">
+                      <table>
+                        <th>
+                          <div>
+                              <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+                          </div>
+                        </th>
+                      <tr>
+                          <td>a<br />
+                          a</td>
+                      </tr>
+                      </table>
+                      <div onclick="addStudent()" class="addStudentOverlay">
+                        <a  class="plusIcon" title="Create Student">&#43;</a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+        
+              <div id="newStudentForm" class="studentForm">
+                <!-- newStudentForm content -->
+                <div class="studentForm-content">
+                  <span class="close">&times;</span>
+                  <ul>
+                    <li class="formTitle">Add a Student</li>
+                    <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
+                    <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
+                    <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+                    <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPost()">Create</a></li>
+                  </ul>
+                </div>
+              </div>
+            <% } else { %>
+              <h2>No students</h2>
+            <% } %>
           </div>
-        </li>
-      </ul>
-      <% } else { %>
-        <h2>No activities</h2>
-      <% } %>
-    </div>
+      
+          <div id="activitiesTab" class="tabContent">
+            <% if (activities.length > 0) {%>
+              <%- include listOfActivities.ejs %>
+              <li class="addActivity">
+                <div class="studentContainer">
+                  <p title="Create Student">New Activity +</p>
+                </div>
+              </li>
+            </ul>
+            <% } else { %>
+              <h2>No activities</h2>
+            <% } %>
+          </div>
+        </td>
+      </tr>
+    </table>
+    
+
+    
   </body>
   <script>
     // Get the modal
@@ -108,6 +120,7 @@
 
       // Get all elements with class="tabcontent" and hide them
       tabcontent = document.getElementsByClassName("tabContent");
+      console.log(tabcontent);
       for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
       }
