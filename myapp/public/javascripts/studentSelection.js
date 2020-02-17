@@ -12,8 +12,6 @@ $(document).ready(function(){
     submitButton = document.getElementById("submitButton");
 })
 
-sessionStorage.setItem("favoriteMovie", favoritemovie);
-
 function selectedStudent(studentElement, studentID){
     // the passed student is being de-selected
     if(studentElement.classList.contains("selectedStudent")){
@@ -130,8 +128,14 @@ function selectionMade(){
 
 // activity and student(s) chosen, submit to database
 function submitToDB(){
-    // do something database-y with selectedStudentIDs and selectedActivityID
-    httpPostAsync("studentActivity");
+    
+    var theUrl = window.location.href+'/addstudentActivity';
+    var data = data + "numStu=" + selectedStudentIDs.length;
+    data = data + "&stu=" + selectedStudentIDs;
+    data = data + "&act=" + selectedActivityID;
+    var callback = reloadIt;
+
+    httpPostAsync(theUrl,data,callback);
 }
 
 function hideElement(element) { 
