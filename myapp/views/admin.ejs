@@ -15,7 +15,7 @@
         <td class="tab">
           <div class="tabsContainer">
             <ul>
-              <li><button class="tablinks" onclick="openTab(event, 'studentsTab')">Students</button></li>
+              <li><button id="studentsTabButton" class="tablinks" onclick="openTab(event, 'studentsTab')">Students</button></li>
               <li><button class="tablinks" onclick="openTab(event, 'activitiesTab')">Activities</button></li>
             </ul>
           </div>
@@ -113,6 +113,9 @@
         formElement.style.display = "none";
       }
     }
+
+    document.getElementById("studentsTab").style.display = "block";
+    document.getElementById("studentsTabButton").className += " active";
 
     function openTab(evt, tabName) {
       // Declare all variables

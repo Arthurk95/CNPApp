@@ -125,7 +125,7 @@ body{
 }
 
 .activitiesList li{
-    width: 20% !important;
+    width: 300px !important;
 }
 
 .activitiesList .studentContainer a{
@@ -135,5 +135,8 @@ body{
 
 .addActivity{
     background: var(--adminColor) !important;
+}
+
+.addActivity p{
     color: var(--lightGray1) !important;
 }
