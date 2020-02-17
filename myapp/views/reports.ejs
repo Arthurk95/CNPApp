@@ -5,10 +5,8 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/students.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/javascripts/reportScripts.js"></script>
   </head>
   <body>
-    <a id="test"><%= reports %></a>
     <% if(reports.length > 0) {%>
       <% reports.forEach((report, index) => {%>
         <table>
@@ -17,7 +15,7 @@
           </thead>
           <tbody>
             <% report.listOfActivities.forEach((activity, index) => {%>
-              <tr><%= activity %></tr>
+              <tr> .<%= activity.ActivityName %>.</tr>
             <% }) %>
             <tr></tr>
           </tbody>
