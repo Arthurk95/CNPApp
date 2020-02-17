@@ -1,4 +1,4 @@
-CREATE PROCEDURE DoDailyEventHelpter
+CREATE PROCEDURE DoDailyEventHelper
 
 BEGIN
   SET @var = DAYNAME(CURRENT_DATE);
