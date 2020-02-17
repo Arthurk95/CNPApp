@@ -48,7 +48,7 @@
               <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
               <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
               <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-              <li style="text-align: center;"><a id="newStudentSubmit">Create</a></li>
+              <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPost()">Create</a></li>
             </ul>
           </div>
         </div>
@@ -73,7 +73,6 @@
       <% } %>
     </div>
   </body>
-  <script src="/javascripts/adminScripts.js"></script>
   <script>
     // Get the modal
     var formElement = document.getElementById("newStudentForm");
@@ -123,6 +122,17 @@
       // Show the current tab, and add an "active" class to the button that opened the tab
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
+    }
+
+    //generate perameters for post and call post
+    function callPost(){
+      var theUrl = window.location.href+'/addstudent';
+      var data = data + "name=" + document.getElementById("newStudentName").value;
+      data = data + "&contact=" + document.getElementById("newStudentContact").value;
+      data = data + "&email=" + document.getElementById("newStudentEmail").value;
+      var callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
     }
   </script>
 </html>

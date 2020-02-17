@@ -5,10 +5,12 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/students.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/javascripts/reportScripts.js"></script>
   </head>
   <body>
-    <% if(reports.length > 0) {%>
-      <% reports.forEach((report, index) => {%>
+    <a id="test" style="visibility: hidden;"><%= report %></a>
+    <% if(report.length > 0) {%>
+      <% report.forEach((report, index) => {%>
         <table>
           <thead>
             <tr><% report.name %></tr>

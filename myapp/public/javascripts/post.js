@@ -1,9 +1,6 @@
-function httpPostAsync(type)
+function httpPostAsync(theUrl, data, callback)
 {
-    var theUrl;
-    var data="";
-    var callback;
-    if(type=="newStudent"){
+    /*if(type=="newStudent"){
         theUrl = window.location.href+'/addstudent';
         data = data + "name=" + document.getElementById("newStudentName").value;
         data = data + "&contact=" + document.getElementById("newStudentContact").value;
@@ -25,15 +22,8 @@ function httpPostAsync(type)
         }
         data = "actNum=" + val;
         callback = reloadIt;
-    }
-    else if(type=="studentActivity"){
-        console.log(selectedStudentIDs + " " + selectedActivityID + " " + selectedStudentIDs.length);
-        theUrl = window.location.href+'/addstudentActivity';
-        data = data + "numStu=" + selectedStudentIDs.length;
-        data = data + "&stu=" + selectedStudentIDs;
-        data = data + "&act=" + selectedActivityID;
-        callback = reloadIt;
-    }
+    }*/
+    
     
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
