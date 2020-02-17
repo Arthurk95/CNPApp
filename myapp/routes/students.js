@@ -20,4 +20,22 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.post('/addstudentActivity', function(req, res){
+  stus = req.body.stu.split(",");
+  console.log(stus + " " + req.body.act);
+  recursepost(0,stus,req.body.act,req.body.numStu,res);
+  
+});
+
+function recursepost(i,stus,act,num,res){
+  var sql = "CALL AddDailyActivity('" + stus[i] + "','" + act + "');";
+  con.query(sql, function (err, result) {
+    if(i < num){
+      recursepost(i+1,stus,act,num,res);
+    }
+    if(i==0){
+      res.end();
+    }
+  });
+}
 module.exports = router;

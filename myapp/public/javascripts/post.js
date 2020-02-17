@@ -10,12 +10,12 @@ function httpPostAsync(type)
         data = data + "&email=" + document.getElementById("newStudentEmail").value;
         callback = uStuStatus;
     }
-    if(type=="newActivity"){
+    else if(type=="newActivity"){
         theUrl = window.location.href+'/addactivity';
         data = "name=" + document.getElementById("newActivityName").value;
         callback = uActStatus;
     }
-    if(type[0]=='d', type[1]=='e', type[2]=='l',type[6]=='A', type[7]=='c', type[8]=='t'){
+    else if(type[0]=='d', type[1]=='e', type[2]=='l',type[6]=='A', type[7]=='c', type[8]=='t'){
         theUrl = window.location.href+'/delete';
         i = 14;
         var val = "";
@@ -24,6 +24,14 @@ function httpPostAsync(type)
             i= i + 1;
         }
         data = "actNum=" + val;
+        callback = reloadIt;
+    }
+    else if(type=="studentActivity"){
+        console.log(selectedStudentIDs + " " + selectedActivityID + " " + selectedStudentIDs.length);
+        theUrl = window.location.href+'/addstudentActivity';
+        data = data + "numStu=" + selectedStudentIDs.length;
+        data = data + "&stu=" + selectedStudentIDs;
+        data = data + "&act=" + selectedActivityID;
         callback = reloadIt;
     }
     

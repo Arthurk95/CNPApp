@@ -130,7 +130,7 @@ function selectionMade(){
 // activity and student(s) chosen, submit to database
 function submitToDB(){
     // do something database-y with selectedStudentIDs and selectedActivityID
-    con.query()
+    httpPostAsync("studentActivity");
 }
 
 function hideElement(element) { 

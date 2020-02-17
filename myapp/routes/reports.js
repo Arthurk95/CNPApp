@@ -40,11 +40,12 @@ router.get('/', function(req, res, next) {
               Students[j].listOfActivities.push(activities[0][k].ActivityName);
             }
           }
+          res.render('reports.ejs', { title: 'CNP Daily Report', report: Students });
         }) 
       }
       console.log(Students);
      
-      res.render('reports.ejs', { title: 'CNP Daily Report', report: Students });
+      
     })
   });
 
