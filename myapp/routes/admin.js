@@ -37,9 +37,10 @@ router.get('/', function(req, res, next) {
 
 /* GET home page. */
 router.get('/profile', function(req, res, next) {
-  var student_query = "CALL PullStudentData(54)"
+  var student_query = "CALL PullStudentData(62)"
   con.query(student_query, function (err, student) {
     if (err) throw err;
+    console.log(student);
     res.render('profile.ejs', {title: 'Profile Page', students: student});
     })
 });
