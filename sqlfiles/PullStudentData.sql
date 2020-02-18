@@ -1,10 +1,8 @@
 DELIMITER $$
-CREATE PROCEDURE `cnp_data`.`PullStudentData` (IN StudentID INT)
+CREATE PROCEDURE `cnp_data`.`PullStudentData` (IN StudId INT)
 
-BEGIN 
-  SELECT 
-    FROM   'Students', 'Schedule', 'Relatives'
-      WHERE 'schedule'.StudentID = StudID  AND 'Relatives'.StudentID = StudID AND 'Students'.StudentID = StudID;
-
-
-END $$ 
+BEGIN
+	SELECT * 
+		FROM `Students`, `Schedual`, `Relatives`
+			WHERE `Schedual`.StudentId = StudId AND `Relatives`.StudentId = StudId AND `Students`.StudentId = StudId;
+END $$
