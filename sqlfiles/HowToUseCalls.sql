@@ -13,3 +13,4 @@ CALL DeleteStudent(39);/*student id*/
 CALL DeleteActivity(2);/*activity id*/
 CALL ShowAllStudents();/*Pulls full student roster*/
 CALL ShowAllActivities();/*pulls full activity list*/
+CALL InsertDailyBehavior(3, "slept well", "ate a little", "was nice today", "did not use the restroom");/* put in student id and up to 255 character description for each activity in provided order*/
