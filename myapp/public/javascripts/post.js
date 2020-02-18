@@ -1,12 +1,6 @@
 function httpPostAsync(theUrl, data, callback)
 {
-    /*if(type=="newStudent"){
-        theUrl = window.location.href+'/addstudent';
-        data = data + "name=" + document.getElementById("newStudentName").value;
-        data = data + "&contact=" + document.getElementById("newStudentContact").value;
-        data = data + "&email=" + document.getElementById("newStudentEmail").value;
-        callback = uStuStatus;
-    }
+    /*
     else if(type=="newActivity"){
         theUrl = window.location.href+'/addactivity';
         data = "name=" + document.getElementById("newActivityName").value;
