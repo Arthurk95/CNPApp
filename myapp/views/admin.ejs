@@ -13,7 +13,6 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
-
     <div id="accordion">
       <h3 class="accordion">Students</h3>
         <div class="accordionPanel">
@@ -27,13 +26,13 @@
                               <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
                           </div>
                         </th>
-                      <tr>
+                        <tr>
                           <td>a<br />
                           a</td>
-                      </tr>
+                        </tr>
                       </table>
                       <div onclick="addStudent()" class="addStudentOverlay">
-                        <a  class="plusIcon" title="Create Student">&#43;</a>
+                        <a class="plusIcon" title="Create Student">&#43;</a>
                       </div>
                     </div>
                   </li>
@@ -50,7 +49,6 @@
                     <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
                     <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
                     <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
-                    <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
                     <ul class="week">
                       <li><p>S</p></li>
                       <li><p>M</p></li>
@@ -60,7 +58,7 @@
                       <li><p>F</p></li>
                       <li><p>S</p></li>
                     </ul>
-                    <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPost()">Create</a></li>
+                    <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
                   </ul>
                 </div>
             <% } else { %>
@@ -75,7 +73,7 @@
             <%- include listOfActivities.ejs %>
             <li class="addActivity">
               <div class="studentContainer">
-                <p title="Create Student">New Activity +</p>
+                <p title="Create Student" onclick="addActivity()">New Activity +</p>
               </div>
             </li>
           </ul>
@@ -107,7 +105,7 @@
 
     // opens student profile in same tab when a student is clicked
     function selectedStudent(element, studentID){
-      window.open("/admin/" + studentID,"_self");
+      window.location.href ="/admin/profile/?id=" + studentID;
     }
 
     document.getElementById("students").style.display = "block";
@@ -157,12 +155,24 @@
     }
 
     //generate perameters for post and call post
-    function callPost(){
+    function callPostStu(){
+
       var theUrl = window.location.href+'/addstudent';
       var data = data + "name=" + document.getElementById("newStudentName").value;
       data = data + "&contact=" + document.getElementById("newStudentContact").value;
       data = data + "&email=" + document.getElementById("newStudentEmail").value;
+      data = data + "&contactNum=" + document.getElementById("newStudentContactNumber").value;
+      data = data + "&birthday=" + document.getElementById("newStudentBirthday").value;
+      data = data + "&email=" + document.getElementById("newStudentEmail").value;
       var callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
+    }
+    function callPostAct(){
+
+      theUrl = window.location.href+'/addactivity';
+      data = "name=" + document.getElementById("newActivityName").value;
+      callback = reloadIt;
 
       httpPostAsync(theUrl, data, callback);
     }

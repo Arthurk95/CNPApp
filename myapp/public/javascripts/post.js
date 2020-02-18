@@ -1,11 +1,7 @@
 function httpPostAsync(theUrl, data, callback)
 {
     /*
-    else if(type=="newActivity"){
-        theUrl = window.location.href+'/addactivity';
-        data = "name=" + document.getElementById("newActivityName").value;
-        callback = uActStatus;
-    }
+    
     else if(type[0]=='d', type[1]=='e', type[2]=='l',type[6]=='A', type[7]=='c', type[8]=='t'){
         theUrl = window.location.href+'/delete';
         i = 14;
