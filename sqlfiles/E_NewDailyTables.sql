@@ -1,5 +1,3 @@
-DROP EVENT NewDailyTables;
-
 CREATE EVENT NewDailyTables
 ON SCHEDULE
     EVERY 1 DAY

@@ -148,7 +148,7 @@
   .activitiesList .studentContainer p{
       padding: 20px;
       margin: 0;
-      font-size: 3em !important;
+      font-size: 3em;
       color: var(--darkGray3);
   }
 
