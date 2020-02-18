@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE `cnp_data`.`ShowAllStudents` ()
+CREATE PROCEDURE `cnp_data`.`ShowAllStudentsInfo` ()
 
 BEGIN
 	SELECT *

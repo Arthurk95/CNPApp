@@ -1,4 +1,5 @@
 DELIMITER $$
+
 CREATE PROCEDURE `cnp_data`.`PullStudentData` (IN StudId INT)
 
 BEGIN

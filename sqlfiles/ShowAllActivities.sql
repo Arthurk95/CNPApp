@@ -3,5 +3,5 @@ CREATE PROCEDURE `cnp_data`.`ShowAllActivities` ()
 
 BEGIN
 	Select * FROM Activities
-	ORDER BY ActivityName;
+	ORDER BY ActivityName ASC;
 END $$
