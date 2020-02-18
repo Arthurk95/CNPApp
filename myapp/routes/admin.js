@@ -36,18 +36,30 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET home page. */
-router.get('/profile', function(req, res, next) {
-  var student_query = "CALL PullStudentData(62)"
+// router.get('/profile', function(req, res, next) {
+//   var student_query = "CALL PullStudentData(62)"
+//   con.query(student_query, function (err, student) {
+//     if (err) throw err;
+//     console.log(student);
+//     res.render('profile.ejs', {title: 'Profile Page', students: student});
+//     })
+// });
+
+// router.get('/admin/:', function(req, res, next) {
+  
+//   res.render('admin.ejs');
+// });
+
+// Access student profile page
+router.get('/student-profile/:id', function (req, res, next) {
+  student_id = req.params.id
+  var student_query = `CALL PullStudentData(${student_id})`;
+  
   con.query(student_query, function (err, student) {
     if (err) throw err;
     console.log(student);
     res.render('profile.ejs', {title: 'Profile Page', students: student});
     })
-});
-
-router.get('/admin/:', function(req, res, next) {
-  
-  res.render('admin.ejs');
 });
 module.exports = router;
 
