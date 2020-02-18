@@ -51,6 +51,8 @@ ul{
   margin-inline-end: 0;
   padding-inline-start: 0px;
   /* ------------------------------ -*/
+
+  list-style-type: none;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -234,7 +236,8 @@ input{
   border-radius: 8px;
   border-style: none;
   outline: none;
-  padding: 7px 0px 7px 15px;
+  padding: 10px 0px 10px 15px;
+  font-size: 1.2em;
 }
 
 input:focus{

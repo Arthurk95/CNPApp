@@ -4,23 +4,82 @@
         <nav><%- include header.ejs %></nav>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/tabs.css' />
+        <link rel='stylesheet' href='/stylesheets/profile.css' />
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
     </head>
     <body>
-        <h1><%- student.StudentName %></h1>
-        <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'profile')">Profile</button>
-            <button class="tablinks" onclick="openTab(event, 'schedule')">Schedule</button>
-          </div>
-          
-          <!-- Tab content -->
-          <div id="profile" class="tabcontent">
-            <h3>London</h3>
-            <p>London is the capital city of England.</p>
-          </div>
-          
-          <div id="schedule" class="tabcontent">
-            <h3>Paris</h3>
-            <p>Paris is the capital of France.</p>
-          </div>
+      
+
+
+      <table class="profileTable">
+        <tr>
+          <td class="leftSide">
+            <div id="tabs">
+              <ul class="tabs">
+                <li><a href="#tabs-1">Profile</a></li>
+                <li><a href="#tabs-2">Schedule</a></li>
+                <li><a href="#tabs-3">Info</a></li>
+              </ul>
+              <div id="tabs-1" class="tabContent">
+                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+              </div>
+              <div id="tabs-2" class="tabContent">
+                <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+              </div>
+              <div id="tabs-3" class="tabContent">
+                <ul>
+                  <li class="formTitle">Add a Student</li>
+                  <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
+                  <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+                  <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
+                  <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
+                </ul>
+              </div>
+            </div>
+          </td>
+
+
+          <td class="rightSide">
+            <ul>
+              <li><img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png"></li>
+              <li><input value="<%- student.StudentName %>"></li>
+              <li><input value="<%- student.StudentBirthday %>"></li>
+            </ul>
+            
+          </td>
+        </tr>
+      </table>
     </body>
+
+
+    <script>
+      $( function() {
+        $( "#tabs" ).tabs();
+      } );
+    </script>
+
+    <script>
+      function openTab(evt, tabName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabContent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    </script>
 </html>

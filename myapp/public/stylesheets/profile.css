@@ -1,0 +1,49 @@
+.profileTable{
+    border-collapse: collapse;
+    border-spacing: 0;
+    row-gap: 0;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.profileTable td, tr, th{
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+}
+
+.leftSide{
+    vertical-align: top;
+    margin-right: 50px;
+}
+
+.leftSide ul{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.leftSide li{
+    display: inline-block;
+    margin: 0;
+}
+
+
+.rightSide{
+    vertical-align: top;
+    width: 35%;
+}
+
+.rightSide img{
+    border: 1px solid white;
+    width: 20vw;
+}
+
+.rightSide ul{
+    text-align: center;
+    display: block;
+}
+
+.rightSide li{
+    margin-bottom: 15px;
+}
