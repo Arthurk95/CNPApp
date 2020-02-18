@@ -38,7 +38,7 @@
 
   .studentForm-content li{
     display: block;
-    padding: 15px 40px;
+    padding: 1vh 40px;
   }
 
   .formTitle{
@@ -112,6 +112,41 @@
       width: 90%;
       font-size: 5em;
     }
+  }
 
-    
+  .week{
+    padding: 0;
+    margin: 4vh 0 !important;
+    list-style: none;
+    display: block !important;
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .week li{
+    border: 2px solid var(--darkGray2);
+    border-radius: 50%;
+    margin: 2px;
+    width: 80px;
+    height: 80px;
+    padding: 0px !important;
+    display: inline-block;
+  }
+  .week li p{
+    font-size: 2em;
+    color: var(--darkGray2);
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display:flex;/*CSS3*/
+    align-items:center;/*Vertical align*/
+    justify-content:center;/*horizontal align*/
+  }
+  .week li:hover{
+    background: var(--darkGray2);
+  }
+
+  .week li:hover p{
+    color: var(--lightGray2);
   }

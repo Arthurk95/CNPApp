@@ -1,24 +1,5 @@
-
-.week{
-    color: var(--weekdayText);
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: block !important;
-    margin-top: 15px;
-    width: 100%;
-    text-align: center;
-}
-
-.week li{
-    display: inline-block !important;
-    border: 2px solid var(--darkGray2);
-    font-size: 2em;
-    border-radius: 50%;
-    margin: 2px;
-    width: 80px;
-    height: 80px;
-    padding: 0px !important;
+body{
+    background: var(--adminColor);
 }
 
 .attending{

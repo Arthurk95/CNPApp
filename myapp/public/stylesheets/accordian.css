@@ -2,10 +2,10 @@
 .accordion {
     display: block;
     margin: 0 auto;
-    background-color: #eee;
-    color: #444;
+    background-color: var(--darkGray3);
+    color: var(--lightGray2);
     cursor: pointer;
-    padding: 18px;
+    padding: 18px 0;
     width: 95%;
     font-size: 4em;
     text-align: center;
@@ -17,15 +17,25 @@
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .accordion:hover {
-    background-color: #ccc;
+    background-color: var(--darkGray1);
+    color: var(--lightGray1);
+  }
+
+  .ui-accordion-header {
+      font-weight: 500;
+  }
+
+  .ui-accordion-header.ui-state-active{
+    color: var(--lightGray1) !important;
+    background-color: var(--darkGray1) !important;
   }
   
   /* Style the accordion panel. Note: hidden by default */
-  .accordianPanel {
+  .accordionPanel {
     margin: 0 auto;
     width: 95%;
-    padding: 0 18px;
-    background-color: white;
+    background-color: var(--darkGray3);
+    padding: 20px 0px;
     display: none;
     overflow: hidden;
   }
