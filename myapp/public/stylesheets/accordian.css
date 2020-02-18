@@ -25,6 +25,7 @@
       font-weight: 500;
   }
 
+  /* jQuery override for the color of the buttons */
   .ui-accordion-header.ui-state-active{
     color: var(--lightGray1) !important;
     background-color: var(--darkGray1) !important;

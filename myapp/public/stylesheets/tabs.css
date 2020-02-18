@@ -1,7 +1,7 @@
 .tabsContainer{
   background-color: var(--darkGray3);
 }
-/* Style the tab */
+/* <ul> list of tab buttons */
 .tabs {
   display: block;
   list-style-type: none;
@@ -10,6 +10,7 @@
   background: var(--darkGray3);
 }
 
+/* Tab buttons */
 .tabs a{
   padding: 0px 30px;
   text-decoration: none;
@@ -29,19 +30,16 @@
   color: var(--lightGray1);
 }
 
-/* Style the tab content */
+/* Tab content with a background and stuff */
 .tabContent {
   display: none;
   padding: 6px 12px;
+  border: 1px solid var(--darkGray3);
   border-top: none;
   background: var(--darkGray2);
 }
 
-.tabContentArea{
-  display: block;
-  min-width: 100%;
-}
-
+/* jQuery styling override for tab colors */
 .ui-tabs-tab.ui-state-active{
   color: var(--lightGray1) !important;
   background-color: var(--darkGray2) !important;

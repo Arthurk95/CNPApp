@@ -1,13 +1,6 @@
 
+/* <ul> list of buttons/components in the footer */
 .studentFooter{
-    /* -- Remove default ul styling -- */
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    padding-inline-start: 0px;
-    /* ------------------------------ -*/
-
     position: fixed;
     left: 0;
     right: 0;
@@ -19,12 +12,13 @@
     padding-bottom: 40px;
 }
 
+/* Each actual component, probably a button */
 .studentFooter li{
     display: inline;
     transition: opacity 0.2s ease-in-out;
 }
 
-/*<span class="arrow">&#10132</span>*/
+/* Actual button for the footer */
 .studentFooter a{
     position: relative;
     text-decoration: none;
@@ -49,6 +43,7 @@
         padding-bottom: 0;
     }
 
+    /* Make the big footer buttons full width on small screens */
     .studentFooter a{
         font-size: 10vw;
         padding: 4vh 0 4vh 0;

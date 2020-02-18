@@ -20,7 +20,7 @@
     border-spacing: 20px 20px;
 }
 
-/* This is the actual student listing itself,
+/* This is the actual listing itself,
    which contains multiple elements */
 .blockList li {
     transition: box-shadow 0.1s !important;
@@ -65,12 +65,15 @@
     font-size: 1.7em;
 }
 
+/* This is called when a student is selected 
+   on the tracking page */
 .selectedStudent{
     background-color: var(--lightGray3) !important;
     box-shadow: inset 0px 0px 6px 3px var(--darkGray1) !important;
 }
 
-.studentContainer{
+/*  */
+.blockContainer{
     position: relative;
     width: 100%;
 }
@@ -105,6 +108,7 @@
     text-align: center;
   }
 
+  /* Students and Activities buttons on the tracking page. */
   .selectionButtons{
       display: block;
       list-style: none;
@@ -115,12 +119,14 @@
       text-align: center;
   }
 
+  /* Each li is the container for the button */
   .selectionButtons li{
     display: inline-block;
     width: 80%;
     margin-bottom: 30px;
   }
 
+  /* This is the button itself */
   .selectionButtons a{
     transition: 0.1s all;
     color: var(--lightGray1);
@@ -145,13 +151,15 @@
     background: var(--tasksColor);
   }
 
-  .activitiesList .studentContainer p{
+  /* Makes the text for the activity look better */
+  .activitiesList .blockContainer p{
       padding: 20px;
       margin: 0;
       font-size: 3em;
       color: var(--darkGray3);
   }
 
+  /* Shows less Activities per row since the text is on one line */
  .activitiesList li{
       width: 40%;
   }

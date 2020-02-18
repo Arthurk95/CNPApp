@@ -1,4 +1,4 @@
-/* The Modal (background) */
+/* The form container, which spans the entire page with a darkish background */
 .studentForm {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -12,7 +12,7 @@
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
   }
   
-  /* Modal Content/Box */
+  /* The actual pop-up box that contains everything in the form */
   .studentForm-content {
     border-radius: 4px;
     background-color: var(--lightGray1);
@@ -22,30 +22,28 @@
     box-shadow: 0px 0px 15px 1px var(--darkGray2);
   }
 
+  /* <ul> is used to list each component top-to-bottom */
   .studentForm-content ul{
-    /* -- Remove default ul styling -- */
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    padding-inline-start: 0px;
-    /* ------------------------------ -*/
     list-style: none;
     margin: 0;
     padding: 0;
     display: block;
   }
 
+  /* Each li is an element on the form */
   .studentForm-content li{
     display: block;
     padding: 1vh 40px;
   }
 
+  /* Large title at the top of the form (first <li>) */
   .formTitle{
     font-size: 2em;
     color: var(--darkGray3);
   }
 
+  /* Styling for the input fields. Makes them bigger and more prominent
+     with a nice inset border */
   .studentForm input{
     box-shadow: inset 0px 0px 3px 0px var(--darkGray2);
     font-size: 1.2em;
@@ -56,10 +54,12 @@
     width: 95%;
   }
 
+  /* Style for when an input field is selected */
   .studentForm input:focus{
     box-shadow: inset 0px 0px 4px 2px var(--adminColor);
   }
 
+  /* Any button on the form, probably a submit button */
   .studentForm a{
     transition: 0.2s background-color;
     cursor: pointer;
@@ -86,7 +86,7 @@
     opacity: 0.8;
   }
 
-  /* The Close Button */
+  /* The Close Button at the top right */
   .close {
     color: var(--darkGray3);
     float: right;
@@ -95,8 +95,6 @@
     line-height: 0;
   }
   
- 
-
   .close:hover,
   .close:focus {
     color: var(--adminColor);
@@ -104,6 +102,8 @@
     cursor: pointer;
   }
 
+  /* Mobile-friendly to make the form full-width (almost) when the screen
+     is smaller and make the button bigger */
   @media screen and (max-width: 1200px){
     .studentForm-content{
       width: 85%;
@@ -114,6 +114,7 @@
     }
   }
 
+  /* <ul> for the days of the week */
   .week{
     padding: 0;
     margin: 4vh 0 !important;
@@ -124,6 +125,8 @@
     text-align: center;
   }
 
+  /* Each <li> is a single weekday.
+     Creates the circle for the day. */
   .week li{
     border: 2px solid var(--darkGray2);
     border-radius: 50%;
@@ -133,6 +136,8 @@
     padding: 0px !important;
     display: inline-block;
   }
+  
+  /* <p> tag is the text of the day. This element fills its <li> to fit. */
   .week li p{
     font-size: 2em;
     color: var(--darkGray2);

@@ -1,12 +1,5 @@
+/* <ul> list for Header bar */
 .headerStyle {
-    /* -- Remove default ul styling -- */
-    margin-block-start: 0;
-    margin-block-end: 0;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    padding-inline-start: 0px;
-    /* ------------------------------ -*/
-
     background-color: var(--darkGray1);
     font-size: 3vw;
     font-weight: 400;
@@ -16,11 +9,12 @@
     margin-bottom: 30px;
   }
   
-
+  /* Each li is an element in the header, usually an <a> tag */
   .headerStyle li{
-    display: inline;
+    display: inline; /* List everything horizontally */
   }
   
+  /* Actual header button styling */
   .headerStyle a {
     transition: 0.2s background-color;
     display: inline-block;

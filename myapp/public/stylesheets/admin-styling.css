@@ -24,6 +24,8 @@ body{
     opacity: 0;
 }
 
+/* Overlay for the Add Student plus sign thing in the list.
+   This styles it to fit the list item. */
 .addStudentOverlay{
     border-radius: 20px;
     position: absolute;
@@ -54,6 +56,7 @@ body{
     line-height: 100%
 }
 
+/* The big plus sign for the AddStudent list item */
 .plusIcon{
     line-height: 100%;
     transition: 0.1s all;
@@ -70,7 +73,9 @@ body{
     text-align: center;
 }
 
+/* Mobile friendly stuff */
 @media screen and (max-width: 1200px){
+    /* Makes the student listings smaller */
     .studentsList li{
         width: 28% !important;
     }
@@ -88,29 +93,23 @@ body{
     }
 }
 
-.checkMarkOverlay{
-    display: none;
-}
+/* Hides the checkmark since we don't need it on the admin page */
+.checkMarkOverlay{ display: none; }
+.checkMark{ display: none; }
 
-.checkMark{
-    display: none;
-}
-
+/* Automatically shows the blockLists since the jQuery accordion handles this */
 .blockList{
     display: block !important;
   }
 
-.activitiesList .studentContainer p{
+  /* Make the font size bigger for each activity */
+.activitiesList .blockContainer p{
     font-size: 2em !important;
 }
 
+/* Make each activity larger to fit text on one line */
 .activitiesList li{
     width: 300px !important;
-}
-
-.activitiesList .studentContainer a{
-    padding: 20px;
-    font-size: 2em;
 }
 
 .addActivity{

@@ -3,7 +3,7 @@
         <% students.forEach((student, index) => { %>
             <% studentSpl = student.StudentName.split(" "); %>
         <li onclick="selectedStudent(this, <%= student.StudentId %>)">
-            <div class="studentContainer">
+            <div class="blockContainer">
                 <table>
                 <!-- Image below is just to test. Old text:
                     /assets/img/<%= student.Img %> -->
