@@ -8,105 +8,98 @@
     <link rel='stylesheet' href='/stylesheets/accordian.css' />
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/student-form.css' />
+    
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
 
-    <button class="accordion">Students</button>
-    <div class="accordianPanel">
-        <% if (students.length > 0) {%>
-          <%- include listOfStudents.ejs %>
-              <li class="addStudent">
-                <div class="studentContainer">
-                  <table>
-                    <th>
-                      <div>
-                          <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+    <div id="accordion">
+      <h3 class="accordion">Students</h3>
+        <div class="accordionPanel">
+            <% if (students.length > 0) {%>
+              <%- include listOfStudents.ejs %>
+                  <li class="addStudent">
+                    <div class="studentContainer">
+                      <table>
+                        <th>
+                          <div>
+                              <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+                          </div>
+                        </th>
+                      <tr>
+                          <td>a<br />
+                          a</td>
+                      </tr>
+                      </table>
+                      <div onclick="addStudent()" class="addStudentOverlay">
+                        <a  class="plusIcon" title="Create Student">&#43;</a>
                       </div>
-                    </th>
-                  <tr>
-                      <td>a<br />
-                      a</td>
-                  </tr>
-                  </table>
-                  <div onclick="addStudent()" class="addStudentOverlay">
-                    <a  class="plusIcon" title="Create Student">&#43;</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-    
-          <div id="newStudentForm" class="studentForm">
-            <!-- newStudentForm content -->
-            <div class="studentForm-content">
-              <span class="close">&times;</span>
-              <ul>
-                <li class="formTitle">Add a Student</li>
-                <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
-                <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
-                <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-                <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
-                <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
-                <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
-                <ul class="week">
-                  <li>M</li>
-                  <li>T</li>
-                  <li>W</li>
-                  <li>R</li>
-                  <li>F</li>
-                  <li>S</li>
-                  <li>S</li>
+                    </div>
+                  </li>
                 </ul>
-                <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPost()">Create</a></li>
-              </ul>
-            </div>
-        <% } else { %>
-          <h2>No students</h2>
-        <% } %>
-      </div>
-    </div>
-    
-    <button class="accordion">Activities</button>
-    <div class="accordianPanel">
-      <% if (activities.length > 0) {%>
-        <%- include listOfActivities.ejs %>
-        <li class="addActivity">
-          <div class="studentContainer">
-            <p title="Create Student">New Activity +</p>
+        
+              <div id="newStudentForm" class="studentForm">
+                <!-- newStudentForm content -->
+                <div class="studentForm-content">
+                  <span class="close">&times;</span>
+                  <ul>
+                    <li class="formTitle">Add a Student</li>
+                    <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
+                    <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
+                    <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+                    <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
+                    <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
+                    <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
+                    <ul class="week">
+                      <li><p>S</p></li>
+                      <li><p>M</p></li>
+                      <li><p>T</p></li>
+                      <li><p>W</p></li>
+                      <li><p>T</p></li>
+                      <li><p>F</p></li>
+                      <li><p>S</p></li>
+                    </ul>
+                    <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPost()">Create</a></li>
+                  </ul>
+                </div>
+            <% } else { %>
+              <h2>No students</h2>
+            <% } %>
           </div>
-        </li>
-      </ul>
-      <% } else { %>
-        <h2>No activities</h2>
-      <% } %>
-    </div>
-    
-    <button class="accordion">Tasks</button>
-    <div class="accordianPanel">
-      <p>Lorem ipsum...</p>
-    </div>
+        </div>
+      
+      <h3 class="accordion">Activities</h3>
+        <div class="accordionPanel">
+          <% if (activities.length > 0) {%>
+            <%- include listOfActivities.ejs %>
+            <li class="addActivity">
+              <div class="studentContainer">
+                <p title="Create Student">New Activity +</p>
+              </div>
+            </li>
+          </ul>
+          <% } else { %>
+            <h2>No activities</h2>
+          <% } %>
+        </div>
+      
+      <h3 class="accordion">Tasks</h3>
+        <div class="accordionPanel">
+          <p>Lorem ipsum...</p>
+        </div>
+  </div>
     
 
     
   </body>
   <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        /* Toggle between adding and removing the "active" class,
-        to highlight the button that controls the panel */
-        this.classList.toggle("active");
-
-        /* Toggle between hiding and showing the active panel */
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
+    $( function() {
+      $( "#accordion" ).accordion({
+        collapsible: true,
+        active: false
       });
-    }
+    } );
   </script>
   <script>
     // Get the modal
