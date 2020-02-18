@@ -35,31 +35,20 @@ router.get('/', function(req, res, next) {
   })
 });
 
-/* GET home page. */
-// router.get('/profile', function(req, res, next) {
-//   var student_query = "CALL PullStudentData(62)"
-//   con.query(student_query, function (err, student) {
-//     if (err) throw err;
-//     console.log(student);
-//     res.render('profile.ejs', {title: 'Profile Page', students: student});
-//     })
-// });
-
-// router.get('/admin/:', function(req, res, next) {
-  
-//   res.render('admin.ejs');
-// });
-
 // Access student profile page
 router.get('/student-profile/:id', function (req, res, next) {
   student_id = req.params.id
   var student_query = `CALL PullStudentData(${student_id})`;
   
-  con.query(student_query, function (err, student) {
+  con.query(student_query, function (err, result) {
     if (err) throw err;
-    console.log(student);
-    res.render('profile.ejs', {title: 'Profile Page', students: student});
+    //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
+    //strip away OkPacket, create selected_student as new array
+    [selected_student] = result[0];
+    console.log(selected_student);
+    res.render('profile.ejs', {title: 'Profile Page', student: selected_student});
     })
 });
+
 module.exports = router;
 
