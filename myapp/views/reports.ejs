@@ -3,25 +3,36 @@
   <nav><%- include header.ejs %></nav>
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/students.css' />
+    <link rel='stylesheet' href='/stylesheets/reports.css' />
+    <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
     <% if(reports.length > 0) {%>
+      <ul class="reportsList grid">
       <% reports.forEach((report, index) => {%>
-        <table>
-          <thead>
-            
-          </thead>
-          <tbody>
-            <tr> <%= report.name %></tr>
-            <% report.listOfActivities.forEach((activity, index) => {%>
-              <tr> .<%= activity.ActivityName %>.</tr>
-            <% }) %>
-            <tr></tr>
-          </tbody>
-        </table>
+        <li>
+          <table class="customTable grid-item">
+            <thead>
+              <tr><th colspan=2><%= report.name %></th></tr>
+            </thead>
+            <tbody>
+              <% report.listOfActivities.forEach((activity, index) => {%>
+              <tr>
+                <td class="activity">
+                  <%= activity.ActivityName %>
+                </td>
+                <td class="timeStamp">
+                  time stamp
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </li>
       <% }) %>
+      
+    </ul>
     <% } else {%>
       <h2>no reports</h2>
     <% } %>

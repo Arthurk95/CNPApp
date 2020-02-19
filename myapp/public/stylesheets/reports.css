@@ -1,0 +1,32 @@
+.reportsList{
+    display: block;
+    width: 100%;
+    list-style: none;
+    text-align: center;
+}
+
+.reportsList li{
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+    margin: 20px;
+}
+
+
+.timeStamp{
+    width: 30%;
+    float: right;
+    background: var(--studentsColor);
+    color: var(--lightGray2);
+    box-shadow: inset 0px 0px 3px var(--darkGray1);
+}
+
+.activity{
+    float: left;
+}
+
+@media screen and (max-width: 1200px){
+    .reportsList li{
+        width: 90%;
+    }
+}
