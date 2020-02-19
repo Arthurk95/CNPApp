@@ -13,8 +13,29 @@
       
 
 
-      <table class="profileTable">
+      <table class="tableContainer">
         <tr>
+          <td class="rightSide mobileProfile">
+            <ul>
+              <li class="imageContainer">
+                <a class="editImage" href=""></a>
+                <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+              </li>
+              <li>
+                <table class="studentTable">
+                  <tr>
+                    <td class="labelColumn"><label>NAME</label></td>
+                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentName %>"></td>
+                  </tr>
+                  <tr>
+                    <td class="labelColumn"><label>BIRTHDAY</label></td>
+                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentBirthday %>"></td>
+                  </tr>
+                </table>
+              </li>
+            </ul>
+          </td>
+
           <td class="leftSide">
             <div id="tabs">
               <ul class="tabs">
@@ -29,13 +50,27 @@
                 <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
               </div>
               <div id="tabs-3" class="tabContent">
-                <ul>
-                  <li class="formTitle">Add a Student</li>
-                  <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
-                  <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-                  <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
-                  <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
-                </ul>
+                <table class="infoTable">
+                  <tr>
+                    <td>
+                      <ul>
+                        <li class="formTitle">Gaurdian #1</li>
+                        <li><input type="text" id="guardian1Name" placeholder="Guardian Name"></li>
+                        <li><input type="text" id="guardian1Email" placeholder="Guardian Email"></li>
+                        <li><input type="text" id="guardian1Number" placeholder="Guardian's Phone Number"></li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li class="formTitle">Gaurdian #2</li>
+                        <li><input type="text" id="guardian2Name" placeholder="Guardian Name"></li>
+                        <li><input type="text" id="guardian2Email" placeholder="Guardian Email"></li>
+                        <li><input type="text" id="guardian2Number" placeholder="Guardian's Phone Number"></li>
+                      </ul>
+                    </td>
+                  </tr>
+                </table>
+                
               </div>
             </div>
           </td>
@@ -43,9 +78,22 @@
 
           <td class="rightSide">
             <ul>
-              <li><img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png"></li>
-              <li><input value="<%- student.StudentName %>"></li>
-              <li><input value="<%- student.StudentBirthday %>"></li>
+              <li class="imageContainer">
+                <a class="editImage" href=""></a>
+                <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+              </li>
+              <li>
+                <table class="studentTable">
+                  <tr>
+                    <td class="labelColumn"><label>NAME</label></td>
+                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentName %>"></td>
+                  </tr>
+                  <tr>
+                    <td class="labelColumn"><label>BIRTHDAY</label></td>
+                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentBirthday %>"></td>
+                  </tr>
+                </table>
+              </li>
             </ul>
             
           </td>

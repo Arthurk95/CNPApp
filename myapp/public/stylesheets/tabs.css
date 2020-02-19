@@ -7,7 +7,6 @@
   list-style-type: none;
   text-align: left;
   font-size: 2em;
-  background: var(--darkGray3);
 }
 
 /* Tab buttons */
@@ -30,13 +29,17 @@
   color: var(--lightGray1);
 }
 
+.tabs li{
+  display: inline-block;
+}
+
 /* Tab content with a background and stuff */
 .tabContent {
   display: none;
-  padding: 6px 12px;
-  border: 1px solid var(--darkGray3);
-  border-top: none;
-  background: var(--darkGray2);
+  padding: 20px 40px;
+  border: 1px solid var(--darkGray2);
+  background: white;
+  opacity: 1;
 }
 
 /* jQuery styling override for tab colors */
