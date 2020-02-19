@@ -13,8 +13,8 @@
   /* Page Theme Colors: */
   --studentsColor: #86AAA7;
   --studentsColorDark: #425452;
-  --emailColor: #AA8689;
-  --emailColorDark: #574446;
+  --reportsColor: #AB7D81;
+  --reportsColorDark: #593E41;
   --adminColor: #5E895F;
   --adminColorDark: #3E4E3E;
   --tasksColor: #868DAA;
@@ -125,14 +125,14 @@ a{
 
 .homeButton:hover {
   color: var(--lightGray1);
-  opacity: 0.9;
+  filter: brightness(0.9);
   box-shadow: inset 0px 0px 15px 2px var(--darkGray3);
 }
 
 /* Classes below change the color of buttons from default */
 .studentButton {background: var(--studentsColor);}
 .tasksButton { background: var(--tasksColor); }
-.emailButton { background: var(--emailColor); }
+.emailButton { background: var(--reportsColor); }
 .adminButton { background: var(--adminColor); }
 
 /* Container for home page buttons */
