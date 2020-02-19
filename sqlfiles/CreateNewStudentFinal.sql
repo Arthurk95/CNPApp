@@ -28,5 +28,17 @@ SET @age = DATEDIFF(CURRENT_DATE, StudB) / 365.25;
 		VALUES (@TestId, Mon, Tues, Wed, Thur, Fri, Sat, Sun, Dtype, Enroll);
 	INSERT INTO `Relatives` (StudentId, RelativeName, RelativeEmail, RelativePhone, RelativeName2, RelativeEmail2, RelativePhone2)
 		VALUES (@TestId, RelativeN1, RelativeE1, RelativeP1, RelativeN2, RelativeE2, RelativeP2);
-	
+	SET @var = DAYNAME(CURRENT_DATE);
+    SET @sqlstm = CONCAT("INSERT INTO ClassSession
+							(`StudentId` ,  `CurrentDate` )
+						 SELECT 
+							`StudentId` ,
+                            CURRENT_DATE
+						FROM
+							Schedual
+						WHERE  
+							`", @var , "`= 1 AND CurrentEnroll = 1 AND `StudentId`= ",@TestId," AND ((`Schedual`.DayType=0 AND CURRENT_TIME < 120000) OR `Schedual`.Daytype=1);");
+	PREPARE stmt FROM @sqlstm;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
 END$$
