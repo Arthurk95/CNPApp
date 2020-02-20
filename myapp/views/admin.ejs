@@ -48,16 +48,22 @@
                     <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
                     <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
                     <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
+                    <li><input type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
+                    <li><input type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
+                    <li><input type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
                     <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
                     <ul class="week">
-                      <li><p>S</p></li>
-                      <li><p>M</p></li>
-                      <li><p>T</p></li>
-                      <li><p>W</p></li>
-                      <li><p>T</p></li>
-                      <li><p>F</p></li>
-                      <li><p>S</p></li>
+                      <li style="visibility: hidden;"><p id="sun" value=0 onclick="updateDayVal('sun')" style="visibility: hidden;">S</p></li>
+                      <li><p id="mon" value=0 onclick="updateDayVal('mon')">M</p></li>
+                      <li><p id="tue" value=0 onclick="updateDayVal('tue')">T</p></li>
+                      <li><p id="wed" value=0 onclick="updateDayVal('wed')">W</p></li>
+                      <li><p id="thu" value=0 onclick="updateDayVal('thu')">T</p></li>
+                      <li><p id="fri" value=0 onclick="updateDayVal('fri')">F</p></li>
+                      <li style="visibility: hidden;"><p id="sat" value=0 onclick="updateDayVal('sat')" style="visibility: hidden;">S</p></li>
+                      
+                      
                     </ul>
+                    <li style="text-align: center;"><a id="fullDay" value=0 onclick="updateDayVal('fullDay')">Full Day</a></li>
                     <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
                   </ul>
                 </div>
@@ -131,7 +137,16 @@
 
     document.getElementById("studentsTab").style.display = "block";
     document.getElementById("studentsTabButton").className += " active";
-
+    function initDaySel(){
+      updateDayVal("sun");
+      updateDayVal("mon");
+      updateDayVal("tue");
+      updateDayVal("wed");
+      updateDayVal("thu");
+      updateDayVal("fri");
+      updateDayVal("sat");
+      updateDayVal("fullDay");
+    }
     function openTab(evt, tabName) {
       // Declare all variables
       var i, tabcontent, tablinks;
@@ -154,16 +169,102 @@
       evt.currentTarget.className += " active";
     }
 
+    function updateDayVal(day){
+      if(day == "sun"){
+        selected = document.getElementById("sun");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+      else if(day == "mon"){
+        selected = document.getElementById("mon");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+      else if(day == "tue"){
+        selected = document.getElementById("tue");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+      else if(day == "wed"){
+        selected = document.getElementById("wed");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+      else if(day == "thu"){
+        selected = document.getElementById("thu");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+      else if(day == "fri"){
+        selected = document.getElementById("fri");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+      else if(day == "sat"){
+        selected = document.getElementById("sat");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+      else if(day == "fullDay"){
+        selected = document.getElementById("fullDay");
+        if(selected.value == 0){
+          selected.value = 1;
+        }
+        else{
+          selected.value = 0;
+        }
+      }
+    }
     //generate perameters for post and call post
     function callPostStu(){
 
       var theUrl = window.location.href+'/addstudent';
-      var data = data + "name=" + document.getElementById("newStudentName").value;
-      data = data + "&contact=" + document.getElementById("newStudentContact").value;
-      data = data + "&email=" + document.getElementById("newStudentEmail").value;
-      data = data + "&contactNum=" + document.getElementById("newStudentContactNumber").value;
-      data = data + "&birthday=" + document.getElementById("newStudentBirthday").value;
-      data = data + "&email=" + document.getElementById("newStudentEmail").value;
+      var data = 
+      "name=" + document.getElementById("newStudentName").value + 
+      "&contact=" + document.getElementById("newStudentContact").value + 
+      "&email=" + document.getElementById("newStudentEmail").value + 
+      "&contactNum=" + document.getElementById("newStudentContactNumber").value + 
+      "&contact2=" + document.getElementById("newStudentContact2").value + 
+      "&email2=" + document.getElementById("newStudentEmail2").value + 
+      "&contactNum2=" + document.getElementById("newStudentContactNumber2").value + 
+      "&birthday=" + document.getElementById("newStudentBirthday").value + 
+      "&sun=" + document.getElementById("sun").value + 
+      "&mon=" + document.getElementById("mon").value + 
+      "&tue=" + document.getElementById("tue").value + 
+      "&wed=" + document.getElementById("wed").value + 
+      "&thu=" + document.getElementById("thu").value + 
+      "&fri=" + document.getElementById("fri").value + 
+      "&sat=" + document.getElementById("sat").value + 
+      "&fullDay=" + document.getElementById("fullDay").value + 
+      "&enroll=" + 1 ;
       var callback = reloadIt;
 
       httpPostAsync(theUrl, data, callback);
@@ -177,4 +278,5 @@
       httpPostAsync(theUrl, data, callback);
     }
   </script>
+  <script>initDaySel();</script>
 </html>

@@ -1,5 +1,6 @@
 DELIMITER $$
-CREATE PROCEDURE `cnp_data`.`CreateNewStudentFinal`(IN StudentN   VARCHAR(255),
+CREATE PROCEDURE `UpdateStudent`(IN StudId INT,
+														 IN StudentN   VARCHAR(255),
 														 IN StudB DATE,
 														 IN RelativeN1  VARCHAR(255),
 														 IN RelativeE1 VARCHAR(255),
@@ -18,16 +19,14 @@ CREATE PROCEDURE `cnp_data`.`CreateNewStudentFinal`(IN StudentN   VARCHAR(255),
                                                          IN Enroll BOOL)
 BEGIN
 SET @age = DATEDIFF(CURRENT_DATE, StudB) / 365.25;
-	INSERT INTO `Students` (StudentName, Birthdate, Age)
-		VALUES (StudentN, StudB, @age);
+	UPDATE `Students` SET StudentName = StudentN, Birthdate=StudB, Age=@age
+		WHERE `Students`.StudentId=StudId;
         
-	SELECT MAX(StudentId) FROM Students INTO @StringId;
-	SELECT StudentId FROM Students WHERE StudentId = @StringId INTO @TestId;
+	UPDATE `Schedual` SET Monday=Mon, Tuesday=Tues, Wednesday=Wed, Thursday=Thur, Friday=Fri, Saturday=Sat, Sunday=Sun, Daytype=Dtype, CurrentEnroll=Enroll
+		WHERE `Schedual`.StudentId=StudId;
         
-	INSERT INTO `Schedual` (StudentId, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Daytype, CurrentEnroll)
-		VALUES (@TestId, Mon, Tues, Wed, Thur, Fri, Sat, Sun, Dtype, Enroll);
-	INSERT INTO `Relatives` (StudentId, RelativeName, RelativeEmail, RelativePhone, RelativeName2, RelativeEmail2, RelativePhone2)
-		VALUES (@TestId, RelativeN1, RelativeE1, RelativeP1, RelativeN2, RelativeE2, RelativeP2);
+	UPDATE `Relatives` SET RelativeName=RelativeN1, RelativeEmail=RelativeE1, RelativePhone=RelativeP1, RelativeName2=RelativeN2, RelativeEmail2=RelativeE2, RelativePhone2=RelativeP2
+		WHERE `Relatives`.StudentId=StudId;
 	SET @var = DAYNAME(CURRENT_DATE);
     SET @sqlstm = CONCAT("INSERT INTO ClassSession
 							(`StudentId` ,  `CurrentDate` )
@@ -41,4 +40,4 @@ SET @age = DATEDIFF(CURRENT_DATE, StudB) / 365.25;
 	PREPARE stmt FROM @sqlstm;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-END$$
+END $$
