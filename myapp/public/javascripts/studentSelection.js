@@ -6,7 +6,10 @@ var footer;
 var selectButton;
 var submitButton;
 var select;
-var toSubmit = false;
+var toSubmit = false; // if a selection was made
+var activitiesHidden = true;
+var studentsHidden = true;
+
 $(document).ready(function(){
     footer = document.getElementById("footer");
     select = document.getElementById("select");
@@ -14,6 +17,7 @@ $(document).ready(function(){
     submitButton = document.getElementById("submitButton");
 })
 
+// a student was selected from the Students list
 function selectedStudent(studentElement, studentID){
     // the passed student is being de-selected
     if(studentElement.classList.contains("selectedStudent")){
@@ -92,35 +96,41 @@ function clearActivitySelection(){
     oldSelection.classList.remove("selectedStudent");
 }
 
-function activitiesHidden(){return document.getElementById("activities").style.display == "none";}
-function hideActivities(){document.getElementById("activities").style.display = "none";}
-function showActivities(){document.getElementById("activities").style.display = "block";}
+function hideActivities(){
+    document.getElementById("activities").style.display = "none";
+    activitiesHidden = true;
+}
+function showActivities(){
+    document.getElementById("activities").style.display = "block";
+    activitiesHidden = false;
+}
 
-function studentsHidden(){ return document.getElementById("students").style.display == "none";}
-function hideStudents(){document.getElementById("students").style.display = "none";}
-function showStudents(){document.getElementById("students").style.display = "block";}
+function hideStudents(){
+    document.getElementById("students").style.display = "none";
+    studentsHidden = true;
+}
+function showStudents(){
+    document.getElementById("students").style.display = "block";
+    studentsHidden = false;
+}
 
 // The "Students" button was pushed when first coming to the page
 function startWithStudents(){
-    hideButtons();
+    hideStartButtons();
     showStudents();
-}
-
-function hideButtons(){
-    document.getElementById("selectionButtons").style.display = "none";
 }
 
 // The "Activities" button was pushed when first coming to the page
 function startWithActivities(){
-    hideButtons();
+    hideStartButtons();
     showActivities();
 }
 
-// activity or student(s) was chosen
+// activity or student(s) was chosen and the "Select" button was clicked
 function selectionMade(){
     hideElement(selectButton);
-    // students were selected first
-    if(activitiesHidden()){
+    
+    if(activitiesHidden){ // students were selected first
         hideStudents();
         showActivities();
     }
@@ -128,23 +138,28 @@ function selectionMade(){
         hideActivities();
         showStudents();
     }
+    if(selectedActivityID != undefined){ showElement(submitButton); }
     toSubmit = true;
 }
 
 // activity and student(s) chosen, submit to database
 function submitToDB(){
-    
     var theUrl = window.location.href+'/addstudentActivity';
-    var data = data + "numStu=" + selectedStudentIDs.length;
-    data = data + "&stu=" + selectedStudentIDs;
-    data = data + "&act=" + selectedActivityID;
-    var callback = reloadIt;
 
-    httpPostAsync(theUrl,data,callback);
+    for(var i = 0; i < selectedStudentIDs.length; i++){
+        var data = data + "&stu=" + selectedStudentIDs[i];
+        data = data + "&act=" + selectedActivityID;
+        var callback = reloadIt;
+    
+        httpPostAsync(theUrl,data,callback);
+    }
+    
 }
 
+// Hides the active list (students or activities) and shows the inactive one
+// Also hides the submit/back buttons and shows the select button.
 function goBack(){
-    if(studentsHidden()){
+    if(studentsHidden){
         hideActivities();
         showStudents();
     }
@@ -158,6 +173,11 @@ function goBack(){
     showButton(selectButton);
 }
 
+
+
+function hideStartButtons(){
+    document.getElementById("selectionButtons").style.display = "none";
+}
 function hideElement(element) { 
     element.style.display = "none"; 
 }
