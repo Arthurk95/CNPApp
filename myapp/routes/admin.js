@@ -2,10 +2,15 @@ var express = require('express');
 var router = express.Router();
 
   router.post('/addstudent', function(req, res){
-    var sql = "CALL CreateNewStudentFinal('" + req.body.name + "','" + req.body.contact + "','" + req.body.email + "');";
+    var sql = "CALL CreateNewStudentFinal('" + req.body.name + "','" + req.body.birthday + "','" + req.body.contact +
+     "','" + req.body.email + "','" + req.body.contactNum + "','" + req.body.contact2 + "','" + req.body.email2 + 
+     "','" + req.body.contactNum2 + "','" + req.body.mon + "','" + req.body.tue +
+     "','" + req.body.wed + "','" + req.body.thu + "','" + req.body.fri + "','" + req.body.sat + 
+     "','" + req.body.sun + "','" + req.body.fullDay + "','" + req.body.enroll + "');";
+    console.log(sql);
     con.query(sql, function (err, result) {
-        if (err) res.send("failure to add");
-        res.send("added succesfully");
+        if (err) throw(err);
+        res.end();
     });
   });
 
