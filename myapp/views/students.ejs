@@ -30,8 +30,11 @@
     <% } %>
     <footer>
         <ul id="footer" class="studentFooter">
-            <li><a id="selectButton" onclick="selectionMade()">Select</a></li>
-            <li><a id="submitButton" onclick="submitToDB()">Submit</a></li>
+            <li id="select"><a id="selectButton" onclick="selectionMade()">Select</a></li>
+            <li id="submitButton" class="backSubmitButton">
+                <a id="backButton" onclick="goBack()">Back</a>
+                <a onclick="submitToDB()">Submit</a>
+            </li>
         </ul>
     </footer>
   </body>

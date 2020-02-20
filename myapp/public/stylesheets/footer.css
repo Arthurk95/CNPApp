@@ -14,7 +14,7 @@
 
 /* Each actual component, probably a button */
 .studentFooter li{
-    display: inline;
+    display: none;
     transition: opacity 0.2s ease-in-out;
 }
 
@@ -22,7 +22,7 @@
 .studentFooter a{
     position: relative;
     text-decoration: none;
-    display: none;
+    display: inline-block;
     font-size: 3em;
     width: 30vw;
     padding: 12px 80px;
@@ -52,4 +52,8 @@
     .studentFooter a:hover{
         font-size: 10.1vw;
     }
+}
+
+.backSubmitButton{
+    display: none;
 }

@@ -5,9 +5,11 @@ var selectedActivityID = undefined;
 var footer;
 var selectButton;
 var submitButton;
+var select;
 var toSubmit = false;
 $(document).ready(function(){
     footer = document.getElementById("footer");
+    select = document.getElementById("select");
     selectButton = document.getElementById("selectButton");
     submitButton = document.getElementById("submitButton");
 })
@@ -49,6 +51,7 @@ function showButton(buttonText){
         showElement(submitButton, "inline-block");
     }
     else{
+        showElement(select, "inline-block");
         showElement(selectButton, "inline-block");
         selectButton.text = "Select " + buttonText;
     }
@@ -89,9 +92,11 @@ function clearActivitySelection(){
     oldSelection.classList.remove("selectedStudent");
 }
 
+function activitiesHidden(){return document.getElementById("activities").style.display == "none";}
 function hideActivities(){document.getElementById("activities").style.display = "none";}
 function showActivities(){document.getElementById("activities").style.display = "block";}
 
+function studentsHidden(){ return document.getElementById("students").style.display == "none";}
 function hideStudents(){document.getElementById("students").style.display = "none";}
 function showStudents(){document.getElementById("students").style.display = "block";}
 
@@ -115,7 +120,7 @@ function startWithActivities(){
 function selectionMade(){
     hideElement(selectButton);
     // students were selected first
-    if(selectedActivityID == undefined){
+    if(activitiesHidden()){
         hideStudents();
         showActivities();
     }
@@ -136,6 +141,21 @@ function submitToDB(){
     var callback = reloadIt;
 
     httpPostAsync(theUrl,data,callback);
+}
+
+function goBack(){
+    if(studentsHidden()){
+        hideActivities();
+        showStudents();
+    }
+    else{
+        hideStudents();
+        showActivities();
+    }
+    
+    hideElement(submitButton);
+    toSubmit = false;
+    showButton(selectButton);
 }
 
 function hideElement(element) { 
