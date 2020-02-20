@@ -6,17 +6,16 @@
 }
 
 .reportsList li{
-    display: inline-block;
-    width: 40%;
+    width: 900px;
     vertical-align: top;
-    margin: 20px;
+    margin: 20px auto;
 }
 
 
 .timeStamp{
     width: 30%;
     float: right;
-    background: var(--studentsColor);
+    background: var(--reportsColor);
     color: var(--lightGray2);
     box-shadow: inset 0px 0px 3px var(--darkGray1);
 }
