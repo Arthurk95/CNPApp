@@ -21,7 +21,7 @@
       var aTags = document.getElementsByTagName("a");
       for(var i = 0; i < aTags.length; i++){
         if(aTags[i].href == current_url){
-          aTags[i].style.display = "none";
+          aTags[i].classList += " currentPage";
         }
       }
   </script>
