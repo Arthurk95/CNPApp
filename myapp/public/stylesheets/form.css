@@ -18,7 +18,7 @@ HTML Formatting:
 */
 
 /* The form container, which spans the entire page with a darkish background */
-.studentForm {
+.formWindow {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -32,17 +32,17 @@ HTML Formatting:
   }
   
   /* The actual pop-up box that contains everything in the form */
-  .studentForm-content {
+  .formWindow-content {
     border-radius: 4px;
     background-color: var(--lightGray1);
     margin: 2% auto; /* 15% from the top and centered */
-    width: 40%; /* Could be more or less, depending on screen size */
+    width: 1000px; /* Could be more or less, depending on screen size */
     padding: 30px;
     box-shadow: 0px 0px 15px 1px var(--darkGray2);
   }
 
   /* <ul> is used to list each component top-to-bottom */
-  .studentForm-content ul{
+  .formWindow-content ul{
     list-style: none;
     margin: 0;
     padding: 0;
@@ -50,7 +50,7 @@ HTML Formatting:
   }
 
   /* Each li is an element on the form, such as <input> or <a> */
-  .studentForm-content li{
+  .formWindow-content li{
     display: block;
     padding: 1vh 40px;
   }
@@ -63,7 +63,7 @@ HTML Formatting:
 
   /* Styling for the input fields. Makes them bigger and more prominent
      with a nice inset border */
-  .studentForm input{
+  .formWindow input{
     box-shadow: inset 0px 0px 3px 0px var(--darkGray2);
     font-size: 1.2em;
     display: table-cell;
@@ -74,13 +74,13 @@ HTML Formatting:
   }
 
   /* Style for when an input field is selected */
-  .studentForm input:focus{
+  .formWindow input:focus{
     box-shadow: inset 0px 0px 4px 2px var(--adminColor);
   }
 
   /* Any button on the form, probably a submit button */
-  .studentForm a{
-    transition: 0.2s background-color;
+  .formSubmitButton{
+    transition: 0.2s;
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
@@ -92,15 +92,13 @@ HTML Formatting:
     border: 2px solid var(--adminColor);
     margin-top: 20px;
   }
-
-  .studentForm a:hover{
+  
+  .formSubmitButton:hover{
     background: var(--adminColor);
     color: var(--lightGray1);
-    border: none;
-    padding: 12px;
   }
 
-  .studentForm a:active{
+  .formSubmitButton:active{
     box-shadow: inset 0px 0px 4px var(--darkGray2);
     opacity: 0.8;
   }
@@ -124,19 +122,22 @@ HTML Formatting:
   /* Mobile-friendly to make the form full-width (almost) when the screen
      is smaller and make the button bigger */
   @media screen and (max-width: 1200px){
-    .studentForm-content{
+    .formWindow-content{
       width: 85%;
     }
-    .studentForm a{
+    .formWindow a{
       width: 90%;
       font-size: 5em;
+    }
+    .week li{
+      margin: 2px 1.5vw !important;
     }
   }
 
   /* <ul> for the days of the week */
   .week{
     padding: 0;
-    margin: 4vh 0 !important;
+    margin: 4vh auto !important;
     list-style: none;
     display: block !important;
     margin-top: 15px;
@@ -147,9 +148,7 @@ HTML Formatting:
   /* Each <li> is a single weekday.
      Creates the circle for the day. */
   .week li{
-    border: 2px solid var(--darkGray2);
-    border-radius: 50%;
-    margin: 2px;
+    margin: 2px 0.4vw;
     width: 80px;
     height: 80px;
     padding: 0px !important;
@@ -157,20 +156,42 @@ HTML Formatting:
   }
   
   /* <p> tag is the text of the day. This element fills its <li> to fit. */
-  .week li p{
+  .week li a{
+    transition: 0.1s;
     font-size: 2em;
-    color: var(--darkGray2);
+    color: var(--lightGray2);
+    border-radius: 50%;
+    border: 2px solid var(--darkGray3);
+    background: var(--darkGray3);
+    box-shadow: 0px 0px 4px var(--darkGray1);
     margin: 0;
-    width: 100%;
-    height: 100%;
-    display:flex;/*CSS3*/
-    align-items:center;/*Vertical align*/
-    justify-content:center;/*horizontal align*/
-  }
-  .week li:hover{
-    background: var(--darkGray2);
+    width: 76px;
+    height: 76px;
+    display: flex;/*CSS3*/
+    align-items: center;/*Vertical align*/
+    justify-content: center;/*horizontal align*/
   }
 
-  .week li:hover p{
-    color: var(--lightGray2);
+  .week li a:hover{
+    box-shadow: 0px 0px 2px var(--darkGray1);
+    background: var(--darkGray4);
+    border: 2px solid var(--darkGray4);
+    color: var(--lightGray1);
+  }
+
+  .selectedDay{
+    border: 2px solid var(--darkGray4) !important;
+    color: var(--lightGray1) !important;
+    background: var(--studentsColor) !important;
+    box-shadow: inset 0px 0px 5px var(--darkGray1) !important;
+  }
+
+  /* td container for the switch */
+  .checkBox{
+    width: 80px;
+  }
+
+  /* td container for checkBoxLabel */
+  .checkLabel{
+    width: 100px;
   }
