@@ -16,8 +16,7 @@ HTML Format:
             </div>
         </div>
     </li>
-</ul>    
-
+</ul>
 
 */
 
@@ -68,7 +67,7 @@ HTML Format:
 @media screen and (max-width: 1200px) {
     .blockList li { 
         width: 28%; 
-        font-size: 3vw;
+        font-size: 2vw;
     } 
     
     .activitiesList li{
