@@ -49,7 +49,7 @@ router.get('/student-profile/:id', function (req, res, next) {
     //strip away OkPacket, create selected_student as new array
     [selected_student] = result[0];
     console.log(selected_student);
-    res.render('profile_upload_test.ejs', {title: 'Profile Page', student: selected_student});
+    res.render('profile.ejs', {title: 'Profile Page', student: selected_student});
     })
 });
 
