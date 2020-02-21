@@ -1,3 +1,22 @@
+/* This class is the styling for the "Modal" (form) that's used to add
+new entries to stuff, such as students or activities. It's a popup and overlays
+over the current page.
+HTML Formatting:
+
+<div class="studentForm">
+  <div class="studentForm-content">
+    <span class="close">&times;</span> // this is the close button
+    <ul>
+      <li class="formTitle"></li>
+      <li><input></li>
+      // then as many <li>'s as you want
+      // each li will be one row in the form
+    </ul>
+  </div>
+</div>
+
+*/
+
 /* The form container, which spans the entire page with a darkish background */
 .studentForm {
     display: none; /* Hidden by default */
@@ -30,7 +49,7 @@
     display: block;
   }
 
-  /* Each li is an element on the form */
+  /* Each li is an element on the form, such as <input> or <a> */
   .studentForm-content li{
     display: block;
     padding: 1vh 40px;

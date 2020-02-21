@@ -1,3 +1,27 @@
+/* This is the class for the styling of a list, where each list
+item is a "block" with content in it.
+HTML Format:
+
+<ul class="blockList">
+    <li onclick="selectedStudent"> // onlick if you want it to be selectable
+        <div class="blockContainer">
+            << anything can go here >>
+            
+            // add this div only if you want the list item to have
+            // a checkmark displayed over it when selected.
+            // this should be paired with the selectedStudent() function
+            // that's in the studentSelection.js file.
+            <div class="checkmarkOverlay">
+                <a class="checkmark">&#10003</a>
+            </div>
+        </div>
+    </li>
+</ul>    
+
+
+*/
+
+
 /* List container for the students. 
     Removes default list style and sets width. */
 .blockList{
