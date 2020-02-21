@@ -75,7 +75,7 @@
                       <li><a id="wed" onclick="weekdaySelected(this)">W</a></li>
                       <li><a id="thu" onclick="weekdaySelected(this)">T</a></li>
                       <li><a id="fri" onclick="weekdaySelected(this)">F</a></li>
-                      <li style="display: none;"><p id="sat" onclick="updateDayVal(this)" style="visibility: hidden;">S</p></li>
+                      <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                     </ul>
                     <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
                   </ul>
@@ -87,31 +87,32 @@
         </div>
       
       <h3 class="accordion">Activities</h3>
-      <div class="accordionPanel">
-        <% if (activities.length > 0) {%>
-          <%- include listOfActivities.ejs %>
-          <li class="addActivity">
-            <div class="blockContainer">
-              <p title="Create Activity" onclick="addActivity()">New Activity +</p>
+        <div class="accordionPanel">
+          <% if (activities.length > 0) {%>
+            <%- include listOfActivities.ejs %>
+            <li class="addActivity">
+              <div class="blockContainer">
+                <p title="Create Activity" onclick="addActivity()">New Activity +</p>
+              </div>
+            </li>
+          </ul>
+          <div id="newActivityForm" class="formWindow">
+            <!-- newStudentForm content -->
+            <div class="formWindow-content">
+              <span class="close">&times;</span>
+              <ul>
+                <li class="formTitle">Add an Activity</li>
+                <li><input type="text" id="newActivityName" placeholder="Activity Name"></li>
+                <li style="text-align: center;"><a class="formSubmitButton" id="newActivitySubmit" onclick="callPostAct()">Create</a></li>
+              </ul>
             </div>
-          </li>
-        </ul>
-        <% } else { %>
-          <h2>No activities</h2>
-        <% } %>
-      </div>
-
-        <div id="newActivityForm" class="formWindow">
-          <!-- newStudentForm content -->
-          <div class="formWindow-content">
-            <span class="close">&times;</span>
-            <ul>
-              <li class="formTitle">Add an Activity</li>
-              <li><input type="text" id="newActivityName" placeholder="Activity Name"></li>
-              <li style="text-align: center;"><a id="newActivitySubmit" onclick="callPostStu()">Create</a></li>
-            </ul>
           </div>
+          <% } else { %>
+            <h2>No activities</h2>
+          <% } %>
         </div>
+
+      
       
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
@@ -141,7 +142,7 @@
 
     document.getElementById("students").style.display = "block";
     // Get the <span> element that closes the modal
-    var closeButton = document.getElementsByClassName("close")[0];
+    var closeButton = document.getElementsByClassName("close");
 
     // When the user clicks on the button, open the modal
     function addStudent() {
@@ -155,7 +156,10 @@
     }
 
     // When the user clicks on <span> (x), close the modal
-    closeButton.onclick = function() {
+    closeButton[0].onclick = function() {
+      formElement.style.display = "none";
+    }
+    closeButton[1].onclick = function() {
       formElement.style.display = "none";
     }
 
@@ -178,6 +182,10 @@
     //generate perameters for post and call post
     function callPostStu(){
       var theUrl = window.location.href+'/addstudent';
+      var halfDay = convertBoolToInt(document.getElementById("halfDay").checked);
+
+      console.log(halfDay);
+
       var data = 
       "name=" + document.getElementById("newStudentName").value + 
       "&contact=" + document.getElementById("newStudentContact").value + 
@@ -187,19 +195,21 @@
       "&email2=" + document.getElementById("newStudentEmail2").value + 
       "&contactNum2=" + document.getElementById("newStudentContactNumber2").value + 
       "&birthday=" + document.getElementById("newStudentBirthday").value + 
-      "&sun=" + document.getElementById("sun").classList.contains("selectedDay") + 
-      "&mon=" + document.getElementById("mon").classList.contains("selectedDay") + 
-      "&tue=" + document.getElementById("tue").classList.contains("selectedDay") + 
-      "&wed=" + document.getElementById("wed").classList.contains("selectedDay") + 
-      "&thu=" + document.getElementById("thu").classList.contains("selectedDay") + 
-      "&fri=" + document.getElementById("fri").classList.contains("selectedDay") + 
-      "&sat=" + document.getElementById("sat").classList.contains("selectedDay") + 
-      "&halfDay=" + document.getElementById("halfDay").checked + 
+      "&sun=" + 0 + 
+      "&mon=" + isDaySelected("mon") + 
+      "&tue=" + isDaySelected("tue") + 
+      "&wed=" + isDaySelected("wed") + 
+      "&thu=" + isDaySelected("thu") + 
+      "&fri=" + isDaySelected("fri") + 
+      "&sat=" + 0 + 
+      "&halfDay=" + 0 + 
       "&enroll=" + 1 ;
       var callback = reloadIt;
 
+      console.log(data);
       httpPostAsync(theUrl, data, callback);
     }
+
     function callPostAct(){
 
       theUrl = window.location.href+'/addactivity';
@@ -207,6 +217,17 @@
       callback = reloadIt;
 
       httpPostAsync(theUrl, data, callback);
+    }
+
+    function isDaySelected(day){
+      return convertBoolToInt(document.getElementById(day).classList.contains("selectedDay"));
+    }
+
+    function convertBoolToInt(boolVal){
+      if(boolVal){
+        return 1;
+      }
+      else return 0;
     }
   </script>
 </html>

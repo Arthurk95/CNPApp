@@ -6,7 +6,7 @@ var router = express.Router();
      "','" + req.body.email + "','" + req.body.contactNum + "','" + req.body.contact2 + "','" + req.body.email2 + 
      "','" + req.body.contactNum2 + "','" + req.body.mon + "','" + req.body.tue +
      "','" + req.body.wed + "','" + req.body.thu + "','" + req.body.fri + "','" + req.body.sat + 
-     "','" + req.body.sun + "','" + req.body.fullDay + "','" + req.body.enroll + "');";
+     "','" + req.body.sun + "','" + req.body.halfDay + "','" + req.body.enroll + "');";
     console.log(sql);
     con.query(sql, function (err, result) {
         if (err) throw(err);
