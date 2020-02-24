@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var uploads = require('../public/javascripts/uploads');
 
   router.post('/addstudent', function(req, res){
     var sql = "CALL CreateNewStudentFinal('" + req.body.name + "','" + req.body.birthday + "','" + req.body.contact +
      "','" + req.body.email + "','" + req.body.contactNum + "','" + req.body.contact2 + "','" + req.body.email2 + 
      "','" + req.body.contactNum2 + "','" + req.body.mon + "','" + req.body.tue +
      "','" + req.body.wed + "','" + req.body.thu + "','" + req.body.fri + "','" + req.body.sat + 
-     "','" + req.body.sun + "','" + req.body.fullDay + "','" + req.body.enroll + "');";
+     "','" + req.body.sun + "','" + req.body.halfDay + "','" + req.body.enroll + "');";
     console.log(sql);
     con.query(sql, function (err, result) {
         if (err) throw(err);
@@ -51,6 +52,26 @@ router.get('/student-profile/:id', function (req, res, next) {
     res.render('profile.ejs', {title: 'Profile Page', student: selected_student});
     })
 });
+
+router.post('/student-profile/:id/upload', (req, res) => {
+  uploads.upload(req, res, (err) => {
+    if (err) {
+      res.redirect('back');
+    } else {
+      
+      if (req.file == undefined) {
+        res.redirect('back');
+      } else {
+        update_img_query = `UPDATE Students SET Img = '${req.file.filename}' WHERE StudentId = ${req.params.id};`;
+        con.query(update_img_query, function (err, result) {
+          if (err) throw err;
+          
+          res.redirect('back');
+        });
+      }
+    }
+  })
+})
 
 module.exports = router;
 

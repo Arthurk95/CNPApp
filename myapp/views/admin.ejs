@@ -7,7 +7,9 @@
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
     <link rel='stylesheet' href='/stylesheets/accordian.css' />
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
-    <link rel='stylesheet' href='/stylesheets/student-form.css' />
+    <link rel='stylesheet' href='/stylesheets/form.css' />
+    <link rel='stylesheet' href='/stylesheets/switch.css' />
+
     
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -38,33 +40,44 @@
                   </li>
                 </ul>
         
-              <div id="newStudentForm" class="studentForm">
+              <div id="newStudentForm" class="formWindow">
                 <!-- newStudentForm content -->
-                <div class="studentForm-content">
+                <div class="formWindow-content">
                   <span class="close">&times;</span>
+                  
                   <ul>
-                    <li class="formTitle">Add a Student</li>
+                    <li class="formTitle">
+                      <table style="width: 100%;">
+                        <tr>
+                          <td>Add a Student</td>
+                          <td class="checkLabel"><label for="halfDay" class="checkBoxLabel">Half Day</label></td>
+                          <td class="checkBox">
+                            <label class="switch">
+                              <input type="checkbox" id="halfDay" name="halfDay">
+                              <span class="slider round"></span>
+                            </label>
+                          </td>
+                        </tr>
+                      </table>
+                    </li>
                     <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
                     <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
                     <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+                    <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
                     <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
                     <li><input type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
                     <li><input type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
                     <li><input type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
-                    <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
                     <ul class="week">
-                      <li style="visibility: hidden;"><p id="sun" value=0 onclick="updateDayVal('sun')" style="visibility: hidden;">S</p></li>
-                      <li><p id="mon" value=0 onclick="updateDayVal('mon')">M</p></li>
-                      <li><p id="tue" value=0 onclick="updateDayVal('tue')">T</p></li>
-                      <li><p id="wed" value=0 onclick="updateDayVal('wed')">W</p></li>
-                      <li><p id="thu" value=0 onclick="updateDayVal('thu')">T</p></li>
-                      <li><p id="fri" value=0 onclick="updateDayVal('fri')">F</p></li>
-                      <li style="visibility: hidden;"><p id="sat" value=0 onclick="updateDayVal('sat')" style="visibility: hidden;">S</p></li>
-                      
-                      
+                      <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
+                      <li><a id="mon" onclick="weekdaySelected(this)">M</a></li>
+                      <li><a id="tue" onclick="weekdaySelected(this)">T</a></li>
+                      <li><a id="wed" onclick="weekdaySelected(this)">W</a></li>
+                      <li><a id="thu" onclick="weekdaySelected(this)">T</a></li>
+                      <li><a id="fri" onclick="weekdaySelected(this)">F</a></li>
+                      <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                     </ul>
-                    <li style="text-align: center;"><a id="fullDay" value=0 onclick="updateDayVal('fullDay')">Full Day</a></li>
-                    <li style="text-align: center;"><a id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
+                    <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
                   </ul>
                 </div>
             <% } else { %>
@@ -79,20 +92,33 @@
             <%- include listOfActivities.ejs %>
             <li class="addActivity">
               <div class="blockContainer">
-                <p title="Create Student" onclick="addActivity()">New Activity +</p>
+                <p title="Create Activity" onclick="addActivity()">New Activity +</p>
               </div>
             </li>
           </ul>
+          <div id="newActivityForm" class="formWindow">
+            <!-- newStudentForm content -->
+            <div class="formWindow-content">
+              <span class="close">&times;</span>
+              <ul>
+                <li class="formTitle">Add an Activity</li>
+                <li><input type="text" id="newActivityName" placeholder="Activity Name"></li>
+                <li style="text-align: center;"><a class="formSubmitButton" id="newActivitySubmit" onclick="callPostAct()">Create</a></li>
+              </ul>
+            </div>
+          </div>
           <% } else { %>
             <h2>No activities</h2>
           <% } %>
         </div>
+
+      
       
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
           <p>Lorem ipsum...</p>
         </div>
-  </div>
+    </div>
     
 
     
@@ -107,7 +133,7 @@
   </script>
   <script>
     // Get the modal
-    var formElement = document.getElementById("newStudentForm");
+    var formElement;
 
     // opens student profile in same tab when a student is clicked
     function selectedStudent(element, studentID){
@@ -116,137 +142,50 @@
 
     document.getElementById("students").style.display = "block";
     // Get the <span> element that closes the modal
-    var closeButton = document.getElementsByClassName("close")[0];
+    var closeButton = document.getElementsByClassName("close");
 
     // When the user clicks on the button, open the modal
     function addStudent() {
+      formElement = document.getElementById("newStudentForm");
+      formElement.style.display = "block";
+    }
+
+    function addActivity(){
+      formElement = document.getElementById("newActivityForm");
       formElement.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
-    closeButton.onclick = function() {
+    closeButton[0].onclick = function() {
+      formElement.style.display = "none";
+    }
+    closeButton[1].onclick = function() {
       formElement.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
+    // When the user clicks anywhere outside of the form window, close it
     window.onclick = function(event) {
       if (event.target == formElement) {
         formElement.style.display = "none";
       }
     }
 
-    document.getElementById("studentsTab").style.display = "block";
-    document.getElementById("studentsTabButton").className += " active";
-    function initDaySel(){
-      updateDayVal("sun");
-      updateDayVal("mon");
-      updateDayVal("tue");
-      updateDayVal("wed");
-      updateDayVal("thu");
-      updateDayVal("fri");
-      updateDayVal("sat");
-      updateDayVal("fullDay");
-    }
-    function openTab(evt, tabName) {
-      // Declare all variables
-      var i, tabcontent, tablinks;
-
-      // Get all elements with class="tabcontent" and hide them
-      tabcontent = document.getElementsByClassName("tabContent");
-      console.log(tabcontent);
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+    function weekdaySelected(element){
+      if(element.classList.contains("selectedDay")){
+        element.classList.remove("selectedDay");
       }
-
-      // Get all elements with class="tablinks" and remove the class "active"
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-
-      // Show the current tab, and add an "active" class to the button that opened the tab
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-    }
-
-    function updateDayVal(day){
-      if(day == "sun"){
-        selected = document.getElementById("sun");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
-      }
-      else if(day == "mon"){
-        selected = document.getElementById("mon");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
-      }
-      else if(day == "tue"){
-        selected = document.getElementById("tue");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
-      }
-      else if(day == "wed"){
-        selected = document.getElementById("wed");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
-      }
-      else if(day == "thu"){
-        selected = document.getElementById("thu");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
-      }
-      else if(day == "fri"){
-        selected = document.getElementById("fri");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
-      }
-      else if(day == "sat"){
-        selected = document.getElementById("sat");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
-      }
-      else if(day == "fullDay"){
-        selected = document.getElementById("fullDay");
-        if(selected.value == 0){
-          selected.value = 1;
-        }
-        else{
-          selected.value = 0;
-        }
+      else{
+        element.classList += " selectedDay";
       }
     }
+
     //generate perameters for post and call post
     function callPostStu(){
-
       var theUrl = window.location.href+'/addstudent';
+      var halfDay = convertBoolToInt(document.getElementById("halfDay").checked);
+
+      console.log(halfDay);
+
       var data = 
       "name=" + document.getElementById("newStudentName").value + 
       "&contact=" + document.getElementById("newStudentContact").value + 
@@ -256,19 +195,21 @@
       "&email2=" + document.getElementById("newStudentEmail2").value + 
       "&contactNum2=" + document.getElementById("newStudentContactNumber2").value + 
       "&birthday=" + document.getElementById("newStudentBirthday").value + 
-      "&sun=" + document.getElementById("sun").value + 
-      "&mon=" + document.getElementById("mon").value + 
-      "&tue=" + document.getElementById("tue").value + 
-      "&wed=" + document.getElementById("wed").value + 
-      "&thu=" + document.getElementById("thu").value + 
-      "&fri=" + document.getElementById("fri").value + 
-      "&sat=" + document.getElementById("sat").value + 
-      "&fullDay=" + document.getElementById("fullDay").value + 
+      "&sun=" + 0 + 
+      "&mon=" + isDaySelected("mon") + 
+      "&tue=" + isDaySelected("tue") + 
+      "&wed=" + isDaySelected("wed") + 
+      "&thu=" + isDaySelected("thu") + 
+      "&fri=" + isDaySelected("fri") + 
+      "&sat=" + 0 + 
+      "&halfDay=" + 0 + 
       "&enroll=" + 1 ;
       var callback = reloadIt;
 
+      console.log(data);
       httpPostAsync(theUrl, data, callback);
     }
+
     function callPostAct(){
 
       theUrl = window.location.href+'/addactivity';
@@ -277,6 +218,16 @@
 
       httpPostAsync(theUrl, data, callback);
     }
+
+    function isDaySelected(day){
+      return convertBoolToInt(document.getElementById(day).classList.contains("selectedDay"));
+    }
+
+    function convertBoolToInt(boolVal){
+      if(boolVal){
+        return 1;
+      }
+      else return 0;
+    }
   </script>
-  <script>initDaySel();</script>
 </html>

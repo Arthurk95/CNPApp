@@ -47,7 +47,7 @@
                 <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
               </div>
               <div id="tabs-2" class="tabContent">
-                <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+                <p><%- student.Monday %> <%- student.Tuesday %> <%- student.Wednesday %> <%- student.Thursday %> <%- student.Friday %></p>
               </div>
               <div id="tabs-3" class="tabContent">
                 <table class="infoTable">
@@ -55,17 +55,17 @@
                     <td>
                       <ul>
                         <li class="formTitle">Gaurdian #1</li>
-                        <li><input type="text" id="guardian1Name" placeholder="Guardian Name"></li>
-                        <li><input type="text" id="guardian1Email" placeholder="Guardian Email"></li>
-                        <li><input type="text" id="guardian1Number" placeholder="Guardian's Phone Number"></li>
+                        <li><input type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
+                        <li><input type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
+                        <li><input type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
                       </ul>
                     </td>
                     <td>
                       <ul>
                         <li class="formTitle">Gaurdian #2</li>
-                        <li><input type="text" id="guardian2Name" placeholder="Guardian Name"></li>
-                        <li><input type="text" id="guardian2Email" placeholder="Guardian Email"></li>
-                        <li><input type="text" id="guardian2Number" placeholder="Guardian's Phone Number"></li>
+                        <li><input type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
+                        <li><input type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
+                        <li><input type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
                       </ul>
                     </td>
                   </tr>
@@ -78,9 +78,15 @@
 
           <td class="rightSide">
             <ul>
-              <li class="imageContainer">
-                <a class="editImage" href=""></a>
-                <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+              <li>
+                <label for="file-input" class="imageContainer">
+                  <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                </label>
+                <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
+                  <div class="file-field input-field hiddenUpload">
+                    <input id="file-input" name="myImage" type="file" onchange="form.submit()">
+                  </div>
+                </form>
               </li>
               <li>
                 <table class="studentTable">
@@ -90,7 +96,7 @@
                   </tr>
                   <tr>
                     <td class="labelColumn"><label>BIRTHDAY</label></td>
-                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentBirthday %>"></td>
+                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.Birthdate %>"></td>
                   </tr>
                 </table>
               </li>

@@ -111,7 +111,7 @@ label{
     width: 100%;
 }
 
-.editImage{
+/* .editImage{
     position: absolute;
     top: 0;
     bottom: 0;
@@ -124,12 +124,21 @@ label{
 .editImage:hover{
     background: var(--adminColor);
     opacity: 0.2;
+} */
+
+.imageContainer:hover{
+    background: var(--adminColor);
+    opacity: 0.2;
 }
 
 .imageContainer img{
     border: 1px solid black;
     width: 100%;
 }
+
+.hiddenUpload>input {
+    display: none;
+  }
 
 @media screen and (max-width: 1200px){
     .infoTable tr, td{display: block;}
