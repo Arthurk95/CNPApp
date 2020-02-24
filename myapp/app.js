@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var logger = require('morgan');
 var sql = require('mysql');
-con = sql.createConnection({host:"remotemysql.com",user:"Uuk2Kn6Ts6",password:"xN1cvvUas5",database:"Uuk2Kn6Ts6"});
+con = sql.createConnection({host:"db4free.net",user:"cnp_team",password:"cnptracker123",database:"cnp_tracker"});
 
 var indexRouter = require('./routes/index');
 var studentsRouter = require('./routes/students');
