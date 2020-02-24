@@ -1,9 +1,8 @@
 CREATE TABLE Students (
     StudentId INT NOT NULL AUTO_INCREMENT,
     StudentName VARCHAR(255) NOT NULL,
-    Img LONGBLOB,
+    Img VARCHAR(255),
 	Birthdate DATE,
-	Age INT,
     PRIMARY KEY (StudentId)
 );
 
@@ -11,10 +10,10 @@ CREATE TABLE Relatives (
     StudentId INT NOT NULL,
     RelativeName VARCHAR(255) NOT NULL,
     RelativeEmail VARCHAR(255) NOT NULL,
-	RelativePhone VHARCHAR(20) NOT NULL
+	RelativePhone VARCHAR(20) NOT NULL,
 	RelativeName2 VARCHAR(255),
     RelativeEmail2 VARCHAR(255),
-	RelativePhone2 VHARCHAR(20),
+	RelativePhone2 VARCHAR(20),
     FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
     PRIMARY KEY (StudentId, RelativeName)
 );
@@ -74,7 +73,7 @@ CREATE TABLE Schedual (
     Saturday BOOL NOT NULL DEFAULT 0,
     Sunday BOOL NOT NULL DEFAULT 0,
 	DayType BOOL NOT NULL DEFAULT 1,
-	CurrentEnroll NOT NULL DEFAULT 1,
+	CurrentEnroll BOOL NOT NULL DEFAULT 1,
     FOREIGN KEY (StudentId) REFERENCES Students(StudentId),
     PRIMARY KEY (StudentId)
 );
@@ -83,7 +82,7 @@ CREATE TABLE Administer (
 	AdminId INT NOT NULL AUTO_INCREMENT,
     AdminName VARCHAR(255) NOT NULL,
     AdminPass VARCHAR(255) NOT NULL,
-    AdminImg LONGBLOB,
+    AdminImg VARCHAR(255),
     AdminEmail VARCHAR(255) NOT NULL,
     AdminEmailPass VARCHAR(255) NOT NULL,
     PRIMARY KEY (AdminId)
