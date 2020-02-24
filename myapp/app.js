@@ -5,7 +5,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var logger = require('morgan');
 var sql = require('mysql');
-con = sql.createConnection({host:"remotemysql.com",user:"Uuk2Kn6Ts6",password:"xN1cvvUas5",database:"Uuk2Kn6Ts6"});
+
+var fs = require('fs'),
+configPath = './config.json';
+var parsed = JSON.parse(fs.readFileSync(configPath, 'UTF-8'));
+con = sql.createConnection(parsed);
 
 var indexRouter = require('./routes/index');
 var studentsRouter = require('./routes/students');
