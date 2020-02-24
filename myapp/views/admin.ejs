@@ -38,51 +38,69 @@
                       </div>
                     </div>
                   </li>
-                </ul>
-        
-              <div id="newStudentForm" class="formWindow">
-                <!-- newStudentForm content -->
-                <div class="formWindow-content">
-                  <span class="close">&times;</span>
-                  
-                  <ul>
-                    <li class="formTitle">
-                      <table style="width: 100%;">
+            <script>initStudentListVars();</script>
+            <% } else { %>
+              <ul class="blockList">
+                  <li class="addStudent">
+                    <div class="blockContainer">
+                      <table>
+                        <th>
+                          <div>
+                              <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+                          </div>
+                        </th>
                         <tr>
-                          <td>Add a Student</td>
-                          <td class="checkLabel"><label for="halfDay" class="checkBoxLabel">Half Day</label></td>
-                          <td class="checkBox">
-                            <label class="switch">
-                              <input type="checkbox" id="halfDay" name="halfDay">
-                              <span class="slider round"></span>
-                            </label>
-                          </td>
+                          <td>a<br />
+                          a</td>
                         </tr>
                       </table>
-                    </li>
-                    <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
-                    <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
-                    <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-                    <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
-                    <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
-                    <li><input type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
-                    <li><input type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
-                    <li><input type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
-                    <ul class="week">
-                      <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                      <li><a id="mon" onclick="weekdaySelected(this)">M</a></li>
-                      <li><a id="tue" onclick="weekdaySelected(this)">T</a></li>
-                      <li><a id="wed" onclick="weekdaySelected(this)">W</a></li>
-                      <li><a id="thu" onclick="weekdaySelected(this)">T</a></li>
-                      <li><a id="fri" onclick="weekdaySelected(this)">F</a></li>
-                      <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
-                    </ul>
-                    <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
+                      <div onclick="addStudent()" class="addStudentOverlay">
+                        <a class="plusIcon" title="Create Student">&#43;</a>
+                      </div>
+                    </div>
+                  </li>
+            <% } %> 
+            </ul>
+            <div id="newStudentForm" class="formWindow">
+              <!-- newStudentForm content -->
+              <div class="formWindow-content">
+                <span class="close">&times;</span>
+                
+                <ul>
+                  <li class="formTitle">
+                    <table style="width: 100%;">
+                      <tr>
+                        <td>Add a Student</td>
+                        <td class="checkLabel"><label for="halfDay" class="checkBoxLabel">Half Day</label></td>
+                        <td class="checkBox">
+                          <label class="switch">
+                            <input type="checkbox" id="halfDay" name="halfDay">
+                            <span class="slider round"></span>
+                          </label>
+                        </td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li><input type="text" id="newStudentName" placeholder="Student Name"></li>
+                  <li><input type="text" id="newStudentContact" placeholder="Guardian Name"></li>
+                  <li><input type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+                  <li><input type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
+                  <li><input type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
+                  <li><input type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
+                  <li><input type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
+                  <li><input type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
+                  <ul class="week">
+                    <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
+                    <li><a id="mon" onclick="weekdaySelected(this)">M</a></li>
+                    <li><a id="tue" onclick="weekdaySelected(this)">T</a></li>
+                    <li><a id="wed" onclick="weekdaySelected(this)">W</a></li>
+                    <li><a id="thu" onclick="weekdaySelected(this)">T</a></li>
+                    <li><a id="fri" onclick="weekdaySelected(this)">F</a></li>
+                    <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                   </ul>
-                </div>
-            <% } else { %>
-              <h2>No students</h2>
-            <% } %>
+                  <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
+                </ul>
+              </div>
           </div>
         </div>
       
@@ -95,6 +113,15 @@
                 <p title="Create Activity" onclick="addActivity()">New Activity +</p>
               </div>
             </li>
+          <% } else { %>
+            <ul class="blockList">
+              <li class="addActivity">
+                <div class="blockContainer">
+                  <p title="Create Activity" onclick="addActivity()">New Activity +</p>
+                </div>
+              </li>
+            
+          <% } %>
           </ul>
           <div id="newActivityForm" class="formWindow">
             <!-- newStudentForm content -->
@@ -107,9 +134,6 @@
               </ul>
             </div>
           </div>
-          <% } else { %>
-            <h2>No activities</h2>
-          <% } %>
         </div>
 
       
@@ -140,7 +164,9 @@
       window.location.href ="/admin/student-profile/" + studentID;
     }
 
-    document.getElementById("students").style.display = "block";
+    function initStudentListVars(){
+      document.getElementById("students").style.display = "block";
+    }
     // Get the <span> element that closes the modal
     var closeButton = document.getElementsByClassName("close");
 
@@ -162,6 +188,7 @@
     closeButton[1].onclick = function() {
       formElement.style.display = "none";
     }
+
 
     // When the user clicks anywhere outside of the form window, close it
     window.onclick = function(event) {
