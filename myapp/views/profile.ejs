@@ -5,6 +5,8 @@
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/tabs.css' />
         <link rel='stylesheet' href='/stylesheets/profile.css' />
+        <link rel='stylesheet' href='/stylesheets/form.css' />
+
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
@@ -39,17 +41,11 @@
           <td class="leftSide">
             <div id="tabs">
               <ul class="tabs">
-                <li><a href="#tabs-1">Profile</a></li>
+                <li><a href="#tabs-1">Info</a></li>
                 <li><a href="#tabs-2">Schedule</a></li>
-                <li><a href="#tabs-3">Info</a></li>
+                <li><a href="#tabs-3">Statistics</a></li>
               </ul>
               <div id="tabs-1" class="tabContent">
-                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-              </div>
-              <div id="tabs-2" class="tabContent">
-                <p><%- student.Monday %> <%- student.Tuesday %> <%- student.Wednesday %> <%- student.Thursday %> <%- student.Friday %></p>
-              </div>
-              <div id="tabs-3" class="tabContent">
                 <table class="infoTable">
                   <tr>
                     <td>
@@ -70,8 +66,21 @@
                     </td>
                   </tr>
                 </table>
-                
               </div>
+              
+              <div id="tabs-2" class="tabContent">
+                <ul id="schedule" class="week">
+                  <li><a id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)">M</a></li>
+                  <li><a id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)">T</a></li>
+                  <li><a id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)">W</a></li>
+                  <li><a id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)">T</a></li>
+                  <li><a id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)">F</a></li>
+              </div>
+
+              <div id="tabs-3" class="tabContent">
+                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+              </div>
+              
             </div>
           </td>
 
@@ -115,6 +124,21 @@
     </script>
 
     <script>
+      var days = document.getElementById("schedule").getElementsByTagName("li");
+
+      for (var i = 0; i < days.length; i++){
+        if(days[i].value == "1"){
+          days[i].classList += " selectedDay";
+        }
+        else {
+          days[i].classList.remove("selectedDay");
+        }
+      }
+
+      function weekdaySelected(element){
+
+      }
+
       function openTab(evt, tabName) {
         // Declare all variables
         var i, tabcontent, tablinks;
