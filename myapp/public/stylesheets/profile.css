@@ -126,6 +126,32 @@ label{
     opacity: 0.2;
 } */
 
+/* Tooltip container */
+.edit-image-tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Tooltip text */
+  .edit-image-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .edit-image-tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
 .imageContainer:hover{
     background: var(--adminColor);
     opacity: 0.2;
