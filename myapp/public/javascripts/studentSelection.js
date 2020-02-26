@@ -146,13 +146,12 @@ function selectionMade(){
 function submitToDB(){
     var theUrl = window.location.href+'/addstudentActivity';
 
-    for(var i = 0; i < selectedStudentIDs.length; i++){
-        var data = data + "&stu=" + selectedStudentIDs[i];
+        var data = "&stu=" + selectedStudentIDs;
         data = data + "&act=" + selectedActivityID;
+        data = data + "&numStu=" + selectedStudentIDs.length;
         var callback = reloadIt;
     
         httpPostAsync(theUrl,data,callback);
-    }
     
 }
 

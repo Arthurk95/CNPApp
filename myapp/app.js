@@ -6,8 +6,7 @@ var bodyParser = require("body-parser");
 var logger = require('morgan');
 var sql = require('mysql');
 
-var fs = require('fs'),
-configPath = './config.json';//credentials file
+var fs = require('fs'), configPath = './config.json';//credentials file
 var parsed = JSON.parse(fs.readFileSync(configPath, 'UTF-8'));
 con = sql.createConnection(parsed);
 
