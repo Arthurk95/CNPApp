@@ -248,3 +248,39 @@ input:focus{
   padding: 30px;
 }
 /*# sourceMappingURL=style.css.map */
+
+/* Main container for when something is missing. 
+   Format:
+   <div class="missingContainer>
+    <h2></h2>
+    <a></a>
+   </div>
+   */
+.missingContainer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid var(--lightGray3);
+  width: 70%;
+  margin: 0px auto;
+  padding-bottom: 40px;
+}
+
+.missingContainer h2{
+  font-size: 3em;
+  color: var(--lightGray1);
+}
+
+.missingContainer a{
+  text-decoration: none;
+  padding: 15px 90px;
+  font-size: 2em;
+  color: var(--lightGray1);
+  background: var(--studentsColor);
+  border-radius: 10px;
+}
+
+.missingContainer a:hover{
+  filter: brightness(90%);
+  box-shadow: inset 0px 0px 5px var(--darkGray1);
+}

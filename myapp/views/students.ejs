@@ -10,24 +10,29 @@
     <script src="/javascripts/studentSelection.js"></script>
   </head>
   <body>
-    <ul id="selectionButtons" class="selectionButtons">
-        <li><a id="studentButton" onclick="startWithStudents()">Select Students</a></li>
-        <li><a id="activitiesButton" onclick="startWithActivities()">Select Activity</a></li>
-    </ul>
-      
+    
+      <!-- Only display if there are students AND activities-->
     <% if (students.length > 0) {%>
-        <%- include listOfStudents.ejs %>
-    </ul>
+        <% if (activities.length > 0) {%>
+            <ul id="selectionButtons" class="selectionButtons">
+                <li><a id="studentButton" onclick="startWithStudents()">Select Students</a></li>
+                <li><a id="activitiesButton" onclick="startWithActivities()">Select Activity</a></li>
+            </ul>
+            <%- include listOfStudents.ejs %></ul>
+            <%- include listOfActivities.ejs %></ul>
+        <% } else { %>
+            <h2>No activities</h2>
+        <% } %>
     <% } else { %>
-        <h2>No students</h2>
+        <div class="missingContainer">
+            <h2>No Students Today</h2>
+            <a href="/admin">Add Students</a>
+        </div>
     <% } %>
 
-    <% if (activities.length > 0) {%>
-        <%- include listOfActivities.ejs %>
-    </ul>
-    <% } else { %>
-        <h2>No activities</h2>
-    <% } %>
+   
+        
+    
     <footer>
         <ul id="footer" class="studentFooter">
             <li id="select"><a id="selectButton" onclick="selectionMade()">Select</a></li>
