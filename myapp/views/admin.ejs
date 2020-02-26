@@ -38,7 +38,6 @@
                       </div>
                     </div>
                   </li>
-            <script>initStudentListVars();</script>
             <% } else { %>
               <ul class="blockList">
                   <li class="addStudent">
@@ -71,10 +70,10 @@
                     <table style="width: 100%;">
                       <tr>
                         <td>Add a Student</td>
-                        <td class="checkLabel"><label for="halfDay" class="checkBoxLabel">Half Day</label></td>
+                        <td class="checkLabel"><label for="fullDay" class="checkBoxLabel">Full Day</label></td>
                         <td class="checkBox">
                           <label class="switch">
-                            <input type="checkbox" id="halfDay" name="halfDay">
+                            <input type="checkbox" id="fullDay" name="fullDay" checked="true">
                             <span class="slider round"></span>
                           </label>
                         </td>
@@ -91,11 +90,11 @@
                   <li><input type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
                   <ul class="week">
                     <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                    <li><a id="mon" onclick="weekdaySelected(this)">M</a></li>
-                    <li><a id="tue" onclick="weekdaySelected(this)">T</a></li>
-                    <li><a id="wed" onclick="weekdaySelected(this)">W</a></li>
-                    <li><a id="thu" onclick="weekdaySelected(this)">T</a></li>
-                    <li><a id="fri" onclick="weekdaySelected(this)">F</a></li>
+                    <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
+                    <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
+                    <li id="wed" onclick="weekdaySelected(this)"><a>W</a></li>
+                    <li id="thu" onclick="weekdaySelected(this)"><a>T</a></li>
+                    <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
                     <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                   </ul>
                   <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
@@ -167,6 +166,8 @@
     function initStudentListVars(){
       document.getElementById("students").style.display = "flex";
     }
+
+    initStudentListVars();
     // Get the <span> element that closes the modal
     var closeButton = document.getElementsByClassName("close");
 
@@ -209,9 +210,7 @@
     //generate perameters for post and call post
     function callPostStu(){
       var theUrl = window.location.href+'/addstudent';
-      var halfDay = convertBoolToInt(document.getElementById("halfDay").checked);
-
-      console.log(halfDay);
+      var fullDay = convertBoolToInt(document.getElementById("fullDay").checked);
 
       var data = 
       "name=" + document.getElementById("newStudentName").value + 
@@ -229,7 +228,7 @@
       "&thu=" + isDaySelected("thu") + 
       "&fri=" + isDaySelected("fri") + 
       "&sat=" + 0 + 
-      "&halfDay=" + 0 + 
+      "&halfDay=" + fullDay + 
       "&enroll=" + 1 ;
       var callback = reloadIt;
 

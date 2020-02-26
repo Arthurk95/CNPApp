@@ -137,53 +137,53 @@ HTML Formatting:
   /* <ul> for the days of the week */
   .week{
     padding: 0;
-    margin: 4vh auto !important;
+    justify-content: center;
     list-style: none;
-    display: block !important;
-    margin-top: 15px;
+    display: flex !important;
+    margin-top: 20px !important;
     width: 100%;
     text-align: center;
+    align-items: center;
   }
 
   /* Each <li> is a single weekday.
      Creates the circle for the day. */
   .week li{
     margin: 2px 0.4vw;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     padding: 0px !important;
-    display: inline-block;
+    border-radius: 50%;
+    background: var(--darkGray3);
   }
   
   /* <p> tag is the text of the day. This element fills its <li> to fit. */
   .week li a{
+    width: 90px;
+    height: 90px;
     transition: 0.1s;
     font-size: 2em;
     color: var(--lightGray2);
-    border-radius: 50%;
-    border: 2px solid var(--darkGray3);
-    background: var(--darkGray3);
-    box-shadow: 0px 0px 4px var(--darkGray1);
-    margin: 0;
-    width: 76px;
-    height: 76px;
     display: flex;/*CSS3*/
     align-items: center;/*Vertical align*/
     justify-content: center;/*horizontal align*/
   }
 
-  .week li a:hover{
-    box-shadow: 0px 0px 2px var(--darkGray1);
-    background: var(--darkGray4);
-    border: 2px solid var(--darkGray4);
+  .week li:hover{
+    cursor: pointer;
+    box-shadow: inset 0px 0px 2px var(--darkGray1);
+    background: var(--darkGray2);
     color: var(--lightGray1);
   }
 
   .selectedDay{
-    border: 2px solid var(--darkGray4) !important;
-    color: var(--lightGray1) !important;
+    box-shadow: inset 0px 0px 6px 1px var(--darkGray3) !important;
     background: var(--studentsColor) !important;
-    box-shadow: inset 0px 0px 5px var(--darkGray1) !important;
+  }
+
+  .selectedDay a{
+    color: var(--lightGray1) !important;
+    filter: brightness(130%);
   }
 
   /* td container for the switch */
