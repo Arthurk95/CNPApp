@@ -19,9 +19,15 @@
         <tr>
           <td class="rightSide mobileProfile">
             <ul>
-              <li class="imageContainer">
-                <a class="editImage" href=""></a>
-                <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
+              <li id="studentImage">
+                <label for="file-input" class="imageContainer">
+                  <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                </label>
+                <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
+                  <div class="file-field input-field hiddenUpload">
+                    <input id="file-input" name="myImage" type="file" onchange="form.submit()">
+                  </div>
+                </form>
               </li>
               <li>
                 <table class="studentTable">
@@ -31,7 +37,7 @@
                   </tr>
                   <tr>
                     <td class="labelColumn"><label>BIRTHDAY</label></td>
-                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentBirthday %>"></td>
+                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.Birthdate %>"></td>
                   </tr>
                 </table>
               </li>
@@ -87,7 +93,7 @@
 
           <td class="rightSide">
             <ul>
-              <li>
+              <li id="studentImage">
                 <label for="file-input" class="imageContainer">
                   <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
                 </label>
@@ -124,16 +130,21 @@
     </script>
 
     <script>
-      var days = document.getElementById("schedule").getElementsByTagName("li");
+      var days = document.getElementById("schedule").getElementsByTagName("a");
+      var length = days.length;
 
-      for (var i = 0; i < days.length; i++){
-        if(days[i].value == "1"){
-          days[i].classList += " selectedDay";
+      // Sets days that are selected to selected in the Schedule tab
+      $(document).ready(function(){
+        for (var i = 0; i < length; i++){
+          val = days[i].getAttribute("value");
+          if(val == 1){
+            days[i].classList += " selectedDay";
+          }
+          else {
+            days[i].classList.remove("selectedDay");
+          }
         }
-        else {
-          days[i].classList.remove("selectedDay");
-        }
-      }
+      })
 
       function weekdaySelected(element){
 
