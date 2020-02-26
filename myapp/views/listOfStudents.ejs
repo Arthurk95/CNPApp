@@ -5,7 +5,7 @@
             <% if (student.DayType == 0) {%>
             <li class="halfDayStudent" onclick="studentSelected(this, <%= student.StudentId %>)">
             <% } else { %>
-            <li class="halfDayStudent" onclick="studentSelected(this, <%= student.StudentId %>)">
+            <li onclick="studentSelected(this, <%= student.StudentId %>)">
             <% } %>
             
                 <div class="blockContainer">
