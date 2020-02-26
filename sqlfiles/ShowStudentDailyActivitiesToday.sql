@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE `cnp_data`.`ShowStudentDailyActivities` (IN Id INT, IN thisday VARCHAR(255))
+CREATE PROCEDURE `cnp_data`.`ShowStudentDailyActivitiesToday` (IN Id INT)
 
 BEGIN
 	SELECT * 
