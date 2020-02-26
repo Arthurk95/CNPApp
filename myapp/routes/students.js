@@ -22,7 +22,9 @@ router.get('/', function(req, res, next) {
 
 router.post('/addstudentActivity', function(req, res){
   stus = req.body.stu.split(",");
-  console.log(stus + " " + req.body.act);
+  console.log("adding daily activities");
+  console.log(req.body.numStu + " " + req.body.act);
+  console.log(stus);
   recursepost(0,stus,req.body.act,req.body.numStu,res);
   
 });
@@ -33,7 +35,7 @@ function recursepost(i,stus,act,num,res){
     if(i < num){
       recursepost(i+1,stus,act,num,res);
     }
-    if(i==0){
+    if(i == num){
       res.end();
     }
   });
