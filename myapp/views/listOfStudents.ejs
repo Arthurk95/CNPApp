@@ -2,22 +2,27 @@
     <ul id="students" class="blockList">
         <% students.forEach((student, index) => { %>
             <% studentSpl = student.StudentName.split(" "); %>
-        <li onclick="studentSelected(this, <%= student.StudentId %>)">
-            <div class="blockContainer">
-                <table>
-                <!-- Image below is just to test. Old text:
-                    /assets/img/<%= student.Img %> -->
-                    <th>
-                        <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-                    </th>
-                    <tr>
-                        <td><%= studentSpl[0] %>
-                        <br /><%= studentSpl[1] %></td>
-                    </tr>
-                </table>
-                <div class="checkmarkOverlay">
-                    <a class="checkmark" title="Select Student">&#10003</a>
+            <% if (student.DayType == 0) {%>
+            <li class="halfDayStudent" onclick="studentSelected(this, <%= student.StudentId %>)">
+            <% } else { %>
+            <li class="halfDayStudent" onclick="studentSelected(this, <%= student.StudentId %>)">
+            <% } %>
+            
+                <div class="blockContainer">
+                    <table>
+                    <!-- Image below is just to test. Old text:
+                        /assets/img/<%= student.Img %> -->
+                        <th>
+                            <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                        </th>
+                        <tr>
+                            <td><%= studentSpl[0] %>
+                            <br /><%= studentSpl[1] %> <%= student.DayType %></td>
+                        </tr>
+                    </table>
+                    <div class="checkmarkOverlay">
+                        <a class="checkmark" title="Select Student">&#10003</a>
+                    </div>
                 </div>
-            </div>
         </li>
         <% }) %>
