@@ -53,7 +53,7 @@ body{
 .addStudentOverlay:hover .plusIcon{
     color: var(--adminColor) !important;
     font-size: 20em;
-    line-height: 100%
+    line-height: 100%;
 }
 
 /* The big plus sign for the AddStudent list item */
@@ -81,7 +81,7 @@ body{
     }
 
     .plusIcon{
-        font-size: 35vw;
+        font-size: 20em;
     }
 
     .addStudentOverlay:hover .plusIcon{
@@ -99,7 +99,7 @@ body{
 
 /* Automatically shows the blockLists since the jQuery accordion handles this */
 .blockList{
-    display: block !important;
+    display: flex !important;
   }
 
   /* Make the font size bigger for each activity */

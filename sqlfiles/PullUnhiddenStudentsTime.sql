@@ -1,6 +1,6 @@
 DELIMITER $$
 
-CREATE PROCEDURE `PullUnhiddenStudents`()
+CREATE PROCEDURE `PullUnhiddenStudentsTime`()
 BEGIN
 	SET @DayDate = CURRENT_DATE;
 			SELECT `Students`.StudentId, `Students`.StudentName

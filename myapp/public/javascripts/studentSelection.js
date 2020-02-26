@@ -1,6 +1,9 @@
 var selectedStudentIDs = [];
 var numSelectedStudents = 0;
 var selectedActivityID = undefined;
+var SUBMIT_BUTTON_DISPLAY_TYPE = "inline-block";
+var SELECT_BUTTON_DISPLAY_TYPE = "inline-block";
+var LIST_DISPLAY_TYPE = "flex";
 
 var footer;
 var selectButton;
@@ -18,7 +21,7 @@ $(document).ready(function(){
 })
 
 // a student was selected from the Students list
-function selectedStudent(studentElement, studentID){
+function studentSelected(studentElement, studentID){
     // the passed student is being de-selected
     if(studentElement.classList.contains("selectedStudent")){
         studentElement.classList.remove("selectedStudent");
@@ -52,17 +55,17 @@ function addStudentToList(studentID){
 
 function showButton(buttonText){
     if(toSubmit){
-        showElement(submitButton, "inline-block");
+        showElement(submitButton, SUBMIT_BUTTON_DISPLAY_TYPE);
     }
     else{
-        showElement(select, "inline-block");
-        showElement(selectButton, "inline-block");
+        showElement(select, SELECT_BUTTON_DISPLAY_TYPE);
+        showElement(selectButton, SELECT_BUTTON_DISPLAY_TYPE);
         selectButton.text = "Select " + buttonText;
     }
 }
 
 /* Activity <li> element clicked, either make it green or de-select it */
-function selectedActivity(element, activityId){
+function activitySelected(element, activityId){
     // activity is already selected, deselect it
     if(element.classList.contains("selectedStudent")){
         element.classList.remove("selectedStudent");
@@ -101,7 +104,7 @@ function hideActivities(){
     activitiesHidden = true;
 }
 function showActivities(){
-    document.getElementById("activities").style.display = "block";
+    document.getElementById("activities").style.display = LIST_DISPLAY_TYPE;
     activitiesHidden = false;
 }
 
@@ -110,7 +113,7 @@ function hideStudents(){
     studentsHidden = true;
 }
 function showStudents(){
-    document.getElementById("students").style.display = "block";
+    document.getElementById("students").style.display = LIST_DISPLAY_TYPE;
     studentsHidden = false;
 }
 
@@ -138,8 +141,8 @@ function selectionMade(){
         hideActivities();
         showStudents();
     }
-    if(selectedActivityID != undefined){ showElement(submitButton); }
     toSubmit = true;
+    if(selectedActivityID != undefined){ showButton(""); }
 }
 
 // activity and student(s) chosen, submit to database

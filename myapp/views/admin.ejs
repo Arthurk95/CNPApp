@@ -160,12 +160,12 @@
     var formElement;
 
     // opens student profile in same tab when a student is clicked
-    function selectedStudent(element, studentID){
+    function studentSelected(element, studentID){
       window.location.href ="/admin/student-profile/" + studentID;
     }
 
     function initStudentListVars(){
-      document.getElementById("students").style.display = "block";
+      document.getElementById("students").style.display = "flex";
     }
     // Get the <span> element that closes the modal
     var closeButton = document.getElementsByClassName("close");
