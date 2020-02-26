@@ -129,6 +129,7 @@ label{
 .imageContainer:hover{
     background: var(--adminColor);
     opacity: 0.2;
+    cursor: pointer;
 }
 
 .imageContainer img{
@@ -161,7 +162,7 @@ label{
 
     .leftSide tr, td{ display: block; }
 
-    .mobileProfile { display: block !important; margin: 0 auto;}
+    .mobileProfile { display: block !important; margin: 0 auto !important;}
 
     .mobileProfile ul { margin: 0 auto;}
     .mobileProfile input{
@@ -169,9 +170,11 @@ label{
         padding: 10px 0 10px 8px;
     }
 
+    #studentImage label{float: none !important;}
+
     .mobileProfile tr td{ vertical-align: middle;}
 
-    .imageContainer { width: 75%; margin: 0 auto;}
+    .imageContainer img{ border-radius: 50%; width: 70%; margin: 0 auto 20px auto !important;}
 
     .rightSide{display: none;}
 
