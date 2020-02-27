@@ -201,8 +201,14 @@ label{
 .saveButton:hover{
     filter: brightness(110%);
 }
-
 /* ------------------------------------------------------------------- */
+
+.fullDay{
+    display: flex;
+    height: 80px;
+    flex-wrap: nowrap;
+}
+
 @media screen and (max-width: 1200px){
 
     /* Collapses the Profile over the Tabs section */
