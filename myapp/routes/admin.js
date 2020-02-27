@@ -51,8 +51,8 @@ router.get('/student-profile/:id', function (req, res, next) {
     [selected_student] = result[0];
     console.log(selected_student);
     res.render('profile.ejs', { title: 'Profile Page', student: selected_student, upload_error_message: req.session.upload_error });
-    delete req.session.upload_error;
-    })
+    req.session.destroy();
+  })
 });
 
 router.post('/student-profile/:id/upload', (req, res) => {
