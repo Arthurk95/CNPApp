@@ -60,6 +60,11 @@ body{
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px){
     /* Makes the student listings smaller */
+
+    .blockList{
+        margin-bottom: 0 !important;
+    }
+
     .studentsList li{
         width: 28% !important;
     }
