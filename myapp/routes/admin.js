@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var uploads = require('../public/javascripts/uploads');
+var session = require('express-session');
 
   router.post('/addstudent', function(req, res){
     var sql = "CALL CreateNewStudentFinal('" + req.body.name + "','" + req.body.birthday + "','" + req.body.contact +
@@ -49,24 +50,30 @@ router.get('/student-profile/:id', function (req, res, next) {
     //strip away OkPacket, create selected_student as new array
     [selected_student] = result[0];
     console.log(selected_student);
-    res.render('profile.ejs', {title: 'Profile Page', student: selected_student});
+    res.render('profile.ejs', { title: 'Profile Page', student: selected_student, upload_error_message: req.session.upload_error });
+    delete req.session.upload_error;
     })
 });
 
 router.post('/student-profile/:id/upload', (req, res) => {
   uploads.upload(req, res, (err) => {
     if (err) {
-      res.redirect('back');
+      if (err.message) {
+        req.session.upload_error = 'Error: ' + err.message;
+      } else {
+        req.session.upload_error = err;
+      }
+      res.redirect(`/admin/student-profile/${req.params.id}`);
     } else {
       
       if (req.file == undefined) {
-        res.redirect('back');
+        req.session.upload_error = "Error: File is Undefined";
+        res.redirect(`/admin/student-profile/${req.params.id}`);
       } else {
         update_img_query = `UPDATE Students SET Img = '${req.file.filename}' WHERE StudentId = ${req.params.id};`;
         con.query(update_img_query, function (err, result) {
           if (err) throw err;
-          
-          res.redirect('back');
+          res.redirect(`/admin/student-profile/${req.params.id}`);
         });
       }
     }
