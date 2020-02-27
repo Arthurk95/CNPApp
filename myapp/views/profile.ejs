@@ -8,6 +8,7 @@
         <link rel='stylesheet' href='/stylesheets/form.css' />
         <link rel='stylesheet' href='/stylesheets/switch.css' />
 
+        <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
@@ -46,6 +47,15 @@
             </div>
             
             <div id="tabs-2" class="tabContent">
+              <div class="fullDay">
+                <label for="fullDay" class="checkBoxLabel">Full Day</label>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" id="fullDay" name="fullDay" onload="loadCheckBox(this, <%= student.DayType %>)">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
               <ul id="schedule" class="week">
                 <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
                 <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
@@ -53,16 +63,6 @@
                 <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>T</a></li>
                 <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
               </ul>
-
-              <div class="checkLabel">
-                <label for="fullDay" class="checkBoxLabel">Full Day</label>
-                <div class="checkBox">
-                  <label class="switch">
-                    <input type="checkbox" id="fullDay" name="fullDay" checked="true">
-                    <span class="slider round"></span>
-                  </label>
-                </div>
-              </div>
             </div>
 
             <div id="tabs-3" class="tabContent">
@@ -131,24 +131,21 @@
             days[i].classList.remove("selectedDay");
           }
         }
-      })
-
-      function weekdaySelected(element){
-        if(element.classList.contains("selectedDay")){
-          element.classList.remove("selectedDay");
-        }
-        else{
-          element.classList += " selectedDay";
-        }
-      }
+      });
 
       function saveStudent(){
         // do database-y stuff
-        // for weekdays:
-        // if (document.getElementById("mon").classList.contains("selectedDay")){
-        //    this weekday is selected, tell database
-        // }
-        //
+        
+        /*  HOW TO GET DAY VALUES: 
+          "&mon=" + isDaySelected("mon") + 
+          "&tue=" + isDaySelected("tue") + 
+          "&wed=" + isDaySelected("wed") + 
+          "&thu=" + isDaySelected("thu") + 
+          "&fri=" + isDaySelected("fri") + 
+        */
+
+        // CheckBox:
+        // var fullDay = convertBoolToInt(document.getElementById("fullDay").checked);
       }
 
       function deleteStudent(button){
@@ -170,25 +167,11 @@
         }
       }
 
-      function openTab(evt, tabName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabContent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
+      function loadCheckBox(checkBox, val){
+        if(val == 1){
+          checkBox.checked = true;
         }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
+        else checkBox.checked = false;
       }
     </script>
 </html>
