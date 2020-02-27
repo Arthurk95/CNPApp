@@ -170,13 +170,16 @@ label{
 .profileButtons{
     display: flex;
     justify-content: space-around;
-    
+}
+
+.profileButtons a{
+    width: 45%;
+    padding: 10px 0px;
+    text-decoration: none;
+    font-size: 1.5em;
 }
 
 .deleteButton{
-    text-decoration: none;
-    font-size: 1.5em;
-    padding: 6px 30px;
     background: var(--reportsColorDark);
     color: var(--lightGray2);
 }
@@ -191,9 +194,6 @@ label{
 }
 
 .saveButton{
-    text-decoration: none;
-    font-size: 1.5em;
-    padding: 6px 30px;
     background: var(--adminColor);
     color: var(--lightGray1);
 }
@@ -203,6 +203,17 @@ label{
 }
 
 @media screen and (max-width: 1200px){
+    .profileButtons{
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .profileButtons a{
+        width: 80%;
+        margin-bottom: 20px;
+        font-size: 4em;
+    }
+
     .infoTable tr, td{display: block;}
 
     .infoTable ul{

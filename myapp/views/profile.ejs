@@ -42,6 +42,10 @@
                   </tr>
                 </table>
               </li>
+              <li class="profileButtons">
+                <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
+                <a onclick="saveStudent()" class="saveButton">Save Changes</a>
+              </li>
             </ul>
           </td>
 
@@ -179,6 +183,14 @@
         else {
           button.classList += " deleteButtonActive";
           button.innerHTML = "Are you sure?";
+        }
+
+
+        window.onclick = function(event) {
+          if (event.target != button) {
+            button.classList.remove("deleteButtonActive");
+            button.innerHTML = "Delete Student";
+          }
         }
       }
 
