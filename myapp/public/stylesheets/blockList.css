@@ -69,16 +69,23 @@ HTML Format:
 @media screen and (max-width: 1200px) {
     .blockList li { 
         max-width: 38%; 
-        font-size: 2vw;
+        font-size: 2.5vw;
     } 
-    
+    .name{
+        font-size: 2vw;
+    }
     .activitiesList li{
         width: 90% !important;
-        max-width: 90%;
+        max-width: 90% !important;
     }
 
     .selectionButtons a{
         padding: 15vh 0px 15vh 0px !important;
+    }
+
+    /* Size of Activities text */
+    .activitiesList .blockContainer p{
+        font-size: 8vw !important;
     }
 }
 
@@ -86,9 +93,9 @@ HTML Format:
     column-span: 2;
 }
 
-.blockList td{
+.name{
     color: var(--darkGray4);
-    font-size: 1.7em;
+    font-size: 1.8em;
 }
 
 /* This is called when a student is selected 
@@ -181,7 +188,7 @@ HTML Format:
   .activitiesList .blockContainer p{
       padding: 20px;
       margin: 0;
-      font-size: 3em;
+      font-size: 3vw;
       color: var(--darkGray3);
   }
 

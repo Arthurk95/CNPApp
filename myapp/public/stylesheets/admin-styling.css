@@ -1,5 +1,5 @@
 body{
-    background: var(--adminColor);
+    background: var(--adminColorDark);
 }
 
 .attending{
@@ -18,6 +18,8 @@ body{
 
 .addStudent{
     background: var(--adminColor) !important;
+    filter: brightness(120%);
+    box-shadow: 0px 0px 4px 1px var(--adminColor);
 }
 
 .addStudent table{
@@ -35,25 +37,7 @@ body{
     right: 0;
     width: 100%;
     transition: 0.1s;
-    background-color: var(--selectedStudentColor);
-    box-shadow: 0px 0px 4px 1px var(--adminColor);
-    background: var(--lightGray2) !important;
-    opacity: 0.8 !important;
     transition: 0.1s all;
-}
-
-.addStudentOverlay:hover{
-    opacity: 1 !important;
-    box-shadow: 0px 0px 5px 2px var(--adminColor);
-    padding: 2px;
-    margin: -2px;
-    background: var(--lightGray1) !important;
-}
-
-.addStudentOverlay:hover .plusIcon{
-    color: var(--adminColor) !important;
-    font-size: 20em;
-    line-height: 100%;
 }
 
 /* The big plus sign for the AddStudent list item */
@@ -61,7 +45,7 @@ body{
     line-height: 100%;
     transition: 0.1s all;
     text-decoration: none;
-    color: var(--darkGray3);
+    color: var(--lightGray1);
     font-size: 20em;
     font-weight: 700;
     position: absolute;
@@ -101,16 +85,6 @@ body{
 .blockList{
     display: flex !important;
   }
-
-  /* Make the font size bigger for each activity */
-.activitiesList .blockContainer p{
-    font-size: 2em !important;
-}
-
-/* Make each activity larger to fit text on one line */
-.activitiesList li{
-    width: 300px !important;
-}
 
 .addActivity{
     background: var(--adminColor) !important;
