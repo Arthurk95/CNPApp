@@ -143,7 +143,7 @@ HTML Formatting:
     justify-content: center;
     list-style: none;
     display: flex !important;
-    margin-top: 20px !important;
+    margin: 20px 0 !important;
     width: 100%;
     text-align: center;
     align-items: center;
@@ -196,5 +196,5 @@ HTML Formatting:
 
   /* td container for checkBoxLabel */
   .checkLabel{
-    width: 100px;
+    width: 150px;
   }
