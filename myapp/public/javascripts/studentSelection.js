@@ -1,7 +1,7 @@
 var selectedStudentIDs = [];
 var numSelectedStudents = 0;
 var selectedActivityID = undefined;
-var SUBMIT_BUTTON_DISPLAY_TYPE = "inline-block";
+var SUBMIT_BUTTON_DISPLAY_TYPE = "flex";
 var SELECT_BUTTON_DISPLAY_TYPE = "inline-block";
 var LIST_DISPLAY_TYPE = "flex";
 
