@@ -61,7 +61,33 @@
   }
 
   .checkBoxLabel{
-      height: 66px;
       font-size: 20px;
       color: var(--darkGray3);
+  }
+
+
+  @media screen and (max-width: 1200px){
+    .switch{
+      width: 132px;
+      height: 50px;
+    }
+
+    .slider:before{
+      width: 64px;
+      height: 42px;
+      left: 8px;
+    }
+    input:checked + .slider:before {
+      -webkit-transform: translateX(52px);
+      -ms-transform: translateX(52px);
+      transform: translateX(52px);
+    }
+
+    .slider.round, .slider.round:before{
+      border-radius: 6px;
+    }
+
+    .checkBoxLabel{
+      font-size: 22px;
+    }
   }

@@ -132,6 +132,9 @@ HTML Formatting:
     .week li{
       margin: 2px 1.5vw !important;
     }
+    .close{
+      font-size: 80px;
+    }
   }
 
   /* <ul> for the days of the week */

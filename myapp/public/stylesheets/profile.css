@@ -246,6 +246,9 @@ label{
 
     .mobileProfile tr td{ vertical-align: middle;}
 
+    .mobileProfile input{ font-size: 1.5em !important;}
+    .mobileProfile label{ font-size: 1.5em !important;}
+
     .imageContainer img{ border-radius: 50%; width: 70%; margin: 0 auto 20px auto !important;}
 
     .rightSide{display: none;}
