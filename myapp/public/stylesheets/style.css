@@ -238,6 +238,8 @@ input{
   outline: none;
   padding: 10px 0px 10px 15px;
   font-size: 1.2em;
+  -webkit-appearance: none;
+  -webkit-user-select:text;
 }
 
 input:focus{
