@@ -27,7 +27,7 @@ var session = require('express-session');
 
   /* GET home page. */
   router.get('/', function(req, res, next) {
-    var student_query = "SELECT * FROM Students ORDER BY StudentName ASC"; 
+    var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
     /* var student_query = "CALL ShowAllStudents();"; */ 
     con.query(student_query, function (err, sQuery) {
@@ -35,7 +35,7 @@ var session = require('express-session');
       console.log(sQuery);
       con.query(activity_query, function (err, aQuery) {
         if (err) throw err;
-        res.render('admin.ejs', {title: 'Admin Page', students: sQuery,  activities: aQuery});
+        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery});
       });
     });
   });
