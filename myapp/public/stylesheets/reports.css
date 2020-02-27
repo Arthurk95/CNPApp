@@ -1,3 +1,7 @@
+body{
+    background: var(--reportsColorDark);
+}
+
 .reportsList{
     display: block;
     width: 100%;
