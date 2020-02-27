@@ -30,6 +30,8 @@ HTML Format:
     width: 100%;
     list-style: none;
     text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Image in each listing with border around it */
@@ -52,7 +54,7 @@ HTML Format:
     border-radius: 20px;
     margin: 5px;
     display: inline-block;
-    width: 250px;
+    max-width: 250px;
     text-align: center;
     box-shadow: inset 0px 0px 0px var(--darkGray1);
 }
@@ -66,12 +68,13 @@ HTML Format:
 /* On small screens, show three students per row */
 @media screen and (max-width: 1200px) {
     .blockList li { 
-        width: 28%; 
+        max-width: 38%; 
         font-size: 2vw;
     } 
     
     .activitiesList li{
         width: 90% !important;
+        max-width: 90%;
     }
 
     .selectionButtons a{
@@ -185,4 +188,16 @@ HTML Format:
   /* Shows less Activities per row since the text is on one line */
  .activitiesList li{
       width: 40%;
+      max-width: 40%;
+  }
+
+  /* Striped background for a halfday student*/
+  .halfDayStudent{
+    background: repeating-linear-gradient(
+        45deg,
+        var(--lightGray1),
+        var(--lightGray1) 40px,
+        var(--lightGray3) 40px,
+        var(--lightGray3) 80px
+      ) !important;
   }
