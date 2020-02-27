@@ -6,131 +6,107 @@
         <link rel='stylesheet' href='/stylesheets/tabs.css' />
         <link rel='stylesheet' href='/stylesheets/profile.css' />
         <link rel='stylesheet' href='/stylesheets/form.css' />
+        <link rel='stylesheet' href='/stylesheets/switch.css' />
 
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
     </head>
     <body>
-      
 
-
-      <table class="tableContainer">
-        <tr>
-          <td class="rightSide mobileProfile">
-            <ul>
-              <li id="studentImage">
-                <label for="file-input" class="imageContainer">
-                  <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-                </label>
-                <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
-                  <div class="file-field input-field hiddenUpload">
-                    <input id="file-input" name="myImage" type="file" onchange="form.submit()">
-                  </div>
-                </form>
-              </li>
-              <li>
-                <p1><font color="red"><%- upload_error_message %></font></p1>
-                <table class="studentTable">
-                  <tr>
-                    <td class="labelColumn"><label>NAME</label></td>
-                    <td class="valueColumn"><input name=”notASearchField” class="hiddenInput" value="<%- student.StudentName %>"></td>
-                  </tr>
-                  <tr>
-                    <td class="labelColumn"><label>BIRTHDAY</label></td>
-                    <td class="valueColumn"><input name=”notASearchField” class="hiddenInput" value="<%- student.Birthdate %>"></td>
-                  </tr>
-                </table>
-              </li>
-              <li class="profileButtons">
-                <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
-                <a onclick="saveStudent()" class="saveButton">Save Changes</a>
-              </li>
+      <div class="profileContainer">
+        <div class="tabsSection">
+          <div id="tabs">
+            <ul class="tabs">
+              <li><a href="#tabs-1">Info</a></li>
+              <li><a href="#tabs-2">Schedule</a></li>
+              <li><a href="#tabs-3">Statistics</a></li>
             </ul>
-          </td>
-
-          <td class="leftSide">
-            <div id="tabs">
-              <ul class="tabs">
-                <li><a href="#tabs-1">Info</a></li>
-                <li><a href="#tabs-2">Schedule</a></li>
-                <li><a href="#tabs-3">Statistics</a></li>
-              </ul>
-              <div id="tabs-1" class="tabContent">
-                <table class="infoTable">
-                  <tr>
-                    <td>
-                      <ul>
-                        <li class="formTitle">Gaurdian #1</li>
-                        <li><input name=”notASearchField” type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
-                        <li><input name=”notASearchField” type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
-                        <li><input name=”notASearchField” type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
-                      </ul>
-                    </td>
-                    <td>
-                      <ul>
-                        <li class="formTitle">Gaurdian #2</li>
-                        <li><input name=”notASearchField” type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
-                        <li><input name=”notASearchField” type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
-                        <li><input name=”notASearchField” type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
-                      </ul>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              
-              <div id="tabs-2" class="tabContent">
-                <ul id="schedule" class="week">
-                  <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
-                  <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
-                  <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
-                  <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>T</a></li>
-                  <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
-              </div>
-
-              <div id="tabs-3" class="tabContent">
-                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-              </div>
-              
+            <div id="tabs-1" class="tabContent">
+              <table class="infoTable">
+                <tr>
+                  <td>
+                    <ul>
+                      <li class="formTitle">Gaurdian #1</li>
+                      <li><input name=”notASearchField” type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
+                      <li><input name=”notASearchField” type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
+                      <li><input name=”notASearchField” type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul>
+                      <li class="formTitle">Gaurdian #2</li>
+                      <li><input name=”notASearchField” type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
+                      <li><input name=”notASearchField” type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
+                      <li><input name=”notASearchField” type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
+                    </ul>
+                  </td>
+                </tr>
+              </table>
             </div>
-          </td>
-
-          <td class="rightSide">
-            <ul>
-              <li>
-                <label for="file-input" class="imageContainer tooltip">
-                  <div class="edit-image-tooltip">
-                    <span class="tooltiptext">Edit Image</span>
-                  <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-                </label>
-                <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
-                  <div class="file-field input-field hiddenUpload">
-                    <input id="file-input" name="myImage" type="file" onchange="form.submit()">
-                  </div>
-                </form>
-              </li>
-              <li>
-                <p1><font color="red"><%- upload_error_message %></font></p1>
-                <table class="studentTable">
-                  <tr>
-                    <td class="labelColumn"><label>NAME</label></td>
-                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentName %>"></td>
-                  </tr>
-                  <tr>
-                    <td class="labelColumn"><label>BIRTHDAY</label></td>
-                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.Birthdate %>"></td>
-                  </tr>
-                </table>
-              </li>
-              <li class="profileButtons">
-                <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
-                <a onclick="saveStudent()" class="saveButton">Save Changes</a>
-              </li>
-            </ul>
             
-          </td>
-        </tr>
-      </table>
+            <div id="tabs-2" class="tabContent">
+              <ul id="schedule" class="week">
+                <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
+                <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
+                <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
+                <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>T</a></li>
+                <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
+              </ul>
+
+              <div class="checkLabel">
+                <label for="fullDay" class="checkBoxLabel">Full Day</label>
+                <div class="checkBox">
+                  <label class="switch">
+                    <input type="checkbox" id="fullDay" name="fullDay" checked="true">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="tabs-3" class="tabContent">
+              <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="profileSection">
+          <ul>
+            <li>
+              <label for="file-input" class="imageContainer tooltip">
+                <div class="edit-image-tooltip">
+                  <span class="tooltiptext">Edit Image</span>
+                <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+              </label>
+              <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
+                <div class="file-field input-field hiddenUpload">
+                  <input id="file-input" name="myImage" type="file" onchange="form.submit()">
+                </div>
+              </form>
+            </li>
+            <li>
+              <p1><font color="red"><%- upload_error_message %></font></p1>
+              <table class="studentTable">
+                <tr>
+                  <td class="labelColumn"><label>NAME</label></td>
+                  <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentName %>"></td>
+                </tr>
+                <tr>
+                  <td class="labelColumn"><label>BIRTHDAY</label></td>
+                  <td class="valueColumn"><input class="hiddenInput" value="<%- student.Birthdate %>"></td>
+                </tr>
+              </table>
+            </li>
+            <li class="profileButtons">
+              <a onclick="saveStudent()" class="saveButton">Save Changes</a>
+              <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </body>
 
 

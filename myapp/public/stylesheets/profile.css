@@ -1,54 +1,44 @@
 body{
-    background: var(--adminColor);
+    background: var(--adminColorDark);
 }
 
-/* Main table for profile page */
-.tableContainer{
-    border-collapse: collapse;
-    border-spacing: 0;
-    row-gap: 0;
-    width: 95%;
-    margin: 0 auto;
-}
-
-/* Style reset to remove default styling */
-.tableContainer td, tr, th{
-    margin: 0;
-    padding: 0;
-    border-spacing: 0;
+.profileContainer{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
 }
 
 /* Tabs section with the info, profile, etc */
-.leftSide{
+.tabsSection{
     vertical-align: top;
     margin-right: 50px;
+    width: 60%;
 }
 
-.leftSide input{
+.tabsSection input{
     box-shadow: inset 0px 0px 2px var(--darkGray1);
 }
 
-.leftSide input:focus{
+.tabsSection input:focus{
     box-shadow: inset 0px 0px 3px 1px var(--studentsColorDark);
 }
 
-.rightSide{
-    vertical-align: top;
+.profileSection{
     width: 32%;
-}
-
-.rightSide ul{
     filter: drop-shadow(0px 10px 10px var(--darkGray3));
     background: white;
-    width: 80%;
-    margin: 0 0 0 auto;
-    padding: 20px;
-    text-align: center;
-    display: block;
     border-radius: 8px;
 }
 
-.rightSide li{
+.profileSection ul{
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.profileSection li{
     margin-bottom: 15px;
 }
 
@@ -78,8 +68,10 @@ label{
     vertical-align: middle;
 }
 
-.valueColumn{
-    vertical-align: middle;
+
+.valueColumn input{
+    width: 95%;
+    float: right;
 }
 
 .infoTable{
@@ -153,7 +145,6 @@ label{
   }
 
 .imageContainer:hover{
-    background: var(--adminColor);
     opacity: 0.2;
     cursor: pointer;
 }
@@ -163,20 +154,29 @@ label{
     width: 100%;
 }
 
+.imageContainer img:hover{
+    background: var(--adminColor);
+}
+
 .hiddenUpload>input {
     display: none;
   }
 
+/* -------  Delete and Save buttons under profile picture  ------- */
 .profileButtons{
     display: flex;
     justify-content: space-around;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .profileButtons a{
-    width: 45%;
+    width: 90%;
     padding: 10px 0px;
     text-decoration: none;
     font-size: 1.5em;
+    margin-bottom: 20px;
 }
 
 .deleteButton{
@@ -202,20 +202,20 @@ label{
     filter: brightness(110%);
 }
 
+/* ------------------------------------------------------------------- */
 @media screen and (max-width: 1200px){
-    .profileButtons{
+
+    /* Collapses the Profile over the Tabs section */
+    .profileContainer {
         flex-direction: column-reverse;
         align-items: center;
     }
 
-    .profileButtons a{
-        width: 80%;
-        margin-bottom: 20px;
-        font-size: 4em;
-    }
+    .profileButtons a{ font-size: 4em; }
 
-    .infoTable tr, td{display: block;}
+    .infoTable tr, td{ display: block; }
 
+    /* Displays the info area as one item per row and full width */
     .infoTable ul{
         width: 100%;
         margin: 0 auto;
@@ -227,13 +227,11 @@ label{
         display: inline-block;
         width: 90%;
     }
-
-    .leftSide{ width: 90%; margin: 45px auto !important;}
-
     .infoTable input{width: 100%;}
 
-    .leftSide tr, td{ display: block; }
+    .tabsSection{ width: 90%; margin: 45px auto !important;}
 
+    
     .mobileProfile { display: block !important; margin: 0 auto !important;}
 
     .mobileProfile ul { margin: 0 auto;}
@@ -251,10 +249,11 @@ label{
 
     .imageContainer img{ border-radius: 50%; width: 70%; margin: 0 auto 20px auto !important;}
 
-    .rightSide{display: none;}
+    .profileSection{ width: 90%; }
 
-    .rightSide ul{ width: 90%; padding: 30px 0px 20px 0px;}
+    .profileSection ul{ width: 90%; padding: 30px 0px 20px 0px;}
 
+    
     .labelColumn{
         display: table-cell;
         width: 10%;
