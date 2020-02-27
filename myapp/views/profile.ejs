@@ -34,11 +34,11 @@
                 <table class="studentTable">
                   <tr>
                     <td class="labelColumn"><label>NAME</label></td>
-                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentName %>"></td>
+                    <td class="valueColumn"><input name=”notASearchField” class="hiddenInput" value="<%- student.StudentName %>"></td>
                   </tr>
                   <tr>
                     <td class="labelColumn"><label>BIRTHDAY</label></td>
-                    <td class="valueColumn"><input class="hiddenInput" value="<%- student.Birthdate %>"></td>
+                    <td class="valueColumn"><input name=”notASearchField” class="hiddenInput" value="<%- student.Birthdate %>"></td>
                   </tr>
                 </table>
               </li>
@@ -62,17 +62,17 @@
                     <td>
                       <ul>
                         <li class="formTitle">Gaurdian #1</li>
-                        <li><input type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
-                        <li><input type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
-                        <li><input type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
+                        <li><input name=”notASearchField” type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
+                        <li><input name=”notASearchField” type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
+                        <li><input name=”notASearchField” type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
                       </ul>
                     </td>
                     <td>
                       <ul>
                         <li class="formTitle">Gaurdian #2</li>
-                        <li><input type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
-                        <li><input type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
-                        <li><input type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
+                        <li><input name=”notASearchField” type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
+                        <li><input name=”notASearchField” type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
+                        <li><input name=”notASearchField” type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
                       </ul>
                     </td>
                   </tr>
