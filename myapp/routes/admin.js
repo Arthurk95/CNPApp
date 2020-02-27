@@ -26,59 +26,60 @@ var session = require('express-session');
   });
 
   /* GET home page. */
-router.get('/', function(req, res, next) {
-  var student_query = "SELECT * FROM Students ORDER BY StudentName ASC"; 
-  var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
-  /* var student_query = "CALL ShowAllStudents();"; */ 
-  con.query(student_query, function (err, sQuery) {
-    if (err) throw err;
-    con.query(activity_query, function (err, aQuery) {
+  router.get('/', function(req, res, next) {
+    var student_query = "SELECT * FROM Students ORDER BY StudentName ASC"; 
+    var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
+    /* var student_query = "CALL ShowAllStudents();"; */ 
+    con.query(student_query, function (err, sQuery) {
       if (err) throw err;
-      res.render('admin.ejs', {title: 'Admin Page', students: sQuery,  activities: aQuery});
-    })
-  })
-});
+      console.log(sQuery);
+      con.query(activity_query, function (err, aQuery) {
+        if (err) throw err;
+        res.render('admin.ejs', {title: 'Admin Page', students: sQuery,  activities: aQuery});
+      });
+    });
+  });
 
-// Access student profile page
-router.get('/student-profile/:id', function (req, res, next) {
-  student_id = req.params.id
-  var student_query = `CALL PullStudentData(${student_id})`;
-  
-  con.query(student_query, function (err, result) {
-    if (err) throw err;
-    //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
-    //strip away OkPacket, create selected_student as new array
-    [selected_student] = result[0];
-    console.log(selected_student);
-    res.render('profile.ejs', { title: 'Profile Page', student: selected_student, upload_error_message: req.session.upload_error });
-    req.session.destroy();
-  })
-});
+  // Access student profile page
+  router.get('/student-profile/:id', function (req, res, next) {
+    student_id = req.params.id
+    var student_query = `CALL PullStudentData(${student_id})`;
+    
+    con.query(student_query, function (err, result) {
+      if (err) throw err;
+      //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
+      //strip away OkPacket, create selected_student as new array
+      [selected_student] = result[0];
+      console.log(selected_student);
+      res.render('profile.ejs', { title: 'Profile Page', student: selected_student, upload_error_message: req.session.upload_error });
+      req.session.destroy();
+    });
+  });
 
-router.post('/student-profile/:id/upload', (req, res) => {
-  uploads.upload(req, res, (err) => {
-    if (err) {
-      if (err.message) {
-        req.session.upload_error = 'Error: ' + err.message;
-      } else {
-        req.session.upload_error = err;
-      }
-      res.redirect(`/admin/student-profile/${req.params.id}`);
-    } else {
-      
-      if (req.file == undefined) {
-        req.session.upload_error = "Error: File is Undefined";
+  router.post('/student-profile/:id/upload', (req, res) => {
+    uploads.upload(req, res, (err) => {
+      if (err) {
+        if (err.message) {
+          req.session.upload_error = 'Error: ' + err.message;
+        } else {
+          req.session.upload_error = err;
+        }
         res.redirect(`/admin/student-profile/${req.params.id}`);
       } else {
-        update_img_query = `UPDATE Students SET Img = '${req.file.filename}' WHERE StudentId = ${req.params.id};`;
-        con.query(update_img_query, function (err, result) {
-          if (err) throw err;
+        
+        if (req.file == undefined) {
+          req.session.upload_error = "Error: File is Undefined";
           res.redirect(`/admin/student-profile/${req.params.id}`);
-        });
+        } else {
+          update_img_query = `UPDATE Students SET Img = '${req.file.filename}' WHERE StudentId = ${req.params.id};`;
+          con.query(update_img_query, function (err, result) {
+            if (err) throw err;
+            res.redirect(`/admin/student-profile/${req.params.id}`);
+          });
+        }
       }
-    }
-  })
-})
+    });
+  });
 
 module.exports = router;
 
