@@ -21,7 +21,10 @@
             <%- include listOfStudents.ejs %></ul>
             <%- include listOfActivities.ejs %></ul>
         <% } else { %>
-            <h2>No activities</h2>
+            <div class="missingContainer">
+                <h2>No Activities</h2>
+                <a href="/admin">Add Activities</a>
+            </div>
         <% } %>
     <% } else { %>
         <div class="missingContainer">
