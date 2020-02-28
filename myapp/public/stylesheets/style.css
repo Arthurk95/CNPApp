@@ -274,7 +274,6 @@ input:focus{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-bottom: 1px solid var(--lightGray3);
   width: 70%;
   margin: 0px auto;
   padding-bottom: 40px;
