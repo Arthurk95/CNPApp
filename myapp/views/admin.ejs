@@ -154,11 +154,12 @@
 
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
-          <% if (activities.length > 0) { %>
-            <ul class="taskList">
+          <% if (tasks.length > 0) { %>
+            <ul class="ulList">
               <% tasks.forEach((task, index) => { %>
                 <li> 
-                  <p><%= task %></p>
+                  <input type="checkbox">
+                  <p><%= task %></p>                  
                   <!----<button> </button> -->
                 </li>
               <% }) %>
