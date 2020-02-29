@@ -29,7 +29,12 @@ var session = require('express-session');
   router.get('/', function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
-    var task_list = ['Mow lawn', 'Clean chicken coupe', 'Fix slide', 'Replace chian on swing']
+    var task_list = []
+    var task1 = {name:'Mow lawn', priority: 1, complete: 0}
+    var task2 = {name:'Fix slide', priority: 2, complete: 0}
+    var task3 = {name:'Replace chains on swing', priority: 0, complete: 0}
+    var task4 = {name:'Clean coupe', priority: 1, complete: 0}
+    task_list.push(task1, task2, task3, task4)
     console.log(task_list);
     /* var student_query = "CALL ShowAllStudents();"; */ 
     con.query(student_query, function (err, sQuery) {

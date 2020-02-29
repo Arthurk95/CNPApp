@@ -52,7 +52,6 @@
 }
 
 .ulList li button:hover{
-    background: inherit;
     cursor: pointer;
     box-shadow: inset 0px 0px 3px 1px var(--darkGray3);
     filter: brightness(90%);

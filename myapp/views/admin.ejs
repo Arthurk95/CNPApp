@@ -160,12 +160,18 @@
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
           <% if (tasks.length > 0) { %>
-            <ul class="ulList">
+            <ul id="tasksList" class="ulList">
               <% tasks.forEach((task, index) => { %>
                 <li> 
                   <div class="checkBox" onclick="checkboxClicked(this)"><p></p></div>>
-                  <p><%= task %></p>                  
-                  <!----<button> </button> -->
+                  <p><%= task.name %></p> 
+                  <% if (task.priority == 0) { %>
+                    <button class= "greenButton">🏳</button>  
+                  <% } else if(task.priority == 1) { %>
+                    <button class= "yellowButton">🏳</button>
+                  <% } else { %>
+                    <button class= "redButton">🏳</button>
+                  <% } %>
                 </li>
               <% }) %>
             </ul>
@@ -260,6 +266,14 @@
       callback = reloadIt;
 
       httpPostAsync(theUrl, data, callback);
+    }
+
+    function updatePriorityStyle() {
+      var task = getElementById("tasksList");
+      var tasks = task.getElementsByTagName("li");
+      for (var i=0; i < tasks.length; i++) {
+        tasks[i]
+      }
     }
   </script>
 </html>
