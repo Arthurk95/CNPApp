@@ -1,6 +1,6 @@
 /* <ul> list for Header bar */
 .headerStyle {
-    background-color: var(--green4);
+    background-color: var(--darkGray1);
     font-size: 3vw;
     font-weight: 400;
     list-style-type: none;
