@@ -139,7 +139,16 @@
       
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
-          <p>Lorem ipsum...</p>
+          <% if (activities.length > 0) { %>
+            <ul class="taskList">
+              <% tasks.forEach((task, index) => { %>
+                <li> 
+                  <p><%= task %></p>
+                  <!----<button> </button> -->
+                </li>
+              <% }) %>
+            </ul>
+          <% } %>
         </div>
     </div>
     
