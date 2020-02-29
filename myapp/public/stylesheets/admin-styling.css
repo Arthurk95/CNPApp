@@ -1,7 +1,3 @@
-body{
-    background: var(--adminColorDark);
-}
-
 .attending{
     border: 1px solid var(--weekdayColor) !important;
     color: var(--lightGray1) !important;
