@@ -14,6 +14,11 @@
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      function initStudentListVars(){
+        document.getElementById("students").style.display = "flex";
+      }
+    </script>
   </head>
   <body>
     <div id="accordion">
@@ -116,7 +121,6 @@
               <% } else { %>
               <li>
               <% } %>
-                <div class="checkBox" onclick="checkboxClicked(this)"><p></p></div>
                 <p><%= activity.ActivityName %></p>
                 <button id="greenButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
                 <button id="yellowButton" onclick="">🖉</button>
@@ -185,10 +189,6 @@
     // opens student profile in same tab when a student is clicked
     function studentSelected(element, studentID){
       window.location.href ="/admin/student-profile/" + studentID;
-    }
-
-    function initStudentListVars(){
-      document.getElementById("students").style.display = "flex";
     }
 
     // Get the <span> element that closes the modal
