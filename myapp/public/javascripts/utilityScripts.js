@@ -26,5 +26,10 @@ function weekdaySelected(element){
 }
 
 function checkboxClicked(element) {
-    element.classList+=" active";
+    if(element.classList.contains("checkboxSelected")){
+        element.classList.remove("checkboxSelected");
+    }
+    else{
+        element.classList += " checkboxSelected";
+    }
 }
