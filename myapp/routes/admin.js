@@ -29,13 +29,15 @@ var session = require('express-session');
   router.get('/', function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
+    var task_list = ['Mow lawn', 'Clean chicken coupe', 'Fix slide', 'Replace chian on swing']
+    console.log(task_list);
     /* var student_query = "CALL ShowAllStudents();"; */ 
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
       console.log(sQuery);
       con.query(activity_query, function (err, aQuery) {
         if (err) throw err;
-        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery});
+        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery, tasks: task_list});
       });
     });
   });
