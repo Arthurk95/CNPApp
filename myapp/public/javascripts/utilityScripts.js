@@ -24,3 +24,7 @@ function weekdaySelected(element){
       element.classList += " selectedDay";
     }
 }
+
+function checkboxClicked(element) {
+    element.classList+=" active";
+}
