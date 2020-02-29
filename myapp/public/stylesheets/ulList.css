@@ -19,7 +19,6 @@
     align-content: center;
     align-items: center;
     margin: 0;
-    border-radius: 12px;
 }
 
 /* Each <li> is one row with an activity name and the buttons */
@@ -28,13 +27,15 @@
     display: flex;
     flex-direction: row;
     align-content: center;
-    background: var(--green2);
     margin-bottom: 15px;
+    border-radius: 12px;
+    overflow: hidden;
+    padding-left: 20px;
+    background: var(--darkGray2);
 }
 
 .ulList li p{
     color: var(--lightGray1);
-    padding-left: 10px;
     font-size: 2.5em;
     text-align: left;
     flex-grow: 2;
@@ -53,11 +54,13 @@
 .ulList li button:hover{
     background: inherit;
     cursor: pointer;
+    box-shadow: inset 0px 0px 3px 1px var(--darkGray3);
     filter: brightness(90%);
+
 }
 
-.ulList li #blueButton{
-    background: var(--blue1) !important;
+.ulList li #greenButton{
+    background: var(--green1) !important;
 }
 
 .ulList li #yellowButton {

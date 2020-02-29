@@ -20,17 +20,20 @@
   --tasksColor: #868DAA;
   --tasksColorDark: #4E5263;
 
-  --yellow1: #F1FF47;
-  --yellow2: #CDD937;
-  --yellow3: #9AA32A;
+  --yellow1: #F2FB83;
+  --yellow2: #D0D86D;
+  --yellow3: #9FA646;
+  --yellow4: #6C7130;
 
   --green1: #a2ce63;
   --green2: #7C9D4C;
   --green3: #607A3B;
+  --green4: #233c00;
 
-  --blue1: #636EB9;
-  --blue2: #525A95;
-  --blue3: #343960;
+  --blue1: #8A92C8;
+  --blue2: #656B99;
+  --blue3: #404463;
+  --blue4: #252739;
 
   --red1: #A97478;
   --red2: #7E5558;
@@ -103,7 +106,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background-color: var(--darkGray3);
+  background-color: var(--green2);
 }
 
 a{
@@ -266,8 +269,7 @@ input{
   outline: none;
   padding: 10px 0px 10px 15px;
   font-size: 1.2em;
-  -webkit-appearance: none;
-  -webkit-user-select:text;
+  -webkit-user-select: text;
 }
 
 input:focus{
@@ -306,6 +308,7 @@ input:focus{
   font-size: 2em;
   color: var(--lightGray1);
   background: var(--studentsColor);
+  box-shadow: 0px 0px 4px var(--darkGray4);
   border-radius: 10px;
 }
 

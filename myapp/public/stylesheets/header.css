@@ -1,6 +1,6 @@
 /* <ul> list for Header bar */
 .headerStyle {
-    background-color: var(--darkGray1);
+    background-color: var(--green4);
     font-size: 3vw;
     font-weight: 400;
     list-style-type: none;
@@ -25,11 +25,11 @@
   }
 
 .headerStyle a:hover{
-    background-color: var(--headerHoverColor);
+    background-color: var(--green2);
   }
 
   /* hopefully a temporary solution. Would like to re-use the above a:hover for this */
 .currentPage {
-    background-color: var(--headerHoverColor);
+    background-color: var(--green2);
   }
   
