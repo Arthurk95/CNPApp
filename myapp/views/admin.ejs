@@ -9,6 +9,7 @@
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/form.css' />
     <link rel='stylesheet' href='/stylesheets/switch.css' />
+    <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -106,7 +107,22 @@
       <h3 class="accordion">Activities</h3>
         <div class="accordionPanel">
           <% if (activities.length > 0) {%>
-            <%- include listOfActivities.ejs %>
+            
+            <ul id="activities" class="ulList">
+              <% activities.forEach((activity, index) => { %>
+              <% if (activity.Hidden == 1) { %>
+              <li class="blackAndWhite"></li>
+              <% } else { %>
+              <li>
+              <% } %>
+                <input type="checkbox">
+                <p><%= activity.ActivityName %></p>
+                <button id="blueButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
+                <button id="yellowButton" onclick="">🖉</button>
+                <button id="redButton" onclick="">✖</button>
+              </li>
+              <% }) %>
+
             <li class="addActivity">
               <div class="blockContainer">
                 <p title="Create Activity" onclick="addActivity()">New Activity +</p>
@@ -134,9 +150,8 @@
             </div>
           </div>
         </div>
+      
 
-      
-      
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
           <% if (activities.length > 0) { %>
@@ -151,8 +166,6 @@
           <% } %>
         </div>
     </div>
-    
-
     
   </body>
   <script>
@@ -193,11 +206,14 @@
     // When the user clicks on <span> (x), close the modal
     closeButton[0].onclick = function() {
       formElement.style.display = "none";
-    }
+    };
     closeButton[1].onclick = function() {
       formElement.style.display = "none";
-    }
+    };
 
+    function hideActivity(element, activity){
+      
+    }
 
     // When the user clicks anywhere outside of the form window, close it
     window.onclick = function(event) {

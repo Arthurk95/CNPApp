@@ -1,0 +1,79 @@
+/*
+    Styling to display activities as a list with buttons on the side
+    HTML Format:
+
+    <ul class="adminActivities">
+        <li>
+            <p></p> // activity name
+            <button id="hideActivity"></button>
+            <button id="editActivity"></button>
+            <button id="deleteActivity"></button>
+        </li>
+*/
+
+/* styling for main <ul> */
+.ulList{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    border-radius: 12px;
+}
+
+/* Each <li> is one row with an activity name and the buttons */
+.ulList li{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    background: var(--green2);
+    margin-bottom: 15px;
+}
+
+.ulList li p{
+    color: var(--lightGray1);
+    padding-left: 10px;
+    font-size: 2.5em;
+    text-align: left;
+    flex-grow: 2;
+}
+
+.ulList li button{
+    font-size: 4em;
+    justify-self: center;
+    align-self: stretch;
+    width: 12vw;
+    border: none;
+    outline: none;
+    color: var(--darkGray2);
+}
+
+.ulList li button:hover{
+    background: inherit;
+    cursor: pointer;
+    filter: brightness(90%);
+}
+
+.ulList li #blueButton{
+    background: var(--blue1) !important;
+}
+
+.ulList li #yellowButton {
+    background: var(--yellow1) !important;
+}
+
+.ulList li #redButton{
+    background: var(--red1) !important;
+}
+
+.blackAndWhite{
+    filter: grayscale(100%);
+}
+
+@media screen and (max-width: 1200px){
+    .ulList li button{
+        width: 18%;
+    }
+}
