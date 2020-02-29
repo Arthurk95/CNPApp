@@ -10,6 +10,7 @@
     <link rel='stylesheet' href='/stylesheets/form.css' />
     <link rel='stylesheet' href='/stylesheets/switch.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
+    <link rel='stylesheet' href='/stylesheets/checkbox.css' />
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -115,9 +116,9 @@
               <% } else { %>
               <li>
               <% } %>
-                <input type="checkbox">
+                <div class="checkBox" onclick="checkboxClicked(this)"><div>&#10004;</div></div>
                 <p><%= activity.ActivityName %></p>
-                <button id="blueButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
+                <button id="greenButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
                 <button id="yellowButton" onclick="">🖉</button>
                 <button id="redButton" onclick="">✖</button>
               </li>
@@ -203,7 +204,7 @@
     };
 
     function hideActivity(element, activity){
-      
+
     }
 
     // When the user clicks anywhere outside of the form window, close it
