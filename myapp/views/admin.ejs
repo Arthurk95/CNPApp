@@ -122,9 +122,9 @@
               <li>
               <% } %>
                 <p><%= activity.ActivityName %></p>
-                <button id="greenButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
-                <button id="yellowButton" onclick="">🖉</button>
-                <button id="redButton" onclick="">✖</button>
+                <button class="greenButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
+                <button class="yellowButton" onclick="">🖉</button>
+                <button class="redButton" onclick="">✖</button>
               </li>
               <% }) %>
 
@@ -163,7 +163,7 @@
             <ul class="ulList">
               <% tasks.forEach((task, index) => { %>
                 <li> 
-                  <div class="checkBox" onclick="checkboxClicked(this)"><p></p></div>>
+                  <a class="checkBox" onclick="checkboxClicked(this)"></a>
                   <p><%= task %></p>                  
                   <!----<button> </button> -->
                 </li>
