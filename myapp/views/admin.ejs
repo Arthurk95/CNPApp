@@ -159,8 +159,8 @@
 
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
-          <% if (tasks.length > 0) { %>
-            <ul id="tasksList" class="ulList">
+          <ul id="tasksList" class="ulList">
+            <% if (tasks.length > 0) { %>            
               <% tasks.forEach((task, index) => { %>
                 <li> 
                   <a class="checkBox" onclick="taskComplete(this, '<%= task.name %>') "></a>
@@ -174,15 +174,25 @@
                   <% } %>
                 </li>
               <% }) %>
-            </ul>
-            <div id="changePriorityForm" class="formWindow">
-              <div class="formWindow-content">
-                <span class="close">&times;</span>
-                <ul>
-                </ul>
-              </div>
-            </div>
+              
           <% } %>
+          <li class="addElement">
+            <div class="blockContainer">
+              <p title="Add Task" onclick="addTask()">New Task +</p>
+            </div>
+          </li>
+        </ul>
+        <div id="newTaskForm" class="formWindow">
+          <!-- newStudentForm content -->
+          <div class="formWindow-content">
+            <span class="close">&times;</span>
+            <ul>
+              <li class="formTitle">Add a Task</li>
+              <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
+              <li style="text-align: center;"><a class="formSubmitButton" id="newTaskSubmit" onclick="">Add</a></li>
+            </ul>
+          </div>
+        </div>
         </div>
     </div>
     
@@ -218,11 +228,19 @@
       formElement.style.display = "block";
     }
 
+    function addTask(){
+      formElement = document.getElementById("newTaskForm");
+      formElement.style.display = "block";
+    }
+
     // When the user clicks on <span> (x), close the modal
     closeButton[0].onclick = function() {
       formElement.style.display = "none";
     };
     closeButton[1].onclick = function() {
+      formElement.style.display = "none";
+    };
+    closeButton[2].onclick = function() {
       formElement.style.display = "none";
     };
 
