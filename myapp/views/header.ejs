@@ -3,10 +3,10 @@
   <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/header.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/javascripts/post.js"></script>
   </head>
    <body>
-   <nav>
       <ul class="headerStyle">
          <li><a href="/">Home</a></li>
          <li><a href="/students">Tracker</a></li>
@@ -14,7 +14,20 @@
          <li><a href="/admin">Admin</a></li>
          <li><a href="/tasks">Stats</a></li>
       </ul>
-   </nav>
+
+      <div onclick="openNav()" id="mobileHeader" class="mobileHeader">
+        <a id="hamburger" href="javascript:void(0);" class="icon" onclick="">
+          <i class="fa fa-bars"></i>
+        </a>
+        <div id="links" class="links">
+          <a href="/">Home</a>
+          <a href="/students">Tracker</a>
+          <a href="/reports">Reports</a>
+          <a href="/admin">Admin</a>
+          <a href="/stats">Stats</a>
+        </div>
+        
+      </div>
   </body>
     <script>
       let current_url = document.location;
@@ -24,5 +37,26 @@
           aTags[i].classList += " currentPage";
         }
       }
+
+      function openNav(){
+        var links = document.getElementsByClassName("links");
+        
+        if(links[0].style.display == "flex"){
+          $('body > :not(#mobileHeader)').show(); //hide all nodes directly under the body
+          $('#mobileHeader').prependTo('body');
+        
+          $("#links").slideUp("fast");
+          //links[0].style.display = "none";
+        }
+        else{
+          $("#links").slideDown("fast");
+          links[0].style.display = "flex";
+          $('body > :not(#mobileHeader)').hide(); //hide all nodes directly under the body
+          $('#mobileHeader').appendTo('body');
+        }
+
+      }
+
+      
   </script>
 </html>
