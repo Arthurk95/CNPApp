@@ -166,7 +166,7 @@
                   <a class="checkBox" onclick="checkboxClicked(this)"></a>>
                   <p><%= task.name %></p> 
                   <% if (task.priority == 0) { %>
-                    <button class="greenButton" onclick="changePriority(<%= task.name %>)">🏳</button>  
+                    <button class="greenButton" onclick="changePriority('<%= task.name %>')">🏳</button>  
                   <% } else if(task.priority == 1) { %>
                     <button class="yellowButton">🏳</button>
                   <% } else { %>
