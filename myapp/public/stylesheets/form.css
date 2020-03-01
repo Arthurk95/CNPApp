@@ -189,12 +189,4 @@ HTML Formatting:
     filter: brightness(130%);
   }
 
-  /* td container for the switch */
-  .checkBox{
-    width: 80px;
-  }
-
-  /* td container for checkBoxLabel */
-  .checkLabel{
-    width: 150px;
-  }
+  

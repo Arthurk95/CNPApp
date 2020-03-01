@@ -57,10 +57,20 @@
     border-radius: 4px;
   }
 
-  .checkBoxLabel{
+  .switchLabel{
       font-size: 24px;
       margin-right: 10px;
       color: var(--darkGray3);
+  }
+
+  /* td container for the switch */
+  .switchColumn{
+    width: 80px;
+  }
+
+  /* td container for checkBoxLabel */
+  .labelColumn{
+    width: 150px;
   }
 
 
