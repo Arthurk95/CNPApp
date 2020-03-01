@@ -189,7 +189,16 @@
             <ul>
               <li class="formTitle">Add a Task</li>
               <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
+              <li>
+                <label for="cars">Select a priority</label>
+                <select>
+                   <option value=0>Low</option>
+                   <option value=1>Medium</option>
+                   <option value=2>High</option>
+                </select>
+              </li>
               <li style="text-align: center;"><a class="formSubmitButton" id="newTaskSubmit" onclick="">Add</a></li>
+              
             </ul>
           </div>
         </div>
@@ -302,6 +311,7 @@
     function taskComplete(element, task){
       checkboxClicked(element);
       $(element.parentElement).slideUp();
+      $(element).slideUp();
       setTimeout(function(){
         element.parentElement.style.display = "none";
       }, 1000);
