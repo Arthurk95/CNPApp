@@ -14,6 +14,7 @@
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script>
       function initStudentListVars(){
         document.getElementById("students").style.display = "flex";
@@ -96,9 +97,9 @@
                 <li>
                 <% } %>
                   <p><%= activity.ActivityName %></p>
-                  <button class="greenButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
-                  <button class="yellowButton" onclick="//editActivity()">🖉</button>
-                  <button class="redButton" onclick="//deleteActivity()">✖</button>
+                  <button class="greenButton" onclick="hideActivity(this, <%= activity %>);"><i class="far fa-eye"></i></button>
+                  <button class="yellowButton" onclick="//editActivity()"><i class="far fa-edit"></i></button>
+                  <button class="redButton" onclick="//deleteActivity()"><i class="far fa-trash-alt"></i></button>
                 </li>
               <% }) %>
             <% } %>
@@ -131,11 +132,11 @@
                   <a class="checkBox" onclick="taskComplete(this, '<%= task.name %>') "></a>
                   <p><%= task.name %></p> 
                   <% if (task.priority == 0) { %>
-                    <button class="greenButton" onclick="changePriority('<%= task.name %>')">🏳</button>  
+                    <button class="greenButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>  
                   <% } else if(task.priority == 1) { %>
-                    <button class="yellowButton" onclick="changePriority('<%= task.name %>')">🏳</button>
+                    <button class="yellowButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>
                   <% } else { %>
-                    <button class="redButton" onclick="changePriority('<%= task.name %>')">🏳</button>
+                    <button class="redButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>
                   <% } %>
               <% }) %>
               
