@@ -15,28 +15,30 @@
 .ulList{
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-content: center;
     align-items: center;
+    flex-wrap: wrap;
     margin: 0;
 }
 
-/* Each <li> is one row with an activity name and the buttons */
+/* Each <li> is one row */
 .ulList li{
     width: 90%;
     display: flex;
     flex-direction: row;
     align-content: center;
+    align-items: center;
     margin-bottom: 25px;
     border-radius: 12px;
     overflow: hidden;
     padding-left: 20px;
-    background: var(--lightGray2);
+    background: var(--lightGray1);
     box-shadow: 0px 0px 6px var(--darkGray2);
 }
 
 .ulList li p{
-    color: var(--darkGray2);
+    margin: 30px 0px;
+    color: var(--darkGray3);
     font-size: 2.5em;
     text-align: left;
     flex-grow: 2;
@@ -46,16 +48,16 @@
     font-size: 4em;
     justify-self: center;
     align-self: stretch;
-    width: 12vw;
+    width: 10vw;
     border: none;
     outline: none;
     color: var(--darkGray2);
 }
 
 .ulList li button:hover{
+    transition: 0.2s box-shadow ease-in-out;
     cursor: pointer;
-    box-shadow: inset 0px 0px 3px 1px var(--darkGray3);
-    filter: brightness(90%);
+    box-shadow: inset 0px 0px 4px 1px var(--darkGray3);
 
 }
 
@@ -71,7 +73,15 @@
     background: var(--red1) !important;
 }
 
+.ulList li img{
+    width: 10vw;
+    height: 10vw;
+    border: 1px solid black;
+    margin: 10px;
+}
+
 .ulList .addElement{
+    margin-top: 30px;
     width: 60%;
     background: var(--green2);
     justify-content: center;
@@ -91,12 +101,43 @@
     background: var(--green3);
 }
 
+.ulList .clickableItem:hover{
+    cursor: pointer;
+    filter: brightness(110%);
+}
+
+.ulList .halfWidth{
+    align-self: stretch;
+    width: 40%;
+    margin: 20px;
+}
+
+.ulList .halfWidth p{
+    text-align: center;
+}
+
 .blackAndWhite{
     filter: grayscale(100%);
 }
 
+
+/* Striped background for a halfday student*/
+.stripedBackground{
+    background: repeating-linear-gradient(
+        45deg,
+        var(--lightGray1),
+        var(--lightGray1) 40px,
+        var(--lightGray3) 40px,
+        var(--lightGray3) 80px
+      ) !important;
+  }
+
 @media screen and (max-width: 1200px){
     .ulList li button{
         width: 18%;
+    }
+
+    .ulList .halfWidth{
+        width: 90%;
     }
 }
