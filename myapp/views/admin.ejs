@@ -163,18 +163,25 @@
             <ul id="tasksList" class="ulList">
               <% tasks.forEach((task, index) => { %>
                 <li> 
-                  <a class="checkBox" onclick="checkboxClicked(this)"></a>>
+                  <a class="checkBox" onclick="taskComplete(this, '<%= task.name %>') "></a>
                   <p><%= task.name %></p> 
                   <% if (task.priority == 0) { %>
                     <button class="greenButton" onclick="changePriority('<%= task.name %>')">🏳</button>  
                   <% } else if(task.priority == 1) { %>
-                    <button class="yellowButton">🏳</button>
+                    <button class="yellowButton" onclick="changePriority('<%= task.name %>')">🏳</button>
                   <% } else { %>
-                    <button class="redButton">🏳</button>
+                    <button class="redButton" onclick="changePriority('<%= task.name %>')">🏳</button>
                   <% } %>
                 </li>
               <% }) %>
             </ul>
+            <div id="changePriorityForm" class="formWindow">
+              <div class="formWindow-content">
+                <span class="close">&times;</span>
+                <ul>
+                </ul>
+              </div>
+            </div>
           <% } %>
         </div>
     </div>
@@ -270,7 +277,16 @@
 
     function changePriority(task) {
       console.log(task);
+
       
+    }
+
+    function taskComplete(element, task){
+      checkboxClicked(element);
+      $(element.parentElement).slideUp();
+      setTimeout(function(){
+        element.parentElement.style.display = "none";
+      }, 1000);
     }
   </script>
 </html>
