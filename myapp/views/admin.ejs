@@ -163,14 +163,14 @@
             <ul id="tasksList" class="ulList">
               <% tasks.forEach((task, index) => { %>
                 <li> 
-                  <div class="checkBox" onclick="checkboxClicked(this)"><p></p></div>>
+                  <a class="checkBox" onclick="checkboxClicked(this)"></a>>
                   <p><%= task.name %></p> 
                   <% if (task.priority == 0) { %>
-                    <button class= "greenButton">🏳</button>  
+                    <button class="greenButton" onclick="changePriority(<%= task.name %>)">🏳</button>  
                   <% } else if(task.priority == 1) { %>
-                    <button class= "yellowButton">🏳</button>
+                    <button class="yellowButton">🏳</button>
                   <% } else { %>
-                    <button class= "redButton">🏳</button>
+                    <button class="redButton">🏳</button>
                   <% } %>
                 </li>
               <% }) %>
@@ -268,12 +268,9 @@
       httpPostAsync(theUrl, data, callback);
     }
 
-    function updatePriorityStyle() {
-      var task = getElementById("tasksList");
-      var tasks = task.getElementsByTagName("li");
-      for (var i=0; i < tasks.length; i++) {
-        tasks[i]
-      }
+    function changePriority(task) {
+      console.log(task);
+      
     }
   </script>
 </html>
