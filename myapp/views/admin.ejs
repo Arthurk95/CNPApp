@@ -157,22 +157,48 @@
 
       <h3 class="accordion">Tasks</h3>
         <div class="accordionPanel">
-          <% if (tasks.length > 0) { %>
-            <ul id="tasksList" class="ulList">
+          <ul id="tasksList" class="ulList">
+            <% if (tasks.length > 0) { %>            
               <% tasks.forEach((task, index) => { %>
                 <li> 
-                  <a class="checkBox" onclick="checkboxClicked(this)"></a>
+                  <a class="checkBox" onclick="taskComplete(this, '<%= task.name %>') "></a>
                   <p><%= task.name %></p> 
                   <% if (task.priority == 0) { %>
                     <button class="greenButton" onclick="changePriority('<%= task.name %>')">🏳</button>  
                   <% } else if(task.priority == 1) { %>
-                    <button class="yellowButton">🏳</button>
+                    <button class="yellowButton" onclick="changePriority('<%= task.name %>')">🏳</button>
                   <% } else { %>
-                    <button class="redButton">🏳</button>
+                    <button class="redButton" onclick="changePriority('<%= task.name %>')">🏳</button>
                   <% } %>
               <% }) %>
-            </ul>
+              
           <% } %>
+          <li class="addElement">
+            <div class="blockContainer">
+              <p title="Add Task" onclick="addTask()">New Task +</p>
+            </div>
+          </li>
+        </ul>
+        <div id="newTaskForm" class="formWindow">
+          <!-- newStudentForm content -->
+          <div class="formWindow-content">
+            <span class="close">&times;</span>
+            <ul>
+              <li class="formTitle">Add a Task</li>
+              <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
+              <li>
+                <label for="cars">Select a priority</label>
+                <select>
+                   <option value=0>Low</option>
+                   <option value=1>Medium</option>
+                   <option value=2>High</option>
+                </select>
+              </li>
+              <li style="text-align: center;"><a class="formSubmitButton" id="newTaskSubmit" onclick="">Add</a></li>
+              
+            </ul>
+          </div>
+        </div>
         </div>
     </div>
     
@@ -208,11 +234,19 @@
       formElement.style.display = "block";
     }
 
+    function addTask(){
+      formElement = document.getElementById("newTaskForm");
+      formElement.style.display = "block";
+    }
+
     // When the user clicks on <span> (x), close the modal
     closeButton[0].onclick = function() {
       formElement.style.display = "none";
     };
     closeButton[1].onclick = function() {
+      formElement.style.display = "none";
+    };
+    closeButton[2].onclick = function() {
       formElement.style.display = "none";
     };
 
@@ -267,19 +301,17 @@
 
     function changePriority(task) {
       console.log(task);
+
       
     }
 
-    function hidePriorities(element, priority){
-      var buttons = element.getElementsByTag("button");
-
-      console.log(buttons);
-      console.log(priority);
-      for(var i = 0; i < buttons.length; i++){
-        if(i != priority){
-          buttons[i].style.display = "none";
-        }
-      }
+    function taskComplete(element, task){
+      checkboxClicked(element);
+      $(element.parentElement).slideUp();
+      $(element).slideUp();
+      setTimeout(function(){
+        element.parentElement.style.display = "none";
+      }, 1000);
     }
   </script>
 </html>
