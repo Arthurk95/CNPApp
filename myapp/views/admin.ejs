@@ -77,8 +77,8 @@
                     <table style="width: 100%;">
                       <tr>
                         <td>Add a Student</td>
-                        <td class="checkLabel"><label for="fullDay" class="checkBoxLabel">Full Day</label></td>
-                        <td class="checkBox">
+                        <td class="switchLabel"><label for="fullDay" class="switchLabel">Full Day</label></td>
+                        <td class="switchColumn">
                           <label class="switch">
                             <input type="checkbox" id="fullDay" name="fullDay" checked="true">
                             <span class="slider round"></span>
@@ -128,10 +128,8 @@
               </li>
               <% }) %>
 
-            <li class="addActivity">
-              <div class="blockContainer">
-                <p title="Create Activity" onclick="addActivity()">New Activity +</p>
-              </div>
+            <li class="addElement">
+              <a title="Create Activity" onclick="addActivity()">New Activity +</a>
             </li>
           <% } else { %>
             <ul class="blockList activitiesList">
@@ -163,16 +161,15 @@
             <ul id="tasksList" class="ulList">
               <% tasks.forEach((task, index) => { %>
                 <li> 
-                  <a class="checkBox" onclick="checkboxClicked(this)"></a>>
+                  <a class="checkBox" onclick="checkboxClicked(this)"></a>
                   <p><%= task.name %></p> 
                   <% if (task.priority == 0) { %>
-                    <button class="greenButton" onclick="changePriority(<%= task.name %>)">🏳</button>  
+                    <button class="greenButton" onclick="changePriority('<%= task.name %>')">🏳</button>  
                   <% } else if(task.priority == 1) { %>
                     <button class="yellowButton">🏳</button>
                   <% } else { %>
                     <button class="redButton">🏳</button>
                   <% } %>
-                </li>
               <% }) %>
             </ul>
           <% } %>
@@ -271,6 +268,18 @@
     function changePriority(task) {
       console.log(task);
       
+    }
+
+    function hidePriorities(element, priority){
+      var buttons = element.getElementsByTag("button");
+
+      console.log(buttons);
+      console.log(priority);
+      for(var i = 0; i < buttons.length; i++){
+        if(i != priority){
+          buttons[i].style.display = "none";
+        }
+      }
     }
   </script>
 </html>
