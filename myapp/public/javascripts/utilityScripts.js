@@ -36,7 +36,6 @@ function checkboxClicked(element) {
 
 function checkStudentDayType(element, dayType){
     if(dayType == 0){
-      element.classList += " clickableItem stripedBackground";
+      element.classList += " stripedBackground";
     }
-    else element.classList += " clickableItem";
   }
