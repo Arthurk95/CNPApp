@@ -55,7 +55,7 @@
 }
 
 .ulList li button:hover{
-    transition: 0.2s box-shadow ease-in-out;
+    transition: 0.1s box-shadow linear;
     cursor: pointer;
     box-shadow: inset 0px 0px 4px 1px var(--darkGray3);
 
@@ -98,7 +98,7 @@
 }
 
 .ulList .addElement:hover{
-    background: var(--green3);
+    filter: brightness(110%);
 }
 
 .ulList .clickableItem:hover{
