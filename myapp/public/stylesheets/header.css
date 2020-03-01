@@ -25,12 +25,12 @@
   }
 
 .headerStyle a:hover{
-    background-color: var(--green2);
+    background-color: var(--yellow3);
   }
 
   /* hopefully a temporary solution. Would like to re-use the above a:hover for this */
 .currentPage {
-    background-color: var(--green2);
+    background-color: var(--yellow3);
   }
   
 
@@ -66,7 +66,7 @@
 }
 
 .mobileHeader .links a:hover{
-  background: var(--green2);
+  background: var(--yellow3);
 }
 
 .mobileHeader a.icon{
