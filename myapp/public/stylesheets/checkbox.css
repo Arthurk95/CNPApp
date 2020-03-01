@@ -1,5 +1,13 @@
+/* <a id="checkbox1" class="checkbox" onclick="checkboxSelected(this)"></a>
+
+  To see if checkbox is selected:
+  if(document.getElementById("checkbox1").classList.contains(" checkboxSelected")){
+    checkbox is selected, do something
+  }
+*/
+
+/* Border will be the opposite color of its parent */
 .checkBox{
-    transition: 0.2s background-color;
     outline: none;
     width: 50px;
     height: 50px;
@@ -9,14 +17,16 @@
     border: 2px solid var(--lightGray1);
     margin: 0px 30px 0px 5px;
     text-align: center;
-    background: var(--lightGray2);
+    filter: invert();
     opacity: 0.7;
     font-size: 40px;
     font-weight: 700;
     text-align: center;
 }
 
+/* because adding "active" to the classlist doesn't work */
 .checkboxSelected{
+    filter: none;
     background: var(--blue2);
     border: none;
     width: 54px;
@@ -24,6 +34,7 @@
     opacity: 1;
 }
 
+/* checkmark */
 .checkboxSelected::after{
     visibility: visible !important;
     content: "✔";
@@ -32,6 +43,16 @@
 
 .checkBox:hover{
     cursor: pointer;
+}
+
+/* Style for when clicked */
+.checkBox:active{
+    filter: none;
+    background: var(--blue2);
+    border: none;
+    width: 54px;
+    height: 54px;
+    opacity: 1;
 }
 
 .checkBox:active::after{
