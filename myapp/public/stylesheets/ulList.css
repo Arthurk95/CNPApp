@@ -58,15 +58,15 @@
 
 }
 
-.ulList li #greenButton{
+.ulList li .greenButton{
     background: var(--green1) !important;
 }
 
-.ulList li #yellowButton {
+.ulList li .yellowButton {
     background: var(--yellow1) !important;
 }
 
-.ulList li #redButton{
+.ulList li .redButton{
     background: var(--red1) !important;
 }
 
