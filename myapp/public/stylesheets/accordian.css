@@ -35,9 +35,10 @@
   .accordionPanel {
     height: auto !important;
     margin: 0 auto;
+    margin-bottom: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
     width: 95%;
-    background-color: var(--blue2);
+    background-color: var(--blue1);
     display: none;
   }
