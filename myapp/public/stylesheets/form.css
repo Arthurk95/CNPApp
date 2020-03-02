@@ -29,6 +29,7 @@ HTML Formatting:
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    text-align: center;
   }
   
   /* The actual pop-up box that contains everything in the form */
@@ -46,16 +47,33 @@ HTML Formatting:
     list-style: none;
     margin: 0;
     padding: 0;
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
   /* Each li is an element on the form, such as <input> or <a> */
   .formWindow-content li{
-    display: block;
     padding: 1vh 40px;
+    justify-content: center;
   }
 
   /* Large title at the top of the form (first <li>) */
+  .formTitleWithSwitch{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    font-size: 2em;
+    color: var(--darkGray3);
+  }
+
+  .formTitleWithSwitch p{
+    align-self: flex-start;
+  }
+
+  .formTitleWithSwitch .rightAlignFormElement{
+    align-self: center;
+  }
+
   .formTitle{
     font-size: 2em;
     color: var(--darkGray3);
@@ -151,6 +169,7 @@ HTML Formatting:
     width: 100%;
     text-align: center;
     align-items: center;
+    flex-direction: row !important;
   }
 
   /* Each <li> is a single weekday.
