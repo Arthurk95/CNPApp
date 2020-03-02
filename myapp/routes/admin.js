@@ -31,6 +31,14 @@ var session = require('express-session');
     });
   });
 
+  router.put('/hideactivity', function(req, res){
+    var sql = "CALL HideActivity('" + req.body.id + "');";
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
   router.put('/editactivity', function(req, res){
     var sql = "UPDATE Activities set ActivityName = '" + req.body.name + "' WHERE ActivityId = " + req.body.id + ";";
     console.log(sql);
