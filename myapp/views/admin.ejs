@@ -93,9 +93,9 @@
                 <li>
                 <% } %>
                   <p><%= activity.ActivityName %></p>
-                  <button class="greenButton" onclick="hideActivity(this, <%= activity %>);"><i class="far fa-eye"></i></button>
-                  <button class="yellowButton" onclick="//editActivity()"><i class="far fa-edit"></i></button>
-                  <button class="redButton" onclick="//deleteActivity()"><i class="far fa-trash-alt"></i></button>
+                  <button class="greenButton" onclick="hideActivity('<%= activity.ActivityId %>')"><i class="far fa-eye"></i></button>
+                  <button class="yellowButton" onclick="editActivity('<%= activity.ActivityId %>')"><i class="far fa-edit"></i></button>
+                  <button class="redButton" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
                 </li>
               <% }) %>
             <% } %>
@@ -150,13 +150,13 @@
                 <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
                 <li>
                   <label for="cars">Select a priority</label>
-                  <select>
+                  <select id="newTaskPriority">
                     <option value=0>Low</option>
                     <option value=1>Medium</option>
                     <option value=2>High</option>
                   </select>
                 </li>
-                <li><a class="formSubmitButton" id="newTaskSubmit" onclick="">Add</a></li>
+                <li><a class="formSubmitButton" id="newTaskSubmit" onclick="addTaskPost()">Add</a></li>
                 
               </ul>
             </div>
@@ -201,6 +201,14 @@
       formElement.style.display = "block";
     }
 
+    function addTaskPost(){
+      var theUrl = window.location.href+'/addtask';
+      var data = "name=" + document.getElementById("newTaskName").value +
+      "&priority=" +  document.getElementById("newTaskPriority");
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
+
     // When the user clicks on <span> (x), close the modal
     closeButton[0].onclick = function() {
       formElement.style.display = "none";
@@ -212,8 +220,29 @@
       formElement.style.display = "none";
     };
 
-    function hideActivity(element, activity){
+    function hideActivity(element){
 
+    }
+
+    function editActivity(id){
+      //take new input
+      editActivityPost(id, "crab battle");
+    }
+
+    function editActivityPost(id,name){
+      theUrl = window.location.href+'/editactivity';
+      data = "id=" + id + "&name=" + name;
+      callback = reloadIt;
+
+      httpPutAsync(theUrl, data, callback);
+    }
+
+    function deleteActivity(element){
+      theUrl = window.location.href+'/deleteactivity';
+      data = "id=" + element;
+      callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
     }
 
     // When the user clicks anywhere outside of the form window, close it
@@ -222,6 +251,7 @@
         formElement.style.display = "none";
       }
     }
+
 
     //generate perameters for post and call post
     function callPostStu(){
@@ -259,6 +289,8 @@
 
       httpPostAsync(theUrl, data, callback);
     }
+
+
 
     function changePriority(task) {
     }

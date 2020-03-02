@@ -13,7 +13,6 @@ con = sql.createConnection(parsed);
 
 var indexRouter = require('./routes/index');
 var studentsRouter = require('./routes/students');
-var activitiesRouter = require('./routes/activities');
 var adminRouter = require('./routes/admin');
 var reportsRouter = require('./routes/reports');
 
@@ -41,7 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/students', studentsRouter);
-app.use('/activities', activitiesRouter);
 app.use('/admin', adminRouter);
 app.use('/reports', reportsRouter);
 
