@@ -9,7 +9,7 @@ var sql = require('mysql');
 
 var fs = require('fs'), configPath = './config.json';//credentials file
 var parsed = JSON.parse(fs.readFileSync(configPath, 'UTF-8'));
-con = sql.createConnection(parsed);
+con = sql.createConnection({"host":parsed.host,"user":parsed.user,"password":parsed.password,"database":parsed.database});
 
 var indexRouter = require('./routes/index');
 var studentsRouter = require('./routes/students');
