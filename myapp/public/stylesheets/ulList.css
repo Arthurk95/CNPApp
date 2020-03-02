@@ -2,7 +2,7 @@
     Styling to display activities as a list with buttons on the side
     HTML Format:
 
-    <ul class="adminActivities">
+    <ul class="ulList">
         <li>
             <p></p> // activity name
             <button id="hideActivity"></button>
@@ -15,28 +15,31 @@
 .ulList{
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-content: center;
     align-items: center;
+    flex-wrap: wrap;
     margin: 0;
 }
 
-/* Each <li> is one row with an activity name and the buttons */
+/* Each <li> is one row */
 .ulList li{
+    position: relative;
     width: 90%;
     display: flex;
     flex-direction: row;
     align-content: center;
+    align-items: center;
     margin-bottom: 25px;
     border-radius: 12px;
     overflow: hidden;
     padding-left: 20px;
-    background: var(--lightGray2);
+    background: var(--lightGray1);
     box-shadow: 0px 0px 6px var(--darkGray2);
 }
 
 .ulList li p{
-    color: var(--darkGray2);
+    margin: 30px 0px;
+    color: var(--darkGray3);
     font-size: 2.5em;
     text-align: left;
     flex-grow: 2;
@@ -46,57 +49,137 @@
     font-size: 4em;
     justify-self: center;
     align-self: stretch;
-    width: 12vw;
+    width: 10vw;
     border: none;
     outline: none;
     color: var(--darkGray2);
 }
 
 .ulList li button:hover{
+    transition: 0.1s box-shadow linear;
     cursor: pointer;
-    box-shadow: inset 0px 0px 3px 1px var(--darkGray3);
-    filter: brightness(90%);
+    box-shadow: inset 0px 0px 4px 1px var(--darkGray3);
 
 }
 
 .ulList li .greenButton{
-    background: var(--green1) !important;
+    background: var(--green2) !important;
 }
 
 .ulList li .yellowButton {
-    background: var(--yellow1) !important;
+    background: var(--yellow2) !important;
 }
 
 .ulList li .redButton{
-    background: var(--red1) !important;
+    background: var(--red2) !important;
 }
 
 .ulList .addElement{
-    width: 60%;
-    background: var(--green2);
-    justify-content: center;
+    background: var(--green3) !important;
+}
+
+.ulList .addElement p{
+    text-align: center;
+    color: var(--lightGray1) !important;
 }
 
 .ulList .addElement a{
+    justify-self: center;
+    align-self: center;
     text-decoration: none;
     color: var(--lightGray1);
     text-align: center;
-    font-size: 3em;
+    font-size: 2.5em;
     width: 100%;
     height: 100%;
     padding: 30px 0px;
 }
 
-.ulList .addElement:hover{
-    background: var(--green3);
+.ulList .addIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    margin-left: -50px;
+    border-radius: 50%;
+    overflow: hidden;
+    font-size: 105px;
+    background: var(--green2);
+    color: white;
+    box-shadow: 0px 0px 5px var(--darkGray3);
+    transition: width 0.1s ease-in-out, height 0.1s ease-in-out, 
+        font-size 0.1s ease-in-out, margin 0.1s ease-in-out;
+}
+
+.ulList .addIcon i{
+    align-self: center !important;
+}
+
+.ulList .clickableItem:hover{cursor: pointer !important;}
+
+.ulList .clickableItem:hover img{
+    width: 180px;
+    height: 180px;
+}
+
+.ulList .clickableItem:hover .addIcon{
+    width: 180px;
+    height: 180px;
+    font-size: 120px;
+    margin-left: -65px;
+}
+
+.ulList .profileList{
+    overflow: visible;
+    align-items: center;
+    width: 25%;
+    height: 130px;
+    margin: 20px 40px;
+    background: white;
+    padding-left: 0;
+ }
+
+.ulList .profileList p{
+    text-align: center;
+    color: var(--darkGray4);
+}
+
+.ulList .profileList img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--yellow1);
+    margin: 0;
+    margin-left: -60px;
+    box-shadow: 0px 0px 5px var(--darkGray3);   
+    transition: width 0.1s ease-in-out, height 0.1s ease-in-out;
 }
 
 .blackAndWhite{
     filter: grayscale(100%);
 }
 
+
+/* Striped background for a halfday student*/
+.stripedBackground{
+    background: repeating-linear-gradient(
+        45deg,
+        white,
+        white 40px,
+        var(--yellow1) 40px,
+        var(--yellow1) 80px
+      ) !important;
+  }
+
 @media screen and (max-width: 1200px){
     .ulList li button{
         width: 18%;
+    }
+
+    .ulList .profileList{
+        width: 80%;
+        margin-right: -15px;
     }
 }

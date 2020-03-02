@@ -33,3 +33,9 @@ function checkboxClicked(element) {
         element.classList += " checkboxSelected";
     }
 }
+
+function checkStudentDayType(element, dayType){
+    if(dayType == 0){
+      element.classList += " stripedBackground";
+    }
+  }

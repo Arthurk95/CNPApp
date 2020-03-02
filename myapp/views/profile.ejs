@@ -48,10 +48,10 @@
             
             <div id="tabs-2" class="tabContent">
               <div class="fullDay">
-                <label for="fullDay" class="checkBoxLabel">Full Day</label>
+                <label for="fullDay" class="switchLabel">Full Day</label>
                 <div>
                   <label class="switch">
-                    <input type="checkbox" id="fullDay" name="fullDay" onload="loadCheckBox(this, <%= student.DayType %>)">
+                    <input type="switchColumn" id="fullDay" name="fullDay" onload="loadCheckBox(this, <%= student.DayType %>)">
                     <span class="slider round"></span>
                   </label>
                 </div>

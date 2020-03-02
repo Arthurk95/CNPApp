@@ -20,24 +20,27 @@
   --tasksColor: #868DAA;
   --tasksColorDark: #4E5263;
 
-  --yellow1: #F2FB83;
-  --yellow2: #D0D86D;
-  --yellow3: #9FA646;
-  --yellow4: #6C7130;
+  --yellow1: #FDFFAD;
+  --yellow2: #DDDF8D;
+  --yellow3: #B3B46F;
+  --yellow4: #7A7C46;
+  --yellow5: #555631;
 
-  --green1: #73CE63;
-  --green2: #5E895F;
-  --green3: #3B633C;
-  --green4: #284528;
+  --green1: #B4FFBE;
+  --green2: #9AE1A4;
+  --green3: #83BB8B;
+  --green4: #64936B;
+  --green5: #4A6F50;
 
-  --blue1: #8A92C8;
-  --blue2: #656B99;
-  --blue3: #404463;
-  --blue4: #252739;
+  --blue1: #8A9EC8;
+  --blue2: #66779C;
+  --blue3: #505F80;
+  --blue4: #3B4760;
 
-  --red1: #A97478;
-  --red2: #7E5558;
-  --red3: #583B3D;
+  --red1: #FFB1B7;
+  --red2: #C4757B;
+  --red3: #914A4F;
+  --red4: #5D2E32;
 
   /* Button Colors */
 
@@ -270,6 +273,10 @@ input{
   padding: 10px 0px 10px 15px;
   font-size: 1.2em;
   -webkit-user-select: text;
+}
+
+input::selection{
+  background: #D4E4FF;
 }
 
 input:focus{

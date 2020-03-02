@@ -201,13 +201,4 @@ HTML Format:
       max-width: 40%;
   }
 
-  /* Striped background for a halfday student*/
-  .halfDayStudent{
-    background: repeating-linear-gradient(
-        45deg,
-        var(--lightGray1),
-        var(--lightGray1) 40px,
-        var(--lightGray3) 40px,
-        var(--lightGray3) 80px
-      ) !important;
-  }
+  

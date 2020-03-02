@@ -9,7 +9,6 @@ var session = require('express-session');
      "','" + req.body.contactNum2 + "','" + req.body.mon + "','" + req.body.tue +
      "','" + req.body.wed + "','" + req.body.thu + "','" + req.body.fri + "','" + req.body.sat + 
      "','" + req.body.sun + "','" + req.body.halfDay + "','" + req.body.enroll + "');";
-    console.log(sql);
     con.query(sql, function (err, result) {
         if (err) throw(err);
         res.end();
@@ -17,8 +16,32 @@ var session = require('express-session');
   });
 
   router.post('/addactivity', function(req, res){
-    console.log(req.body.name);
     var sql = "CALL CreateNewActivity('" + req.body.name + "');";
+    con.query(sql, function (err, result) {
+        if (err) res.send("failure to add");
+        res.send("added succesfully");
+    });
+  });
+
+  router.post('/deleteactivity', function(req, res){
+    var sql = "CALL DeleteActivity('" + req.body.id + "');";
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.put('/editactivity', function(req, res){
+    var sql = "UPDATE Activities set ActivityName = '" + req.body.name + "' WHERE ActivityId = " + req.body.id + ";";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.post('/addtask', function(req, res){
+    var sql = "CALL CreateNewTask('" + req.body.name + "," + req.body.priority + "');";
     con.query(sql, function (err, result) {
         if (err) res.send("failure to add");
         res.send("added succesfully");
@@ -28,7 +51,7 @@ var session = require('express-session');
   /* GET home page. */
   router.get('/', function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 
-    var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
+    var activity_query = "CALL ShowAllActivities();";
     var task_list = []
     var task1 = {name:'Mow lawn', priority: 1, complete: 0, stamp: ""}
     var task2 = {name:'Fix slide', priority: 2, complete: 0, stamp: ""}
@@ -45,7 +68,6 @@ var session = require('express-session');
     /* var student_query = "CALL ShowAllStudents();"; */ 
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
-      console.log(sQuery);
       con.query(activity_query, function (err, aQuery) {
         if (err) throw err;
         res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery, tasks: task_list, compTasks: tasks_complete});
@@ -63,7 +85,6 @@ var session = require('express-session');
       //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
       //strip away OkPacket, create selected_student as new array
       [selected_student] = result[0];
-      console.log(selected_student);
       res.render('profile.ejs', { title: 'Profile Page', student: selected_student, upload_error_message: req.session.upload_error });
       req.session.destroy();
     });

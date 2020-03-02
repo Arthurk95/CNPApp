@@ -14,135 +14,99 @@
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-      function initStudentListVars(){
-        document.getElementById("students").style.display = "flex";
-      }
-    </script>
   </head>
   <body>
     <div id="accordion">
       <h3 class="accordion">Students</h3>
         <div class="accordionPanel">
-            <% if (students.length > 0) {%>
-              <%- include listOfStudents.ejs %>
-                  <li class="addStudent">
-                    <div class="blockContainer">
-                      <table>
-                        <th>
-                          <div>
-                              <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
-                          </div>
-                        </th>
-                        <tr>
-                          <td>a<br />
-                          a</td>
-                        </tr>
-                      </table>
-                      <div onclick="addStudent()" class="addStudentOverlay">
-                        <a class="plusIcon" title="Create Student">&#43;</a>
-                      </div>
-                    </div>
+          <ul id="students" class="ulList">
+            <% if (students.length > 0) { %>
+              <% students.forEach((student, index) => { %>
+                <% studentSpl = student.StudentName.split(" "); %>
+                  <li class="profileList clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
+                    <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
+                    <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                    <p><%= student.StudentName %></p>
                   </li>
-                  <script>initStudentListVars();</script>
-            <% } else { %>
-              <ul class="blockList">
-                  <li class="addStudent">
-                    <div class="blockContainer">
-                      <table>
-                        <th>
-                          <div>
-                              <img src="https://cdn2.iconfinder.com/data/icons/popular-social-media-flat/48/Popular_Social_Media-12-512.png">
-                          </div>
-                        </th>
-                        <tr>
-                          <td>a<br />
-                          a</td>
-                        </tr>
-                      </table>
-                      <div onclick="addStudent()" class="addStudentOverlay">
-                        <a class="plusIcon" title="Create Student">&#43;</a>
-                      </div>
-                    </div>
-                  </li>
+                <% }) %>
             <% } %> 
-            </ul>
-            <div id="newStudentForm" class="formWindow">
-              <!-- newStudentForm content -->
-              <div class="formWindow-content">
-                <span class="close">&times;</span>
-                
-                <ul>
-                  <li class="formTitle">
-                    <table style="width: 100%;">
-                      <tr>
-                        <td>Add a Student</td>
-                        <td class="switchLabel"><label for="fullDay" class="switchLabel">Full Day</label></td>
-                        <td class="switchColumn">
-                          <label class="switch">
-                            <input type="checkbox" id="fullDay" name="fullDay" checked="true">
-                            <span class="slider round"></span>
-                          </label>
-                        </td>
-                      </tr>
-                    </table>
-                  </li>
-                  <li><input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"></li>
-                  <li><input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name"></li>
-                  <li><input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-                  <li><input name=”notASearchField” type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
-                  <li><input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
-                  <li><input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
-                  <li><input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
-                  <li><input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
-                  <ul class="week">
-                    <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                    <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
-                    <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
-                    <li id="wed" onclick="weekdaySelected(this)"><a>W</a></li>
-                    <li id="thu" onclick="weekdaySelected(this)"><a>T</a></li>
-                    <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
-                    <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
-                  </ul>
-                  <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
+              <li title="Add Student" class="profileList clickableItem addElement" onclick="addStudent()">
+                <div class="addIcon">
+                  <i class="fas fa-plus"></i>
+                </div>
+                <p>New Student</p>
+              </li> 
+          </ul>
+
+          <!-- New Student Form -->
+          <div id="newStudentForm" class="formWindow">
+            <div class="formWindow-content">
+              <span class="close">&times;</span>
+              
+              <ul>
+                <li class="formTitle">
+                  <table style="width: 100%;">
+                    <tr>
+                      <td>Add a Student</td>
+                      <td class="switchLabel"><label for="fullDay" class="switchLabel">Full Day</label></td>
+                      <td class="switchColumn">
+                        <label class="switch">
+                          <input type="checkbox" id="fullDay" name="fullDay" checked="true">
+                          <span class="slider round"></span>
+                        </label>
+                      </td>
+                    </tr>
+                  </table>
+                </li>
+                <li><input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"></li>
+                <li><input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name"></li>
+                <li><input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
+                <li><input name=”notASearchField” type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
+                <li><input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
+                <li><input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
+                <li><input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
+                <li><input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
+                <ul class="week">
+                  <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
+                  <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
+                  <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
+                  <li id="wed" onclick="weekdaySelected(this)"><a>W</a></li>
+                  <li id="thu" onclick="weekdaySelected(this)"><a>T</a></li>
+                  <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
+                  <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                 </ul>
-              </div>
+                <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       
       <h3 class="accordion">Activities</h3>
         <div class="accordionPanel">
-          <% if (activities.length > 0) {%>
-            
-            <ul id="activities" class="ulList">
+          <ul id="activities" class="ulList">
+            <% if (activities.length > 0) {%>
+              
               <% activities.forEach((activity, index) => { %>
-              <% if (activity.Hidden == 1) { %>
-              <li class="blackAndWhite"></li>
-              <% } else { %>
-              <li>
-              <% } %>
-                <p><%= activity.ActivityName %></p>
-                <button class="greenButton" onclick="hideActivity(this, <%= activity %>);">👁</button>
-                <button class="yellowButton" onclick="">🖉</button>
-                <button class="redButton" onclick="">✖</button>
-              </li>
+                <% if (activity.Hidden == 1) { %>
+                <li class="blackAndWhite">
+                <% } else { %>
+                <li>
+                <% } %>
+                  <p><%= activity.ActivityName %></p>
+                  <button class="greenButton" onclick="hideActivity('<%= activity.ActivityId %>')"><i class="far fa-eye"></i></button>
+                  <button class="yellowButton" onclick="editActivity('<%= activity.ActivityId %>')"><i class="far fa-edit"></i></button>
+                  <button class="redButton" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                </li>
               <% }) %>
-
-            <li class="addElement">
-              <a title="Create Activity" onclick="addActivity()">New Activity +</a>
+            <% } %>
+            <li onclick="addActivity()" class="addElement clickableItem">
+              <p title="Create Activity" >New Activity +</p>
             </li>
-          <% } else { %>
-            <ul class="blockList activitiesList">
-              <li class="addActivity">
-                <div class="blockContainer">
-                  <p title="Create Activity" onclick="addActivity()">New Activity +</p>
-                </div>
-              </li>
-            
-          <% } %>
           </ul>
+
+
+            <!-- New Activity Form -->
           <div id="newActivityForm" class="formWindow">
-            <!-- newStudentForm content -->
             <div class="formWindow-content">
               <span class="close">&times;</span>
               <ul>
@@ -164,40 +128,39 @@
                   <a class="checkBox" onclick="taskComplete(this, '<%= task.name %>') "></a>
                   <p><%= task.name %></p> 
                   <% if (task.priority == 0) { %>
-                    <button class="greenButton" onclick="changePriority('<%= task.name %>')">🏳</button>  
+                    <button class="greenButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>  
                   <% } else if(task.priority == 1) { %>
-                    <button class="yellowButton" onclick="changePriority('<%= task.name %>')">🏳</button>
+                    <button class="yellowButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>
                   <% } else { %>
-                    <button class="redButton" onclick="changePriority('<%= task.name %>')">🏳</button>
+                    <button class="redButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>
                   <% } %>
                   <button onclick="deleteTask('<%= task.name %>')">☒</button>
               <% }) %>
               
-          <% } %>
-          <li class="addElement">
-            <div class="blockContainer">
-              <p title="Add Task" onclick="addTask()">New Task +</p>
+            <% } %>
+            <li class="addElement">
+              <a title="Add Task" onclick="addTask()">New Task +</a>
+            </li>
+          </ul>
+          <div id="newTaskForm" class="formWindow">
+            <!-- newStudentForm content -->
+            <div class="formWindow-content">
+              <span class="close">&times;</span>
+              <ul>
+                <li class="formTitle">Add a Task</li>
+                <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
+                <li>
+                  <label for="cars">Select a priority</label>
+                  <select id="newTaskPriority">
+                    <option value=0>Low</option>
+                    <option value=1>Medium</option>
+                    <option value=2>High</option>
+                  </select>
+                </li>
+                <li><a class="formSubmitButton" id="newTaskSubmit" onclick="addTaskPost()">Add</a></li>
+                
+              </ul>
             </div>
-          </li>
-        </ul>
-        <div id="newTaskForm" class="formWindow">
-          <!-- newStudentForm content -->
-          <div class="formWindow-content">
-            <span class="close">&times;</span>
-            <ul>
-              <li class="formTitle">Add a Task</li>
-              <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
-              <li>
-                <label for="cars">Select a priority</label>
-                <select>
-                   <option value=0>Low</option>
-                   <option value=1>Medium</option>
-                   <option value=2>High</option>
-                </select>
-              </li>
-              <li style="text-align: center;"><a class="formSubmitButton" id="newTaskSubmit" onclick="">Add</a></li>
-              
-            </ul>
           </div>
         </div>
         </div>
@@ -238,7 +201,7 @@
     var formElement;
 
     // opens student profile in same tab when a student is clicked
-    function studentSelected(element, studentID){
+    function studentSelected(studentID){
       window.location.href ="/admin/student-profile/" + studentID;
     }
 
@@ -261,6 +224,14 @@
       formElement.style.display = "block";
     }
 
+    function addTaskPost(){
+      var theUrl = window.location.href+'/addtask';
+      var data = "name=" + document.getElementById("newTaskName").value +
+      "&priority=" +  document.getElementById("newTaskPriority");
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
+
     // When the user clicks on <span> (x), close the modal
     closeButton[0].onclick = function() {
       formElement.style.display = "none";
@@ -272,8 +243,29 @@
       formElement.style.display = "none";
     };
 
-    function hideActivity(element, activity){
+    function hideActivity(element){
 
+    }
+
+    function editActivity(id){
+      //take new input
+      editActivityPost(id, "crab battle");
+    }
+
+    function editActivityPost(id,name){
+      theUrl = window.location.href+'/editactivity';
+      data = "id=" + id + "&name=" + name;
+      callback = reloadIt;
+
+      httpPutAsync(theUrl, data, callback);
+    }
+
+    function deleteActivity(element){
+      theUrl = window.location.href+'/deleteactivity';
+      data = "id=" + element;
+      callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
     }
 
     // When the user clicks anywhere outside of the form window, close it
@@ -282,6 +274,7 @@
         formElement.style.display = "none";
       }
     }
+
 
     //generate perameters for post and call post
     function callPostStu(){
@@ -308,7 +301,6 @@
       "&enroll=" + 1 ;
       var callback = reloadIt;
 
-      console.log(data);
       httpPostAsync(theUrl, data, callback);
     }
 
@@ -330,11 +322,17 @@
     }
     function taskComplete(element, task){
       checkboxClicked(element);
-      $(element.parentElement).slideUp();
-      $(element).slideUp();
+      $(element.parentElement.getElementsByTagName("button")).animate({width:'toggle'},200);
+      $(element.parentElement.getElementsByTagName("p")).animate({color: "#EEEEEE"},200);
+
+      $(element.parentElement).animate({backgroundColor: "#5E895F"}, 200);
+
+      
       setTimeout(function(){
-        element.parentElement.style.display = "none";
-      }, 1000);
+        $(element.parentElement).slideUp("fast");
+        $(element).animate({bottom: "200px"}, 100);
+        //element.parentElement.style.display = "none";
+      }, 500);
     }
   </script>
 </html>

@@ -33,7 +33,6 @@
   
   /* Style the accordion panel. Note: hidden by default */
   .accordionPanel {
-    height: auto !important;
     margin: 0 auto;
     margin-bottom: 20px;
     padding-top: 20px;
