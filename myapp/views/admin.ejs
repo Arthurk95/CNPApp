@@ -242,7 +242,11 @@
     }
 
     function hideActivity(element){
+      theUrl = window.location.href+'/hideactivity';
+      data = "id=" + element;
+      callback = reloadIt;
 
+      httpPutAsync(theUrl, data, callback);
     }
 
     function closeForm(){
