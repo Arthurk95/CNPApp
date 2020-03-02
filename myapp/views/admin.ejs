@@ -41,22 +41,18 @@
           <!-- New Student Form -->
           <div id="newStudentForm" class="formWindow">
             <div class="formWindow-content">
-              <span class="close">&times;</span>
+              <span class="close" onclick="closeForm()">&times;</span>
               
               <ul>
-                <li class="formTitle">
-                  <table style="width: 100%;">
-                    <tr>
-                      <td>Add a Student</td>
-                      <td class="switchLabel"><label for="fullDay" class="switchLabel">Full Day</label></td>
-                      <td class="switchColumn">
-                        <label class="switch">
-                          <input type="checkbox" id="fullDay" name="fullDay" checked="true">
-                          <span class="slider round"></span>
-                        </label>
-                      </td>
-                    </tr>
-                  </table>
+                <li class="formTitleWithSwitch">
+                  <p>Add a Student</p>
+                  <div class="rightAlignFormElement">
+                    <label for="fullDay" class="switchLabel">Full Day</label>
+                    <label class="switch">
+                      <input type="checkbox" id="fullDay" name="fullDay" checked="true">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
                 </li>
                 <li><input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"></li>
                 <li><input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name"></li>
@@ -96,7 +92,7 @@
                 <% } %>
                   <p><%= activity.ActivityName %></p>
                   <button class="greenButton" onclick="hideActivity('<%= activity.ActivityId %>')"><i class="far fa-eye"></i></button>
-                  <button class="yellowButton" onclick="editActivity('<%= activity.ActivityId %>')"><i class="far fa-edit"></i></button>
+                  <button class="yellowButton" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
                   <button class="redButton" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
                 </li>
               <% }) %>
@@ -106,11 +102,23 @@
             </li>
           </ul>
 
+          <div id="editActivityForm" class="formWindow">
+            <div class="formWindow-content">
+              <span class="close" onclick="closeForm()">&times;</span>
+              <ul>
+                <li class="formTitle">Edit Activity</li>
+                <li><p id="editActivityID" style="display: none"></p></li>
+                <li><input type="text" id="editActivityInput" value=""></li>
+                <li><a class="formSubmitButton" onclick="passEditActToPost()">Save Changes</a></li>
+              </ul>
+            </div>
+          </div>
+
 
             <!-- New Activity Form -->
           <div id="newActivityForm" class="formWindow">
             <div class="formWindow-content">
-              <span class="close">&times;</span>
+              <span class="close" onclick="closeForm()">&times;</span>
               <ul>
                 <li class="formTitle">Add an Activity</li>
                 <li><input type="text" id="newActivityName" placeholder="Activity Name"></li>
@@ -147,7 +155,7 @@
           <div id="newTaskForm" class="formWindow">
             <!-- newStudentForm content -->
             <div class="formWindow-content">
-              <span class="close">&times;</span>
+              <span class="close" onclick="closeForm()">&times;</span>
               <ul>
                 <li class="formTitle">Add a Task</li>
                 <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
@@ -233,24 +241,26 @@
       httpPostAsync(theUrl,data,callback);
     }
 
-    // When the user clicks on <span> (x), close the modal
-    closeButton[0].onclick = function() {
-      formElement.style.display = "none";
-    };
-    closeButton[1].onclick = function() {
-      formElement.style.display = "none";
-    };
-    closeButton[2].onclick = function() {
-      formElement.style.display = "none";
-    };
-
     function hideActivity(element){
 
     }
 
-    function editActivity(id){
+    function closeForm(){
+      formElement.style.display = "none";
+    }
+    function editActivity(id, oldName){
       //take new input
-      editActivityPost(id, "crab battle");
+      formElement = document.getElementById("editActivityForm");
+      formElement.style.display = "block";
+      formElement.querySelector("#editActivityID").innerHTML = id;
+      formElement.querySelector("#editActivityInput").value = oldName;
+    }
+
+    function passEditActToPost(){
+      var actID = formElement.querySelector("#editActivityID").innerHTML;
+      var newName = formElement.querySelector("#editActivityInput").value;
+
+      editActivityPost(actID, newName);
     }
 
     function editActivityPost(id,name){
