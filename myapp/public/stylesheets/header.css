@@ -38,6 +38,7 @@
   display: none;
   background: var(--darkGray1);
   height: 150px;
+  margin-bottom: 30px;
 }
 
 /* Div full of header links <a> tags */
