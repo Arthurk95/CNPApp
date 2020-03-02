@@ -14,12 +14,6 @@
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
-    <script>
-      function initStudentListVars(){
-        document.getElementById("students").style.display = "flex";
-      }
-    </script>
   </head>
   <body>
     <div id="accordion">
@@ -29,16 +23,18 @@
             <% if (students.length > 0) { %>
               <% students.forEach((student, index) => { %>
                 <% studentSpl = student.StudentName.split(" "); %>
-                  <li class="halfWidth" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
+                  <li class="profileList clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
                     <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
-                      <img>
-                      <p><%= student.StudentName %></p>
+                    <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                    <p><%= student.StudentName %></p>
                   </li>
-                  <script>initStudentListVars();</script>
                 <% }) %>
             <% } %> 
-              <li class="addElement">
-                <a title="Add Student" onclick="addStudent()">New Student +</a>
+              <li title="Add Student" class="profileList clickableItem addElement" onclick="addStudent()">
+                <div class="addIcon">
+                  <i class="fas fa-plus"></i>
+                </div>
+                <p>New Student</p>
               </li> 
           </ul>
 
@@ -103,8 +99,8 @@
                 </li>
               <% }) %>
             <% } %>
-            <li class="addElement">
-              <a title="Create Activity" onclick="addActivity()">New Activity +</a>
+            <li onclick="addActivity()" class="addElement clickableItem">
+              <p title="Create Activity" >New Activity +</p>
             </li>
           </ul>
 
