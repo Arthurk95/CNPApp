@@ -70,7 +70,7 @@ var session = require('express-session');
       if (err) throw err;
       con.query(activity_query, function (err, aQuery) {
         if (err) throw err;
-        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery, tasks: task_list, compTasks: tasks_complete});
+        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: task_list, compTasks: tasks_complete});
       });
     });
   });
