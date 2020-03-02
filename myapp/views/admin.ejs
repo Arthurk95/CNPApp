@@ -170,6 +170,7 @@
                   <% } else { %>
                     <button class="redButton" onclick="changePriority('<%= task.name %>')">🏳</button>
                   <% } %>
+                  <button onclick="deleteTask('<%= task.name %>')">☒</button>
               <% }) %>
               
           <% } %>
@@ -200,7 +201,28 @@
           </div>
         </div>
         </div>
+      <h3 class="accordion">Maintenance Log</h3>
+        <div class="accordionPanel">
+          <ul id="comptasksList" class="ulList">
+            <% if (compTasks.length > 0) { %> 
+              <table class="customTable grid-item">          
+                <tbody>
+                  <% compTasks.forEach((task, index) => {%>
+                  <tr>
+                    <td class="task">
+                      <%= task.name %>
+                    </td>
+                    <td class="timeStamp">
+                      <%= task.stamp %>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+            <% } %>
+          </ul>
+        </div>
     </div>
+
     
   </body>
   <script>
@@ -300,11 +322,12 @@
     }
 
     function changePriority(task) {
-      console.log(task);
-
-      
+      console.log(task);      
     }
 
+    function deleteTask(task) {
+      <!--- Code here to remove task from database-->
+    }
     function taskComplete(element, task){
       checkboxClicked(element);
       $(element.parentElement).slideUp();

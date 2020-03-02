@@ -30,19 +30,25 @@ var session = require('express-session');
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
     var task_list = []
-    var task1 = {name:'Mow lawn', priority: 1, complete: 0}
-    var task2 = {name:'Fix slide', priority: 2, complete: 0}
-    var task3 = {name:'Replace chains on swing', priority: 0, complete: 0}
-    var task4 = {name:'Clean coupe', priority: 1, complete: 0}
-    task_list.push(task1, task2, task3, task4)
+    var task1 = {name:'Mow lawn', priority: 1, complete: 0, stamp: ""}
+    var task2 = {name:'Fix slide', priority: 2, complete: 0, stamp: ""}
+    var task3 = {name:'Replace chains on swing', priority: 0, complete: 0, stamp: ""}
+    var task4 = {name:'Clean coupe', priority: 1, complete: 0, stamp: ""}
+    task_list.push(task1, task2, task3, task4);
+    var tasks_complete = []
+    var task5 = {name:'Wash patio', priority: 1, complete: 1, stamp: "02/29/2020"}
+    var task6 = {name:'Feed Chickens', priority: 2, complete: 1, stamp: "02/29/2020"}
+    tasks_complete.push(task5, task6);
+
     console.log(task_list);
+    console.log(tasks_complete);
     /* var student_query = "CALL ShowAllStudents();"; */ 
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
       console.log(sQuery);
       con.query(activity_query, function (err, aQuery) {
         if (err) throw err;
-        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery, tasks: task_list});
+        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery, tasks: task_list, compTasks: tasks_complete});
       });
     });
   });
