@@ -16,10 +16,10 @@ var session = require('express-session');
   });
 
   router.post('/addactivity', function(req, res){
-    var sql = "CALL CreateNewActivity('" + req.body.name + "');";
+    var sql = "CALL CreateNewActivity('" + req.body.name + ", " + req.body.helper + "');";
     con.query(sql, function (err, result) {
-        if (err) res.send("failure to add");
-        res.send("added succesfully");
+        if (err) res.end("failure to add");
+        res.end("added succesfully");
     });
   });
 
