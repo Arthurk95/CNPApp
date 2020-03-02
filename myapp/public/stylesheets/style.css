@@ -270,7 +270,7 @@ input{
   border-radius: 8px;
   border-style: none;
   outline: none;
-  padding: 10px 0px 10px 15px;
+  padding: 10px 15px 10px 15px;
   font-size: 1.2em;
   -webkit-user-select: text;
 }
@@ -280,6 +280,24 @@ input::selection{
 }
 
 input:focus{
+  box-shadow: inset 0px 0px 4px var(--selectedStudentColor);
+}
+
+textarea{
+  border-style: none;
+  width: 95%;
+  outline: none;
+  font-size: 1.2em;
+  padding: 10px 15px;
+  box-shadow: inset 0px 0px 3px 0px var(--darkGray2);
+  border-radius: 10px;
+  max-width: 100%;
+  min-height: 3em;
+  resize: none;
+  overflow-y: auto;
+}
+
+textarea:focus{
   box-shadow: inset 0px 0px 4px var(--selectedStudentColor);
 }
 

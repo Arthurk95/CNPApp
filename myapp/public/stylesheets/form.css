@@ -78,6 +78,7 @@ HTML Formatting:
     box-shadow: inset 0px 0px 4px 2px var(--adminColor);
   }
 
+
   /* Any button on the form, probably a submit button */
   .formSubmitButton{
     transition: 0.2s;
@@ -134,6 +135,9 @@ HTML Formatting:
     }
     .close{
       font-size: 80px;
+    }
+    .formWindow textarea{
+      font-size: 2em;
     }
   }
 

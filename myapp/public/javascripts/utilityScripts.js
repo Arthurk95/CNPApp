@@ -39,3 +39,8 @@ function checkStudentDayType(element, dayType){
       element.classList += " stripedBackground";
     }
   }
+
+  function textAreaAdjust(textArea) {
+    textArea.style.height = "1px";
+    textArea.style.height = (textArea.style.fontSize + textArea.scrollHeight)+"px";
+  }
