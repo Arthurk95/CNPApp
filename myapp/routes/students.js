@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var activity_query = "SELECT * FROM Activities ORDER BY ActivityName;";
+  var activity_query = "CALL PullUnhiddenActivities";
   /* Students of current day */
   var student_query = "CALL PullUnhiddenStudents();";
 
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     console.log(sQuery);
     con.query(activity_query, function (err, aQuery) {
       if (err) throw err;
-      res.render('students.ejs', {title: 'Student Page', students: sQuery[0],  activities: aQuery});
+      res.render('students.ejs', {title: 'Student Page', students: sQuery[0],  activities: aQuery[0]});
     })
   })
 });
