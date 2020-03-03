@@ -5,6 +5,7 @@
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
         <link rel='stylesheet' href='/stylesheets/custom-dropdown.css' />
+        <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
@@ -62,32 +63,25 @@
                     <div class="twoColumns">
                         <div>
                             <p class="listTitle">Activities</p>
-                            <ul class="activitiesList">
-                                <% if(activities.length > 0) { %>
-                                    <% activities.forEach((activity, index) => { %>
-                                    <li><%= activity.ActivityName %></li>
-                                    <% }) %>
-                                <% } else { %>
-                                    <li>No activities today</li>
-                                <% } %>
+                            <ul id="activitiesList" class="activitiesList">
+                                
                             </ul>
                         </div>
-                        <div class="dropdown">
-                            <p class="activeOption" onclick="openDropdown(this);">Option 1</p>
-                            <div class="dropdownOptions">
-                                <a class="selectedOption" onclick="selectedOption(this)">Option 1</a>
-                                <a onclick="selectedOption(this)">Option 2</a>
-                                <a onclick="selectedOption(this)">Option 3</a>
-                            </div>
+                        <div id="" class="dropdown">
+                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                            <a class="selectedOption" onclick="selectedOption(this)">Option 1</a>
+                            <a onclick="selectedOption(this)">Option 2</a>
+                            <a onclick="selectedOption(this)">Option 3</a>
                         </div>
                     </div>
                     
                 </div>
                 <div class="rightPanel">
                     <ul id="listOfStudents" class="studentsList" >
-                    <% if (students.length > 0) { %>
-                        <% students.forEach((student, index) => { %>
-                            <li id="student<%= index %>" onclick="showStudentData(this, '<%= student.StudentName %>', <%= student.StudentId %>, <%= index %>)"><%= student.StudentName %></li>
+                    <% if (reports.length > 0) { %>
+                        <script>passToJS(<%- JSON.stringify(reports) %>);</script>
+                        <% reports.forEach((report, index) => { %>
+                            <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
                         <% }) %>
                     <% } else { %>
                         <li>No Students</li>
@@ -105,6 +99,6 @@
             </div>
             
         </div>
-        <script src="/javascripts/emailerScripts.js"></script>
+        <script>initEmailerVariables();</script>
     </body>
 </html>
