@@ -109,9 +109,10 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background-color: var(--darkGray2);
+  background: rgb(17,15,51);
+  background: linear-gradient(197deg, rgba(17,15,51,1) 0%, rgba(31,39,50,1) 54%, rgba(18,24,29,1) 100%);
+  min-height: 100vh;
 }
-
 a{
   cursor: pointer;
 }
