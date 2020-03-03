@@ -5,6 +5,8 @@
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
         <script src="/javascripts/utilityScripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
 
     </head>
     <body>
@@ -56,12 +58,13 @@
             <div id="stepTwo" class="stepTwo">
                 <div class="leftPanel">
                     <p id="stepTwoTitle" class="title"></p>
+
                 </div>
                 <div class="rightPanel">
                     <% if (students.length > 0) { %>
-                    <ul id="listOfStudents" class="simpleList" >
+                    <ul id="listOfStudents" class="studentsList" >
                         <% students.forEach((student, index) => { %>
-                            <li id="student<%= index %>" onclick="showStudentData(this, <%= student.StudentName %>, <%= student.StudentId %>, <%= index %>)"><%= student.StudentName %></li>
+                            <li id="student<%= index %>" onclick="showStudentData(this, '<%= student.StudentName %>', <%= student.StudentId %>, <%= index %>)"><%= student.StudentName %></li>
                         <% }) %>
                     <% } else { %>
                         <li>No Students</li>

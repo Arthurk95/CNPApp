@@ -73,6 +73,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding-right: 30px;
+    margin-top: 50px;
 }
 
 .bottomSection .verticalList{
@@ -101,30 +102,31 @@
 }
 
 .stepTwo div{
+    overflow: hidden;
     border-radius: 10px;
     box-shadow: 0px 0px 10px var(--darkGray1);
-    
     background: var(--lightGray2);
-    padding: 15px;
 }
 
 .stepTwo .leftPanel{
-    width: 60%;
+    width: 68%;
 }
 
 .stepTwo .rightPanel{
+    padding: 15px;
     width: 25%;
 }
 
 
-.simpleList{
+.studentsList{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 20px;
 }
 
-.simpleList li{
+.studentsList li{
     cursor: pointer;
     width: 100%;
     max-width: 300px;

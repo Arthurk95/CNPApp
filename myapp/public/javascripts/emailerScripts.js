@@ -4,6 +4,7 @@ var stepTwo = document.getElementById("stepTwo");
 var stepThree = document.getElementById("stepThree");
 var lastSelectedStudent = document.getElementById("student0");
 var stepTwoTitle = document.getElementById("stepTwoTitle");
+var studentsList = document.getElementById("listOfStudents");
 var currentStudentIndex = 0;
 
 
@@ -13,7 +14,6 @@ stepTwoTitle.innerHTML = lastSelectedStudent.innerHTML;
 
 function toNextStep(){
     currentStep++;
-    console.log(stepOne);
     stepChange();
 }
 
