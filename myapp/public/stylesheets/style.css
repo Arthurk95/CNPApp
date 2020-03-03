@@ -117,6 +117,29 @@ a{
   cursor: pointer;
 }
 
+/* Apply to elements that you want to re-color individually 
+    <p class="lightText red right">Hello</p>
+    The above has light text, red BG, and is oriented right*/
+.halfWidth{width: 50% !important;}
+.thirdWidth{width: 30% !important;}
+
+.shadow{box-shadow: inset 0px 0px 3px var(--darkGray1) !important;}
+.customTable .darkText{color: var(--darkGray2) !important;}
+
+.lightGray{ background: var(--lightGray2) !important;}
+.darkGray{background: var(--darkGray2) !important;}
+.green{background: var(--green2) !important;}
+.blue{background: var(--blue1) !important;}
+.red{background: var(--red2) !important;}
+.yellow{background: var(--yellow2) !important;}
+
+.lightText{color: var(--lightGray2)};
+.darkText{color: var(--darkGray2)};
+
+.right{float: right;}
+.left{float: left;}
+
+
 /* Use this for any buttons */
 .customButton{
   padding: 8px 25px;
