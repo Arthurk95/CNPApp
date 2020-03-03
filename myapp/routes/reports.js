@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
         });
         recurseDailies(Students,dailyStudents,i+1,res);
         if(i == (dailyStudents[0].length) - 1){
-          bottomLayer(res, Students);
+          bottomLayer(res, Students,con);
         }
       });
     }
@@ -40,9 +40,9 @@ router.get('/', function(req, res, next) {
     }
     
   }
+  
 });
-function bottomLayer(res,Students){
-  console.log(Students);
+function bottomLayer(res,Students,con){
   res.render('reports.ejs', { title: 'CNP Daily Report', reports: Students });
 }
   module.exports = router;
