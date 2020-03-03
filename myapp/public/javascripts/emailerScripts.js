@@ -1,16 +1,17 @@
 var currentStep = 1;
-var stepOne = document.getElementById("stepOne");
-var stepTwo = document.getElementById("stepTwo");
-var stepThree = document.getElementById("stepThree");
-var lastSelectedStudent = document.getElementById("student0");
-var stepTwoTitle = document.getElementById("stepTwoTitle");
-var studentsList = document.getElementById("listOfStudents");
+var stepOne;
+var stepTwo;
+var stepThree;
+var lastSelectedStudent;
+var stepTwoTitle;
+var studentsList;
+var activities;
+var reports;
 var currentStudentIndex = 0;
 
 
 // Init step two data for first student
-lastSelectedStudent.classList += " selected";
-stepTwoTitle.innerHTML = lastSelectedStudent.innerHTML;
+
 
 function toNextStep(){
     currentStep++;
@@ -47,19 +48,53 @@ function showStep(step){
     step.style.display = "flex";
 }
 
-function showStudentData(listElement, studentName, studentId, index){
+function showStudentData(listElement, report, index){
     currentStudentIndex = index;
     lastSelectedStudent.classList.remove("selected");
     listElement.classList += "selected";
     lastSelectedStudent = listElement;
-    populateData(studentName, studentId);
+    populateData(report);
 }
 
-function populateData(studentName, id){
-    stepTwoTitle.innerHTML = studentName;
+function populateData(report){
+    stepTwoTitle.innerHTML = report.name;
+    
+    $(activities).empty();
+
+    for(var i = 0; i < report.listOfActivities.length; i++){
+        var li = document.createElement("li");
+        li.innerHTML = report.listOfActivities[i].ActivityName;
+        activities.appendChild(li);
+    }
 }
 
 function studentApproved(id){
     lastSelectedStudent.classList.remove("selected");
     lastSelectedStudent.classList += (" approved");
+}
+
+function passToJS(r){
+    reports = r;
+}
+
+function initEmailerVariables(){
+    stepOne = document.getElementById("stepOne");
+    stepTwo = document.getElementById("stepTwo");
+    stepThree = document.getElementById("stepThree");
+    lastSelectedStudent = document.getElementById("student0");
+    stepTwoTitle = document.getElementById("stepTwoTitle");
+    studentsList = document.getElementById("listOfStudents");
+    activities = document.getElementById("activitiesList");
+    lastSelectedStudent.classList += " selected";
+    stepTwoTitle.innerHTML = lastSelectedStudent.innerHTML;
+
+    initActivities();
+}
+
+function initActivities(){
+    for(var i = 0; i < reports[0].listOfActivities.length; i++){
+        var li = document.createElement("li");
+        li.innerHTML = reports[0].listOfActivities[i].ActivityName;
+        activities.appendChild(li);
+    }
 }
