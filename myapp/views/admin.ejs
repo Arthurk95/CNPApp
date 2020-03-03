@@ -91,7 +91,7 @@
                 <li>
                 <% } %>
                   <p><%= activity.ActivityName %></p>
-                  <button class="greenButton" onclick="hideActivity('<%= activity.ActivityId %>')"><i class="far fa-eye"></i></button>
+                  <button class="greenButton noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
                   <button class="yellowButton" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
                   <button class="redButton" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
                 </li>
@@ -153,7 +153,7 @@
                   <% } else { %>
                     <button class="redButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>
                   <% } %>
-                  <button onclick="deleteTask('<%= task.name %>')">☒</button>
+                  <button class="darkRedButton" onclick="deleteTask('<%= task.name %>')"><i class="far fa-trash-alt"></i></button>
               <% }) %>
               
             <% } %>
@@ -250,12 +250,25 @@
       httpPostAsync(theUrl,data,callback);
     }
 
-    function hideActivity(element){
-      theUrl = window.location.href+'/hideactivity';
-      data = "id=" + element;
-      callback = reloadIt;
+    function hideActivity(element, id, hidden){
+      if(hidden){
+        theUrl = window.location.href+'/unhideactivity';
+      }
+      else{ theUrl = window.location.href+'/hideactivity'; }
+      data = "id=" + id;
+      toggleActivityHide(element.parentElement)
+      callback = doNothing;
 
       httpPutAsync(theUrl, data, callback);
+    }
+
+    function toggleActivityHide(element){
+      if(element.getElementsByClassName("blackAndWhite").length > 0){
+        $(element).find('*').removeClass('blackAndWhite');
+      }
+      else{
+        $(element).find('*').addClass('blackAndWhite');
+      }
     }
 
     function closeForm(){
