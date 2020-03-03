@@ -29,6 +29,7 @@ var session = require('express-session');
         if (err) res.end();
         res.end();
     });
+    
   });
 
   router.put('/hideactivity', function(req, res){
@@ -81,6 +82,7 @@ var session = require('express-session');
         res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: task_list, compTasks: tasks_complete});
       });
     });
+    
   });
 
   // Access student profile page

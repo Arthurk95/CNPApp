@@ -6,11 +6,10 @@ var session = require('express-session');
 var bodyParser = require("body-parser");
 var logger = require('morgan');
 var sql = require('mysql');
-
 var fs = require('fs'), configPath = './config.json';//credentials file
 var parsed = JSON.parse(fs.readFileSync(configPath, 'UTF-8'));
-con = sql.createConnection({"host":parsed.host,"user":parsed.user,"password":parsed.password,"database":parsed.database});
-
+con = sql.createPool({connectionLimit : 100,"host":parsed.host,"user":parsed.user,"password":parsed.password,"database":parsed.database});
+weatherdata = "http://api.openweathermap.org/data/2.5/weather?id=" + parsed.sacramentoid + "&appid=" + parsed.weatherkey;
 var indexRouter = require('./routes/index');
 var studentsRouter = require('./routes/students');
 var adminRouter = require('./routes/admin');
@@ -19,10 +18,6 @@ var emailerRouter = require('./routes/emailer');
 
 var app = express();
 
-con.connect(function(err){
-  if (err) throw err;
- console.log("connected!");
-});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
