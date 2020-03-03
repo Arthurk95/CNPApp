@@ -4,6 +4,7 @@
     <nav><%- include header.ejs %></nav>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
+    <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
     <link rel='stylesheet' href='/stylesheets/accordian.css' />
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
@@ -186,14 +187,14 @@
         <div class="accordionPanel">
           <ul id="comptasksList" class="ulList">
             <% if (compTasks.length > 0) { %> 
-              <table class="customTable grid-item">          
+              <table class="customTable halfWidth">          
                 <tbody>
                   <% compTasks.forEach((task, index) => {%>
                   <tr>
-                    <td class="task">
+                    <td class="left">
                       <%= task.name %>
                     </td>
-                    <td class="timeStamp">
+                    <td class="right green thirdWidth">
                       <%= task.stamp %>
                     </td>
                   </tr>
