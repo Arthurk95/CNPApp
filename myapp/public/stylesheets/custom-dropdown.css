@@ -1,26 +1,22 @@
 .dropdown {
     position: relative;
     display: inline-block;
-    width: 200px;
+    width: 10vw;
 }
 
-.dropdownOptions{
-    z-index: 1;
+.dropdown a{
+    width: 100%;
     display: none;
     position: absolute;
-    background-color: var(--lightGray2);
-    border: 1px solid var(--lightGray3);
-}
-
-.dropdownOptions a{
-    display: block;
     text-decoration: none;
     background: var(--lightGray2);
     color: var(--darkgray3);
-    padding: 6px 10px;
+    padding: 6px 0 6px 10px;
+    margin-left: -10px;
+    font-size: 1.5em;
 }
 
-.dropdownOptions a:hover{
+.dropdown a:hover{
     cursor: pointer;
     background: var(--blue1);
     color: var(--lightGray1);
@@ -35,15 +31,31 @@
 }
 
 .dropdown .selectedOption{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: block !important;
+    top: 0px;
     background: var(--blue1);
     color: var(--lightGray1);
 }
 
-.dropdown .activeOption::after{
-    float: right;
-    content: '>';
-    font-size: 20px;
-    background: var(--lightGray)
+
+.showOption{
+    display: block !important;
 }
 
-.showOptions{display: block;}
+.dropdown .arrow{
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 6px 10px 6px 10px;
+    text-align: center;
+    color: var(--lightGray2);
+    background: var(--blue2);
+}
+
+.dropdown .arrowRotated{
+    transform: rotate(180deg);
+}
