@@ -58,11 +58,19 @@
             <div id="stepTwo" class="stepTwo">
                 <div class="leftPanel">
                     <p id="stepTwoTitle" class="title"></p>
-
+                    <ul class="activitiesList">
+                        <% if(activities.length > 0) { %>
+                            <% activities.forEach((activitiy, index) => { %>
+                            <li><%= activity.ActivityName %></li>
+                            <% }) %>
+                        <% } else { %>
+                            <li>No activities today</li>
+                        <% } %>
+                    </ul>
                 </div>
                 <div class="rightPanel">
-                    <% if (students.length > 0) { %>
                     <ul id="listOfStudents" class="studentsList" >
+                    <% if (students.length > 0) { %>
                         <% students.forEach((student, index) => { %>
                             <li id="student<%= index %>" onclick="showStudentData(this, '<%= student.StudentName %>', <%= student.StudentId %>, <%= index %>)"><%= student.StudentName %></li>
                         <% }) %>
