@@ -4,6 +4,7 @@
     <head>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
+        <link rel='stylesheet' href='/stylesheets/custom-dropdown.css' />
         <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
@@ -58,15 +59,29 @@
             <div id="stepTwo" class="stepTwo">
                 <div class="leftPanel">
                     <p id="stepTwoTitle" class="title"></p>
-                    <ul class="activitiesList">
-                        <% if(activities.length > 0) { %>
-                            <% activities.forEach((activitiy, index) => { %>
-                            <li><%= activity.ActivityName %></li>
-                            <% }) %>
-                        <% } else { %>
-                            <li>No activities today</li>
-                        <% } %>
-                    </ul>
+                    <div class="twoColumns">
+                        <div>
+                            <p class="listTitle">Activities</p>
+                            <ul class="activitiesList">
+                                <% if(activities.length > 0) { %>
+                                    <% activities.forEach((activity, index) => { %>
+                                    <li><%= activity.ActivityName %></li>
+                                    <% }) %>
+                                <% } else { %>
+                                    <li>No activities today</li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <p class="activeOption" onclick="openDropdown(this);">Option 1</p>
+                            <div class="dropdownOptions">
+                                <a class="selectedOption" onclick="selectedOption(this)">Option 1</a>
+                                <a onclick="selectedOption(this)">Option 2</a>
+                                <a onclick="selectedOption(this)">Option 3</a>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="rightPanel">
                     <ul id="listOfStudents" class="studentsList" >
