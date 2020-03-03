@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <nav><%- include header.ejs %></nav>
+    <head>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+    </head>
+    <body>
+        <div id="editor"></div>
+    </body>
+    <script>
+        var quill = new Quill('#editor', {
+            modules: {
+                toolbar: true
+            },
+            theme: 'snow'
+            });
+
+    </script>
+</html>
