@@ -1,0 +1,151 @@
+.emailerContainer{
+    width: 85%;
+    margin: 0 auto;
+}
+
+.emailerContainer .title{
+    font-size: 3em;
+    padding: 30px;
+    margin-top: 0;
+    background: var(--yellow3);
+    color: var(--lightGray1);
+}
+
+.centeredElement{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 50%;
+}
+
+.nextStepButton{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+    height: 80px;
+    background: var(--green2);
+    align-self: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: -1px 2px 4px var(--darkGray4);
+}
+
+.nextStepButton:hover{
+    cursor: pointer;
+}
+
+.nextStepButton:active{
+    filter: brightness(95%);
+    box-shadow: -1px 1px 2px var(--darkGray4);
+}
+
+.nextStepButton p{
+    margin: 0;
+    flex-grow: 2;
+    font-size: 2.3em;
+    color: white;
+    padding-left: 30px;
+}
+
+.nextStepButton i{
+    font-size: 60px;
+    line-height: 80px;
+    color: white;
+}
+
+.nextStepButton .buttonIcon{
+    background: var(--green3);
+    width: 40%;
+    text-align: center;
+}
+
+.stepOne{
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px var(--darkGray1);
+    background: var(--lightGray2);
+    width: 100%;
+}
+
+.bottomSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 30px;
+}
+
+.bottomSection .verticalList{
+    width: 50%;
+}
+
+.verticalList{
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.verticalList li{
+    margin-bottom: 30px;
+    align-self: stretch;
+    justify-items: stretch;
+}
+
+/* Styling for the Second step - 
+    Adding/approving each student's information to their emails */
+.stepTwo {
+    display: none;
+    margin: 0 auto;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.stepTwo div{
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px var(--darkGray1);
+    
+    background: var(--lightGray2);
+    padding: 15px;
+}
+
+.stepTwo .leftPanel{
+    width: 60%;
+}
+
+.stepTwo .rightPanel{
+    width: 25%;
+}
+
+
+.simpleList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.simpleList li{
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    padding: 6px 0px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.5em;
+    background: var(--lightGray3);
+    color: var(--darkgray2);
+    align-items: center;
+}
+
+.selected {
+    background: var(--blue1) !important;
+    color: var(--lightGray1) !important;
+    box-shadow: inset 0px 0px 4px var(--darkGray3);
+}
+
+.approved{
+    background: var(--green3) !important;
+    color: var(--lightGray1) !important;
+    box-shadow: inset 0px 0px 4px var(--darkGray3);
+}
