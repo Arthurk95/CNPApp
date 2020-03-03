@@ -78,21 +78,28 @@ CREATE TABLE Schedual (
     PRIMARY KEY (StudentId)
 );
 
-CREATE TABLE Administer (
-	AdminId INT NOT NULL AUTO_INCREMENT,
-    AdminName VARCHAR(255) NOT NULL,
-    AdminPass VARCHAR(255) NOT NULL,
-    AdminImg VARCHAR(255),
-    AdminEmail VARCHAR(255) NOT NULL,
-    AdminEmailPass VARCHAR(255) NOT NULL,
-    PRIMARY KEY (AdminId)
-);
-
-CREATE TABLE AdminNotes(
-	AdminId INT NOT NULL,
-	CurrentTime DATETIME NOT NULL DEFAULT (CURRENT_DATE),
-    AdminNoteId INT NOT NULL,
-    NoteContent VARCHAR(512),
-    FOREIGN KEY (AdminId) REFERENCES Administer(AdminId),
-    PRIMARY KEY (AdminId, AdminNoteId)
-);
+CREATE TABLE Tasks (
+	TaskId INT NOT NULL AUTO_INCREMENT,
+	Priority INT(2) NOT NULL,
+	NoteContent varchar(512),
+	Completed BOOL NOT NULL DEFAULT 0,
+	CompletedTime DATETIME,
+	PRIMARY KEY (TaskId)
+  );
+  
+  CREATE TABLE cnp_data.Weather (
+  weatherId INT NOT NULL AUTO_INCREMENT,
+  dateTimes TIMESTAMP,
+  main VARCHAR(45) NULL,
+  description VARCHAR(45) NULL,
+  temp FLOAT NULL,
+  feels_like FLOAT NULL,
+  temp_min FLOAT NULL,
+  temp_max FLOAT NULL,
+  pressure INT NULL,
+  humidity INT NULL,
+  wind_speed FLOAT NULL,
+  wind_deg INT NULL,
+  wind_gust FLOAT NULL,
+  PRIMARY KEY (weatherId)
+  );
