@@ -30,7 +30,7 @@
   --green2: #9AE1A4;
   --green3: #83BB8B;
   --green4: #64936B;
-  --green5: #4A6F50;
+  --green5: #2F4633;
 
   --blue1: #8A9EC8;
   --blue2: #66779C;
@@ -210,7 +210,11 @@ a{
   input{
     padding-top: 15px !important;
     padding-bottom: 15px !important;
-    font-size: 2em !important;
+    font-size: 2.5em !important;
+  }
+
+  textarea{
+    font-size: 2.5em !important;
   }
 
   /* Make the button collapse under "No students today" text */

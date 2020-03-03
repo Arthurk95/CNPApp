@@ -73,7 +73,7 @@
                   <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
                   <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                 </ul>
-                <li style="text-align: center;"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
+                <li><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
               </ul>
             </div>
           </div>
@@ -120,9 +120,18 @@
             <div class="formWindow-content">
               <span class="close" onclick="closeForm()">&times;</span>
               <ul>
-                <li class="formTitle">Add an Activity</li>
+                <li class="formTitleWithSwitch">
+                  <p>Add an Activity</p>
+                  <div class="rightAlignFormElement">
+                    <label for="Helper" class="switchLabel">Helper</label>
+                    <label class="switch">
+                      <input type="checkbox" id="helper" name="Helper" checked="false">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </li>
                 <li><input type="text" id="newActivityName" placeholder="Activity Name"></li>
-                <li style="text-align: center;"><a class="formSubmitButton" id="newActivitySubmit" onclick="callPostAct()">Create</a></li>
+                <li><a class="formSubmitButton" id="newActivitySubmit" onclick="callPostAct()">Create</a></li>
               </ul>
             </div>
           </div>
@@ -320,9 +329,10 @@
     }
 
     function callPostAct(){
-
+      var helper = convertBoolToInt(document.getElementById("helper").checked);
       theUrl = window.location.href+'/addactivity';
-      data = "name=" + document.getElementById("newActivityName").value;
+      data = "name=" + document.getElementById("newActivityName").value +
+            "&helper=" + helper;
       callback = reloadIt;
 
       httpPostAsync(theUrl, data, callback);

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <nav><%- include header.ejs %></nav>
+    <head>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel='stylesheet' href='/stylesheets/emailer.css' />
+        <script src="/javascripts/utilityScripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+
+    </head>
+    <body>
+        <div id="mainEmailerContainer" class="emailerContainer">
+            <div id="stepOne" class="stepOne">
+                <p class="title">Step 1: Email Template</p>
+                <ul class="verticalList">
+                    <li>
+                        <label for="summary">Summary</label>
+                        <textarea name="summary"></textarea>
+                    </li>
+                    <li>
+                        <label for="amSnack">AM Snack</label>
+                        <textarea name="amSnack"></textarea>
+                    </li>
+                    <li>
+                        <label for="lunch">Lunch</label>
+                        <textarea name="lunch"></textarea>
+                    </li>
+                </ul>
+
+                <div class="bottomSection">
+                    <ul class="verticalList">
+                        <li>
+                            <label for="rem1">Reminder 1</label>
+                            <select name="rem1">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="rem2">Reminder 2</label>
+                            <select name="rem2">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <div class="nextStepButton" onclick="toNextStep()">
+                        <p>Next</p>
+                        <div class="buttonIcon">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="stepTwo" class="stepTwo">
+                <div class="leftPanel">
+                    <p id="stepTwoTitle" class="title"></p>
+
+                </div>
+                <div class="rightPanel">
+                    <% if (students.length > 0) { %>
+                    <ul id="listOfStudents" class="studentsList" >
+                        <% students.forEach((student, index) => { %>
+                            <li id="student<%= index %>" onclick="showStudentData(this, '<%= student.StudentName %>', <%= student.StudentId %>, <%= index %>)"><%= student.StudentName %></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li>No Students</li>
+                    <% } %>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="stepThree" class="stepThree">
+                <div class="leftPanel">
+
+                </div>
+                <div class="rightPanel">
+                </div>
+            </div>
+            
+        </div>
+        <script src="/javascripts/emailerScripts.js"></script>
+    </body>
+</html>
