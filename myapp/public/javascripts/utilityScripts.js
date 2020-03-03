@@ -40,7 +40,43 @@ function checkStudentDayType(element, dayType){
     }
   }
 
-  function textAreaAdjust(textArea) {
+function textAreaAdjust(textArea) {
     textArea.style.height = "1px";
     textArea.style.height = (textArea.style.fontSize + textArea.scrollHeight)+"px";
-  }
+}
+
+function openDropdown(activeOption){
+    var content = activeOption.parentElement.getElementsByClassName("dropdownOptions");
+
+    console.log(content);
+    if(content[0].classList.contains("showOptions")){
+        content[0].classList.remove("showOptions");
+    }
+    else {content[0].classList += " showOptions";}
+}
+
+function selectedOption(option){
+    var dropdown = option.parentElement.parentElement;
+    dropdown.getElementsByClassName("activeOption")[0].innerHTML = option.innerHTML;
+
+    var otherOptions = dropdown.getElementsByTagName("a");
+    for(var i = 0; i < otherOptions.length; i++){
+        if(otherOptions[i].classList.contains("selectedOption")){
+            otherOptions[i].classList.remove("selectedOption");
+        }
+    }
+    option.classList += " selectedOption";
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('.activeOption')) {
+      var dropdowns = document.getElementsByClassName("dropdownOptions");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains("showOptions")) {
+          openDropdown.classList.remove("showOptions");
+        }
+      }
+    }
+}
