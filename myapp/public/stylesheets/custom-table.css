@@ -5,7 +5,7 @@
     margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
-    filter: drop-shadow(0px 3px 2px var(--darkGray1));
+    filter: drop-shadow(0px 3px 2px var(--darkGray3));
 }
 
 .customTable thead th{
@@ -30,10 +30,13 @@
 
 .customTable tr{
     color: var(--darkGray2);
-    background: var(--green2);
+    background: var(--lightGray1);
     border-bottom: 3px solid var(--darkGray3);
 }
 
 .customTable tr:last-child{
     border-bottom: none;
 }
+
+
+

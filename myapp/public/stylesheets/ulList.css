@@ -53,13 +53,16 @@
     border: none;
     outline: none;
     color: var(--darkGray2);
+    transition: 0.1s box-shadow linear;
 }
 
 .ulList li button:hover{
-    transition: 0.1s box-shadow linear;
     cursor: pointer;
     box-shadow: inset 0px 0px 4px 1px var(--darkGray3);
+}
 
+.ulList li button:active{
+    box-shadow: inset 0px 0px 5px 2px var(--darkGray3);
 }
 
 .ulList li .greenButton{
@@ -72,6 +75,11 @@
 
 .ulList li .redButton{
     background: var(--red2) !important;
+}
+
+.ulList li .darkRedButton{
+    color: var(--lightGray2);
+    background: var(--red3) !important;
 }
 
 .ulList .addElement{
@@ -161,6 +169,9 @@
     filter: grayscale(100%);
 }
 
+.noBlackAndWhiteHover:hover {
+    filter: grayscale(0%) !important;
+}
 
 /* Striped background for a halfday student*/
 .stripedBackground{

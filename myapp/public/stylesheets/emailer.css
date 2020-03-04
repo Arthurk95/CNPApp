@@ -9,6 +9,13 @@
     margin-top: 0;
     background: var(--yellow3);
     color: var(--lightGray1);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;;
+}
+
+#stepTwoTitle{
+    background: var(--blue1);
+    margin-bottom: 20px;
 }
 
 .centeredElement{
@@ -61,7 +68,6 @@
 }
 
 .stepOne{
-    overflow: hidden;
     border-radius: 10px;
     box-shadow: 0px 0px 10px var(--darkGray1);
     background: var(--lightGray2);
@@ -98,25 +104,23 @@
     display: none;
     margin: 0 auto;
     justify-content: space-around;
-    align-items: flex-start;
-}
-
-.stepTwo div{
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px var(--darkGray1);
-    background: var(--lightGray2);
 }
 
 .stepTwo .leftPanel{
+    box-shadow: 0px 0px 10px var(--darkGray1);
+    background: var(--lightGray2);
     width: 68%;
+    border-radius: 10px;
 }
 
 .stepTwo .rightPanel{
+    box-shadow: 0px 0px 10px var(--darkGray1);
+    background: var(--lightGray2);
     padding: 15px;
     width: 25%;
+    overflow: hidden;
+    border-radius: 10px;
 }
-
 
 .studentsList{
     display: flex;
@@ -140,14 +144,53 @@
     align-items: center;
 }
 
+/* Student is selected in the studentsList */
 .selected {
     background: var(--blue1) !important;
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
 
+/* Student's email was approved */
 .approved{
     background: var(--green3) !important;
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
+}
+
+.activitiesList{
+    margin: 0 20px;
+    padding: 20px;
+    display: flex;
+    border-radius: 3px;
+    border: 1px solid var(--green3);
+    background: #d7d7d7;
+    box-shadow: inset 0px 0px 4px var(--darkGray3);
+}
+
+.activitiesList li{
+    padding: 4px 10px;
+    background: var(--red2);
+    border-radius: 20px;
+    font-size: 1em;
+    color: var(--lightGray1);
+    margin-right: 10px;
+}
+
+.twoColumns{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.listTitle{
+    position: relative;
+    text-align: center;
+    width: 90px;
+    margin: 0;
+    margin-left: 20px;
+    font-size: 1.2em;
+    margin-bottom: 0px;
+    padding: 6px;
+    color: var(--darkGray3);
 }

@@ -32,3 +32,5 @@ function logit(datum){
 function reloadIt(datum){
     location.reload(true);
 }
+
+function doNothing(datum){}

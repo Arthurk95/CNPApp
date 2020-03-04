@@ -32,6 +32,8 @@
     <script>
       let current_url = document.location;
       var aTags = document.getElementsByTagName("a");
+      var links = document.getElementById("links");
+      links.style.display = "none";
       for(var i = 0; i < aTags.length; i++){
         if(aTags[i].href == current_url){
           aTags[i].classList += " currentPage";
@@ -39,22 +41,37 @@
       }
 
       function openNav(){
-        var links = document.getElementsByClassName("links");
-        
-        if(links[0].style.display == "flex"){
-          $('body > :not(#mobileHeader)').show(); //hide all nodes directly under the body
-          $('#mobileHeader').prependTo('body');
-        
-          $("#links").slideUp("fast");
-          //links[0].style.display = "none";
+        if(mobileHeaderHidden()){ 
+          showMobileHeader();
         }
         else{
-          $("#links").slideDown("fast");
-          links[0].style.display = "flex";
-          $('body > :not(#mobileHeader)').hide(); //hide all nodes directly under the body
-          $('#mobileHeader').appendTo('body');
+          hideMobileHeader();
         }
+      }
 
+      // returns true if mobile header is hidden
+      function mobileHeaderHidden(){
+        return (links.style.display === "none");
+      }
+
+      function showMobileHeader(){
+        $('body > :not(#mobileHeader)').slideUp("fast"); //hide all nodes directly under the body
+          
+          setTimeout(function(){
+            $("#links").slideDown("fast");
+            links.style.display = "flex";
+            $('#mobileHeader').appendTo('body');
+          }, 200);
+      }
+
+      function hideMobileHeader(){
+        $('#mobileHeader').prependTo('body');
+        
+        $("#links").slideUp("fast");
+        links.style.display == "none";
+        setTimeout(function(){
+          $('body > :not(#mobileHeader)').slideDown("fast"); //hide all nodes directly under the body
+        }, 200);
       }
 
       

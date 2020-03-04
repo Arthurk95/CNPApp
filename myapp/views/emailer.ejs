@@ -4,6 +4,8 @@
     <head>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
+        <link rel='stylesheet' href='/stylesheets/custom-dropdown.css' />
+        <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
@@ -58,13 +60,28 @@
             <div id="stepTwo" class="stepTwo">
                 <div class="leftPanel">
                     <p id="stepTwoTitle" class="title"></p>
-
+                    <div class="twoColumns">
+                        <div>
+                            <p class="listTitle">Activities</p>
+                            <ul id="activitiesList" class="activitiesList">
+                                
+                            </ul>
+                        </div>
+                        <div id="" class="dropdown">
+                            <a class="selectedOption" onclick="selectedOption(this)">Option 1</a>
+                            <a onclick="selectedOption(this)">Option 2</a>
+                            <a onclick="selectedOption(this)">Option 3</a>
+                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="rightPanel">
-                    <% if (students.length > 0) { %>
                     <ul id="listOfStudents" class="studentsList" >
-                        <% students.forEach((student, index) => { %>
-                            <li id="student<%= index %>" onclick="showStudentData(this, '<%= student.StudentName %>', <%= student.StudentId %>, <%= index %>)"><%= student.StudentName %></li>
+                    <% if (reports.length > 0) { %>
+                        <script>passToJS(<%- JSON.stringify(reports) %>);</script>
+                        <% reports.forEach((report, index) => { %>
+                            <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
                         <% }) %>
                     <% } else { %>
                         <li>No Students</li>
@@ -82,6 +99,6 @@
             </div>
             
         </div>
-        <script src="/javascripts/emailerScripts.js"></script>
+        <script>initEmailerVariables();</script>
     </body>
 </html>
