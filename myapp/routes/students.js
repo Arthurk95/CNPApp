@@ -29,7 +29,6 @@ router.post('/addstudentActivity', function(req, res){
     var recent = new Date(result[0].dateTimes);
     var now = new Date();
     now.setMinutes(now.getMinutes()-30);
-    console.log(recent,now);
     if(recent < now){
       request(weatherdata).then(body=> {parseWeather(body,con)});
     }

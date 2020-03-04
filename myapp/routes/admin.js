@@ -14,6 +14,24 @@ var session = require('express-session');
         res.end();
     });
   });
+  router.put('/savestudent', function(req, res){
+    var sql = "CALL UpdateStudent('" + req.body.id + "', '" + req.body.name + "', '" + req.body.birthday + "', '" + req.body.G1Name + "', '" + req.body.G1EMail + 
+              "', '" + req.body.G1Phone + "', '" + req.body.G2Name + "', '" + req.body.G2EMail + "', '" + req.body.G2Phone + "', '" + req.body.mon + 
+              "', '" + req.body.tue + "', '" + req.body.wed + "', '" + req.body.thu + "', '" + req.body.fri + "', '" + 0 + "', '" + 0 + "', '" + req.body.fullday + 
+              "', '" + 1 + "');";
+              console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+  router.post('/deletestudent', function(req, res){
+    var sql = "CALL DeleteStudent('" + req.body.id + "');";
+    con.query(sql, function (err, result) {
+        if (err) throw(err);
+        res.end();
+    });
+  });
 
   router.post('/addactivity', function(req, res){
     var sql = "CALL CreateNewActivity('" + req.body.name + ", " + req.body.helper + "');";
@@ -100,6 +118,10 @@ var session = require('express-session');
     
     con.query(student_query, function (err, result) {
       if (err) throw err;
+      if(result[0].length==0){
+        console.log("hi");
+        res.redirect('/admin');
+      }
       //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
       //strip away OkPacket, create selected_student as new array
       [selected_student] = result[0];
