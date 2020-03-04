@@ -46,10 +46,15 @@ CREATE TABLE DailyActivites (
 CREATE TABLE Behavior (
 	StudentId INT NOT NULL,
     CurrentDate DATE NOT NULL,
-    SleepingPattern VARCHAR(255),
-    EatingHabits VARCHAR(255),
-    Attitude VARCHAR(255),
-    RestRoomActivity VARCHAR(255),
+    SleepingPattern VARCHAR(45),
+	SleepingPatternNote VARCHAR(255),
+    EatingHabits VARCHAR(45),
+	EatingHabitsNote VARCHAR(255),
+    Attitude VARCHAR(45),
+	AttitudeNote VARCHAR(255),
+    RestRoomActivity VARCHAR(45),
+	RestRoomActivityNumber INT,
+	RestRoomActivityNote VARCHAR(255)
     FOREIGN KEY (StudentId, CurrentDate) REFERENCES ClassSession(StudentId, CurrentDate),
     PRIMARY KEY(StudentId, CurrentDate)
 );
@@ -102,4 +107,42 @@ CREATE TABLE Tasks (
   wind_deg INT NULL,
   wind_gust FLOAT NULL,
   PRIMARY KEY (weatherId)
+  );
+  
+  CREATE TABLE TemplateObject (
+	TemplateId INT NOT NULL AUTO_INCREMENT,
+	Hidden BOOL NOT NULL DEFAULT 0,
+	NameOf VARCHAR(45),
+	CategoryOne VARCHAR(45),
+    CategoryTwo VARCHAR(45),
+    CategoryThree VARCHAR(45),
+    CategoryFour VARCHAR(45),
+	CategoryFive VARCHAR(45),
+	PRIMARY KEY (TemplateId)
+  );
+  
+  CREATE TABLE RemindersObject (
+	TemplateId INT NOT NULL AUTO_INCREMENT,
+	Hidden BOOL NOT NULL DEFAULT 0,
+	NameOf VARCHAR(45),
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (TemplateId)
+  );
+
+CREATE TABLE DailySummary (
+	Dates TIMESTAMP NOT NULL,
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (Dates)
+  );
+  
+  CREATE TABLE DailyAmFood (
+	Dates TIMESTAMP NOT NULL,
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (Dates)
+  );
+  
+  CREATE TABLE DailyLunch(
+	Dates TIMESTAMP NOT NULL,
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (Dates)
   );
