@@ -1,3 +1,18 @@
+/* Custom dropdown that uses <div> and <a> tags 
+Must include:
+        <script src="/javascripts/utilityScripts.js"></script> 
+        
+    HTML Format:
+
+    <div id="" class="dropdown">
+        <a class="selectedOption" onclick="selectedOption(this)">Option 1</a>
+        <a onclick="selectedOption(this)">Option 2</a>
+        <a onclick="selectedOption(this)">Option 3</a>
+        <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+    </div>
+*/
+
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -46,8 +61,8 @@
 
 .dropdown .arrow{
     position: absolute;
+    pointer-events: none;
     right: 0;
-    z-index: 1;
     font-size: 1.5em;
     margin: 0;
     padding: 6px 10px 6px 10px;
