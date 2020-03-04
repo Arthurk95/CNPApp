@@ -7,11 +7,13 @@
         <link rel='stylesheet' href='/stylesheets/profile.css' />
         <link rel='stylesheet' href='/stylesheets/form.css' />
         <link rel='stylesheet' href='/stylesheets/switch.css' />
-
+        <link rel='stylesheet' href='/stylesheets/birthday.css' />
+        
+        
         <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
+        
     </head>
     <body>
 
@@ -84,7 +86,7 @@
               <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
                 <div class="file-field input-field hiddenUpload">
                   <input id="file-input" name="myImage" type="file" onchange="form.submit()">
-                </div>
+                  </div>
               </form>
             </li>
             <li>
@@ -96,82 +98,56 @@
                 </tr>
                 <tr>
                   <td class="labelColumn"><label>BIRTHDAY</label></td>
-                  <td class="valueColumn"><input class="hiddenInput" ><input id="studentbirthday" value="<%- student.Birthdate %>" style="visibility: hidden; position: absolute;"></a>
-                  <script type="text/javascript">
-                    $(document).ready(function() {
+                  <td class="valueColumn"><input class="hiddenInput" >
+                    <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none; position: absolute;"></a>
                 
-                   $(function() {
-                    $( "#fullDate" ).datepicker({
-                    onClose: function(dateText, inst) {
-                       $('#day').val( dateText.split('/')[2] );
-                       $('#month').val( dateText.split('/')[1] );
-                   $('#birthdateyear').val( dateText.split('/')[0] );
-                    }
-                 });
-                });
-                }); 
-                </script> 
-                <div class="demo">
+
+                    <div class="demo">
                   year:<select name="year" id="birthdateyear" onchange="genDays()">
-                    <script>
-                      var birthday = new Date(document.getElementById('studentbirthday').value);
-                      var date = new Date();
-                      for(var i = 0; i < 15; ++i){
-                        
-                        var option = document.createElement("option");
-                        option.text = date.getFullYear() - i;
-                        document.getElementById('birthdateyear').add(option);
-                        if(option.text == birthday.getFullYear()){
-                          document.getElementById('birthdateyear').selectedIndex = i;
-                        }
-                      }
-                    </script>
                     </select>
 
                   month:<select name="month" id="birthdatemonth" onchange="genDays()">
-                    <script>
-                      var date = new Date(); 
-                      var birthday = new Date(document.getElementById('studentbirthday').value);
-                      for(var i = 0; i < 12; ++i){
-                        var option = document.createElement("option");
-                        option.text = i + 1;
-                        document.getElementById('birthdatemonth').add(option);
-                        if(option.text == (birthday.getMonth() + 1)){
-                          document.getElementById('birthdatemonth').selectedIndex = i;
-                        }
-                      }
-                    </script>
                   </select>
 
                   day:<select name="day" id="birthdateday">
                     <script>
-                      genDays();
-                      function genDays(){
-                        var year = document.getElementById("birthdateyear").value;
-                        var month = document.getElementById("birthdatemonth").value;
-                        if(month == 12){
-                          year = year + 1;
-                          month = 0;
-                        }
-                        var date = new Date(); 
-                        var birthday = new Date(document.getElementById('studentbirthday').value);
-                        var daysinmonth = new Date(year, month, 0).getDate();
-                        for(var i = 0; i < daysinmonth; ++i){
-                          var option = document.createElement("option");
-                          option.text = i + 1;
-                          document.getElementById('birthdateday').add(option);
-                          if(option.text == (birthday.getDate())){
-                            document.getElementById('birthdateday').selectedIndex = i;
-                          }
-                        }
-                      }
+                      
                     </script>
                   </select>
-                  
-                  </div></td>
-                  
+                  </div>
+                </td>
                 </tr>
               </table>
+              <div id="birthdayDropdown" class="birthdayContainer width100">
+                <ul id="year" class="birthdayList width20">
+                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">2010</li>
+                </ul>
+                <ul id="month" class="birthdayList width10">
+                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">Jan</li>
+                  <li>Jan</li>
+                  <li>Feb</li>
+                  <li>Mar</li>
+                  <li>Apr</li>
+                  <li>May</li>
+                  <li>Jun</li>
+                  <li>Jul</li>
+                  <li>Aug</li>
+                  <li>Sep</li>
+                  <li>Oct</li>
+                  <li>Nov</li>
+                  <li>Dec</li>
+                </ul>
+                <ul id="day" class="birthdayList width10">
+                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">1</li>
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                  <li>4</li>
+                  <li>5</li>
+                  <li>6</li>
+                </ul>
+              </div>
+              
             </li>
             <li class="profileButtons">
               <a onclick="saveStudent()" class="saveButton">Save Changes</a>
@@ -184,12 +160,62 @@
 
 
     <script>
-      
       $( function() {
         $( "#tabs" ).tabs();
       } );
     </script>
 
+
+    <script>
+       $(document).ready(function() {
+                
+          $(function() {
+            $( "#fullDay" ).datepicker({
+              onClose: function(dateText, inst) {
+                $('#day').getElementById('selected').innerHTML = dateText.split('/')[2];
+                $('#month').getElementById('selected').innerHTML = dateText.split('/')[1];
+                $('#birthdateyear').getElementById('selected').innerHTML = dateText.split('/')[0];
+              }
+            });
+          });
+        }); 
+
+        var birthday = new Date(document.getElementById('studentbirthday').value);
+        var date = new Date();
+        yearDrop = document.getElementById('year');
+        for(var i = 0; i < 15; ++i){
+          var option = document.createElement("li");
+          option.innerHTML = date.getFullYear() - i;
+          yearDrop.appendChild(option);
+          if(option.innerHTML == birthday.getFullYear()){
+            yearDrop.getElementById('selected').innerHTML = option.innerHTML;
+          }
+        }
+        
+        genDays();
+        function genDays(){
+          var month = document.getElementById('month').getElementsByClassName('selectedValue')[0].innerHTML;
+          //var month = monthList;
+          
+          var daysinmonth = new Date(year, month, 0).getDate();
+          clearList(document.getElementById('day'));
+          for(var i = 1; i <= daysinmonth; ++i){
+            var option = document.createElement("li");
+            option.innerHTML = i;
+            document.getElementById('day').appendChild(option);
+            if(option.innerHTML == (birthday.getDate())){
+              document.getElementById('day').innerHTML = i;
+            }
+          }
+        }
+
+        function clearList(list){
+          var items = list.getElementsByTagName("li");
+          for(var i = 1; i < items.length; i++){
+            list.remove(items[i]);
+          }
+        }
+    </script>
     <script>
       var days = document.getElementById("schedule").getElementsByTagName("li");
       var length = days.length;
@@ -271,4 +297,6 @@
         else checkBox.checked = false;
       }
     </script>
+    
+    <script src="/javascripts/birthdayDropdown.js"></script>
 </html>
