@@ -92,11 +92,84 @@
               <table class="studentTable">
                 <tr>
                   <td class="labelColumn"><label>NAME</label></td>
-                  <td class="valueColumn"><input class="hiddenInput" value="<%- student.StudentName %>"></td>
+                  <td class="valueColumn"><input class="hiddenInput" id="studentName" value="<%- student.StudentName %>"></td>
                 </tr>
                 <tr>
                   <td class="labelColumn"><label>BIRTHDAY</label></td>
-                  <td class="valueColumn"><input class="hiddenInput" value="<%- student.Birthdate %>"></td>
+                  <td class="valueColumn"><input class="hiddenInput" ><input id="studentbirthday" value="<%- student.Birthdate %>" style="visibility: hidden; position: absolute;"></a>
+                  <script type="text/javascript">
+                    $(document).ready(function() {
+                
+                   $(function() {
+                    $( "#fullDate" ).datepicker({
+                    onClose: function(dateText, inst) {
+                       $('#day').val( dateText.split('/')[2] );
+                       $('#month').val( dateText.split('/')[1] );
+                   $('#birthdateyear').val( dateText.split('/')[0] );
+                    }
+                 });
+                });
+                }); 
+                </script> 
+                <div class="demo">
+                  year:<select name="year" id="birthdateyear" onchange="genDays()">
+                    <script>
+                      var birthday = new Date(document.getElementById('studentbirthday').value);
+                      var date = new Date();
+                      for(var i = 0; i < 15; ++i){
+                        
+                        var option = document.createElement("option");
+                        option.text = date.getFullYear() - i;
+                        document.getElementById('birthdateyear').add(option);
+                        if(option.text == birthday.getFullYear()){
+                          document.getElementById('birthdateyear').selectedIndex = i;
+                        }
+                      }
+                    </script>
+                    </select>
+
+                  month:<select name="month" id="birthdatemonth" onchange="genDays()">
+                    <script>
+                      var date = new Date(); 
+                      var birthday = new Date(document.getElementById('studentbirthday').value);
+                      for(var i = 0; i < 12; ++i){
+                        var option = document.createElement("option");
+                        option.text = i + 1;
+                        document.getElementById('birthdatemonth').add(option);
+                        if(option.text == (birthday.getMonth() + 1)){
+                          document.getElementById('birthdatemonth').selectedIndex = i;
+                        }
+                      }
+                    </script>
+                  </select>
+
+                  day:<select name="day" id="birthdateday">
+                    <script>
+                      genDays();
+                      function genDays(){
+                        var year = document.getElementById("birthdateyear").value;
+                        var month = document.getElementById("birthdatemonth").value;
+                        if(month == 12){
+                          year = year + 1;
+                          month = 0;
+                        }
+                        var date = new Date(); 
+                        var birthday = new Date(document.getElementById('studentbirthday').value);
+                        var daysinmonth = new Date(year, month, 0).getDate();
+                        for(var i = 0; i < daysinmonth; ++i){
+                          var option = document.createElement("option");
+                          option.text = i + 1;
+                          document.getElementById('birthdateday').add(option);
+                          if(option.text == (birthday.getDate())){
+                            document.getElementById('birthdateday').selectedIndex = i;
+                          }
+                        }
+                      }
+                    </script>
+                  </select>
+                  
+                  </div></td>
+                  
                 </tr>
               </table>
             </li>
@@ -111,6 +184,7 @@
 
 
     <script>
+      
       $( function() {
         $( "#tabs" ).tabs();
       } );
@@ -134,23 +208,46 @@
       });
 
       function saveStudent(){
-        // do database-y stuff
-        
-        /*  HOW TO GET DAY VALUES: 
+        var temp = window.location.href.split('/');
+        var theUrl = temp[0];
+        for(var i = 1; i < temp.length - 2;++i){
+          theUrl = theUrl + '/' + temp[i];
+        }
+
+        var theUrl = theUrl + '/savestudent';
+        var birthdate = document.getElementById("birthdateyear").value + "-" + document.getElementById("birthdatemonth").value + "-" + document.getElementById("birthdateday").value;
+        var fullDay = convertBoolToInt(document.getElementById("fullDay").checked);
+        var data = "id=" + temp[temp.length - 1] +
           "&mon=" + isDaySelected("mon") + 
           "&tue=" + isDaySelected("tue") + 
           "&wed=" + isDaySelected("wed") + 
           "&thu=" + isDaySelected("thu") + 
           "&fri=" + isDaySelected("fri") + 
-        */
+          "&birthday=" + birthdate + "&fullday=" + fullDay + "&name=" + document.getElementById("studentName").value +
+          "&G1Name=" + document.getElementById("guardian1Name").value + 
+          "&G1EMail=" + document.getElementById("guardian1Email").value + 
+          "&G1Phone=" + document.getElementById("guardian1Number").value + 
+          "&G2Name=" + document.getElementById("guardian2Name").value + 
+          "&G2EMail=" + document.getElementById("guardian2Email").value + 
+          "&G2Phone=" + document.getElementById("guardian2Number").value;
 
-        // CheckBox:
-        // var fullDay = convertBoolToInt(document.getElementById("fullDay").checked);
+        var callback = reloadIt;
+
+        httpPutAsync(theUrl, data, callback);
       }
 
       function deleteStudent(button){
         if(button.classList.contains("deleteButtonActive")){
-          // do some database-y stuff
+          var temp = window.location.href.split('/');
+          var theUrl = temp[0];
+          for(var i = 1; i < temp.length - 2;++i){
+            theUrl = theUrl + '/' + temp[i];
+          }
+
+          var theUrl = theUrl + '/deletestudent';
+          var data = "id=" + temp[temp.length - 1];
+          var callback = goToAdmin;
+          httpPostAsync(theUrl, data, callback);
         }
 
         else {

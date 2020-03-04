@@ -14,6 +14,24 @@ var session = require('express-session');
         res.end();
     });
   });
+  router.put('/savestudent', function(req, res){
+    var sql = "CALL UpdateStudent('" + req.body.id + "', '" + req.body.name + "', '" + req.body.birthday + "', '" + req.body.G1Name + "', '" + req.body.G1EMail + 
+              "', '" + req.body.G1Phone + "', '" + req.body.G2Name + "', '" + req.body.G2EMail + "', '" + req.body.G2Phone + "', '" + req.body.mon + 
+              "', '" + req.body.tue + "', '" + req.body.wed + "', '" + req.body.thu + "', '" + req.body.fri + "', '" + 0 + "', '" + 0 + "', '" + req.body.fullday + 
+              "', '" + 1 + "');";
+              console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+  router.post('/deletestudent', function(req, res){
+    var sql = "CALL DeleteStudent('" + req.body.id + "');";
+    con.query(sql, function (err, result) {
+        if (err) throw(err);
+        res.end();
+    });
+  });
 
   router.post('/addactivity', function(req, res){
     var sql = "CALL CreateNewActivity('" + req.body.name + ", " + req.body.helper + "');";
@@ -58,10 +76,35 @@ var session = require('express-session');
   });
 
   router.post('/addtask', function(req, res){
-    var sql = "CALL CreateNewTask('" + req.body.name + "," + req.body.priority + "');";
+    var sql = "INSERT INTO cnp_data.Tasks (Priority,NoteContent) VALUES (" + req.body.priority + ",'" + req.body.name + "');";
+    console.log(sql);
     con.query(sql, function (err, result) {
-        if (err) res.send("failure to add");
-        res.send("added succesfully");
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.put('/changetask', function(req, res){
+    var sql = "UPDATE cnp_data.Tasks SET Priority = " + req.body.priority + " WHERE TaskId = " + req.body.id + ";";
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.put('/completetask', function(req, res){
+    var sql = "UPDATE cnp_data.Tasks SET Completed = " + req.body.completed + " WHERE TaskId = " + req.body.id + ";";
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.post('/deletetask', function(req, res){
+    var sql = "DELETE FROM cnp_data.Tasks WHERE TaskId = " + req.body.id + ";";
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
     });
   });
 
@@ -69,25 +112,26 @@ var session = require('express-session');
   router.get('/', function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "CALL ShowAllActivities();";
-    var task_list = []
-    var task1 = {name:'Mow lawn', priority: 1, complete: 0, stamp: ""}
-    var task2 = {name:'Fix slide', priority: 2, complete: 0, stamp: ""}
-    var task3 = {name:'Replace chains on swing', priority: 0, complete: 0, stamp: ""}
-    var task4 = {name:'Clean coupe', priority: 1, complete: 0, stamp: ""}
-    task_list.push(task1, task2, task3, task4);
-    var tasks_complete = []
-    var task5 = {name:'Wash patio', priority: 1, complete: 1, stamp: "02/29/2020"}
-    var task6 = {name:'Feed Chickens', priority: 2, complete: 1, stamp: "02/29/2020"}
-    tasks_complete.push(task5, task6);
-
-    console.log(task_list);
-    console.log(tasks_complete);
-    /* var student_query = "CALL ShowAllStudents();"; */ 
+    var task_query = "SELECT * FROM cnp_data.Tasks;";
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
       con.query(activity_query, function (err, aQuery) {
         if (err) throw err;
-        res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: task_list, compTasks: tasks_complete});
+        con.query(task_query,function (err, tQuery){
+          if(err) throw err;
+          var tasks = [], completed = [];
+          for(var i = 0;i < tQuery.length;++i){
+            if(tQuery[i].Completed == 0){
+              tasks.push(tQuery[i]);
+            }
+            else{
+              completed.push(tQuery[i]);
+            }
+          }
+          res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed});
+        }
+        );
+        
       });
     });
     
@@ -100,6 +144,9 @@ var session = require('express-session');
     
     con.query(student_query, function (err, result) {
       if (err) throw err;
+      if(result[0].length==0){
+        res.redirect('/admin');
+      }
       //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
       //strip away OkPacket, create selected_student as new array
       [selected_student] = result[0];

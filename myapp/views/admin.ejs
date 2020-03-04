@@ -152,16 +152,16 @@
             <% if (tasks.length > 0) { %>            
               <% tasks.forEach((task, index) => { %>
                 <li> 
-                  <a class="checkBox" onclick="taskComplete(this, '<%= task.name %>') "></a>
-                  <p><%= task.name %></p> 
-                  <% if (task.priority == 0) { %>
-                    <button class="greenButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>  
-                  <% } else if(task.priority == 1) { %>
-                    <button class="yellowButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>
+                  <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
+                  <p><%= task.NoteContent %></p> 
+                  <% if (task.Priority == 0) { %>
+                    <button class="greenButton" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
+                  <% } else if(task.Priority == 1) { %>
+                    <button class="yellowButton" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
                   <% } else { %>
-                    <button class="redButton" onclick="changePriority('<%= task.name %>')"><i class="far fa-flag"></i></button>
+                    <button class="redButton" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
                   <% } %>
-                  <button class="darkRedButton" onclick="deleteTask('<%= task.name %>')"><i class="far fa-trash-alt"></i></button>
+                  <button class="darkRedButton" onclick="deleteTask('<%= task.TaskId %>')"><i class="far fa-trash-alt"></i></button>
               <% }) %>
               
             <% } %>
@@ -199,7 +199,7 @@
                   <% compTasks.forEach((task, index) => {%>
                   <tr>
                     <td class="left">
-                      <%= task.name %>
+                      <%= task.NoteContent %>
                     </td>
                     <td class="right green thirdWidth">
                       <%= task.stamp %>
@@ -250,13 +250,6 @@
       formElement.style.display = "block";
     }
 
-    function addTaskPost(){
-      var theUrl = window.location.href+'/addtask';
-      var data = "name=" + document.getElementById("newTaskName").value +
-      "&priority=" +  document.getElementById("newTaskPriority");
-      var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
-    }
 
     function hideActivity(element, id, hidden){
       if(hidden){
@@ -359,11 +352,28 @@
       httpPostAsync(theUrl, data, callback);
     }
 
-    function changePriority(task) {
-      console.log(task);      
+    function changePriority(task,cur) {
+      theUrl = window.location.href+'/changetask';
+      data = "id=" + task + "&priority=" + (cur + 1) % 3;
+      callback = reloadIt; 
+      httpPutAsync(theUrl,data,callback);  
+    }
+
+    function addTaskPost(){
+      var theUrl = window.location.href+'/addtask';
+      var data = "name=" + document.getElementById("newTaskName").value +
+      "&priority=" +  document.getElementById("newTaskPriority").value;
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
     }
 
     function deleteTask(task) {
+      var helper = convertBoolToInt(document.getElementById("helper").checked);
+      theUrl = window.location.href+'/deletetask';
+      data = "id=" + task;
+      callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
     }
     function taskComplete(element, task){
       checkboxClicked(element);
@@ -378,6 +388,12 @@
         $(element).animate({bottom: "200px"}, 100);
         //element.parentElement.style.display = "none";
       }, 500);
+
+      theUrl = window.location.href+'/completetask';
+      data = "id=" + task + "&completed=" + 1;
+      callback = reloadIt; 
+      httpPutAsync(theUrl,data,callback); 
+
     }
   </script>
 </html>
