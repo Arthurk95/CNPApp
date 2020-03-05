@@ -26,7 +26,13 @@ router.post('/addstudentActivity', function(req, res){
 
   var sql = "SELECT dateTimes FROM Weather WHERE weatherID = (SELECT MAX(weatherID) FROM Weather);";
   con.query(sql, function(err,result){
-    var recent = new Date(result[0].dateTimes);
+    var recent = '';
+    if(result.length == 0){
+      recent = new Date(1970,02,01);
+    }
+    else{
+      recent = new Date(result[0].dateTimes);
+    }
     var now = new Date();
     now.setMinutes(now.getMinutes()-30);
     if(recent < now){
