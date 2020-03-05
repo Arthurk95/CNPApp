@@ -100,27 +100,12 @@
                   <td class="labelColumn"><label>BIRTHDAY</label></td>
                   <td class="valueColumn"><input class="hiddenInput" >
                     <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none; position: absolute;"></a>
-                
-
-                    <div class="demo">
-                  year:<select name="year" id="birthdateyear" onchange="genDays()">
-                    </select>
-
-                  month:<select name="month" id="birthdatemonth" onchange="genDays()">
-                  </select>
-
-                  day:<select name="day" id="birthdateday">
-                    <script>
-                      
-                    </script>
-                  </select>
-                  </div>
                 </td>
                 </tr>
               </table>
               <div id="birthdayDropdown" class="birthdayContainer width100">
                 <ul id="year" class="birthdayList width20">
-                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">2010</li>
+                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall" >2010</li>
                 </ul>
                 <ul id="month" class="birthdayList width10">
                   <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">Jan</li>
@@ -139,12 +124,6 @@
                 </ul>
                 <ul id="day" class="birthdayList width10">
                   <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">1</li>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>6</li>
                 </ul>
               </div>
               
@@ -167,22 +146,10 @@
 
 
     <script>
-       $(document).ready(function() {
-                
-          $(function() {
-            $( "#fullDay" ).datepicker({
-              onClose: function(dateText, inst) {
-                $('#day').getElementById('selected').innerHTML = dateText.split('/')[2];
-                $('#month').getElementById('selected').innerHTML = dateText.split('/')[1];
-                $('#birthdateyear').getElementById('selected').innerHTML = dateText.split('/')[0];
-              }
-            });
-          });
-        }); 
 
         var birthday = new Date(document.getElementById('studentbirthday').value);
         var date = new Date();
-        yearDrop = document.getElementById('year');
+        var yearDrop = document.getElementById('year');
         for(var i = 0; i < 15; ++i){
           var option = document.createElement("li");
           option.innerHTML = date.getFullYear() - i;
@@ -195,8 +162,8 @@
         genDays();
         function genDays(){
           var month = document.getElementById('month').getElementsByClassName('selectedValue')[0].innerHTML;
-          //var month = monthList;
-          
+          var year = document.getElementById('year').getElementsByClassName('selectedValue')[0].innerHTML;
+          month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
           var daysinmonth = new Date(year, month, 0).getDate();
           clearList(document.getElementById('day'));
           for(var i = 1; i <= daysinmonth; ++i){
@@ -204,7 +171,10 @@
             option.innerHTML = i;
             document.getElementById('day').appendChild(option);
             if(option.innerHTML == (birthday.getDate())){
-              document.getElementById('day').innerHTML = i;
+              var selected = document.createElement("li");
+              selected.innerHTML = i;
+              selected.classList.add("selectedValue", "insetShadowSmall", "borderRadiusSmall");
+              document.getElementById('day').appendChild(selected);
             }
           }
         }
@@ -212,7 +182,10 @@
         function clearList(list){
           var items = list.getElementsByTagName("li");
           for(var i = 1; i < items.length; i++){
-            list.remove(items[i]);
+            if(items[i].id == "selected"){}
+            else{
+              list.remove(items[i]);
+            }
           }
         }
     </script>
