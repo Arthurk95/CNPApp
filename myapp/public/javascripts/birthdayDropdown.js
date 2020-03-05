@@ -36,7 +36,8 @@ function changeSelectedValue(dropdown){
     var toReplace = dropdown.getElementsByClassName("selectedValue")[0];
 
     toReplace.innerHTML = clickedLi.innerHTML;
-    genDays();
+    if(dropdown.id != "day")
+        genDays();
     toggleDropdown(dropdown);
 }
 
