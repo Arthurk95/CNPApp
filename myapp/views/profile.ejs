@@ -146,7 +146,7 @@
 
 
     <script>
-
+        
         var birthday = new Date(document.getElementById('studentbirthday').value);
         var date = new Date();
         var yearDrop = document.getElementById('year');
@@ -159,35 +159,28 @@
           }
         }
         
-        genDays();
-        function genDays(){
+        genDays(1);
+        function genDays(a=0){
           var month = document.getElementById('month').getElementsByClassName('selectedValue')[0].innerHTML;
           var year = document.getElementById('year').getElementsByClassName('selectedValue')[0].innerHTML;
+          var day = document.getElementById('day');
           month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
           var daysinmonth = new Date(year, month, 0).getDate();
-          clearList(document.getElementById('day'));
+          $(day).empty();
+          var selected = document.createElement("li");
+          selected.classList.add("selectedValue", "insetShadowSmall", "borderRadiusSmall");
+          selected.innerHTML = 1;
+          day.appendChild(selected);
           for(var i = 1; i <= daysinmonth; ++i){
             var option = document.createElement("li");
             option.innerHTML = i;
-            document.getElementById('day').appendChild(option);
-            if(option.innerHTML == (birthday.getDate())){
-              var selected = document.createElement("li");
+            day.appendChild(option);
+            if(a==1 && option.innerHTML == (birthday.getDate())){
               selected.innerHTML = i;
-              selected.classList.add("selectedValue", "insetShadowSmall", "borderRadiusSmall");
-              document.getElementById('day').appendChild(selected);
             }
           }
         }
-
-        function clearList(list){
-          var items = list.getElementsByTagName("li");
-          for(var i = 1; i < items.length; i++){
-            if(items[i].id == "selected"){}
-            else{
-              list.remove(items[i]);
-            }
-          }
-        }
+      
     </script>
     <script>
       var days = document.getElementById("schedule").getElementsByTagName("li");
