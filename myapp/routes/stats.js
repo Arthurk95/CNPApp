@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var Students = [];
-  var daily_query = "CALL PullUnhiddenStudents();";
+  var daily_query = "CALL ShowAllStudentsInfo();";
   con.query(daily_query, function (err, dailyStudents) {
     if (err) throw err;
     recurseDailies(Students,dailyStudents,0,res);
@@ -23,5 +23,7 @@ function parseWeather(data,con){
   con.query(sql, function (err, result) {
   });
 }
+
+updateData();
 
 module.exports = router;
