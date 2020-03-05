@@ -445,3 +445,16 @@ textarea:focus{
   padding-left: 5px;
   padding-right: 5px;
 }
+
+/* stats */
+.chart{
+  color:white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+svg {
+  background-color: rgba(255, 255, 255, 0.9);
+}
