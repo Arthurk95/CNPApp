@@ -17,7 +17,7 @@ CALL DeleteTemplateObject(2);/*template number, deletes a template*/
 CALL HideActivity(1);/* hides activities by id number*/
 CALL HideTemplateObject(2);/*template id*/
 CALL HideReminderObject(4);/*reminder id*/
-CALL InsertDailyBehavior(3, "slept well", "ate a little", "was nice today", "did not use the restroom");/* put in student id and up to 255 character description for each activity in provided order*/
+CALL InsertRestroomActivityNumber(5)/*Student id*/
 CALL MarkStudentAbsent(39); /*student id*/
 CALL MarkStudentUnabsent(39); /*student id*/
 CALL PullAllHelper();/*pulls all helper activities*/
@@ -29,6 +29,7 @@ CALL PullStudentsAndDayType();/*displays all students and whether they are helf 
 CALL PullUnhiddenActivites();/* pull all activites that are not hidden by the user(Id, name)*/
 CALL PullUnhiddenHelper();/*pulls all unhidden helper activities*/
 CALL PullUnhiddenStudents();/*pulls students enrolled on current day, not absent and hides a student if they are only in morning section (Id, name), call this one for list of students to add activities to*/
+CALL PullRestRoomNumber();/*pulls all attending students number of bathroom breaks*/
 CALL ShowAllActivities();/*pulls full activity list*/
 CALL ShowAllRemindersObject();/*shows all reminder names and ids*/
 CALL ShowAllStudentsInfo();/*pulls all students and associated student info*/
