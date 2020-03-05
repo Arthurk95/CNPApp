@@ -427,6 +427,9 @@ textarea:focus{
   box-shadow: inset 0px 0px 5px var(--darkGray1);
 }
 
+
+/**** Statistics ****/
+
 /* Navigation styling */
 #navigation {
   display: flex;
