@@ -186,6 +186,10 @@ a{
 .right{float: right;}
 .left{float: left;}
 
+.lightPadding{padding: 5px !important;}
+.mediumPadding{padding: 10px !important;}
+.heavyPadding{padding: 15px !important;}
+
 .insetShadowSmall{box-shadow: inset 0px 0px 2px var(--darkGray2);}
 .insetShadowMedium{box-shadow: inset 0px 0px 6px 1px var(--darkGray2);}
 .insetShadowBig{box-shadow: inset 0px 0px 12px 2px var(--darkGray2);}
@@ -235,6 +239,18 @@ a{
 .lightGray1-border{border-color: var(--lightGray1) !important;}
 .lightGray2-border{border-color: var(--lightGray2) !important;}
 .lightGray3-border{border-color: var(--lightGray3) !important;}
+
+.smallFont{font-size: 0.8em !important;}
+.mediumFont{font-size: 1.5em !important;}
+.largeFont{font-size: 2em !important;}
+
+.flex{display: flex !important;}
+
+.flexRowSpaceAround{
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+}
 
 /* Use this for any buttons */
 .customButton{
