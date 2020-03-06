@@ -54,7 +54,7 @@ HTML Formatting:
   .formWindow-content li{
     display: flex;
     justify-content: center;
-    padding: 1vh 40px;
+    margin: 5px 0px;
   }
 
   /* Large title at the top of the form (first <li>) */
