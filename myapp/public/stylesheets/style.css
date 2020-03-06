@@ -246,10 +246,20 @@ a{
 
 .flex{display: flex !important;}
 
+.flexCenter{
+  display: flex !important;
+  justify-content: center !important;
+  align-content: center !important;
+}
+.flexSpaceBetween{
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
 .flexRowSpaceAround{
   display: flex;
-  justify-content: space-around;
-  align-content: center;
+  justify-content: space-around !important;
+  align-content: center !important;
 }
 
 /* Use this for any buttons */
@@ -386,7 +396,7 @@ input:focus{
 
 textarea{
   border-style: none;
-  width: 95%;
+  width: 100%;
   outline: none;
   font-size: 1.2em;
   padding: 10px 15px;
