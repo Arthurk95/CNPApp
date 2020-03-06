@@ -2,6 +2,7 @@
   position: relative;
   min-width: 72px; /* 70px + borders */
   display: inline-block;
+  font: normal Calibri, sans-serif;
 }
 .prettydropdown.loading {
   min-width: 0;
@@ -16,7 +17,6 @@
   box-sizing: content-box;
   color: #000;
   cursor: pointer;
-  font: normal 18px Calibri, sans-serif;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -196,3 +196,6 @@
 .prettydropdown ::-webkit-scrollbar-track-piece{
   background: none;
 }
+
+.mediumFontSize{ font-size: 1.5em;}
+.largeFontSize{ font-size: 2em;}
