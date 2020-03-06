@@ -45,6 +45,15 @@ router.get('/', function(req, res, next) {
   
 });
 function bottomLayer(res,Students,con){
-  res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students });
+  var Behaviors = [];
+  behavior1 = {name: 'AM Snack:', op1: 'All/Most', op2: 'Half', op3: 'None'}
+  behavior2 = {name: 'PM Snack:', op1: 'All/Most', op2: 'Half', op3: 'None'}
+  behavior3 = {name: 'Nap:', op1: 'Slept All/Most of nap', op2: 'Slept half/some', op3: 'Quiet time'}
+  behavior4 = {name: 'Academic play:', op1: 'Listened/Participated', op2: 'Somewhat listened/participated', op3: 'Trouble listening/participating'}
+  behavior5 = {name: 'Restroom Use:', op1: 'Great/No Accidents', op2: 'Accidents/Needed help', op3: 'Diapers'}
+  behavior6 = {name: 'Mood:', op1: 'Happy/Played Well', op2: 'Frustrations', op3: 'Tested Boundaries'}
+  Behaviors.push(behavior1, behavior2, behavior3, behavior4, behavior5, behavior6);
+  console.log(Behaviors);
+  res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors });
 }
   module.exports = router;
