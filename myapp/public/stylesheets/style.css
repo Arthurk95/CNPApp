@@ -32,15 +32,17 @@
   --green4: #64936B;
   --green5: #2F4633;
 
-  --blue1: #8A9EC8;
-  --blue2: #66779C;
-  --blue3: #505F80;
-  --blue4: #3B4760;
+  --blue1: #ACC5F8;
+  --blue2: #8A9EC8;
+  --blue3: #66779C;
+  --blue4: #505F80;
+  --blue5: #3B4760;
 
   --red1: #FFB1B7;
-  --red2: #C4757B;
-  --red3: #914A4F;
-  --red4: #5D2E32;
+  --red2: #DF868D;
+  --red3: #AD676C;
+  --red4: #834B4F;
+  --red5: #5C3236;
 
   /* Button Colors */
 
@@ -123,8 +125,53 @@ a{
 .halfWidth{width: 50% !important;}
 .thirdWidth{width: 30% !important;}
 
-.shadow{box-shadow: inset 0px 0px 3px var(--darkGray1) !important;}
+/* ----------- WITDH STUFF ----------- */
+.width10{width: 10% !important;}
+.width20{width: 20% !important;}
+.width30{width: 30% !important;}
+.width40{width: 40% !important;}
+.width50{width: 50% !important;}
+.width60{width: 60% !important;}
+.width70{width: 70% !important;}
+.width80{width: 80% !important;}
+.width90{width: 90% !important;}
+.width100{width: 100% !important;}
+
 .customTable .darkText{color: var(--darkGray2) !important;}
+
+/* ----------- BACKGROUND STUFF ----------- */
+.lightGray1-BG{background: var(--lightGray1) !important;}
+.lightGray2-BG{background: var(--lightGray2) !important;}
+.lightGray3-BG{background: var(--lightGray3) !important;}
+
+.darkGray1-BG{background: var(--darkGray1) !important;}
+.darkGray2-BG{background: var(--darkGray2) !important;}
+.darkGray3-BG{background: var(--darkGray3) !important;}
+
+.red1-BG{background: var(--red1) !important;}
+.red2-BG{background: var(--red2) !important;}
+.red3-BG{background: var(--red3) !important;}
+.red4-BG{background: var(--red4) !important;}
+.red5-BG{background: var(--red5) !important;}
+
+.blue1-BG{background: var(--blue1) !important;}
+.blue2-BG{background: var(--blue2) !important;}
+.blue3-BG{background: var(--blue3) !important;}
+.blue4-BG{background: var(--blue4) !important;}
+.blue5-BG{background: var(--blue5) !important;}
+
+.green1-BG{background: var(--green1) !important;}
+.green2-BG{background: var(--green2) !important;}
+.green3-BG{background: var(--green3) !important;}
+.green4-BG{background: var(--green4) !important;}
+.green5-BG{background: var(--green5) !important;}
+
+.yellow1-BG{background: var(--yellow1) !important;}
+.yellow2-BG{background: var(--yellow2) !important;}
+.yellow3-BG{background: var(--yellow3) !important;}
+.yellow4-BG{background: var(--yellow4) !important;}
+.yellow5-BG{background: var(--yellow5) !important;}
+
 
 .lightGray{ background: var(--lightGray2) !important;}
 .darkGray{background: var(--darkGray2) !important;}
@@ -139,6 +186,81 @@ a{
 .right{float: right;}
 .left{float: left;}
 
+.lightPadding{padding: 5px !important;}
+.mediumPadding{padding: 10px !important;}
+.heavyPadding{padding: 15px !important;}
+
+.insetShadowSmall{box-shadow: inset 0px 0px 2px var(--darkGray2);}
+.insetShadowMedium{box-shadow: inset 0px 0px 6px 1px var(--darkGray2);}
+.insetShadowBig{box-shadow: inset 0px 0px 12px 2px var(--darkGray2);}
+
+.shadowSmall{box-shadow: 0px 0px 2px var(--darkGray2);}
+.shadowMedium{box-shadow: 0px 0px 6px 1px var(--darkGray2);}
+.shadowBig{box-shadow: 0px 0px 12px 2px var(--darkGray2);}
+
+
+/* ----------- BORDER STUFF ----------- */
+.border1px{border: 1px solid;}
+.border2px{border: 2px solid;}
+.border5px{border: 5px solid;}
+
+.borderRadiusSmall{border-radius: 4px !important;}
+.borderRadiusMedium{border-radius: 8px !important;}
+.borderRadiusLarge{border-radius: 16px !important;}
+
+.red1-border{border-color: var(--red1) !important;}
+.red2-border{border-color: var(--red2) !important;}
+.red3-border{border-color: var(--red3) !important;}
+.red4-border{border-color: var(--red4) !important;}
+.red5-border{border-color: var(--red5) !important;}
+
+.blue1-border{border-color: var(--blue1) !important;}
+.blue2-border{border-color: var(--blue2) !important;}
+.blue3-border{border-color: var(--blue3) !important;}
+.blue4-border{border-color: var(--blue4) !important;}
+.blue5-border{border-color: var(--blue5) !important;}
+
+.green1-border{border-color: var(--green1) !important;}
+.green2-border{border-color: var(--green2) !important;}
+.green3-border{border-color: var(--green3) !important;}
+.green4-border{border-color: var(--green4) !important;}
+.green5-border{border-color: var(--green5) !important;}
+
+.yellow1-border{border-color: var(--yellow1) !important;}
+.yellow2-border{border-color: var(--yellow2) !important;}
+.yellow3-border{border-color: var(--yellow3) !important;}
+.yellow4-border{border-color: var(--yellow4) !important;}
+.yellow5-border{border-color: var(--yellow5) !important;}
+
+.darkGray1-border{border-color: var(--darkGray1) !important;}
+.darkGray2-border{border-color: var(--darkGray2) !important;}
+.darkGray3-border{border-color: var(--darkGray3) !important;}
+
+.lightGray1-border{border-color: var(--lightGray1) !important;}
+.lightGray2-border{border-color: var(--lightGray2) !important;}
+.lightGray3-border{border-color: var(--lightGray3) !important;}
+
+.smallFont{font-size: 0.8em !important;}
+.mediumFont{font-size: 1.5em !important;}
+.largeFont{font-size: 2em !important;}
+
+.flex{display: flex !important;}
+
+.flexCenter{
+  display: flex !important;
+  justify-content: center !important;
+  align-content: center !important;
+}
+.flexSpaceBetween{
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+.flexRowSpaceAround{
+  display: flex;
+  justify-content: space-around !important;
+  align-content: center !important;
+}
 
 /* Use this for any buttons */
 .customButton{
@@ -274,7 +396,7 @@ input:focus{
 
 textarea{
   border-style: none;
-  width: 95%;
+  width: 100%;
   outline: none;
   font-size: 1.2em;
   padding: 10px 15px;
@@ -329,4 +451,64 @@ textarea:focus{
 .missingContainer a:hover{
   filter: brightness(90%);
   box-shadow: inset 0px 0px 5px var(--darkGray1);
+}
+
+
+/**** Statistics ****/
+
+/* Navigation styling */
+#navigation {
+  display: flex;
+  top: 0;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.section {
+  padding-top: 70px;
+}
+
+#form {
+  padding-top: 8px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* stats */
+.chart{
+  color:white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+svg {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Navigation styling */
+#navigation {
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+}
+
+li {
+  float: center;
+}
+
+.section {
+  padding-top: 70px;
+}
+
+#form {
+  padding-top: 5px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
 }

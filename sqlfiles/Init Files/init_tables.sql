@@ -46,10 +46,15 @@ CREATE TABLE DailyActivites (
 CREATE TABLE Behavior (
 	StudentId INT NOT NULL,
     CurrentDate DATE NOT NULL,
-    SleepingPattern VARCHAR(255),
-    EatingHabits VARCHAR(255),
-    Attitude VARCHAR(255),
-    RestRoomActivity VARCHAR(255),
+    SleepingPattern VARCHAR(45),
+	SleepingPatternNote VARCHAR(255),
+    EatingHabits VARCHAR(45),
+	EatingHabitsNote VARCHAR(255),
+    Attitude VARCHAR(45),
+	AttitudeNote VARCHAR(255),
+    RestRoomActivity VARCHAR(45),
+	RestRoomActivityNumber INT,
+	RestRoomActivityNote VARCHAR(255)
     FOREIGN KEY (StudentId, CurrentDate) REFERENCES ClassSession(StudentId, CurrentDate),
     PRIMARY KEY(StudentId, CurrentDate)
 );
@@ -78,21 +83,66 @@ CREATE TABLE Schedual (
     PRIMARY KEY (StudentId)
 );
 
-CREATE TABLE Administer (
-	AdminId INT NOT NULL AUTO_INCREMENT,
-    AdminName VARCHAR(255) NOT NULL,
-    AdminPass VARCHAR(255) NOT NULL,
-    AdminImg VARCHAR(255),
-    AdminEmail VARCHAR(255) NOT NULL,
-    AdminEmailPass VARCHAR(255) NOT NULL,
-    PRIMARY KEY (AdminId)
-);
+CREATE TABLE Tasks (
+	TaskId INT NOT NULL AUTO_INCREMENT,
+	Priority INT(2) NOT NULL,
+	NoteContent varchar(512),
+	Completed BOOL NOT NULL DEFAULT 0,
+	CompletedTime DATETIME,
+	PRIMARY KEY (TaskId)
+  );
+  
+  CREATE TABLE cnp_data.Weather (
+  weatherId INT NOT NULL AUTO_INCREMENT,
+  dateTimes TIMESTAMP,
+  main VARCHAR(45) NULL,
+  description VARCHAR(45) NULL,
+  temp FLOAT NULL,
+  feels_like FLOAT NULL,
+  temp_min FLOAT NULL,
+  temp_max FLOAT NULL,
+  pressure INT NULL,
+  humidity INT NULL,
+  wind_speed FLOAT NULL,
+  wind_deg INT NULL,
+  wind_gust FLOAT NULL,
+  PRIMARY KEY (weatherId)
+  );
+  
+  CREATE TABLE TemplateObject (
+	TemplateId INT NOT NULL AUTO_INCREMENT,
+	Hidden BOOL NOT NULL DEFAULT 0,
+	NameOf VARCHAR(45),
+	CategoryOne VARCHAR(45),
+    CategoryTwo VARCHAR(45),
+    CategoryThree VARCHAR(45),
+    CategoryFour VARCHAR(45),
+	CategoryFive VARCHAR(45),
+	PRIMARY KEY (TemplateId)
+  );
+  
+  CREATE TABLE RemindersObject (
+	TemplateId INT NOT NULL AUTO_INCREMENT,
+	Hidden BOOL NOT NULL DEFAULT 0,
+	NameOf VARCHAR(45),
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (TemplateId)
+  );
 
-CREATE TABLE AdminNotes(
-	AdminId INT NOT NULL,
-	CurrentTime DATETIME NOT NULL DEFAULT (CURRENT_DATE),
-    AdminNoteId INT NOT NULL,
-    NoteContent VARCHAR(512),
-    FOREIGN KEY (AdminId) REFERENCES Administer(AdminId),
-    PRIMARY KEY (AdminId, AdminNoteId)
-);
+CREATE TABLE DailySummary (
+	Dates TIMESTAMP NOT NULL,
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (Dates)
+  );
+  
+  CREATE TABLE DailyAmFood (
+	Dates TIMESTAMP NOT NULL,
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (Dates)
+  );
+  
+  CREATE TABLE DailyLunch(
+	Dates TIMESTAMP NOT NULL,
+	MainParagraphs VARCHAR(5000),
+	PRIMARY KEY (Dates)
+  );

@@ -12,9 +12,12 @@
     <link rel='stylesheet' href='/stylesheets/switch.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/checkbox.css' />
+    <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/javascripts/jquery.prettydropdowns.js"></script>
+    <script src="/javascripts/birthdayDropdown.js"></script>
   </head>
   <body>
     <div id="accordion">
@@ -55,10 +58,38 @@
                     </label>
                   </div>
                 </li>
-                <li><input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"></li>
+                
+                <li class="flexSpaceBetween width100">
+                  <input class="width30" name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name">
+                    <div class="flexSpaceBetween width60">
+                      <label class="mediumFontSize">Birthday:</label>
+                      <select id="year" class="pretty-classic" onchange="genDays();">
+                      </select>
+    
+                      <select id="month" class="pretty-classic" onchange="genDays();">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+        
+                      <select id="day" class="pretty-classic">
+                      </select>
+                    </div>
+                
+                </li>
                 <li><input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name"></li>
                 <li><input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-                <li><input name=”notASearchField” type="text" id="newStudentBirthday" placeholder="Birthday YYYY/MM/DD"></li>
+                
+                
                 <li><input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
                 <li><input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
                 <li><input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
@@ -74,7 +105,7 @@
                   <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
                   <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                 </ul>
-                <li><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
+                <li class="flexCenter"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
               </ul>
             </div>
           </div>
@@ -223,6 +254,13 @@
     } );
   </script>
   <script>
+    $dropdown = $('.pretty-classic').prettyDropdown({
+        classic: true,
+        height: 50,
+        width: '10%',
+        customClass: 'arrow mediumFontSize',
+        hoverIntent: -1
+      });
     // Get the modal
     var formElement;
 
@@ -318,6 +356,7 @@
     function callPostStu(){
       var theUrl = window.location.href+'/addstudent';
       var fullDay = convertBoolToInt(document.getElementById("fullDay").checked);
+      birthday = getSelectedBirthday();
 
       var data = 
       "name=" + document.getElementById("newStudentName").value + 
@@ -327,7 +366,7 @@
       "&contact2=" + document.getElementById("newStudentContact2").value + 
       "&email2=" + document.getElementById("newStudentEmail2").value + 
       "&contactNum2=" + document.getElementById("newStudentContactNumber2").value + 
-      "&birthday=" + document.getElementById("newStudentBirthday").value + 
+      "&birthday=" + birthday + 
       "&sun=" + 0 + 
       "&mon=" + isDaySelected("mon") + 
       "&tue=" + isDaySelected("tue") + 
@@ -357,6 +396,18 @@
       data = "id=" + task + "&priority=" + (cur + 1) % 3;
       callback = reloadIt; 
       httpPutAsync(theUrl,data,callback);  
+    }
+
+
+    function getSelectedBirthday(){
+      var years = document.getElementById('year');
+      var year = years.options[years.selectedIndex].text;
+      var months = document.getElementById('month');
+      var month = months.options[months.selectedIndex].value;
+      var days = document.getElementById('day');
+      var day = days.options[days.selectedIndex].text;
+
+      return (year + '/' + month + '/' + day);
     }
 
     function addTaskPost(){

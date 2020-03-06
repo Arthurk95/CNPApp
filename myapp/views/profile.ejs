@@ -7,11 +7,14 @@
         <link rel='stylesheet' href='/stylesheets/profile.css' />
         <link rel='stylesheet' href='/stylesheets/form.css' />
         <link rel='stylesheet' href='/stylesheets/switch.css' />
-
-        <script src="/javascripts/utilityScripts.js"></script>
+        <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
+        
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
+        <script src="/javascripts/utilityScripts.js"></script>
+        <script src="/javascripts/birthdayDropdown.js"></script>
+        <script src="/javascripts/jquery.prettydropdowns.js"></script>
+        
     </head>
     <body>
 
@@ -71,10 +74,10 @@
           </div>
         </div>
 
-
+        
 
         <div class="profileSection">
-          <ul>
+          <ul class="profileList">
             <li>
               <label for="file-input" class="imageContainer tooltip">
                 <div class="edit-image-tooltip">
@@ -84,92 +87,43 @@
               <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
                 <div class="file-field input-field hiddenUpload">
                   <input id="file-input" name="myImage" type="file" onchange="form.submit()">
-                </div>
+                  </div>
               </form>
             </li>
             <li>
               <p1><font color="red"><%- upload_error_message %></font></p1>
               <table class="studentTable">
                 <tr>
-                  <td class="labelColumn"><label>NAME</label></td>
-                  <td class="valueColumn"><input class="hiddenInput" id="studentName" value="<%- student.StudentName %>"></td>
+                  <td class="width20"><label>NAME</label></td>
+                  <td class="width100 left"><input class="hiddenInput" id="studentName" value="<%- student.StudentName %>"></td>
                 </tr>
                 <tr>
-                  <td class="labelColumn"><label>BIRTHDAY</label></td>
-                  <td class="valueColumn"><input class="hiddenInput" ><input id="studentbirthday" value="<%- student.Birthdate %>" style="visibility: hidden; position: absolute;"></a>
-                  <script type="text/javascript">
-                    $(document).ready(function() {
-                
-                   $(function() {
-                    $( "#fullDate" ).datepicker({
-                    onClose: function(dateText, inst) {
-                       $('#day').val( dateText.split('/')[2] );
-                       $('#month').val( dateText.split('/')[1] );
-                   $('#birthdateyear').val( dateText.split('/')[0] );
-                    }
-                 });
-                });
-                }); 
-                </script> 
-                <div class="demo">
-                  year:<select name="year" id="birthdateyear" onchange="genDays()">
-                    <script>
-                      var birthday = new Date(document.getElementById('studentbirthday').value);
-                      var date = new Date();
-                      for(var i = 0; i < 15; ++i){
-                        
-                        var option = document.createElement("option");
-                        option.text = date.getFullYear() - i;
-                        document.getElementById('birthdateyear').add(option);
-                        if(option.text == birthday.getFullYear()){
-                          document.getElementById('birthdateyear').selectedIndex = i;
-                        }
-                      }
-                    </script>
-                    </select>
+                  <td class="width20"><label>BIRTHDAY</label></td>
+                  <td class="width80">
+                    <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></a>
+                    <div class="flexRowSpaceAround">
+                      <select id="year" class="pretty-classic" onchange="genDays();">
+                      </select>
 
-                  month:<select name="month" id="birthdatemonth" onchange="genDays()">
-                    <script>
-                      var date = new Date(); 
-                      var birthday = new Date(document.getElementById('studentbirthday').value);
-                      for(var i = 0; i < 12; ++i){
-                        var option = document.createElement("option");
-                        option.text = i + 1;
-                        document.getElementById('birthdatemonth').add(option);
-                        if(option.text == (birthday.getMonth() + 1)){
-                          document.getElementById('birthdatemonth').selectedIndex = i;
-                        }
-                      }
-                    </script>
-                  </select>
-
-                  day:<select name="day" id="birthdateday">
-                    <script>
-                      genDays();
-                      function genDays(){
-                        var year = document.getElementById("birthdateyear").value;
-                        var month = document.getElementById("birthdatemonth").value;
-                        if(month == 12){
-                          year = year + 1;
-                          month = 0;
-                        }
-                        var date = new Date(); 
-                        var birthday = new Date(document.getElementById('studentbirthday').value);
-                        var daysinmonth = new Date(year, month, 0).getDate();
-                        for(var i = 0; i < daysinmonth; ++i){
-                          var option = document.createElement("option");
-                          option.text = i + 1;
-                          document.getElementById('birthdateday').add(option);
-                          if(option.text == (birthday.getDate())){
-                            document.getElementById('birthdateday').selectedIndex = i;
-                          }
-                        }
-                      }
-                    </script>
-                  </select>
-                  
-                  </div></td>
-                  
+                      <select id="month" class="pretty-classic" onchange="genDays();">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+        
+                      <select id="day" class="pretty-classic">
+                      </select>
+                    </div>
+                  </td>
                 </tr>
               </table>
             </li>
@@ -184,7 +138,6 @@
 
 
     <script>
-      
       $( function() {
         $( "#tabs" ).tabs();
       } );
@@ -204,9 +157,15 @@
           else {
             days[i].classList.remove("selectedDay");
           }
-        }
+        }  
       });
 
+      $dropdown = $('.pretty-classic').prettyDropdown({
+        classic: true,
+        height: 30,
+        hoverIntent: -1
+      });
+      
       function saveStudent(){
         var temp = window.location.href.split('/');
         var theUrl = temp[0];
@@ -271,4 +230,5 @@
         else checkBox.checked = false;
       }
     </script>
+    
 </html>
