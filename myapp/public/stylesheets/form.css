@@ -45,6 +45,7 @@ HTML Formatting:
   .formWindow-content ul{
     list-style: none;
     margin: 0;
+    margin-top: 30px;
     padding: 0;
     display: flex !important;
     flex-direction: column;
@@ -53,7 +54,7 @@ HTML Formatting:
   /* Each li is an element on the form, such as <input> or <a> */
   .formWindow-content li{
     display: flex;
-    justify-content: center;
+    justify-content: stretch;
     margin: 5px 0px;
   }
 
@@ -88,7 +89,7 @@ HTML Formatting:
     color: var(--darkGray2);
     padding-top: 10px;
     padding-bottom: 10px;
-    width: 95%;
+    width: 100%;
   }
 
   /* Style for when an input field is selected */
@@ -100,8 +101,6 @@ HTML Formatting:
   /* Any button on the form, probably a submit button */
   .formSubmitButton{
     text-align: center;
-    justify-self: center !important;
-    align-self: center !important;
     transition: 0.2s;
     cursor: pointer;
     text-decoration: none;
