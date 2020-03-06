@@ -4,6 +4,9 @@
 }
 
 .emailerContainer .title{
+    left: 0;
+    right: 0;
+    top: 0;
     font-size: 3em;
     padding: 30px;
     margin-top: 0;
@@ -61,13 +64,6 @@
 .nextStepButton .buttonIcon{
     width: 40%;
     text-align: center;
-}
-
-.stepOne{
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px var(--darkGray1);
-    background: var(--lightGray2);
-    width: 100%;
 }
 
 .bottomSection{
