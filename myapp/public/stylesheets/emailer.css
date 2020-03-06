@@ -7,14 +7,12 @@
     font-size: 3em;
     padding: 30px;
     margin-top: 0;
-    background: var(--yellow3);
     color: var(--lightGray1);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;;
 }
 
 #stepTwoTitle{
-    background: var(--blue1);
     margin-bottom: 20px;
 }
 
@@ -31,7 +29,6 @@
     align-items: center;
     width: 20%;
     height: 80px;
-    background: var(--green2);
     align-self: center;
     border-radius: 8px;
     overflow: hidden;
@@ -62,7 +59,6 @@
 }
 
 .nextStepButton .buttonIcon{
-    background: var(--green3);
     width: 40%;
     text-align: center;
 }
@@ -146,7 +142,7 @@
 
 /* Student is selected in the studentsList */
 .selected {
-    background: var(--blue1) !important;
+    background: var(--blue2) !important;
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
