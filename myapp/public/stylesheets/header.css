@@ -1,9 +1,9 @@
 /* <ul> list for Header bar */
 .headerStyle {
-    font-size: 3vw;
+    font-size: 1.2em;
     font-weight: 400;
     list-style-type: none;
-    text-align: center;
+    text-align: left;
     margin-top: 0px;
     margin-bottom: 30px;
   }
