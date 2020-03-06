@@ -7,12 +7,13 @@
         <link rel='stylesheet' href='/stylesheets/profile.css' />
         <link rel='stylesheet' href='/stylesheets/form.css' />
         <link rel='stylesheet' href='/stylesheets/switch.css' />
-        <link rel='stylesheet' href='/stylesheets/birthday.css' />
+        <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
         
-        
-        <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="/javascripts/utilityScripts.js"></script>
+        <script src="/javascripts/customDropdown.js"></script>
+        <script src="/javascripts/jquery.prettydropdowns.js"></script>
         
     </head>
     <body>
@@ -73,10 +74,10 @@
           </div>
         </div>
 
-
+        
 
         <div class="profileSection">
-          <ul>
+          <ul class="profileList">
             <li>
               <label for="file-input" class="imageContainer tooltip">
                 <div class="edit-image-tooltip">
@@ -93,40 +94,38 @@
               <p1><font color="red"><%- upload_error_message %></font></p1>
               <table class="studentTable">
                 <tr>
-                  <td class="labelColumn"><label>NAME</label></td>
-                  <td class="valueColumn"><input class="hiddenInput" id="studentName" value="<%- student.StudentName %>"></td>
+                  <td class="width20"><label>NAME</label></td>
+                  <td class="width100 left"><input class="hiddenInput" id="studentName" value="<%- student.StudentName %>"></td>
                 </tr>
                 <tr>
-                  <td class="labelColumn"><label>BIRTHDAY</label></td>
-                  <td class="valueColumn"><input class="hiddenInput" >
-                    <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none; position: absolute;"></a>
-                </td>
+                  <td class="width20"><label>BIRTHDAY</label></td>
+                  <td class="width80">
+                    <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></a>
+                    <div class="flexRowSpaceAround">
+                      <select id="year" class="pretty-classic" onchange="genDays();">
+                      </select>
+
+                      <select id="month" class="pretty-classic" onchange="genDays();">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+        
+                      <select id="day" class="pretty-classic">
+                      </select>
+                    </div>
+                  </td>
                 </tr>
               </table>
-              <div id="birthdayDropdown" class="birthdayContainer width100">
-                <ul id="year" class="birthdayList width20">
-                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall" >2010</li>
-                </ul>
-                <ul id="month" class="birthdayList width10">
-                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">Jan</li>
-                  <li>Jan</li>
-                  <li>Feb</li>
-                  <li>Mar</li>
-                  <li>Apr</li>
-                  <li>May</li>
-                  <li>Jun</li>
-                  <li>Jul</li>
-                  <li>Aug</li>
-                  <li>Sep</li>
-                  <li>Oct</li>
-                  <li>Nov</li>
-                  <li>Dec</li>
-                </ul>
-                <ul id="day" class="birthdayList width10">
-                  <li id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">1</li>
-                </ul>
-              </div>
-              
             </li>
             <li class="profileButtons">
               <a onclick="saveStudent()" class="saveButton">Save Changes</a>
@@ -144,44 +143,6 @@
       } );
     </script>
 
-
-    <script>
-        
-        var birthday = new Date(document.getElementById('studentbirthday').value);
-        var date = new Date();
-        var yearDrop = document.getElementById('year');
-        for(var i = 0; i < 15; ++i){
-          var option = document.createElement("li");
-          option.innerHTML = date.getFullYear() - i;
-          yearDrop.appendChild(option);
-          if(option.innerHTML == birthday.getFullYear()){
-            yearDrop.getElementById('selected').innerHTML = option.innerHTML;
-          }
-        }
-        
-        genDays(1);
-        function genDays(a=0){
-          var month = document.getElementById('month').getElementsByClassName('selectedValue')[0].innerHTML;
-          var year = document.getElementById('year').getElementsByClassName('selectedValue')[0].innerHTML;
-          var day = document.getElementById('day');
-          month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
-          var daysinmonth = new Date(year, month, 0).getDate();
-          $(day).empty();
-          var selected = document.createElement("li");
-          selected.classList.add("selectedValue", "insetShadowSmall", "borderRadiusSmall");
-          selected.innerHTML = 1;
-          day.appendChild(selected);
-          for(var i = 1; i <= daysinmonth; ++i){
-            var option = document.createElement("li");
-            option.innerHTML = i;
-            day.appendChild(option);
-            if(a==1 && option.innerHTML == (birthday.getDate())){
-              selected.innerHTML = i;
-            }
-          }
-        }
-      
-    </script>
     <script>
       var days = document.getElementById("schedule").getElementsByTagName("li");
       var length = days.length;
@@ -196,9 +157,15 @@
           else {
             days[i].classList.remove("selectedDay");
           }
-        }
+        }  
       });
 
+      $dropdown = $('.pretty-classic').prettyDropdown({
+        classic: true,
+        height: 30,
+        hoverIntent: -1
+      });
+      
       function saveStudent(){
         var temp = window.location.href.split('/');
         var theUrl = temp[0];
@@ -264,5 +231,4 @@
       }
     </script>
     
-    <script src="/javascripts/birthdayDropdown.js"></script>
 </html>

@@ -1,52 +1,45 @@
-var clickedLi;
-var selectedLiHeight;
+const MAX_DROPDOWN_HEIGHT = 100;
+var birthday = new Date();
+var date = new Date();
+var yearDrop;
 
-$('#birthdayDropdown').on('click', 'li', function(){
-    clickedLi = $(this).context; // returns the <li> element that was selected
-    selectedLiHeight = clickedLi.offsetHeight;
-    valueSelected();
+$(document).ready(function(){
+    
+    yearDrop = document.getElementById('year');
+    // for if a birthday dropdown exist
+    if(document.getElementById('studentbirthday') != null){
+        birthday = new Date(document.getElementById('studentbirthday').value);
+    }
+    for(var i = 0; i < 15; ++i){
+        var option = document.createElement("option");
+        option.text = date.getFullYear() - i;
+        if(option.text == birthday.getFullYear()){
+            option.selected = true;
+        }
+        yearDrop.appendChild(option);
+    }
+    
+    genDays();
 });
 
-function valueSelected(){
-    // selectedValue clicked again: open/close dropdown
-    if(clickedLi.classList.contains('selectedValue')){ 
-        toggleDropdown(clickedLi.parentElement);
-    }
-    else{
-        changeSelectedValue(clickedLi.parentElement);
-    }
-}
-
-function toggleDropdown(dropdown){
-    var options = dropdown.getElementsByTagName("li");
-    var displayType = "block";
-    if(options[1].style.display == "block"){
-        displayType = "none";
-    }
-    for(var i = 1; i < options.length; i++){
-        options[i].style.display = displayType;
-        if(displayType == "block"){
-            options[i].style.top = (selectedLiHeight*i)+'px';
+function genDays(){
+    var months = document.getElementById('month');
+    var month = months.options[months.selectedIndex].value;
+    var years = document.getElementById('year');
+    var year = years.options[years.selectedIndex].text;
+    var day = document.getElementById('day');
+    month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
+    var daysinmonth = new Date(year, month, 0).getDate();
+    $(day).empty();
+    for(var i = 0; i <= daysinmonth; ++i){
+        var option = document.createElement("option");
+        option.text = i;
+        option.value = i;
+        if(option.text == (birthday.getDate())){
+            option.selected = true;
         }
-        else{options[i].style.top = 0;}
+        day.appendChild(option);
     }
-}
-
-function changeSelectedValue(dropdown){
-    var toReplace = dropdown.getElementsByClassName("selectedValue")[0];
-
-    toReplace.innerHTML = clickedLi.innerHTML;
-    if(dropdown.id != "day")
-        genDays();
-    toggleDropdown(dropdown);
-}
-
-function getValues(){
-    var selectedValues = $('#birthdayDropdown').getElementsByClassName('selectedValue');
-
-    var date = {
-        "year": selectedValues[0].innerHTML,
-        "month": selectedValues[1].innerHTML,
-        "day": selectedValues[2].innerHTML
-    }
+    
+    $dropdown.refresh();
 }
