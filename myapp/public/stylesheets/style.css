@@ -190,13 +190,13 @@ a{
 .mediumPadding{padding: 10px !important;}
 .heavyPadding{padding: 15px !important;}
 
-.insetShadowSmall{box-shadow: inset 0px 0px 2px var(--darkGray2);}
-.insetShadowMedium{box-shadow: inset 0px 0px 6px 1px var(--darkGray2);}
-.insetShadowBig{box-shadow: inset 0px 0px 12px 2px var(--darkGray2);}
+.insetShadowSmall{box-shadow: inset 0px 0px 2px var(--darkGray2) !important;}
+.insetShadowMedium{box-shadow: inset 0px 0px 6px 1px var(--darkGray2) !important;}
+.insetShadowBig{box-shadow: inset 0px 0px 12px 2px var(--darkGray2) !important;}
 
-.shadowSmall{box-shadow: 0px 0px 2px var(--darkGray2);}
-.shadowMedium{box-shadow: 0px 0px 6px 1px var(--darkGray2);}
-.shadowBig{box-shadow: 0px 0px 12px 2px var(--darkGray2);}
+.shadowSmall{box-shadow: 0px 0px 2px var(--darkGray2) !important;}
+.shadowMedium{box-shadow: 0px 0px 6px 1px var(--darkGray2) !important;}
+.shadowBig{box-shadow: 0px 0px 12px 2px var(--darkGray2) !important;}
 
 
 /* ----------- BORDER STUFF ----------- */
@@ -244,22 +244,37 @@ a{
 .mediumFont{font-size: 1.5em !important;}
 .largeFont{font-size: 2em !important;}
 
-.flex{display: flex !important;}
+.marginTop{margin-top: 40px !important;}
+.marginBottom{margin-bottom: 40px !important;}
+.marginLeft{margin-left: 40px !important;}
+.marginRight{margin-right: 40px !important;}
+
+.displayNone{display: none !important;}
+.relative{position: relative;}
+.absolute{position: absolute;}
+
+.flexContainer{
+  display: flex;
+  padding: 30px;
+  margin: 0;
+}
+
+.flex{display: flex;}
+.flexColumn{flex-direction: column;}
 
 .flexCenter{
-  display: flex !important;
-  justify-content: center !important;
-  align-content: center !important;
+  justify-content: center;
+  align-content: center;
 }
-.flexSpaceBetween{
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-}
-.flexRowSpaceAround{
-  display: flex;
-  justify-content: space-around !important;
-  align-content: center !important;
+
+.flexAlignCenter{align-content: center; align-items: center;}
+
+.flexLeft{justify-content: flex-start;}
+.flexRight{justify-content: flex-end;}
+.spaceBetween{justify-content: space-between;}
+.spaceAround{
+  justify-content: space-around;
+  align-content: center;
 }
 
 /* Use this for any buttons */
