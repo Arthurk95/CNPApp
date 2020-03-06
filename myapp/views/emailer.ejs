@@ -8,13 +8,15 @@
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="/javascripts/customDropdown.js"></script>
+
  
 
     </head>
     <body>
         <div id="mainEmailerContainer" class="emailerContainer">
             <div id="stepOne" class="stepOne">
-                <p class="title">Step 1: Email Template</p>
+                <p class="title yellow3-BG">Step 1: Email Template</p>
                 <ul class="verticalList">
                     <li>
                         <label for="summary">Summary</label>
@@ -47,9 +49,9 @@
                             </select>
                         </li>
                     </ul>
-                    <div class="nextStepButton" onclick="toNextStep()">
+                    <div class="nextStepButton green3-BG" onclick="toNextStep()">
                         <p>Next</p>
-                        <div class="buttonIcon">
+                        <div class="buttonIcon green4-BG">
                             <i class="fas fa-arrow-right"></i>
                         </div>
                     </div>
@@ -59,7 +61,7 @@
 
             <div id="stepTwo" class="stepTwo">
                 <div class="leftPanel">
-                    <p id="stepTwoTitle" class="title"></p>
+                    <p id="stepTwoTitle" class="title blue2-BG"></p>
                     <div class="twoColumns">
                         <div>
                             <p class="listTitle">Activities</p>
@@ -67,14 +69,24 @@
                                 
                             </ul>
                         </div>
-                        <div id="" class="dropdown">
-                            <a class="selectedOption" onclick="selectedOption(this)">Option 1</a>
-                            <a onclick="selectedOption(this)">Option 2</a>
-                            <a onclick="selectedOption(this)">Option 3</a>
-                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                        <div id="" class="dropdownContainer width60">
+                            <a id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">Option 1</a>
+                            <ul class="optionList width100">
+                                <li>Option 1</li>
+                                <li>Option 2</li>
+                                <li>Option 3</li>
+                                <li>Option 4</li>
+                            </ul>
                         </div>
                     </div>
-                    
+                    <div class="bottomSection">
+                        <div class="nextStepButton green3-BG" onclick="toNextStep()">
+                            <p>Next</p>
+                            <div class="buttonIcon green4-BG">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="rightPanel">
                     <ul id="listOfStudents" class="studentsList" >
@@ -88,6 +100,8 @@
                     <% } %>
                     </ul>
                 </div>
+
+                
             </div>
 
             <div id="stepThree" class="stepThree">
