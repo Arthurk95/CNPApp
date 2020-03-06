@@ -4,11 +4,12 @@
     <head>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
-        <link rel='stylesheet' href='/stylesheets/custom-dropdown.css' />
+        <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="/javascripts/customDropdown.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="/javascripts/jquery.prettydropdowns.js"></script>
 
  
 
@@ -69,15 +70,9 @@
                                 
                             </ul>
                         </div>
-                        <div id="" class="dropdownContainer width60">
-                            <a id="selected" class="selectedValue insetShadowSmall borderRadiusSmall">Option 1</a>
-                            <ul class="optionList width100">
-                                <li>Option 1</li>
-                                <li>Option 2</li>
-                                <li>Option 3</li>
-                                <li>Option 4</li>
-                            </ul>
-                        </div>
+                        <select>
+
+                        </select>
                     </div>
                     <div class="bottomSection">
                         <div class="nextStepButton green3-BG" onclick="toNextStep()">
@@ -113,6 +108,11 @@
             </div>
             
         </div>
-        <script>initEmailerVariables();</script>
+        <script>initEmailerVariables();
+        
+        $('select').prettyDropdown({
+            height: 40
+        })
+        </script>
     </body>
 </html>
