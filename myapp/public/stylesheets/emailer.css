@@ -141,7 +141,7 @@
 }
 
 /* Student is selected in the studentsList */
-.selected {
+.studentsList .selected {
     background: var(--blue2) !important;
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
