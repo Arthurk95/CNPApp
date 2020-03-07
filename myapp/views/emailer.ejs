@@ -4,7 +4,6 @@
     <head>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
-        <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -18,12 +17,42 @@
                 var op = 'op';
                 var select = document.getElementById(id).getElementsByTagName("select")[0];
                 var len = Object.keys(list).length;
-                for(var i = 1; i < len; i++){
+                for(var i = 0; i < len; i++){
                     var option = document.createElement("option");
-                    op = 'op' + i;
-                    option.text = list[op]; 
+                    if(i == 0){
+                        select.append(option);
+                    }
+                    else{
+                        op = 'op' + i;
+                        option.text = list[op]; 
+                        select.appendChild(option);
+                    }
+                }
+            }
+            
+            function fillReminders(remindersList){
+                var NUM_REMINDERS = 4;
+                var reminders = document.getElementById('reminders');
+                var select = document.createElement('select');
+
+                for(var i = 0; i < remindersList.length; i++){
+                    var option = document.createElement('option');
+
+                    option.text = remindersList[i].title;
                     select.appendChild(option);
                 }
+
+                for(var i = 1; i <= NUM_REMINDERS; i++){
+                    var li = document.createElement('li');
+                    li.classList = "flex spaceBetween flexAlignCenter heavyPadding";
+                    var label = document.createElement('label');
+                    label.innerHTML = "Reminder " + i;
+                    li.append(label);
+                    li.append(select);
+                    reminders.append(li);
+                }
+
+                
             }
         </script>
 
@@ -49,25 +78,11 @@
                             <textarea name="lunch"></textarea>
                         </li>
                     </ul>
-    
-                    <div class="flex spaceBetween heavyPadding marginTop">
-                        <ul class="verticalList width30">
-                            <li>
-                                <label for="rem1">Reminder 1</label>
-                                <select name="rem1">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label for="rem2">Reminder 2</label>
-                                <select name="rem2">
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                </select>
-                            </li>
-                        </ul>
-                    </div>
+
+                    <ul id="reminders" class="flex flexColumn flexCenter heavyPadding width40">          
+                    </ul>
+                    <script>fillReminders(<%- JSON.stringify(reminders) %>)</script>   
+                
                 </div>
                 
             </div>
@@ -152,6 +167,11 @@
             
         </script>
 
+        <script>
+            
+                
+
+        </script>
         
     </body>
 </html>
