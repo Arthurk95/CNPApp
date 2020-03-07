@@ -54,6 +54,9 @@ function bottomLayer(res,Students,con){
   behavior6 = {name: 'Mood:', op1: 'Happy/Played Well', op2: 'Frustrations', op3: 'Tested Boundaries'}
   Behaviors.push(behavior1, behavior2, behavior3, behavior4, behavior5, behavior6);
   console.log(Behaviors);
+  var Reminders = [];
+  reminder1 = {title: "Book Order", contents: "Book orders for our schloastic book club are due on April 1"}
+  reminder2 = {title: "March 9 Closure", contents: "Reminder that CNP will be closed on March 9 and 10"}
   res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors });
 }
   module.exports = router;

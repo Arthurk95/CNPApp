@@ -165,7 +165,7 @@
 
       theUrl = window.location.href+'/completetask';
       data = "id=" + task + "&completed=" + 1;
-      callback = reloadIt; 
+      callback = doNothing; 
       httpPutAsync(theUrl,data,callback); 
 
     }
