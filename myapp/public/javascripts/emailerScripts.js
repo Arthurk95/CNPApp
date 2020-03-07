@@ -98,10 +98,15 @@ function initEmailerVariables(){
     stepTwoTitle = document.getElementById("stepTwoTitle");
     studentsList = document.getElementById("listOfStudents");
     activities = document.getElementById("activitiesList");
-    lastSelectedStudent.classList += " selected";
-    stepTwoTitle.innerHTML = lastSelectedStudent.innerHTML;
+    if(lastSelectedStudent != null){
+        lastSelectedStudent.classList += " selected";
+        stepTwoTitle.innerHTML = lastSelectedStudent.innerHTML;
+        initActivities();
+    }
+    else{
+        stepTwoTitle.innerHTML = "No Students";
+    }
 
-    initActivities();
 }
 
 function initActivities(){
