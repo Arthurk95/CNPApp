@@ -7,16 +7,18 @@
         <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="/javascripts/jquery.prettydropdowns.js"></script>
+        
 
         <script>
             function fillSelect(id, list){
                 var op = 'op';
                 var select = document.getElementById(id).getElementsByTagName("select")[0];
                 var len = Object.keys(list).length;
-                for(var i = 1; i <= len; i++){
+                for(var i = 1; i < len; i++){
                     var option = document.createElement("option");
                     op = 'op' + i;
                     option.text = list[op]; 
@@ -27,12 +29,13 @@
 
     </head>
     <body>
-        <div id="mainEmailerContainer" class="emailerContainer">
-            <div id="stepOne" class="flexCenter flexColumn lightGray1-BG borderRadiusMedium shadowMedium">
-                <p class="title yellow3-BG">Step 1: Email Template</p>
+        <div id="mainEmailerContainer" class="emailerContainer flex spaceAround">
+            <div id="backButton" class="sideButton" onclick="toPreviousStep()"><i class="fas fa-chevron-left"></i></div>
+            <div id="stepOne" class="flexCenter flexColumn lightGray2-BG borderRadiusMedium shadowMedium width80">
+                <p class="title green4-BG">Step 1: Email Template</p>
 
                 <div class="heavyPadding">
-                    <ul class="verticalList">
+                    <ul class="flex flexColumn">
                         <li>
                             <label for="summary">Summary</label>
                             <textarea name="summary"></textarea>
@@ -47,8 +50,8 @@
                         </li>
                     </ul>
     
-                    <div class="bottomSection">
-                        <ul class="verticalList">
+                    <div class="flex spaceBetween heavyPadding marginTop">
+                        <ul class="verticalList width30">
                             <li>
                                 <label for="rem1">Reminder 1</label>
                                 <select name="rem1">
@@ -64,85 +67,89 @@
                                 </select>
                             </li>
                         </ul>
-                        <div class="nextStepButton green3-BG" onclick="toNextStep()">
-                            <p>Next</p>
-                            <div class="buttonIcon green4-BG">
-                                <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-    
                     </div>
                 </div>
                 
             </div>
 
             <div id="stepTwo" class="flex spaceAround displayNone width100">
-                    <div class="width70 lightGray2-BG borderRadiusMedium"> <!-- Left column -->
-                        <p id="stepTwoTitle" class="title blue2-BG"></p>
-                        <div class="heavyPadding"> <!-- activities and dropdowns -->
-                            <div class="flex spaceBetween">
-                                <div id="activities" class="width70">
-                                    <p class="listTitle">Activities</p>
-                                    <ul id="activitiesList" class="activitiesList">
-                                        
-                                    </ul>
-                                </div>
-
-                                <div id="" class="flex flexColumn width30 mediumPadding">
-                                    <% behaviors.forEach((behavior, index) => { %>
-                                        <div id="<%= behavior.name %>" class="flex spaceBetween">
-                                            <label for="<%= behavior.name %>"><%= behavior.name %></label>
-                                            <select name="<%= behavior.name %>">
-                                            </select>
-                                        </div>
-                                        <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>)</script>
-                                            
-                                    <% }) %>
-                                </div>
-                            </div>
-
-                            <div class="flexContainer spaceBetween marginTop">
-                                <div class="nextStepButton green3-BG" onclick="toNextStep()">
-                                    <p>Next</p>
-                                    <div class="buttonIcon green4-BG">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </div>
-                                </div>
+                <div class="width70 lightGray2-BG borderRadiusMedium"> <!-- Left column -->
+                    <div class="relative title blue2-BG flex spaceBetween">
+                        <p id="stepTwoTitle" class=""></p>
+                        <div class="stepButton green2-BG" onclick="studentApproved(this)">
+                            <p>Approve</p>
+                            <div class="buttonIcon green3-BG">
+                                <i class="fas fa-check"></i>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Right column (students) -->
-                    <div class="lightGray2-BG heavyPadding width20 borderRadiusMedium">
-                        <ul id="listOfStudents" class="studentsList" >
-                        <% if (reports.length > 0) { %>
-                            <script>passToJS(<%- JSON.stringify(reports) %>);</script>
-                            <% reports.forEach((report, index) => { %>
-                                <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
-                            <% }) %>
-                        <% } else { %>
-                            <li>No Students</li>
-                        <% } %>
-                        </ul>
+                    <div class="heavyPadding"> <!-- activities and dropdowns -->
+                        <div class="flex spaceBetween">
+                            <div id="activities" class="width60">
+                                <p class="listTitle">Activities</p>
+                                <ul id="activitiesList" class="activitiesList">
+                                    
+                                </ul>
+                            </div>
+
+                            <div id="" class="flex flexColumn flexCenter heavyPadding">
+                                <% behaviors.forEach((behavior, index) => { %>
+                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottomSmall">
+                                        <label for="<%= behavior.name %>"><%= behavior.name %></label>
+                                        <select name="<%= behavior.name %>" class="pretty-classic">
+                                        </select>
+                                        
+                                    </div>
+                                    <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>)</script>
+                                        
+                                <% }) %>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                
+                <!-- Right column (students) -->
+                <div class="lightGray2-BG heavyPadding width20 borderRadiusMedium">
+                    <ul id="listOfStudents" class="studentsList" >
+                    <% if (reports.length > 0) { %>
+                        <script>passToJS(<%- JSON.stringify(reports) %>);</script>
+                        <% reports.forEach((report, index) => { %>
+                            <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li>No Students</li>
+                    <% } %>
+                    </ul>
+                </div>
                     
             </div>
 
-            <div id="stepThree" class="stepThree">
-                <div class="leftPanel">
+            <div id="stepThree" class="flex spaceAround displayNone width100">
+                <div class="width70 lightGray2-BG borderRadiusMedium">
 
                 </div>
-                <div class="rightPanel">
+                <div class="lightGray2-BG heavyPadding width20 borderRadiusMedium">
+                    <ul id="listOfStudents" class="studentsList" >
+                    <% if (reports.length > 0) { %>
+                        <script>passToJS(<%- JSON.stringify(reports) %>);</script>
+                        <% reports.forEach((report, index) => { %>
+                            <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
+                        <% }) %>
+                    <% } else { %>
+                        <li>No Students</li>
+                    <% } %>
+                    </ul>
                 </div>
             </div>
-            
+            <div id="nextButton" onclick="toNextStep()" class="sideButton"><i class="fas fa-chevron-right"></i></div>
         </div>
         <script>initEmailerVariables();
         
-        $('select').prettyDropdown({
-            height: 40,
-            width: 50
+        $(document).ready(function(){
+            $('select').selectmenu();
         })
+            
         </script>
 
         

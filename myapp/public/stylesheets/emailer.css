@@ -1,6 +1,7 @@
 .emailerContainer{
-    width: 85%;
+    width: 95%;
     margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 .emailerContainer .title{
@@ -10,13 +11,45 @@
     font-size: 3em;
     padding: 30px;
     margin-top: 0;
+    margin-bottom: 15px;
     color: var(--lightGray1);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.emailerContainer .approveButton{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    background: red;
+    padding: 10px 20px;
+}
+
+.emailerContainer .sideButton{
+    display: flex;
+    width: 5%;
+    border-radius: 8px;
+    background: rgba(82, 82, 82, 0.1);
+    border: 1px solid;
+    padding: 0px 10px;
+    border-color: rgba(255, 255, 255, 0.1);
+    font-size: 7vw;
+    color: var(--lightGray3);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#backButton:hover{
+    background: rgba(255, 2, 2, 0.507);
+}
+
+#nextButton:hover{
+    background: rgba(6, 158, 0, 0.5);
 }
 
 #stepTwoTitle{
-    margin-bottom: 20px;
+    margin: 0;
 }
 
 .centeredElement{
@@ -26,42 +59,42 @@
     width: 50%;
 }
 
-.nextStepButton{
+.stepButton{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 20%;
-    height: 80px;
+    height: 50px;
     align-self: center;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: -1px 2px 4px var(--darkGray4);
 }
 
-.nextStepButton:hover{
+.stepButton:hover{
     cursor: pointer;
 }
 
-.nextStepButton:active{
+.stepButton:active{
     filter: brightness(95%);
     box-shadow: -1px 1px 2px var(--darkGray4);
 }
 
-.nextStepButton p{
+.stepButton p{
     margin: 0;
     flex-grow: 2;
-    font-size: 2.3em;
+    font-size: 18px;
     color: white;
     padding-left: 30px;
 }
 
-.nextStepButton i{
-    font-size: 60px;
+.stepButton i{
+    font-size: 20px;
     line-height: 80px;
     color: white;
 }
 
-.nextStepButton .buttonIcon{
+.stepButton .buttonIcon{
     width: 40%;
     text-align: center;
 }
@@ -86,8 +119,9 @@
 
 .verticalList li{
     margin-bottom: 30px;
-    align-self: stretch;
-    justify-items: stretch;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Styling for the Second step - 
@@ -138,7 +172,7 @@
 
 /* Student is selected in the studentsList */
 .studentsList .selected {
-    background: var(--blue2) !important;
+    background: var(--blue2);
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
@@ -161,8 +195,8 @@
 }
 
 .activitiesList li{
-    padding: 4px 10px;
-    background: var(--red2);
+    padding: 4px 15px;
+    background: var(--blue3);
     border-radius: 20px;
     font-size: 1em;
     color: var(--lightGray1);
