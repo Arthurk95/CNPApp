@@ -40,12 +40,12 @@ function stepChange(){
 
 
 function hideSteps(step1, step2){
-    step1.style.display = "none";
-    step2.style.display = "none";
+    step1.classList.add("displayNone");
+    step2.classList.add("displayNone");
 }
 
 function showStep(step){
-    step.style.display = "flex";
+    step.classList.remove("displayNone");
 }
 
 function showStudentData(listElement, report, index){

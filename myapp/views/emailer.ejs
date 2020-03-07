@@ -11,92 +11,121 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="/javascripts/jquery.prettydropdowns.js"></script>
 
- 
+        <script>
+            function fillSelect(id, list){
+                var op = 'op';
+                var select = document.getElementById(id).getElementsByTagName("select")[0];
+                var len = Object.keys(list).length;
+                for(var i = 1; i <= len; i++){
+                    var option = document.createElement("option");
+                    op = 'op' + i;
+                    option.text = list[op]; 
+                    select.appendChild(option);
+                }
+            }
+        </script>
 
     </head>
     <body>
         <div id="mainEmailerContainer" class="emailerContainer">
-            <div id="stepOne" class="stepOne">
+            <div id="stepOne" class="flexCenter flexColumn lightGray1-BG borderRadiusMedium shadowMedium">
                 <p class="title yellow3-BG">Step 1: Email Template</p>
-                <ul class="verticalList">
-                    <li>
-                        <label for="summary">Summary</label>
-                        <textarea name="summary"></textarea>
-                    </li>
-                    <li>
-                        <label for="amSnack">AM Snack</label>
-                        <textarea name="amSnack"></textarea>
-                    </li>
-                    <li>
-                        <label for="lunch">Lunch</label>
-                        <textarea name="lunch"></textarea>
-                    </li>
-                </ul>
 
-                <div class="bottomSection">
+                <div class="heavyPadding">
                     <ul class="verticalList">
                         <li>
-                            <label for="rem1">Reminder 1</label>
-                            <select name="rem1">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                            </select>
+                            <label for="summary">Summary</label>
+                            <textarea name="summary"></textarea>
                         </li>
                         <li>
-                            <label for="rem2">Reminder 2</label>
-                            <select name="rem2">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                            </select>
+                            <label for="amSnack">AM Snack</label>
+                            <textarea name="amSnack"></textarea>
+                        </li>
+                        <li>
+                            <label for="lunch">Lunch</label>
+                            <textarea name="lunch"></textarea>
                         </li>
                     </ul>
-                    <div class="nextStepButton green3-BG" onclick="toNextStep()">
-                        <p>Next</p>
-                        <div class="buttonIcon green4-BG">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div id="stepTwo" class="stepTwo">
-                <div class="leftPanel">
-                    <p id="stepTwoTitle" class="title blue2-BG"></p>
-                    <div class="twoColumns">
-                        <div>
-                            <p class="listTitle">Activities</p>
-                            <ul id="activitiesList" class="activitiesList">
-                                
-                            </ul>
-                        </div>
-                        <select>
-
-                        </select>
-                    </div>
+    
                     <div class="bottomSection">
+                        <ul class="verticalList">
+                            <li>
+                                <label for="rem1">Reminder 1</label>
+                                <select name="rem1">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="rem2">Reminder 2</label>
+                                <select name="rem2">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </li>
+                        </ul>
                         <div class="nextStepButton green3-BG" onclick="toNextStep()">
                             <p>Next</p>
                             <div class="buttonIcon green4-BG">
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                         </div>
+    
                     </div>
                 </div>
-                <div class="rightPanel">
-                    <ul id="listOfStudents" class="studentsList" >
-                    <% if (reports.length > 0) { %>
-                        <script>passToJS(<%- JSON.stringify(reports) %>);</script>
-                        <% reports.forEach((report, index) => { %>
-                            <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
-                        <% }) %>
-                    <% } else { %>
-                        <li>No Students</li>
-                    <% } %>
-                    </ul>
-                </div>
-
                 
+            </div>
+
+            <div id="stepTwo" class="flex spaceAround displayNone width100">
+                    <div class="width70 lightGray2-BG borderRadiusMedium"> <!-- Left column -->
+                        <p id="stepTwoTitle" class="title blue2-BG"></p>
+                        <div class="heavyPadding"> <!-- activities and dropdowns -->
+                            <div class="flex spaceBetween">
+                                <div id="activities" class="width70">
+                                    <p class="listTitle">Activities</p>
+                                    <ul id="activitiesList" class="activitiesList">
+                                        
+                                    </ul>
+                                </div>
+
+                                <div id="" class="flex flexColumn width30 mediumPadding">
+                                    <% behaviors.forEach((behavior, index) => { %>
+                                        <div id="<%= behavior.name %>" class="flex spaceBetween">
+                                            <label for="<%= behavior.name %>"><%= behavior.name %></label>
+                                            <select name="<%= behavior.name %>">
+                                            </select>
+                                        </div>
+                                        <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>)</script>
+                                            
+                                    <% }) %>
+                                </div>
+                            </div>
+
+                            <div class="flexContainer spaceBetween marginTop">
+                                <div class="nextStepButton green3-BG" onclick="toNextStep()">
+                                    <p>Next</p>
+                                    <div class="buttonIcon green4-BG">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right column (students) -->
+                    <div class="lightGray2-BG heavyPadding width20 borderRadiusMedium">
+                        <ul id="listOfStudents" class="studentsList" >
+                        <% if (reports.length > 0) { %>
+                            <script>passToJS(<%- JSON.stringify(reports) %>);</script>
+                            <% reports.forEach((report, index) => { %>
+                                <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
+                            <% }) %>
+                        <% } else { %>
+                            <li>No Students</li>
+                        <% } %>
+                        </ul>
+                    </div>
+                    
             </div>
 
             <div id="stepThree" class="stepThree">
@@ -111,8 +140,11 @@
         <script>initEmailerVariables();
         
         $('select').prettyDropdown({
-            height: 40
+            height: 40,
+            width: 50
         })
         </script>
+
+        
     </body>
 </html>
