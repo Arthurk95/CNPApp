@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<nav><%- include header.ejs %></nav>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
+    <link rel='stylesheet' href='/stylesheets/custom-table.css' />
+    <link rel='stylesheet' href='/stylesheets/blockList.css' />
+    <link rel='stylesheet' href='/stylesheets/accordian.css' />
+    <link rel='stylesheet' href='/stylesheets/tabs.css' />
+    <link rel='stylesheet' href='/stylesheets/form.css' />
+    <link rel='stylesheet' href='/stylesheets/switch.css' />
+    <link rel='stylesheet' href='/stylesheets/ulList.css' />
+    <link rel='stylesheet' href='/stylesheets/checkbox.css' />
+    <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
+    <script src="/javascripts/utilityScripts.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/javascripts/jquery.prettydropdowns.js"></script>
+  </head>
+  <body>
+    <div id="accordion">      
+      <h3 class="accordion">Tasks</h3>
+        <div class="accordionPanel">
+          <ul id="tasksList" class="ulList">
+            <% if (tasks.length > 0) { %>            
+              <% tasks.forEach((task, index) => { %>
+                <li> 
+                  <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
+                  <p><%= task.NoteContent %></p> 
+                  <% if (task.Priority == 0) { %>
+                    <button class="greenButton" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
+                  <% } else if(task.Priority == 1) { %>
+                    <button class="yellowButton" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
+                  <% } else { %>
+                    <button class="redButton" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
+                  <% } %>
+                  <button class="darkRedButton" onclick="deleteTask('<%= task.TaskId %>')"><i class="far fa-trash-alt"></i></button>
+              <% }) %>
+              
+            <% } %>
+            <li class="addElement">
+              <a title="Add Task" onclick="addTask()">New Task +</a>
+            </li>
+          </ul>
+          <div id="newTaskForm" class="formWindow">
+            <!-- newStudentForm content -->
+            <div class="formWindow-content">
+              <span class="close" onclick="closeForm()">&times;</span>
+              <ul>
+                <li class="formTitle">Add a Task</li>
+                <li><input type="text" id="newTaskName" placeholder="Task Name"></li>
+                <li>
+                  <label for="cars">Select a priority</label>
+                  <select id="newTaskPriority">
+                    <option value=0>Low</option>
+                    <option value=1>Medium</option>
+                    <option value=2>High</option>
+                  </select>
+                </li>
+                <li><a class="formSubmitButton" id="newTaskSubmit" onclick="addTaskPost()">Add</a></li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      <h3 class="accordion">Maintenance Log</h3>
+        <div class="accordionPanel">
+          <ul id="comptasksList" class="ulList">
+            <% if (compTasks.length > 0) { %> 
+              <table class="customTable halfWidth">          
+                <tbody>
+                  <% compTasks.forEach((task, index) => {%>
+                  <tr>
+                    <td class="left">
+                      <%= task.NoteContent %>
+                    </td>
+                    <td class="right green thirdWidth">
+                      <%= task.stamp %>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+            <% } %>
+          </ul>
+        </div>
+    </div>
+
+    
+  </body>
+  <script>
+    $( function() {
+      $( "#accordion" ).accordion({
+        collapsible: true,
+        active: false
+      });
+    } );
+  </script>
+  <script>
+    $dropdown = $('.pretty-classic').prettyDropdown({
+        classic: true,
+        height: 50,
+        width: '10%',
+        customClass: 'arrow mediumFontSize',
+        hoverIntent: -1
+      });
+    // Get the modal
+    var formElement;
+
+    // Get the <span> element that closes the modal
+    var closeButton = document.getElementsByClassName("close");
+
+    // When the user clicks on the button, open the modal
+
+    function addTask(){
+      formElement = document.getElementById("newTaskForm");
+      formElement.style.display = "block";
+    }
+
+    function closeForm(){
+      formElement.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the form window, close it
+    window.onclick = function(event) {
+      if (event.target == formElement) {
+        formElement.style.display = "none";
+      }
+    }
+
+    function changePriority(task,cur) {
+      theUrl = window.location.href+'/changetask';
+      data = "id=" + task + "&priority=" + (cur + 1) % 3;
+      callback = reloadIt; 
+      httpPutAsync(theUrl,data,callback);  
+    }
+
+    function addTaskPost(){
+      var theUrl = window.location.href+'/addtask';
+      var data = "name=" + document.getElementById("newTaskName").value +
+      "&priority=" +  document.getElementById("newTaskPriority").value;
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
+
+    function deleteTask(task) {
+      var helper = convertBoolToInt(document.getElementById("helper").checked);
+      theUrl = window.location.href+'/deletetask';
+      data = "id=" + task;
+      callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
+    }
+    function taskComplete(element, task){
+      checkboxClicked(element);
+      $(element.parentElement.getElementsByTagName("button")).animate({width:'toggle'},200);
+      $(element.parentElement.getElementsByTagName("p")).animate({color: "#EEEEEE"},200);
+
+      $(element.parentElement).animate({backgroundColor: "#5E895F"}, 200);
+
+      
+      setTimeout(function(){
+        $(element.parentElement).slideUp("fast");
+        $(element).animate({bottom: "200px"}, 100);
+        //element.parentElement.style.display = "none";
+      }, 500);
+
+      theUrl = window.location.href+'/completetask';
+      data = "id=" + task + "&completed=" + 1;
+      callback = reloadIt; 
+      httpPutAsync(theUrl,data,callback); 
+
+    }
+  </script>
+</html>
