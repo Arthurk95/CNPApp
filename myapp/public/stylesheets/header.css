@@ -6,11 +6,13 @@
     text-align: left;
     margin-top: 0px;
     margin-bottom: 30px;
+    background: rgba(138, 138, 138, 0.1);
   }
   
   /* Each li is an element in the header, usually an <a> tag */
   .headerStyle li{
     display: inline; /* List everything horizontally */
+    
   }
   
   /* Actual header button styling */
@@ -31,7 +33,6 @@
 .currentPage {
     background-color: var(--blue3);
   }
-  
 
 .mobileHeader{
   display: none;
