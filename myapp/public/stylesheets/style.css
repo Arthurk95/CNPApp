@@ -130,6 +130,7 @@ a{
 .width20{width: 20% !important;}
 .width30{width: 30% !important;}
 .width40{width: 40% !important;}
+.width45{width: 45% !important;}
 .width50{width: 50% !important;}
 .width60{width: 60% !important;}
 .width70{width: 70% !important;}
@@ -249,6 +250,13 @@ a{
 .marginLeft{margin-left: 40px !important;}
 .marginRight{margin-right: 40px !important;}
 
+.marginTopSmall{margin-top: 6px !important;}
+.marginBottomSmall{margin-bottom: 6px !important;}
+.marginLeftSmall{margin-left: 6px !important;}
+.marginRightSmall{margin-right: 6px !important;}
+
+
+
 .displayNone{display: none !important;}
 .relative{position: relative;}
 .absolute{position: absolute;}
@@ -261,20 +269,24 @@ a{
 
 .flex{display: flex;}
 .flexColumn{flex-direction: column;}
+.flexStretch{justify-content: stretch; align-items: stretch;}
 
 .flexCenter{
-  justify-content: center;
-  align-content: center;
+  justify-content: center !important;
+  align-content: center !important;
 }
 
-.flexAlignCenter{align-content: center; align-items: center;}
+.flexCenterSelf{justify-self: center !important;}
+.flexCenterItems{justify-items: center !important;}
 
-.flexLeft{justify-content: flex-start;}
-.flexRight{justify-content: flex-end;}
-.spaceBetween{justify-content: space-between;}
+.flexAlignCenter{align-content: center !important; align-items: center !important;}
+
+.flexLeft{justify-content: flex-start !important;}
+.flexRight{justify-content: flex-end !important;}
+.spaceBetween{justify-content: space-between !important;}
 .spaceAround{
-  justify-content: space-around;
-  align-content: center;
+  justify-content: space-around !important;
+  align-content: center !important;
 }
 
 /* Use this for any buttons */
@@ -348,6 +360,7 @@ a{
   font-size: 4vw;
 }
 
+
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
 
@@ -399,6 +412,8 @@ input{
   padding: 10px 15px 10px 15px;
   font-size: 1.2em;
   -webkit-user-select: text;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 input::selection{
@@ -411,9 +426,11 @@ input:focus{
 
 textarea{
   border-style: none;
-  width: 100%;
   outline: none;
   font-size: 1.2em;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  width: 100%;
   padding: 10px 15px;
   box-shadow: inset 0px 0px 3px 0px var(--darkGray2);
   border-radius: 10px;

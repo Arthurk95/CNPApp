@@ -48,55 +48,68 @@
               <span class="close" onclick="closeForm()">&times;</span>
               
               <ul>
-                <li class="formTitleWithSwitch">
-                  <p>Add a Student</p>
-                  <div class="rightAlignFormElement">
+                <li class="flex flexAlignCenter width100">
+                  <div class="flexLeft">
                     <label for="fullDay" class="switchLabel">Full Day</label>
                     <label class="switch">
                       <input type="checkbox" id="fullDay" name="fullDay" checked="true">
                       <span class="slider round"></span>
                     </label>
                   </div>
+                  
+                  <p class="largeFont width70" style="margin: 0; text-align: center;">Add a Student</p>
                 </li>
                 
-                <li class="flexSpaceBetween width100">
-                  <input class="width30" name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name">
-                    <div class="flexSpaceBetween width60">
-                      <label class="mediumFontSize">Birthday:</label>
-                      <select id="year" class="pretty-classic" onchange="genDays();">
-                      </select>
-    
-                      <select id="month" class="pretty-classic" onchange="genDays();">
-                        <option value="01">Jan</option>
-                        <option value="02">Feb</option>
-                        <option value="03">Mar</option>
-                        <option value="04">Apr</option>
-                        <option value="05">May</option>
-                        <option value="06">Jun</option>
-                        <option value="07">Jul</option>
-                        <option value="08">Aug</option>
-                        <option value="09">Sep</option>
-                        <option value="10">Oct</option>
-                        <option value="11">Nov</option>
-                        <option value="12">Dec</option>
-                      </select>
-        
-                      <select id="day" class="pretty-classic">
-                      </select>
-                    </div>
+                <li class="flex spaceBetween width100">
+                  <input class="width40" name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
+                  <div class="flex flexRight flexAlignCenter width60">
+                    <label class="mediumFontSize">Birthday:</label>
+                    <select id="year" class="pretty-classic" onchange="genDays();">
+                    </select>
+  
+                    <select id="month" class="pretty-classic" onchange="genDays();">
+                      <option value="01">Jan</option>
+                      <option value="02">Feb</option>
+                      <option value="03">Mar</option>
+                      <option value="04">Apr</option>
+                      <option value="05">May</option>
+                      <option value="06">Jun</option>
+                      <option value="07">Jul</option>
+                      <option value="08">Aug</option>
+                      <option value="09">Sep</option>
+                      <option value="10">Oct</option>
+                      <option value="11">Nov</option>
+                      <option value="12">Dec</option>
+                    </select>
+      
+                    <select id="day" class="pretty-classic">
+                    </select>
+                  </div>
                 
                 </li>
-                <li><input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name"></li>
-                <li><input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email"></li>
-                
-                
-                <li><input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number"></li>
-                <li><input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name"></li>
-                <li><input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email"></li>
-                <li><input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number"></li>
-                <li><textarea onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea></li>
-                <li><textarea onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentNotes" placeholder="Other Notes"></textarea></li>
-                <ul class="week">
+                <li class="width100 flex spaceAround">
+                  <div class="flex flexColumn width45">
+                    <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
+                    <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
+                    <input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number">
+                  </div>
+
+                  <div class="flex flexColumn width45">
+                    <input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name">
+                    <input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email">
+                    <input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number">
+                  </div>
+                </li>
+                <li class="width100 flex spaceAround">
+                  <div class="flex flexColumn width45">
+                    <textarea onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
+                  </div>
+
+                  <div class="flex flexColumn width45">
+                    <textarea onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentNotes" placeholder="Other Notes"></textarea>
+                  </div>
+                </li>
+                <li><ul class="week">
                   <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
                   <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
                   <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
@@ -258,7 +271,7 @@
         classic: true,
         height: 50,
         width: '10%',
-        customClass: 'arrow mediumFontSize',
+        customClass: 'arrow mediumFontSize margins',
         hoverIntent: -1
       });
     // Get the modal

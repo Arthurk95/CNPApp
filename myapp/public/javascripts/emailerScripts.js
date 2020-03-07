@@ -49,14 +49,27 @@ function showStep(step){
 }
 
 function showStudentData(listElement, report, index){
-    currentStudentIndex = index;
+    
+    if(!listElement.classList.contains("approved")){
+
+        listElement.classList += " selected";
+    }
+    
     lastSelectedStudent.classList.remove("selected");
-    listElement.classList += "selected";
+    currentStudentIndex = index;
     lastSelectedStudent = listElement;
     populateData(report);
 }
 
 function populateData(report){
+    /*
+    if(report.approved == true && !stepTwoTitle.parentElement.classList.contains("approved")){
+        stepTwoTitle.parentElement.classList.add("approved")
+    }
+    else if(report.approved == 0){
+        stepTwoTitle.parentElement.classList.remove("approved");
+    }
+    */
     stepTwoTitle.innerHTML = report.name;
     
     $(activities).empty();
@@ -68,9 +81,9 @@ function populateData(report){
     }
 }
 
-function studentApproved(id){
-    lastSelectedStudent.classList.remove("selected");
-    lastSelectedStudent.classList += (" approved");
+function studentApproved(button){
+    button.parentElement.classList.add("green3-BG")
+    lastSelectedStudent.classList.add("approved");
 }
 
 function passToJS(r){
