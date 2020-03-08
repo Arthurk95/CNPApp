@@ -190,6 +190,7 @@ a{
 .lightPadding{padding: 5px !important;}
 .mediumPadding{padding: 10px !important;}
 .heavyPadding{padding: 15px !important;}
+.veryHeavyPadding{padding: 50px !important;}
 
 .insetShadowSmall{box-shadow: inset 0px 0px 2px var(--darkGray2) !important;}
 .insetShadowMedium{box-shadow: inset 0px 0px 6px 1px var(--darkGray2) !important;}
@@ -261,11 +262,15 @@ a{
 .relative{position: relative;}
 .absolute{position: absolute;}
 
+.borderBox{box-sizing: border-box !important;}
+
 .flexContainer{
   display: flex;
   padding: 30px;
   margin: 0;
 }
+
+.noMargin{margin: 0 !important;}
 
 .flex{display: flex;}
 .flexColumn{flex-direction: column;}
