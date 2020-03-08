@@ -8,19 +8,24 @@ var studentsList;
 var activities;
 var reports;
 var currentStudentIndex = 0;
+var MAX_STEPS = 3;
 
 
 // Init step two data for first student
 
 
 function toNextStep(){
-    currentStep++;
-    stepChange();
+    if(currentStep < MAX_STEPS){
+        currentStep++;
+        stepChange();
+    }
 }
 
 function toPreviousStep(){
-    currentStep--;
-    stepChange();
+    if(currentStep > 1){
+        currentStep--;
+        stepChange();
+    }
 }
 
 function stepChange(){
