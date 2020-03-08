@@ -30,59 +30,40 @@
                 }
             }
             
-            function fillReminders(remindersList){
-                var NUM_REMINDERS = 4;
-                var reminders = document.getElementById('reminders');
-                var select = document.createElement('select');
-
-                for(var i = 0; i < remindersList.length; i++){
-                    var option = document.createElement('option');
-
-                    option.text = remindersList[i].title;
-                    select.appendChild(option);
-                }
-
-                for(var i = 1; i <= NUM_REMINDERS; i++){
-                    var li = document.createElement('li');
-                    li.classList = "flex spaceBetween flexAlignCenter heavyPadding";
-                    var label = document.createElement('label');
-                    label.innerHTML = "Reminder " + i;
-                    li.append(label);
-                    li.append(select);
-                    reminders.append(li);
-                }
-
-                
-            }
         </script>
 
     </head>
     <body>
         <div id="mainEmailerContainer" class="emailerContainer flex spaceAround">
-            <div id="backButton" class="sideButton" onclick="toPreviousStep()"><i class="fas fa-chevron-left"></i></div>
-            <div id="stepOne" class="flexCenter flexColumn lightGray2-BG borderRadiusMedium shadowMedium width80">
+            <div  class="sideButton" onclick="toPreviousStep()"><i id="backButton" class="fas fa-chevron-left"></i></div>
+            <div id="stepOne" class="flexCenter flexColumn borderBox lightGray2-BG borderRadiusMedium shadowMedium width80">
                 <p class="title green4-BG">Step 1: Email Template</p>
 
-                <div class="heavyPadding">
+                <div class="veryHeavyPadding">
                     <ul class="flex flexColumn">
-                        <li>
+                        <li class="marginBottomSmall">
                             <label for="summary">Summary</label>
                             <textarea name="summary"></textarea>
                         </li>
-                        <li>
+                        <li class="marginBottomSmall">
                             <label for="amSnack">AM Snack</label>
                             <textarea name="amSnack"></textarea>
                         </li>
-                        <li>
+                        <li class="marginBottomSmall">
                             <label for="lunch">Lunch</label>
                             <textarea name="lunch"></textarea>
                         </li>
                     </ul>
 
-                    <ul id="reminders" class="flex flexColumn flexCenter heavyPadding width40">          
-                    </ul>
-                    <script>fillReminders(<%- JSON.stringify(reminders) %>)</script>   
-                
+                    <div id="remindersContainer" class="flexContainer borderRadiusMedium marginTop relative flexColumn flexCenter border1px darkGray3-border lightGray1-BG heavyPadding width40">          
+                        <div class="flex spaceBetween marginBottom width100 flexAlignCenter">
+                            <p class="mediumFont noMargin darkText">Reminders</p>
+                            <a class="addReminder" onclick="addReminder()"><i class="fas fa-plus"></i></a>
+                        </div>
+                        <ul id="reminders" class="flex flexColumn spaceBetween width100">
+
+                        </ul>
+                    </div>
                 </div>
                 
             </div>
@@ -157,7 +138,7 @@
                     </ul>
                 </div>
             </div>
-            <div id="nextButton" onclick="toNextStep()" class="sideButton"><i class="fas fa-chevron-right"></i></div>
+            <div onclick="toNextStep()" class="sideButton"><i id="nextButton" class="fas fa-chevron-right"></i></div>
         </div>
         <script>initEmailerVariables();
         
@@ -168,8 +149,30 @@
         </script>
 
         <script>
-            
+            var listOfReminders = <%- JSON.stringify(reminders) %>;
+            var numRemindersShown = 0;
+            function addReminder(){
+                numRemindersShown++;
+                var reminders = document.getElementById('reminders');
+                var select = document.createElement("select");
+                for(var i = 0; i < listOfReminders.length; i++){
+                    var option = document.createElement("option");
+                    option.text = listOfReminders[i].title;
+
+                    select.appendChild(option);
+                }
+
+                var label = document.createElement("label");
+                label.innerHTML = "Reminder " + numRemindersShown;
+                label.classList = "darkText";
+                var li = document.createElement("li");
+                li.classList = "flex spaceBetween flexAlignCenter lightPadding";
+                li.appendChild(label);
+                li.appendChild(select);
+                reminders.appendChild(li);
                 
+                $('select').selectmenu();
+            }
 
         </script>
         
