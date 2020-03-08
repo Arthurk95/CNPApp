@@ -28,24 +28,24 @@
 .emailerContainer .sideButton{
     display: flex;
     width: 5%;
-    border-radius: 8px;
-    background: rgba(82, 82, 82, 0.1);
-    border: 1px solid;
     padding: 0px 10px;
-    border-color: rgba(255, 255, 255, 0.1);
     font-size: 7vw;
-    color: var(--lightGray3);
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
 
-#backButton:hover{
-    background: rgba(255, 2, 2, 0.507);
+.emailerContainer .sideButton i{
+    transition: font-size 0.2s ease-in-out;
+    color: var(--lightGray3);
 }
 
-#nextButton:hover{
-    background: rgba(6, 158, 0, 0.5);
+.emailerContainer .sideButton i:hover{
+    font-size: 10vw;
+}
+
+.emailerContainer .sideButton i:active{
+    font-size: 10vw;
 }
 
 #stepTwoTitle{
@@ -175,6 +175,14 @@
     background: var(--blue2);
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
+}
+
+.addReminder{
+    outline: none;
+    border: none;
+    background: none;
+    color: var(--green3);
+    font-size: 40px;
 }
 
 /* Student's email was approved */
