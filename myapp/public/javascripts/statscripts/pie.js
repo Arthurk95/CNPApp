@@ -1,4 +1,4 @@
-function dashboard(id){
+function plotPie(id){
   // set the dimensions and margins of the graph
   var width = 450
       height = 450
@@ -7,8 +7,8 @@ function dashboard(id){
   // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
   var radius = Math.min(width, height) / 2 - margin
 
-  // append the svg object to the div called 'my_dataviz'
-  var svg = d3.select("#my_dataviz2")
+  // append the svg object to the div called 'pie'
+  var svg = d3.select("#pie")
     .append("svg")
       .attr("width", width)
       .attr("height", height)
@@ -58,11 +58,15 @@ function dashboard(id){
       .exit()
       .remove()
 
+    // Initialize the plot with the first dataset
+    update(data1)
+    plotPie('#pie');
+
   }
 }
 
-function updateData() {
+//function updateData() {
   // Initialize the plot with the first dataset
-  update(data1)
-  dashboard('#pie');
-}
+  //update(data1)
+  //dashboard('#pie');
+//}
