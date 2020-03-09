@@ -11,6 +11,7 @@ var reports;
 var currentStudentIndex = 0;
 var MAX_STEPS = 3;
 var behaviors;
+var formElement;
 
 // Init step two data for first student
 
@@ -89,8 +90,15 @@ function populateData(report){
 }
 
 function studentApproved(button){
-    button.parentElement.classList.add("green3-BG")
+    document.getElementById('stepTwoTitle').classList.add("green3-BG");
     currentStudentElement.classList.add("approved");
+
+    // get all values from form text fields and shit
+    // post it to DB
+    // DO NOT RELOAD PAGE AS CALLBACK
+
+
+    formElement.style.display = "none";
 }
 
 function passToJS(r){
@@ -102,6 +110,8 @@ function initEmailerVariables(){
     stepTwo = document.getElementById("stepTwo");
     stepThree = document.getElementById("stepThree");
     currentStudentElement = document.getElementById("student0");
+    console.log(reports);
+    currentStudentData = reports[0];
     stepTwoTitle = document.getElementById("stepTwoTitle");
     studentsList = document.getElementById("listOfStudents");
     activities = document.getElementById("activitiesList");
@@ -143,7 +153,7 @@ function studentSaved(clickedButton, behaviors){
     
 
     /* Pass behaviors to DB for the student ID
-    databaseWizardy(currentSelectedStudent.StudentId, studentsBehaviors);
+    databaseWizardy(currentStudentData.id, studentsBehaviors);
     */
 
     clickedButton.classList.remove("blue2-BG");
@@ -152,4 +162,21 @@ function studentSaved(clickedButton, behaviors){
     icon.classList.remove("blue3-BG");
     icon.classList.add("green3-BG");
     clickedButton.getElementsByTagName("p")[0].innerHTML = "Saved";
+}
+
+function openReview(){
+    var studentBehaviors; // = getStudentBehaviorsFromDB(currentStudentData.id);
+    var summary; // = getSummaryDB(currentStudentData.id);
+    formElement = document.getElementById('reviewForm');
+    var summaryElement = document.getElementById('summaryText');
+    formElement.style.display = "block";
+    
+    formElement.getElementsByClassName('formTitle')[0].innerHTML = currentStudentData.name;
+    
+    for(var i = 0; i < studentBehaviors.length; i++){
+        summaryElement.append(studentBehaviors[i].name);
+    }
+
+
+
 }
