@@ -161,7 +161,7 @@
                 <li class="formTitle">Edit Activity</li>
                 <li><p id="editActivityID" style="display: none"></p></li>
                 <li><input type="text" id="editActivityInput" value=""></li>
-                <li><a class="formSubmitButton" onclick="passEditActToPost()">Save Changes</a></li>
+                <li class="flexCenter"><a class="formSubmitButton" onclick="passEditActToPost()">Save Changes</a></li>
               </ul>
             </div>
           </div>
@@ -183,7 +183,7 @@
                   </div>
                 </li>
                 <li><input type="text" id="newActivityName" placeholder="Activity Name"></li>
-                <li><a class="formSubmitButton" id="newActivitySubmit" onclick="callPostAct()">Create</a></li>
+                <li class="flexCenter"><a class="formSubmitButton" id="newActivitySubmit" onclick="callPostAct()">Create</a></li>
               </ul>
             </div>
           </div>
@@ -266,9 +266,6 @@
       }
     }
 
-    function closeForm(){
-      formElement.style.display = "none";
-    }
     function editActivity(id, oldName){
       //take new input
       formElement = document.getElementById("editActivityForm");

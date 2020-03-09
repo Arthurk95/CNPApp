@@ -4,6 +4,7 @@
     <head>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
+        <link rel='stylesheet' href='/stylesheets/form.css' />
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -43,15 +44,15 @@
                     <ul class="flex flexColumn">
                         <li class="marginBottomSmall">
                             <label for="summary">Summary</label>
-                            <textarea name="summary"></textarea>
+                            <textarea onkeyup="textAreaAdjust(this)" name="summary"></textarea>
                         </li>
                         <li class="marginBottomSmall">
                             <label for="amSnack">AM Snack</label>
-                            <textarea name="amSnack"></textarea>
+                            <textarea onkeyup="textAreaAdjust(this)" name="amSnack"></textarea>
                         </li>
                         <li class="marginBottomSmall">
                             <label for="lunch">Lunch</label>
-                            <textarea name="lunch"></textarea>
+                            <textarea onkeyup="textAreaAdjust(this)" name="lunch"></textarea>
                         </li>
                     </ul>
 
@@ -72,14 +73,23 @@
                 <div class="width70 lightGray2-BG borderRadiusMedium"> <!-- Left column -->
                     <div class="relative title blue2-BG flex spaceBetween">
                         <p id="stepTwoTitle" class=""></p>
-                        <div class="stepButton green2-BG" onclick="studentApproved(this)">
-                            <p>Approve</p>
-                            <div class="buttonIcon green3-BG">
-                                <i class="fas fa-check"></i>
-                            </div>
+                        <div class="stepButton green2-BG" onclick="openReview()">
+                            <p>Review</p>
                         </div>
                     </div>
-                    
+
+                    <div id="reviewForm" class="formWindow">
+                        <div class="formWindow-content">
+                          <span class="close" onclick="closeForm()">&times;</span>
+                          <ul>
+                            <li class="formTitle"></li>
+                            <li><textarea onkeyup="textAreaAdjust(this)" id="summaryText"></textarea></li>
+                            <li></li>
+                            <li class="flexCenter"><a class="formSubmitButton" onclick="studentApproved(this)">Approve</a></li>
+                          </ul>
+                        </div>
+                    </div>
+
                     <div class="heavyPadding"> <!-- activities and dropdowns -->
                         <div class="flex spaceBetween">
                             <div id="activities" class="width60">
@@ -97,9 +107,18 @@
                                         </select>
                                         
                                     </div>
-                                    <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>)</script>
+                                    <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>);</script>
                                         
                                 <% }) %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flexContainer flexRight">
+                        <div class="stepButton blue2-BG" onclick="studentSaved(this, <%= JSON.stringify(behaviors) %>);">
+                            <p>Save</p>
+                            <div class="buttonIcon blue3-BG">
+                                <i class="fas fa-check"></i>
                             </div>
                         </div>
                     </div>
@@ -174,6 +193,13 @@
                 $('select').selectmenu();
             }
 
+
+            // When the user clicks anywhere outside of the form window, close it
+            window.onclick = function(event) {
+                if (event.target == formElement) {
+                    formElement.style.display = "none";
+                }
+            }
         </script>
         
     </body>

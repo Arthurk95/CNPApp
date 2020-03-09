@@ -47,3 +47,10 @@ function textAreaAdjust(textArea) {
     textArea.style.height = "1px";
     textArea.style.height = (textArea.style.fontSize + textArea.scrollHeight)+"px";
 }
+
+
+/* FORM FUNCTIONS */
+
+function closeForm(){
+    formElement.style.display = "none";
+  }
