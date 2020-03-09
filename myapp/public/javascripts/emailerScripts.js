@@ -110,7 +110,6 @@ function initEmailerVariables(){
     stepTwo = document.getElementById("stepTwo");
     stepThree = document.getElementById("stepThree");
     currentStudentElement = document.getElementById("student0");
-    console.log(reports);
     currentStudentData = reports[0];
     stepTwoTitle = document.getElementById("stepTwoTitle");
     studentsList = document.getElementById("listOfStudents");
@@ -138,7 +137,6 @@ function studentSaved(clickedButton, behaviors){
 
     var studentsBehaviors = [];
 
-    console.log(behaviors);
 
     for(var i = 0; i < behaviors.length; i++){
         var sel = document.getElementById(behaviors[i].name);
