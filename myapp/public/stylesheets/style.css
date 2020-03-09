@@ -535,6 +535,11 @@ svg {
   position: sticky;
 }
 
+#navigationPie{
+  display: flex;
+  position: inherit;
+}
+
 li {
   float: center;
 }
