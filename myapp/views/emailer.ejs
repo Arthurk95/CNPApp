@@ -97,9 +97,18 @@
                                         </select>
                                         
                                     </div>
-                                    <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>)</script>
+                                    <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>);</script>
                                         
                                 <% }) %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flexContainer flexRight">
+                        <div class="stepButton blue2-BG" onclick="studentSaved(this, <%= JSON.stringify(behaviors) %>);">
+                            <p>Save</p>
+                            <div class="buttonIcon blue3-BG">
+                                <i class="fas fa-check"></i>
                             </div>
                         </div>
                     </div>

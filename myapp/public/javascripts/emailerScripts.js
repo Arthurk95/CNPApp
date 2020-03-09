@@ -2,14 +2,15 @@ var currentStep = 1;
 var stepOne;
 var stepTwo;
 var stepThree;
-var lastSelectedStudent;
+var currentStudentElement;
+var currentStudentData;
 var stepTwoTitle;
 var studentsList;
 var activities;
 var reports;
 var currentStudentIndex = 0;
 var MAX_STEPS = 3;
-
+var behaviors;
 
 // Init step two data for first student
 
@@ -60,9 +61,9 @@ function showStudentData(listElement, report, index){
         listElement.classList += " selected";
     }
     
-    lastSelectedStudent.classList.remove("selected");
+    currentStudentElement.classList.remove("selected");
     currentStudentIndex = index;
-    lastSelectedStudent = listElement;
+    currentStudentElement = listElement;
     populateData(report);
 }
 
@@ -75,6 +76,7 @@ function populateData(report){
         stepTwoTitle.parentElement.classList.remove("approved");
     }
     */
+    currentStudentData = report;
     stepTwoTitle.innerHTML = report.name;
     
     $(activities).empty();
@@ -88,7 +90,7 @@ function populateData(report){
 
 function studentApproved(button){
     button.parentElement.classList.add("green3-BG")
-    lastSelectedStudent.classList.add("approved");
+    currentStudentElement.classList.add("approved");
 }
 
 function passToJS(r){
@@ -99,13 +101,13 @@ function initEmailerVariables(){
     stepOne = document.getElementById("stepOne");
     stepTwo = document.getElementById("stepTwo");
     stepThree = document.getElementById("stepThree");
-    lastSelectedStudent = document.getElementById("student0");
+    currentStudentElement = document.getElementById("student0");
     stepTwoTitle = document.getElementById("stepTwoTitle");
     studentsList = document.getElementById("listOfStudents");
     activities = document.getElementById("activitiesList");
-    if(lastSelectedStudent != null){
-        lastSelectedStudent.classList += " selected";
-        stepTwoTitle.innerHTML = lastSelectedStudent.innerHTML;
+    if(currentStudentElement != null){
+        currentStudentElement.classList += " selected";
+        stepTwoTitle.innerHTML = currentStudentElement.innerHTML;
         initActivities();
     }
     else{
@@ -120,4 +122,34 @@ function initActivities(){
         li.innerHTML = reports[0].listOfActivities[i].ActivityName;
         activities.appendChild(li);
     }
+}
+
+function studentSaved(clickedButton, behaviors){
+
+    var studentsBehaviors = [];
+
+    console.log(behaviors);
+
+    for(var i = 0; i < behaviors.length; i++){
+        var sel = document.getElementById(behaviors[i].name);
+        if(sel.selectedIndex != undefined){
+            studentsBehaviors.push(sel.options[sel.selectedIndex].text);
+        }
+        else {
+            studentsBehaviors.push("None");
+        }
+
+    }
+    
+
+    /* Pass behaviors to DB for the student ID
+    databaseWizardy(currentSelectedStudent.StudentId, studentsBehaviors);
+    */
+
+    clickedButton.classList.remove("blue2-BG");
+    clickedButton.classList.add("green2-BG");
+    var icon = clickedButton.getElementsByClassName("buttonIcon")[0];
+    icon.classList.remove("blue3-BG");
+    icon.classList.add("green3-BG");
+    clickedButton.getElementsByTagName("p")[0].innerHTML = "Saved";
 }
