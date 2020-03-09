@@ -63,7 +63,11 @@ function plotPie(id){
     plotPie('#pie');
 
   }
-}
+};
+
+function getData() {
+  ploatPie('#pie');
+};
 
 //function updateData() {
   // Initialize the plot with the first dataset
