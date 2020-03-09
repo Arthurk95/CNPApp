@@ -58,6 +58,7 @@ function bottomLayer(res,Students,con){
   reminder1 = {title: "Book Order", contents: "Book orders for our schloastic book club are due on April 1"}
   reminder2 = {title: "March 9 Closure", contents: "Reminder that CNP will be closed on March 9 and 10"}
   Reminders.push(reminder1, reminder2);
+  console.log(Reminders);
   res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders });
 }
   module.exports = router;
