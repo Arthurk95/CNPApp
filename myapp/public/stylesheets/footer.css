@@ -26,10 +26,9 @@
     text-decoration: none;
     display: inline-block;
     font-size: 3em;
-    width: 30vw;
+    justify-self: stretch;
     padding: 12px 80px;
     color: var(--lightGray1);
-    background-color: var(--studentsColor);
 }
 
 .studentFooter a:hover{
@@ -47,36 +46,47 @@
     }
 
     /* Make the big footer buttons full width on small screens */
-    .studentFooter a{
-        font-size: 10vw;
+    .studentFooter .twoButtons a{
+        font-size: 8vw;
         padding: 4vh 0 4vh 0;
-    }
-
-    .studentFooter #submitButton a{
-        margin: 0 !important;
         width: 50%;
-    }
-
-    .studentFooter #selectButton{
-        width: 100%;
     }
 
     .studentFooter li{
         margin: 0;
         width: 100%;
     }
+
+    .studentFooter .titleWithTwoButtons{
+        width: 100%;
+    }
+
+    .studentFooter .titleWithTwoButtons a{ font-size: 5vw !important;}
+    
+    .studentFooter .smallerFont{
+        font-size: 6vw !important; 
+    }
+
+    .studentFooter .noClick{ 
+        width: 40vw !important;}
+    
+    .studentFooter .titleWithTwoButtons a{
+        width: 20vw;
+    }
 }
 
-.backSubmitButton{
+.studentFooter .twoButtons{
     display: none;
-    justify-content: space-evenly;
-    align-items: stretch;
+    justify-content: center;
     flex-wrap: nowrap;
 }
 
-#backButton{
-    background: var(--reportsColor);
+.studentFooter .titleWithTwoButtons{
+    display: none;
+    justify-content: center;
+    flex-wrap: nowrap;
 }
+
 
 #backButton:hover{
     background: var(--reportsColorDark);
@@ -85,3 +95,13 @@
 #backButton:active{
     background: var(--reportsColorDark);
 }
+
+
+
+.studentFooter .noClick{
+    color: var(--lightGray2);
+    cursor: default; 
+    border-right: 3px solid var(--darkGray2);
+}
+
+.noClick:hover{background-color: var(--darkGray3) !important;}
