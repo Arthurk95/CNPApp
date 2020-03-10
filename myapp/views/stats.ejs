@@ -12,6 +12,8 @@
     <!-- Load d3.js -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
 
     <!-- Color scale -->
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -45,7 +47,7 @@
     </div> <!-- end navigation -->
 
     <!-- PIE CHART -->
-    <div class="chart" id="thePie">
+    <div class="chart" id="pie">
       <h1>Pie Chart</h1>
       <!-- Add 2 buttons -->
       <button onclick="update(data1)">Data 1</button>
@@ -171,6 +173,15 @@
         })
       </script>
     </div> <!-- end Line -->
+
+    <!-- HEAT MAP -->
+      <div class="chart" id="heat">
+          <h1>Heat Map</h1>
+
+      <!--     <div id="heat"></div>--> 
+      <!--     <div id="dataset-picker">--> 
+      <!-- </div>--> 
+    </div> <!-- end heat --> 
     
 
 
@@ -181,7 +192,9 @@
 
     <!-- local javascript -->
     <script type="text/javascript" src="javascripts/statscripts/pie.js"></script>
+    <script type="text/javascript" src="javascripts/statscripts/line.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/navigation.js"></script>
+    <script type="text/javascript" src="javascripts/statscripts/heat.js"></script>
   </body>
 
 </html>

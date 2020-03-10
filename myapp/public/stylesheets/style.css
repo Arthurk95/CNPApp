@@ -514,7 +514,7 @@ textarea:focus{
 
 /* stats */
 .chart{
-  color:white;
+  color: rgb(255, 255, 255);
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 40px;
@@ -524,6 +524,27 @@ textarea:focus{
 svg {
   background-color: rgba(255, 255, 255, 0.9);
 }
+
+
+/* heat map  */
+rect.bordered {
+  stroke: #E6E6E6;
+  stroke-width:2px;   
+}
+
+text.mono {
+  font-size: 9pt;
+  font-family: Consolas, courier;
+  fill: #aaa;
+}
+
+text.axis-workweek {
+  fill: #000;
+}
+
+text.axis-worktime {
+  fill: #000;
+} 
 
 /* Navigation styling */
 #navigation {
