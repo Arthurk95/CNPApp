@@ -50,11 +50,28 @@ function bottomLayer(res,Students,){
     behave = behave[0];
     var Behaviors = [];
     if(behave.length == 0){
-      Behaviors.push({name: 'No behaviors in database:', op1: 'beep', op2: 'boop', op3: 'None'});
+      Behaviors.push({name: 'No behaviors in database:'});
     }
     else{
       behave.forEach((element) => {
-        Behaviors.push({name: element.NameOf, op1: element.CategoryOne, op2: element.CategoryTwo, op3: element.CategoryThree, op4: element.CategoryFour, op5: element.CategoryFive});
+        bObj = {name: element.NameOf};
+        if(element.CategoryOne != "" && element.CategoryOne != null){
+          bObj.op1 = element.CategoryOne;
+        }
+        if(element.CategoryTwo != "" && element.CategoryTwo != null){
+          bObj.op2 = element.CategoryTwo;
+        }
+        if(element.CategoryThree != "" && element.CategoryThree != null){
+          bObj.op3 = element.CategoryThree;
+        }
+        if(element.CategoryFour != "" && element.CategoryFour != null){
+          console.log(element.CategoryFour);
+          bObj.op4 = element.CategoryFour;
+        }
+        if(element.CategoryFive != "" && element.CategoryFive != null){
+          bObj.op5 = element.CategoryFive;
+        }
+        Behaviors.push(bObj);
       })
     }
     var get_reminders = "CALL ShowUnhiddenRemindersObject();";
@@ -62,7 +79,7 @@ function bottomLayer(res,Students,){
       remind = remind[0];
       var Reminders = [];
       if(remind.length == 0){
-        Reminders.push({title: "No reminders in database", contents: "beep boop"});
+        Reminders.push({title: "No reminders in database"});
       }
       else{
         remind.foreach((element) => {
