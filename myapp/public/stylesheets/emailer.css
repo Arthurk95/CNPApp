@@ -228,7 +228,7 @@
 }
 
 .contentWithSidebar .sidebar{
-    align-self: flex-end;
+    align-self: flex-start;
     min-width: 150px;
     width: 20%;
     background: var(--lightGray2);
@@ -245,10 +245,6 @@
     margin-bottom: 0px;
     padding: 6px;
     color: var(--darkGray3);
-}
-
-.emailerContainer .studentsColumn{
-    
 }
 
 @media screen and (max-width: 1200px){
