@@ -69,8 +69,8 @@
                 
             </div>
 
-            <div id="stepTwo" class="flex spaceAround displayNone width100">
-                <div class="width70 lightGray2-BG borderRadiusMedium"> <!-- Left column -->
+            <div id="stepTwo" class="contentWithSidebar displayNone">
+                <div class="content lightGray2-BG borderRadiusMedium"> <!-- Left column -->
                     <div class="relative title blue2-BG flex spaceBetween">
                         <p id="stepTwoTitle" class=""></p>
                         <div class="stepButton green2-BG" onclick="openReview()">
@@ -99,12 +99,15 @@
                                 </ul>
                             </div>
 
-                            <div id="" class="flex flexColumn flexCenter heavyPadding">
+                            <!-- Behavior dropdowns -->
+                            <div id="" class="flex flexColumn flexCenter heavyPadding width70">
                                 <% behaviors.forEach((behavior, index) => { %>
-                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottomSmall">
+                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottomSmall flexWrap">
                                         <label for="<%= behavior.name %>"><%= behavior.name %></label>
-                                        <select name="<%= behavior.name %>" class="pretty-classic">
+                                        
+                                        <select name="<%= behavior.name %>" class="width20">
                                         </select>
+                                        
                                         
                                     </div>
                                     <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>);</script>
@@ -125,7 +128,7 @@
                 </div>
                 
                 <!-- Right column (students) -->
-                <div class="lightGray2-BG heavyPadding width20 borderRadiusMedium">
+                <div class="sidebar">
                     <ul id="listOfStudents" class="studentsList" >
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>
@@ -140,11 +143,11 @@
                     
             </div>
 
-            <div id="stepThree" class="flex spaceAround displayNone width100">
-                <div class="width70 lightGray2-BG borderRadiusMedium">
-
+            <div id="stepThree" class="contentWithSidebar displayNone">
+                <div class="content lightGray2-BG borderRadiusMedium">
+                    <p>no idea what to put here</p>
                 </div>
-                <div class="lightGray2-BG heavyPadding width20 borderRadiusMedium">
+                <div class="sidebar">
                     <ul id="listOfStudents" class="studentsList" >
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>

@@ -264,6 +264,9 @@ a{
 
 .borderBox{box-sizing: border-box !important;}
 
+.flexWrap {flex-wrap: wrap !important;}
+.flexWrapReverse{flex-wrap: wrap-reverse !important;}
+
 .flexContainer{
   display: flex;
   padding: 30px;
@@ -292,6 +295,10 @@ a{
 .spaceAround{
   justify-content: space-around !important;
   align-content: center !important;
+}
+
+.ui-selectmenu-button.ui-button{
+  width: 10vw !important;
 }
 
 /* Use this for any buttons */
