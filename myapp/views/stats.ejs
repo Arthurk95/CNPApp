@@ -50,8 +50,15 @@
     <div class="chart" id="pie">
       <h1>Pie Chart</h1>
       <!-- Add 2 buttons -->
-      <button onclick="update(data1)">Data 1</button>
-      <button onclick="update(data2)">Data 2</button>
+      <button onclick="makePie('#pie')">Data 1</button>
+      <script>
+      function makePie(id){
+        let pie1 = new thePie(id);
+        pie1.plotPie(id);
+        console.log(pie1);
+      };
+      </script>
+      <button onclick="update('data2')">Data 2</button>
 
       <div id="navigationPie">
       <ul class="navbar-nav">
@@ -194,7 +201,7 @@
     <script type="text/javascript" src="javascripts/statscripts/pie.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/line.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/navigation.js"></script>
-    <script type="text/javascript" src="javascripts/statscripts/heat.js"></script>
+    <!--<script type="text/javascript" src="javascripts/statscripts/heat.js"></script>-->>
   </body>
 
 </html>
