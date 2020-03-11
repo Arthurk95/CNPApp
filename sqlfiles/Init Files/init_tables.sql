@@ -20,7 +20,7 @@ CREATE TABLE Relatives (
 
 CREATE TABLE ClassSession (
     StudentId INT NOT NULL,
-    CurrentDate DATE NOT NULL DEFAULT (CURRENT_DATE),
+    CurrentDate date NOT NULL DEFAULT NOW(),
 	Absent BOOL NOT NULL DEFAULT 0,
     FOREIGN KEY (StudentId) REFERENCES Students(StudentId),
     PRIMARY KEY(StudentId, CurrentDate)
@@ -30,6 +30,7 @@ CREATE TABLE Activities(
     ActivityId INT NOT NULL AUTO_INCREMENT,
     ActivityName VARCHAR(255) NOT NULL,
 	Hidden BOOL NOT NULL DEFAULT 0,
+	Helper BOOL NOT NULL DEFAULT 0,
     PRIMARY KEY (ActivityID)
 );
 
@@ -46,15 +47,8 @@ CREATE TABLE DailyActivites (
 CREATE TABLE Behavior (
 	StudentId INT NOT NULL,
     CurrentDate DATE NOT NULL,
-    SleepingPattern VARCHAR(45),
-	SleepingPatternNote VARCHAR(255),
-    EatingHabits VARCHAR(45),
-	EatingHabitsNote VARCHAR(255),
-    Attitude VARCHAR(45),
-	AttitudeNote VARCHAR(255),
-    RestRoomActivity VARCHAR(45),
-	RestRoomActivityNumber INT,
-	RestRoomActivityNote VARCHAR(255)
+	RestroomActivityNumber INT,
+	RestroomAccidentNumber INT,
     FOREIGN KEY (StudentId, CurrentDate) REFERENCES ClassSession(StudentId, CurrentDate),
     PRIMARY KEY(StudentId, CurrentDate)
 );
@@ -146,3 +140,12 @@ CREATE TABLE DailySummary (
 	MainParagraphs VARCHAR(5000),
 	PRIMARY KEY (Dates)
   );
+  
+  CREATE TABLE Admins(
+	AdminId INT NOT NULL AUTO_INCREMENT,
+	Username VARCHAR(45) NOT NULL,
+    Passwords VARCHAR(512) NOT NULL,
+    Email VARCHAR(45) NOT NULL,
+    Names VARCHAR(45) NOT NULL,
+    PRIMARY KEY (AdminId)
+);

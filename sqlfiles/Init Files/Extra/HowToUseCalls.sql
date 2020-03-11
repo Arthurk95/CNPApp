@@ -1,7 +1,7 @@
 CALL AddDailyActivity(39, 57);/*Student ID followed by Activity ID*/
 CALL AddDailySummary("Send in summary here");/*Takes in a long string and saves it a daily summary user must write one per day*/
 CALL AddDailyLunch("talk about lunch here");/*user write lunch every day here*/
-CALL AddDailyAmFood("talk about snacks");/* \user writes about snacks eaten*/
+CALL AddDailyAmFood("talk about snacks");/* user writes about snacks eaten*/
 CALL AddTemplateObject("title","option 1","option 2","option 3","option 4","option 5");/*ability to create a new template to add at the begining of an email*/
 CALL AddRemindersObject("title","long reminder here")/*creates a resueable reminder*/
 CALL AddWeatherData("clear", "clear skys", 288.32, 284.32, 282.15, 293.45, 1000, 40, 4, 350, 7);/*main, description, temp, feels like, min temp, max temp, pressure, humidity, wind speed, wind direction, gust*/
@@ -43,3 +43,9 @@ CALL UnhideTemplateObject(4);/*template id*/
 CALL UnhideRemindersObject(2);/*reminders id*/
 CALL UpdateStudent(39, "Student Name", "Parent Name1", "ParentEmail@email.com", "Parent Name 2", "Parent2Email@email.com", 0,1,0,1,0,0,0);/* very simmilar to CreateNewStudentFinal but updates information and takes in the value of a StudentID at the begining of the call*/
 CALL UploadStudentImg("file.name");/*enters a students picture reference into database*/
+CALL ShowFinish6MonthTask();/* pulls all finished tasks in a 6 month period*/
+CALL CreateNewTask(1, "task name/info");
+CALL CompleteTask(1);/* task number*/
+CALL ShowAllUnfinishedTasks();
+CALL DeleteTask(1);/*task number*/
+CALL UpdateTaskPriority(1);/*Task number*/
