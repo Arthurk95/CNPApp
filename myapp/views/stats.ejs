@@ -52,13 +52,19 @@
       <!-- Add 2 buttons -->
       <button onclick="makePie('#pie')">Data 1</button>
       <script>
+      var hello = [];
       function makePie(id){
         let pie1 = new thePie(id);
+        hello.push(pie1);
         pie1.plotPie(id);
-        console.log(pie1);
       };
       </script>
-      <button onclick="update('data2')">Data 2</button>
+      <button onclick="changePie('data2')">Data 2</button>
+      <script>
+        function changePie(name){
+          hello.forEach((element) => {element.update({a: 6, b: 16, c:20, d:14, e:19, f:12, g:20, h:5});});
+        }
+      </script>
 
       <div id="navigationPie">
       <ul class="navbar-nav">
@@ -84,10 +90,9 @@
 
       <!-- Initialize a select button -->
       <select id="selectButton"></select>
-
+      <!--<button onclick=makeLine()>hi</button> -->
       <!-- Create a div where the graph will take place -->
-      <div id="my_dataviz"></div>
-
+      <div id="my_dataviz1"></div>
       <script>
 
         // set the dimensions and margins of the graph
@@ -96,7 +101,7 @@
             height = 400 - margin.top - margin.bottom;
         
         // append the svg object to the body of the page
-        var svg = d3.select("#my_dataviz")
+        var svg = d3.select("#my_dataviz1")
           .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -179,6 +184,16 @@
             })
         })
       </script>
+      <script>
+        function makeLine(){
+          console.log("hi");
+
+          let myLine = new theLine();
+          hello.push(myLine);
+          myLine.plotLine();
+        }
+      </script>
+      
     </div> <!-- end Line -->
 
     <!-- HEAT MAP -->
