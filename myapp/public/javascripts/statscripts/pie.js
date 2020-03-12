@@ -1,8 +1,12 @@
-class thePie{
+class thePie {
+
   color = null; 
   radius = null;
   svg = null;
-  constructor(id){
+
+  constructor(id) {
+    pieOptions();
+
     // set the dimensions and margins of the graph
     this.width = 450;
     this.height = 450;
@@ -10,30 +14,32 @@ class thePie{
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
+
      // set the color scale
     this.color = d3.scaleOrdinal()
      .domain(["a", "b", "c", "d", "e", "f"])
      .range(d3.schemeDark2);
 
+    // append the svg object to the div called 'pie'
     this.svg = d3.select("#pie")
       .append("svg")
         .attr("width", this.width)
         .attr("height", this.height)
       .append("g")
         .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");
-  }
-  plotPie(id){
-    
-    
-    // append the svg object to the div called 'pie'
-    
 
+  }
+
+  plotPie(id) {
+    
     // create 2 data_set
     var data1 = {a: 9, b: 20, c:30, d:8, e:12}
     var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
 
-    this.update(data1)
+    this.update(data1);
+    console.log("updated data 1 from plotPie");
   };
+
   update(data) {
     var parentObject = this;
     // Compute the position of each group on the pie:
@@ -73,6 +79,28 @@ class thePie{
 
   };
 };
+
+function pieOptions() {  
+  var myDiv = document.getElementById("pie");  
+    
+  // creating button element  
+  var button1 = document.createElement('BUTTON');
+  var button2 = document.createElement('BUTTON');  
+    
+  // creating text to be 
+  //displayed on button 
+  var text1 = document.createTextNode("Button1"); 
+  var text2 = document.createTextNode("Button2");
+    
+  // appending text to button 
+  button1.appendChild(text1);
+  button2.appendChild(text2); 
+    
+  // appending button to div 
+  myDiv.appendChild(button1);
+  myDiv.appendChild(button2);
+};
+
 function getData() {
   plotPie('#pie');
 };
