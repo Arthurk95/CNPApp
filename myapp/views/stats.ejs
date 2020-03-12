@@ -205,7 +205,20 @@
       <!-- </div>--> 
     </div> <!-- end heat --> 
     
-
+    <script>
+      getData("Students","Activities", "14", 'clear sky',);
+      function getData(selection, beta, id, weather){
+        var today = new Date();
+        theUrl = window.location.href+'/getdata';
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + '2020-02-27' + "&end=2020-03-09";
+        callback = gotData; 
+        httpPostAsync(theUrl,data,callback); 
+      }
+      function gotData(data){
+        console.log("prime");
+        console.log(data);
+      }
+    </script>
 
     <!-- bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
