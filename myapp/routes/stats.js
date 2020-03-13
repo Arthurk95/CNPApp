@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('stats', { title: 'Stats' });
+  var sql = "SELECT MIN(CurrentDate) as startDate FROM cnp_data.DailyActivities;";
+  con.query(sql, function(err,result){
+    res.render('stats', { title: 'Stats' , startDate: result[0].startDate});
+  });
 });
 
 router.post('/getdata', function(req, res, next) {
@@ -17,7 +20,7 @@ router.post('/getdata', function(req, res, next) {
     if(prime == "Students"){
       if(beta == "Activities"){
         sql = "SELECT * FROM cnp_data.Students p, cnp_data.Activities b, " + 
-         "cnp_data.DailyActivities da WHERE p.StudentId = da.StudentId and da.ActivityId = b.ActivityId and p.StudentId = " + id + " and da.CurrentTime BETWEEN '" + start + "' AND '" + end + "';";
+         "cnp_data.DailyActivities da WHERE p.StudentId = da.StudentId and da.ActivityId = b.ActivityId and p.StudentId = " + id + " and da.CurrentDate BETWEEN '" + start + "' AND '" + end + "';";
         sql2 = "SELECT * FROM cnp_data.Activities;";
       }
       if(beta == "Behavior" || beta == "ClassSession"){
@@ -26,17 +29,17 @@ router.post('/getdata', function(req, res, next) {
       }
       if(beta == "Friends"){
         sql = "SELECT * FROM cnp_data.Students p, cnp_data.Activities b, " + 
-        "cnp_data.DailyActivities da WHERE p.StudentId = da.StudentId and da.ActivityId = b.ActivityId and p.StudentId = " + id + " and da.CurrentTime BETWEEN '" + start + "' AND '" + end +
+        "cnp_data.DailyActivities da WHERE p.StudentId = da.StudentId and da.ActivityId = b.ActivityId and p.StudentId = " + id + " and da.CurrentDate BETWEEN '" + start + "' AND '" + end +
         "' UNION SELECT * FROM cnp_data.Students p, cnp_data.Activities b, cnp_data.DailyActivities da WHERE p.StudentId = da.StudentId and da.ActivityId = b.ActivityId and " +
         "p.StudentId != " + id + " and date_format(da.CurrentTime,'%Y-%m-%d %H:%i') IN (SELECT date_format(CurrentTime,'%Y-%m-%d %H:%i') FROM cnp_data.DailyActivities WHERE StudentId = " + 
-        id + " and da.CurrentTime BETWEEN " + start + " AND " + end +  ");";
+        id + " and da.CurrentDate BETWEEN " + start + " AND " + end +  ");";
         sql2 = "SELECT * FROM cnp_data.Students;";
       }
     }
     else if(prime == "Activities"){
       if(beta == "Students"){
         sql = "SELECT * FROM cnp_data.Activities p, cnp_data.Students b, " + 
-         "cnp_data.DailyActivities da WHERE p.StudentId = da.StudentId and da.ActivityId = b.ActivityId and p.ActivityId = " + id + " and da.CurrentTime BETWEEN '" + start + "' AND '" + end +  "';";
+         "cnp_data.DailyActivities da WHERE p.StudentId = da.StudentId and da.ActivityId = b.ActivityId and p.ActivityId = " + id + " and da.CurrentDate BETWEEN '" + start + "' AND '" + end +  "';";
         sql2 = "SELECT * FROM cnp_data.Students;";
       }
     }
@@ -58,6 +61,7 @@ router.post('/getdata', function(req, res, next) {
       }
     }
   }
+  console.log(sql);
   con.query(sql, function (err, primeVal) {
     con.query(sql2, function (err, betaVal) {
       if(weather == "all"){

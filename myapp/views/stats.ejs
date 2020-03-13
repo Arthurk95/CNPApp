@@ -28,16 +28,55 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+        
           <!-- Month selection -->
           <ul class="navbar-nav pull-right">
             <li class="nav-item" id="form">
               <div class="float-right">
                 <form id="myForm">
                   <label>Beginning Date</label>
-                  <select id="selectNumber"></select>
+                  <select id="syear" class="pretty-classic" onchange="sgenDays();">
+                  </select>
+
+                  <select id="smonth" class="pretty-classic" onchange="sgenDays();">
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+    
+                  <select id="sday" class="pretty-classic">
+                  </select>
                   <label>End Date</label>
-                  <select id="selectNumber2"></select>
+                  <select id="eyear" class="pretty-classic" onchange="egenDays();">
+                  </select>
+                  
+                  <select id="emonth" class="pretty-classic" onchange="egenDays();">
+                    <option value="01">Jan</option>
+                    <option value="02">Feb</option>
+                    <option value="03">Mar</option>
+                    <option value="04">Apr</option>
+                    <option value="05">May</option>
+                    <option value="06">Jun</option>
+                    <option value="07">Jul</option>
+                    <option value="08">Aug</option>
+                    <option value="09">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+    
+                  <select id="eday" class="pretty-classic">
+                  </select>
+                  <a onclick="getRecords('Students','Activities', '14', 'clear sky');">test data</a>
                 </form>
               </div> <!-- end month selection-->
             </li>
@@ -187,6 +226,7 @@
             })
         })
       </script>
+      <input id="hiddenstartDate" value="<%= startDate %>" style="display: none;"></input>
       <script>
         function makeLine(){
           console.log("hi");
@@ -209,17 +249,92 @@
     </div> <!-- end heat --> 
     
     <script>
-      getData("Students","Activities", "14", 'clear sky',);
-      function getData(selection, beta, id, weather){
+      
+      function getRecords(selection, beta, id, weather){
         var today = new Date();
+        var start = document.getElementById('syear').value + '-' + document.getElementById('smonth').value + '-' + document.getElementById('sday').value;
+        var end = document.getElementById('eyear').value + '-' + document.getElementById('emonth').value + '-' + document.getElementById('eday').value;
         theUrl = window.location.href+'/getdata';
-        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + '2020-02-27' + "&end=2020-03-09";
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end;
         callback = gotData; 
         httpPostAsync(theUrl,data,callback); 
       }
       function gotData(data){
-        console.log("prime");
+        console.log("gotdata");
         console.log(data);
+      }
+      
+      $(document).ready(function(){
+        console.log();
+        var date = new Date();
+        var moreThanZero = false;
+        var startdate = document.getElementById('hiddenstartDate').value;
+        startdate = (new Date(startdate)).getFullYear();
+        var yearDrop = document.getElementById('syear');
+        // for if a birthday dropdown exist
+        for(var i = 0; date.getFullYear() - i >= startdate; ++i){
+            var option = document.createElement("option");
+            option.text = date.getFullYear() - i;
+            if(i == 1){
+              option.selected = true;
+              moreThanZero = true;
+            }
+            yearDrop.appendChild(option);
+        }
+        if(moreThanZero){
+          document.getElementById('smonth').selectedIndex = date.getMonth();
+        }
+        sgenDays();
+        if(moreThanZero){
+          document.getElementById('sday').selectedIndex = date.getMonth() - 1;
+        }
+
+        var yearDrop = document.getElementById('eyear');
+        
+        // for if a birthday dropdown exist
+        for(var i = 0; date.getFullYear() - i >= startdate; ++i){
+            var option = document.createElement("option");
+            option.text = date.getFullYear() - i;
+            yearDrop.appendChild(option);
+        }
+        document.getElementById('emonth').selectedIndex = date.getMonth();
+        egenDays();
+        
+        document.getElementById('eday').selectedIndex = date.getDate() - 1;
+      });
+
+      function sgenDays(){
+        var months = document.getElementById('smonth');
+        var month = months.options[months.selectedIndex].value;
+        var years = document.getElementById('syear');
+        var year = years.options[years.selectedIndex].text;
+        var day = document.getElementById('sday');
+        month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
+        var daysinmonth = new Date(year, month, 0).getDate();
+        $(day).empty();
+        for(var i = 1; i <= daysinmonth; ++i){
+            var option = document.createElement("option");
+            option.text = i;
+            option.value = i;
+            day.appendChild(option);
+        }
+      }
+      function egenDays(){
+        var months = document.getElementById('emonth');
+        var month = months.options[months.selectedIndex].value;
+        var years = document.getElementById('eyear');
+        var year = years.options[years.selectedIndex].text;
+        var day = document.getElementById('eday');
+        month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
+        var daysinmonth = new Date(year, month, 0).getDate();
+        $(day).empty();
+        for(var i = 1; i <= daysinmonth; ++i){
+            var option = document.createElement("option");
+            option.text = i;
+            option.value = i;
+            day.appendChild(option);
+        }
+        
       }
     </script>
 
