@@ -6,7 +6,6 @@ class thePie {
 
   constructor(id) {
     pieOptions();
-    update(data1);
 
     // set the dimensions and margins of the graph
     this.width = 450;
@@ -75,13 +74,13 @@ class thePie {
       .remove()
 
     // Initialize the plot with the first dataset
-    update(data1);
+    //update(data1);
     
 
   };
 };
 
-function pieOptions() {  
+function pieOptions(data) {  
   var myDiv = document.getElementById("pie");  
     
   // creating button element  
