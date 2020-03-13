@@ -35,6 +35,7 @@
             <li class="nav-item" id="form">
               <div class="float-right">
                 <form id="myForm">
+                  <input id="hiddenstartDate" value="<%- startDate %>" style="display: none;"></input>
                   <label>Beginning Date</label>
                   <select id="syear" class="pretty-classic" onchange="sgenDays();">
                   </select>
@@ -371,6 +372,7 @@
         var date = new Date();
         var moreThanZero = false;
         var startdate = document.getElementById('hiddenstartDate').value;
+        console.log(startdate);
         startdate = (new Date(startdate)).getFullYear();
         var yearDrop = document.getElementById('syear');
         // for if a birthday dropdown exist
