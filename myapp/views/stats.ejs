@@ -76,7 +76,7 @@
     
                   <select id="eday" class="pretty-classic">
                   </select>
-                  <a onclick="getRecords('Students','Activities', '14', 'clear sky');">test data</a>
+                  <a id="testy" onclick="getRecords('Students','Activities', '14', 'clear sky', this);">test data</a>
                 </form>
               </div> <!-- end month selection-->
             </li>
@@ -250,16 +250,17 @@
     
     <script>
       
-      function getRecords(selection, beta, id, weather){
+      function getRecords(selection, beta, id, weather, caller){
         var today = new Date();
         var start = document.getElementById('syear').value + '-' + document.getElementById('smonth').value + '-' + document.getElementById('sday').value;
         var end = document.getElementById('eyear').value + '-' + document.getElementById('emonth').value + '-' + document.getElementById('eday').value;
         theUrl = window.location.href+'/getdata';
-        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end;
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller.id;
         callback = gotData; 
         httpPostAsync(theUrl,data,callback); 
       }
       function gotData(data){
+        data = JSON.parse(data);
         console.log("gotdata");
         console.log(data);
       }
