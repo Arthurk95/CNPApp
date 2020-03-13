@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/getdata', function(req, res, next) {
   var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, start = req.body.start, end = req.body.end, caller = req.body.caller;
+  var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller};
   var all = false;
   var sql,sql2;
   if(id == "all"){
@@ -60,18 +61,23 @@ router.post('/getdata', function(req, res, next) {
         sql2 = "SELECT * FROM cnp_data.Activities;";
       }
     }
+    if(prime == "Activities"){
+      if(beta == "Students"){
+        sql = "SELECT * FROM cnp_data.Students a, cnp_data.Activities b, cnp_data.DailyActivities c WHERE a.StudentId = c.StudentId AND b.ActivityId = c.ActivityId" + " and c.CurrentDate BETWEEN '" + start + "' AND '" + end + "';";
+        sql2 = "SELECT * FROM cnp_data.Students;";
+      }
+    }
   }
   con.query(sql, function (err, primeVal) {
     con.query(sql2, function (err, betaVal) {
       if(weather == "all"){
-        console.log(caller);
-        values = {"primeval":primeVal,"betaval":betaVal,"caller":caller};
+        values = {"primeval":primeVal,"betaval":betaVal,"inputs":inputs};
         res.send(values);
       }
       else{
-        var sql3 = "SELECT * FROM cnp_data.Weather WHERE description like '" + weather + "';";
+        var sql3 = "SELECT * FROM cnp_data.Weather WHERE description like '" + weather + "' and dateTimes BETWEEN '" + start + "' AND '" + end + "';";
         con.query(sql3, function (err, weatherVal){
-          values = {"primeval":primeVal,"betaval":betaVal,"weatherVal":weatherVal,"caller":caller};
+          values = {"primeval":primeVal,"betaval":betaVal,"weatherVal":weatherVal,"inputs":inputs};
           res.send(values);
         });
       }
