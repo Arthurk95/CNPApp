@@ -565,6 +565,17 @@ svg {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+#bar-chart{
+  background-color: white;
+  width: 450px;
+  height: 450px;
+}
+
+#bar{
+  width: 1075px;
+  height: 1000px;
+}
+
 
 /* heat map  
 rect.bordered {
