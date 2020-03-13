@@ -1,2 +1,3 @@
 node_modules
 myapp/config.json
+myapp/package-lock.json

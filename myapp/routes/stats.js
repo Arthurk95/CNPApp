@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/getdata', function(req, res, next) {
-  var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, start = req.body.start, end = req.body.end;
+  var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, start = req.body.start, end = req.body.end, caller = req.body.caller;
   var all = false;
   var sql,sql2;
   if(id == "all"){
@@ -61,17 +61,17 @@ router.post('/getdata', function(req, res, next) {
       }
     }
   }
-  console.log(sql);
   con.query(sql, function (err, primeVal) {
     con.query(sql2, function (err, betaVal) {
       if(weather == "all"){
-        values = {"primeval":primeVal,"betaval":betaVal};
+        console.log(caller);
+        values = {"primeval":primeVal,"betaval":betaVal,"caller":caller};
         res.send(values);
       }
       else{
         var sql3 = "SELECT * FROM cnp_data.Weather WHERE description like '" + weather + "';";
         con.query(sql3, function (err, weatherVal){
-          values = {"primeval":primeVal,"betaval":betaVal,"weatherVal":weatherVal};
+          values = {"primeval":primeVal,"betaval":betaVal,"weatherVal":weatherVal,"caller":caller};
           res.send(values);
         });
       }
