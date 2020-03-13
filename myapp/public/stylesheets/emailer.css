@@ -64,6 +64,7 @@
     justify-content: space-between;
     align-items: center;
     width: 20%;
+    min-width: 150px;
     height: 50px;
     align-self: center;
     border-radius: 8px;
@@ -85,7 +86,7 @@
     flex-grow: 2;
     font-size: 18px;
     color: white;
-    padding-left: 30px;
+    padding-left: 10%;
 }
 
 .stepButton i{
@@ -153,7 +154,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
+    padding: 20px;
 }
 
 .studentsList li{
@@ -214,7 +215,24 @@
 .twoColumns{
     display: flex;
     justify-content: space-between;
+}
 
+.contentWithSidebar{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.contentWithSidebar .content{
+    width: 70%;
+}
+
+.contentWithSidebar .sidebar{
+    align-self: flex-start;
+    min-width: 150px;
+    width: 20%;
+    background: var(--lightGray2);
+    border-radius: 8px;
 }
 
 .listTitle{
@@ -227,4 +245,26 @@
     margin-bottom: 0px;
     padding: 6px;
     color: var(--darkGray3);
+}
+
+@media screen and (max-width: 1200px){
+    .contentWithSidebar .sidebar{
+        margin-bottom: 40px;
+        width: 90%;
+        align-self: center !important;
+    }
+
+    .emailerContainer .studentsList{
+        flex-direction: row;
+    }
+
+    .contentWithSidebar{
+        flex-direction: column-reverse !important;
+        justify-items: center !important;
+        align-items: center !important;
+    }
+
+    .contentWithSidebar .content{
+        width: 90% !important;
+    }
 }

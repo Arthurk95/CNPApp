@@ -32,16 +32,21 @@
             <a href="/admin">Add Students</a>
         </div>
     <% } %>
-
-   
-        
     
     <footer>
         <ul id="footer" class="studentFooter">
-            <li id="select"><a id="selectButton" onclick="selectionMade()">Select</a></li>
-            <li id="submitButton" class="backSubmitButton">
-                <a id="backButton" onclick="goBack()">Back</a>
-                <a onclick="submitToDB()">Submit</a>
+            <li id="pottyAndSelect" class="twoButtons">
+                <a id="pottyBreak" class="blue3-BG smallerFont" onclick="pottyBreak()">Potty Break</a>
+                <a id="selectButton" class="green3-BG smallerFont" onclick="selectionMade()">Select</a>
+            </li>
+            <li id="backAndSubmit" class="twoButtons">
+                <a id="backButton" class="red3-BG" onclick="goBack()">Back</a>
+                <a onclick="submitToDB()" class="green3-BG">Submit</a>
+            </li>
+            <li id="pottyYesNo" class="titleWithTwoButtons">
+                <a class="darkGray3-BG noClick">Accident?</a>
+                <a id="pottyYes" class="red3-BG" onclick="submitPottyToDB(true)">Yes</a>
+                <a id="pottyNo" class="blue3-BG" onclick="submitPottyToDB(false)">No</a>
             </li>
         </ul>
     </footer>

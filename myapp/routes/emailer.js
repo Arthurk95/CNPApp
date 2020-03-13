@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
         });
         recurseDailies(Students,dailyStudents,i+1,res);
         if(i == (dailyStudents[0].length) - 1){
-          bottomLayer(res, Students,con);
+          bottomLayer(res, Students);
         }
       });
     }
@@ -44,20 +44,53 @@ router.get('/', function(req, res, next) {
   }
   
 });
-function bottomLayer(res,Students,con){
-  var Behaviors = [];
-  behavior1 = {name: 'AM Snack:', op1: 'All/Most', op2: 'Half', op3: 'None'}
-  behavior2 = {name: 'PM Snack:', op1: 'All/Most', op2: 'Half', op3: 'None'}
-  behavior3 = {name: 'Nap:', op1: 'Slept All/Most of nap', op2: 'Slept half/some', op3: 'Quiet time'}
-  behavior4 = {name: 'Academic play:', op1: 'Listened/Participated', op2: 'Somewhat listened/participated', op3: 'Trouble listening/participating'}
-  behavior5 = {name: 'Restroom Use:', op1: 'Great/No Accidents', op2: 'Accidents/Needed help', op3: 'Diapers'}
-  behavior6 = {name: 'Mood:', op1: 'Happy/Played Well', op2: 'Frustrations', op3: 'Tested Boundaries'}
-  Behaviors.push(behavior1, behavior2, behavior3, behavior4, behavior5, behavior6);
-  console.log(Behaviors);
-  var Reminders = [];
-  reminder1 = {title: "Book Order", contents: "Book orders for our schloastic book club are due on April 1"}
-  reminder2 = {title: "March 9 Closure", contents: "Reminder that CNP will be closed on March 9 and 10"}
-  Reminders.push(reminder1, reminder2);
-  res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders });
+function bottomLayer(res,Students,){
+  var get_template = "CALL ShowUnhiddenTemplateObject();";
+  con.query(get_template, function(err, behave){
+    behave = behave[0];
+    var Behaviors = [];
+    if(behave.length == 0){
+      Behaviors.push({name: 'No behaviors in database:'});
+    }
+    else{
+      behave.forEach((element) => {
+        bObj = {name: element.NameOf};
+        if(element.CategoryOne != "" && element.CategoryOne != null){
+          bObj.op1 = element.CategoryOne;
+        }
+        if(element.CategoryTwo != "" && element.CategoryTwo != null){
+          bObj.op2 = element.CategoryTwo;
+        }
+        if(element.CategoryThree != "" && element.CategoryThree != null){
+          bObj.op3 = element.CategoryThree;
+        }
+        if(element.CategoryFour != "" && element.CategoryFour != null){
+          console.log(element.CategoryFour);
+          bObj.op4 = element.CategoryFour;
+        }
+        if(element.CategoryFive != "" && element.CategoryFive != null){
+          bObj.op5 = element.CategoryFive;
+        }
+        Behaviors.push(bObj);
+      })
+    }
+    var get_reminders = "CALL ShowUnhiddenRemindersObject();";
+    con.query(get_reminders, function(err, remind){
+      remind = remind[0];
+      var Reminders = [];
+      if(remind.length == 0){
+        Reminders.push({title: "No reminders in database"});
+      }
+      else{
+        remind.foreach((element) => {
+          console.log(element);
+          Reminders.push({title: element.NameOf, contents: element.MainParagraphs});
+        });
+      }
+      
+     
+      res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders });
+    });
+  });
 }
   module.exports = router;

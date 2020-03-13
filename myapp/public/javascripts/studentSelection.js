@@ -7,17 +7,21 @@ var LIST_DISPLAY_TYPE = "flex";
 
 var footer;
 var selectButton;
-var submitButton;
-var select;
+var backAndSubmit;
+var pottyAndSelect;
+var pottyButton;
+var pottyYesNo;
 var toSubmit = false; // if a selection was made
 var activitiesHidden = true;
 var studentsHidden = true;
 
 $(document).ready(function(){
     footer = document.getElementById("footer");
-    select = document.getElementById("select");
+    pottyAndSelect = document.getElementById("pottyAndSelect");
     selectButton = document.getElementById("selectButton");
-    submitButton = document.getElementById("submitButton");
+    backAndSubmit = document.getElementById("backAndSubmit");
+    pottyButton = document.getElementById("pottyBreak");
+    pottyYesNo = document.getElementById("pottyYesNo");
 })
 
 // a student was selected from the Students list
@@ -27,8 +31,9 @@ function studentSelected(studentElement, studentID){
         studentElement.classList.remove("selectedStudent");
         removeStudentFromList(studentID);
         if(numSelectedStudents == 0){
-            hideElement(selectButton);
-            hideElement(submitButton);
+            hideElement(pottyAndSelect);
+            hideElement(backAndSubmit);
+            hideElement(pottyYesNo);
         }
     }
     // the passed student is being selected
@@ -55,10 +60,10 @@ function addStudentToList(studentID){
 
 function showButton(buttonText){
     if(toSubmit){
-        showElement(submitButton, SUBMIT_BUTTON_DISPLAY_TYPE);
+        showElement(backAndSubmit, SUBMIT_BUTTON_DISPLAY_TYPE);
     }
     else{
-        showElement(select, SELECT_BUTTON_DISPLAY_TYPE);
+        showElement(pottyAndSelect, SUBMIT_BUTTON_DISPLAY_TYPE);
         showElement(selectButton, SELECT_BUTTON_DISPLAY_TYPE);
         selectButton.text = "Select " + buttonText;
     }
@@ -70,7 +75,7 @@ function activitySelected(element, activityId){
     if(element.classList.contains("selectedStudent")){
         element.classList.remove("selectedStudent");
         selectedActivityID = undefined;
-        hideElement(submitButton);
+        hideElement(backAndSubmit);
         hideElement(selectButton);
     }
     // activity is not selected
@@ -131,7 +136,7 @@ function startWithActivities(){
 
 // activity or student(s) was chosen and the "Select" button was clicked
 function selectionMade(){
-    hideElement(selectButton);
+    hideElement(pottyAndSelect);
     
     if(activitiesHidden){ // students were selected first
         hideStudents();
@@ -156,7 +161,6 @@ function submitToDB(){
     var callback = reloadIt;
 
     httpPostAsync(theUrl,data,callback);
-    alert("Successfully Submitted!");
     
 }
 
@@ -172,7 +176,7 @@ function goBack(){
         showActivities();
     }
     
-    hideElement(submitButton);
+    hideElement(backAndSubmit);
     toSubmit = false;
     showButton(selectButton);
 }
@@ -187,4 +191,14 @@ function hideElement(element) {
 }
 function showElement(element, displayType) { 
     element.style.display = displayType; 
+}
+
+function pottyBreak(){
+    hideElement(pottyAndSelect);
+    showElement(pottyYesNo, SUBMIT_BUTTON_DISPLAY_TYPE);
+}
+
+// accidental is a boolean value. true for accidental, false for not
+function submitPottyToDB(accidental){
+
 }

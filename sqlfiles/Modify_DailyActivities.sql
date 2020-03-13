@@ -2,10 +2,10 @@ DELIMITER $$
 CREATE DEFINER =`abstractPizza`@`%` PROCEDURE `AddDailyActivity`(IN StudId INT, 
 												IN ActId INT)
 BEGIN
-	INSERT INTO DailyActivites (`StudentId`, `CurrentDate`, `ActivityId`)
-		VALUES (StudId, CURRENT_DATE, ActId);
+	INSERT INTO DailyActivities (`StudentId`, `CurrentDate`, `ActivityId`)
+		VALUES (StudId, NOW(), ActId);
 END $$
-/////////////////////////////////////////////////////////////////////////////////////////////
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
 DELIMITER $$
 CREATE PROCEDURE DailyEventHelper()
 
@@ -23,9 +23,22 @@ BEGIN
 	PREPARE stmt FROM @sqlstm;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
+	
+	SET @sqlstm2 = CONCAT("INSERT INTO Behavior
+							(`StudentId` ,  `CurrentDate` )
+						 SELECT 
+							`StudentId`,
+                            CURRENT_DATE
+						FROM
+							Schedual
+						WHERE  
+							`", @var, "`= 1 AND CurrentEnroll = 1;");
+	PREPARE stmt FROM @sqlstm2;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
 
 END $$
-//////////////////////////////////////////////////////////////////////////////////////////////
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
 DELIMITER $$
 CREATE PROCEDURE DeleteDailyActivity(IN StuId INT,
 								  IN ActId INT)
@@ -34,7 +47,7 @@ BEGIN
 		WHERE StudentId = StuId AND ActivityId = ActId;
 
 END $$
-//////////////////////////////////////////////////////////////////////////////////////////////
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
 DELIMITER $$
 CREATE PROCEDURE `cnp_data`.`ShowStudentDailyActivitiesToday` (IN Id INT)
 
@@ -46,7 +59,7 @@ BEGIN
 					WHERE `StudentId` = id AND `CurrentDate` = CURRENT_DATE
                     ORDER BY DailyActivites.CurrentTime ASC;
 END $$
-/////////////////////////////////////////////////////////////////////////////////////////////
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
 DELIMITER $$
 
 CREATE PROCEDURE `PullUnhiddenHelper`()
@@ -56,7 +69,7 @@ FROM Activities
 	WHERE Hidden = 0 AND Helper = 1
 	ORDER BY ActivityName ASC;
 END$$
-/////////////////////////////////////////////////////////////////////////////////////////////
+/*///////////////////////////////////////////////////////////////////////////////////////////*/
 DELIMITER $$
 
 CREATE PROCEDURE `PullAllHelper`()
@@ -66,4 +79,4 @@ FROM Activities
 	WHERE Helper = 1
 	ORDER BY ActivityName ASC;
 END$$
-/////////////////////////////////////////////////////////////////////////////////////////////
+/*///////////////////////////////////////////////////////////////////////////////////////////*/

@@ -161,45 +161,45 @@ a{
 .customTable .darkText{color: var(--darkGray2) !important;}
 
 /* ----------- BACKGROUND STUFF ----------- */
-.lightGray1-BG{background: var(--lightGray1) !important;}
-.lightGray2-BG{background: var(--lightGray2) !important;}
-.lightGray3-BG{background: var(--lightGray3) !important;}
+.lightGray1-BG{background: var(--lightGray1);}
+.lightGray2-BG{background: var(--lightGray2);}
+.lightGray3-BG{background: var(--lightGray3);}
 
-.darkGray1-BG{background: var(--darkGray1) !important;}
-.darkGray2-BG{background: var(--darkGray2) !important;}
-.darkGray3-BG{background: var(--darkGray3) !important;}
+.darkGray1-BG{background: var(--darkGray1);}
+.darkGray2-BG{background: var(--darkGray2);}
+.darkGray3-BG{background: var(--darkGray3);}
 
-.red1-BG{background: var(--red1) !important;}
-.red2-BG{background: var(--red2) !important;}
-.red3-BG{background: var(--red3) !important;}
-.red4-BG{background: var(--red4) !important;}
-.red5-BG{background: var(--red5) !important;}
+.red1-BG{background: var(--red1);}
+.red2-BG{background: var(--red2);}
+.red3-BG{background: var(--red3);}
+.red4-BG{background: var(--red4);}
+.red5-BG{background: var(--red5);}
 
-.blue1-BG{background: var(--blue1) !important;}
-.blue2-BG{background: var(--blue2) !important;}
-.blue3-BG{background: var(--blue3) !important;}
-.blue4-BG{background: var(--blue4) !important;}
-.blue5-BG{background: var(--blue5) !important;}
+.blue1-BG{background: var(--blue1);}
+.blue2-BG{background: var(--blue2);}
+.blue3-BG{background: var(--blue3);}
+.blue4-BG{background: var(--blue4);}
+.blue5-BG{background: var(--blue5);}
 
-.green1-BG{background: var(--green1) !important;}
-.green2-BG{background: var(--green2) !important;}
-.green3-BG{background: var(--green3) !important;}
-.green4-BG{background: var(--green4) !important;}
-.green5-BG{background: var(--green5) !important;}
+.green1-BG{background: var(--green1);}
+.green2-BG{background: var(--green2);}
+.green3-BG{background: var(--green3);}
+.green4-BG{background: var(--green4);}
+.green5-BG{background: var(--green5);}
 
-.yellow1-BG{background: var(--yellow1) !important;}
-.yellow2-BG{background: var(--yellow2) !important;}
-.yellow3-BG{background: var(--yellow3) !important;}
-.yellow4-BG{background: var(--yellow4) !important;}
-.yellow5-BG{background: var(--yellow5) !important;}
+.yellow1-BG{background: var(--yellow1);}
+.yellow2-BG{background: var(--yellow2);}
+.yellow3-BG{background: var(--yellow3);}
+.yellow4-BG{background: var(--yellow4);}
+.yellow5-BG{background: var(--yellow5);}
 
 
-.lightGray{ background: var(--lightGray2) !important;}
-.darkGray{background: var(--darkGray2) !important;}
-.green{background: var(--green2) !important;}
-.blue{background: var(--blue1) !important;}
-.red{background: var(--red2) !important;}
-.yellow{background: var(--yellow2) !important;}
+.lightGray{ background: var(--lightGray2);}
+.darkGray{background: var(--darkGray2);}
+.green{background: var(--green2);}
+.blue{background: var(--blue1);}
+.red{background: var(--red2);}
+.yellow{background: var(--yellow2);}
 
 .lightText{color: var(--lightGray2)};
 .darkText{color: var(--darkGray2)};
@@ -284,6 +284,9 @@ a{
 
 .borderBox{box-sizing: border-box !important;}
 
+.flexWrap {flex-wrap: wrap !important;}
+.flexWrapReverse{flex-wrap: wrap-reverse !important;}
+
 .flexContainer{
   display: flex;
   padding: 30px;
@@ -312,6 +315,10 @@ a{
 .spaceAround{
   justify-content: space-around !important;
   align-content: center !important;
+}
+
+.ui-selectmenu-button.ui-button{
+  width: 10vw !important;
 }
 
 /* Use this for any buttons */
@@ -526,6 +533,15 @@ textarea:focus{
 }
 
 #form {
+  color:rgb(0, 0, 0);
+  padding-top: 8px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#form2{
+  color:rgb(255, 255, 255);
   padding-top: 8px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -534,16 +550,41 @@ textarea:focus{
 
 /* stats */
 .chart{
-  color:white;
+  color: rgb(0, 0, 0);
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left: 40px;
   padding-right: 40px;
 }
 
+h1{
+  color:rgb(255, 255, 255);
+}
+
 svg {
   background-color: rgba(255, 255, 255, 0.9);
 }
+
+
+/* heat map  */
+rect.bordered {
+  stroke: #E6E6E6;
+  stroke-width:2px;   
+}
+
+text.mono {
+  font-size: 9pt;
+  font-family: Consolas, courier;
+  fill: #aaa;
+}
+
+text.axis-workweek {
+  fill: #000;
+}
+
+text.axis-worktime {
+  fill: #000;
+} 
 
 /* Navigation styling */
 #navigation {
@@ -553,6 +594,11 @@ svg {
   margin-bottom: 10px;
   position: -webkit-sticky; /* Safari */
   position: sticky;
+}
+
+#navigationPie{
+  display: flex;
+  position: inherit;
 }
 
 li {
