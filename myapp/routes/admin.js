@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var uploads = require('../public/javascripts/uploads');
 var session = require('express-session');
+const jo = require('jpeg-autorotate');
 
   router.post('/addstudent', function(req, res){
     var sql = "CALL CreateNewStudentFinal('" + req.body.name + "','" + req.body.birthday + "','" + req.body.contact +
@@ -171,6 +172,21 @@ var session = require('express-session');
           res.redirect(`/admin/student-profile/${req.params.id}`);
         } else {
           update_img_query = `UPDATE Students SET Img = '${req.file.filename}' WHERE StudentId = ${req.params.id};`;
+          
+          const options = { quality: 100 };
+          const path = './public/uploads/images/' + req.file.filename;
+          
+          jo.rotate(path, options)
+            .then(({ buffer, orientation, dimensions, quality }) => {
+              console.log('Rotating uploaded file @ ' + path);
+              console.log(`Orientation was ${orientation}`);
+              console.log(`Dimensions after rotation: ${dimensions.width}x${dimensions.height}`);
+              console.log(`Quality: ${quality}`);
+          })
+          .catch((error) => {
+            console.log('An error occurred when rotating the file: ' + error.message + ' ' + path);
+          })
+
           con.query(update_img_query, function (err, result) {
             if (err) throw err;
             res.redirect(`/admin/student-profile/${req.params.id}`);
