@@ -34,7 +34,7 @@
           <ul class="navbar-nav pull-right">
             <li class="nav-item" id="form">
               <div class="float-right">
-                <form id="myForm">
+                <form>
                   <input id="hiddenstartDate" value="<%- startDate %>" style="display: none;"></input>
                   <label>Beginning Date</label>
                   <select id="syear" class="pretty-classic" onchange="sgenDays();">
@@ -78,7 +78,7 @@
     
                   <select id="eday" class="pretty-classic">
                   </select>
-                  <a id="testy" onclick="getRecords('Students','Activities', '14', 'clear sky', this);">test data</a>
+                  <a class="customButton" id="testy" onclick="getRecords('Students','Activities', '14', 'clear sky', this);">test data</a>
                 </form>
               </div> <!-- end month selection-->
             </li>
@@ -362,17 +362,60 @@
         httpPostAsync(theUrl,data,callback); 
       }
       function gotData(data){
+        var outputs = {};
         data = JSON.parse(data);
         console.log("gotdata");
         console.log(data);
+        if(data.primeval.length == 0)
+        {
+          outputs.name = "No Data";
+        }
+        else if(data.inputs.prime == "Students"){
+          outputs.name = data.primeval[0].StudentName;
+          if(data.inputs.beta == "Activities"){
+            var i = 0;
+            data.betaval.forEach(element => {
+              var activity = {name:element.ActivityName};
+              var count = 0;
+              var prevDate = null;
+              data.primeval.forEach(row =>{
+                var date = new Date(row.CurrentDate);
+                if(prevDate != null && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+                }
+                else{
+                  if(element.ActivityName == row.ActivityName){
+                    var present = false;
+                    if(data.inputs.weather != "all"){
+                      data.weatherVal.forEach(entry =>{
+                        var weatherDate = new Date(entry.dateTimes);
+                        if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                          present = true;
+                        }
+                      });
+                    }
+                    else{
+                      present = true;
+                    }
+                    if(present){
+                      count = count + 1;
+                    }
+                  }
+                  prevDate = date;
+                }
+              });
+              activity.value = count;
+              outputs['input'+ i] = activity;
+              i = i+1;
+            });
+            console.log(outputs);
+          }
+        }
       }
       
       $(document).ready(function(){
-        console.log();
         var date = new Date();
         var moreThanZero = false;
         var startdate = document.getElementById('hiddenstartDate').value;
-        console.log(startdate);
         startdate = (new Date(startdate)).getFullYear();
         var yearDrop = document.getElementById('syear');
         // for if a birthday dropdown exist
