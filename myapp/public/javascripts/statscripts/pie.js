@@ -74,13 +74,13 @@ class thePie {
       .remove()
 
     // Initialize the plot with the first dataset
-    
+    //update(data1);
     
 
   };
 };
 
-function pieOptions() {  
+function pieOptions(data) {  
   var myDiv = document.getElementById("pie");  
     
   // creating button element  
@@ -99,6 +99,13 @@ function pieOptions() {
   // appending button to div 
   myDiv.appendChild(button1);
   myDiv.appendChild(button2);
+
+  //click
+  //document.getElementById(button1).onClick();
+};
+
+function onClick(){
+    console.log("button 1 does something");
 };
 
 function getData() {
