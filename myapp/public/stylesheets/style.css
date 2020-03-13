@@ -20,29 +20,49 @@
   --tasksColor: #868DAA;
   --tasksColorDark: #4E5263;
 
-  --yellow1: #FDFFAD;
-  --yellow2: #DDDF8D;
-  --yellow3: #B3B46F;
-  --yellow4: #7A7C46;
-  --yellow5: #555631;
+  --yellow1: #FFE3AE;
+  --yellow2: #F9D38B;
+  --yellow3: #E0BA71;
+  --yellow4: #C29D54;
+  --yellow5: #A58443;
 
-  --green1: #B4FFBE;
-  --green2: #9AE1A4;
-  --green3: #83BB8B;
-  --green4: #64936B;
-  --green5: #2F4633;
+  --orange1: #F8BA9F;
+  --orange2: #DD8E6C;
+  --orange3: #B67458;
+  --orange4: #905D49;
+  --orange5: #6D3E2B;
 
-  --blue1: #ACC5F8;
-  --blue2: #8A9EC8;
-  --blue3: #66779C;
-  --blue4: #505F80;
-  --blue5: #3B4760;
+  --green1: #C1D6BA;
+  --green2: #AFC2A9;
+  --green3: #96A990;
+  --green4: #6C7E66;
+  --green5: #4C5948;
+
+  --blue1: #97B8CA;
+  --blue2: #86A6B8;
+  --blue3: #627A87;
+  --blue4: #495A64;
+  --blue5: #323D43;
 
   --red1: #FFB1B7;
   --red2: #DF868D;
   --red3: #AD676C;
   --red4: #834B4F;
   --red5: #5C3236;
+
+  --skyBlue1: ;
+  --skyBlue2: ;
+  --skyBlue3: ;
+  --skyBlue4: ;
+  --skyBlue5: ;
+
+  --purple1: ;
+  --purple2: ;
+  --purple3: ;
+  --purple4: ;
+  --purple5: ;
+
+
 
   /* Button Colors */
 
@@ -111,8 +131,8 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background: rgb(17,15,51);
-  background: linear-gradient(197deg, rgba(17,15,51,1) 0%, rgba(31,39,50,1) 54%, rgba(18,24,29,1) 100%);
+  background: var(--blue4);
+  background: linear-gradient(197deg, var(--blue5) 0%, var(--blue5) 54%, var(--blue5) 100%);
   min-height: 100vh;
 }
 a{
