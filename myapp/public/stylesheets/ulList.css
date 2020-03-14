@@ -83,12 +83,12 @@
 }
 
 .ulList .addElement{
-    background: var(--yellow1) !important;
+    background: var(--blue1) !important;
 }
 
 .ulList .addElement p{
     text-align: center;
-    color: var(--darkGray3) !important;
+    color: var(--lightGray2) !important;
 }
 
 .ulList .addElement a{
@@ -103,6 +103,7 @@
     padding: 30px 0px;
 }
 
+/* Plus icon for adding a student */
 .ulList .addIcon{
     display: flex;
     align-items: center;
@@ -113,8 +114,8 @@
     border-radius: 50%;
     overflow: hidden;
     font-size: 105px;
-    background: var(--yellow2);
-    color: var(--blue4);
+    background: var(--blue3);
+    color: var(--lightGray2);
     box-shadow: 0px 0px 5px var(--darkGray3);
     transition: width 0.1s ease-in-out, height 0.1s ease-in-out, 
         font-size 0.1s ease-in-out, margin 0.1s ease-in-out;

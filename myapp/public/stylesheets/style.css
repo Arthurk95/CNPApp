@@ -131,12 +131,13 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background: var(--blue4);
-  background: linear-gradient(197deg, var(--blue5) 0%, var(--blue5) 54%, var(--blue5) 100%);
-  min-height: 100vh;
+  background: var(--darkGray3);
+  /*background: linear-gradient(197deg, var(--blue5) 0%, var(--blue5) 54%, var(--blue5) 100%);
+  */min-height: 100vh;
 }
 a{
   cursor: pointer;
+  text-decoration: none;
 }
 
 /* Apply to elements that you want to re-color individually 
