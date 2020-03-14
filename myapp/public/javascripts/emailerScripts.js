@@ -110,7 +110,7 @@ function initEmailerVariables(){
     stepTwo = document.getElementById("stepTwo");
     stepThree = document.getElementById("stepThree");
     currentStudentElement = document.getElementById("student0");
-    currentStudentData = reports[0];
+    if(reports != undefined) {currentStudentData = reports[0];}
     stepTwoTitle = document.getElementById("stepTwoTitle");
     studentsList = document.getElementById("listOfStudents");
     activities = document.getElementById("activitiesList");
