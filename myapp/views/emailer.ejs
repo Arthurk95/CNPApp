@@ -71,8 +71,8 @@
 
             <div id="stepTwo" class="contentWithSidebar displayNone">
                 <div class="content lightGray2-BG borderRadiusMedium"> <!-- Left column -->
-                    <div class="relative title blue2-BG flex spaceBetween">
-                        <p id="stepTwoTitle" class=""></p>
+                    <div id="stepTwoTitle" class="relative title blue2-BG flex spaceBetween">
+                        <p class=""></p>
                         <div class="stepButton green2-BG" onclick="openReview()">
                             <p>Review</p>
                         </div>
@@ -118,7 +118,7 @@
                     </div>
 
                     <div class="flexContainer flexRight">
-                        <div class="stepButton blue2-BG" onclick="studentSaved(this, <%= JSON.stringify(behaviors) %>);">
+                        <div id="saveButton" class="stepButton blue2-BG" onclick="studentSaved(this, <%= JSON.stringify(behaviors) %>);">
                             <p>Save</p>
                             <div class="buttonIcon blue3-BG">
                                 <i class="fas fa-check"></i>
@@ -133,7 +133,7 @@
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>
                         <% reports.forEach((report, index) => { %>
-                            <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
+                            <li id="student<%= index %>" onclick="studentSelected(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
                         <% }) %>
                     <% } else { %>
                         <li>No Students</li>
