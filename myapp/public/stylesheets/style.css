@@ -5,10 +5,10 @@
 :root{
   /* Dark Grays (used in backgrounds,shadows, and text)
      darkGray1: darkest; darkGray3: lightest */
-  --darkGray1: #2a2a2a;
-  --darkGray2: #2f2f2f;
-  --darkGray3: #3a3a3a; 
-  --darkGray4: #494949;
+  --darkGray1: #25272D;
+  --darkGray2: #2F3137;
+  --darkGray3: #3B3D44; 
+  --darkGray4: #474951;
 
   /* Page Theme Colors: */
   --studentsColor: #86AAA7;
@@ -131,7 +131,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background: var(--darkGray3);
+  background: var(--darkGray1);
   /*background: linear-gradient(197deg, var(--blue5) 0%, var(--blue5) 54%, var(--blue5) 100%);
   */min-height: 100vh;
 }
@@ -139,6 +139,8 @@ a{
   cursor: pointer;
   text-decoration: none;
 }
+
+p{margin: 0;}
 
 /* Apply to elements that you want to re-color individually 
     <p class="lightText red right">Hello</p>
@@ -626,4 +628,20 @@ li {
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+/* Input field with no background and just a bottom border */
+
+.lineInput{
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--lightGray3);
+  color: var(--lightGray2) !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.lineInput:focus{
+  box-shadow: none !important;
+  border-color: var(--blue2);
 }
