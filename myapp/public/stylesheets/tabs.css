@@ -19,13 +19,13 @@
 
 /* Change background color of buttons on hover */
 .tabs a:hover {
-  color: var(--lightGray1);
-  background-color: var(--darkGray2);
+  color: var(--darkGray3);
+  background-color: var(--lightGray3);
 }
 
 /* Create an active/current tablink class */
 .tabs a:active {
-  background-color: var(--darkGray2);
+  background-color: var(--darkGray3);
   color: var(--lightGray1);
 }
 
@@ -38,13 +38,12 @@
   display: none;
   padding: 20px 40px;
   border: 1px solid var(--darkGray2);
-  filter: drop-shadow(0px 10px 10px var(--darkGray3));
-  background: white;
+  border-top: none;
   opacity: 1;
 }
 
 /* jQuery styling override for tab colors */
 .ui-tabs-tab.ui-state-active{
   color: var(--lightGray1) !important;
-  background-color: var(--darkGray2) !important;
+  background-color: var(--darkGray3) !important;
 }

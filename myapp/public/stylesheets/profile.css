@@ -1,6 +1,3 @@
-body{
-    background: var(--adminColorDark);
-}
 
 .profileContainer{
     display: flex;
@@ -26,8 +23,6 @@ body{
 
 .profileSection{
     width: 32%;
-    filter: drop-shadow(0px 10px 10px var(--darkGray3));
-    background: white;
     border-radius: 8px;
 }
 
@@ -52,16 +47,18 @@ body{
     background: none;
     box-shadow: none;
     width: 70%;
+    color: var(--lightGray3);
 }
 
 label{
-    font-weight: 700;
     float: left;
+    color: var(--lightGray3);
 }
 
 .studentTable {
     width: 80%;
     margin: 0 auto;
+    margin-bottom: 50px;
 }
 
 .labelColumn{
@@ -98,10 +95,7 @@ label{
     width: 100%;
 }
 
-.imageContainer{
-    position: relative;
-    width: 100%;
-}
+
 
 /* .editImage{
     position: absolute;
@@ -144,6 +138,11 @@ label{
     visibility: visible;
   }
 
+.imageContainer{
+    position: relative;
+    width: 100%;
+}
+
 .imageContainer:hover{
     opacity: 0.2;
     cursor: pointer;
@@ -151,7 +150,10 @@ label{
 
 .imageContainer img{
     border: 1px solid black;
-    width: 100%;
+    border-radius: 50%;
+    width: 20vw;
+    height: 20vw;
+    margin: 0 auto 20px auto !important;
 }
 
 .imageContainer img:hover{
@@ -253,7 +255,12 @@ label{
     .mobileProfile input{ font-size: 1.5em !important;}
     .mobileProfile label{ font-size: 1.5em !important;}
 
-    .imageContainer img{ border-radius: 50%; width: 70%; margin: 0 auto 20px auto !important;}
+    .imageContainer {width: 100%;}
+    .imageContainer img{ 
+        width: 50vw;
+        height: 50vw;
+        margin: 0 auto 20px auto !important;
+    }
 
     .profileSection{ width: 90%; }
 
