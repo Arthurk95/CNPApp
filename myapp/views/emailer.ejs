@@ -143,23 +143,6 @@
                     
             </div>
 
-            <div id="stepThree" class="contentWithSidebar displayNone">
-                <div class="content lightGray2-BG borderRadiusMedium">
-                    <p>no idea what to put here</p>
-                </div>
-                <div class="sidebar">
-                    <ul id="listOfStudents" class="studentsList" >
-                    <% if (reports.length > 0) { %>
-                        <script>passToJS(<%- JSON.stringify(reports) %>);</script>
-                        <% reports.forEach((report, index) => { %>
-                            <li id="student<%= index %>" onclick="showStudentData(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
-                        <% }) %>
-                    <% } else { %>
-                        <li>No Students</li>
-                    <% } %>
-                    </ul>
-                </div>
-            </div>
             <div onclick="toNextStep()" class="sideButton"><i id="nextButton" class="fas fa-chevron-right"></i></div>
         </div>
         <script>initEmailerVariables();

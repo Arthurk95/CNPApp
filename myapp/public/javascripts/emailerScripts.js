@@ -1,7 +1,6 @@
 var currentStep = 1;
 var stepOne;
 var stepTwo;
-var stepThree;
 var currentStudentElement;
 var currentStudentData;
 var stepTwoTitle;
@@ -9,7 +8,7 @@ var studentsList;
 var activities;
 var reports;
 var currentStudentIndex = 0;
-var MAX_STEPS = 3;
+var MAX_STEPS = 2;
 var behaviors;
 var formElement;
 
@@ -32,33 +31,27 @@ function toPreviousStep(){
 
 function stepChange(){
     if(currentStep == 1){
-        hideSteps(stepTwo, stepThree);
+        hideStep(stepTwo);
         showStep(stepOne);
     }
     else if(currentStep == 2){
-        hideSteps(stepOne, stepThree);
+        hideStep(stepOne);
         showStep(stepTwo);
-    }
-    else if(currentStep == 3){
-        hideSteps(stepOne, stepTwo);
-        showStep(stepThree);
     }
 }
 
 
-function hideSteps(step1, step2){
-    step1.classList.add("displayNone");
-    step2.classList.add("displayNone");
+function hideStep(step){
+    step.classList.add("displayNone");
 }
 
 function showStep(step){
     step.classList.remove("displayNone");
 }
 
-function showStudentData(listElement, report, index){
-    
-    if(!listElement.classList.contains("approved")){
 
+function showStudentData(listElement, report, index){
+    if(!listElement.classList.contains("approved")){
         listElement.classList += " selected";
     }
     
@@ -108,7 +101,6 @@ function passToJS(r){
 function initEmailerVariables(){
     stepOne = document.getElementById("stepOne");
     stepTwo = document.getElementById("stepTwo");
-    stepThree = document.getElementById("stepThree");
     currentStudentElement = document.getElementById("student0");
     if(reports != undefined) {currentStudentData = reports[0];}
     stepTwoTitle = document.getElementById("stepTwoTitle");
