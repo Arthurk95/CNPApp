@@ -5,6 +5,7 @@
     <nav><%- include header.ejs %></nav>
     <meta charset="utf-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/stats.css' />
     <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
     <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
@@ -39,16 +40,14 @@
   <body>
 
     <!-- Navigation -->
-    <div id="navigation">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light solid w-100">
-        <span class="navbar-brand mb-0 h1">CNP Statistics</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="headerStyle2" id ="navigation">
+      <nav class="navbar-expand-lg">
+        <span class="navbar-brand">CNP Statistics</span>
+
         
           <!-- Month selection -->
-          <ul class="navbar-nav pull-right">
-            <li class="nav-item" id="form">
+          <ul class="navbar-nav">
+            <li class="nav-item">
               <div class="float-right">
                 <form>
                   <input id="hiddenstartDate" value="<%- startDate %>" style="display: none;"></input>
