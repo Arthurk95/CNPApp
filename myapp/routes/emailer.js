@@ -87,10 +87,111 @@ function bottomLayer(res,Students,){
           Reminders.push({title: element.NameOf, contents: element.MainParagraphs});
         });
       }
+
+      var get_summary = `CALL PullDailySummaryToday()`;     
+      con.query(get_summary, function (err, sum_result) {
+        if (err) {
+          console.log('Unable to pull daily summary: ' + err);
+        } else {
+          try {
+            [stripped_result] = sum_result[0];
+            var summary = stripped_result.MainParagraphs;
+          } catch (e) {
+            var summary = '';
+            console.log(e);
+          }
+
+          console.log('Daily summary pulled successfully: ' + summary);
+        }
+
+        var get_snack = `CALL PullDailyAmFoodToday()`;     
+        con.query(get_snack, function (err, snack_result) {
+          if (err) {
+            console.log('Unable to pull AM snack: ' + err);
+          } else {
+            try {
+              [stripped_result] = snack_result[0];
+              var snack = stripped_result.MainParagraphs;
+            } catch (e) {
+              var snack = '';
+              console.log(e);
+            }
+  
+            console.log('AM snack pulled successfully: ' + snack);
+          }
+
+          var get_lunch = `CALL PullDailyLunchToday()`;     
+          con.query(get_lunch, function (err, lunch_result) {
+            if (err) {
+              console.log('Unable to pull lunch: ' + err);
+            } else {
+              try {
+                [stripped_result] = lunch_result[0];
+                var lunch = stripped_result.MainParagraphs;
+              } catch (e) {
+                var lunch = '';
+                console.log(e);
+              }
+    
+              console.log('Lunch pulled successfully: ' + lunch);
+            }
       
      
-      res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders });
+      res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch });
+        }); // end lunch query
+        }); // end snack query
+      }); // end summary query
     });
   });
 }
+
+router.post('/push-summary', function (req, res, next) {
+  save_template_query = `CALL AddDailySummary("${req.body.text}")`;
+
+  con.query(save_template_query, function (err, result) {
+    if (err) {
+      console.log(`Unable to add [${req.body.text}] to daily summary. ` + err);
+      res.end();
+    } else {
+      console.log('Daily summary updated: ' + req.body.text);
+      res.end();
+    }
+  });
+
+
+});
+
+
+router.post('/push-am-snack', function (req, res, next) {
+  save_template_query = `CALL AddDailyAmFood("${req.body.text}")`;
+
+  con.query(save_template_query, function (err, result) {
+    if (err) {
+      console.log(`Unable to add [${req.body.text}] to AM snack. ` + err);
+      res.end();
+    } else {
+      console.log('AM snack updated: ' + req.body.text);
+      res.end();
+    }
+  });
+
+
+});
+
+router.post('/push-lunch', function (req, res, next) {
+  save_template_query = `CALL AddDailyLunch("${req.body.text}")`;
+
+  con.query(save_template_query, function (err, result) {
+    if (err) {
+      console.log(`Unable to add [${req.body.text}] to lunch. ` + err);
+      res.end();
+    } else {
+      console.log('Lunch updated: ' + req.body.text);
+      res.end();
+    }
+  });
+
+
+});
+
   module.exports = router;
