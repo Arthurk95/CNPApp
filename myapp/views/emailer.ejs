@@ -39,21 +39,25 @@
             <div  class="sideButton" onclick="toPreviousStep()"><i id="backButton" class="fas fa-chevron-left"></i></div>
             <div id="stepOne" class="flexCenter flexColumn borderBox lightGray2-BG borderRadiusMedium shadowMedium width80">
                 <p class="title green4-BG">Step 1: Email Template</p>
-
                 <div class="veryHeavyPadding">
                     <ul class="flex flexColumn">
                         <li class="marginBottomSmall">
                             <label for="summary">Summary</label>
-                            <textarea onkeyup="textAreaAdjust(this)" name="summary"></textarea>
+                            <textarea id="summary_text_area" onkeyup="textAreaAdjust(this)" name="summary" onchange="pushSummary(this)"></textarea>
                         </li>
                         <li class="marginBottomSmall">
-                            <label for="amSnack">AM Snack</label>
-                            <textarea onkeyup="textAreaAdjust(this)" name="amSnack"></textarea>
+                            <label for="snack">AM Snack</label>
+                            <textarea id="snack_text_area" onkeyup="textAreaAdjust(this)" name="amSnack" onchange="pushAmSnack(this)"></textarea>
                         </li>
                         <li class="marginBottomSmall">
                             <label for="lunch">Lunch</label>
-                            <textarea onkeyup="textAreaAdjust(this)" name="lunch"></textarea>
+                            <textarea id="lunch_text_area" onkeyup="textAreaAdjust(this)" name="lunch" onchange="pushLunch(this)"></textarea>
                         </li>
+                        <script>
+                            document.getElementById("summary_text_area").innerHTML = "<%- summary %>";
+                            document.getElementById("snack_text_area").innerHTML = "<%- snack %>";
+                            document.getElementById("lunch_text_area").innerHTML = "<%- lunch %>";
+                        </script>
                     </ul>
 
                     <div id="remindersContainer" class="flexContainer borderRadiusMedium marginTop relative flexColumn flexCenter border1px darkGray3-border lightGray1-BG heavyPadding width40">          
@@ -188,5 +192,25 @@
             }
         </script>
         
+        <script>
+            //template functions (page 1)
+            function pushSummary(summary_element) {
+                theUrl = window.location.href + '/push-summary';
+                data = "text=" + summary_element.value;
+                httpPostAsync(theUrl, data, null);
+            }
+
+            function pushAmSnack(am_snack_element) {
+                theUrl = window.location.href + '/push-am-snack';
+                data = "text=" + am_snack_element.value;
+                httpPostAsync(theUrl, data, null);
+            }
+
+            function pushLunch(lunch_element) {
+                theUrl = window.location.href + '/push-lunch';
+                data = "text=" + lunch_element.value;
+                httpPostAsync(theUrl, data, null);
+            }
+        </script>
     </body>
 </html>
