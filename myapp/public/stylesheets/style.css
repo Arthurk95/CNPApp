@@ -526,7 +526,7 @@ textarea:focus{
 /* Navigation styling */
 #navigation {
   display: flex;
-  top: 0;
+  top: 0px;
   width: 100%;
   margin-bottom: 100px;
 }
