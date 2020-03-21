@@ -1,7 +1,7 @@
 new Chart(document.getElementById("bar-chart"), {
     type: 'bar',
     data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ["Activity 1", "Activity 2", "Activity 3", "Activity 4", "Activity 5"],
       datasets: [
         {
           label: "Population (millions)",
