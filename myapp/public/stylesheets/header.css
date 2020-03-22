@@ -6,7 +6,7 @@
     text-align: left;
     margin-top: 0px;
     margin-bottom: 30px;
-    background: rgba(138, 138, 138, 0.1);
+    background: rgba(138, 138, 138, 0.5);
   }
   
   /* Each li is an element in the header, usually an <a> tag */
