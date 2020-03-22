@@ -1,3 +1,5 @@
+body{ overflow: scroll; }
+
 /* <ul> list for Header bar */
 .headerStyle {
     font-size: 1.2em;
@@ -6,7 +8,7 @@
     text-align: left;
     margin-top: 0px;
     margin-bottom: 30px;
-    background: rgba(138, 138, 138, 0.5);
+    background: white;
   }
   
   /* Each li is an element in the header, usually an <a> tag */
@@ -17,22 +19,27 @@
   
   /* Actual header button styling */
   .headerStyle a {
+    position: relative;
     transition: 0.2s background-color;
     display: inline-block;
-    color: var(--lightGray1);
+    color: var(--darkGray3);
     text-decoration: none;
     padding: 20px 30px;
     margin: 0;
   }
 
 .headerStyle a:hover{
-    background-color: var(--blue3);
+    background-color: var(--lightGray2);
   }
 
   /* hopefully a temporary solution. Would like to re-use the above a:hover for this */
-.currentPage {
-    background-color: var(--blue3);
-  }
+.currentPage{
+  background: var(--blue1);
+}
+
+.currentPage:hover{
+  background: var(--blue1) !important; 
+}
 
 .mobileHeader{
   display: none;
@@ -42,24 +49,24 @@
 
 /* Div full of header links <a> tags */
 .mobileHeader .links{
-  overflow: scroll;
   display: none;
   flex-direction: column;
   text-align: center;
-  position: fixed;
+  position: absolute;
   top: 150px;
   z-index: 1;
   width: 100%;
-  height: 100%;
-  max-height: 100%;
+  background: white;
 }
 
 /* Actual links */
 .mobileHeader .links a{
   text-align: center;
   text-decoration: none;
-  color: var(--lightGray1);
+  color: var(--darkGray3);
+  align-self: center;
   width: 100%;
+  border-bottom: 1px solid var(--lightGray3);
   font-size: 10vh;
   padding: 20px 0px;
 }
@@ -72,8 +79,8 @@
   
   padding: 14px 16px;
   background: none;
-  color: white;
-  font-size: 100px;
+  color: var(--darkGray2);
+  font-size: 80px;
   display: block;
   position: absolute;
   right: 20px;

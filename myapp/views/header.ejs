@@ -60,23 +60,15 @@
       }
 
       function showMobileHeader(){
-        $('body > :not(#mobileHeader)').slideUp("fast"); //hide all nodes directly under the body
-          
-          setTimeout(function(){
-            $("#links").slideDown("fast");
-            links.style.display = "flex";
-            $('#mobileHeader').appendTo('body');
-          }, 200);
+        $("#links").slideDown("fast");
+        links.style.display = "flex";
       }
 
       function hideMobileHeader(){
-        $('#mobileHeader').prependTo('body');
-        
+
         $("#links").slideUp("fast");
         links.style.display == "none";
-        setTimeout(function(){
-          $('body > :not(#mobileHeader)').slideDown("fast"); //hide all nodes directly under the body
-        }, 200);
+        
       }
 
       
