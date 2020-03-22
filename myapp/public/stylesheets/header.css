@@ -1,4 +1,4 @@
-body{ overflow: scroll; }
+
 
 /* <ul> list for Header bar */
 .headerStyle {
@@ -56,7 +56,7 @@ body{ overflow: scroll; }
   top: 150px;
   z-index: 1;
   width: 100%;
-  background: white;
+  background: var(--mainBGColor);
 }
 
 /* Actual links */
