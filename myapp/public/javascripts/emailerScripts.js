@@ -9,6 +9,7 @@ var activities; // the <ul> element that displays the current student's activiti
 var listOfStudents;
 var currentStudentIndex = 0;
 var savedList = []; // array with true/false value for if corresponding student is saved
+var approvedList = [];
 var MAX_STEPS = 2;
 var behaviors;
 var formElement;
@@ -61,7 +62,7 @@ function studentSelected(listElement, studentData, index){
     if(!savedList[currentStudentIndex]){
         // clicked another student without saving, save student's data to database
     }
-    if(!listElement.classList.contains("approved")){
+    if(listElement.classList.contains("approved")){
         listElement.classList += " selected";
     }
     
@@ -78,12 +79,17 @@ function studentSelected(listElement, studentData, index){
 function populateData(){
     /*
     if(report.approved == true && !stepTwoTitle.parentElement.classList.contains("approved")){
-        stepTwoTitle.parentElement.classList.add("approved")
+        stepTwoTitle.classList.add("approved")
     }
     else if(report.approved == 0){
-        stepTwoTitle.parentElement.classList.remove("approved");
+        stepTwoTitle.classList.remove("approved");
     }
     */
+    if(approvedList[currentStudentIndex]){
+        setApprovedStyle();
+    }
+    else{setNormalStyle();}
+
     stepTwoTitle.getElementsByTagName("p")[0].innerHTML = currentStudentData.name;
     
     $(activities).empty();
@@ -98,15 +104,25 @@ function populateData(){
 }
 
 function studentApproved(button){
-    document.getElementById('stepTwoTitle').classList.add("green3-BG");
-    currentStudentElement.classList.add("approved");
+    setApprovedStyle();
+    approvedList[currentStudentIndex] = true;
 
     // get all values from form text fields and stuff
     // post it to DB
     // DO NOT RELOAD PAGE AS CALLBACK
 
-
     formElement.style.display = "none";
+}
+
+function setApprovedStyle(){
+    if(!stepTwoTitle.classList.contains("green3-BG")){
+        stepTwoTitle.classList.add("green3-BG");
+        currentStudentElement.classList.add("approved");
+    }
+}
+
+function setNormalStyle(){
+    stepTwoTitle.classList.remove("green3-BG");
 }
 
 // node.js "reports" variable passed to JS
@@ -153,6 +169,7 @@ function initSavedList(){
     }
 
     savedList = list;
+    approvedList = list;
 }
 
 // Student's behaviors and other stuff was saved,
