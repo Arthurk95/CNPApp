@@ -1,3 +1,6 @@
+body{
+    background: var(--yellow3);
+}
 
 .profileContainer{
     display: flex;
@@ -26,17 +29,6 @@
     border-radius: 8px;
 }
 
-.profileSection .profileList{
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-.profileSection li{
-    margin-bottom: 15px;
-}
-
 .formTitle{
     font-weight: 500;
     font-size: 1.2em;
@@ -47,12 +39,12 @@
     background: none;
     box-shadow: none;
     width: 70%;
-    color: var(--lightGray3);
+    color: var(--darkGray3);
 }
 
 label{
     float: left;
-    color: var(--lightGray3);
+    color: var(--darkGray3);
 }
 
 .studentTable {
@@ -118,8 +110,8 @@ label{
     display: inline-block;
   }
   
-  /* Tooltip text */
-  .edit-image-tooltip .tooltiptext {
+/* Tooltip text */
+.edit-image-tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -127,18 +119,19 @@ label{
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
-   
+
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-  }
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .edit-image-tooltip:hover .tooltiptext {
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.edit-image-tooltip:hover .tooltiptext {
     visibility: visible;
-  }
+}
 
 .imageContainer{
+    text-align: center;
     position: relative;
     width: 100%;
 }
@@ -171,10 +164,11 @@ label{
     align-content: center;
     flex-direction: column;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 .profileButtons a{
-    width: 90%;
+    width: 60%;
     padding: 10px 0px;
     text-decoration: none;
     font-size: 1.5em;
@@ -219,7 +213,7 @@ label{
         align-items: center;
     }
 
-    .profileButtons a{ font-size: 4em; }
+    .profileButtons a{width: 100%; font-size: 4em; }
 
     .infoTable tr, td{ display: block; }
 

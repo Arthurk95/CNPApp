@@ -26,12 +26,12 @@
               <li><a href="#tabs-2">Schedule</a></li>
               <li><a href="#tabs-3">Statistics</a></li>
             </ul>
-            <div id="tabs-1" class="tabContent darkGray3-BG">
+            <div id="tabs-1" class="tabContent yellow1-BG">
               <table class="infoTable">
                 <tr>
                   <td>
                     <ul>
-                      <li class="formTitle">Guardian #1</li>
+                      <li class="darkText largeFont">Guardian #1</li>
                       <li><input class="lineInput"name=”notASearchField” type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
                       <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
                       <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
@@ -39,7 +39,7 @@
                   </td>
                   <td>
                     <ul>
-                      <li class="formTitle">Guardian #2</li>
+                      <li class="darkText largeFont">Guardian #2</li>
                       <li><input name=”notASearchField” type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
                       <li><input name=”notASearchField” type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
                       <li><input name=”notASearchField” type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
@@ -49,7 +49,7 @@
               </table>
             </div>
             
-            <div id="tabs-2" class="tabContent darkGray3-BG">
+            <div id="tabs-2" class="tabContent yellow1-BG">
               <div class="fullDay">
                 <label for="fullDay" class="switchLabel">Full Day</label>
                 <div>
@@ -68,7 +68,7 @@
               </ul>
             </div>
 
-            <div id="tabs-3" class="tabContent darkGray3-BG">
+            <div id="tabs-3" class="tabContent yellow1-BG">
               <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
             </div>
           </div>
@@ -76,8 +76,8 @@
 
         
 
-        <div class="profileSection darkGray3-BG">
-          <ul class="profileList">
+        <div class="profileSection yellow1-BG">
+          <ul class="width90 flexListColumn heavyPadding">
             <li>
               <label for="file-input" class="imageContainer tooltip marginBottom">
                 <div class="edit-image-tooltip">
@@ -90,42 +90,36 @@
                   </div>
               </form>
             </li>
-            <li>
-              <p1><font color="red"><%- upload_error_message %></font></p1>
-              <table class="studentTable">
-                <tr>
-                  <td class="width20"><label>NAME</label></td>
-                  <td class="width70 left"><input class="hiddenInput" id="studentName" value="<%- student.StudentName %>"></td>
-                </tr>
-                <tr>
-                  <td class="width20"><label>BIRTHDAY</label></td>
-                  <td class="width80">
-                    <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
-                    <div class="flexRowSpaceAround">
-                      <select id="year" class="pretty-classic" onchange="genDays();">
-                      </select>
+            <li class="spaceBetween">
+              <label class="width30">NAME</label>
+              <input class="hiddenInput rightText" id="studentName" value="<%- student.StudentName %>">
+            
+              <p1><font color="red"><%- upload_error_message %></font></p1></li>
+            <li class="spaceBetween marginBottom">
+              <label class="width30">BIRTHDAY</label>
+              <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
+              <div class="flexRowSpaceAround">
+                <select id="year" class="pretty-classic" onchange="genDays();">
+                </select>
 
-                      <select id="month" class="pretty-classic" onchange="genDays();">
-                        <option value="01">Jan</option>
-                        <option value="02">Feb</option>
-                        <option value="03">Mar</option>
-                        <option value="04">Apr</option>
-                        <option value="05">May</option>
-                        <option value="06">Jun</option>
-                        <option value="07">Jul</option>
-                        <option value="08">Aug</option>
-                        <option value="09">Sep</option>
-                        <option value="10">Oct</option>
-                        <option value="11">Nov</option>
-                        <option value="12">Dec</option>
-                      </select>
+                <select id="month" class="pretty-classic" onchange="genDays();">
+                  <option value="01">Jan</option>
+                  <option value="02">Feb</option>
+                  <option value="03">Mar</option>
+                  <option value="04">Apr</option>
+                  <option value="05">May</option>
+                  <option value="06">Jun</option>
+                  <option value="07">Jul</option>
+                  <option value="08">Aug</option>
+                  <option value="09">Sep</option>
+                  <option value="10">Oct</option>
+                  <option value="11">Nov</option>
+                  <option value="12">Dec</option>
+                </select>
         
-                      <select id="day" class="pretty-classic">
-                      </select>
-                    </div>
-                  </td>
-                </tr>
-              </table>
+                <select id="day" class="pretty-classic">
+                </select>
+              </div>
             </li>
             <li class="profileButtons">
               <a onclick="saveStudent()" class="saveButton">Save Changes</a>
