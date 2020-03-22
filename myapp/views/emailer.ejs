@@ -35,8 +35,8 @@
 
     </head>
     <body>
-        <div id="mainEmailerContainer" class="emailerContainer flex spaceAround">
-            <div  class="sideButton" onclick="toPreviousStep()"><i id="backButton" class="fas fa-chevron-left"></i></div>
+        <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
+            <i id="backButton" onclick="toPreviousStep()" class="fas fa-chevron-left icon hugeFont hoverable"></i>
             <div id="stepOne" class="flexCenter flexColumn borderBox lightGray2-BG borderRadiusMedium shadowMedium width80">
                 <p class="title green4-BG">Step 1: Email Template</p>
                 <div class="veryHeavyPadding">
@@ -74,9 +74,9 @@
             </div>
 
             <div id="stepTwo" class="contentWithSidebar displayNone">
-                <div class="content lightGray2-BG borderRadiusMedium"> <!-- Left column -->
-                    <div id="stepTwoTitle" class="relative title blue2-BG flex spaceBetween">
-                        <p class=""></p>
+                <div class="width70 lightGray1-BG borderRadiusMedium"> <!-- Left column -->
+                    <div id="stepTwoTitle" class="title blue2-BG flex spaceBetween">
+                        <p></p>
                         <div class="stepButton green2-BG" onclick="openReview()">
                             <p>Review</p>
                         </div>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="heavyPadding"> <!-- activities and dropdowns -->
+                    <div class="content"> <!-- activities and dropdowns -->
                         <div class="flex spaceBetween">
                             <div id="activities" class="width60">
                                 <p class="listTitle">Activities</p>
@@ -119,20 +119,21 @@
                                 <% }) %>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="flexContainer flexRight">
-                        <div id="saveButton" class="stepButton blue2-BG" onclick="studentSaved(this, <%= JSON.stringify(behaviors) %>);">
-                            <p>Save</p>
-                            <div class="buttonIcon blue3-BG">
-                                <i class="fas fa-check"></i>
+                        <div class="flexContainer flexRight">
+                            <div id="saveButton" class="stepButton blue2-BG" onclick="studentSaved(this, <%= JSON.stringify(behaviors) %>);">
+                                <p>Save</p>
+                                <div class="buttonIcon blue3-BG">
+                                    <i class="fas fa-check"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    
                 </div>
                 
                 <!-- Right column (students) -->
-                <div class="sidebar">
+                <div class="sidebar width20 lightGray1-BG">
                     <ul id="listOfStudents" class="studentsList" >
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>
@@ -147,7 +148,7 @@
                     
             </div>
 
-            <div onclick="toNextStep()" class="sideButton"><i id="nextButton" class="fas fa-chevron-right"></i></div>
+            <i onclick="toNextStep()" id="nextButton" class="fas fa-chevron-right icon hugeFont hoverable"></i>
         </div>
         <script>initEmailerVariables();
         

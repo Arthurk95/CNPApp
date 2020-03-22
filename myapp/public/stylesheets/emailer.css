@@ -4,19 +4,6 @@
     margin-bottom: 30px;
 }
 
-.emailerContainer .title{
-    left: 0;
-    right: 0;
-    top: 0;
-    font-size: 3em;
-    padding: 30px;
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: var(--lightGray1);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
 .emailerContainer .approveButton{
     position: absolute;
     right: 0;
@@ -215,24 +202,6 @@
 .twoColumns{
     display: flex;
     justify-content: space-between;
-}
-
-.contentWithSidebar{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.contentWithSidebar .content{
-    width: 70%;
-}
-
-.contentWithSidebar .sidebar{
-    align-self: flex-start;
-    min-width: 150px;
-    width: 20%;
-    background: var(--lightGray2);
-    border-radius: 8px;
 }
 
 .listTitle{
