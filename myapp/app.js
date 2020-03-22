@@ -11,7 +11,7 @@ var parsed = JSON.parse(fs.readFileSync(configPath, 'UTF-8'));
 con = sql.createPool({connectionLimit : 100,"host":parsed.host,"user":parsed.user,"password":parsed.password,"database":parsed.database});
 weatherdata = "http://api.openweathermap.org/data/2.5/weather?id=" + parsed.sacramentoid + "&appid=" + parsed.weatherkey;
 var indexRouter = require('./routes/index');
-var studentsRouter = require('./routes/students');
+var trackerRouter = require('./routes/tracker');
 var adminRouter = require('./routes/admin');
 var reportsRouter = require('./routes/reports');
 var emailerRouter = require('./routes/emailer');
@@ -37,7 +37,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/students', studentsRouter);
+app.use('/tracker', trackerRouter);
 app.use('/admin', adminRouter);
 app.use('/reports', reportsRouter);
 app.use('/emailer', emailerRouter);

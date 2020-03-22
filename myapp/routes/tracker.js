@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     if (err) throw err;
     con.query(activity_query, function (err, aQuery) {
       if (err) throw err;
-      res.render('students.ejs', {title: 'Student Page', students: sQuery[0],  activities: aQuery[0]});
+      res.render('tracker.ejs', {title: 'Student Page', students: sQuery[0],  activities: aQuery[0]});
     })
   })
   
