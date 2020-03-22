@@ -20,7 +20,7 @@
   --tasksColor: #868DAA;
   --tasksColorDark: #4E5263;
 
-  --yellow1: #FFE3AE;
+  --yellow1: #FDE0CA;
   --yellow2: #F9D38B;
   --yellow3: #E0BA71;
   --yellow4: #C29D54;
@@ -38,7 +38,7 @@
   --green4: #6C7E66;
   --green5: #4C5948;
 
-  --blue1: #97B8CA;
+  --blue1: #AFBCD4;
   --blue2: #86A6B8;
   --blue3: #627A87;
   --blue4: #495A64;
@@ -205,10 +205,14 @@ p{margin: 0;}
 .yellow{background: var(--yellow2);}
 
 .lightText{color: var(--lightGray2)};
-.darkText{color: var(--darkGray2)};
+.darkText{color: var(--darkGray3)};
 
 .right{float: right;}
 .left{float: left;}
+
+.centerText{text-align: center;}
+.rightText{text-align: right;}
+.leftText{text-align: left;}
 
 .lightPadding{padding: 5px !important;}
 .mediumPadding{padding: 10px !important;}
@@ -297,6 +301,21 @@ p{margin: 0;}
 }
 
 .noMargin{margin: 0 !important;}
+
+.flexListColumn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.flexListColumn li{
+  align-items: center;
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+}
 
 .flex{display: flex;}
 .flexColumn{flex-direction: column;}
@@ -634,13 +653,13 @@ li {
 .lineInput{
   background: none;
   border: none;
-  border-bottom: 1px solid var(--lightGray3);
-  color: var(--lightGray2) !important;
+  border-bottom: 1px solid var(--darkGray3);
+  color: var(--darkGray3) !important;
   box-shadow: none !important;
   border-radius: 0 !important;
 }
 
 .lineInput:focus{
   box-shadow: none !important;
-  border-color: var(--blue2);
+  border-color: var(--green1);
 }
