@@ -37,7 +37,7 @@
 .tabContent {
   display: none;
   padding: 20px 40px;
-  border: 1px solid var(--darkGray2);
+  border: 1px solid #A57750;
   border-top: none;
   opacity: 1;
 }
