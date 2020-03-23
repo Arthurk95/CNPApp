@@ -31,14 +31,6 @@
     color: var(--lightGray1);
 }
 
-.studentFooter a:hover{
-    background-color: var(--footerNextHoverColor);
-}
-
-.studentFooter a:active{
-    background-color: var(--footerNextHoverColor);
-}
-
 @media screen and (max-width: 1200px){
     .studentFooter{
         padding-bottom: 0;
@@ -87,21 +79,16 @@
     flex-wrap: nowrap;
 }
 
-
-#backButton:hover{
-    background: var(--reportsColorDark);
+.studentFooter a:hover{
+    filter: brightness(110%);
 }
-
-#backButton:active{
-    background: var(--reportsColorDark);
-}
-
-
 
 .studentFooter .noClick{
     color: var(--lightGray2);
     cursor: default; 
     border-right: 3px solid var(--darkGray2);
 }
+
+.studentFooter .noClick:hover{ filter: none;}
 
 .noClick:hover{background-color: var(--darkGray3) !important;}
