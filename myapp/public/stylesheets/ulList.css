@@ -93,7 +93,7 @@
     overflow: hidden;
     font-size: 105px;
     color: var(--lightGray2);
-    box-shadow: 0px 0px 5px var(--darkGray3);
+    box-shadow: 0px 0px 2px var(--darkGray3);
     transition: width 0.1s ease-in-out, height 0.1s ease-in-out, 
         font-size 0.1s ease-in-out, margin 0.1s ease-in-out;
 }
@@ -135,10 +135,10 @@
     height: 150px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid var(--accentColor2Light);
+    border: 3px solid var(--accentColor2);
     margin: 0;
     margin-left: -60px;
-    box-shadow: 0px 0px 5px var(--darkGray3);   
+    box-shadow: 0px 0px 2px var(--darkGray3);   
     transition: width 0.1s ease-in-out, height 0.1s ease-in-out;
 }
 
