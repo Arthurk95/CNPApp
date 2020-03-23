@@ -158,6 +158,7 @@ function initActivities(){
     for(var i = 0; i < listOfStudents[0].listOfActivities.length; i++){
         var li = document.createElement("li");
         li.innerHTML = listOfStudents[0].listOfActivities[i].ActivityName;
+        li.classList.add("main-BG")
         activities.appendChild(li);
     }
 }
