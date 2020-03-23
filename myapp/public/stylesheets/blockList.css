@@ -48,6 +48,7 @@ HTML Format:
 /* This is the actual listing itself,
    which contains multiple elements */
 .blockList li {
+    position: relative;
     transition: box-shadow 0.1s !important;
     transition: opacity 0.2s ease-in;
     background: var(--lightGray1);
@@ -104,8 +105,9 @@ HTML Format:
 /* This is called when a student is selected 
    on the tracking page */
 .selectedStudent{
+    position: relative;
     background-color: var(--lightGray3) !important;
-    box-shadow: inset 0px 0px 6px 3px var(--darkGray1) !important;
+    box-shadow: inset 0px 0px 6px 3px var(--darkGray3) !important;
 }
 
 /*  */
@@ -125,7 +127,7 @@ HTML Format:
     width: 100%;
     opacity: 0;
     transition: 0.1s;
-    background-color: var(--selectedStudentColor);
+    background-color: var(--accentColor2Light);
   }
 
   .selectedStudent .checkmarkOverlay{ opacity: 0.3; }
@@ -166,7 +168,6 @@ HTML Format:
   .selectionButtons a{
     transition: 0.1s all;
     color: var(--lightGray1);
-    background: var(--darkGray2);
     font-size: 6em;
     padding: 10vh 0px 10vh 0px;
     display: block;
@@ -179,13 +180,6 @@ HTML Format:
       opacity: 0.9;
   }
 
-  #studentButton{
-      background: var(--studentsColor);
-  }
-
-  #activitiesButton{
-    background: var(--tasksColor);
-  }
 
   /* Makes the text for the activity look better */
   .activitiesList .blockContainer p{
