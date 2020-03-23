@@ -42,7 +42,7 @@
                   </li>
                 <% }) %>
             <% } %> 
-              <li title="Add Student" class="profileList clickableItem accent2Light-BG" onclick="addStudent()">
+              <li title="Add Student" class="profileList clickableItem accent2Light-BG centerText" onclick="addStudent()">
                 <div class="addIcon accent2-BG">
                   <i class="fas fa-plus"></i>
                 </div>
@@ -142,14 +142,14 @@
                 
                 
                   <% if (activity.Hidden == 1) { %>
-                  <li class="background-BG blackAndWhite">
+                  <li class="main-BG blackAndWhite">
                     <p><%= activity.ActivityName %></p>
                     <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
                     <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
                     <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
                     
                   <% } else { %>
-                  <li class="">
+                  <li class="white-BG">
                     <p><%= activity.ActivityName %></p>
                     <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
                     <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
@@ -160,7 +160,7 @@
                 </li>
               <% }) %>
             <% } %>
-            <li onclick="addActivity()" class="addElement clickableItem">
+            <li onclick="addActivity()" class="accent2Light-BG centerText clickableItem">
               <p title="Create Activity" >New Activity +</p>
             </li>
           </ul>
@@ -204,7 +204,7 @@
       <section id="tab3" class="item" data-title="Email Manager">
         <div class="item-content">
           <ul id="comptasksList" class="ulList">
-            <li onclick="editHeader" class="addElement clickableItem">
+            <li onclick="editHeader" class="accent2Light-BG centerText clickableItem">
               <p title="Edit Header" >Edit Header</p>
             </li>
           </ul>
@@ -266,11 +266,13 @@
     function toggleActivityHide(element){
       if(element.classList.contains("blackAndWhite")){
         element.classList.remove("blackAndWhite");
-        element.classList.remove("background-BG");
+        element.classList.remove("main-BG");
+        element.classList.add("white-BG");
       }
       else{
+        element.classList.remove("white-BG");
         element.classList.add("blackAndWhite");
-        element.classList.add("background-BG");
+        element.classList.add("main-BG");
 
       }
     }
