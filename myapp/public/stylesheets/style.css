@@ -293,7 +293,7 @@ p{margin: 0;}
 
 .white-BG{background: white;}
 
-.background-BG{background: var(--mainBGColor);}
+.main-BG{background: var(--mainBGColor);}
 .content-BG{background: var(--contentBGColor);}
 .accent1-BG{background: var(--accentColor1);}
 .accent1Light-BG{background: var(--accentColor1Light);}
@@ -520,6 +520,9 @@ p{margin: 0;}
 
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
+
+  .width100Mobile{width: 100% !important;}
+  .flexContainer{ flex-direction: column;}
 
   .contentWithSidebar{flex-direction: column-reverse; align-items: center;}
   .sidebar{width: 100% !important;}
