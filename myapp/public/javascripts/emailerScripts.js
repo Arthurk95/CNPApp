@@ -62,7 +62,7 @@ function studentSelected(listElement, studentData, index){
     if(!savedList[currentStudentIndex]){
         // clicked another student without saving, save student's data to database
     }
-    if(listElement.classList.contains("approved")){
+    if(!listElement.classList.contains("approved")){
         listElement.classList += " selected";
     }
     
@@ -115,14 +115,14 @@ function studentApproved(button){
 }
 
 function setApprovedStyle(){
-    if(!stepTwoTitle.classList.contains("green3-BG")){
-        stepTwoTitle.classList.add("green3-BG");
+    if(!stepTwoTitle.classList.contains("accent2Light-BG")){
+        stepTwoTitle.classList.add("accent2Light-BG");
         currentStudentElement.classList.add("approved");
     }
 }
 
 function setNormalStyle(){
-    stepTwoTitle.classList.remove("green3-BG");
+    stepTwoTitle.classList.remove("accent2Light-BG");
 }
 
 // node.js "reports" variable passed to JS
