@@ -10,7 +10,7 @@
 
 .customTable thead th{
     border: none;
-    background: var(--green5);
+    background: var(--accentColor2);
     color: var(--lightGray2);
     font-size: 2.2em;
     padding: 10px 0;
