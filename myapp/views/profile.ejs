@@ -27,26 +27,21 @@
               <li><a href="#tabs-3">Statistics</a></li>
             </ul>
             <div id="tabs-1" class="content content-BG">
-              <table class="infoTable">
-                <tr>
-                  <td>
-                    <ul>
-                      <li class="darkText largeFont">Guardian #1</li>
-                      <li><input class="lineInput"name=”notASearchField” type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
-                      <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
-                      <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
-                    </ul>
-                  </td>
-                  <td>
-                    <ul>
-                      <li class="darkText largeFont">Guardian #2</li>
-                      <li><input name=”notASearchField” type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
-                      <li><input name=”notASearchField” type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
-                      <li><input name=”notASearchField” type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
-                    </ul>
-                  </td>
-                </tr>
-              </table>
+              <div class="flexContainer spaceAround flexWrap">
+                <ul class="width40 width100Mobile marginBottom40">
+                  <li class="darkText largeFont marginBottom10">Guardian #1</li>
+                  <li><input class="lineInput"name=”notASearchField” type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
+                  <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
+                  <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
+                </ul>
+                <ul class="width40 width100Mobile">
+                  <li class="darkText largeFont marginBottom10">Guardian #2</li>
+                  <li><input name=”notASearchField” type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
+                  <li><input name=”notASearchField” type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
+                  <li><input name=”notASearchField” type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
+                </ul>
+              </div>
+              
             </div>
             
             <div id="tabs-2" class="content content-BG">
@@ -77,7 +72,7 @@
         <div class="profileSection content-BG">
           <ul class="width90 flexListColumn heavyPadding">
             <li>
-              <label for="file-input" class="imageContainer tooltip marginBottom">
+              <label for="file-input" class="imageContainer tooltip marginBottom40 marginTop20">
                 <div class="edit-image-tooltip">
                   <span class="tooltiptext">Edit Image</span>
                 <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
@@ -93,7 +88,7 @@
               <input class="hiddenInput rightText" id="studentName" value="<%- student.StudentName %>">
             
               <p1><font color="red"><%- upload_error_message %></font></p1></li>
-            <li class="spaceBetween marginBottom">
+            <li class="spaceBetween marginBottom40">
               <label class="width30">BIRTHDAY</label>
               <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
               <div class="flexRowSpaceAround">
@@ -120,8 +115,8 @@
               </div>
             </li>
             <li class="profileButtons">
-              <a onclick="saveStudent()" class="saveButton">Save Changes</a>
               <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
+              <a onclick="saveStudent()" class="saveButton">Save Changes</a>
             </li>
           </ul>
         </div>

@@ -44,47 +44,6 @@ label{
     color: var(--darkGray3);
 }
 
-.studentTable {
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 50px;
-}
-
-.labelColumn{
-    vertical-align: middle;
-}
-
-
-.valueColumn input{
-    width: 95%;
-    float: right;
-}
-
-.infoTable{
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.infoTable td{
-    padding: 10px;
-}
-
-.infoTable li{
-    margin-bottom: 15px;
-}
-
-.infoTable input{
-    width: 90%;
-    display: block;
-    margin: 0 auto;
-}
-
-.mobileProfile{
-    display: none;
-    width: 100%;
-}
-
-
 
 /* .editImage{
     position: absolute;
@@ -159,16 +118,14 @@ label{
     display: flex;
     justify-content: space-around;
     align-content: center;
-    flex-direction: column;
     flex-wrap: wrap;
     text-align: center;
 }
 
 .profileButtons a{
-    width: 60%;
+    width: 40%;
     padding: 10px 0px;
     text-decoration: none;
-    font-size: 1.5em;
     margin-bottom: 20px;
 }
 
@@ -210,9 +167,10 @@ label{
         align-items: center;
     }
 
-    .profileButtons a{width: 100%; font-size: 4em; }
+    label{font-size: 5vw;}
 
-    .infoTable tr, td{ display: block; }
+    .profileButtons{flex-direction: column-reverse;}
+    .profileButtons a{width: 100%; font-size: 4em; }
 
     /* Displays the info area as one item per row and full width */
     .infoTable ul{
@@ -230,21 +188,7 @@ label{
 
     .tabsSection{ width: 90%; margin: 45px auto !important;}
 
-    
-    .mobileProfile { display: block !important; margin: 0 auto !important;}
-
-    .mobileProfile .profileList { margin: 0 auto;}
-    .mobileProfile input{
-        font-size: 1.2em !important;
-        padding: 10px 0 10px 8px;
-    }
-
     #studentImage label{float: none !important;}
-
-    .mobileProfile tr td{ vertical-align: middle;}
-
-    .mobileProfile input{ font-size: 1.5em !important;}
-    .mobileProfile label{ font-size: 1.5em !important;}
 
     .imageContainer {width: 100%;}
     .imageContainer img{ 
@@ -256,15 +200,5 @@ label{
     .profileSection{ width: 90%; }
 
     .profileSection .profileList{ width: 90%; padding: 30px 0px 20px 0px;}
-
-    
-    .labelColumn{
-        display: table-cell;
-        width: 10%;
-    }
-
-    .studentTable{
-        font-size: 1.2em;
-    }
 }
 
