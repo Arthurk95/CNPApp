@@ -160,7 +160,7 @@
 
 /* Student is selected in the studentsList */
 .studentsList .selected {
-    background: var(--blue2);
+    background: var(--accentColor1Light);
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
@@ -175,7 +175,7 @@
 
 /* Student's email was approved */
 .approved{
-    background: var(--green3) !important;
+    background: var(--accentColor2Light) !important;
     color: var(--lightGray1) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
