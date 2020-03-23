@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/stats.css' />
+    <link rel='stylesheet' href='/stylesheets/charts.css' />
     <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
     <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
@@ -273,10 +274,22 @@
         
         })
         </script>
+    </div>
 
+    <!-- Bubble Chart -->
+    <div class="chart" id="bubble"> 
+      <h1>Bubble Chart</h1>
 
-
-
+      <!-- Make a bar chart -->
+      <!-- Doesn't work -->
+      <button onclick="makeBubble('#bubble')">Make Bubble</button>
+      <script>
+        function makeBubble(id){
+          console.log("make a bubble");
+        }
+      </script>
+      <!-- this just makes one bar chart -->
+      <canvas id="bubble-chart"></canvas>
     </div>
 
     <!-- Another Chart --> 
@@ -395,6 +408,7 @@
     <script type="text/javascript" src="javascripts/statscripts/navigation.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/radar-chart.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/bar-chart.js"></script>
+    <script type="text/javascript" src="javascripts/statscripts/bubble-chart.js"></script>
   </body>
 
   <script>

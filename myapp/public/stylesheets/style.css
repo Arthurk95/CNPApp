@@ -692,39 +692,6 @@ svg {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-#bar-chart {
-  background-color: white;
-  width: 450px;
-  height: 450px;
-}
-
-#bar{
-  width: 1075px;
-  height: 670px;
-}
-
-#line-chart {
-  background-color: white;
-  width: 450px;
-  height: 450px;
-}
-
-#line {
-  width: 1075px;
-  height: 670px;
-}
-
-#radar-chart {
-  background-color: white;
-  width: 450px;
-  height: 450px;
-}
-
-#radar {
-  width: 875px;
-}
-
-
 /* heat map  
 rect.bordered {
   stroke: #E6E6E6;

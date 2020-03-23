@@ -1,0 +1,43 @@
+
+#bar-chart {
+  background-color: white;
+  width: 450px;
+  height: 450px;
+}
+
+#bar{
+  width: 1075px;
+  height: 670px;
+}
+
+#line-chart {
+  background-color: white;
+  width: 450px;
+  height: 450px;
+}
+
+#line {
+  width: 1075px;
+  height: 670px;
+}
+
+#radar-chart {
+  background-color: white;
+  width: 450px;
+  height: 450px;
+}
+
+#radar {
+  width: 875px;
+}
+
+#bubble-chart {
+  background-color: white;
+  width: 450px;
+  height: 450px;
+}
+
+#bubble{
+  width: 1075px;
+  height: 670px;
+}
