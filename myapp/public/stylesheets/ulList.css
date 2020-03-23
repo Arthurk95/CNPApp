@@ -33,20 +33,19 @@
     border-radius: 12px;
     overflow: hidden;
     padding-left: 20px;
-    background: var(--lightGray1);
-    box-shadow: 0px 0px 6px var(--darkGray2);
+    box-shadow: 0px 0px 2px var(--darkGray4);
 }
 
 .ulList li p{
-    margin: 30px 0px;
+    margin: 20px 0px;
     color: var(--darkGray3);
-    font-size: 2.5em;
+    font-size: 1.7em;
     text-align: left;
     flex-grow: 2;
 }
 
 .ulList li button{
-    font-size: 4em;
+    font-size: 2em;
     justify-self: center;
     align-self: stretch;
     width: 10vw;
@@ -63,27 +62,6 @@
 
 .ulList li button:active{
     box-shadow: inset 0px 0px 5px 2px var(--darkGray3);
-}
-
-.ulList li .greenButton{
-    background: var(--green2) !important;
-}
-
-.ulList li .yellowButton {
-    background: var(--yellow2) !important;
-}
-
-.ulList li .redButton{
-    background: var(--red2) !important;
-}
-
-.ulList li .darkRedButton{
-    color: var(--lightGray2);
-    background: var(--red3) !important;
-}
-
-.ulList .addElement{
-    background: var(--blue1) !important;
 }
 
 .ulList .addElement p{
@@ -114,7 +92,6 @@
     border-radius: 50%;
     overflow: hidden;
     font-size: 105px;
-    background: var(--blue3);
     color: var(--lightGray2);
     box-shadow: 0px 0px 5px var(--darkGray3);
     transition: width 0.1s ease-in-out, height 0.1s ease-in-out, 
@@ -142,10 +119,9 @@
 .ulList .profileList{
     overflow: visible;
     align-items: center;
-    width: 25%;
+    width: 35%;
     height: 130px;
     margin: 20px 40px;
-    background: white;
     padding-left: 0;
  }
 
@@ -159,7 +135,7 @@
     height: 150px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid var(--yellow1);
+    border: 5px solid var(--accentColor2Light);
     margin: 0;
     margin-left: -60px;
     box-shadow: 0px 0px 5px var(--darkGray3);   
@@ -180,8 +156,8 @@
         45deg,
         white,
         white 40px,
-        var(--yellow1) 40px,
-        var(--yellow1) 80px
+        var(--accentColor2Light) 40px,
+        var(--accentColor2Light) 80px
       ) !important;
   }
 
