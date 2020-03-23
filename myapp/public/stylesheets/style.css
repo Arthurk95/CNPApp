@@ -75,12 +75,16 @@
 
   font-family: 'Roboto Slab', sans-serif;
 
-  --mainBGColor: #739898;
+  --mainBGColor: #97C5CD;
   --contentBGColor: rgb(226, 219, 205);
-  --accentColor1: #155353;
-  --accentColor1Light: #2B6868;
-  --accentColor2: #AD8B47;
-  --accentColor2Light: #D3B57B;
+  --accentColor1: #05414C;
+  --accentColor1Light: #317582;
+  --accentColor2: #1C734B;
+  --accentColor2Light: #5DB08A;
+  --accentColor3: #A68528;
+  --accentColor3Light: #D4B04D;
+  --accentColor4: #992540;
+  --accentColor4Light: #EA7C96;
 
 }
 
@@ -285,6 +289,10 @@ p{margin: 0;}
 .accent1Light-BG{background: var(--accentColor1Light);}
 .accent2-BG{background: var(--accentColor2);}
 .accent2Light-BG{background: var(--accentColor2Light)}
+.accent3-BG{background: var(--accentColor3);}
+.accent3Light-BG{background: var(--accentColor3Light);}
+.accent4-BG{background: var(--accentColor4);}
+.accent4Light-BG{background: var(--accentColor4Light);}
 
 
 /* ----------- BORDER STUFF ----------- */
