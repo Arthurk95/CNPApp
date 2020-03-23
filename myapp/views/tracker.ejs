@@ -15,8 +15,8 @@
     <% if (students.length > 0) {%>
         <% if (activities.length > 0) {%>
             <ul id="selectionButtons" class="selectionButtons">
-                <li><a id="studentButton" onclick="startWithStudents()">Select Students</a></li>
-                <li><a id="activitiesButton" onclick="startWithActivities()">Select Activity</a></li>
+                <li><a id="studentButton" class="accent2Light-BG" onclick="startWithStudents()">Select Students</a></li>
+                <li><a id="activitiesButton" class="accent3Light-BG" onclick="startWithActivities()">Select Activity</a></li>
             </ul>
             <%- include listOfStudents.ejs %></ul>
             <%- include listOfActivities.ejs %></ul>
@@ -36,17 +36,17 @@
     <footer>
         <ul id="footer" class="studentFooter">
             <li id="pottyAndSelect" class="twoButtons">
-                <a id="pottyBreak" class="blue3-BG smallerFont" onclick="pottyBreak()">Potty Break</a>
-                <a id="selectButton" class="green3-BG smallerFont" onclick="selectionMade()">Select</a>
+                <a id="pottyBreak" class="accent3Light-BG smallerFont" onclick="pottyBreak()">Potty Break</a>
+                <a id="selectButton" class="accent2Light-BG smallerFont" onclick="selectionMade()">Select</a>
             </li>
             <li id="backAndSubmit" class="twoButtons">
-                <a id="backButton" class="red3-BG" onclick="goBack()">Back</a>
-                <a onclick="submitToDB()" class="green3-BG">Submit</a>
+                <a id="backButton" class="accent4-BG" onclick="goBack()">Back</a>
+                <a onclick="submitToDB()" class="accent2-BG">Submit</a>
             </li>
             <li id="pottyYesNo" class="titleWithTwoButtons">
                 <a class="darkGray3-BG noClick">Accident?</a>
-                <a id="pottyYes" class="red3-BG" onclick="submitPottyToDB(true)">Yes</a>
-                <a id="pottyNo" class="blue3-BG" onclick="submitPottyToDB(false)">No</a>
+                <a id="pottyYes" class="accent4-BG" onclick="submitPottyToDB(true)">Yes</a>
+                <a id="pottyNo" class="accent2-BG" onclick="submitPottyToDB(false)">No</a>
             </li>
         </ul>
     </footer>
