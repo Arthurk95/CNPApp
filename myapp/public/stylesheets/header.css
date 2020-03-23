@@ -9,6 +9,7 @@
     margin-top: 0px;
     margin-bottom: 30px;
     background: var(--accentColor1);
+    box-shadow: 0px 0px 5px var(--darkGray2);
   }
   
   /* Each li is an element in the header, usually an <a> tag */
@@ -34,8 +35,9 @@
 
   /* hopefully a temporary solution. Would like to re-use the above a:hover for this */
 .currentPage{
-  color: var(--darkGray2) !important;
-  background: var(--mainBGColor);
+  font-size: 1.4em;
+  color: var(--lightGray2) !important;
+  background: var(--accentColor1Light);
 }
 
 .currentPage:hover{

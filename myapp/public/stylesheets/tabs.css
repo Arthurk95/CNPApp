@@ -14,8 +14,8 @@
   display: block;
   padding: 5px 30px;
   text-decoration: none;
-  color: var(--darkGray4);
-  background: var(--lightGray3);
+  color: var(--lightGray2);
+  background: var(--accentColor2Light);
   outline: none;
 }
 
@@ -42,9 +42,10 @@
 
 /* jQuery styling override for tab colors */
 .ui-tabs-tab.ui-state-active a{
-  color: var(--darkGray3) !important;
+  color: white !important;
   font-size: 1.3em;
-  background-color: var(--lightGray1) !important;
+  background-color: var(--contentBGColor) !important;
+  text-shadow: 0px 0px 4px var(--darkGray3);
 }
 
 
@@ -70,14 +71,18 @@ an accordion when on mobile */
 }
 
 .tabbed-content .tabs li a{
+  color: var(--lightGray1);
   padding: 10px 30px;
   display: block;
+  background: var(--accentColor2Light) !important;
+  text-shadow: 0px 0px 1px var(--darkGray3);
 }
 
 .tabbed-content .tabs li a.openTab{
   font-size: 1.2em;
-  background: var(--accentColor1) !important;
-  color: var(--lightGray1);
+  text-shadow: 0px 0px 4px var(--darkGray3);
+  background: var(--contentBGColor) !important;
+  color: white;
 }
 
 .tabbed-content .item .item-content{

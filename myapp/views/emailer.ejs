@@ -38,8 +38,8 @@
     <body>
         <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
             <i id="backButton" onclick="toPreviousStep()" class="fas fa-chevron-left icon hugeFont hoverable displayNone"></i>
-            <div id="stepOne" class="flexCenter flexColumn borderBox contentBG borderRadiusMedium width80">
-                <p class="title green4-BG">Step 1: Email Template</p>
+            <div id="stepOne" class="flexCenter flexColumn borderBox content-BG borderRadiusMedium width80">
+                <p class="title accent2-BG">Step 1: Email Template</p>
                 <div class="veryHeavyPadding">
                     <ul class="flex flexColumn">
                         <li class="marginBottom10">
@@ -75,8 +75,8 @@
             </div>
 
             <div id="stepTwo" class="contentWithSidebar displayNone">
-                <div class="width70 contentBG borderRadiusMedium"> <!-- Left column -->
-                    <div id="stepTwoTitle" class="title blue2-BG flex spaceBetween">
+                <div class="width70 content-BG borderRadiusMedium"> <!-- Left column -->
+                    <div id="stepTwoTitle" class="title accent1Light-BG flex spaceBetween">
                         <p></p>
                         <div class="stepButton green2-BG" onclick="openReview()">
                             <p>Review</p>
@@ -135,7 +135,7 @@
                 </div>
                 
                 <!-- Right column (students) -->
-                <div class="sidebar width20 contentBG">
+                <div class="sidebar width20 content-BG">
                     <ul id="listOfStudents" class="studentsList" >
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>

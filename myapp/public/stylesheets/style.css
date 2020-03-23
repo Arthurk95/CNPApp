@@ -4,7 +4,7 @@
    elements. */
 :root{
   /* Dark Grays (used in backgrounds,shadows, and text)
-     darkGray1: darkest; darkGray3: lightest */
+     darkGray1: darkest; darkGray4: lightest */
   --darkGray1: #25272D;
   --darkGray2: #2F3137;
   --darkGray3: #3B3D44; 
@@ -68,31 +68,19 @@
   /* Button Colors */
 
   /* Light Grays (Mostly in text or light backgrounds)
-     lightGray1: lightest; lightGray2: darkest */
+     lightGray1: lightest; lightGray3: darkest */
   --lightGray1: #EEEEEE;
   --lightGray2: #e0e0e0;
   --lightGray3: #B6B6B6;
 
-
-  --headerHoverColor: #48657F;
-  
-  --adminButtonColor: #4B4F7E;
-  --adminButtonHoverColor: #3D4067;
-  
-  --selectedStudentColor: #00A719;
   font-family: 'Roboto Slab', sans-serif;
 
-  --footerNextColor: #48657F;
-  --footerNextHoverColor: #48657F;
-
-  --weekdayColor: #4196E3;
-
-  --mainBGColor: rgb(212, 212, 212);
-  --contentBGColor: var(--lightGray1);
-  --accentColor1: var(--blue5);
-  --accentColor1Light: var(--blue3);
-  --accentColor2: var(--green4);
-  --accentColor2Light: var(--green2);
+  --mainBGColor: #739898;
+  --contentBGColor: rgb(226, 219, 205);
+  --accentColor1: #155353;
+  --accentColor1Light: #2B6868;
+  --accentColor2: #AD8B47;
+  --accentColor2Light: #D3B57B;
 
 }
 
@@ -386,15 +374,17 @@ p{margin: 0;}
 .largeFont{font-size: 28px !important;}
 .hugeFont{font-size: 100px !important;}
 
-.lightText{color: var(--lightGray2)};
-.darkText{color: var(--darkGray3)};
+.whiteText{color: white !important;}
+.lightText{color: var(--lightGray2);}
+.darkText{color: var(--darkGray3);}
+.textShadow{text-shadow: 0px 0px 4px var(--darkGray3);}
 
 .right{float: right;}
 .left{float: left;}
 
-.centerText{text-align: center;}
-.rightText{text-align: right;}
-.leftText{text-align: left;}
+.centerText{text-align: center !important;}
+.rightText{text-align: right !important;}
+.leftText{text-align: left !important;}
 
 
 /* ------------ DISPLAYS ------------- */
