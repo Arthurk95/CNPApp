@@ -5,6 +5,7 @@
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
         <link rel='stylesheet' href='/stylesheets/form.css' />
+        <link rel='stylesheet' href='/stylesheets/ulList.css' />
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -36,20 +37,20 @@
     </head>
     <body>
         <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
-            <i id="backButton" onclick="toPreviousStep()" class="fas fa-chevron-left icon hugeFont hoverable"></i>
-            <div id="stepOne" class="flexCenter flexColumn borderBox lightGray2-BG borderRadiusMedium shadowMedium width80">
+            <i id="backButton" onclick="toPreviousStep()" class="fas fa-chevron-left icon hugeFont hoverable displayNone"></i>
+            <div id="stepOne" class="flexCenter flexColumn borderBox contentBG borderRadiusMedium width80">
                 <p class="title green4-BG">Step 1: Email Template</p>
                 <div class="veryHeavyPadding">
                     <ul class="flex flexColumn">
-                        <li class="marginBottomSmall">
+                        <li class="marginBottom10">
                             <label for="summary">Summary</label>
                             <textarea id="summary_text_area" onkeyup="textAreaAdjust(this)" name="summary" onchange="pushSummary(this)"></textarea>
                         </li>
-                        <li class="marginBottomSmall">
+                        <li class="marginBottom10">
                             <label for="snack">AM Snack</label>
                             <textarea id="snack_text_area" onkeyup="textAreaAdjust(this)" name="amSnack" onchange="pushAmSnack(this)"></textarea>
                         </li>
-                        <li class="marginBottomSmall">
+                        <li class="marginBottom10">
                             <label for="lunch">Lunch</label>
                             <textarea id="lunch_text_area" onkeyup="textAreaAdjust(this)" name="lunch" onchange="pushLunch(this)"></textarea>
                         </li>
@@ -60,8 +61,8 @@
                         </script>
                     </ul>
 
-                    <div id="remindersContainer" class="flexContainer borderRadiusMedium marginTop relative flexColumn flexCenter border1px darkGray3-border lightGray1-BG heavyPadding width40">          
-                        <div class="flex spaceBetween marginBottom width100 flexAlignCenter">
+                    <div id="remindersContainer" class="flexContainer borderRadiusMedium marginTop30 relative flexColumn flexCenter border1px darkGray3-border lightGray1-BG heavyPadding width40">          
+                        <div class="flex spaceBetween marginBottom10 width100 flexAlignCenter">
                             <p class="mediumFont noMargin darkText">Reminders</p>
                             <a class="addReminder" onclick="addReminder()"><i class="fas fa-plus"></i></a>
                         </div>
@@ -74,7 +75,7 @@
             </div>
 
             <div id="stepTwo" class="contentWithSidebar displayNone">
-                <div class="width70 lightGray1-BG borderRadiusMedium"> <!-- Left column -->
+                <div class="width70 contentBG borderRadiusMedium"> <!-- Left column -->
                     <div id="stepTwoTitle" class="title blue2-BG flex spaceBetween">
                         <p></p>
                         <div class="stepButton green2-BG" onclick="openReview()">
@@ -97,16 +98,17 @@
                     <div class="content"> <!-- activities and dropdowns -->
                         <div class="flex spaceBetween">
                             <div id="activities" class="width60">
-                                <p class="listTitle">Activities</p>
-                                <ul id="activitiesList" class="activitiesList">
-                                    
+                                <p class="mediumFont darkText marginBottom20">Activities</p>
+                                <ul id="activitiesList" class="ulList darkText width50">
+                                    <li>hello</li>
+                                    <li>goodbye</li>
                                 </ul>
                             </div>
 
                             <!-- Behavior dropdowns -->
                             <div id="" class="flex flexColumn flexCenter heavyPadding width70">
                                 <% behaviors.forEach((behavior, index) => { %>
-                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottomSmall flexWrap">
+                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottom10 flexWrap">
                                         <label for="<%= behavior.name %>"><%= behavior.name %></label>
                                         
                                         <select name="<%= behavior.name %>" class="width20">
@@ -133,7 +135,7 @@
                 </div>
                 
                 <!-- Right column (students) -->
-                <div class="sidebar width20 lightGray1-BG">
+                <div class="sidebar width20 contentBG">
                     <ul id="listOfStudents" class="studentsList" >
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>
