@@ -10,6 +10,7 @@
   --darkGray3: #3B3D44; 
   --darkGray4: #474951;
 
+  
   /* Page Theme Colors: */
   --studentsColor: #86AAA7;
   --studentsColorDark: #425452;
@@ -85,6 +86,14 @@
   --footerNextHoverColor: #48657F;
 
   --weekdayColor: #4196E3;
+
+  --mainBGColor: rgb(212, 212, 212);
+  --contentBGColor: var(--lightGray1);
+  --accentColor1: var(--blue5);
+  --accentColor1Light: var(--blue3);
+  --accentColor2: var(--green4);
+  --accentColor2Light: var(--green2);
+
 }
 
 ul{
@@ -131,7 +140,7 @@ body {
   padding: 0px;
   margin: 0px;
   font-size: 16px;
-  background: var(--darkGray1);
+  background: var(--mainBGColor);
   /*background: linear-gradient(197deg, var(--blue5) 0%, var(--blue5) 54%, var(--blue5) 100%);
   */min-height: 100vh;
 }
@@ -142,9 +151,95 @@ a{
 
 p{margin: 0;}
 
-/* Apply to elements that you want to re-color individually 
-    <p class="lightText red right">Hello</p>
-    The above has light text, red BG, and is oriented right*/
+
+/* 
+   Global classes that can be used to style elements easily. 
+   Each is named in a way that is hopefully easy to understand and
+   remember. 
+*/
+
+
+/* ----------- LAYOUT CLASSES -----------
+
+   These are classes used to setup layouts for containers 
+   or elements within those containers. 
+*/
+
+/* 
+  This is the main container that is used most often. 
+  Mostly used for the parent element of any elements, like below:
+   
+   <div class="flexContainer">
+      <div>child</div>
+      <div>child</div>
+   </div>
+*/
+.flexContainer{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.content{
+  padding: 30px;
+}
+
+.contentBG{background: var(--lightGray1);}
+
+
+/* 
+  Contains a content area with a sidebar. EX:
+  <div class="contentWithSidebar">
+    <div class="width70">Content</div>
+    <div class="sidebar">Sidebar</div>
+*/
+.contentWithSidebar{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.sidebar{
+  align-self: flex-start;
+  min-width: 150px;
+  border-radius: 8px;
+}
+
+/* To be used for the title of a content area. EX:
+    <p class="title blue2-BG">This is a title</p>
+
+  Can also be used as a parent element if there are multiple elements
+  in the title section, like in step 2 of the Emailer page. EX:
+
+    <div class="title blue2-BG flex spaceBetween">
+      <p>Title</p>
+      <button>SomeButton</button>
+    </div>
+  
+  The above example creates an element with a text title and a button,
+  formatted so the title is on the left and the button is on the right.
+*/
+.title{
+  font-size: 3em;
+  padding: 30px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--lightGray1);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+
+/* */
+
+.icon{
+  font-size: 16px;
+  color: var(--darkGray2);
+}
+
+.hoverable{cursor:pointer;}
+
 .halfWidth{width: 50% !important;}
 .thirdWidth{width: 30% !important;}
 
@@ -196,13 +291,14 @@ p{margin: 0;}
 .yellow4-BG{background: var(--yellow4);}
 .yellow5-BG{background: var(--yellow5);}
 
+.white-BG{background: white;}
 
-.lightGray{ background: var(--lightGray2);}
-.darkGray{background: var(--darkGray2);}
-.green{background: var(--green2);}
-.blue{background: var(--blue1);}
-.red{background: var(--red2);}
-.yellow{background: var(--yellow2);}
+.background-BG{background: var(--mainBGColor);}
+.content-BG{background: var(--contentBGColor);}
+.accent1-BG{background: var(--accentColor1);}
+.accent1Light-BG{background: var(--accentColor1Light);}
+.accent2-BG{background: var(--accentColor2);}
+.accent2Light-BG{background: var(--accentColor2Light)}
 
 .lightText{color: var(--lightGray2)};
 .darkText{color: var(--darkGray3)};
@@ -269,20 +365,30 @@ p{margin: 0;}
 .lightGray2-border{border-color: var(--lightGray2) !important;}
 .lightGray3-border{border-color: var(--lightGray3) !important;}
 
-.smallFont{font-size: 0.8em !important;}
-.mediumFont{font-size: 1.5em !important;}
-.largeFont{font-size: 2em !important;}
+.smallFont{font-size: 12px !important;}
+.mediumFont{font-size: 18px !important;}
+.largeFont{font-size: 28px !important;}
+.hugeFont{font-size: 100px !important;}
 
-.marginTop{margin-top: 40px !important;}
-.marginBottom{margin-bottom: 40px !important;}
-.marginLeft{margin-left: 40px !important;}
-.marginRight{margin-right: 40px !important;}
+.marginTop10{margin-top: 10px !important;}
+.marginTop20{margin-top: 20px !important;}
+.marginTop30{margin-top: 30px !important;}
+.marginTop40{margin-top: 40px !important;}
 
-.marginTopSmall{margin-top: 6px !important;}
-.marginBottomSmall{margin-bottom: 6px !important;}
-.marginLeftSmall{margin-left: 6px !important;}
-.marginRightSmall{margin-right: 6px !important;}
+.marginBottom10{margin-bottom: 10px !important;}
+.marginBottom20{margin-bottom: 20px !important;}
+.marginBottom30{margin-bottom: 30px !important;}
+.marginBottom40{margin-bottom: 40px !important;}
 
+.marginLeft10{margin-left: 10px !important;}
+.marginLeft20{margin-left: 20px !important;}
+.marginLeft30{margin-left: 30px !important;}
+.marginLeft40{margin-left: 40px !important;}
+
+.marginRight10{margin-right: 10px !important;}
+.marginRight20{margin-right: 20px !important;}
+.marginRight30{margin-right: 30px !important;}
+.marginRight40{margin-right: 40px !important;}
 
 
 .displayNone{display: none !important;}
@@ -294,11 +400,7 @@ p{margin: 0;}
 .flexWrap {flex-wrap: wrap !important;}
 .flexWrapReverse{flex-wrap: wrap-reverse !important;}
 
-.flexContainer{
-  display: flex;
-  padding: 30px;
-  margin: 0;
-}
+
 
 .noMargin{margin: 0 !important;}
 
@@ -338,6 +440,7 @@ p{margin: 0;}
   justify-content: space-around !important;
   align-content: center !important;
 }
+
 
 .ui-selectmenu-button.ui-button{
   width: 10vw !important;
@@ -418,6 +521,9 @@ p{margin: 0;}
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
 
+  .contentWithSidebar{flex-direction: column-reverse; align-items: center;}
+  .sidebar{width: 100% !important;}
+
   .buttonAreaGrid{
     width: 80%;
   }
@@ -456,7 +562,7 @@ p{margin: 0;}
     margin-bottom: 20px;
   }
 }
-
+/* END MOBILE FRIENDLY STUFF */
 
 
 input{
