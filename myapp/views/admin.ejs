@@ -6,7 +6,6 @@
     <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
     <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
-    <link rel='stylesheet' href='/stylesheets/accordian.css' />
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/form.css' />
     <link rel='stylesheet' href='/stylesheets/switch.css' />
@@ -18,24 +17,33 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/javascripts/jquery.prettydropdowns.js"></script>
     <script src="/javascripts/birthdayDropdown.js"></script>
+
   </head>
   <body>
-    <div id="accordion">
-      <h3 class="accordion">Students</h3>
-        <div class="accordionPanel">
-          <ul id="students" class="ulList">
+
+    <article class="tabbed-content width90">
+      <nav class="tabs">
+        <ul>
+          <li><a href="#tab1" class="openTab">Students</a></li>
+          <li><a href="#tab2">Activities</a></li>
+          <li><a href="#tab3">Email Manager</a></li>
+        </ul>
+      </nav>
+      <section id="tab1" class="item openTab" data-title="Students">
+        <div class="item-content">
+          <ul id="students" class="ulList spaceAround">
             <% if (students.length > 0) { %>
               <% students.forEach((student, index) => { %>
                 <% studentSpl = student.StudentName.split(" "); %>
-                  <li class="profileList clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
+                  <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
                     <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
                     <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
                     <p><%= student.StudentName %></p>
                   </li>
                 <% }) %>
             <% } %> 
-              <li title="Add Student" class="profileList clickableItem addElement" onclick="addStudent()">
-                <div class="addIcon">
+              <li title="Add Student" class="profileList clickableItem accent2Light-BG" onclick="addStudent()">
+                <div class="addIcon accent2-BG">
                   <i class="fas fa-plus"></i>
                 </div>
                 <p>New Student</p>
@@ -123,26 +131,29 @@
             </div>
           </div>
         </div>
-      
-      <h3 class="accordion">Activities</h3>
-        <div class="accordionPanel">
+      </section>
+
+      <section id="tab2" class="item" data-title="Activities">
+        <div class="item-content">
           <ul id="activities" class="ulList">
             <% if (activities.length > 0) {%>
               
               <% activities.forEach((activity, index) => { %>
                 
-                <li>
+                
                   <% if (activity.Hidden == 1) { %>
-                    <p class="blackAndWhite"><%= activity.ActivityName %></p>
-                    <button class="greenButton blackAndWhite noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                    <button class="yellowButton blackAndWhite" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                    <button class="redButton blackAndWhite" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                  <li class="background-BG blackAndWhite">
+                    <p><%= activity.ActivityName %></p>
+                    <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                    <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                    <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
                     
                   <% } else { %>
+                  <li class="">
                     <p><%= activity.ActivityName %></p>
-                    <button class="greenButton noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                    <button class="yellowButton" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                    <button class="redButton" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                    <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                    <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                    <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
                     
                   <% } %>
                   
@@ -188,27 +199,22 @@
             </div>
           </div>
         </div>
-        <h3 class="accordion">Email Management</h3>
-        <div class="accordionPanel">
+      </section>
+
+      <section id="tab3" class="item" data-title="Email Manager">
+        <div class="item-content">
           <ul id="comptasksList" class="ulList">
             <li onclick="editHeader" class="addElement clickableItem">
               <p title="Edit Header" >Edit Header</p>
             </li>
           </ul>
         </div>
+      </section>
+    </article>
 
-    </div>
-
-    
   </body>
-  <script>
-    $( function() {
-      $( "#accordion" ).accordion({
-        collapsible: true,
-        active: false
-      });
-    } );
-  </script>
+  
+  <script src="/javascripts/tabs.js"></script>
   <script>
     $dropdown = $('.pretty-classic').prettyDropdown({
         classic: true,
@@ -258,11 +264,14 @@
     }
 
     function toggleActivityHide(element){
-      if(element.getElementsByClassName("blackAndWhite").length > 0){
-        $(element).find('*').removeClass('blackAndWhite');
+      if(element.classList.contains("blackAndWhite")){
+        element.classList.remove("blackAndWhite");
+        element.classList.remove("background-BG");
       }
       else{
-        $(element).find('*').addClass('blackAndWhite');
+        element.classList.add("blackAndWhite");
+        element.classList.add("background-BG");
+
       }
     }
 

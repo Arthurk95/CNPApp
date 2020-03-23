@@ -6,28 +6,26 @@
   display: block;
   list-style-type: none;
   text-align: left;
-  font-size: 2em;
+  font-size: 1.3em;
 }
 
 /* Tab buttons */
 .tabs a{
-  padding: 0px 30px;
+  display: block;
+  padding: 5px 30px;
   text-decoration: none;
-  color: var(--lightGray2);
+  color: var(--darkGray4);
+  background: var(--lightGray3);
   outline: none;
 }
 
 /* Change background color of buttons on hover */
 .tabs a:hover {
   color: var(--darkGray3);
-  background-color: var(--lightGray3);
+  background: var(--lightGray3);
 }
 
-/* Create an active/current tablink class */
-.tabs a:active {
-  background-color: var(--darkGray3);
-  color: var(--lightGray1);
-}
+.tabs a:active{color: var(--lightGray2);}
 
 .tabs li{
   display: inline-block;
@@ -43,7 +41,85 @@
 }
 
 /* jQuery styling override for tab colors */
-.ui-tabs-tab.ui-state-active{
-  color: var(--lightGray1) !important;
-  background-color: var(--darkGray3) !important;
+.ui-tabs-tab.ui-state-active a{
+  color: var(--darkGray3) !important;
+  font-size: 1.3em;
+  background-color: var(--lightGray1) !important;
 }
+
+
+
+/* This section of classes is for the tabs that turn into 
+an accordion when on mobile */
+.tabbed-content{
+  margin: 0 auto;
+}
+
+.tabbed-content .item{
+  background: var(--contentBGColor);
+  min-height: 0;
+}
+
+/* <ul> element that has the tab links */
+.tabbed-content .tabs{
+  display:block;
+}
+
+.tabbed-content .tabs li{
+  display: inline-block;
+}
+
+.tabbed-content .tabs li a{
+  padding: 10px 30px;
+  display: block;
+}
+
+.tabbed-content .tabs li a.openTab{
+  font-size: 1.2em;
+  background: var(--accentColor1) !important;
+  color: var(--lightGray1);
+}
+
+.tabbed-content .item .item-content{
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+}
+
+.openTab .item-content{
+  padding: 30px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  height: auto !important;
+}
+
+
+@media screen and (max-width: 1200px){
+  .tabbed-content .item{
+    margin-bottom: 30px;
+  }
+  
+  /* This is the accordion header for each tab */
+  .tabbed-content .item::before{ 
+    text-align: center;
+    color: var(--lightGray2);
+    font-size: 9vw;
+    padding: 10px 0px 10px 20px;
+    background: var(--accentColor1);
+    cursor: pointer;
+    display: block; 
+    content: attr(data-title) !important;
+  }
+  
+  .tabbed-content .tabs{
+    display: none;
+  }
+  
+  .tabbed-content .item .item-content{
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+  }
+}
+
