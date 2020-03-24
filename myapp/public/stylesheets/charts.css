@@ -41,3 +41,14 @@
   width: 1075px;
   height: 670px;
 }
+
+#scatter-chart {
+  background-color: white;
+  width: 450px;
+  height: 450px;
+}
+
+#scatter{
+  width: 1075px;
+  height: 670px;
+}

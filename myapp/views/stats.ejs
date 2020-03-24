@@ -17,13 +17,15 @@
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/checkbox.css' />
     <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/javascripts/jquery.prettydropdowns.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <script async="" src="//www.google-analytics.com/analytics.js"></script>
    
     <!-- Load d3.js -->
     <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -167,6 +169,23 @@
       <!-- this just makes one bar chart -->
       <canvas id="line-chart"></canvas>
     </div> <!-- end Line -->
+
+    <!-- SCATTER PLOT -->
+    <div class="chart" id="scatter">
+      <h1>Scatter Plot</h1>
+      <!-- Make a scatter chart -->
+      <!-- Doesn't work -->
+      <button onclick="makeScatter('#scatter')">Make Scatter</button>
+      <script>
+        function makeScatter(id){
+          console.log("make a scatter chart");
+        }
+      </script>
+      <!-- this just makes one scatter chart -->
+      <canvas id="scatter-chart"></canvas>
+      <!-- randomize some data just as proof of concept -->
+      <button id="randomizeData">Randomize Data</button>
+    </div> <!-- end Scatter -->
 
 
     <!-- RADAR CHART --> 
@@ -409,6 +428,7 @@
     <script type="text/javascript" src="javascripts/statscripts/radar-chart.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/bar-chart.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/bubble-chart.js"></script>
+    <script type="text/javascript" src="javascripts/statscripts/scatter-chart.js"></script>
   </body>
 
   <script>
