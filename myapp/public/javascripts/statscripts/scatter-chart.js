@@ -38,7 +38,7 @@
 				options: {
 					title: {
 						display: true,
-						text: 'Scatter Chart'
+						//text: 'Scatter Chart'
 					},
 				}
 			});
