@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../public/javascripts/loginScripts');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var Students = [];
   var daily_query = "CALL PullUnhiddenStudents();";
   con.query(daily_query, function (err, dailyStudents) {
@@ -145,7 +146,7 @@ function bottomLayer(res,Students,){
   });
 }
 
-router.post('/push-summary', function (req, res, next) {
+router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
   save_template_query = `CALL AddDailySummary("${req.body.text}")`;
 
   con.query(save_template_query, function (err, result) {
@@ -162,7 +163,7 @@ router.post('/push-summary', function (req, res, next) {
 });
 
 
-router.post('/push-am-snack', function (req, res, next) {
+router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
   save_template_query = `CALL AddDailyAmFood("${req.body.text}")`;
 
   con.query(save_template_query, function (err, result) {
@@ -178,7 +179,7 @@ router.post('/push-am-snack', function (req, res, next) {
 
 });
 
-router.post('/push-lunch', function (req, res, next) {
+router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
   save_template_query = `CALL AddDailyLunch("${req.body.text}")`;
 
   con.query(save_template_query, function (err, result) {

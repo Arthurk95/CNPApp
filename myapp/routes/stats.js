@@ -1,15 +1,16 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../public/javascripts/loginScripts');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var sql = "SELECT MIN(CurrentDate) as startDate FROM cnp_data.DailyActivities;";
   con.query(sql, function(err,result){
     res.render('stats', { title: 'Stats' , startDate: result[0].startDate});
   });
 });
 
-router.post('/getdata', function(req, res, next) {
+router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
   var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, start = req.body.start, end = req.body.end, caller = req.body.caller;
   var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller};
   var all = false;

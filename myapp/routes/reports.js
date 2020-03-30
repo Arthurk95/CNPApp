@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
+const auth = require('../public/javascripts/loginScripts');
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var Students = [];
   var daily_query = "CALL PullUnhiddenStudents();";
   con.query(daily_query, function (err, dailyStudents) {

@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request-promise');
+const auth = require('../public/javascripts/loginScripts');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var activity_query = "CALL PullUnhiddenActivities";
   /* Students of current day */
   var student_query = "CALL PullUnhiddenStudents();";
@@ -21,7 +22,7 @@ router.get('/', function(req, res, next) {
   
 });
 
-router.post('/addstudentActivity', function(req, res){
+router.post('/addstudentActivity', auth.checkAuthenticated, function(req, res){
   stus = req.body.stu.split(",");
 
   var sql = "SELECT dateTimes FROM Weather WHERE weatherID = (SELECT MAX(weatherID) FROM Weather);";

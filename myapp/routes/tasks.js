@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var uploads = require('../public/javascripts/uploads');
 var session = require('express-session');
+const auth = require('../public/javascripts/loginScripts');
 
 
-  router.post('/addtask', function(req, res){
+  router.post('/addtask', auth.checkAuthenticated, function(req, res){
     var sql = "INSERT INTO cnp_data.Tasks (Priority,NoteContent) VALUES (" + req.body.priority + ",'" + req.body.name + "');";
     console.log(sql);
     con.query(sql, function (err, result) {
@@ -13,7 +14,7 @@ var session = require('express-session');
     });
   });
 
-  router.put('/changetask', function(req, res){
+  router.put('/changetask', auth.checkAuthenticated, function(req, res){
     var sql = "UPDATE cnp_data.Tasks SET Priority = " + req.body.priority + " WHERE TaskId = " + req.body.id + ";";
     con.query(sql, function (err, result) {
         if (err) res.end();
@@ -21,7 +22,7 @@ var session = require('express-session');
     });
   });
 
-  router.put('/completetask', function(req, res){
+  router.put('/completetask', auth.checkAuthenticated, function(req, res){
     var sql = "UPDATE cnp_data.Tasks SET Completed = " + req.body.completed + " WHERE TaskId = " + req.body.id + ";";
     con.query(sql, function (err, result) {
         if (err) res.end();
@@ -29,7 +30,7 @@ var session = require('express-session');
     });
   });
 
-  router.post('/deletetask', function(req, res){
+  router.post('/deletetask', auth.checkAuthenticated, function(req, res){
     var sql = "DELETE FROM cnp_data.Tasks WHERE TaskId = " + req.body.id + ";";
     con.query(sql, function (err, result) {
         if (err) res.end();
@@ -38,7 +39,7 @@ var session = require('express-session');
   });
 
   /* GET home page. */
-  router.get('/', function(req, res, next) {
+  router.get('/', auth.checkAuthenticated, function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "CALL ShowAllActivities();";
     var task_query = "SELECT * FROM cnp_data.Tasks;";
