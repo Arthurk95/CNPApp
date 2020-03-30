@@ -13,15 +13,18 @@ router.post('/', auth.checkNotAuthenticated, async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10); //10 is good hash default value
         push_user = `INSERT INTO Admins (Username, Email, Passwords, Names) VALUES ("${req.body.name}", "${req.body.email}", "${hashedPassword}", "temp");`
         con.query(push_user, function (err, result) {
-            console.log(err);
-          if (err) throw err;
+            if (err) {
+                console.log(err);
+                throw err;
+            }
         });
         //if successful then:
         res.redirect('/login');
-    } catch {
+    } catch (e) {
         //if unsuccessful
+        console.log(e);
         res.redirect('/register');
-    }
-})
+    };
+});
 
 module.exports = router;
