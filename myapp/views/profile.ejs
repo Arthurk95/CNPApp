@@ -83,11 +83,12 @@
                   </div>
               </form>
             </li>
+            <p1><font color="red"><%- messages.upload_error %></font></p1></li>
             <li class="spaceBetween">
               <label class="width30">NAME</label>
               <input class="hiddenInput rightText" id="studentName" value="<%- student.StudentName %>">
             
-              <p1><font color="red"><%- upload_error_message %></font></p1></li>
+              
             <li class="spaceBetween marginBottom40">
               <label class="width30">BIRTHDAY</label>
               <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>

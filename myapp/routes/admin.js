@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var uploads = require('../public/javascripts/uploads');
-var session = require('express-session');
 const jo = require('jpeg-autorotate');
 const auth = require('../public/javascripts/loginScripts');
 
@@ -152,8 +151,7 @@ const auth = require('../public/javascripts/loginScripts');
       //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
       //strip away OkPacket, create selected_student as new array
       [selected_student] = result[0];
-      res.render('profile.ejs', { title: 'Profile Page', student: selected_student, upload_error_message: req.session.upload_error });
-      req.session.destroy();
+      res.render('profile.ejs', { title: 'Profile Page', student: selected_student });
     });
   });
 
@@ -161,15 +159,15 @@ const auth = require('../public/javascripts/loginScripts');
     uploads.upload(req, res, (err) => {
       if (err) {
         if (err.message) {
-          req.session.upload_error = 'Error: ' + err.message;
+          req.flash('upload_error', `Error: ${err}`);
         } else {
-          req.session.upload_error = err;
+          req.flash('upload_error', `${err}`);
         }
         res.redirect(`/admin/student-profile/${req.params.id}`);
       } else {
         
         if (req.file == undefined) {
-          req.session.upload_error = "Error: File is Undefined";
+          req.flash('upload_error', "Error: File is Undefined");
           res.redirect(`/admin/student-profile/${req.params.id}`);
         } else {
           update_img_query = `UPDATE Students SET Img = '${req.file.filename}' WHERE StudentId = ${req.params.id};`;
@@ -177,9 +175,10 @@ const auth = require('../public/javascripts/loginScripts');
           const options = { quality: 100 };
           const path = './public/uploads/images/' + req.file.filename;
           
+          //rotate file if contains exif data
           jo.rotate(path, options)
             .then(({ buffer, orientation, dimensions, quality }) => {
-              console.log('Rotating uploaded file @ ' + path);
+              console.log(`Rotating uploaded file @ ${path}`);
               console.log(`Orientation was ${orientation}`);
               console.log(`Dimensions after rotation: ${dimensions.width}x${dimensions.height}`);
               console.log(`Quality: ${quality}`);
@@ -187,6 +186,7 @@ const auth = require('../public/javascripts/loginScripts');
           .catch((error) => {
             console.log('An error occurred when rotating the file: ' + error.message + ' ' + path);
           })
+          //end exif removal/rotation
 
           con.query(update_img_query, function (err, result) {
             if (err) throw err;
