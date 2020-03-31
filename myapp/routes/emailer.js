@@ -96,13 +96,13 @@ function bottomLayer(res,Students,){
         } else {
           try {
             [stripped_result] = sum_result[0];
-            var summary = stripped_result.MainParagraphs;
+            if (stripped_result) {
+              var summary = stripped_result.MainParagraphs;
+            }
           } catch (e) {
             var summary = '';
             console.log(e);
           }
-
-          console.log('Daily summary pulled successfully: ' + summary);
         }
 
         var get_snack = `CALL PullDailyAmFoodToday()`;     
@@ -112,13 +112,13 @@ function bottomLayer(res,Students,){
           } else {
             try {
               [stripped_result] = snack_result[0];
-              var snack = stripped_result.MainParagraphs;
+              if (stripped_result) {
+                var snack = stripped_result.MainParagraphs;
+              }
             } catch (e) {
               var snack = '';
               console.log(e);
             }
-  
-            console.log('AM snack pulled successfully: ' + snack);
           }
 
           var get_lunch = `CALL PullDailyLunchToday()`;     
@@ -128,13 +128,13 @@ function bottomLayer(res,Students,){
             } else {
               try {
                 [stripped_result] = lunch_result[0];
-                var lunch = stripped_result.MainParagraphs;
+                if (stripped_result) {
+                  var lunch = stripped_result.MainParagraphs;
+                }
               } catch (e) {
                 var lunch = '';
                 console.log(e);
               }
-    
-              console.log('Lunch pulled successfully: ' + lunch);
             }
       
      
