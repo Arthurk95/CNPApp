@@ -3,6 +3,7 @@ var router = express.Router();
 var uploads = require('../public/javascripts/uploads');
 const jo = require('jpeg-autorotate');
 const auth = require('../public/javascripts/loginScripts');
+const fs = require('fs');
 
   router.post('/addstudent', auth.checkAuthenticated, function(req, res){
     var sql = "CALL CreateNewStudentFinal('" + req.body.name + "','" + req.body.birthday + "','" + req.body.contact +
@@ -176,15 +177,20 @@ const auth = require('../public/javascripts/loginScripts');
           const path = './public/uploads/images/' + req.file.filename;
           
           //rotate file if contains exif data
-          jo.rotate(path, options)
-            .then(({ buffer, orientation, dimensions, quality }) => {
-              console.log(`Rotating uploaded file @ ${path}`);
-              console.log(`Orientation was ${orientation}`);
-              console.log(`Dimensions after rotation: ${dimensions.width}x${dimensions.height}`);
-              console.log(`Quality: ${quality}`);
-          })
-          .catch((error) => {
-            console.log('An error occurred when rotating the file: ' + error.message + ' ' + path);
+          jo.rotate(path, options, function (error, buffer, orientation) {
+            if (error) {
+              console.log('An error occurred when rotating the file: ' + error.message)
+              return
+            }
+            console.log(`Orientation was ${orientation}`)
+            // Do whatever you need with the resulting buffer
+            fs.writeFile(path, buffer, function(err) {
+              if(err) {
+                return console.log(err);
+              }
+              console.log("File was successfully rotated.");
+            });
+            
           })
           //end exif removal/rotation
 
