@@ -6,7 +6,7 @@ const path = require('path');
 const storage = multer.diskStorage({
     destination: './public/uploads/images/',
     filename: function (req, file, cb) { //cb = callback
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        cb(null, file.fieldname + '-' + req.params.id + path.extname(file.originalname));
     }
   });
   
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
     fileFilter: function (req, file, cb) {
         checkFileType(file, cb);
     }
-  }).single('myImage'); //because it's a single file
+  }).single('student-image-id'); //because it's a single file
   
   // check file type
   function checkFileType(file, cb) {
