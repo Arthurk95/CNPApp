@@ -176,24 +176,33 @@ function initSavedList(){
 // Student's behaviors and other stuff was saved,
 // so create a list of their behaviors and push it to the
 // db. Then change colors of stuff
+
 function studentSaved(behaviors){
     var studentsBehaviors = [];
-
+    var behaviorNames = [];
+    // for(var i = 0; i < behaviors.length; i++){
+    //     var sel = document.getElementById(behaviors[i].name);
+    //     if(sel.selectedIndex != undefined){
+    //         studentsBehaviors.push(sel.options[sel.selectedIndex].text);
+    //     }
+    //     else {
+    //         studentsBehaviors.push("None");
+    //     }
+    // }
+    // replacing the above for loop as many of those variables are undefined
     for(var i = 0; i < behaviors.length; i++){
         var sel = document.getElementById(behaviors[i].name);
-        if(sel.selectedIndex != undefined){
-            studentsBehaviors.push(sel.options[sel.selectedIndex].text);
-        }
-        else {
-            studentsBehaviors.push("None");
-        }
+        //child at index 2 is currently the dropdown selection.. more elegant way to do this?
+        studentsBehaviors.push(sel.children[2].textContent);
+        behaviorNames.push(behaviors[i].name);
     }
-    
 
     /* Pass behaviors to DB for the student ID
     databaseWizardy(currentStudentData.id, studentsBehaviors);
     */
-
+   var db_data = `id=${currentStudentData.id}&behaviorNames=${behaviorNames}&studentsBehaviors=${studentsBehaviors}`;
+   httpPostAsync(`/emailer/push-behavior/`, db_data, null);
+    
     if(!savedList[currentStudentIndex]){ savedStyle(); } // isn't already saved
     savedList[currentStudentIndex] = true;
 }

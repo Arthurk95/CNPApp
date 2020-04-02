@@ -137,7 +137,7 @@ function bottomLayer(res,Students,){
               }
             }
       
-     
+            
       res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch });
         }); // end lunch query
         }); // end snack query
@@ -193,6 +193,25 @@ router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
   });
 
 
+});
+
+router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next) {
+  var behavior_names = req.body.behaviorNames.split(',');
+  var behavior_selection = req.body.studentsBehaviors.split(',');
+  var notes = ''; //4th param is note--null for now
+
+  for (var i = 0; i < behavior_names.length; i++ ) {
+    push_behaviors_query = `CALL AddBehavior(${req.body.id}, "${behavior_names[i]}", "${behavior_selection[i]}", "");`;
+    (function (query) { 
+      con.query(query, function (err, result) {
+        if (err) {
+          console.log(`Unable to add behaviors: ${err}`);
+        }
+        console.log(query);
+      })
+    })(push_behaviors_query); //closure necessary for async consistency
+  }
+  res.end();
 });
 
   module.exports = router;
