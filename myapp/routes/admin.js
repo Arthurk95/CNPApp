@@ -197,15 +197,23 @@ const fs = require('fs');
   });
 
   router.post('/student-profile/:id/delete-student', auth.checkAuthenticated, function (req, res) {
-    console.log('delete student');
-      var sql = "CALL DeleteStudent('" + req.params.id + "');";
-      con.query(sql, function (err, result) {
+      var delete_stu_query = `CALL DeleteStudent("${req.params.id}");`;
+      con.query(delete_stu_query, function (err, result) {
         if (err) {
           throw (err);
         }
-        console.log('redirecting?');
         res.redirect('/admin'); 
       });
+  });
+    
+  router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, function (req, res) {
+    var sql = '';
+      // con.query(sql, function (err, result) {
+      //   if (err) {
+      //     throw (err);
+      //   }
+
+      // });
     });
 
 module.exports = router;
