@@ -27,13 +27,6 @@ const fs = require('fs');
         res.end();
     });
   });
-  router.post('/deletestudent', auth.checkAuthenticated, function(req, res){
-    var sql = "CALL DeleteStudent('" + req.body.id + "');";
-    con.query(sql, function (err, result) {
-        if (err) throw(err);
-        res.end();
-    });
-  });
 
   router.post('/addactivity', auth.checkAuthenticated, function(req, res){
     var sql = "CALL CreateNewActivity('" + req.body.name + ", " + req.body.helper + "');";
@@ -202,6 +195,18 @@ const fs = require('fs');
       }
     });
   });
+
+  router.post('/student-profile/:id/delete-student', auth.checkAuthenticated, function (req, res) {
+    console.log('delete student');
+      var sql = "CALL DeleteStudent('" + req.params.id + "');";
+      con.query(sql, function (err, result) {
+        if (err) {
+          throw (err);
+        }
+        console.log('redirecting?');
+        res.redirect('/admin'); 
+      });
+    });
 
 module.exports = router;
 

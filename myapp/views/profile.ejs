@@ -116,8 +116,14 @@
               </div>
             </li>
             <li class="profileButtons">
-              <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
-              <a onclick="saveStudent()" class="saveButton">Save Changes</a>
+              <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST" enctype="multipart/form-data">
+                <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
+              </form>
+              <!-- <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a> -->
+              <form action="<%-student.StudentId%>/save-changes" id="save-changes-form" method="POST" enctype="multipart/form-data">
+                <a onclick="saveStudent()" class="saveButton">Save Changes</a>
+              </form>
+              <!-- <a onclick="saveStudent()" class="saveButton">Save Changes</a> -->
             </li>
           </ul>
         </div>
@@ -193,8 +199,9 @@
 
           var theUrl = theUrl + '/deletestudent';
           var data = "id=" + temp[temp.length - 1];
-          var callback = goToAdmin;
-          httpPostAsync(theUrl, data, callback);
+
+          form = document.getElementById("delete-student-form");
+          form.submit();
         }
 
         else {
