@@ -189,6 +189,7 @@ const fs = require('fs');
 
           con.query(update_img_query, function (err, result) {
             if (err) throw err;
+            req.flash('upload_successful', "Student Image Updated!");
             res.redirect(`/admin/student-profile/${req.params.id}`);
           });
         }
