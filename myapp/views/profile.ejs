@@ -117,6 +117,7 @@
                 <a onclick="saveStudent()" class="saveButton">Save Changes</a>
             </li>
             <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST"></form>
+              <label><font color="green"><%- messages.upload_successful %></font></label>
               <label><font color="green"><%- messages.changes_saved %></font></label>
               <label><font color="red"><%- messages.changes_error %></font></label>
               <label><font color="red"><%- messages.upload_error %></font></label>
