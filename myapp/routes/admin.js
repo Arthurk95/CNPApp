@@ -207,14 +207,25 @@ const fs = require('fs');
   });
     
   router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, function (req, res) {
-    var sql = '';
-      // con.query(sql, function (err, result) {
-      //   if (err) {
-      //     throw (err);
-      //   }
+    var sql = ``;//UpdateGuardian1(stuId, name, email, number)
+                  //UpdateGuardian2(stuId, name, email, number)
+                  //Update Birthday(stuId, year, month, day)
+                  //Update Name(stuId, name)
+                  //Update Schedule(stuId, mon, tue, wed, thur, fri, fullDay) - all binary
 
-      // });
-    });
+    // con.query(sql, function (err, result) {
+    //     if (err) {
+    //       req.flash('changes_error', "Error Updating Profile");
+    //       throw (err);
+    //   }
+    //   console.log(result);
+    //     req.flash('changes_saved', "Profile Updated!");
+    //   });
+    
+    console.log('save-changes');
+    console.log(req.body);
+    res.end();
+  });
 
 module.exports = router;
 

@@ -30,15 +30,15 @@
               <div class="flexContainer spaceAround flexWrap">
                 <ul class="width40 width100Mobile marginBottom40">
                   <li class="darkText largeFont marginBottom10">Guardian #1</li>
-                  <li><input class="lineInput"name=”notASearchField” type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
-                  <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
-                  <li><input class="lineInput" name=”notASearchField” type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
+                  <li><input class="lineInput"name="guardian1Name" type="text" id="guardian1Name" placeholder="Guardian Name" value=<%- student.RelativeName %>></li>
+                  <li><input class="lineInput" name="guardian1Email" type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
+                  <li><input class="lineInput" name="guardian1Number" type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
                 </ul>
                 <ul class="width40 width100Mobile">
                   <li class="darkText largeFont marginBottom10">Guardian #2</li>
-                  <li><input name=”notASearchField” type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
-                  <li><input name=”notASearchField” type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
-                  <li><input name=”notASearchField” type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
+                  <li><input name="guardian2Name" type="text" id="guardian2Name" placeholder="Guardian Name" value=<%- student.RelativeName2 %>></li>
+                  <li><input name="guardian2Email" type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
+                  <li><input name="guardian2Number" type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
                 </ul>
               </div>
               
@@ -83,12 +83,9 @@
                   </div>
               </form>
             </li>
-            <p1><font color="red"><%- messages.upload_error %></font></p1></li>
             <li class="spaceBetween">
               <label class="width30">NAME</label>
-              <input class="hiddenInput rightText" id="studentName" value="<%- student.StudentName %>">
-            
-              
+              <input class="hiddenInput rightText" name="studentName" id="studentName" value=<%- student.StudentName %>>
             <li class="spaceBetween marginBottom40">
               <label class="width30">BIRTHDAY</label>
               <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
@@ -116,15 +113,13 @@
               </div>
             </li>
             <li class="profileButtons">
-              <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST" enctype="multipart/form-data">
                 <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
-              </form>
-              <!-- <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a> -->
-              <form action="<%-student.StudentId%>/save-changes" id="save-changes-form" method="POST" enctype="multipart/form-data">
                 <a onclick="saveStudent()" class="saveButton">Save Changes</a>
-              </form>
-              <!-- <a onclick="saveStudent()" class="saveButton">Save Changes</a> -->
             </li>
+            <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST"></form>
+              <label><font color="green"><%- messages.changes_saved %></font></label>
+              <label><font color="red"><%- messages.changes_error %></font></label>
+              <label><font color="red"><%- messages.upload_error %></font></label>
           </ul>
         </div>
       </div>
@@ -159,47 +154,34 @@
         height: 30,
         hoverIntent: -1
       });
-      
+
       function saveStudent(){
-        var temp = window.location.href.split('/');
-        var theUrl = temp[0];
-        for(var i = 1; i < temp.length - 2;++i){
-          theUrl = theUrl + '/' + temp[i];
-        }
+        
+        var data = 
+          `studentName=${document.getElementById('studentName').value}` +
+          `&mon=${isDaySelected("mon")}` +
+          `&tue=${isDaySelected("tue")}` +
+          `&wed=${isDaySelected("wed")}` +
+          `&thu=${isDaySelected("thu")}` +
+          `&fri=${isDaySelected("fri")}` +
+          `&fullDayFlag=${convertBoolToInt(document.getElementById("fullDay").checked)}` +
+          `&bdayYear=${document.getElementById("year").value}` +
+          `&bdayMonth=${document.getElementById("month").value}` +
+          `&bdayDay=${document.getElementById("day").value}` +
+          `&guardian1Name=${document.getElementById('guardian1Name').value}` +
+          `&guardian1Email=${document.getElementById('guardian1Email').value}` +
+          `&guardian1Number=${document.getElementById('guardian1Number').value}` +
+          `&guardian2Name=${document.getElementById('guardian2Name').value}` +
+          `&guardian2Email=${document.getElementById('guardian2Email').value}` +
+          `&guardian2Number=${document.getElementById('guardian2Number').value}`;
+        
 
-        var theUrl = theUrl + '/savestudent';
-        var birthdate = document.getElementById("birthdateyear").value + "-" + document.getElementById("birthdatemonth").value + "-" + document.getElementById("birthdateday").value;
-        var fullDay = convertBoolToInt(document.getElementById("fullDay").checked);
-        var data = "id=" + temp[temp.length - 1] +
-          "&mon=" + isDaySelected("mon") + 
-          "&tue=" + isDaySelected("tue") + 
-          "&wed=" + isDaySelected("wed") + 
-          "&thu=" + isDaySelected("thu") + 
-          "&fri=" + isDaySelected("fri") + 
-          "&birthday=" + birthdate + "&fullday=" + fullDay + "&name=" + document.getElementById("studentName").value +
-          "&G1Name=" + document.getElementById("guardian1Name").value + 
-          "&G1EMail=" + document.getElementById("guardian1Email").value + 
-          "&G1Phone=" + document.getElementById("guardian1Number").value + 
-          "&G2Name=" + document.getElementById("guardian2Name").value + 
-          "&G2EMail=" + document.getElementById("guardian2Email").value + 
-          "&G2Phone=" + document.getElementById("guardian2Number").value;
+        httpPostAsync(`${window.location.href}/save-changes`, data, reloadIt)
 
-        var callback = reloadIt;
-
-        httpPutAsync(theUrl, data, callback);
       }
 
       function deleteStudent(button){
         if(button.classList.contains("deleteButtonActive")){
-          var temp = window.location.href.split('/');
-          var theUrl = temp[0];
-          for(var i = 1; i < temp.length - 2;++i){
-            theUrl = theUrl + '/' + temp[i];
-          }
-
-          var theUrl = theUrl + '/deletestudent';
-          var data = "id=" + temp[temp.length - 1];
-
           form = document.getElementById("delete-student-form");
           form.submit();
         }
