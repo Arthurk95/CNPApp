@@ -208,21 +208,28 @@ const fs = require('fs');
   });
     
   router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, function (req, res) {
-    var sql = ``;//UpdateGuardian1(stuId, name, email, number)
-                  //UpdateGuardian2(stuId, name, email, number)
-                  //Update Birthday(stuId, year, month, day)
-                  //Update Name(stuId, name)
-                  //Update Schedule(stuId, mon, tue, wed, thur, fri, fullDay) - all binary
+    var sql_calls = [
+      `CALL UpdateStudentGuardian1(${req.params.id}, "${req.body.guardian1Name}", "${req.body.guardian1Email}", "${req.body.guardian1Number}");`,
+      `CALL UpdateStudentGuardian2(${req.params.id}, "${req.body.guardian2Name}", "${req.body.guardian2Email}", "${req.body.guardian2Number}");`,
+      `CALL UpdateStudentBirthday(${req.params.id}, "${req.body.birthdate}")`,
+      `CALL UpdateStudentName(${req.params.id}, "${req.body.studentName}");`
+      //`CALL UpdateStudentSchedule(${req.params.id}, ${req.body.mon}, ${req.body.tue}, ${req.body.wed}, ${req.body.thu}, ${req.body.fri}, ${req.body.fullDayFlag}, 1);`;
+    ]
 
-    // con.query(sql, function (err, result) {
-    //     if (err) {
-    //       req.flash('changes_error', "Error Updating Profile");
-    //       throw (err);
-    //   }
-    //   console.log(result);
-    //     req.flash('changes_saved', "Profile Updated!");
-    //   });
-    
+    for (var i = 0; i < sql_calls.length; i++){
+      update_student_query = sql_calls[i];
+      (function (query) {
+        con.query(query, function (err, result) {
+          if (err) {
+            req.flash('changes_error', "Error Updating Profile");
+            throw (err);
+          }
+          console.log(result);
+          req.flash('changes_saved', "Profile Updated!");
+        });
+      })(update_student_query); //closure necesssary for async
+    }
+
     console.log('save-changes');
     console.log(req.body);
     res.end();
