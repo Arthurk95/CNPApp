@@ -218,20 +218,21 @@ const fs = require('fs');
 
     for (var i = 0; i < sql_calls.length; i++){
       update_student_query = sql_calls[i];
-      (function (query) {
+      var error_flag = false;
+      (function (query, is_error) {
         con.query(query, function (err, result) {
           if (err) {
-            req.flash('changes_error', "Error Updating Profile");
+            error_flag = true;
             throw (err);
           }
-          console.log(result);
-          req.flash('changes_saved', "Profile Updated!");
         });
-      })(update_student_query); //closure necesssary for async
+      })(update_student_query, error_flag); //closure necesssary for async
     }
-
-    console.log('save-changes');
-    console.log(req.body);
+    if (error_flag) {
+      req.flash('changes_error', "Error Updating Profile");
+    } else {
+      req.flash('changes_saved', "Profile Updated!");
+    }
     res.end();
   });
 
