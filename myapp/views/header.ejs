@@ -15,10 +15,13 @@
          <li><a href="/stats">Stats</a></li>
          <li><a href="/emailer">Email</a></li>
          <li><a href="/tasks">Tasks</a></li>
-         <form action="/logout?_method=DELETE" method="POST">
-            <button type="submit">Logout</button>
-          </form>
       </ul>
+      <div id="logout" class="logout">
+        <form action="/logout?_method=DELETE" method="POST">
+          <button class="flex customButton red4-BG" type="submit">Logout <i class="fas fa-sign-out-alt marginLeft10"></i></button>
+        </form>
+      </div>
+      
 
       <div onclick="openNav()" id="mobileHeader" class="mobileHeader">
         <a id="hamburger" href="javascript:void(0);" class="icon" onclick="">
