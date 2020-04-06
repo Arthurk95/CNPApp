@@ -212,8 +212,8 @@ const fs = require('fs');
       `CALL UpdateStudentGuardian1(${req.params.id}, "${req.body.guardian1Name}", "${req.body.guardian1Email}", "${req.body.guardian1Number}");`,
       `CALL UpdateStudentGuardian2(${req.params.id}, "${req.body.guardian2Name}", "${req.body.guardian2Email}", "${req.body.guardian2Number}");`,
       `CALL UpdateStudentBirthday(${req.params.id}, "${req.body.birthdate}")`,
-      `CALL UpdateStudentName(${req.params.id}, "${req.body.studentName}");`
-      //`CALL UpdateStudentSchedule(${req.params.id}, ${req.body.mon}, ${req.body.tue}, ${req.body.wed}, ${req.body.thu}, ${req.body.fri}, ${req.body.fullDayFlag}, 1);`;
+      `CALL UpdateStudentName(${req.params.id}, "${req.body.studentName}");`,
+      `CALL UpdateStudentSchedule(${req.params.id}, ${req.body.mon}, ${req.body.tue}, ${req.body.wed}, ${req.body.thu}, ${req.body.fri}, ${req.body.fullDayFlag}, 1);`
     ]
 
     for (var i = 0; i < sql_calls.length; i++){
