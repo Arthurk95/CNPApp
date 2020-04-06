@@ -19,6 +19,8 @@ $(document).ready(function(){
         yearDrop.appendChild(option);
     }
     
+    var month = document.getElementById('month');
+    month.selectedIndex = birthday.getMonth();
     genDays();
 });
 

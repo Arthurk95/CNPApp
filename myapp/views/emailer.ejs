@@ -9,6 +9,7 @@
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -60,6 +61,18 @@
                             document.getElementById("lunch_text_area").innerHTML = "<%- lunch %>";
                         </script>
                     </ul>
+                    <!-- Create the editor container -->
+                    <div id="editor">
+                        <p>Hello World!</p>
+                        <p>Some initial <strong>bold</strong> text</p>
+                        <p><br></p>
+                    </div>
+                    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+                    <script>
+                        var quill = new Quill('#editor', {
+                            theme: 'snow'
+                        });
+                    </script>
 
                     <div id="remindersContainer" class="flexContainer borderRadiusMedium marginTop30 relative flexColumn flexCenter border1px darkGray3-border lightGray1-BG heavyPadding width40">          
                         <div class="flex spaceBetween marginBottom10 width100 flexAlignCenter">
@@ -99,10 +112,7 @@
                         <div class="flex spaceBetween">
                             <div id="activities" class="width60">
                                 <p class="mediumFont darkText marginBottom20">Activities</p>
-                                <ul id="activitiesList" class="ulList darkText width50">
-                                    <li>hello</li>
-                                    <li>goodbye</li>
-                                </ul>
+                                <ul id="activitiesList" class="ulList darkText width50"></ul>
                             </div>
 
                             <!-- Behavior dropdowns -->
