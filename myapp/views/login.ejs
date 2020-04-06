@@ -1,16 +1,36 @@
-<h1>Login</h1>
-<% if (messages.error) { %>
-    <%= messages.error %>
-<% } %>
-<form action="/login" method="POST">
-    <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit">Login</button>
-</form>
-<a href="/register">Register</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+    </head>
+    <body>
+        <div class="flex flexCenter veryHeavyPadding">
+            <div class="width30 width90Mobile veryHeavyPadding white-BG flex flexColumn flexAlignCenter borderRadiusSmall shadowSmall">
+                <h1 class="marginBottom40 darkText">Login</h1>
+                    <% if (messages.error) { %>
+                        <%= messages.error %>
+                    <% } %>
+                <form class="marginBottom10" action="/login" method="POST">
+                    <div class="width100 marginBottom10 flex spaceBetween lightGray1-BG flexAlignCenter borderRadiusSmall">
+                        <i class="fas fa-envelope marginLeft10 mediumFont"></i>
+                        <input class="blankInput" type="email" id="email" name="email" required>
+                    </div>
+                    <div class="width100 marginBottom20 flex spaceBetween lightGray1-BG flexAlignCenter borderRadiusSmall">
+                        <i class="fas fa-key marginLeft10 mediumFont"></i>
+                        <input class="blankInput" type="password" id="password" name="password" required>
+                    </div>
+                    <div class="flex flexCenter">
+                        <button class="customButton width70 mediumFont accent1-BG" type="submit">Login</button>
+                    </div>
+                    
+                </form>
+                <a class="smallFont darkText" href="/register">Register</a>
+            </div>
+            
+        </div>
+        
+    </body>
+    
+</html>
