@@ -75,20 +75,20 @@
       </div>
 
       <script>
-        var hello = [];
+        var chartArray = [];
         var curId = 0;
         function makeChart(){
           var id = "chartObject" + curId;
           var selected = document.getElementById("newchart").selectedIndex;
-          if(selected == 0){
+          if(selected == 0) {
             generatePie(id);
             let pie1 = new thePie(id);
-            hello.push(pie1);
+           chartArray.push(pie1);
             curId = curId + 1;
             
             getRecords('Students','Activities', '16', 'all', id);
           }
-          else{
+          else {
       
           }
           
@@ -107,7 +107,7 @@
           console.log("make a line chart");
         }
       </script>
-      <!-- this just makes one bar chart -->
+      <!-- this just makes one line chart -->
       <canvas id="line-chart"></canvas>
     </div> <!-- end Line -->
 
@@ -127,7 +127,6 @@
       <!-- randomize some data just as proof of concept -->
       <button id="randomizeData">Randomize Data</button>
     </div> <!-- end Scatter -->
-
 
     <!-- RADAR CHART --> 
     <div class="chart" id="radar">
@@ -201,7 +200,7 @@
           }
         }); 
         var object = document.getElementById(id);
-        hello.forEach((chart) => {
+       chartArray.forEach((chart) => {
           if(chart.myId == id){
             chart.update(datum);
           }
@@ -215,23 +214,23 @@
         var startdate = document.getElementById('hiddenstartDate').value;
         startdate = (new Date(startdate)).getFullYear();
         var yearDrop = document.getElementById('syear' + id);
+
         // for if a birthday dropdown exist
         for(var i = 0; date.getFullYear() - i >= startdate; ++i){
             var option = document.createElement("option");
             option.text = date.getFullYear() - i;
-            if(i == 1){
+            if(i == 1) {
               option.selected = true;
               moreThanZero = true;
             }
+
             yearDrop.appendChild(option);
         }
-        if(moreThanZero){
-          
+        if(moreThanZero) {
           document.getElementById('smonth' + id).selectedIndex = date.getMonth();
-          
         }
         sgenDays(id);
-        if(moreThanZero){
+        if(moreThanZero) {
           document.getElementById('sday' + id).selectedIndex = date.getMonth() - 1;
         }
 
@@ -243,6 +242,7 @@
             option.text = date.getFullYear() - i;
             yearDrop.appendChild(option);
         }
+
         document.getElementById('emonth' + id).selectedIndex = date.getMonth();
         egenDays(id);
         
@@ -265,6 +265,7 @@
             day.appendChild(option);
         }
       }
+      
       function egenDays(id){
         var months = document.getElementById('emonth' + id);
         var month = months.options[months.selectedIndex].value;
