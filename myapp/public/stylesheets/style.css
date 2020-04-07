@@ -482,17 +482,19 @@ p{margin: 0;}
 /* Container for home page buttons */
 .buttonAreaGrid{
   padding: 50px;
+  width: 1000px;
   margin: 0 auto;
-  width: 70%;
   list-style-type: none;
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   text-align: center;
 }
 
 .buttonAreaGrid li{
   border-radius: 20px;
-  width: 28vw;
-  height: 28vw;
+  width: 300px;
+  height: 300px;
   margin: 10px;
   display: inline-block;
 }
@@ -506,7 +508,7 @@ p{margin: 0;}
   display:flex;/*CSS3*/
   align-items:center;/*Vertical align*/
   justify-content:center;/*horizontal align*/
-  font-size: 4vw;
+  font-size: 45px;
 }
 
 .logout{
@@ -520,14 +522,24 @@ p{margin: 0;}
   margin: auto 0;
 }
 
+.resetButton{
+  background: none;
+  outline: none;
+  border: none;
+}
+
+.hiddenMobile{display: none !important;}
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
+
+  .hiddenMobile{display: inherit !important;}
+  .logout{display: none;}
 
   .width100Mobile{width: 100% !important;}
   .width90Mobile{width:90% !important;}
   .flexContainer{ flex-direction: column;}
 
-  .smallFont{font-size: 1.3em !important;}
+  .smallFont{font-size: 1em !important;}
   .mediumFont{font-size: 1.8em !important;}
   .largeFont{font-size: 2.5em !important;}
 
