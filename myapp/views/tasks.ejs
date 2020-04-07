@@ -17,9 +17,16 @@
     <script src="/javascripts/jquery.prettydropdowns.js"></script>
   </head>
   <body>
-    <div id="accordion">      
-      <h3 class="accordion">Tasks</h3>
-        <div class="accordionPanel">
+    <article class="tabbed-content width90">
+      <nav class="tabs">
+        <ul>
+          <li><a href="#tab1" class="openTab">Tasks</a></li>
+          <li><a href="#tab2">Maintenance Log</a></li>
+        </ul>
+      </nav>
+
+      <section id="tab1" class="item openTab" data-title="Tasks">
+        <div class="item-content">
           <ul id="tasksList" class="ulList">
             <% if (tasks.length > 0) { %>            
               <% tasks.forEach((task, index) => { %>
@@ -35,10 +42,9 @@
                   <% } %>
                   <button class="darkRedButton" onclick="deleteTask('<%= task.TaskId %>')"><i class="far fa-trash-alt"></i></button>
               <% }) %>
-              
             <% } %>
-            <li class="addElement">
-              <a title="Add Task" onclick="addTask()">New Task +</a>
+            <li onclick="addTask()" class="accent2Light-BG clickableItem ">
+              <p title="Add Task" class="whiteText textShadow centerText largeFont">New Task +</p>
             </li>
           </ul>
           <div id="newTaskForm" class="formWindow">
@@ -62,8 +68,10 @@
             </div>
           </div>
         </div>
-      <h3 class="accordion">Maintenance Log</h3>
-        <div class="accordionPanel">
+      </section>
+
+      <section id="tab2" class="item" data-title="Maintenance Log">
+        <div class="item-content">
           <ul id="comptasksList" class="ulList">
             <% if (compTasks.length > 0) { %> 
               <table class="customTable halfWidth">          
@@ -82,18 +90,12 @@
             <% } %>
           </ul>
         </div>
-    </div>
-
-    
+      </section>
+    </article>
   </body>
-  <script>
-    $( function() {
-      $( "#accordion" ).accordion({
-        collapsible: true,
-        active: false
-      });
-    } );
-  </script>
+
+  <script src="/javascripts/tabs.js"></script>
+  
   <script>
     $dropdown = $('.pretty-classic').prettyDropdown({
         classic: true,
