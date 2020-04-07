@@ -204,8 +204,9 @@
       <section id="tab3" class="item" data-title="Email Manager">
         <div class="item-content">
           <ul id="comptasksList" class="ulList">
-            <li onclick="editHeader" class="accent2Light-BG centerText clickableItem">
+            <li onclick="editHeader()" class="accent2Light-BG centerText clickableItem">
               <p title="Edit Header" class="whiteText centerText textShadow">Edit Header</p>
+              
             </li>
           </ul>
         </div>
@@ -225,7 +226,6 @@
       });
     // Get the modal
     var formElement;
-
     // opens student profile in same tab when a student is clicked
     function studentSelected(studentID){
       window.location.href ="/admin/student-profile/" + studentID;

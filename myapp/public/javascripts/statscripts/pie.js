@@ -3,8 +3,10 @@ class thePie {
   color = null; 
   radius = null;
   svg = null;
+  myId = null;
 
   constructor(id) {
+    this.myId = id;
     pieOptions();
 
     // set the dimensions and margins of the graph
