@@ -6,8 +6,11 @@
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
         <link rel='stylesheet' href='/stylesheets/form.css' />
         <link rel='stylesheet' href='/stylesheets/ulList.css' />
+        <link rel='stylesheet' href='/stylesheets/editor.css' />
         <script src="/javascripts/emailerScripts.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
+        <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css">
+
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -44,23 +47,25 @@
                     <ul class="flex flexColumn">
                         <li class="marginBottom10">
                             <label for="summary">Summary</label>
-                            <textarea id="summary_text_area" onkeyup="textAreaAdjust(this)" name="summary" onchange="pushSummary(this)"></textarea>
+                            <div id="summary">
+                                <p><%- summary %></p>
+                            </div>
                         </li>
                         <li class="marginBottom10">
                             <label for="snack">AM Snack</label>
-                            <textarea id="snack_text_area" onkeyup="textAreaAdjust(this)" name="amSnack" onchange="pushAmSnack(this)"></textarea>
+                            <div id="snack">
+                                <p><%- snack %></p>
+                            </div>
                         </li>
                         <li class="marginBottom10">
                             <label for="lunch">Lunch</label>
-                            <textarea id="lunch_text_area" onkeyup="textAreaAdjust(this)" name="lunch" onchange="pushLunch(this)"></textarea>
+                            <div id="lunch">
+                                <p><%- lunch %></p>
+                            </div>
                         </li>
-                        <script>
-                            document.getElementById("summary_text_area").innerHTML = "<%- summary %>";
-                            document.getElementById("snack_text_area").innerHTML = "<%- snack %>";
-                            document.getElementById("lunch_text_area").innerHTML = "<%- lunch %>";
-                        </script>
                     </ul>
-
+                    <!-- Create the editor container -->
+                    
 
                     <div id="remindersContainer" class="flexContainer borderRadiusMedium marginTop30 relative flexColumn flexCenter border1px darkGray3-border lightGray1-BG heavyPadding width40">          
                         <div class="flex spaceBetween marginBottom10 width100 flexAlignCenter">
@@ -156,6 +161,19 @@
             $('select').selectmenu();
         })
             
+        </script>
+
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <script>
+            var summaryQuill = new Quill('#summary', {
+                theme: 'snow'
+            });
+            var snackQuill = new Quill('#snack', {
+                theme: 'snow'
+            });
+            var lunchQuill = new Quill('#lunch', {
+                theme: 'snow'
+            });
         </script>
 
         <script>

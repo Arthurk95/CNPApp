@@ -107,26 +107,6 @@ h1, h2, h3, h4, h5, h6{
   margin-inline-end: 0;
 }
 
-/*IE9*/
-*::selection 
-{
-    background-color:transparent;
-} 
-*::-moz-selection
-{
-    background-color:transparent;
-}
-*
-{        
-    -webkit-user-select: none;
-    -moz-user-select: -moz-none;
-    /*IE10*/
-    -ms-user-select: none;
-    user-select: none;
-
-    /*You just need this if you are only concerned with android and not desktop browsers.*/
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}  
 
 body {
   padding: 0px;
@@ -349,6 +329,7 @@ p{margin: 0;}
 
 /* ------------- MARGINS AND PADDING -------------*/
 .noMargin{margin: 0 !important;}
+.center{margin: 0 auto;}
 
 .marginTop10{margin-top: 10px !important;}
 .marginTop20{margin-top: 20px !important;}
@@ -383,8 +364,8 @@ p{margin: 0;}
 .hugeFont{font-size: 100px !important;}
 
 .whiteText{color: white !important;}
-.lightText{color: var(--lightGray2);}
-.darkText{color: var(--darkGray3);}
+.lightText{color: var(--lightGray2) !important;}
+.darkText{color: var(--darkGray3) !important;}
 .textShadow{text-shadow: 0px 0px 4px var(--darkGray3);}
 
 .right{float: right;}
@@ -397,6 +378,7 @@ p{margin: 0;}
 
 /* ------------ DISPLAYS ------------- */
 .displayNone{display: none !important;}
+.inlineBlock{display: inline-block;}
 .relative{position: relative;}
 .absolute{position: absolute;}
 .borderBox{box-sizing: border-box !important;}
@@ -420,7 +402,7 @@ p{margin: 0;}
   margin-bottom: 10px;
 }
 
-.flex{display: flex;}
+.flex{display: flex !important;}
 .flexColumn{flex-direction: column;}
 .flexStretch{justify-content: stretch; align-items: stretch;}
 
@@ -443,21 +425,26 @@ p{margin: 0;}
 }
 
 
-
-
 .customTable .darkText{color: var(--darkGray2) !important;}
 
 .ui-selectmenu-button.ui-button{
   width: 10vw !important;
 }
 
+.blankInput{
+  background: none !important;
+  background-color: transparent !important;
+}
+
 /* Use this for any buttons */
 .customButton{
   padding: 8px 25px;
-  background-color: var(--adminButtonColor);
+  outline: none;
+  border: none;
   border-radius: 15px;
   margin-right: 10px;
   color: var(--lightGray1);
+  font-size: 1.2em;
 }
 
 .customButton:hover{
@@ -522,12 +509,28 @@ p{margin: 0;}
   font-size: 4vw;
 }
 
+.logout{
+  position: absolute;
+  right: 10px;
+  top: 22px;
+}
+
+.logout i{
+  text-align: right;
+  margin: auto 0;
+}
 
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
 
   .width100Mobile{width: 100% !important;}
+  .width90Mobile{width:90% !important;}
   .flexContainer{ flex-direction: column;}
+
+  .smallFont{font-size: 1.3em !important;}
+  .mediumFont{font-size: 1.8em !important;}
+  .largeFont{font-size: 2.5em !important;}
+
 
   .contentWithSidebar{flex-direction: column-reverse; align-items: center;}
   .sidebar{width: 100% !important;}
@@ -590,6 +593,16 @@ input::selection{
 
 input:focus{
   box-shadow: inset 0px 0px 4px var(--selectedStudentColor);
+}
+
+/* Remove autofill styling on Chrome for input/select/textfields */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--lightGray1) inset !important;
+    /*use inset box-shadow to cover background-color*/
+    -webkit-text-fill-color: var(--darkGray2) !important;
+    /*use text fill color to cover font color*/
 }
 
 textarea{
@@ -694,7 +707,6 @@ textarea:focus{
 
 h1{
   color:rgb(255, 255, 255);
-  text-shadow: 2px 2px 4px #000000;
 }
 
 svg {

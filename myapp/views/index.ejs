@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body> 
@@ -12,9 +13,11 @@
       <li class="homeButton tasksButton"><a href="/stats">Stats</a></li>
       <li class="homeButton studentButton"><a href="/emailer">Emailer</a></li>
       <li class="homeButton emailButton"><a href="/tasks">Tasks</a></li>
-      <form action="/logout?_method=DELETE" method="POST">
-          <button type="submit">Logout</button>
-      </form>
+      <div id="logout" class="logout">
+        <form action="/logout?_method=DELETE" method="POST">
+          <button class="flex customButton red4-BG" type="submit">Logout <i class="fas fa-sign-out-alt marginLeft10"></i></button>
+        </form>
+      </div>
     </ul>
   </body>
 </html>
