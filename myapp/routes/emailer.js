@@ -66,7 +66,6 @@ function bottomLayer(res,Students,){
           bObj.op3 = element.CategoryThree;
         }
         if(element.CategoryFour != "" && element.CategoryFour != null){
-          console.log(element.CategoryFour);
           bObj.op4 = element.CategoryFour;
         }
         if(element.CategoryFive != "" && element.CategoryFive != null){
