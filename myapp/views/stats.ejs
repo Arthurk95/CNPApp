@@ -55,6 +55,10 @@
               <div class="float-right">
                 <form>
                   <input id="hiddenstartDate" value="<%- startDate %>" style="display: none;">
+                  <script>
+                    var activityList = JSON.parse('<%- activities %>');
+                    var studentList = JSON.parse('<%- students %>');
+                  </script>
                 </form>
               </div> <!-- end month selection-->
             </li>
@@ -85,10 +89,10 @@
           if(selected == 0) {
             generatePie(id);
             let pie1 = new thePie(id);
-           chartArray.push(pie1);
+            chartArray.push(pie1);
             curId = curId + 1;
             
-            getRecords('Students','Activities', '16', 'all', id);
+            
           }
           else {
       
@@ -180,8 +184,12 @@
     <!-- Records and Data -->
     <script>
       
-      function getRecords(selection, beta, id, weather, caller){
+      function getRecords(weather, caller){
         var today = new Date();
+        var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
+        var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
+        var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
+        console.log(id);
         var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
         var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
         theUrl = window.location.href+'/getdata';

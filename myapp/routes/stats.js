@@ -6,7 +6,13 @@ const auth = require('../public/javascripts/loginScripts');
 router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var sql = "SELECT MIN(CurrentDate) as startDate FROM cnp_data.DailyActivities;";
   con.query(sql, function(err,result){
-    res.render('stats', { title: 'Stats' , startDate: result[0].startDate});
+    sql = "SELECT * FROM cnp_data.Activities;";
+    con.query(sql, function(err,a){
+      sql = "SELECT * FROM cnp_data.Students;";
+      con.query(sql, function(err,s){
+        res.render('stats', { title: 'Stats' , startDate: result[0].startDate, activities: JSON.stringify(a), students: JSON.stringify(s)});
+      });
+    });
   });
 });
 

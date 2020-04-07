@@ -85,12 +85,12 @@ function generatePie(id){
     temp = document.createElement("select");
     temp.id = "syear"+id;
     temp.class="pretty-classic";
-    temp.onchange = function(){sgenDays(id)};
+    temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
     temp = document.createElement("select");
     temp.id="smonth" + id;
     temp.class="pretty-classic";
-    temp.onchange = function(){sgenDays(id)};
+    temp.onchange = function(){sgenDays(id); updateData(id);};
     {
       temp2 = document.createElement("option");
       temp2.value = "01";
@@ -145,6 +145,7 @@ function generatePie(id){
     temp = document.createElement("select");
     temp.id="sday" + id;
     temp.class="pretty-classic";
+    temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
     temp = document.createElement("label");
     temp.innerHTML = "End Date";
@@ -152,12 +153,12 @@ function generatePie(id){
     temp = document.createElement("select");
     temp.id="eyear" + id;
     temp.class="pretty-classic";
-    temp.onchange = function(){egenDays(id)};
+    temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(temp);
     temp = document.createElement("select");
     temp.id="emonth" + id;
     temp.class="pretty-classic";
-    temp.onchange = function(){egenDays(id)};
+    temp.onchange = function(){egenDays(id); updateData(id);};
     {
       temp2 = document.createElement("option");
       temp2.value = "01";
@@ -212,12 +213,13 @@ function generatePie(id){
     temp = document.createElement("select");
     temp.id="eday" + id;
     temp.class="pretty-classic";
+    temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
   }
   temp = document.createElement("select");
   temp.id="option1" + id;
   temp.class="pretty-classic";
-  temp.onchange = function(){updateOp2(id)};
+  temp.onchange = function(){onUpdateop1(id);};
   {
     temp2 = document.createElement("option");
     temp2.value = "01";
@@ -230,13 +232,24 @@ function generatePie(id){
   }
   newdiv.appendChild(temp);
   temp = document.createElement("div");
+  temp.id = "opid1" + id;
+  newdiv.appendChild(temp);
+  temp = document.createElement("div");
   temp.id = "op2" + id;
   newdiv.appendChild(temp);
   
   parent.insertBefore(newdiv,bottom);
+  onUpdateop1(id);
+  
+}
+function onUpdateop1(id){
+  updateOpid1(id);
   updateOp2(id);
   makeDates(id);
-  
+  updateData(id);
+}
+function updateData(id){
+  getRecords('all', id);
 }
 function updateOp2(id){
   var op1 = document.getElementById("option1" + id);
@@ -248,6 +261,7 @@ function updateOp2(id){
   temp = document.createElement("select");
   temp.id="option2" + id;
   temp.class="pretty-classic";
+  temp.onchange = function(){updateData(id);};
   if(op1.value == "01")
   {
     temp2 = document.createElement("option");
@@ -262,3 +276,26 @@ function updateOp2(id){
   newdiv.appendChild(temp);
 }
 
+function updateOpid1(id){
+  var op1 = document.getElementById("option1" + id);
+  var newdiv = document.getElementById("opid1" + id);
+  var temp,temp2;
+  if(newdiv.hasChildNodes()){
+    document.getElementById("optionid1" + id).remove();
+  }
+  temp = document.createElement("select");
+  temp.id="optionid1" + id;
+  temp.class="pretty-classic";
+  temp.onchange = function(){updateData(id);};
+  if(op1.value == "01")
+  {
+    console.log(studentList);
+    studentList.forEach((element)=>{
+      temp2 = document.createElement("option");
+      temp2.value = element.StudentId;
+      temp2.innerHTML = element.StudentName;
+      temp.appendChild(temp2);
+    });
+  }
+  newdiv.appendChild(temp);
+}
