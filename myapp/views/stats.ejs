@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
     <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
+    <link rel='stylesheet' href='/stylesheets/footer.css' />
     <link rel='stylesheet' href='/stylesheets/accordian.css' />
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/form.css' />
@@ -71,7 +72,8 @@
         <option>Bubble Chart</option>
         <option>Bar Chart</option>
       </select>
-        <a class="buttons" onclick="makeChart()">Add a New Chart</a>
+      <ul id="selectionButtons" class="selectionButtons">
+      <li><a id="studentButton" class="accent2Light-BG" onclick="makeChart()">Add a New Chart</a></li></ul>
       </div>
 
       <script>
@@ -265,7 +267,7 @@
             day.appendChild(option);
         }
       }
-      
+
       function egenDays(id){
         var months = document.getElementById('emonth' + id);
         var month = months.options[months.selectedIndex].value;
