@@ -674,7 +674,7 @@ textarea:focus{
   display: flex;
   top: 0px;
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 25px;
 }
 
 .section {
@@ -736,11 +736,11 @@ text.axis-worktime {
 /* Navigation styling */
 #navigation {
   display: flex;
-  position: relative;
-  width: 100%;
-  margin-bottom: 10px;
   position: -webkit-sticky; /* Safari */
   position: sticky;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 #navigationPie{
