@@ -22,7 +22,6 @@ router.get('/test', (req, res) => {
 
 router.post('/send-email', (req, res) => {
   var emails = [
-    'matt.kint@gmail.com',
     'add@test.com',
     'test@test.com',
     'emails@test.com',
@@ -30,7 +29,6 @@ router.post('/send-email', (req, res) => {
   ] //updated later to emails from db
 
   var names = [
-    "first name example",
     "second name example",
     "third name example",
     "fourth name example",
