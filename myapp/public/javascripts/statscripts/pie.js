@@ -7,7 +7,6 @@ class thePie {
 
   constructor(id) {
     this.myId = id;
-    pieOptions();
 
     // set the dimensions and margins of the graph
     this.width = 450;
@@ -23,7 +22,7 @@ class thePie {
      .range(d3.schemeDark2);
 
     // append the svg object to the div called 'pie'
-    this.svg = d3.select("#pie")
+    this.svg = d3.select("#" + id)
       .append("svg")
         .attr("width", this.width)
         .attr("height", this.height)
@@ -32,15 +31,6 @@ class thePie {
 
   }
 
-  plotPie(id) {
-    
-    // create 2 data_set
-    var data1 = {a: 9, b: 20, c:30, d:8, e:12}
-    var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
-
-    this.update(data1);
-    console.log("updated data 1 from plotPie");
-  };
 
   update(data) {
     var parentObject = this;
@@ -82,40 +72,193 @@ class thePie {
   };
 };
 
-function pieOptions(data) {  
-  var myDiv = document.getElementById("pie");  
-    
-  // creating button element  
-  var button1 = document.createElement('BUTTON');
-  var button2 = document.createElement('BUTTON');  
-    
-  // creating text to be 
-  //displayed on button 
-  var text1 = document.createTextNode("Button1"); 
-  var text2 = document.createTextNode("Button2");
-    
-  // appending text to button 
-  button1.appendChild(text1);
-  button2.appendChild(text2); 
-    
-  // appending button to div 
-  myDiv.appendChild(button1);
-  myDiv.appendChild(button2);
+function generatePie(id){
+  var parent = document.getElementById("charts");
+  var newdiv = document.createElement("div");
+  var bottom = document.getElementById("newchart");
+  newdiv.id = id;
+  var temp,temp2;
+  {
+    temp = document.createElement("label");
+    temp.innerHTML = "Beginning Date";
+    newdiv.appendChild(temp);
+    temp = document.createElement("select");
+    temp.id = "syear"+id;
+    temp.class="pretty-classic";
+    temp.onchange = function(){sgenDays(id)};
+    newdiv.appendChild(temp);
+    temp = document.createElement("select");
+    temp.id="smonth" + id;
+    temp.class="pretty-classic";
+    temp.onchange = function(){sgenDays(id)};
+    {
+      temp2 = document.createElement("option");
+      temp2.value = "01";
+      temp2.innerHTML = "Jan";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "02";
+      temp2.innerHTML = "Feb";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "03";
+      temp2.innerHTML = "Mar";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "04";
+      temp2.innerHTML = "Apr";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "05";
+      temp2.innerHTML = "May";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "06";
+      temp2.innerHTML = "Jun";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "07";
+      temp2.innerHTML = "Jul";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "08";
+      temp2.innerHTML = "Aug";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "09";
+      temp2.innerHTML = "Sep";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "10";
+      temp2.innerHTML = "Oct";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "11";
+      temp2.innerHTML = "Nov";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "12";
+      temp2.innerHTML = "Dec";
+      temp.appendChild(temp2);
+    }
+    newdiv.appendChild(temp);
+    temp = document.createElement("select");
+    temp.id="sday" + id;
+    temp.class="pretty-classic";
+    newdiv.appendChild(temp);
+    temp = document.createElement("label");
+    temp.innerHTML = "End Date";
+    newdiv.appendChild(temp);
+    temp = document.createElement("select");
+    temp.id="eyear" + id;
+    temp.class="pretty-classic";
+    temp.onchange = function(){egenDays(id)};
+    newdiv.appendChild(temp);
+    temp = document.createElement("select");
+    temp.id="emonth" + id;
+    temp.class="pretty-classic";
+    temp.onchange = function(){egenDays(id)};
+    {
+      temp2 = document.createElement("option");
+      temp2.value = "01";
+      temp2.innerHTML = "Jan";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "02";
+      temp2.innerHTML = "Feb";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "03";
+      temp2.innerHTML = "Mar";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "04";
+      temp2.innerHTML = "Apr";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "05";
+      temp2.innerHTML = "May";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "06";
+      temp2.innerHTML = "Jun";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "07";
+      temp2.innerHTML = "Jul";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "08";
+      temp2.innerHTML = "Aug";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "09";
+      temp2.innerHTML = "Sep";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "10";
+      temp2.innerHTML = "Oct";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "11";
+      temp2.innerHTML = "Nov";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "12";
+      temp2.innerHTML = "Dec";
+      temp.appendChild(temp2);
+    }
+    newdiv.appendChild(temp);
+    temp = document.createElement("select");
+    temp.id="eday" + id;
+    temp.class="pretty-classic";
+    newdiv.appendChild(temp);
+  }
+  temp = document.createElement("select");
+  temp.id="option1" + id;
+  temp.class="pretty-classic";
+  temp.onchange = function(){updateOp2(id)};
+  {
+    temp2 = document.createElement("option");
+    temp2.value = "01";
+    temp2.innerHTML = "Students";
+    temp.appendChild(temp2);
+    temp2 = document.createElement("option");
+    temp2.value = "02";
+    temp2.innerHTML = "Activities";
+    temp.appendChild(temp2);
+  }
+  newdiv.appendChild(temp);
+  temp = document.createElement("div");
+  temp.id = "op2" + id;
+  newdiv.appendChild(temp);
+  
+  parent.insertBefore(newdiv,bottom);
+  updateOp2(id);
+  makeDates(id);
+  
+}
+function updateOp2(id){
+  var op1 = document.getElementById("option1" + id);
+  var newdiv = document.getElementById("op2" + id);
+  var temp,temp2;
+  if(newdiv.hasChildNodes()){
+    document.getElementById("option2" + id).remove();
+  }
+  temp = document.createElement("select");
+  temp.id="option2" + id;
+  temp.class="pretty-classic";
+  if(op1.value == "01")
+  {
+    temp2 = document.createElement("option");
+    temp2.value = "01";
+    temp2.innerHTML = "Activities";
+    temp.appendChild(temp2);
+    temp2 = document.createElement("option");
+    temp2.value = "02";
+    temp2.innerHTML = "Behaivior";
+    temp.appendChild(temp2);
+  }
+  newdiv.appendChild(temp);
+}
 
-  //click
-  //document.getElementById(button1).onClick();
-};
-
-function onClick(){
-    console.log("button 1 does something");
-};
-
-function getData() {
-  plotPie('#pie');
-};
-
-//function updateData() {
-  // Initialize the plot with the first dataset
-  //update(data1)
-  //dashboard('#pie');
-//}
