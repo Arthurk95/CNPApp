@@ -1,5 +1,6 @@
-function theLine(id,data){
+function theLine(id, data) {
   myId = id;
+  
   return new Chart(document.getElementById("canvas" + id), {
     type: 'line',
     data: {
@@ -35,7 +36,8 @@ function theLine(id,data){
     }
   });
 }
-function generateLine(id){
+
+function generateLine(id) {
   var parent = document.getElementById("charts");
   var newdiv = document.createElement("div");
   var bottom = document.getElementById("newchart");
@@ -205,20 +207,23 @@ function generateLine(id){
   newdiv.appendChild(canvas);
   parent.insertBefore(newdiv,bottom);
   onUpdateop1(id);
-  function onUpdateop1(id){
+
+  function onUpdateop1(id) {
     updateOpid1(id);
     updateOp2(id);
     makeDates(id);
     updateData(id);
   }
-  function updateData(id){
+
+  function updateData(id) {
     getRecordsLine('all', id);
   }
-  function updateOp2(id){
+
+  function updateOp2(id) {
     var op1 = document.getElementById("option1" + id);
     var newdiv = document.getElementById("op2" + id);
     var temp,temp2;
-    if(newdiv.hasChildNodes()){
+    if(newdiv.hasChildNodes()) {
       document.getElementById("option2" + id).remove();
     }
     temp = document.createElement("select");
@@ -239,7 +244,7 @@ function generateLine(id){
     newdiv.appendChild(temp);
   }
   
-  function updateOpid1(id){
+  function updateOpid1(id) {
     var op1 = document.getElementById("option1" + id);
     var newdiv = document.getElementById("opid1" + id);
     var temp,temp2;

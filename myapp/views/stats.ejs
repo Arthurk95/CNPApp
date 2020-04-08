@@ -72,6 +72,7 @@
       <select id="newchart" class="pretty-classic">
         <option>Pie Chart</option>
         <option>Line Chart</option>
+        <option>Scatter Plot</option>
         <option>Radar Chart</option>
         <option>Bubble Chart</option>
         <option>Bar Chart</option>
@@ -92,15 +93,32 @@
             chartArray.push(pie1);
             curId = curId + 1;
           }
-          else {
+          else if(selected == 1 ) {
+            console.log("line");
             generateLine(id);
             getRecordsLine('all', id);
-            
+          }
+          else if(selected == 2) {
+            console.log("scatter")
+          }
+          else if(selected == 3) {
+            console.log("radar")
+            generateRadar(id);
+            getRecordsRadar('all', id);
+          }
+          else if(selected == 4) {
+            console.log("bubble")
+          }
+          else if(selected == 5) {
+            console.log("bar")
+          }
+          else {
+            console.log("oh no")
           }
           
         };
         function test(){
-          chart = chartArray[0];
+          chart = chartArray[1];
           console.log(chart.data);
         }
       </script>
@@ -123,21 +141,6 @@
       <!-- randomize some data just as proof of concept -->
       <button id="randomizeData">Randomize Data</button>
     </div> <!-- end Scatter -->
-
-    <!-- RADAR CHART --> 
-    <div class="chart" id="radar">
-      <h1>Radar Chart</h1>
-    <!-- Make a radar chart -->
-    <!-- Doesn't work -->
-      <button onclick="makeRadar('#radar')">Make Radar</button>
-      <script>
-        function makeRadar(id){
-          console.log("make a radar chart");
-        }
-      </script>
-      <!-- this just makes one radar chart -->
-    <canvas id="radar-chart"></canvas>
-    </div> <!-- end Radar -->
 
     <!-- Bubble Chart -->
     <div class="chart" id="bubble"> 
@@ -174,7 +177,8 @@
     <!-- Records and Data -->
     <script>
       
-      function getRecordsPie(weather, caller){
+      //Pie Records
+      function getRecordsPie(weather, caller) {
         var today = new Date();
         var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
         var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
@@ -186,12 +190,13 @@
         callback = gotDataPie; 
         httpPostAsync(theUrl,data,callback); 
       }
-      function gotDataPie(data){
+
+      function gotDataPie(data) {
         data = JSON.parse(data);
         var datum = [];
         var id;
         data.forEach((element) => {
-          if(element.activityName == null){
+          if(element.activityName == null) {
             id = element.caller;
           }
           else{
@@ -204,8 +209,10 @@
           }
         });
       }
+      //End of Pie Records
       
-      function getRecordsLine(weather, caller){
+      //Line Records
+      function getRecordsLine(weather, caller) {
         var today = new Date();
         var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
         var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
@@ -217,7 +224,8 @@
         callback = gotDataLine; 
         httpPostAsync(theUrl,data,callback); 
       }
-      function gotDataLine(data){
+
+      function gotDataLine(data) {
         data = JSON.parse(data);
         var datum = [];
         var id;
@@ -229,24 +237,71 @@
             datum[element.activityName] = element.value;
           }
         }); 
-        let line = new theLine(id,data);
+
+        let line = new theLine(id, data);
         var found = false;
+
         chartArray.forEach((element) =>{
-          if(element.myId==id){
+          if(element.myId == id){
             element = line;
             curId = curId + 1;
             found = true;
           }
-          
         });
+
         if(!found){
           chartArray.push(line);
           curId = curId + 1;
         }
-        
       }
-      function makeDates(id){
-        
+      //End of Line Records
+
+      //Radar Records
+      function getRecordsRadar(weather, caller) {
+        var today = new Date();
+        var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
+        var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
+        var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
+        var start = document.getElementById('syear'+ caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
+        var end = document.getElementById('eyear'+ caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
+        theUrl = window.location.href+'/getdata';
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller;
+        callback = gotDataRadar; 
+        httpPostAsync(theUrl,data,callback); 
+      }
+
+      function gotDataRadar(data) {
+        data = JSON.parse(data);
+        var datum = [];
+        var id;
+        data.forEach((element) => {
+          if(element.activityName == null){
+            id = element.caller;
+          }
+          else{
+            datum[element.activityName] = element.value;
+          }
+        }); 
+
+        let radar = new theRadar(id, data);
+        var found = false;
+
+        chartArray.forEach((element) =>{
+          if(element.myId == id){
+            element = radar;
+            curId = curId + 1;
+            found = true;
+          }
+        });
+
+        if(!found){
+          chartArray.push(radar);
+          curId = curId + 1;
+        }
+      }
+      //End of Radar Records
+
+      function makeDates(id){  
         var date = new Date();
         var moreThanZero = false;
         var startdate = document.getElementById('hiddenstartDate').value;
@@ -320,7 +375,8 @@
             day.appendChild(option);
         }
       }
-    </script><!-- End Records and Data -->
+
+    </script> <!-- End Records and Data -->
 
     <!-- bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
