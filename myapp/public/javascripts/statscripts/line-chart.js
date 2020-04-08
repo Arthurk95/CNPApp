@@ -8,22 +8,22 @@ function theLine(id, data) {
       datasets: [{ 
           data: [data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value],
           label: data[0].activityName,
-          borderColor: "#3e95cd",
+          borderColor: getRandomColor(),
           fill: false
         }, { 
           data: [data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value],
           label: data[1].activityName,
-          borderColor: "#8e5ea2",
+          borderColor: getRandomColor(),
           fill: false
         }, { 
           data: [data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value],
           label: data[2].activityName,
-          borderColor: "#3cba9f",
+          borderColor: getRandomColor(),
           fill: false
         }, { 
           data: [data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value],
           label: data[3].activityName,
-          borderColor: "#e8c3b9",
+          borderColor: getRandomColor(),
           fill: false
         }
       ]
@@ -35,6 +35,15 @@ function theLine(id, data) {
       }
     }
   });
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 function generateLine(id) {

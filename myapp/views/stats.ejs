@@ -67,7 +67,7 @@
       </nav>
     </div> <!-- end navigation -->
 
-    <!-- Drop down for adding a enw chart -->
+    <!-- Drop down for adding a new chart -->
     <div id="charts">
       <select id="newchart" class="pretty-classic">
         <option>Pie Chart</option>
@@ -77,14 +77,17 @@
         <option>Bubble Chart</option>
         <option>Bar Chart</option>
       </select>
+
       <ul id="selectionButtons" class="selectionButtons">
-      <li><a id="studentButton" class="accent2Light-BG" onclick="makeChart()">Add a New Chart</a></li></ul>
+        <li><a id="studentButton" class="accent2Light-BG" onclick="makeChart()">Add a New Chart</a></li>
+        <li><a id="activitiesButton" class="accent3Light-BG" onclick="DeleteChart()">Delete Chart</a></li>
+      </ul>
       </div>
 
       <script>
         var chartArray = [];
         var curId = 0;
-        function makeChart(){
+        function makeChart() {
           var id = "chartObject" + curId;
           var selected = document.getElementById("newchart").selectedIndex;
           if(selected == 0) {
@@ -99,7 +102,10 @@
             getRecordsLine('all', id);
           }
           else if(selected == 2) {
+            //Needs to be updated
             console.log("scatter")
+            generateScatter(id);
+            getRecordsScatter('all', id);
           }
           else if(selected == 3) {
             console.log("radar")
@@ -107,16 +113,26 @@
             getRecordsRadar('all', id);
           }
           else if(selected == 4) {
+            //Needs to be updated
             console.log("bubble")
+            generateBubble(id);
+            getRecordsBubble('all', id);
           }
           else if(selected == 5) {
             console.log("bar")
+            generateBar(id);
+            getRecordsBar('all', id);
           }
           else {
             console.log("oh no")
           }
           
         };
+
+        function deleteChart() {
+          console.log("delete a chart")
+        }
+
         function test(){
           chart = chartArray[1];
           console.log(chart.data);
@@ -142,36 +158,7 @@
       <button id="randomizeData">Randomize Data</button>
     </div> <!-- end Scatter -->
 
-    <!-- Bubble Chart -->
-    <div class="chart" id="bubble"> 
-      <h1>Bubble Chart</h1>
-
-      <!-- Make a bar chart -->
-      <!-- Doesn't work -->
-      <button onclick="makeBubble('#bubble')">Make Bubble</button>
-      <script>
-        function makeBubble(id){
-          console.log("make a bubble");
-        }
-      </script>
-      <!-- this just makes one bar chart -->
-      <canvas id="bubble-chart"></canvas>
-    </div>
-
-    <!-- Another Chart --> 
-    <div class="chart" id="bar"> 
-      <h1>Bar Chart</h1>
-      <!-- Make a bar chart -->
-      <!-- Doesn't work -->
-      <button onclick="makeBar('#bar')">Make Bar</button>
-      <script>
-        function makeBar(id){
-          console.log("its trying to make a bar at least");
-        }
-      </script>
-      <!-- this just makes one bar chart -->
-      <canvas id="bar-chart"></canvas>
-    </div>
+    
     
 
     <!-- Records and Data -->
@@ -256,6 +243,51 @@
       }
       //End of Line Records
 
+      //Scatter Records
+      function getRecordsScatter(weather, caller) {
+        var today = new Date();
+        var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
+        var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
+        var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
+        var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
+        var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
+        theUrl = window.location.href+'/getdata';
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller;
+        callback = gotDataScatter; 
+        httpPostAsync(theUrl,data,callback); 
+      }
+
+      function gotDataScatter(data) {
+        data = JSON.parse(data);
+        var datum = [];
+        var id;
+        data.forEach((element) => {
+          if(element.activityName == null){
+            id = element.caller;
+          }
+          else{
+            datum[element.activityName] = element.value;
+          }
+        }); 
+
+        let scatter = new theScatter(id, data);
+        var found = false;
+
+        chartArray.forEach((element) =>{
+          if(element.myId == id){
+            element = scatter;
+            curId = curId + 1;
+            found = true;
+          }
+        });
+
+        if(!found){
+          chartArray.push(scatter);
+          curId = curId + 1;
+        }
+      }
+      //End of Scatter Records
+
       //Radar Records
       function getRecordsRadar(weather, caller) {
         var today = new Date();
@@ -300,6 +332,96 @@
         }
       }
       //End of Radar Records
+
+      //Bubble Records
+      function getRecordsBubble(weather, caller) {
+        var today = new Date();
+        var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
+        var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
+        var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
+        var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
+        var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
+        theUrl = window.location.href+'/getdata';
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller;
+        callback = gotDataBubble; 
+        httpPostAsync(theUrl,data,callback); 
+      }
+
+      function gotDataBubble(data) {
+        data = JSON.parse(data);
+        var datum = [];
+        var id;
+        data.forEach((element) => {
+          if(element.activityName == null){
+            id = element.caller;
+          }
+          else{
+            datum[element.activityName] = element.value;
+          }
+        }); 
+
+        let bubble = new theBubble(id, data);
+        var found = false;
+
+        chartArray.forEach((element) =>{
+          if(element.myId == id){
+            element = bubble;
+            curId = curId + 1;
+            found = true;
+          }
+        });
+
+        if(!found){
+          chartArray.push(bubble);
+          curId = curId + 1;
+        }
+      }
+      //End of Bubble Records
+
+      //Bar Records
+      function getRecordsBar(weather, caller) {
+        var today = new Date();
+        var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
+        var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
+        var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
+        var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
+        var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
+        theUrl = window.location.href+'/getdata';
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller;
+        callback = gotDataBar; 
+        httpPostAsync(theUrl,data,callback); 
+      }
+
+      function gotDataBar(data) {
+        data = JSON.parse(data);
+        var datum = [];
+        var id;
+        data.forEach((element) => {
+          if(element.activityName == null){
+            id = element.caller;
+          }
+          else{
+            datum[element.activityName] = element.value;
+          }
+        }); 
+
+        let bar = new theBar(id, data);
+        var found = false;
+
+        chartArray.forEach((element) =>{
+          if(element.myId == id){
+            element = bar;
+            curId = curId + 1;
+            found = true;
+          }
+        });
+
+        if(!found){
+          chartArray.push(bar);
+          curId = curId + 1;
+        }
+      }
+      //End of Bar Records
 
       function makeDates(id){  
         var date = new Date();
