@@ -118,6 +118,7 @@ function processData(data,res){
 
   var outputs = [];
   var meta = {};
+  meta["caller"] = data.inputs.caller;
   if(data.primeval.length == 0)
   {
     meta.name = "No Data";
@@ -136,7 +137,6 @@ function processData(data,res){
     if(data.inputs.prime == "Students"){
       meta.name = data.primeval[0].StudentName;
       if(data.inputs.beta == "Activities"){
-        meta["caller"] = data.inputs.caller;
         var i = 0;
         data.betaval.forEach(element => {
           var activity = {activityName:element.ActivityName};
@@ -172,7 +172,6 @@ function processData(data,res){
           outputs.push(activity);
           i = i+1;
         });
-        outputs.push(meta);
       }
       else if(data.inputs.beta == "Behavior"){
         var i = 0;
@@ -205,7 +204,6 @@ function processData(data,res){
         meta.TotalAccidents = totAccident;
         meta.TotalActivity = totActivity;
         meta.totalDays = i;
-        outputs.push(meta);
       }
       else if(data.inputs.beta == "ClassSession"){
         var i = 0;
@@ -234,7 +232,6 @@ function processData(data,res){
           
         });
         meta.totalDays = i;
-        outputs.push(meta);
       }
       else if(data.inputs.beta == "Friends"){
         var i = 0;
@@ -271,7 +268,6 @@ function processData(data,res){
           }
           meta.totalPlayedwithothers = total;
         })
-        outputs.push(meta);
       }
     
     }
@@ -425,7 +421,6 @@ function processData(data,res){
             }
             outputs.push(input);
           }); 
-          outputs.push(meta);  
         }
         else if(data.inputs.beta == "ClassSession"){
           var i = 0;
@@ -468,7 +463,6 @@ function processData(data,res){
             }
             outputs.push(input);
           }); 
-          outputs.push(meta);
         }
         else if(data.inputs.beta == "Friends"){
           data.betaval.forEach(top =>{
@@ -591,8 +585,6 @@ function processData(data,res){
             timetraveler.setDate(timetraveler.getDate() + 1);
             daysbetween = daysbetween + 1;
           }
-          
-          meta["caller"] = data.inputs.caller;
           var i = 0;
           data.betaval.forEach(element => {
             var activity = {activityName:element.ActivityName};
@@ -655,8 +647,6 @@ function processData(data,res){
             outputs.push(activity);
             i = i+1;
           });
-          
-          outputs.push(meta);
         }
         else if(data.inputs.beta == "Behavior"){
           var i = 0;
@@ -689,7 +679,6 @@ function processData(data,res){
           meta.TotalAccidents = totAccident;
           meta.TotalActivity = totActivity;
           meta.totalDays = i;
-          outputs.push(meta);
         }
         else if(data.inputs.beta == "ClassSession"){
           var i = 0;
@@ -718,7 +707,6 @@ function processData(data,res){
             
           });
           meta.totalDays = i;
-          outputs.push(meta);
         }
         else if(data.inputs.beta == "Friends"){
           var i = 0;
@@ -755,7 +743,6 @@ function processData(data,res){
             }
             meta.totalPlayedwithothers = total;
           })
-          outputs.push(meta);
         }
       }
     }
@@ -854,6 +841,7 @@ function processData(data,res){
       }
     }
   }
+  outputs.push(meta);
   res.send(outputs);
 }
 module.exports = router;

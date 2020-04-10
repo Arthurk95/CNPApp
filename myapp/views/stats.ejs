@@ -241,25 +241,33 @@
       }
 
       function gotDataLine(data) {
+        
         data = JSON.parse(data);
         var id;
+        console.log(data);
         data.forEach((element) => {
+          console.log(element);
           if(element.activityName == null){
             id = element.caller;
           }
         }); 
-        let line = new theLine(id, data);
         var found = false;
-
         var i = 0;
         chartArray.forEach((element) =>{
           if(element.myId == id){
-            chartArray.splice(i,1,line);
+            
+            document.getElementById("canvas" + id).remove();
+            var canvas = document.createElement("canvas");
+            canvas.id = "canvas" + id;
+            document.getElementById(id).appendChild(canvas);
+            let line = new theLine(id, data);
+            chartArray[i] = line;
             found = true;
           }
-          i = i +1;
+          i = i + 1;
         });
         if(!found){
+          let line = new theLine(id, data);
           chartArray.push(line);
           curId = curId + 1;
         }
