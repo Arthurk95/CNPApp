@@ -87,6 +87,25 @@
       <script>
         var chartArray = [];
         var curId = 0;
+
+        //Makes an array of random colors
+        function getRandomColors(n) {
+          var colorArray = [];
+          var num = n;
+          console.log(num);
+        
+          var letters = '0123456789ABCDEF';
+          var color = '#';
+          for (var j = 0; j < num; j++) {
+            for (var i = 0; i < 6; i++) {
+              color += letters[Math.floor(Math.random() * 16)];
+            }
+            colorArray.push(color);
+            color = '#';
+          }
+          return colorArray;
+        }
+
         function makeChart() {
           var id = "chartObject" + curId;
           var selected = document.getElementById("newchart").selectedIndex;
@@ -100,6 +119,7 @@
             console.log("line");
             generateLine(id);
             getRecordsLine('all', id);
+            console.log(getRandomColors(6))
           }
           else if(selected == 2) {
             //Needs to be updated
