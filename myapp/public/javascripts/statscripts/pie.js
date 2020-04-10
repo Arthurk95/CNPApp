@@ -237,6 +237,12 @@ function generatePie(id){
   temp = document.createElement("div");
   temp.id = "op2" + id;
   newdiv.appendChild(temp);
+  temp = document.createElement("a");
+  temp.id="activitiesButton";
+  temp.class="accent3Light-BG";
+  temp.onclick = function(){deleteChart(id);};
+  temp.innerHTML = "Delete Chart";
+  newdiv.appendChild(temp);
   
   parent.insertBefore(newdiv,bottom);
   onUpdateop1(id);
@@ -244,6 +250,7 @@ function generatePie(id){
   function onUpdateop1(id){
     updateOpid1(id);
     updateOp2(id);
+    
     makeDates(id);
     updateData(id);
   }
@@ -269,7 +276,15 @@ function generatePie(id){
       temp.appendChild(temp2);
       temp2 = document.createElement("option");
       temp2.value = "02";
-      temp2.innerHTML = "Behaivior";
+      temp2.innerHTML = "Friends";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "03";
+      temp2.innerHTML = "ClassSession";
+      temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "04";
+      temp2.innerHTML = "Behavior";
       temp.appendChild(temp2);
     }
     newdiv.appendChild(temp);

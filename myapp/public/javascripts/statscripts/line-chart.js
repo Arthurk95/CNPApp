@@ -1,32 +1,31 @@
 function theLine(id, data) {
   myId = id;
   
+  var labels;
+  var dataSets = [];
+  
+  data.forEach((element) =>{
+    if(element.activityName == null){
+      labels = element.labels
+    }
+    else{
+      dataSets.push({
+        data: element.values,
+        label: element.activityName,
+        borderColor:getRandomColor(),
+        fill: false 
+      })
+    }
+    
+  });
+  console.log("hi");
+  console.log(labels);
+  console.log(data);
   return new Chart(document.getElementById("canvas" + id), {
     type: 'line',
     data: {
-      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-      datasets: [{ 
-          data: [data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value],
-          label: data[0].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }, { 
-          data: [data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value],
-          label: data[1].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }, { 
-          data: [data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value],
-          label: data[2].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }, { 
-          data: [data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value],
-          label: data[3].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }
-      ]
+      labels: labels,
+      datasets: dataSets
     },
     options: {
       title: {
