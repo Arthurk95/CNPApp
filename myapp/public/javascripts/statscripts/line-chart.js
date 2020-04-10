@@ -1,9 +1,8 @@
 function theLine(id, data) {
-  myId = id;
-  
   var labels;
   var dataSets = [];
-  
+  var colors = getRandomColors(data.length - 1);
+  var i = 0;
   data.forEach((element) =>{
     if(element.activityName == null){
       labels = element.labels
@@ -12,16 +11,14 @@ function theLine(id, data) {
       dataSets.push({
         data: element.values,
         label: element.activityName,
-        borderColor:getRandomColor(),
+        borderColor:colors[i++],
         fill: false 
       })
     }
     
   });
-  console.log("hi");
-  console.log(labels);
-  console.log(data);
-  return new Chart(document.getElementById("canvas" + id), {
+  
+  var chart = new Chart(document.getElementById("canvas" + id), {
     type: 'line',
     data: {
       labels: labels,
@@ -34,6 +31,8 @@ function theLine(id, data) {
       }
     }
   });
+  chart.myId = id;
+  return chart;
 }
 
 function getRandomColor() {

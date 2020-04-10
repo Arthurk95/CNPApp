@@ -95,7 +95,6 @@
         function getRandomColors(n) {
           var colorArray = [];
           var num = n;
-          console.log(num);
         
           var letters = '0123456789ABCDEF';
           var color = '#';
@@ -149,7 +148,6 @@
           else {
             console.log("oh no")
           }
-          
         };
 
         function deleteChart(id) {
@@ -238,39 +236,35 @@
         var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
         var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
         theUrl = window.location.href+'/getdata';
-        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller + "&chart=Line";
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller + "&chart=Line" + "&segNum=" + 10;
         callback = gotDataLine; 
         httpPostAsync(theUrl,data,callback); 
       }
 
       function gotDataLine(data) {
         data = JSON.parse(data);
-        var datum = [];
         var id;
         data.forEach((element) => {
           if(element.activityName == null){
             id = element.caller;
           }
-          else{
-            datum[element.activityName] = element.value;
-          }
         }); 
-
         let line = new theLine(id, data);
         var found = false;
 
+        var i = 0;
         chartArray.forEach((element) =>{
           if(element.myId == id){
-            element = line;
-            curId = curId + 1;
+            chartArray.splice(i,1,line);
             found = true;
           }
+          i = i +1;
         });
-
         if(!found){
           chartArray.push(line);
           curId = curId + 1;
         }
+        console.log(chartArray);
       }
       //End of Line Records
 
@@ -461,7 +455,6 @@
         startdate = (new Date(startdate)).getFullYear();
         var yearDrop = document.getElementById('syear' + id);
 
-        console.log(document.getElementById('hiddenstartDate'));
         // for if a birthday dropdown exist
         for(var i = 0; date.getFullYear() - i >= startdate; ++i){
             var option = document.createElement("option");
@@ -470,13 +463,11 @@
               option.selected = true;
               moreThanZero = true;
             }
-            console.log(option);
             yearDrop.appendChild(option);
         }
         if(moreThanZero) {
           document.getElementById('smonth' + id).selectedIndex = date.getMonth();
         }
-        console.log(yearDrop);
         sgenDays(id);
         if(moreThanZero) {
           document.getElementById('sday' + id).selectedIndex = date.getMonth() - 1;

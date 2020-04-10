@@ -17,8 +17,10 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
 });
 
 router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
-  var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, start = req.body.start, end = req.body.end, caller = req.body.caller, chart = req.body.chart;
-  var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller,chart:chart,start:start,end:end};
+  var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, 
+      start = req.body.start, end = req.body.end, caller = req.body.caller, chart = req.body.chart,
+      segNum = req.body.segNum;
+  var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller,chart:chart,start:start,end:end,segNum:segNum};
   var all = false;
   var sql,sql2,sql4;
   
@@ -583,7 +585,7 @@ function processData(data,res){
           var startday = new Date(data.inputs.start);
           var endday = new Date(data.inputs.end);
           var timetraveler = new Date(startday);
-          var numSeperators = 10;
+          var numSeperators = data.inputs.segNum;
           var daysbetween =0;
           while(timetraveler < endday){
             timetraveler.setDate(timetraveler.getDate() + 1);
