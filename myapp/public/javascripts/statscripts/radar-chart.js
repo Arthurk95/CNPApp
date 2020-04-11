@@ -1,5 +1,23 @@
 function theRadar(id, data) {
-  myId = id;
+
+  var labels;
+  var dataSets = []
+  var colors = getRandomColors(data.length - 1)
+  var i = 0;
+
+  data.forEach((element) => {
+    if (element.activiyName == null) {
+      labels = element.labels
+    }
+    else {
+      dataSets.push({
+        data: element.values,
+        label: element.activityname,
+        borderColor: colors[i++],
+        fill: false
+      })
+    }
+  });
 
   new Chart(document.getElementById("canvas" + id), {
     type: 'radar',

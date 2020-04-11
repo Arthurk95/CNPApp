@@ -1,21 +1,22 @@
 function theLine(id, data) {
+
   var labels;
   var dataSets = [];
   var colors = getRandomColors(data.length - 1);
   var i = 0;
-  data.forEach((element) =>{
-    if(element.activityName == null){
+
+  data.forEach((element) => {
+    if(element.activityName == null) {
       labels = element.labels
     }
-    else{
+    else {
       dataSets.push({
         data: element.values,
         label: element.activityName,
-        borderColor:colors[i++],
+        borderColor: colors[i++],
         fill: false 
       })
     }
-    
   });
   
   var chart = new Chart(document.getElementById("canvas" + id), {
