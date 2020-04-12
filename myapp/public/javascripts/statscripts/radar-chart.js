@@ -288,4 +288,13 @@ function generateRadar(id) {
     }
     newdiv.appendChild(temp);
   }
+
+  //Delete button
+  temp = document.createElement("a");
+  temp.id="activitiesButton";
+  temp.class="accent3Light-BG";
+  temp.className="accent3Light-BG";
+  temp.onclick = function(){deleteChart(id);};
+  temp.innerHTML = "Delete Chart";
+  newdiv.appendChild(temp);
 }

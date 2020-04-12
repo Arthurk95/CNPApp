@@ -308,4 +308,5 @@ function generateBubble(id) {
   temp.className="accent3Light-BG";
   temp.onclick = function(){deleteChart(id);};
   temp.innerHTML = "Delete Chart";
+  newdiv.appendChild(temp);
 }

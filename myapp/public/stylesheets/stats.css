@@ -48,7 +48,7 @@ white-space: normal;
 .accent3Light-BG {
   color:white;
   text-decoration: none;
-  display: inline-block;
+  display: center;
   font-size: 3em;
   justify-self: stretch;
   padding: 12px 80px;
