@@ -60,8 +60,12 @@ function generateRadar(id) {
   var newdiv = document.createElement("div");
   var bottom = document.getElementById("newchart");
   var canvas = document.createElement("canvas");
+
   canvas.id = "canvas" + id;
+  canvas.className = "canvasObj";
   newdiv.id = id;
+  newdiv.className = "canvasObj";
+  
   var temp,temp2;
   {
     temp = document.createElement("label");

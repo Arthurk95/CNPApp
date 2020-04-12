@@ -33,6 +33,36 @@
   background-color: var(--blue3);
 }
 
+.canvasObj {
+  background-color: white;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.newLine {
+display: block;
+content: "\A\A";
+white-space: normal;
+}
+
+.accent3Light-BG {
+  color:white;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 3em;
+  justify-self: stretch;
+  padding: 12px 80px;
+}
+
+.testing span::before{
+  content: "\A";
+  white-space: pre;
+}
+
+.secondOption {
+  padding-top: 20px;
+}
+
 /* hopefully a temporary solution. Would like to re-use the above a:hover for this */
 .currentPage {
   background-color: var(--blue3);
