@@ -29,7 +29,7 @@ const fs = require('fs');
   });
 
   router.post('/addactivity', auth.checkAuthenticated, function(req, res){
-    var sql = "CALL CreateNewActivity('" + req.body.name + ", " + req.body.helper + "');";
+    var sql = "CALL CreateNewActivity('" + req.body.name + "', '" + req.body.helper + "');";
     con.query(sql, function (err, result) {
         if (err) res.end("failure to add");
         res.end("added succesfully");
