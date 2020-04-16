@@ -223,7 +223,7 @@ const fs = require('fs');
         con.query(query, function (err, result) {
           if (err) {
             error_flag = true;
-            throw (err);
+            console.log(err);
           }
         });
       })(update_student_query, error_flag); //closure necesssary for async
