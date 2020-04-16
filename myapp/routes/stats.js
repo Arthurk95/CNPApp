@@ -194,6 +194,7 @@ function processData(data,res){
           if(present){
             input['restroom'] = row.RestroomActivityNumber;
             input['accident'] = row.RestroomAccidentNumber;
+            
             totAccident = totAccident + row.RestroomAccidentNumber;
             totActivity = totActivity + row.RestroomActivityNumber;
             outputs.push(input);
