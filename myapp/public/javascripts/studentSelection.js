@@ -198,7 +198,8 @@ function pottyBreak(){
     showElement(pottyYesNo, SUBMIT_BUTTON_DISPLAY_TYPE);
 }
 
-// accidental is a boolean value. true for accidental, false for not
-function submitPottyToDB(accidental){
-
+// accidentFlag is a boolean value. true for accidental, false for not
+function submitPottyToDB(button, accidentFlag) {
+    var data = `students=${selectedStudentIDs}&accidentFlag=${accidentFlag}`;
+    httpPostAsync(`${window.location.href}/add-potty-break`, data, reloadIt);
 }
