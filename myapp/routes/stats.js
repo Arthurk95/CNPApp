@@ -17,8 +17,10 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
 });
 
 router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
-  var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, start = req.body.start, end = req.body.end, caller = req.body.caller;
-  var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller};
+  var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, 
+      start = req.body.start, end = req.body.end, caller = req.body.caller, chart = req.body.chart,
+      segNum = req.body.segNum;
+  var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller,chart:chart,start:start,end:end,segNum:segNum};
   var all = false;
   var sql,sql2,sql4;
   
@@ -113,224 +115,28 @@ router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
 });
 
 function processData(data,res){
-  //res.send(data);
+
   var outputs = [];
   var meta = {};
+  meta["caller"] = data.inputs.caller;
   if(data.primeval.length == 0)
   {
     meta.name = "No Data";
-  }
-  else if(data.inputs.prime == "Students"){
-    if(data.inputs.id == "all"){
-      if(data.inputs.beta == "Behavior"){
-        data.betaval.forEach(element =>{
-          var TotalActivity = 0;
-          var TotalAccidents = 0;
-          var count = 0;
-          var input = {};
-          meta.mostAccidentsNum = 0;
-          meta.mostAccidents = [];
-          meta.mostActivityNum = 0;
-          meta.mostActivity = [];
-          input['name'] = element.StudentName;
-          data.primeval.forEach(row => {
-            if(element.StudentId == row.StudentId){
-              var date = new Date(row.CurrentDate);
-              var present = false;
-              if(data.inputs.weather != "all"){
-                data.weatherVal.forEach(entry =>{
-                  var weatherDate = new Date(entry.dateTimes);
-                  if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
-                    present = true;
-                  }
-                });
-              }
-              else{
-                present = true;
-              }
-              if(present){
-                TotalActivity = TotalActivity + row.RestroomActivityNumber;
-                TotalAccidents = TotalAccidents + row.RestroomAccidentNumber;
-                count = count + 1;
-              }
-            }
-          });  
-          input['accidents'] = TotalAccidents;
-          input['activity'] = TotalActivity;
-          input['days'] = count;
-          if(TotalAccidents > meta.mostAccidentsNum){
-            meta.mostAccidentsNum = TotalAccidents;
-            meta.mostAccidents = [input.name];
-          }
-          else if(TotalAccidents == meta.mostAccidents && TotalAccidents > 0){
-            meta.mostAccidents.push(input.name);
-          }
-          if(TotalActivity > meta.mostActivityNum){
-            meta.mostActivityNum = TotalActivity;
-            meta.mostActivity = [input.name];
-          }
-          else if(TotalActivity == meta.mostAccidents && TotalActivity > 0){
-            meta.mostActivity.push(input.name);
-          }
-          outputs.push(input);
-        }); 
-        outputs.push(meta);  
-      }
-      else if(data.inputs.beta == "ClassSession"){
-        var i = 0;
-        data.betaval.forEach(element =>{
-          var TotalAbsences = 0;
-          var count = 0;
-          var input = {};
-          meta.mostAbsencesNum = 0;
-          meta.mostAbsences = [];
-          input['name'] = element.StudentName;
-          data.primeval.forEach(row => {
-            if(element.StudentId == row.StudentId){
-              var date = new Date(row.CurrentDate);
-              var present = false;
-              if(data.inputs.weather != "all"){
-                data.weatherVal.forEach(entry =>{
-                  var weatherDate = new Date(entry.dateTimes);
-                  if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
-                    present = true;
-                  }
-                });
-              }
-              else{
-                present = true;
-              }
-              if(present){
-                TotalAbsences = TotalAbsences + row.Absent;
-                count = count + 1;
-              }
-            }
-          });  
-          input['absences'] = TotalAbsences;
-          input['days'] = count;
-          if(TotalAbsences > meta.mostAbsencesNum){
-            meta.mostAbsencesNum = TotalAbsences;
-            meta.mostAbsences = [input.name];
-          }
-          else if(TotalAbsences == meta.mostAbsencesNum && TotalAbsences > 0){
-            meta.mostAbsences.push(input.name);
-          }
-          outputs.push(input);
-        }); 
-        outputs.push(meta);
-      }
-      else if(data.inputs.beta == "Friends"){
-        data.betaval.forEach(top =>{
-          var minimeta = {name:top.StudentName,id:top.StudentId,bestFriendCount:0};
-          minimeta.bestFriend = [];
-          var student = [];
-          var i = 0;
-          var total = 0;
-          data.betaval.forEach(element =>{
-            if(element.StudentId != top.StudentId){
-              var input = {};
-              input['friend'] = element.StudentName;
-              input['id'] = element.StudentId;
-              var count = 0;
-              data.primeval.forEach(row =>{
-                if(row.bId == element.StudentId && row.StudentId == top.StudentId){
-                  var date = new Date(row.CurrentDate);
-                  var present = false;
-                  if(data.inputs.weather != "all"){
-                    data.weatherVal.forEach(entry =>{
-                      var weatherDate = new Date(entry.dateTimes);
-                      if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
-                        present = true;
-                      }
-                    });
-                  }
-                  else{
-                    present = true;
-                  }
-                  if(present){
-                    count = count + 1;
-                    total = total + 1;
-                  }
-                }
-              });
-              input['timestogether'] = count;
-              student.push(input);
-              i = i + 1;
-              if(input.timestogether > minimeta.bestFriendCount){
-                minimeta.bestFriendCount = input.timestogether;
-                friend = {friend:input.friend,friendId:input.id};
-                minimeta.bestFriend = [friend];
-              }
-              else if(input.timestogether == minimeta.bestFriendCount && input.timestogether > 0){
-                friend = {friend:input.friend,friendId:input.id};
-                minimeta.bestFriend.push(friend);
-              }
-            }
-            minimeta.totalPlayedwithothers = total;
-          })
-          student.push(minimeta);
-          outputs.push(student);
-        });
-      }
-      else if(data.inputs.beta == "Activities"){
-        data.extras.forEach(extraz =>{
-          var student = [];
-          var minimeta = {};
-          minimeta.favoriteAct = [];
-          minimeta.favoriteActNum = 0;
-          minimeta.Studentname = extraz.StudentName;
-          
-          var i = 0;
-          data.betaval.forEach(element => {
-            var activity = {name:element.ActivityName};
-            var count = 0;
-            var prevDate = null, prevType = null;
-            data.primeval.forEach(row =>{
-              var date = new Date(row.CurrentDate);
-              if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
-              }
-              else{
-                if(element.ActivityName == row.ActivityName && row.StudentName == extraz.StudentName){
-                  var present = false;
-                  if(data.inputs.weather != "all"){
-                    data.weatherVal.forEach(entry =>{
-                      var weatherDate = new Date(entry.dateTimes);
-                      if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
-                        present = true;
-                      }
-                    });
-                  }
-                  else{
-                    present = true;
-                  }
-                  if(present){
-                    count = count + 1;
-                  }
-                }
-                prevDate = date;
-                prevType = row.ActivityId;
-              }
-            });
-            activity.value = count;
-            student.push(activity);
-            if(count > minimeta.favoriteActNum){
-              minimeta.favoriteActNum = count;
-              minimeta.favoriteAct = [activity.name];
-            }
-            else if(count == minimeta.favoriteActNum && count > 0){
-              minimeta.favoriteAct.push(activity.name);
-            }
-            i = i+1;
-          });
-          student.push(minimeta);
-          outputs.push(student);
-        });
-      }
+    var startday = new Date(data.inputs.start);
+    var endday = new Date(data.inputs.end);
+    var timetraveler = new Date(startday);
+    var daysbetween =0;
+    while(timetraveler < endday){
+      timetraveler.setDate(timetraveler.getDate() + 1);
+      daysbetween = daysbetween + 1;
     }
-    else{
+    timetraveler = new Date(startday);
+    timetraveler.setDate(timetraveler.getDate() + daysbetween/10)
+  }
+  else if(data.inputs.chart=="Pie"){
+    if(data.inputs.prime == "Students"){
       meta.name = data.primeval[0].StudentName;
       if(data.inputs.beta == "Activities"){
-        meta["caller"] = data.inputs.caller;
         var i = 0;
         data.betaval.forEach(element => {
           var activity = {activityName:element.ActivityName};
@@ -366,7 +172,6 @@ function processData(data,res){
           outputs.push(activity);
           i = i+1;
         });
-        outputs.push(meta);
       }
       else if(data.inputs.beta == "Behavior"){
         var i = 0;
@@ -389,6 +194,7 @@ function processData(data,res){
           if(present){
             input['restroom'] = row.RestroomActivityNumber;
             input['accident'] = row.RestroomAccidentNumber;
+            
             totAccident = totAccident + row.RestroomAccidentNumber;
             totActivity = totActivity + row.RestroomActivityNumber;
             outputs.push(input);
@@ -399,7 +205,6 @@ function processData(data,res){
         meta.TotalAccidents = totAccident;
         meta.TotalActivity = totActivity;
         meta.totalDays = i;
-        outputs.push(meta);
       }
       else if(data.inputs.beta == "ClassSession"){
         var i = 0;
@@ -428,7 +233,6 @@ function processData(data,res){
           
         });
         meta.totalDays = i;
-        outputs.push(meta);
       }
       else if(data.inputs.beta == "Friends"){
         var i = 0;
@@ -465,21 +269,69 @@ function processData(data,res){
           }
           meta.totalPlayedwithothers = total;
         })
-        outputs.push(meta);
       }
+    
     }
-  }
-  else if(data.inputs.prime == "Activities"){
-    if(data.inputs.id == "all"){
-      if(data.inputs.beta == "Students"){
-        data.extras.forEach(extraz =>{
-          var activity = [];
-          var minimeta = {};
-          minimeta.mostUsedBy = [];
-          minimeta.favoriteNum = 0;
-          minimeta.ActivityName = extraz.ActivityName;
+    else if(data.inputs.prime == "Activities"){
+      if(data.inputs.id == "all"){
+        if(data.inputs.beta == "Students"){
+          data.extras.forEach(extraz =>{
+            var activity = [];
+            var minimeta = {};
+            minimeta.mostUsedBy = [];
+            minimeta.favoriteNum = 0;
+            minimeta.ActivityName = extraz.ActivityName;
+            data.betaval.forEach(element => {
+              var student = {name:element.StudentName};
+              var count = 0;
+              var prevDate = null, prevType = null;
+              data.primeval.forEach(row =>{
+                var date = new Date(row.CurrentDate);
+                if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+                }
+                else{
+                  if(element.StudentName == row.StudentName && row.ActivityName == extraz.ActivityName){
+                    var present = false;
+                    if(data.inputs.weather != "all"){
+                      data.weatherVal.forEach(entry =>{
+                        var weatherDate = new Date(entry.dateTimes);
+                        if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                          present = true;
+                        }
+                      });
+                    }
+                    else{
+                      present = true;
+                    }
+                    if(present){
+                      count = count + 1;
+                    }
+                  }
+                  prevDate = date;
+                  prevType = row.StudentId;
+                }
+              });
+              student.value = count;
+              activity.push(student);
+              if(count > minimeta.favoriteNum){
+                minimeta.favoriteNum = count;
+                minimeta.mostUsedBy = [student.name];
+              }
+              else if(count == minimeta.favoriteNum && count > 0){
+                minimeta.mostUsedBy.push(student.name);
+              }
+            });
+            activity.push(minimeta);
+            outputs.push(activity);
+          });
+        }
+      }
+      else{
+        if(data.inputs.beta == "Students"){
+          meta.ActivityName = data.primeval[0].ActivityName;
           data.betaval.forEach(element => {
-            var student = {name:element.StudentName};
+            var student = {};
+            student.name = element.StudentName;
             var count = 0;
             var prevDate = null, prevType = null;
             data.primeval.forEach(row =>{
@@ -487,7 +339,7 @@ function processData(data,res){
               if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
               }
               else{
-                if(element.StudentName == row.StudentName && row.ActivityName == extraz.ActivityName){
+                if(element.StudentName == row.StudentName){
                   var present = false;
                   if(data.inputs.weather != "all"){
                     data.weatherVal.forEach(entry =>{
@@ -509,34 +361,29 @@ function processData(data,res){
               }
             });
             student.value = count;
-            activity.push(student);
-            if(count > minimeta.favoriteNum){
-              minimeta.favoriteNum = count;
-              minimeta.mostUsedBy = [student.name];
-            }
-            else if(count == minimeta.favoriteNum && count > 0){
-              minimeta.mostUsedBy.push(student.name);
-            }
+            outputs.push(student);
           });
-          activity.push(minimeta);
-          outputs.push(activity);
-        });
+        }
       }
     }
-    else{
-      if(data.inputs.beta == "Students"){
-        meta.ActivityName = data.primeval[0].ActivityName;
-        data.betaval.forEach(element => {
-          var student = {};
-          student.name = element.StudentName;
-          var count = 0;
-          var prevDate = null, prevType = null;
-          data.primeval.forEach(row =>{
-            var date = new Date(row.CurrentDate);
-            if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
-            }
-            else{
-              if(element.StudentName == row.StudentName){
+  }
+  else if(data.inputs.chart=="Line"){
+    if(data.inputs.prime == "Students"){
+      if(data.inputs.id == "all"){
+        if(data.inputs.beta == "Behavior"){
+          data.betaval.forEach(element =>{
+            var TotalActivity = 0;
+            var TotalAccidents = 0;
+            var count = 0;
+            var input = {};
+            meta.mostAccidentsNum = 0;
+            meta.mostAccidents = [];
+            meta.mostActivityNum = 0;
+            meta.mostActivity = [];
+            input['name'] = element.StudentName;
+            data.primeval.forEach(row => {
+              if(element.StudentId == row.StudentId){
+                var date = new Date(row.CurrentDate);
                 var present = false;
                 if(data.inputs.weather != "all"){
                   data.weatherVal.forEach(entry =>{
@@ -550,19 +397,452 @@ function processData(data,res){
                   present = true;
                 }
                 if(present){
+                  TotalActivity = TotalActivity + row.RestroomActivityNumber;
+                  TotalAccidents = TotalAccidents + row.RestroomAccidentNumber;
                   count = count + 1;
                 }
               }
-              prevDate = date;
-              prevType = row.StudentId;
+            });  
+            input['accidents'] = TotalAccidents;
+            input['activity'] = TotalActivity;
+            input['days'] = count;
+            if(TotalAccidents > meta.mostAccidentsNum){
+              meta.mostAccidentsNum = TotalAccidents;
+              meta.mostAccidents = [input.name];
+            }
+            else if(TotalAccidents == meta.mostAccidents && TotalAccidents > 0){
+              meta.mostAccidents.push(input.name);
+            }
+            if(TotalActivity > meta.mostActivityNum){
+              meta.mostActivityNum = TotalActivity;
+              meta.mostActivity = [input.name];
+            }
+            else if(TotalActivity == meta.mostAccidents && TotalActivity > 0){
+              meta.mostActivity.push(input.name);
+            }
+            outputs.push(input);
+          }); 
+        }
+        else if(data.inputs.beta == "ClassSession"){
+          var i = 0;
+          data.betaval.forEach(element =>{
+            var TotalAbsences = 0;
+            var count = 0;
+            var input = {};
+            meta.mostAbsencesNum = 0;
+            meta.mostAbsences = [];
+            input['name'] = element.StudentName;
+            data.primeval.forEach(row => {
+              if(element.StudentId == row.StudentId){
+                var date = new Date(row.CurrentDate);
+                var present = false;
+                if(data.inputs.weather != "all"){
+                  data.weatherVal.forEach(entry =>{
+                    var weatherDate = new Date(entry.dateTimes);
+                    if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                      present = true;
+                    }
+                  });
+                }
+                else{
+                  present = true;
+                }
+                if(present){
+                  TotalAbsences = TotalAbsences + row.Absent;
+                  count = count + 1;
+                }
+              }
+            });  
+            input['absences'] = TotalAbsences;
+            input['days'] = count;
+            if(TotalAbsences > meta.mostAbsencesNum){
+              meta.mostAbsencesNum = TotalAbsences;
+              meta.mostAbsences = [input.name];
+            }
+            else if(TotalAbsences == meta.mostAbsencesNum && TotalAbsences > 0){
+              meta.mostAbsences.push(input.name);
+            }
+            outputs.push(input);
+          }); 
+        }
+        else if(data.inputs.beta == "Friends"){
+          data.betaval.forEach(top =>{
+            var minimeta = {name:top.StudentName,id:top.StudentId,bestFriendCount:0};
+            minimeta.bestFriend = [];
+            var student = [];
+            var i = 0;
+            var total = 0;
+            data.betaval.forEach(element =>{
+              if(element.StudentId != top.StudentId){
+                var input = {};
+                input['friend'] = element.StudentName;
+                input['id'] = element.StudentId;
+                var count = 0;
+                data.primeval.forEach(row =>{
+                  if(row.bId == element.StudentId && row.StudentId == top.StudentId){
+                    var date = new Date(row.CurrentDate);
+                    var present = false;
+                    if(data.inputs.weather != "all"){
+                      data.weatherVal.forEach(entry =>{
+                        var weatherDate = new Date(entry.dateTimes);
+                        if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                          present = true;
+                        }
+                      });
+                    }
+                    else{
+                      present = true;
+                    }
+                    if(present){
+                      count = count + 1;
+                      total = total + 1;
+                    }
+                  }
+                });
+                input['timestogether'] = count;
+                student.push(input);
+                i = i + 1;
+                if(input.timestogether > minimeta.bestFriendCount){
+                  minimeta.bestFriendCount = input.timestogether;
+                  friend = {friend:input.friend,friendId:input.id};
+                  minimeta.bestFriend = [friend];
+                }
+                else if(input.timestogether == minimeta.bestFriendCount && input.timestogether > 0){
+                  friend = {friend:input.friend,friendId:input.id};
+                  minimeta.bestFriend.push(friend);
+                }
+              }
+              minimeta.totalPlayedwithothers = total;
+            })
+            student.push(minimeta);
+            outputs.push(student);
+          });
+        }
+        else if(data.inputs.beta == "Activities"){
+          console.log(data.inputs.start,data.inputs.end);
+          data.extras.forEach(extraz =>{
+            var student = [];
+            var minimeta = {};
+            minimeta.favoriteAct = [];
+            minimeta.favoriteActNum = 0;
+            minimeta.Studentname = extraz.StudentName;
+            
+            var i = 0;
+            data.betaval.forEach(element => {
+              var activity = {name:element.ActivityName};
+              var count = 0;
+              var prevDate = null, prevType = null;
+              data.primeval.forEach(row =>{
+                var date = new Date(row.CurrentDate);
+                if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+                }
+                else{
+                  if(element.ActivityName == row.ActivityName && row.StudentName == extraz.StudentName){
+                    var present = false;
+                    if(data.inputs.weather != "all"){
+                      data.weatherVal.forEach(entry =>{
+                        var weatherDate = new Date(entry.dateTimes);
+                        if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                          present = true;
+                        }
+                      });
+                    }
+                    else{
+                      present = true;
+                    }
+                    if(present){
+                      count = count + 1;
+                    }
+                  }
+                  prevDate = date;
+                  prevType = row.ActivityId;
+                }
+              });
+              activity.value = count;
+              student.push(activity);
+              if(count > minimeta.favoriteActNum){
+                minimeta.favoriteActNum = count;
+                minimeta.favoriteAct = [activity.name];
+              }
+              else if(count == minimeta.favoriteActNum && count > 0){
+                minimeta.favoriteAct.push(activity.name);
+              }
+              i = i+1;
+            });
+            student.push(minimeta);
+            outputs.push(student);
+          });
+        }
+      }
+      else{
+        meta.name = data.primeval[0].StudentName;
+        if(data.inputs.beta == "Activities"){
+          var startday = new Date(data.inputs.start);
+          var endday = new Date(data.inputs.end);
+          var timetraveler = new Date(startday);
+          var numSeperators = data.inputs.segNum;
+          var daysbetween =0;
+          while(timetraveler < endday){
+            timetraveler.setDate(timetraveler.getDate() + 1);
+            daysbetween = daysbetween + 1;
+          }
+          var i = 0;
+          data.betaval.forEach(element => {
+            var activity = {activityName:element.ActivityName};
+            var count = [];
+            var labels = [];
+            var seperators = {start:[], end:[]};
+
+            var timeTraveler = new Date(startday);
+            timeTraveler.setHours(0,0,0,0);
+            for(var e = 0; e < numSeperators; e= e+1){
+              var next;
+              if(e == numSeperators - 1){
+                next = new Date(endday);
+              }
+              else{
+                next = new Date(timeTraveler);
+                next.setDate(next.getDate() + Math.floor(daysbetween/numSeperators) - 1);
+              }
+              count.push(0);
+              labels.push("" + timeTraveler.getFullYear() + "-" + (timeTraveler.getMonth() + 1) + "-" + timeTraveler.getDate() + " to " +
+              next.getFullYear() + "-" + (next.getMonth() + 1) + "-" + next.getDate());
+              seperators.start.push(timeTraveler);
+              seperators.end.push(next);
+              next.setDate(next.getDate() + 1);
+              timeTraveler = new Date(next);
+              meta.labels = labels;
+            }
+            var prevDate = null, prevType = null;
+            data.primeval.forEach(row =>{
+              var date = new Date(row.CurrentDate);
+              if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+              }
+              else{
+                if(element.ActivityName == row.ActivityName){
+                  var present = false;
+                  if(data.inputs.weather != "all"){
+                    data.weatherVal.forEach(entry =>{
+                      var weatherDate = new Date(entry.dateTimes);
+                      if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                        present = true;
+                      }
+                    });
+                  }
+                  else{
+                    present = true;
+                  }
+                  if(present){
+                    for(var e = 0; e < numSeperators; e= e+1){
+                      if(date > seperators.start[e] && date < seperators.end[e]){
+                        count[e] = count[e] + 1;
+                      }
+                    }
+                  }
+                }
+                prevDate = date;
+                prevType = row.ActivityId;
+              }
+            });
+            activity.values = count;
+            outputs.push(activity);
+            i = i+1;
+          });
+        }
+        else if(data.inputs.beta == "Behavior"){
+          var i = 0;
+          var totAccident = 0, totActivity = 0;
+          data.primeval.forEach(row =>{
+            var input = {};
+            var date = new Date(row.CurrentDate);
+            var present = false;
+            if(data.inputs.weather != "all"){
+              data.weatherVal.forEach(entry =>{
+                var weatherDate = new Date(entry.dateTimes);
+                if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                  present = true;
+                }
+              });
+            }
+            else{
+              present = true;
+            }
+            if(present){
+              input['restroom'] = row.RestroomActivityNumber;
+              input['accident'] = row.RestroomAccidentNumber;
+              totAccident = totAccident + row.RestroomAccidentNumber;
+              totActivity = totActivity + row.RestroomActivityNumber;
+              outputs.push(input);
+              i = i + 1;
             }
           });
-          student.value = count;
-          outputs.push(student);
-        });
+          
+          meta.TotalAccidents = totAccident;
+          meta.TotalActivity = totActivity;
+          meta.totalDays = i;
+        }
+        else if(data.inputs.beta == "ClassSession"){
+          var i = 0;
+          meta.absences = 0;
+          data.primeval.forEach(row =>{
+            var input = {};
+            var date = new Date(row.CurrentDate);
+            var present = false;
+            if(data.inputs.weather != "all"){
+              data.weatherVal.forEach(entry =>{
+                var weatherDate = new Date(entry.dateTimes);
+                if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                  present = true;
+                }
+              });
+            }
+            else{
+              present = true;
+            }
+            if(present){
+              input['absent'] = row.Absent;
+              meta.absences = meta.absences + row.Absent;
+              outputs.push(input);
+              i = i + 1;
+            }
+            
+          });
+          meta.totalDays = i;
+        }
+        else if(data.inputs.beta == "Friends"){
+          var i = 0;
+          var total = 0;
+          data.betaval.forEach(element =>{
+            if(element.StudentId != data.primeval[0].StudentId){
+              var input = {};
+              input['friend'] = element.StudentName;
+              var count = 0;
+              data.primeval.forEach(row =>{
+                if(row.bId == element.StudentId){
+                  var date = new Date(row.CurrentDate);
+                  var present = false;
+                  if(data.inputs.weather != "all"){
+                    data.weatherVal.forEach(entry =>{
+                      var weatherDate = new Date(entry.dateTimes);
+                      if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                        present = true;
+                      }
+                    });
+                  }
+                  else{
+                    present = true;
+                  }
+                  if(present){
+                    count = count + 1;
+                    total = total + 1;
+                  }
+                }
+              });
+              input['timestogether'] = count;
+              outputs.push(input);
+              i = i + 1;
+            }
+            meta.totalPlayedwithothers = total;
+          })
+        }
+      }
+    }
+    else if(data.inputs.prime == "Activities"){
+      if(data.inputs.id == "all"){
+        if(data.inputs.beta == "Students"){
+          data.extras.forEach(extraz =>{
+            var activity = [];
+            var minimeta = {};
+            minimeta.mostUsedBy = [];
+            minimeta.favoriteNum = 0;
+            minimeta.ActivityName = extraz.ActivityName;
+            data.betaval.forEach(element => {
+              var student = {name:element.StudentName};
+              var count = 0;
+              var prevDate = null, prevType = null;
+              data.primeval.forEach(row =>{
+                var date = new Date(row.CurrentDate);
+                if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+                }
+                else{
+                  if(element.StudentName == row.StudentName && row.ActivityName == extraz.ActivityName){
+                    var present = false;
+                    if(data.inputs.weather != "all"){
+                      data.weatherVal.forEach(entry =>{
+                        var weatherDate = new Date(entry.dateTimes);
+                        if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                          present = true;
+                        }
+                      });
+                    }
+                    else{
+                      present = true;
+                    }
+                    if(present){
+                      count = count + 1;
+                    }
+                  }
+                  prevDate = date;
+                  prevType = row.StudentId;
+                }
+              });
+              student.value = count;
+              activity.push(student);
+              if(count > minimeta.favoriteNum){
+                minimeta.favoriteNum = count;
+                minimeta.mostUsedBy = [student.name];
+              }
+              else if(count == minimeta.favoriteNum && count > 0){
+                minimeta.mostUsedBy.push(student.name);
+              }
+            });
+            activity.push(minimeta);
+            outputs.push(activity);
+          });
+        }
+      }
+      else{
+        if(data.inputs.beta == "Students"){
+          meta.ActivityName = data.primeval[0].ActivityName;
+          data.betaval.forEach(element => {
+            var student = {};
+            student.name = element.StudentName;
+            var count = 0;
+            var prevDate = null, prevType = null;
+            data.primeval.forEach(row =>{
+              var date = new Date(row.CurrentDate);
+              if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+              }
+              else{
+                if(element.StudentName == row.StudentName){
+                  var present = false;
+                  if(data.inputs.weather != "all"){
+                    data.weatherVal.forEach(entry =>{
+                      var weatherDate = new Date(entry.dateTimes);
+                      if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                        present = true;
+                      }
+                    });
+                  }
+                  else{
+                    present = true;
+                  }
+                  if(present){
+                    count = count + 1;
+                  }
+                }
+                prevDate = date;
+                prevType = row.StudentId;
+              }
+            });
+            student.value = count;
+            outputs.push(student);
+          });
+        }
       }
     }
   }
+  outputs.push(meta);
   res.send(outputs);
 }
 module.exports = router;

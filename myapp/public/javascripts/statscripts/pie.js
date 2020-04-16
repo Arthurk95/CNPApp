@@ -216,21 +216,6 @@ function generatePie(id){
     temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
   }
-  temp = document.createElement("select");
-  temp.id="option1" + id;
-  temp.class="pretty-classic";
-  temp.onchange = function(){onUpdateop1(id);};
-  {
-    temp2 = document.createElement("option");
-    temp2.value = "01";
-    temp2.innerHTML = "Students";
-    temp.appendChild(temp2);
-    temp2 = document.createElement("option");
-    temp2.value = "02";
-    temp2.innerHTML = "Activities";
-    temp.appendChild(temp2);
-  }
-  newdiv.appendChild(temp);
   temp = document.createElement("div");
   temp.id = "opid1" + id;
   newdiv.appendChild(temp);
@@ -244,6 +229,7 @@ function generatePie(id){
   function onUpdateop1(id){
     updateOpid1(id);
     updateOp2(id);
+    
     makeDates(id);
     updateData(id);
   }
@@ -251,7 +237,6 @@ function generatePie(id){
     getRecordsPie('all', id);
   }
   function updateOp2(id){
-    var op1 = document.getElementById("option1" + id);
     var newdiv = document.getElementById("op2" + id);
     var temp,temp2;
     if(newdiv.hasChildNodes()){
@@ -261,22 +246,16 @@ function generatePie(id){
     temp.id="option2" + id;
     temp.class="pretty-classic";
     temp.onchange = function(){updateData(id);};
-    if(op1.value == "01")
-    {
-      temp2 = document.createElement("option");
-      temp2.value = "01";
-      temp2.innerHTML = "Activities";
-      temp.appendChild(temp2);
-      temp2 = document.createElement("option");
-      temp2.value = "02";
-      temp2.innerHTML = "Behaivior";
-      temp.appendChild(temp2);
-    }
+    temp2 = document.createElement("option");
+    temp2.innerHTML = "Activities";
+    temp.appendChild(temp2);
+    temp2 = document.createElement("option");
+    temp2.innerHTML = "Friends";
+    temp.appendChild(temp2);
     newdiv.appendChild(temp);
   }
 
   function updateOpid1(id){
-    var op1 = document.getElementById("option1" + id);
     var newdiv = document.getElementById("opid1" + id);
     var temp,temp2;
     if(newdiv.hasChildNodes()){
@@ -286,15 +265,21 @@ function generatePie(id){
     temp.id="optionid1" + id;
     temp.class="pretty-classic";
     temp.onchange = function(){updateData(id);};
-    if(op1.value == "01")
-    {
-      studentList.forEach((element)=>{
-        temp2 = document.createElement("option");
-        temp2.value = element.StudentId;
-        temp2.innerHTML = element.StudentName;
-        temp.appendChild(temp2);
-      });
-    }
+    studentList.forEach((element)=>{
+      temp2 = document.createElement("option");
+      temp2.value = element.StudentId;
+      temp2.innerHTML = element.StudentName;
+      temp.appendChild(temp2);
+    });
     newdiv.appendChild(temp);
   }
+
+    //Delete button
+    temp = document.createElement("a");
+    temp.id="activitiesButton";
+    temp.class="accent3Light-BG";
+    temp.className="accent3Light-BG";
+    temp.onclick = function(){deleteChart(id);};
+    temp.innerHTML = "Delete Chart";
+    newdiv.appendChild(temp);
 }

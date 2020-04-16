@@ -1,5 +1,23 @@
 function theRadar(id, data) {
-  myId = id;
+
+  var labels;
+  var dataSets = []
+  var colors = getRandomColors(data.length - 1)
+  var i = 0;
+
+  data.forEach((element) => {
+    if (element.activiyName == null) {
+      labels = element.labels
+    }
+    else {
+      dataSets.push({
+        data: element.values,
+        label: element.activityname,
+        borderColor: colors[i++],
+        fill: false
+      })
+    }
+  });
 
   new Chart(document.getElementById("canvas" + id), {
     type: 'radar',
@@ -42,8 +60,12 @@ function generateRadar(id) {
   var newdiv = document.createElement("div");
   var bottom = document.getElementById("newchart");
   var canvas = document.createElement("canvas");
+
   canvas.id = "canvas" + id;
+  canvas.className = "canvasObj";
   newdiv.id = id;
+  newdiv.className = "canvasObj";
+  
   var temp,temp2;
   {
     temp = document.createElement("label");
@@ -266,4 +288,13 @@ function generateRadar(id) {
     }
     newdiv.appendChild(temp);
   }
+
+  //Delete button
+  temp = document.createElement("a");
+  temp.id="activitiesButton";
+  temp.class="accent3Light-BG";
+  temp.className="accent3Light-BG";
+  temp.onclick = function(){deleteChart(id);};
+  temp.innerHTML = "Delete Chart";
+  newdiv.appendChild(temp);
 }

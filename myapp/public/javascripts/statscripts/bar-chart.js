@@ -39,8 +39,12 @@ function generateBar(id) {
   var newdiv = document.createElement("div");
   var bottom = document.getElementById("newchart");
   var canvas = document.createElement("canvas");
+
   canvas.id = "canvas" + id;
+  canvas.className = "canvasObj";
   newdiv.id = id;
+  newdiv.className = "canvasObj";
+
   var temp,temp2;
   {
     temp = document.createElement("label");
@@ -182,7 +186,8 @@ function generateBar(id) {
   }
   temp = document.createElement("select");
   temp.id="option1" + id;
-  temp.class="pretty-classic";
+  temp.class="newLine";
+  temp.className="newLine";
   temp.onchange = function(){onUpdateop1(id);};
   {
     temp2 = document.createElement("option");
@@ -263,4 +268,13 @@ function generateBar(id) {
     }
     newdiv.appendChild(temp);
   }
+
+  //Delete button
+  temp = document.createElement("a");
+  temp.id="activitiesButton";
+  temp.class="accent3Light-BG";
+  temp.className="accent3Light-BG";
+  temp.onclick = function(){deleteChart(id);};
+  temp.innerHTML = "Delete Chart";
+  newdiv.appendChild(temp);
 }

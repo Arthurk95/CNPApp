@@ -1,40 +1,41 @@
 function theLine(id, data) {
-  myId = id;
+
+  var labels;
+  var dataSets = [];
+  var colors = getRandomColors(data.length - 1);
+  var i = 0;
+  var title = "*New Title here*";
+
+  data.forEach((element) => {
+    if(element.activityName == null) {
+      labels = element.labels
+    }
+    else {
+      dataSets.push({
+        data: element.values,
+        label: element.activityName, 
+        borderColor: colors[i++],
+        fill: false 
+      })
+    }
+  });
   
-  return new Chart(document.getElementById("canvas" + id), {
+  var chart = new Chart(document.getElementById("canvas" + id), {
     type: 'line',
     data: {
-      labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-      datasets: [{ 
-          data: [data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value,data[0].value],
-          label: data[0].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }, { 
-          data: [data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value,data[1].value],
-          label: data[1].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }, { 
-          data: [data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value,data[2].value],
-          label: data[2].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }, { 
-          data: [data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value,data[3].value],
-          label: data[3].activityName,
-          borderColor: getRandomColor(),
-          fill: false
-        }
-      ]
+      labels: labels,
+      datasets: dataSets
     },
     options: {
       title: {
         display: true,
-        text: 'World population per region (in millions)'
+        text: title
       }
     }
   });
+  chart.myId = id;
+  chart.className = "canvasObj";
+  return chart;
 }
 
 function getRandomColor() {
@@ -51,12 +52,17 @@ function generateLine(id) {
   var newdiv = document.createElement("div");
   var bottom = document.getElementById("newchart");
   var canvas = document.createElement("canvas");
+
   canvas.id = "canvas" + id;
+  canvas.className = "canvasObj";
   newdiv.id = id;
+  newdiv.className = "canvasObj";
+  
+  //Start and End Date
   var temp,temp2;
   {
     temp = document.createElement("label");
-    temp.innerHTML = "Beginning Date";
+    temp.innerHTML = "Beginning Date ";
     newdiv.appendChild(temp);
     temp = document.createElement("select");
     temp.id = "syear"+id;
@@ -124,7 +130,7 @@ function generateLine(id) {
     temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
     temp = document.createElement("label");
-    temp.innerHTML = "End Date";
+    temp.innerHTML = " End Date ";
     newdiv.appendChild(temp);
     temp = document.createElement("select");
     temp.id="eyear" + id;
@@ -192,9 +198,12 @@ function generateLine(id) {
     temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
   }
+
+  //First Drop Down Option
   temp = document.createElement("select");
   temp.id="option1" + id;
-  temp.class="pretty-classic";
+  temp.class="newLine";
+  temp.className="newLine";
   temp.onchange = function(){onUpdateop1(id);};
   {
     temp2 = document.createElement("option");
@@ -206,12 +215,16 @@ function generateLine(id) {
     temp2.innerHTML = "Activities";
     temp.appendChild(temp2);
   }
+
+  //Second Drop Down (I think)
   newdiv.appendChild(temp);
   temp = document.createElement("div");
   temp.id = "opid1" + id;
   newdiv.appendChild(temp);
   temp = document.createElement("div");
   temp.id = "op2" + id;
+  temp.class="secondOption";
+  temp.className = "secondOption";
   newdiv.appendChild(temp);
   newdiv.appendChild(canvas);
   parent.insertBefore(newdiv,bottom);
@@ -228,6 +241,7 @@ function generateLine(id) {
     getRecordsLine('all', id);
   }
 
+  //Update the Second Option
   function updateOp2(id) {
     var op1 = document.getElementById("option1" + id);
     var newdiv = document.getElementById("op2" + id);
@@ -275,4 +289,13 @@ function generateLine(id) {
     }
     newdiv.appendChild(temp);
   }
+
+  //Delete button
+  temp = document.createElement("a");
+  temp.id="activitiesButton";
+  temp.class="accent3Light-BG";
+  temp.className="accent3Light-BG";
+  temp.onclick = function(){deleteChart(id);};
+  temp.innerHTML = "Delete Chart";
+  newdiv.appendChild(temp);
 }
