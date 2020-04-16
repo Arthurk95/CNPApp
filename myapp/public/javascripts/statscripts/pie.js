@@ -15,7 +15,7 @@ class thePie {
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
-
+ 
      // set the color scale
     this.color = d3.scaleOrdinal()
      .domain(["a", "b", "c", "d", "e", "f"])
@@ -27,10 +27,8 @@ class thePie {
         .attr("width", this.width)
         .attr("height", this.height)
       .append("g")
-        .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");
-
+        .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
   }
-
 
   update(data) {
     var parentObject = this;
@@ -43,6 +41,13 @@ class thePie {
     // map to data
     var u = this.svg.selectAll("path")
       .data(data_ready)
+
+    var t = this.svg.selectAll("text")
+      .data(data_ready)
+
+    var arcLabel = d3.arc()
+        .innerRadius(0)
+        .outerRadius(this.radius)
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     u
@@ -60,15 +65,30 @@ class thePie {
       .style("stroke-width", "2px")
       .style("opacity", 1)
 
+    //label  
+    t 
+      .enter()
+      .append('text')
+      .merge(t)
+      .transition()
+      .duration(1000)
+      .text(function(d){ 
+        if (d.data.value > 0)
+          return " " + d.data.key + "\n" + d.value})
+      .attr("transform", function(d) { 
+        return "translate(" + arcLabel.centroid(d) + ")";  })
+      .style("text-anchor", "middle")
+      .style("font-size", 20)
+
     // remove the group that is not present anymore
     u
       .exit()
       .remove()
 
-    // Initialize the plot with the first dataset
-    //update(data1);
-    
-
+    t 
+      .exit()
+      .remove()
+      
   };
 };
 
