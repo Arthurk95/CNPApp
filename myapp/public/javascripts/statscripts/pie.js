@@ -266,19 +266,12 @@ function generatePie(id){
     if(op1.value == "01")
     {
       temp2 = document.createElement("option");
-      temp2.value = "01";
       temp2.innerHTML = "Activities";
       temp.appendChild(temp2);
       temp2 = document.createElement("option");
-      temp2.value = "02";
       temp2.innerHTML = "Friends";
       temp.appendChild(temp2);
       temp2 = document.createElement("option");
-      temp2.value = "03";
-      temp2.innerHTML = "ClassSession";
-      temp.appendChild(temp2);
-      temp2 = document.createElement("option");
-      temp2.value = "04";
       temp2.innerHTML = "Behavior";
       temp.appendChild(temp2);
     }
