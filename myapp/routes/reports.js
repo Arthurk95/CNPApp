@@ -11,7 +11,7 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
   })
 
   function recurseDailies(Students,dailyStudents,i,res){
-    var Student = { id: 0, name: "", listOfActivities: []};
+    var Student = { id: 0, name: "", listOfActivities: [], pottyBreaks: 0, pottyAccidents: 0};
     if(i < (dailyStudents[0].length)){
       Student.id = dailyStudents[0][i].StudentId;
       Student.name = dailyStudents[0][i].StudentName;
@@ -19,14 +19,42 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
       Students.push({
         id: Student.id,
         name: Student.name,
-        listOfActivities: []
+        listOfActivities: [],
+        pottyBreaks: 0,
+        pottyAccidents: 0
       });
       activities_query = "CALL ShowStudentDailyActivitiesToday(" + Students[i].id + ");";
-      con.query(activities_query, function(err, act){
-        if(err) throw err;
+      con.query(activities_query, function (err, act) {
+        if (err) throw err;
+
+        // con.query(`CALL PullRestroomNumber(${Students[i].id});`, function (err, pottyCount) {
+        //   if (err) {
+        //     console.log(err);
+        //   }
+        //   con.query(`CALL PullAccidentNumber(${Students[i].id});`, function (err, accidentCount) {
+        //     if (err) {
+        //       console.log(err);
+        //     }
+
+        //     var looper = accidentCount[0];
+        //     looper.forEach(element => {
+        //       if (element) {
+        //         Students[i].pottyAccidents.push(element);
+        //       }
+        //     })
+        //   });
+
+        //   var looper = pottyCount[0];
+        //   looper.forEach(element => {
+        //     if (element) {
+        //       Students[i].pottyBreaks.push(element);
+        //     }
+        //   })
+        // });
+
         var looper = act[0];
         looper.forEach(element => {
-          if(element){
+          if (element) {
             Students[i].listOfActivities.push(element);
           }
         });
@@ -43,7 +71,8 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
   }
   
 });
-function bottomLayer(res,Students,con){
+function bottomLayer(res, Students, con) {
+  console.log(Students);
   res.render('reports.ejs', { title: 'CNP Daily Report', reports: Students });
 }
   module.exports = router;
