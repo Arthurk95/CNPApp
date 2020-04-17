@@ -466,14 +466,40 @@ function processData(data,res){
           }); 
         }
         else if(data.inputs.beta == "ClassSession"){
-          var i = 0;
           data.betaval.forEach(element =>{
-            var TotalAbsences = 0;
-            var count = 0;
-            var input = {};
-            meta.mostAbsencesNum = 0;
-            meta.mostAbsences = [];
-            input['name'] = element.StudentName;
+            var input = {labelName:element.StudentName};
+            input.values = [];
+            var labels = [];
+            var seperators = {start:[], end:[]};
+            var count = [];
+
+            var timeTraveler = new Date(startday);
+            timeTraveler.setHours(0,0,0,0);
+            for(var e = 0; e < numSeperators; e= e+1){
+              var next;
+              if(e == numSeperators - 1){
+                next = new Date(endday);
+              }
+              else{
+                next = new Date(timeTraveler);
+                if(Math.floor(daysbetween/numSeperators) != Math.round(daysbetween/numSeperators)){
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators + (e%2) - 1);
+                }
+                else{
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators - 1);
+                }
+                
+              }
+              count.push(0);
+              input.values.push(0);
+              labels.push("" + timeTraveler.getFullYear() + "-" + (timeTraveler.getMonth() + 1) + "-" + timeTraveler.getUTCDate() + " to " +
+              next.getFullYear() + "-" + (next.getMonth() + 1) + "-" + next.getUTCDate());
+              seperators.start.push(timeTraveler);
+              seperators.end.push(next);
+              next.setDate(next.getUTCDate() + 1);
+              timeTraveler = new Date(next);
+              meta.labels = labels;
+            }
             data.primeval.forEach(row => {
               if(element.StudentId == row.StudentId){
                 var date = new Date(row.CurrentDate);
@@ -490,20 +516,16 @@ function processData(data,res){
                   present = true;
                 }
                 if(present){
-                  TotalAbsences = TotalAbsences + row.Absent;
-                  count = count + 1;
+                  for(var e = 0; e < numSeperators; e= e+1){
+                    if(date > seperators.start[e] && date < seperators.end[e]){
+                      input.values[e] = input.values[e] + row.Absent;
+                      count[e] = count[e] + 1;
+                    }
+                  }
                 }
               }
             });  
-            input['absences'] = TotalAbsences;
             input['days'] = count;
-            if(TotalAbsences > meta.mostAbsencesNum){
-              meta.mostAbsencesNum = TotalAbsences;
-              meta.mostAbsences = [input.name];
-            }
-            else if(TotalAbsences == meta.mostAbsencesNum && TotalAbsences > 0){
-              meta.mostAbsences.push(input.name);
-            }
             outputs.push(input);
           }); 
         }

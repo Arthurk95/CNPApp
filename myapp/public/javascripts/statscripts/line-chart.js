@@ -150,7 +150,7 @@ function generateLine(id) {
       temp2 = document.createElement("option");temp2.value = "03";temp2.innerHTML = "Potty accidents";
       temp.appendChild(temp2);
 
-      temp2 = document.createElement("option");temp2.value = "04";temp2.innerHTML = "Attendance";
+      temp2 = document.createElement("option");temp2.value = "04";temp2.innerHTML = "Absences";
       temp.appendChild(temp2);
     }
     newdiv.appendChild(temp);
