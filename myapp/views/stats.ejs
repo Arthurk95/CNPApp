@@ -239,8 +239,9 @@
         var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
         var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
         var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
+        var sections = document.getElementById('section'+caller).value;
         theUrl = window.location.href+'/getdata';
-        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller + "&chart=Line" + "&segNum=" + 10;
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller + "&chart=Line" + "&segNum=" + sections;
         callback = gotDataLine; 
         httpPostAsync(theUrl,data,callback); 
       }

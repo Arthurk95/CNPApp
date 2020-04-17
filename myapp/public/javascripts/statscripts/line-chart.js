@@ -199,6 +199,15 @@ function generateLine(id) {
     newdiv.appendChild(temp);
   }
 
+  temp = document.createElement("input");
+  temp.id="section" + id;
+  temp.type = "NUMBER";
+  temp.min = "2";
+  temp.max = "20";
+  temp.step = "1";
+  temp.value= "10";
+  temp.onchange = function(){updateData(id);};
+  newdiv.appendChild(temp);
   //First Drop Down Option
   temp = document.createElement("select");
   temp.id="option1" + id;
@@ -263,6 +272,11 @@ function generateLine(id) {
       temp2.value = "02";
       temp2.innerHTML = "Behaivior";
       temp.appendChild(temp2);
+      temp2 = document.createElement("option");
+      temp2.value = "03";
+      temp2.innerHTML = "Friends";
+      temp.appendChild(temp2);
+
     }
     newdiv.appendChild(temp);
   }

@@ -579,6 +579,7 @@ function processData(data,res){
         if(data.inputs.beta == "Activities"){
           var startday = new Date(data.inputs.start);
           var endday = new Date(data.inputs.end);
+          endday.setHours(23,59,59,999);
           var timetraveler = new Date(startday);
           var numSeperators = data.inputs.segNum;
           var daysbetween =0;
@@ -602,21 +603,27 @@ function processData(data,res){
               }
               else{
                 next = new Date(timeTraveler);
-                next.setDate(next.getDate() + Math.floor(daysbetween/numSeperators) - 1);
+                if(Math.floor(daysbetween/numSeperators) != Math.round(daysbetween/numSeperators)){
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators + (e%2) - 1);
+                }
+                else{
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators - 1);
+                }
+                
               }
               count.push(0);
-              labels.push("" + timeTraveler.getFullYear() + "-" + (timeTraveler.getMonth() + 1) + "-" + timeTraveler.getDate() + " to " +
-              next.getFullYear() + "-" + (next.getMonth() + 1) + "-" + next.getDate());
+              labels.push("" + timeTraveler.getFullYear() + "-" + (timeTraveler.getMonth() + 1) + "-" + timeTraveler.getUTCDate() + " to " +
+              next.getFullYear() + "-" + (next.getMonth() + 1) + "-" + next.getUTCDate());
               seperators.start.push(timeTraveler);
               seperators.end.push(next);
-              next.setDate(next.getDate() + 1);
+              next.setDate(next.getUTCDate() + 1);
               timeTraveler = new Date(next);
               meta.labels = labels;
             }
             var prevDate = null, prevType = null;
             data.primeval.forEach(row =>{
               var date = new Date(row.CurrentDate);
-              if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+              if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getUTCDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getUTCDate()){
               }
               else{
                 if(element.ActivityName == row.ActivityName){
@@ -624,7 +631,7 @@ function processData(data,res){
                   if(data.inputs.weather != "all"){
                     data.weatherVal.forEach(entry =>{
                       var weatherDate = new Date(entry.dateTimes);
-                      if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                      if(" " +date.getFullYear()+date.getMonth()+date.getUTCDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getUTCDate()){
                         present = true;
                       }
                     });
