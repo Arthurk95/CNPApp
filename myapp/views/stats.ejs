@@ -204,8 +204,6 @@
         data = JSON.parse(data);
         var datum = [];
         var id;
-        console.log("hi");
-        console.log(data);
         data.forEach((element) => {
           if(element.caller != null) {
             id = element.caller;
@@ -235,13 +233,25 @@
       function getRecordsLine(weather, caller) {
         var today = new Date();
         var selection = document.getElementById('option1' + caller).options[document.getElementById('option1' + caller).selectedIndex].text;
-        var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
+        var betaPre = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
         var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
+        var beta;
+        var extra = "hi";
+        if(betaPre == "Potty total" || betaPre == "Potty successes" || betaPre == "Potty accidents"){
+          beta = "Behavior";
+          extra = (betaPre.split(" "))[1];
+        }
+        else if(betaPre == "Attendance"){
+          beta = "ClassSession";
+        }
+        else{
+          beta = betaPre;
+        }
         var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
         var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
         var sections = document.getElementById('section'+caller).value;
         theUrl = window.location.href+'/getdata';
-        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller + "&chart=Line" + "&segNum=" + sections;
+        data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller + "&chart=Line" + "&segNum=" + sections + "&extra=" + extra;
         callback = gotDataLine; 
         httpPostAsync(theUrl,data,callback); 
       }
@@ -252,7 +262,6 @@
         var id;
         console.log(data);
         data.forEach((element) => {
-          console.log(element);
           if(element.activityName == null){
             id = element.caller;
           }

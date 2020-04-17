@@ -19,8 +19,8 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
 router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
   var id = req.body.id, prime = req.body.prime, beta = req.body.beta, weather = req.body.weather, 
       start = req.body.start, end = req.body.end, caller = req.body.caller, chart = req.body.chart,
-      segNum = req.body.segNum;
-  var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller,chart:chart,start:start,end:end,segNum:segNum};
+      segNum = req.body.segNum, extra = req.body.extra;
+  var inputs = {id:id,prime:prime,beta:beta,weather:weather,caller:caller,chart:chart,start:start,end:end,segNum:segNum,extra:extra};
   var all = false;
   var sql,sql2,sql4;
   
@@ -368,19 +368,62 @@ function processData(data,res){
     }
   }
   else if(data.inputs.chart=="Line"){
+    var startday = new Date(data.inputs.start);
+    var endday = new Date(data.inputs.end);
+    endday.setHours(23,59,59,999);
+    var numSeperators = data.inputs.segNum;
+    var daysbetween =0;
+    {
+      var timetraveler = new Date(startday);
+      while(timetraveler < endday){
+        timetraveler.setDate(timetraveler.getDate() + 1);
+        daysbetween = daysbetween + 1;
+      }
+    }
     if(data.inputs.prime == "Students"){
       if(data.inputs.id == "all"){
         if(data.inputs.beta == "Behavior"){
           data.betaval.forEach(element =>{
-            var TotalActivity = 0;
-            var TotalAccidents = 0;
-            var count = 0;
-            var input = {};
-            meta.mostAccidentsNum = 0;
-            meta.mostAccidents = [];
-            meta.mostActivityNum = 0;
-            meta.mostActivity = [];
-            input['name'] = element.StudentName;
+            var input = {labelName:element.StudentName};
+            var accidents = {labelName:element.StudentName};
+            var bathrooms = {labelName:element.StudentName};
+            input.values = [];
+            accidents.values = [];
+            bathrooms.values = [];
+            var labels = [];
+            var seperators = {start:[], end:[]};
+            var count = [];
+
+            var timeTraveler = new Date(startday);
+            timeTraveler.setHours(0,0,0,0);
+            for(var e = 0; e < numSeperators; e= e+1){
+              var next;
+              if(e == numSeperators - 1){
+                next = new Date(endday);
+              }
+              else{
+                next = new Date(timeTraveler);
+                if(Math.floor(daysbetween/numSeperators) != Math.round(daysbetween/numSeperators)){
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators + (e%2) - 1);
+                }
+                else{
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators - 1);
+                }
+                
+              }
+              count.push(0);
+              bathrooms.values.push(0);
+              accidents.values.push(0);
+              input.values.push(0);
+              labels.push("" + timeTraveler.getFullYear() + "-" + (timeTraveler.getMonth() + 1) + "-" + timeTraveler.getUTCDate() + " to " +
+              next.getFullYear() + "-" + (next.getMonth() + 1) + "-" + next.getUTCDate());
+              seperators.start.push(timeTraveler);
+              seperators.end.push(next);
+              next.setDate(next.getUTCDate() + 1);
+              timeTraveler = new Date(next);
+              meta.labels = labels;
+            }
+
             data.primeval.forEach(row => {
               if(element.StudentId == row.StudentId){
                 var date = new Date(row.CurrentDate);
@@ -388,7 +431,7 @@ function processData(data,res){
                 if(data.inputs.weather != "all"){
                   data.weatherVal.forEach(entry =>{
                     var weatherDate = new Date(entry.dateTimes);
-                    if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                    if(" " +date.getFullYear()+date.getMonth()+date.getUTCDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getUTCDate()){
                       present = true;
                     }
                   });
@@ -397,30 +440,26 @@ function processData(data,res){
                   present = true;
                 }
                 if(present){
-                  TotalActivity = TotalActivity + row.RestroomActivityNumber;
-                  TotalAccidents = TotalAccidents + row.RestroomAccidentNumber;
-                  count = count + 1;
+                  for(var e = 0; e < numSeperators; e= e+1){
+                    if(date > seperators.start[e] && date < seperators.end[e]){
+                      bathrooms.values[e] = bathrooms.values[e] + row.RestroomActivityNumber;
+                      accidents.values[e] = accidents.values[e] + row.RestroomAccidentNumber;
+                      input.values[e] = input.values[e] + row.RestroomActivityNumber + row.RestroomAccidentNumber;
+                      count[e] = count[e] + 1;
+                    }
+                  }
                 }
               }
-            });  
-            input['accidents'] = TotalAccidents;
-            input['activity'] = TotalActivity;
-            input['days'] = count;
-            if(TotalAccidents > meta.mostAccidentsNum){
-              meta.mostAccidentsNum = TotalAccidents;
-              meta.mostAccidents = [input.name];
+            });
+            if(data.inputs.extra == "total"){
+              outputs.push(input);
             }
-            else if(TotalAccidents == meta.mostAccidents && TotalAccidents > 0){
-              meta.mostAccidents.push(input.name);
+            else if(data.inputs.extra == "successes"){
+              outputs.push(bathrooms);
             }
-            if(TotalActivity > meta.mostActivityNum){
-              meta.mostActivityNum = TotalActivity;
-              meta.mostActivity = [input.name];
+            else if(data.inputs.extra == "accidents"){
+              outputs.push(accidents);
             }
-            else if(TotalActivity == meta.mostAccidents && TotalActivity > 0){
-              meta.mostActivity.push(input.name);
-            }
-            outputs.push(input);
           }); 
         }
         else if(data.inputs.beta == "ClassSession"){
@@ -577,19 +616,8 @@ function processData(data,res){
       else{
         meta.name = data.primeval[0].StudentName;
         if(data.inputs.beta == "Activities"){
-          var startday = new Date(data.inputs.start);
-          var endday = new Date(data.inputs.end);
-          endday.setHours(23,59,59,999);
-          var timetraveler = new Date(startday);
-          var numSeperators = data.inputs.segNum;
-          var daysbetween =0;
-          while(timetraveler < endday){
-            timetraveler.setDate(timetraveler.getDate() + 1);
-            daysbetween = daysbetween + 1;
-          }
-          var i = 0;
           data.betaval.forEach(element => {
-            var activity = {activityName:element.ActivityName};
+            var activity = {labelName:element.ActivityName};
             var count = [];
             var labels = [];
             var seperators = {start:[], end:[]};
@@ -653,68 +681,7 @@ function processData(data,res){
             });
             activity.values = count;
             outputs.push(activity);
-            i = i+1;
           });
-        }
-        else if(data.inputs.beta == "Behavior"){
-          var i = 0;
-          var totAccident = 0, totActivity = 0;
-          data.primeval.forEach(row =>{
-            var input = {};
-            var date = new Date(row.CurrentDate);
-            var present = false;
-            if(data.inputs.weather != "all"){
-              data.weatherVal.forEach(entry =>{
-                var weatherDate = new Date(entry.dateTimes);
-                if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
-                  present = true;
-                }
-              });
-            }
-            else{
-              present = true;
-            }
-            if(present){
-              input['restroom'] = row.RestroomActivityNumber;
-              input['accident'] = row.RestroomAccidentNumber;
-              totAccident = totAccident + row.RestroomAccidentNumber;
-              totActivity = totActivity + row.RestroomActivityNumber;
-              outputs.push(input);
-              i = i + 1;
-            }
-          });
-          
-          meta.TotalAccidents = totAccident;
-          meta.TotalActivity = totActivity;
-          meta.totalDays = i;
-        }
-        else if(data.inputs.beta == "ClassSession"){
-          var i = 0;
-          meta.absences = 0;
-          data.primeval.forEach(row =>{
-            var input = {};
-            var date = new Date(row.CurrentDate);
-            var present = false;
-            if(data.inputs.weather != "all"){
-              data.weatherVal.forEach(entry =>{
-                var weatherDate = new Date(entry.dateTimes);
-                if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
-                  present = true;
-                }
-              });
-            }
-            else{
-              present = true;
-            }
-            if(present){
-              input['absent'] = row.Absent;
-              meta.absences = meta.absences + row.Absent;
-              outputs.push(input);
-              i = i + 1;
-            }
-            
-          });
-          meta.totalDays = i;
         }
         else if(data.inputs.beta == "Friends"){
           var i = 0;
