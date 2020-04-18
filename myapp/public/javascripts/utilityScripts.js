@@ -54,3 +54,8 @@ function textAreaAdjust(textArea) {
 function closeForm(){
     formElement.style.display = "none";
   }
+
+function openForm(formID){
+    formElement = document.getElementById(formID);
+    formElement.style.display = "block";
+}

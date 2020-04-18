@@ -43,7 +43,6 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
     }
     
   }
-  
 });
 function bottomLayer(res,Students,){
   var get_template = "CALL ShowUnhiddenTemplateObject();";
@@ -135,7 +134,6 @@ function bottomLayer(res,Students,){
                 console.log(e);
               }
             }
-      
             
       res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch });
         }); // end lunch query
