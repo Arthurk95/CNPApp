@@ -205,12 +205,26 @@
         <div class="item-content">
           <ul id="comptasksList" class="ulList">
             <li onclick="editHeader()" class="accent2Light-BG centerText clickableItem">
-              <p title="Edit Header" class="whiteText centerText textShadow">Edit Header</p>
-              
+              <p title="Edit Header" class="whiteText centerText textShadow">Edit Header</p>              
+            </li>
+            <li onclick="editSignature()" class="accent2Light-BG centerText clickableItem">
+              <p title="Edit Signature" class="whiteText centerText textShadow">Edit Signature</p>              
             </li>
           </ul>
         </div>
       </section>
+
+      <section id="tab4" class="item" data-title="Reminders">
+        <div class="item-content">
+          <ul id="comptasksList" class="ulList">
+            <li onclick="addReminder()" class="accent2Light-BG centerText clickableItem">
+              <p title="Add Reminder" class="whiteText centerText textShadow">Add Reminder</p>              
+                          
+            </li>
+          </ul>
+        </div>
+      </section>
+
     </article>
 
   </body>
@@ -248,6 +262,14 @@
     function addTask(){
       formElement = document.getElementById("newTaskForm");
       formElement.style.display = "block";
+    }
+
+    function editHeader(){
+      
+    }
+
+    function editSignature(){
+      
     }
 
 

@@ -108,6 +108,7 @@ const fs = require('fs');
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "CALL ShowAllActivities();";
     var task_query = "SELECT * FROM cnp_data.Tasks;";
+    var get_reminders = "CALL ShowUnhiddenRemindersObject();";
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
       con.query(activity_query, function (err, aQuery) {
@@ -123,9 +124,21 @@ const fs = require('fs');
               completed.push(tQuery[i]);
             }
           }
-          res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed});
-        }
-        );
+          con.query(get_reminders, function(err, remind){
+            remind = remind[0];
+            var Reminders = [];
+            if(remind.length == 0){
+              Reminders.push({title: "No reminders in database"});
+            }
+            else{
+              remind.foreach((element) => {
+                console.log(element);
+                Reminders.push({title: element.NameOf, contents: element.MainParagraphs});
+              });
+            }
+            res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders});
+          });
+        });
         
       });
     });
