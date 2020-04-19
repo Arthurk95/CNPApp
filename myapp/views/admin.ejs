@@ -21,36 +21,31 @@
   </head>
   <body>
 
-    <article class="tabbed-content width90">
-      <nav class="tabs">
-        <ul>
-          <li><a href="#tab1" class="openTab">Students</a></li>
-          <li><a href="#tab2">Activities</a></li>
-          <li><a href="#tab3">Email Manager</a></li>
-        </ul>
-      </nav>
-      <section id="tab1" class="item openTab" data-title="Students">
-        <div class="item-content">
+    <div class="flex spaceAround flexWrap">
+
+      <!-- --------------------- STUDENTS PANEL --------------------- -->
+      <div id="studentsPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+        <div class="centerText accent3-BG mediumPadding relative">
+          <p class="lightText font25px">Students</p>
+          <a onclick="openForm('newStudentForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
+            <i class=" fas fa-plus"></i>
+          </a>
+        </div>
+        <div class="heavyPadding">
           <ul id="students" class="ulList spaceAround">
             <% if (students.length > 0) { %>
               <% students.forEach((student, index) => { %>
                 <% studentSpl = student.StudentName.split(" "); %>
                   <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
                     <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
-                    <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                    <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
                     <p><%= student.StudentName %></p>
                   </li>
                 <% }) %>
-            <% } %> 
-              <li title="Add Student" class="profileList clickableItem accent2Light-BG centerText" onclick="addStudent()">
-                <div class="addIcon accent2-BG">
-                  <i class="fas fa-plus"></i>
-                </div>
-                <p class="whiteText centerText textShadow">New Student</p>
-              </li> 
+            <% } %>  
           </ul>
 
-          <!-- New Student Form -->
+          <!-- --------------------- New Student Form --------------------- -->
           <div id="newStudentForm" class="formWindow">
             <div class="formWindow-content">
               <span class="close" onclick="closeForm()">&times;</span>
@@ -128,13 +123,21 @@
                 </ul>
                 <li class="flexCenter"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
               </ul>
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="tab2" class="item" data-title="Activities">
-        <div class="item-content">
+
+      <!--  --------------------- ACTIVITIES PANEL --------------------- -->
+      <div id="activitiesPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+        <div class="centerText accent3-BG mediumPadding relative">
+          <p class="lightText font25px">Activities</p>
+          <a onclick="openForm('newActivityForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
+            <i class=" fas fa-plus"></i>
+          </a>
+        </div>
+        <div class="heavyPadding">
           <ul id="activities" class="ulList">
             <% if (activities.length > 0) {%>
               
@@ -160,9 +163,7 @@
                 </li>
               <% }) %>
             <% } %>
-            <li onclick="addActivity()" class="accent2Light-BG clickableItem ">
-              <p title="Create Activity" class="whiteText textShadow centerText largeFont">New Activity +</p>
-            </li>
+          
           </ul>
 
           <div id="editActivityForm" class="formWindow">
@@ -199,19 +200,39 @@
             </div>
           </div>
         </div>
-      </section>
-
-      <section id="tab3" class="item" data-title="Email Manager">
-        <div class="item-content">
+      </div>
+  
+      <!-- --------------------- EMAIL PANEL --------------------- -->
+      <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+        <div class="centerText accent3-BG mediumPadding">
+          <p class="lightText font25px">Email Settings</p>
+          
+        </div>
+        <div class="heavyPadding">
           <ul id="comptasksList" class="ulList">
             <li onclick="editHeader()" class="accent2Light-BG centerText clickableItem">
-              <p title="Edit Header" class="whiteText centerText textShadow">Edit Header</p>
-              
+              <p title="Edit Header" class="whiteText centerText textShadow">Edit Header</p>              
+            </li>
+            <li onclick="editSignature()" class="accent2Light-BG centerText clickableItem">
+              <p title="Edit Signature" class="whiteText centerText textShadow">Edit Signature</p>              
             </li>
           </ul>
         </div>
-      </section>
-    </article>
+      </div>
+    
+      <!-- --------------------- REMINDER PANEL --------------------- -->
+      <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+        <div class="centerText accent3-BG mediumPadding relative">
+          <p class="lightText font25px">Reminders</p>
+          <a onclick="openForm('newReminderForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
+            <i class=" fas fa-plus"></i>
+          </a>
+        </div>
+        <div class="heavyPadding">
+          
+        </div>
+      </div>
+    </div>
 
   </body>
   
