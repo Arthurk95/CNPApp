@@ -177,6 +177,8 @@ p{margin: 0;}
   border-radius: 8px;
 }
 
+.mobilePanel{}
+
 /* To be used for the title of a content area. EX:
     <p class="title blue2-BG">This is a title</p>
 
@@ -227,6 +229,13 @@ p{margin: 0;}
 .width90{width: 90% !important;}
 .width100{width: 100% !important;}
 
+.minWidth250px{min-width: 250px !important;}
+.minWidth300px{min-width: 300px !important;}
+.minWidth350px{min-width: 350px !important;}
+.minWidth400px{min-width: 400px !important;}
+.minWidth450px{min-width: 450px !important;}
+.minWidth500px{min-width: 500px !important;}
+.minWidth600px{min-width: 600px !important;}
 
 /* ----------- BACKGROUNDS ----------- */
 .lightGray1-BG{background: var(--lightGray1);}
@@ -283,6 +292,7 @@ p{margin: 0;}
 .borderRadiusSmall{border-radius: 4px !important;}
 .borderRadiusMedium{border-radius: 8px !important;}
 .borderRadiusLarge{border-radius: 16px !important;}
+.borderRadiusCircle{border-radius: 50% !important;}
 
 .red1-border{border-color: var(--red1) !important;}
 .red2-border{border-color: var(--red2) !important;}
@@ -356,12 +366,27 @@ p{margin: 0;}
 .heavyPadding{padding: 15px !important;}
 .veryHeavyPadding{padding: 50px !important;}
 
+.margin10{margin: 10px;}
+.margin15{margin: 15px;}
+.margin20{margin: 20px;}
+.margin25{margin: 25px;}
+.margin30{margin: 30px;}
+.margin35{margin: 35px;}
+.margin40{margin: 40px;}
 
 /* ----------------- TEXT ------------------- */
 .smallFont{font-size: 12px !important;}
 .mediumFont{font-size: 18px !important;}
 .largeFont{font-size: 28px !important;}
 .hugeFont{font-size: 100px !important;}
+
+.font10px{font-size: 10px !important;}
+.font15px{font-size: 15px !important;}
+.font20px{font-size: 20px !important;}
+.font25px{font-size: 25px !important;}
+.font30px{font-size: 30px !important;}
+.font40px{font-size: 40px !important;}
+.font50px{font-size: 50px !important;}
 
 .whiteText{color: white !important;}
 .lightText{color: var(--lightGray2) !important;}
@@ -379,10 +404,19 @@ p{margin: 0;}
 /* ------------ DISPLAYS ------------- */
 .displayNone{display: none !important;}
 .inlineBlock{display: inline-block;}
+.borderBox{box-sizing: border-box !important;}
+.hideOverflow{overflow: hidden !important;}
+
+/* ------------ POSITIONING ------------- */
 .relative{position: relative;}
 .absolute{position: absolute;}
-.borderBox{box-sizing: border-box !important;}
-
+.absoluteRight{right: 10px;}
+.top0px{top: 0px;}
+.top5px{top: 5px;}
+.top10px{top: 10px;}
+.top15px{top: 15px;}
+.top20px{top: 20px;}
+.top25px{top: 25px;}
 
 /* ------------- FLEX STUFF ------------ */
 .flexWrap {flex-wrap: wrap !important;}
@@ -434,6 +468,20 @@ p{margin: 0;}
 .blankInput{
   background: none !important;
   background-color: transparent !important;
+}
+
+.circleButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+}
+
+.circleButton:hover{
+  
 }
 
 /* Use this for any buttons */
@@ -531,7 +579,16 @@ p{margin: 0;}
 .hiddenMobile{display: none !important;}
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
+  .font10px{font-size: 20px !important;}
+  .font15px{font-size: 28px !important;}
+  .font20px{font-size: 35px !important;}
+  .font25px{font-size: 45px !important;}
+  .font30px{font-size: 50px !important;}
+  .font40px{font-size: 70px !important;}
+  .font50px{font-size: 80px !important;}
 
+
+  .mobilePanel{width: 90% !important;}
   .hiddenMobile{display: inherit !important;}
   .logout{display: none;}
 
