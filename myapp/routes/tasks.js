@@ -23,7 +23,9 @@ const auth = require('../public/javascripts/loginScripts');
   });
 
   router.put('/completetask', auth.checkAuthenticated, function(req, res){
-    var sql = "UPDATE cnp_data.Tasks SET Completed = " + req.body.completed + " WHERE TaskId = " + req.body.id + ";";
+    var sql = "CALL CompleteTask(" + req.body.id + ");";
+    console.log(sql);
+    //var sql = "UPDATE cnp_data.Tasks SET Completed = " + req.body.completed + " WHERE TaskId = " + req.body.id + ";";
     con.query(sql, function (err, result) {
         if (err) res.end();
         res.end();
@@ -43,22 +45,28 @@ const auth = require('../public/javascripts/loginScripts');
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "CALL ShowAllActivities();";
     var task_query = "SELECT * FROM cnp_data.Tasks;";
+    var compl_task_query = "CALL ShowFinished6MonthsTask();";
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
       con.query(activity_query, function (err, aQuery) {
         if (err) throw err;
         con.query(task_query,function (err, tQuery){
           if(err) throw err;
-          var tasks = [], completed = [];
+          var tasks = [];
           for(var i = 0;i < tQuery.length;++i){
             if(tQuery[i].Completed == 0){
               tasks.push(tQuery[i]);
             }
-            else{
-              completed.push(tQuery[i]);
-            }
           }
-          res.render('tasks.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed});
+          var completed = []
+          con.query(compl_task_query,function (err, completedQuery){
+            if(err) throw err;
+            for(var i = 0;i < completedQuery.length;++i){
+              completed.push(completedQuery[i]);
+            }
+            res.render('tasks.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed});
+            
+          });
         }
         );
         
