@@ -29,7 +29,7 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     border-radius: 12px;
     overflow: hidden;
     padding-left: 20px;
@@ -37,18 +37,18 @@
 }
 
 .ulList li p{
-    margin: 20px 0px;
+    margin: 10px 0px;
     color: var(--darkGray3);
-    font-size: 1.7em;
+    font-size: 14px;
     text-align: left;
     flex-grow: 2;
 }
 
 .ulList li button{
-    font-size: 2em;
+    font-size: 14px;
     justify-self: center;
     align-self: stretch;
-    width: 10vw;
+    width: 3vw;
     border: none;
     outline: none;
     color: var(--darkGray2);
@@ -81,65 +81,48 @@
     padding: 30px 0px;
 }
 
-/* Plus icon for adding a student */
-.ulList .addIcon{
+.ulList .leftCircle{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 150px;
-    height: 150px;
-    margin-left: -50px;
+    width: 50px;
+    height: 50px;
+    margin-left: -20px;
     border-radius: 50%;
     overflow: hidden;
-    font-size: 105px;
+    font-size: 50px;
     color: var(--lightGray2);
     box-shadow: 0px 0px 2px var(--darkGray3);
     transition: width 0.1s ease-in-out, height 0.1s ease-in-out, 
         font-size 0.1s ease-in-out, margin 0.1s ease-in-out;
 }
 
-.ulList .addIcon i{
+.ulList .profileList:hover .leftCircle{
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+}
+
+.ulList .leftCircle i{
     align-self: center !important;
+    font-size: 30px;
 }
 
 .ulList .clickableItem:hover{cursor: pointer !important;}
 
-.ulList .clickableItem:hover img{
-    width: 180px;
-    height: 180px;
-}
-
-.ulList .clickableItem:hover .addIcon{
-    width: 180px;
-    height: 180px;
-    font-size: 120px;
-    margin-left: -65px;
-}
-
 .ulList .profileList{
     overflow: visible;
     align-items: center;
-    width: 35%;
-    height: 130px;
-    margin: 20px 40px;
+    height: 40px;
+    margin: 10px 20px;
     padding-left: 0;
+    width: 40%;
  }
 
 .ulList .profileList p{
     text-align: center;
     color: var(--darkGray4);
-}
-
-.ulList .profileList img{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid var(--accentColor2);
-    margin: 0;
-    margin-left: -60px;
-    box-shadow: 0px 0px 2px var(--darkGray3);   
-    transition: width 0.1s ease-in-out, height 0.1s ease-in-out;
+    font-size: 0.8em;
 }
 
 .blackAndWhite{
@@ -169,5 +152,28 @@
     .ulList .profileList{
         width: 80%;
         margin-right: -15px;
+        margin-bottom: 25px;
+    }
+
+    .ulList li{ height: 90px !important;}
+
+    .ulList li p{
+        font-size: 40px !important;
+    }
+
+    .ulList li i{
+        font-size: 30px;
+    }
+
+    .ulList .leftCircle{
+        width: 90px;
+        height: 90px;
+        margin-left: -45px;
+    }
+
+    .ulList .profileList:hover .leftCircle{
+        width: 110px;
+        height: 110px;
+        margin-left: -65px;
     }
 }
