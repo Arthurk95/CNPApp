@@ -177,7 +177,8 @@ p{margin: 0;}
   border-radius: 8px;
 }
 
-.mobilePanel{}
+.mobilePanel{
+}
 
 /* To be used for the title of a content area. EX:
     <p class="title blue2-BG">This is a title</p>
@@ -220,6 +221,7 @@ p{margin: 0;}
 .width10{width: 10% !important;}
 .width20{width: 20% !important;}
 .width30{width: 30% !important;}
+.width35{width: 35% !important;}
 .width40{width: 40% !important;}
 .width45{width: 45% !important;}
 .width50{width: 50% !important;}
@@ -229,6 +231,14 @@ p{margin: 0;}
 .width90{width: 90% !important;}
 .width100{width: 100% !important;}
 
+.width200px{width: 200px !important;}
+.width250px{width: 250px !important;}
+.width300px{width: 300px !important;}
+.width350px{width: 350px !important;}
+.width400px{width: 400px !important;}
+.width450px{width: 450px !important;}
+.width500px{width: 500px !important;}
+
 .minWidth250px{min-width: 250px !important;}
 .minWidth300px{min-width: 300px !important;}
 .minWidth350px{min-width: 350px !important;}
@@ -236,6 +246,26 @@ p{margin: 0;}
 .minWidth450px{min-width: 450px !important;}
 .minWidth500px{min-width: 500px !important;}
 .minWidth600px{min-width: 600px !important;}
+
+.maxWidth250px{max-width: 250px !important;}
+.maxWidth300px{max-width: 300px !important;}
+.maxWidth350px{max-width: 350px !important;}
+.maxWidth400px{max-width: 400px !important;}
+.maxWidth450px{max-width: 450px !important;}
+.maxWidth500px{max-width: 500px !important;}
+.maxWidth550px{max-width: 550px !important;}
+.maxWidth600px{max-width: 600px !important;}
+.maxWidth650px{max-width: 650px !important;}
+
+
+.maxHeight200px{overflow-y: auto; max-height: 200px;}
+.maxHeight300px{overflow-y: auto; max-height: 300px;}
+.maxHeight400px{overflow-y: auto; max-height: 400px;}
+.maxHeight500px{overflow-y: auto; max-height: 500px;}
+.maxHeight600px{overflow-y: auto; max-height: 600px;}
+.maxHeight700px{overflow-y: auto; max-height: 700px;}
+.maxHeight800px{overflow-y: auto; max-height: 800px;}
+
 
 /* ----------- BACKGROUNDS ----------- */
 .lightGray1-BG{background: var(--lightGray1);}
@@ -457,6 +487,7 @@ p{margin: 0;}
   justify-content: space-around !important;
   align-content: center !important;
 }
+.spaceEvenly{justify-content: space-evenly !important;}
 
 
 .customTable .darkText{color: var(--darkGray2) !important;}
