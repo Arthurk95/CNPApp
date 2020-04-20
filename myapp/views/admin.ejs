@@ -236,10 +236,68 @@
           </a>
         </div>
         <div class="heavyPadding maxHeight500px">
+          <ul id="reminders" class="ulList">
+            <% if (reminders.length > 0) {%>
+              
+              <% reminders.forEach((reminder, index) => { %>
+                <li class="white-BG">
+                    <p><%= reminder.title %></p>
+                    <button class="yellow3-BG" onclick=""><i class="far fa-edit"></i></button>
+                    <button class="red3-BG" onclick=""><i class="far fa-trash-alt"></i></button>              
+                 
+              <% }) %>
+            <% } %>
+          
+          </ul>
+
+          <!-- --------------------- New Reminder Form --------------------- -->
+          <div id="newReminderForm" class="formWindow">
+            <div class="formWindow-content">
+              <span class="close" onclick="closeForm()">&times;</span>
+              
+              <ul>
+                <li class="flex flexAlignCenter width100">
+                  
+                  
+                  <p class="largeFont width70" style="margin: 0; text-align: center;">Add a Reminder</p>
+                </li>
+                
+                <li class="flex spaceBetween width100">
+                  <input class="width40" name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
+                
+                </li>
+                <li class="width100 flex spaceAround">
+                  <div class="flex flexColumn width45">
+                    <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
+
+                  </div>
+                </li>
+                
+                
+                <li class="flexCenter"><a class="formSubmitButton" id="newReminderSubmit" onclick="callPostReminder()">Create</a></li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
           
         </div>
       </div>
     </div>
+
+    <!-- --------------------- BEHAVIORS PANEL --------------------- -->
+    <div id="behaviorsPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+      <div class="centerText accent3-BG mediumPadding relative">
+        <p class="lightText font25px">Behaviors</p>
+        <a onclick="openForm('newBehaviorForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
+          <i class=" fas fa-plus"></i>
+        </a>
+      </div>
+      <div class="heavyPadding">
+        
+      </div>
+    </div>
+  </div>
 
   </body>
   
