@@ -1,11 +1,17 @@
+:root{
+  --width: 80px;
+  --height: 40px;
+
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
     float: right;
     margin: auto 0;
     margin-right: 20px;
-    width: 132px;
-    height: 50px;
+    width: calc(var(--width));
+    height: calc(var(--height))
   }
   
   /* Hide default HTML checkbox */
@@ -27,12 +33,13 @@
     box-shadow: inset 0px 0px 3px var(--darkGray2);
   }
   
+  /* The square in the middle */
   .slider:before {
     position: absolute;
     content: "";
-    width: 64px;
-    height: 42px;
-    left: 8px;
+    width: calc(var(--width) / 2);
+    height: calc(var(--height) - 8px);
+    left: 4px;
     bottom: 4px;
     background-color: var(--lightGray1);
   }
@@ -42,10 +49,11 @@
     background-color: var(--adminColor);
   }
   
+  
+  /* When it's checked */
   input:checked + .slider:before {
-    -webkit-transform: translateX(52px);
-      -ms-transform: translateX(52px);
-      transform: translateX(52px);
+    left: auto;
+    right: 4px;
   }
   
   /* Rounded sliders */
@@ -75,10 +83,8 @@
 
 
   @media screen and (max-width: 1200px){
-
-    input:checked + .slider:before {
-      -webkit-transform: translateX(52px);
-      -ms-transform: translateX(52px);
-      transform: translateX(52px);
+    :root{
+      --width: 100px;
+      --height: 60px;
     }
   }
