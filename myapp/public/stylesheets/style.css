@@ -166,7 +166,8 @@ p{margin: 0;}
 */
 .contentWithSidebar{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-wrap: nowrap;
   width: 100%;
 }
@@ -226,6 +227,7 @@ p{margin: 0;}
 .width45{width: 45% !important;}
 .width50{width: 50% !important;}
 .width60{width: 60% !important;}
+.width65{width: 65% !important;}
 .width70{width: 70% !important;}
 .width80{width: 80% !important;}
 .width90{width: 90% !important;}
@@ -489,6 +491,32 @@ p{margin: 0;}
 }
 .spaceEvenly{justify-content: space-evenly !important;}
 
+.flexGrow1{flex-grow: 1;}
+
+/* ------- SELECTABLE LIST ----------- 
+  Example use: the weekday selection in new student form and on profile */
+.selectableList{
+  display: flex;
+  flex-direction: row;
+}
+
+/* Add margin between list elements */
+.selectableList li{
+  background: var(--lightGray3);
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  margin: 5px;
+  align-self: center;
+}
+
+
+.selectableList .selectedElement{
+  box-shadow: inset 0px 0px 6px var(--darkGray1);
+  background: var(--accentColor2Light);
+  color: var(--lightGray1);
+}
+
 
 .customTable .darkText{color: var(--darkGray2) !important;}
 
@@ -619,18 +647,23 @@ p{margin: 0;}
   .font50px{font-size: 80px !important;}
 
 
-  .mobilePanel{width: 90% !important;}
+  .mobilePanel{width: 90% !important; align-self: center;}
   .hiddenMobile{display: inherit !important;}
   .logout{display: none;}
 
-  .width100Mobile{width: 100% !important;}
-  .width90Mobile{width:90% !important;}
+  .width100Mobile{width: 100% !important; margin-bottom: 10px;}
+  .width90Mobile{width:90% !important; margin-bottom: 10px;}
   .flexContainer{ flex-direction: column;}
+
+  .centerFlexMobile{justify-content: center !important;}
 
   .smallFont{font-size: 1em !important;}
   .mediumFont{font-size: 1.8em !important;}
   .largeFont{font-size: 2.5em !important;}
 
+  .selectableList li{
+    font-size: 24px;
+  }
 
   .contentWithSidebar{flex-direction: column-reverse; align-items: center;}
   .sidebar{width: 100% !important;}
