@@ -64,7 +64,7 @@
                 </li>
                 
                 <li class="flex spaceBetween width100">
-                  <input class="width40" name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
+                  <input class="width50" name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
                   <div class="flex flexRight flexAlignCenter width60">
                     <label class="mediumFontSize">Birthday:</label>
                     <select id="year" class="pretty-classic" onchange="genDays();">
@@ -90,7 +90,7 @@
                   </div>
                 
                 </li>
-                <li class="width100 flex spaceAround">
+                <li class="width100 flex spaceBetween">
                   <div class="flex flexColumn width45">
                     <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
                     <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
@@ -103,7 +103,7 @@
                     <input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number">
                   </div>
                 </li>
-                <li class="width100 flex spaceAround">
+                <li class="width100 flex spaceBetween">
                   <div class="flex flexColumn width45">
                     <textarea onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
                   </div>
@@ -112,13 +112,13 @@
                     <textarea onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentNotes" placeholder="Other Notes"></textarea>
                   </div>
                 </li>
-                <li><ul class="week">
+                <li><ul class="selectableList flex">
                   <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                  <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
-                  <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
-                  <li id="wed" onclick="weekdaySelected(this)"><a>W</a></li>
-                  <li id="thu" onclick="weekdaySelected(this)"><a>T</a></li>
-                  <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
+                  <li id="mon" onclick="selectableSelected(this)"><a>M</a></li>
+                  <li id="tue" onclick="selectableSelected(this)"><a>T</a></li>
+                  <li id="wed" onclick="selectableSelected(this)"><a>W</a></li>
+                  <li id="thu" onclick="selectableSelected(this)"><a>T</a></li>
+                  <li id="fri" onclick="selectableSelected(this)"><a>F</a></li>
                   <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                 </ul>
                 <li class="flexCenter"><a class="formSubmitButton" id="newStudentSubmit" onclick="callPostStu()">Create</a></li>
