@@ -2,7 +2,7 @@ var dropdownToggled = false;
 
 
 function isDaySelected(day){
-    return convertBoolToInt(document.getElementById(day).classList.contains("selectedDay"));
+    return convertBoolToInt(document.getElementById(day).classList.contains("selectedElement"));
 }
 
 function convertBoolToInt(boolVal){
@@ -19,12 +19,12 @@ function convertBoolToInt(boolVal){
     else return 0;
 }
 
-function weekdaySelected(element){
-    if(element.classList.contains("selectedDay")){
-      element.classList.remove("selectedDay");
+function selectableSelected(element){
+    if(element.classList.contains("selectedElement")){
+      element.classList.remove("selectedElement");
     }
     else{
-      element.classList += " selectedDay";
+      element.classList += " selectedElement";
     }
 }
 
