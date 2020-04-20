@@ -83,11 +83,15 @@ function updateSearch(elementToSearchID, input){
     // Loop through all list items, and hide those who don't match the search query
     for (i = 0; i < li.length; i++) {
         var p = li[i].getElementsByTagName("p")[0];
-        var txtValue = p.textContent || p.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
+        if(p === undefined){}
+        else{
+            var txtValue = p.textContent || p.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
         }
+        
     }
 }
