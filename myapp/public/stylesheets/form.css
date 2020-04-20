@@ -43,12 +43,9 @@ HTML Formatting:
 
   /* <ul> is used to list each component top-to-bottom */
   .formWindow-content ul{
-    list-style: none;
     margin: 0;
     margin-top: 30px;
     padding: 0;
-    display: flex !important;
-    flex-direction: column;
   }
 
   /* Each li is an element on the form, such as <input> or <a> */
