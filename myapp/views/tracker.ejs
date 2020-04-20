@@ -8,6 +8,7 @@
     <link rel='stylesheet' href='/stylesheets/footer.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/javascripts/studentSelection.js"></script>
+    <script src="/javascripts/utilityScripts.js"></script>
   </head>
   <body>
     
@@ -19,7 +20,23 @@
                 <li><a id="activitiesButton" class="accent3Light-BG" onclick="startWithActivities()">Select Activity</a></li>
             </ul>
             <%- include listOfStudents.ejs %></ul>
-            <%- include listOfActivities.ejs %></ul>
+
+            <ul id="activities" class="blockList activitiesList">
+                <li class="flex flexAlignCenter mediumPadding ">
+                    <input class="lightGray1-BG" onkeyup="updateSearch('activities', this)"></input>
+                    <i class="font30px fas fa-search"></i>
+                </li>
+                <% activities.forEach((activity, index) => { %>
+                <li onclick="activitySelected(this, <%= activity.ActivityId %>)">
+                    <div class="blockContainer">
+                        <p><%= activity.ActivityName %></p>
+                        <div class="checkmarkOverlay">
+                            
+                        </div>
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
         <% } else { %>
             <div class="missingContainer">
                 <h2>No Activities</h2>
