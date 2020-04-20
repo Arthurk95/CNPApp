@@ -39,16 +39,16 @@
 .ulList li p{
     margin: 10px 0px;
     color: var(--darkGray3);
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
     flex-grow: 2;
 }
 
 .ulList li button{
-    font-size: 14px;
+    font-size: 16px;
     justify-self: center;
     align-self: stretch;
-    width: 3vw;
+    width: 4vw;
     border: none;
     outline: none;
     color: var(--darkGray2);
@@ -121,8 +121,6 @@
 
 .ulList .profileList p{
     text-align: center;
-    color: var(--darkGray4);
-    font-size: 0.8em;
 }
 
 .blackAndWhite{
