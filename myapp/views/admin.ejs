@@ -12,26 +12,26 @@
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/checkbox.css' />
     <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
-    <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/javascripts/jquery.prettydropdowns.js"></script>
     <script src="/javascripts/birthdayDropdown.js"></script>
+    <script src="/javascripts/utilityScripts.js"></script>
 
   </head>
   <body>
 
-    <div class="flex spaceAround flexWrap">
+    <div class="flex spaceEvenly flexWrap">
 
       <!-- --------------------- STUDENTS PANEL --------------------- -->
-      <div id="studentsPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+      <div id="studentsPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
         <div class="centerText accent3-BG mediumPadding relative">
           <p class="lightText font25px">Students</p>
           <a onclick="openForm('newStudentForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
             <i class=" fas fa-plus"></i>
           </a>
         </div>
-        <div class="heavyPadding">
+        <div class="heavyPadding maxHeight500px">
           <ul id="students" class="ulList spaceAround">
             <% if (students.length > 0) { %>
               <% students.forEach((student, index) => { %>
@@ -130,14 +130,21 @@
 
 
       <!--  --------------------- ACTIVITIES PANEL --------------------- -->
-      <div id="activitiesPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+      <div id="activitiesPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
         <div class="centerText accent3-BG mediumPadding relative">
-          <p class="lightText font25px">Activities</p>
-          <a onclick="openForm('newActivityForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
-            <i class=" fas fa-plus"></i>
-          </a>
+          <p id="activityTitle" class="lightText font25px">Activities</p>
+          <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
+          <div class="absolute absoluteRight top0px">
+            <a onclick="toggleSearch('activitySearch', 'activityTitle')" class="lightText font40px textShadow">
+              <i class="fas fa-search"></i>
+            </a>
+            <a onclick="openForm('newActivityForm')" class="lightText font40px textShadow">
+              <i class=" fas fa-plus"></i>
+            </a>
+          </div>
+          
         </div>
-        <div class="heavyPadding">
+        <div class="heavyPadding maxHeight500px">
           <ul id="activities" class="ulList">
             <% if (activities.length > 0) {%>
               
@@ -203,12 +210,12 @@
       </div>
   
       <!-- --------------------- EMAIL PANEL --------------------- -->
-      <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+      <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
         <div class="centerText accent3-BG mediumPadding">
           <p class="lightText font25px">Email Settings</p>
           
         </div>
-        <div class="heavyPadding">
+        <div class="heavyPadding maxHeight500px">
           <ul id="comptasksList" class="ulList">
             <li onclick="editHeader()" class="accent2Light-BG centerText clickableItem">
               <p title="Edit Header" class="whiteText centerText textShadow">Edit Header</p>              
@@ -221,14 +228,14 @@
       </div>
     
       <!-- --------------------- REMINDER PANEL --------------------- -->
-      <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+      <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
         <div class="centerText accent3-BG mediumPadding relative">
           <p class="lightText font25px">Reminders</p>
           <a onclick="openForm('newReminderForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
             <i class=" fas fa-plus"></i>
           </a>
         </div>
-        <div class="heavyPadding">
+        <div class="heavyPadding maxHeight500px">
           
         </div>
       </div>
@@ -439,5 +446,7 @@
       httpPutAsync(theUrl,data,callback); 
 
     }
+
+    
   </script>
 </html>
