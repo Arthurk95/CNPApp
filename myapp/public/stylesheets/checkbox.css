@@ -7,19 +7,21 @@
 */
 
 /* Border will be the opposite color of its parent */
+
 .checkBox{
+    --width: 22px;
+    --height: 22px;
     outline: none;
-    width: 50px;
-    height: 50px;
+    width: var(--width);
+    height: var(--height);
     align-self: center;
     padding: 0;
     border-radius: 50%;
     border: 2px solid var(--lightGray1);
-    margin: 0px 30px 0px 5px;
+    margin: 0px 30px 0px 0px;
     text-align: center;
     filter: invert();
     opacity: 0.7;
-    font-size: 40px;
     font-weight: 700;
     text-align: center;
 }
@@ -29,13 +31,14 @@
     filter: none;
     background: var(--blue2);
     border: none;
-    width: 54px;
-    height: 54px;
+    width: calc(var(--width) + 4px); /* make up for no border */
+    height: calc(var(--height) + 4px);
     opacity: 1;
 }
 
 /* checkmark */
 .checkboxSelected::after{
+    width: calc(var(--width));
     visibility: visible !important;
     content: "✔";
     color: white;
@@ -50,12 +53,13 @@
     filter: none;
     background: var(--blue2);
     border: none;
-    width: 54px;
-    height: 54px;
+    width: calc(var(--width) + 4px);
+    height: calc(var(--height) + 4px);
     opacity: 1;
 }
 
 .checkBox:active::after{
+    width: calc(var(--width));
     visibility: visible !important;
     content: "✔";
     color: white;
