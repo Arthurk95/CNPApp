@@ -808,6 +808,7 @@ textarea:focus{
   top: 0px;
   width: 100%;
   margin-bottom: 25px;
+  z-index: 9999;
 }
 
 .section {
