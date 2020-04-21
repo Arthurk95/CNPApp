@@ -17,35 +17,33 @@
     <script src="/javascripts/jquery.prettydropdowns.js"></script>
   </head>
   <body>
-    <article class="tabbed-content width90">
-      <nav class="tabs">
-        <ul>
-          <li><a href="#tab1" class="openTab">Tasks</a></li>
-          <li><a href="#tab2">Maintenance Log</a></li>
-        </ul>
-      </nav>
-
-      <section id="tab1" class="item openTab" data-title="Tasks">
-        <div class="item-content">
+    <div class="flex spaceBetween flexWrap">
+      
+      <!-- ------------ TASKS PANEL ------------ -->
+      <div id="tasksPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width60">
+        <div class="accent3-BG mediumPadding relative">
+          <p class="marginLeft10 lightText font25px">Tasks</p>
+          <a onclick="openForm('newTaskForm')" class="lightText font40px absolute absoluteRight top0px textShadow">
+            <i class=" fas fa-plus"></i>
+          </a>
+        </div>
+        <div class="heavyPadding maxHeight500px">
           <ul id="tasksList" class="ulList">
             <% if (tasks.length > 0) { %>            
               <% tasks.forEach((task, index) => { %>
                 <li> 
                   <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
-                  <p><%= task.NoteContent %></p> 
+                  <p><%= task.NoteContent %>hello</p> 
                   <% if (task.Priority == 0) { %>
-                    <button class="greenButton" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
+                    <button class="accent2Light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
                   <% } else if(task.Priority == 1) { %>
-                    <button class="yellowButton" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
+                    <button class="accent3Light-BG" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
                   <% } else { %>
-                    <button class="redButton" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
+                    <button class="accent4Light-BG" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
                   <% } %>
-                  <button class="darkRedButton" onclick="deleteTask('<%= task.TaskId %>')"><i class="far fa-trash-alt"></i></button>
+                  <button class="accent4-BG" onclick="deleteTask('<%= task.TaskId %>')"><i class="lightText far fa-trash-alt"></i></button>
               <% }) %>
             <% } %>
-            <li onclick="addTask()" class="accent2Light-BG clickableItem ">
-              <p title="Add Task" class="whiteText textShadow centerText largeFont">New Task +</p>
-            </li>
           </ul>
           <div id="newTaskForm" class="formWindow">
             <!-- newStudentForm content -->
@@ -68,10 +66,14 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="tab2" class="item" data-title="Maintenance Log">
-        <div class="item-content">
+       <!-- ------------ LOG PANEL ------------ -->
+      <div id="logPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
+        <div class="accent3-BG mediumPadding">
+          <p class="lightText font25px">Log</p>
+        </div>
+        <div class="heavyPadding maxHeight500px">
           <ul id="comptasksList" class="ulList">
             <% if (compTasks.length > 0) { %> 
               <table class="customTable halfWidth">          
@@ -90,8 +92,8 @@
             <% } %>
           </ul>
         </div>
-      </section>
-    </article>
+      </div>
+    </div> <!-- CONTAINER END -->
   </body>
 
   <script src="/javascripts/tabs.js"></script>
