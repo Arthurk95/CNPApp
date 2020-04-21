@@ -134,8 +134,9 @@ function bottomLayer(res,Students,){
                 console.log(e);
               }
             }
-            
-      res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch });
+            var header = "Creative Nature Daily Report"
+            var footer = "Sincerly, Brandy and Scott Kunakey"
+      res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
         }); // end lunch query
         }); // end snack query
       }); // end summary query

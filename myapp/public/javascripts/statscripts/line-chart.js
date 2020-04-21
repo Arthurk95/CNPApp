@@ -49,7 +49,7 @@ function getRandomColor() {
 
 function generateLine(id) {
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div");newdiv.id = id;newdiv.className = "canvasObj";
+  var newdiv = document.createElement("div");newdiv.id = id;
   var bottom = document.getElementById("newchart");
   
   var temp,temp2;
