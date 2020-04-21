@@ -74,7 +74,8 @@ class thePie {
       .duration(1000)
       .text(function(d){ 
         if (d.data.value > 0)
-          return " " + d.data.key + "\n" + d.value})
+          //return " " + d.data.key + "\n" + d.value})
+          return "" + d.data.key })
       .attr("transform", function(d) { 
         return "translate(" + arcLabel.centroid(d) + ")";  })
       .style("text-anchor", "middle")
@@ -236,6 +237,17 @@ function generatePie(id){
     temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
   }
+ 
+  //Delete button
+  temp = document.createElement("button");
+  temp.id="button";
+  temp.class="deleteB";
+  temp.className="deleteB";
+  temp.innerHTML = "X";
+  temp.onclick = function(){ deleteChart(id); };
+  newdiv.appendChild(temp);
+
+  //Drop Down Options
   temp = document.createElement("div");
   temp.id = "opid1" + id;
   newdiv.appendChild(temp);
@@ -245,6 +257,7 @@ function generatePie(id){
   
   parent.insertBefore(newdiv,bottom);
   onUpdateop1(id);
+
   
   function onUpdateop1(id){
     updateOpid1(id);
@@ -293,13 +306,4 @@ function generatePie(id){
     });
     newdiv.appendChild(temp);
   }
-
-    //Delete button
-    temp = document.createElement("a");
-    temp.id="activitiesButton";
-    temp.class="accent3Light-BG";
-    temp.className="accent3Light-BG";
-    temp.onclick = function(){deleteChart(id);};
-    temp.innerHTML = "Delete Chart";
-    newdiv.appendChild(temp);
 }

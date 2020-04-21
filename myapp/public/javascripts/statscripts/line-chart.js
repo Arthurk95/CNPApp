@@ -4,7 +4,7 @@ function theLine(id, data) {
   var dataSets = [];
   var colors = getRandomColors(data.length - 1);
   var i = 0;
-  var title = "*New Title here*";
+  var title = "Student Records";
 
   data.forEach((element) => {
     if(element.labelName == null) {
@@ -141,13 +141,13 @@ function generateLine(id) {
       temp.appendChild(temp2);
     }
     else if(opid1.value == "all"){
-      temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Potty total";
+      temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Bathroom Total";
       temp.appendChild(temp2);
 
-      temp2 = document.createElement("option");temp2.value = "02";temp2.innerHTML = "Potty successes";
+      temp2 = document.createElement("option");temp2.value = "02";temp2.innerHTML = "Bathroom Successes";
       temp.appendChild(temp2);
 
-      temp2 = document.createElement("option");temp2.value = "03";temp2.innerHTML = "Potty accidents";
+      temp2 = document.createElement("option");temp2.value = "03";temp2.innerHTML = "Bathroom Accidents";
       temp.appendChild(temp2);
 
       temp2 = document.createElement("option");temp2.value = "04";temp2.innerHTML = "Absences";
@@ -187,6 +187,8 @@ function generateLine(id) {
     temp2.innerHTML = html;
     return temp2;
   }
+
+  //Months
   function makeMonthS(addToMe){
     var temp = addToMe;
     temp.appendChild(makeMonth("01","Jan"));

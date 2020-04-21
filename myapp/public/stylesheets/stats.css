@@ -45,13 +45,23 @@ content: "\A\A";
 white-space: normal;
 }
 
-.accent3Light-BG {
-  color:white;
-  text-decoration: none;
-  display: center;
-  font-size: 3em;
-  justify-self: stretch;
-  padding: 10px 75px;
+#deleteButton {
+  /*position: relative; 
+  */right: 0%;
+  top: 0%;
+}
+
+.deleteB {
+  margin-top: 5px;
+  margin-left: 42%;
+  color:rgb(143, 32, 32);
+  background-color: rgb(199, 47, 47);
+  border-color: rgb(143, 32, 32);
+  display: block;
+  font-size: 1.5em;
+  justify-self: right;
+  padding: 2.5px 3px;
+  filter: brightness(110%);
 }
 
 .testing span::before{
