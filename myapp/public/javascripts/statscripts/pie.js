@@ -95,7 +95,7 @@ class thePie {
 
 function generatePie(id){
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div");newdiv.id = id;
+  var newdiv = document.createElement("div"); newdiv.id = id;
   var bottom = document.getElementById("newchart");
   
   var temp;
@@ -129,7 +129,7 @@ function generatePie(id){
   }
  
   //Delete button
-  temp = document.createElement("button");temp.id="button";temp.class="deleteButton";temp.className="deleteButton";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "X";
+  temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
   newdiv.appendChild(temp);
 
   //Drop Down Options
@@ -187,7 +187,7 @@ function generatePie(id){
     temp.onchange = function(){updateData(id);};
     temp2 = document.createElement("option");
     temp2.value = "all";
-    temp2.innerHTML = "All";
+    temp2.innerHTML = "All Students";
     temp.appendChild(temp2);
     studentList.forEach((element)=>{
       temp2 = document.createElement("option");
