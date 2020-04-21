@@ -259,17 +259,19 @@ function generatePie(id){
   onUpdateop1(id);
 
   
-  function onUpdateop1(id){
+  function onUpdateop1(id) {
     updateOpid1(id);
     updateOp2(id);
     
     makeDates(id);
     updateData(id);
   }
-  function updateData(id){
+
+  function updateData(id) {
     getRecordsPie('all', id);
   }
-  function updateOp2(id){
+
+  function updateOp2(id) {
     var newdiv = document.getElementById("op2" + id);
     var temp,temp2;
     if(newdiv.hasChildNodes()){

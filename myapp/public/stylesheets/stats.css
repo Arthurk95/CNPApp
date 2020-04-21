@@ -45,6 +45,10 @@ content: "\A\A";
 white-space: normal;
 }
 
+#newchart {
+  margin-top: 60px;
+}
+
 #deleteButton {
   /*position: relative; 
   */right: 0%;
@@ -62,6 +66,26 @@ white-space: normal;
   justify-self: right;
   padding: 2.5px 3px;
   filter: brightness(110%);
+}
+
+.deleteButton {
+  margin-top: 5px;
+  margin-left: 97%;
+  color:rgb(143, 32, 32);
+  background-color: rgb(199, 47, 47);
+  border-color: rgb(143, 32, 32);
+  display: inline;
+  font-size: 1.5em;
+  justify-self: right;
+  padding: 3px 3px;
+  filter: brightness(110%);
+}
+
+.spinny {
+  
+  background-color: rgba(0, 0, 0, 0.051);
+  width: 30%;
+  visibility: visible;
 }
 
 .testing span::before{

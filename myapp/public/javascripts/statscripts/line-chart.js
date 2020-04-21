@@ -82,7 +82,13 @@ function generateLine(id) {
 
   }
 
-  temp = document.createElement("input");temp.id="section" + id;temp.type = "NUMBER";temp.min = "2";temp.max = "20";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
+  //Delete button
+  temp = document.createElement("button");temp.id="button";temp.class="deleteButton";temp.className="deleteButton";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "X";
+  newdiv.appendChild(temp);
+
+
+  //The Spin thing
+  temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "20";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
   newdiv.appendChild(temp);
 
   //First Drop Down Option
@@ -141,13 +147,13 @@ function generateLine(id) {
       temp.appendChild(temp2);
     }
     else if(opid1.value == "all"){
-      temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Bathroom Total";
+      temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Potty total";
       temp.appendChild(temp2);
 
-      temp2 = document.createElement("option");temp2.value = "02";temp2.innerHTML = "Bathroom Successes";
+      temp2 = document.createElement("option");temp2.value = "02";temp2.innerHTML = "Potty successes";
       temp.appendChild(temp2);
 
-      temp2 = document.createElement("option");temp2.value = "03";temp2.innerHTML = "Bathroom Accidents";
+      temp2 = document.createElement("option");temp2.value = "03";temp2.innerHTML = "Potty accidents";
       temp.appendChild(temp2);
 
       temp2 = document.createElement("option");temp2.value = "04";temp2.innerHTML = "Absences";
@@ -166,7 +172,7 @@ function generateLine(id) {
     temp = document.createElement("select");temp.id="optionid1" + id;temp.class="pretty-classic";temp.onchange = function(){updateOp2(id);updateData(id);};
     if(op1.value == "01")
     {
-      temp2 = document.createElement("option");temp2.value = "all";temp2.innerHTML = "All";
+      temp2 = document.createElement("option");temp2.value = "all";temp2.innerHTML = "All Students";
       temp.appendChild(temp2);
 
       studentList.forEach((element)=>{
@@ -176,10 +182,6 @@ function generateLine(id) {
     }
     newdiv.appendChild(temp);
   }
-
-  //Delete button
-  temp = document.createElement("a");temp.id="activitiesButton";temp.class="accent3Light-BG";temp.className="accent3Light-BG";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "Delete Chart";
-  newdiv.appendChild(temp);
 
   function makeMonth(val, html){
     var temp2 = document.createElement("option");
