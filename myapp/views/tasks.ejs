@@ -33,7 +33,7 @@
               <% tasks.forEach((task, index) => { %>
                 <li> 
                   <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
-                  <p><%= task.NoteContent %>hello</p> 
+                  <p><%= task.NoteContent %></p> 
                   <% if (task.Priority == 0) { %>
                     <button class="accent2Light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
                   <% } else if(task.Priority == 1) { %>
