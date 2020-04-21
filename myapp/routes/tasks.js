@@ -64,7 +64,7 @@ const auth = require('../public/javascripts/loginScripts');
             for(var i = 0;i < completedQuery.length;++i){
               completed.push(completedQuery[i]);
             }
-            res.render('tasks.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed});
+            res.render('tasks.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed[0]});
             
           });
         }
