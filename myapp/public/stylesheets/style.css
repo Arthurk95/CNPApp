@@ -850,6 +850,13 @@ svg {
   margin-right: auto;
 }
 
+canvas {
+  background-color: rgba(255, 255, 255, 0.9);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* heat map  
 rect.bordered {
   stroke: #E6E6E6;
