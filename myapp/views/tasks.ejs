@@ -54,7 +54,7 @@
             <div class="formWindow-content">
               <span class="close" onclick="closeForm()">&times;</span>
               <p class="font50px centerText accent2Light-text marginBottom40">Add a Task</p>
-
+              
               <div class="flex spaceBetween flexAlignCenter flexCollapseMobile marginBottom40 marginBelowChildren10 marginBottom40 width100">
                 <div class="flex width50 width90Mobile">
                   <div class="inputWithIcon width100 white-BG">
@@ -79,8 +79,9 @@
 
        <!-- ------------ LOG PANEL ------------ -->
       <div id="logPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <div class="darkGray3-BG mediumPadding">
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
           <p class="marginLeft10 lightText font25px">Log</p>
+          <a onclick="clearLog()" class="marginRight10 lightPadding accent4Light-text font15px">Clear</a>
         </div>
         <div class="heavyPadding maxHeight500px">
           
@@ -143,6 +144,8 @@
       callback = reloadIt; 
       httpPutAsync(theUrl,data,callback);  
     }
+
+    function clearLog(){}
 
     function addTaskPost(){
       var theUrl = window.location.href+'/addtask';

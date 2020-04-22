@@ -44,7 +44,7 @@
           </div>
 
 
-          <div class="flex flexWrap width100 spaceBetween centerFlexMobile">
+          <div class="flex flex width100 flexCollapseMobile spaceBetween centerFlexMobile">
           <!-- -------------------- EXTRA INFO PANEL --------------------- -->
             <div id="extraInfoPanel" class="mobilePanel width60 lightGray1-BG borderRadiusSmall hideOverflow width90Mobile">
               <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
@@ -61,19 +61,17 @@
   
             <!-- -------------------- SCHEDULE PANEL --------------------- -->
             <div id="schedulePanel" class="mobilePanel lightGray1-BG borderRadiusSmall hideOverflow marginLeft10 flexGrow1 width90Mobile">
-              <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
-                <div class="fullDay">
-                  <div class="flex flexCenter width100">
-                    <% if(student.DayType == 1) { %>
-                      <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
-                      <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
-                    <% } else { %>
-                      <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable">Full Day</a>
-                      <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable toggled">Half Day</a>
-                    <% } %>
-                  </div>
+              <div class="flexContainer flexColumn flexCenterMobile spaceAround flexWrap heavyPadding">
+                <div class="flex flexCenter flexAlignCenter width100 marginBottom30">
+                  <% if(student.DayType == 1) { %>
+                    <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
+                    <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
+                  <% } else { %>
+                    <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable">Full Day</a>
+                    <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable toggled">Half Day</a>
+                  <% } %>
                 </div>
-                <ul id="schedule" class="selectableList flexColumn">
+                <ul id="schedule" class="selectableList flexWrap width100 flexCenter">
                   <li id="mon" value="<%- student.Monday %>" onclick="selectableSelected(this)"><a>M</a></li>
                   <li id="tue" value="<%- student.Tuesday %>" onclick="selectableSelected(this)"><a>T</a></li>
                   <li id="wed" value="<%- student.Wednesday %>" onclick="selectableSelected(this)"><a>W</a></li>
@@ -109,10 +107,10 @@
               <label class="width30">BIRTHDAY</label>
               <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
               <div class="flexRowSpaceAround">
-                <select id="year" class="pretty-classic" onchange="genDays();">
+                <select id="year" class="pretty-classic smallFontSize" onchange="genDays();">
                 </select>
 
-                <select id="month" class="pretty-classic" onchange="genDays();">
+                <select id="month" class="pretty-classic smallFontSize" onchange="genDays();">
                   <option value="01">Jan</option>
                   <option value="02">Feb</option>
                   <option value="03">Mar</option>
@@ -127,7 +125,7 @@
                   <option value="12">Dec</option>
                 </select>
         
-                <select id="day" class="pretty-classic">
+                <select id="day" class="pretty-classic smallFontSize">
                 </select>
               </div>
             </li>

@@ -1,6 +1,6 @@
 .prettydropdown {
   position: relative;
-  min-width: 72px; /* 70px + borders */
+  min-width: 50px; /* 70px + borders */
   display: inline-block;
   font: normal Calibri, sans-serif;
 }
@@ -50,7 +50,7 @@
 }
 .prettydropdown > ul > li {
   position: relative;
-  min-width: 70px;
+  min-width: 40px;
   height: 40px; /* 50px - borders */
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
@@ -197,6 +197,7 @@
   background: none;
 }
 
+.smallFontSize{font-size: 0.6em !important;}
 .mediumFontSize{ font-size: 1.5em;}
 .largeFontSize{ font-size: 2em;}
 
