@@ -63,12 +63,14 @@
             <div id="schedulePanel" class="mobilePanel lightGray1-BG borderRadiusSmall hideOverflow marginLeft10 flexGrow1 width90Mobile">
               <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
                 <div class="fullDay">
-                  <label for="fullDay" class="switchLabel">Full Day</label>
-                  <div>
-                    <label class="switch">
-                      <input type="switchColumn" id="fullDay" name="fullDay" onload="loadCheckBox(this, <%= student.DayType %>)">
-                      <span class="slider round"></span>
-                    </label>
+                  <div class="flex flexCenter width100">
+                    <% if(student.DayType == 0) { %>
+                      <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
+                      <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
+                    <% } else { %>
+                      <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable">Full Day</a>
+                      <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable toggled">Half Day</a>
+                    <% } %>
                   </div>
                 </div>
                 <ul id="schedule" class="selectableList flexColumn">
