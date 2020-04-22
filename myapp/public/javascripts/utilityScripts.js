@@ -48,6 +48,25 @@ function textAreaAdjust(textArea) {
     textArea.style.height = (textArea.style.fontSize + textArea.scrollHeight)+"px";
 }
 
+function isToggled(id){
+    return convertBoolToInt(document.getElementById(id).classList.contains('toggled'));
+}
+
+function toggleableToggled(element){
+    var parent = element.parentElement;
+    var others = parent.getElementsByTagName('a');
+    if(element.classList.contains('toggled')){
+        if(others.length === 1){
+            element.classList.remove("toggled");
+        }
+    }
+    else{
+        for(var i = 0; i < others.length; i++){
+            others[i].classList.remove('toggled');
+        }
+        element.classList.add('toggled');
+    }
+}
 
 /* FORM FUNCTIONS */
 
