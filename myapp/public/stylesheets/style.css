@@ -808,6 +808,7 @@ textarea:focus{
   top: 0px;
   width: 100%;
   margin-bottom: 25px;
+  z-index: 9999;
 }
 
 .section {
@@ -844,6 +845,9 @@ h1{
 
 svg {
   background-color: rgba(255, 255, 255, 0.9);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* heat map  

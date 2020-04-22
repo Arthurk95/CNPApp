@@ -69,15 +69,14 @@ white-space: normal;
 }
 
 .deleteButton {
-  margin-top: 5px;
   margin-left: 97%;
   color:rgb(143, 32, 32);
   background-color: rgb(199, 47, 47);
   border-color: rgb(143, 32, 32);
   display: inline;
-  font-size: 1.5em;
+  font-size: 2em;
   justify-self: right;
-  padding: 3px 3px;
+  padding: 3px 6.5px;
   filter: brightness(110%);
 }
 
