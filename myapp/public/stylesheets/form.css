@@ -33,64 +33,14 @@ HTML Formatting:
   
   /* The actual pop-up box that contains everything in the form */
   .formWindow-content {
+    display: flex;
+    flex-direction: column;
     border-radius: 4px;
     background-color: var(--lightGray1);
     margin: 2% auto; /* 15% from the top and centered */
     width: 1000px; /* Could be more or less, depending on screen size */
     padding: 30px;
     box-shadow: 0px 0px 15px 1px var(--darkGray2);
-  }
-
-  /* <ul> is used to list each component top-to-bottom */
-  .formWindow-content ul{
-    margin: 0;
-    margin-top: 30px;
-    padding: 0;
-  }
-
-  /* Each li is an element on the form, such as <input> or <a> */
-  .formWindow-content li{
-    display: flex;
-    justify-content: stretch;
-    margin: 5px 0px;
-  }
-
-  /* Large title at the top of the form (first <li>) */
-  .formTitleWithSwitch{
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    font-size: 2em;
-    color: var(--darkGray3);
-  }
-
-  .formTitleWithSwitch p{
-    align-self: flex-start;
-  }
-
-  .formTitleWithSwitch .rightAlignFormElement{
-    align-self: center;
-  }
-
-  .formTitle{
-    font-size: 2em;
-    color: var(--darkGray3);
-  }
-
-  /* Styling for the input fields. Makes them bigger and more prominent
-     with a nice inset border */
-  .formWindow input{
-    box-shadow: inset 0px 0px 3px 0px var(--darkGray2);
-    font-size: 1.2em;
-    display: table-cell;
-    color: var(--darkGray2);
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  /* Style for when an input field is selected */
-  .formWindow input:focus{
-    box-shadow: inset 0px 0px 4px 2px var(--adminColor);
   }
 
 
@@ -123,7 +73,8 @@ HTML Formatting:
   .close {
     position: relative;
     color: var(--darkGray3);
-    float: right;
+    right: 10px;
+    top: 10px;
     font-size: 80px;
     font-weight: bold;
     line-height: 0;
@@ -143,73 +94,13 @@ HTML Formatting:
       width: 85%;
     }
 
-    .formWindow-content li{
-      margin-bottom: 15px;
-    }
-
-    .formWindow a{
-      width: 90%;
-      font-size: 5em;
-    }
     .week li{
       margin: 2px 1.5vw !important;
     }
     .close{
       font-size: 80px;
     }
-  }
-
-  /* <ul> for the days of the week */
-  .week{
-    padding: 0;
-    justify-content: center;
-    list-style: none;
-    display: flex !important;
-    margin: 20px 0 !important;
-    width: 100%;
-    text-align: center;
-    align-items: center;
-    flex-direction: row !important;
-  }
-
-  /* Each <li> is a single weekday.
-     Creates the circle for the day. */
-  .week li{
-    margin: 2px 0.4vw;
-    width: 90px;
-    height: 90px;
-    padding: 0px !important;
-    border-radius: 50%;
-    background: var(--darkGray3);
-  }
-  
-  /* <p> tag is the text of the day. This element fills its <li> to fit. */
-  .week li a{
-    width: 90px;
-    height: 90px;
-    transition: 0.1s;
-    font-size: 2em;
-    color: var(--lightGray2);
-    display: flex;/*CSS3*/
-    align-items: center;/*Vertical align*/
-    justify-content: center;/*horizontal align*/
-  }
-
-  .week li:hover{
-    cursor: pointer;
-    box-shadow: inset 0px 0px 2px var(--darkGray1);
-    background: var(--darkGray2);
-    color: var(--lightGray1);
-  }
-
-  .selectedDay{
-    box-shadow: inset 0px 0px 6px 1px var(--darkGray3) !important;
-    background: var(--studentsColor) !important;
-  }
-
-  .selectedDay a{
-    color: var(--lightGray1) !important;
-    filter: brightness(130%);
+    .formSubmitButton{font-size: 5em;}
   }
 
   
