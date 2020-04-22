@@ -81,7 +81,7 @@ function bottomLayer(res,Students,){
         Reminders.push({title: "No reminders in database"});
       }
       else{
-        remind.foreach((element) => {
+        remind.forEach((element) => {
           console.log(element);
           Reminders.push({title: element.NameOf, contents: element.MainParagraphs});
         });
