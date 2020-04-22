@@ -77,6 +77,7 @@ function activitySelected(element, activityId){
         selectedActivityID = undefined;
         hideElement(backAndSubmit);
         hideElement(selectButton);
+        hideElement(pottyAndSelect);
     }
     // activity is not selected
     else{
