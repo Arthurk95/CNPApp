@@ -105,25 +105,25 @@ function generatePie(id){
     temp = document.createElement("label"); temp.innerHTML = "Beginning Date ";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id="sday" + id; temp.class="pretty-classic"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label");temp.innerHTML = " End Date ";
+    temp = document.createElement("label"); temp.innerHTML = " End Date ";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="emonth" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select");t emp.id="emonth" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id="eday" + id; temp.class="newLine"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id="eday" + id; temp.class="newLine"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
   }

@@ -95,6 +95,10 @@ white-space: normal;
   margin-top: 8em;
 }
 
+.startD {
+  margin-right: 2em;
+}
+
 .testing span::before{
   content: "\A";
   white-space: pre;
