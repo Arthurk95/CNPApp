@@ -74,21 +74,19 @@
           <p class="lightText font25px">Log</p>
         </div>
         <div class="heavyPadding maxHeight500px">
+          
           <ul id="comptasksList" class="ulList">
             <% if (compTasks.length > 0) { %> 
-              <table class="customTable halfWidth">          
-                <tbody>
-                  <% compTasks.forEach((task, index) => {%>
-                  <tr>
-                    <td class="left">
-                      <%= task.NoteContent %>
-                    </td>
-                    <td class="right green thirdWidth">
-                      <%= task.stamp %>
-                    </td>
-                  </tr>
-                  <% }) %>
-                </tbody>
+              <% compTasks.forEach((task, index) => {%>
+              <li class="flex spaceBetween">
+                <p><%= task.NoteContent %></p>
+                <div class="width40 accent4Light-BG centerText">
+                  <p><%= task.stamp %></p>
+                </div>
+              </li>
+              <% }) %>
+            <% } else {%>
+              <li><p>Log is empty</p></li>
             <% } %>
           </ul>
         </div>
