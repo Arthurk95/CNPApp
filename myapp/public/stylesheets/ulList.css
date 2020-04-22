@@ -137,11 +137,17 @@
     background: repeating-linear-gradient(
         45deg,
         white,
-        white 40px,
-        var(--accentColor2Light) 40px,
-        var(--accentColor2Light) 80px
+        white 20px,
+        var(--accentColor2Light) 20px,
+        var(--accentColor2Light) 40px
       ) !important;
+      
   }
+.stripedBackground p{
+    color: white;
+    mix-blend-mode: difference;
+    filter: brightness(200%);
+}
 
 @media screen and (max-width: 1200px){
     .ulList li button{width:9vw;}
