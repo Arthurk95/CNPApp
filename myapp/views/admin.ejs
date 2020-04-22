@@ -312,8 +312,9 @@
           <div class="heavyPadding">
             <ul id="behaviors" class="ulList">
               <% if (behaviors.length > 0) {%>
-                
+                <a id=behaviorCount style="visibility: hidden; display: none;" </a><%= behaviors.length %> </a>
                 <% behaviors.forEach((behavior, index) => { %>
+                  <a id="behavior<%= index %>" style="visibility: hidden; display: none;" </a><%= behavior.title %></a>
                   <li class="white-BG spaceBetween">
                       <p><%= behavior.title %></p>
                       <div class="flex">
@@ -356,6 +357,18 @@
                 <div class="flex width60 width100Mobile">
                   <div class="inputWithIcon width100 white-BG">
                     <input name=”notASearchField” type="text" id="newBehaviorOp3" placeholder="Option 3"/>
+                  </div>
+                </div>
+
+                <div class="flex width60 width100Mobile">
+                  <div class="inputWithIcon width100 white-BG">
+                    <input name=”notASearchField” type="text" id="newBehaviorOp4" placeholder="Option 4"/>
+                  </div>
+                </div>
+
+                <div class="flex width60 width100Mobile">
+                  <div class="inputWithIcon width100 white-BG">
+                    <input name=”notASearchField” type="text" id="newBehaviorOp5" placeholder="Option 5"/>
                   </div>
                 </div>
               </div>
@@ -594,19 +607,31 @@
       var op1 = document.getElementById("newBehaviorOp1").value;
       var op2 = document.getElementById("newBehaviorOp2").value;
       var op3 = document.getElementById("newBehaviorOp3").value;
-      var op4 = "";//document.getElementById("newBehaviorOp4").value;
-      var op5 = "";//document.getElementById("newBehaviorOp5").value;
+      var op4 = document.getElementById("newBehaviorOp4").value;
+      var op5 = document.getElementById("newBehaviorOp5").value;
       var theUrl = window.location.href+'/addbehavior';
       var data = "name=" + name + "&op1=" +  op1 + "&op2=" +  op2 + "&op3=" +  op3 + "&op4=" +  op4 + "&op5=" +  op5;
       var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
+      var count = document.getElementById("behaviorCount").text;
+      var found = false;
+      for(var i = 0 ; i < count ; i = i + 1){
+        var comp = document.getElementById("behavior" + i).text;
+        if(comp == name){
+          found = true;
+        }
+      }
+      if(found){
+        reloadIt();
+      }
+      else{
+        httpPostAsync(theUrl,data,callback);
+      }
     }
 
     function deleteBehavior(id){
       var theUrl = window.location.href+'/deletebehavior';
       var data = "id=" + id;
       var callback = reloadIt;
-      console.log(id);
       httpPostAsync(theUrl,data,callback);
     }
     
