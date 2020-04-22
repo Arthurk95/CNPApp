@@ -22,9 +22,9 @@
             <%- include listOfStudents.ejs %></ul>
 
             <ul id="activities" class="blockList activitiesList">
-                <li class="flex flexAlignCenter mediumPadding ">
+                <li class="flex flexAlignCenter">
                     <input class="lightGray1-BG font40px" onkeyup="updateSearch('activities', this)"></input>
-                    <i class="font30px fas fa-search"></i>
+                    <i class="font50px marginRight20 fas fa-search"></i>
                 </li>
                 <% activities.forEach((activity, index) => { %>
                 <li onclick="activitySelected(this, <%= activity.ActivityId %>)">
