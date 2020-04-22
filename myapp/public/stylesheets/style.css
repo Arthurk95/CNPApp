@@ -734,7 +734,6 @@ p{margin: 0;}
   .width90Mobile{width:90% !important; margin-bottom: 10px;}
   .flexContainer{ flex-direction: column;}
   .flexCollapseMobile{flex-direction: column !important; align-items: center !important; justify-content: center !important;}
-  .flexCollapseMobile > * {align-items: center !important;}
   .centerFlexMobile{justify-content: center !important; align-items: center !important;}
 
   .smallFont{font-size: 1em !important;}
