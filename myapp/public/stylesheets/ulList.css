@@ -99,9 +99,9 @@
 }
 
 .ulList .profileList:hover .leftCircle{
-    width: calc(var(--circleSize)+10px);
-    height: calc(var(--circleSize)+10px);
-    margin-left: calc((var(--circleSize)+10px) / 2);
+    width: calc(var(--circleSize) + 10px);
+    height: calc(var(--circleSize) + 10px);
+    margin-left: calc((var(--circleSize) + 10px) / 2 * (-1));
 }
 
 .ulList .leftCircle i{
