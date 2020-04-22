@@ -88,7 +88,7 @@
     justify-content: center;
     width: var(--circleSize);
     height: var(--circleSize);
-    margin-left: calc(var(--circleSize) * 0.4);
+    margin-left: calc(var(--circleSize) * 0.4 * (-1));
     border-radius: 50%;
     overflow: hidden;
     font-size: var(--circleSize);
