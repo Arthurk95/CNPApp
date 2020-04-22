@@ -21,11 +21,9 @@
       
       <!-- ------------ TASKS PANEL ------------ -->
       <div id="tasksPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width60">
-        <div class="darkGray3-BG mediumPadding relative">
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
           <p class="marginLeft10 lightText font25px">Tasks</p>
-          <a onclick="openForm('newTaskForm')" class="accent2Light-text font40px absolute absoluteRight top0px">
-            <i class=" fas fa-plus"></i>
-          </a>
+          <a onclick="openForm('newTaskForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
         </div>
         <div class="heavyPadding maxHeight500px">
           <ul id="tasksList" class="ulList">
@@ -55,10 +53,10 @@
           <div id="newTaskForm" class="formWindow">
             <div class="formWindow-content">
               <span class="close" onclick="closeForm()">&times;</span>
-              <p class="font50px marginBottom40 centerText accent2Light-text">Add a Task</p>
+              <p class="font50px centerText accent2Light-text marginBottom40">Add a Task</p>
 
-              <div class="flex spaceBetween flexAlignCenter flexCollapseMobile marginBelowChildren10 marginBottom40 width100">
-                <div class="flex width50 width90Mobile marginBottom40">
+              <div class="flex spaceBetween flexAlignCenter flexCollapseMobile marginBottom40 marginBelowChildren10 marginBottom40 width100">
+                <div class="flex width50 width90Mobile">
                   <div class="inputWithIcon width100 white-BG">
                     <input type="text" id="newTaskName" placeholder="Task Name">
                   </div>
@@ -91,7 +89,7 @@
               <% compTasks.forEach((task, index) => {%>
               <li class="flex spaceBetween">
                 <p><%= task.NoteContent %></p>
-                <div class="width40 accent4Light-BG centerText">
+                <div class="width40 lightGray3-BG centerText">
                   <p><%= task.stamp %></p>
                 </div>
               </li>
@@ -148,8 +146,12 @@
 
     function addTaskPost(){
       var theUrl = window.location.href+'/addtask';
+      var priority;
+      if(isToggled("low")){priority = 0;}
+      else if(isToggled("mid")){priority = 1;}
+      else {priority = 2;}
       var data = "name=" + document.getElementById("newTaskName").value +
-      "&priority=" +  document.getElementById("newTaskPriority").value;
+      "&priority=" + priority;
       var callback = reloadIt;
       httpPostAsync(theUrl,data,callback);
     }

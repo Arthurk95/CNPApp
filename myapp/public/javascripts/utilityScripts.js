@@ -37,9 +37,10 @@ function checkboxClicked(element) {
     }
 }
 
+// Half day is 0
 function checkStudentDayType(element, dayType){
     if(dayType == 0){
-      element.classList += " textShadow stripedBackground";
+      element.classList += " stripedBackground";
     }
   }
 

@@ -25,11 +25,9 @@
 
       <!-- --------------------- STUDENTS PANEL --------------------- -->
       <div id="studentsPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <div class="centerText darkGray3-BG mediumPadding relative">
-          <p class="lightText font25px">Students</p>
-          <a onclick="openForm('newStudentForm')" class="accent2Light-text font40px absolute absoluteRight top0px">
-            <i class=" fas fa-plus"></i>
-          </a>
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+          <p class="marginLeft10 lightText font25px">Students</p>
+          <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
         </div>
 
         <!-- Students list -->
@@ -57,7 +55,7 @@
               <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
                 <div class="inputWithIcon width45 width90Mobile white-BG">
                   <i class="fas fa-user"></i>
-                  <input name=”notASearchField” type="text" id="" placeholder="Student Name"/>
+                  <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
                 </div>
                 <div class="flex flexAlignCenter width45 width90Mobile">
                   <label class="accent2Light-text">Birthday:</label>
@@ -146,8 +144,8 @@
                   </div>
                   
                   <div class="flex flexCenter width100">
-                    <a onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
-                    <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
+                    <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
+                    <a onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
                   </div>
                 </div>
               </div>
@@ -165,16 +163,14 @@
       <!--  --------------------- ACTIVITIES PANEL --------------------- -->
       <div id="activitiesPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
         <!-- Title Bar -->
-        <div class="centerText darkGray3-BG mediumPadding relative">
-          <p id="activityTitle" class="lightText font25px">Activities</p>
+        <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
+          <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
           <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
-          <div class="absolute absoluteRight top0px">
-            <a onclick="toggleSearch('activitySearch', 'activityTitle')" class="lightText font40px">
+          <div class="flex">
+            <a onclick="toggleSearch('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
               <i class="fas fa-search"></i>
             </a>
-            <a onclick="openForm('newActivityForm')" class="accent2Light-text font40px">
-              <i class=" fas fa-plus"></i>
-            </a>
+            <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
           </div>
         </div>
 
@@ -239,8 +235,8 @@
   
       <!-- --------------------- EMAIL PANEL --------------------- -->
       <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <div class="centerText darkGray3-BG mediumPadding">
-          <p class="lightText font25px">Email Settings</p>
+        <div class="darkGray3-BG mediumPadding">
+          <p class="marginLeft10 lightText font25px">Email Settings</p>
           
         </div>
         <div class="heavyPadding maxHeight500px">
@@ -257,11 +253,9 @@
     
       <!-- --------------------- REMINDER PANEL --------------------- -->
       <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <div class="centerText darkGray3-BG mediumPadding relative">
-          <p class="lightText font25px">Reminders</p>
-          <a onclick="openForm('newReminderForm')" class="accent2Light-text font40px absolute absoluteRight top0px">
-            <i class=" fas fa-plus"></i>
-          </a>
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+          <p class="marginLeft10 lightText font25px">Reminders</p>
+          <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
         </div>
         <div class="heavyPadding maxHeight500px">
           <ul id="reminders" class="ulList">
@@ -311,11 +305,9 @@
           
             <!-- --------------------- BEHAVIORS PANEL --------------------- -->
         <div id="behaviorsPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
-          <div class="centerText darkGray3-BG mediumPadding relative">
-            <p class="lightText font25px">Behaviors</p>
-            <a onclick="openForm('newBehaviorForm')" class="accent2Light-text font40px absolute absoluteRight top0px">
-              <i class=" fas fa-plus"></i>
-            </a>
+          <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+            <p class="marginLeft10 lightText font25px">Behaviors</p>
+            <a onclick="openForm('newBehaviorForm')" class="lightPadding accent2Light-text font15px">Add New</a>
           </div>
           <div class="heavyPadding">
             
@@ -476,7 +468,7 @@
     //generate perameters for post and call post
     function callPostStu(){
       var theUrl = window.location.href+'/addstudent';
-      var halfDay = isToggled("halfDay");
+      var dayType = isToggled("fullDay"); // 0 = half, 1 = full
       birthday = getSelectedBirthday();
 
       var data = 
@@ -495,7 +487,7 @@
       "&thu=" + isDaySelected("thu") + 
       "&fri=" + isDaySelected("fri") + 
       "&sat=" + 0 + 
-      "&halfDay=" + halfDay + 
+      "&halfDay=" + dayType + 
       "&enroll=" + 1 ;
       var callback = reloadIt;
 
