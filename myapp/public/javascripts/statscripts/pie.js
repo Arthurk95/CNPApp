@@ -158,6 +158,7 @@ function generatePie(id){
 
   function updateOp2(id) {
     var newdiv = document.getElementById("op2" + id);
+    var opid1 = document.getElementById("optionid1" + id)[document.getElementById("optionid1" + id).selectedIndex].value;
     var temp,temp2;
     if(newdiv.hasChildNodes()){
       document.getElementById("option2" + id).remove();
@@ -169,9 +170,11 @@ function generatePie(id){
     temp2 = document.createElement("option");
     temp2.innerHTML = "Activities";
     temp.appendChild(temp2);
-    temp2 = document.createElement("option");
-    temp2.innerHTML = "Friends";
-    temp.appendChild(temp2);
+    if(opid1 != "all"){
+      temp2 = document.createElement("option");
+      temp2.innerHTML = "Friends";
+      temp.appendChild(temp2);
+    }
     newdiv.appendChild(temp);
   }
 
@@ -184,7 +187,7 @@ function generatePie(id){
     temp = document.createElement("select");
     temp.id="optionid1" + id;
     temp.class="pretty-classic";
-    temp.onchange = function(){updateData(id);};
+    temp.onchange = function(){updateData(id);updateOp2(id);};
     temp2 = document.createElement("option");
     temp2.value = "all";
     temp2.innerHTML = "All Students";
