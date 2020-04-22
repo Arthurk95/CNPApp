@@ -12,7 +12,7 @@
   top: 0;
   left: 0;
   background: #fff;
-  border: 1px solid #a9a9a9;
+  border: 1px solid var(--lightGray3);
   border-radius: 5px;
   box-sizing: content-box;
   color: #000;
@@ -51,12 +51,12 @@
 .prettydropdown > ul > li {
   position: relative;
   min-width: 70px;
-  height: 48px; /* 50px - borders */
+  height: 40px; /* 50px - borders */
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   box-sizing: border-box;
   display: none;
-  line-height: 46px; /* 48px - borders */
+  line-height: 38px; /* 48px - borders */
   margin: 0;
   padding-left: 0.8rem;
 }
