@@ -39,7 +39,7 @@
                   <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
                     <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
                     <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-                    <p><%= student.StudentName %></p>
+                    <p class="width80"><%= student.StudentName %></p>
                   </li>
                 <% }) %>
             <% } %>  
@@ -147,27 +147,19 @@
         <div class="heavyPadding maxHeight500px">
           <ul id="activities" class="ulList">
             <% if (activities.length > 0) {%>
-              
               <% activities.forEach((activity, index) => { %>
-                
-                
                   <% if (activity.Hidden == 1) { %>
-                  <li class="main-BG blackAndWhite">
-                    <p><%= activity.ActivityName %></p>
-                    <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                    <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                    <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
-                    
+                    <li class="main-BG blackAndWhite spaceBetween">
                   <% } else { %>
-                  <li class="white-BG">
-                    <p><%= activity.ActivityName %></p>
-                    <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                    <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                    <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
-                    
+                    <li class="white-BG spaceBetween">
                   <% } %>
-                  
-                </li>
+                    <p><%= activity.ActivityName %></p>
+                    <div class="flex">
+                      <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                      <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                      <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                  </li>
               <% }) %>
             <% } %>
           
@@ -240,11 +232,14 @@
             <% if (reminders.length > 0) {%>
               
               <% reminders.forEach((reminder, index) => { %>
-                <li class="white-BG">
+                <li class="white-BG spaceBetween">
                     <p><%= reminder.title %></p>
-                    <button class="yellow3-BG" onclick=""><i class="far fa-edit"></i></button>
-                    <button class="red3-BG" onclick=""><i class="far fa-trash-alt"></i></button>              
-                 
+                    <div class="flex">
+                      <button class="yellow3-BG" onclick=""><i class="far fa-edit"></i></button>
+                      <button class="red3-BG" onclick=""><i class="far fa-trash-alt"></i></button>              
+                   
+                    </div>
+                    
               <% }) %>
             <% } %>
           
@@ -299,7 +294,6 @@
 
   </body>
   
-  <script src="/javascripts/tabs.js"></script>
   <script>
     $dropdown = $('.pretty-classic').prettyDropdown({
         classic: true,
@@ -349,7 +343,7 @@
       }
       else{ theUrl = window.location.href+'/hideactivity'; }
       data = "id=" + id;
-      toggleActivityHide(element.parentElement)
+      toggleActivityHide(element.parentElement.parentElement)
       callback = doNothing;
 
       httpPutAsync(theUrl, data, callback);
