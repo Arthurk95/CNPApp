@@ -56,16 +56,16 @@ function generateLine(id) {
 
   //Start and End Date
   {
-    temp = document.createElement("label");temp.innerHTML = "Beginning Date ";
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date ";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "syear"+id;temp.class="pretty-classic";temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="smonth" + id;temp.class="pretty-classic";temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id="sday" + id;temp.class="pretty-classic";temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select");temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label");temp.innerHTML = " End Date ";
@@ -82,13 +82,12 @@ function generateLine(id) {
 
   }
 
-  //Delete button
-  temp = document.createElement("button");temp.id="button";temp.class="deleteButton";temp.className="deleteButton";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "X";
-  newdiv.appendChild(temp);
-
-
   //The Spin thing
   temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "20";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
+  newdiv.appendChild(temp);
+
+  //Delete button
+  temp = document.createElement("button");temp.id="button";temp.class="deleteB";temp.className="deleteB";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "X";
   newdiv.appendChild(temp);
 
   //First Drop Down Option
