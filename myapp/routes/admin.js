@@ -103,12 +103,49 @@ const fs = require('fs');
     });
   });
 
+  router.post('/addreminder', auth.checkAuthenticated, function(req, res){
+    var sql = "CALL AddRemindersObject('" + req.body.name + "', '" + req.body.paragraph + "');";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.post('/deletereminder', auth.checkAuthenticated, function(req, res){
+    var sql = "CALL DeleteRemindersObject('" + req.body.id + "');";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.post('/addbehavior', auth.checkAuthenticated, function(req, res){
+    var sql = "CALL AddTemplateObject('" + req.body.name + "', '" + req.body.op1 + "', '" + req.body.op2 + "', '" + req.body.op3 + "', '" + req.body.op4 + "', '" + req.body.op5 + "');";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.post('/deletebehavior', auth.checkAuthenticated, function(req, res){
+    var sql = "CALL DeleteTemplateObject('" + req.body.id + "');";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
   /* GET home page. */
   router.get('/', auth.checkAuthenticated, function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "CALL ShowAllActivities();";
     var task_query = "SELECT * FROM cnp_data.Tasks;";
     var get_reminders = "CALL ShowUnhiddenRemindersObject();";
+    var get_behaviors = "CALL ShowAllTemplateObject();"
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
       con.query(activity_query, function (err, aQuery) {
@@ -128,15 +165,26 @@ const fs = require('fs');
             remind = remind[0];
             var Reminders = [];
             if(remind.length == 0){
-              Reminders.push({title: "No reminders in database"});
+              Reminders.push({title: "No reminders in database", value:-1});
             }
             else{
-              remind.foreach((element) => {
-                console.log(element);
-                Reminders.push({title: element.NameOf, contents: element.MainParagraphs});
+              remind.forEach((element) => {
+                Reminders.push({title: element.NameOf, contents: element.MainParagraphs, id: element.TemplateId});
               });
             }
-            res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders});
+            con.query(get_behaviors, function(err, behave){
+              behave = behave[0];
+              var Behaviors = [];
+              if(behave.length == 0){
+                Behaviors.push({title: "No behaviors in database", value:-1});
+              }
+              else{
+                behave.forEach((element) => {
+                  Behaviors.push({title: element.NameOf, cat1:element.CategoryOne, cat2:element.CategoryTwo, cat3:element.CategoryThree, cat4:element.CategoryFour, cat5:element.CategoryFive,id:element.TemplateId});
+                })
+              }
+              res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors});
+            });
           });
         });
         

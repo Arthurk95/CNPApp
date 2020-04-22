@@ -265,9 +265,9 @@
                 <li class="white-BG spaceBetween">
                     <p><%= reminder.title %></p>
                     <div class="flex">
-                      <button class="yellow3-BG" onclick=""><i class="far fa-edit"></i></button>
-                      <button class="red3-BG" onclick=""><i class="far fa-trash-alt"></i></button>              
-                   
+                      <% if(reminder.value != -1){ %>
+                        <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
+                      <% }; %>
                     </div>
                     
               <% }) %>
@@ -310,7 +310,22 @@
             <a onclick="openForm('newBehaviorForm')" class="lightPadding accent2Light-text font15px">Add New</a>
           </div>
           <div class="heavyPadding">
+            <ul id="behaviors" class="ulList">
+              <% if (behaviors.length > 0) {%>
+                
+                <% behaviors.forEach((behavior, index) => { %>
+                  <li class="white-BG spaceBetween">
+                      <p><%= behavior.title %></p>
+                      <div class="flex">
+                        <% if(behavior.value != -1){ %>
+                          <button class="red3-BG" onclick="deleteBehavior(<%= behavior.id %>)"><i class="far fa-trash-alt"></i></button>              
+                        <% }; %>
+                      </div>
+                      
+                <% }) %>
+              <% } %>
             
+            </ul>
           </div>
 
           <!-- --------------------- New behavior Form --------------------- -->
@@ -346,7 +361,7 @@
               </div>
 
               <div class="flex flexCenter">
-                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="callPostReminder()">Create</a>
+                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newBehaviorSubmit" onclick="callPostBehavior()">Create</a>
               </div>
             </div>
           </div> <!-- End new behavior form -->
@@ -558,7 +573,42 @@
       httpPutAsync(theUrl,data,callback); 
 
     }
+    function callPostReminder(){
+      var name = document.getElementById("newReminderName").value;
+      var paragraph = document.getElementById("newReminderParagraph").value;
+      var theUrl = window.location.href+'/addreminder';
+      var data = "name=" + name + "&paragraph=" +  paragraph;
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
 
+    function deleteReminder(id){
+      var theUrl = window.location.href+'/deletereminder';
+      var data = "id=" + id;
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
+
+    function callPostBehavior(){
+      var name = document.getElementById("newBehaviorName").value;
+      var op1 = document.getElementById("newBehaviorOp1").value;
+      var op2 = document.getElementById("newBehaviorOp2").value;
+      var op3 = document.getElementById("newBehaviorOp3").value;
+      var op4 = document.getElementById("newBehaviorOp4").value;
+      var op5 = document.getElementById("newBehaviorOp5").value;
+      var theUrl = window.location.href+'/addbehavior';
+      var data = "name=" + name + "&op1=" +  op1 + "&op2=" +  op2 + "&op3=" +  op3 + "&op4=" +  op4 + "&op5=" +  op5;
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
+
+    function deleteBehavior(id){
+      var theUrl = window.location.href+'/deletebehavior';
+      var data = "id=" + id;
+      var callback = reloadIt;
+      console.log(id);
+      httpPostAsync(theUrl,data,callback);
+    }
     
   </script>
 </html>
