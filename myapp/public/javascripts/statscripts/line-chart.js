@@ -56,10 +56,10 @@ function generateLine(id) {
 
   //Start and End Date
   {
-    temp = document.createElement("label");temp.innerHTML = "Beginning Date ";
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date ";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "syear"+id;temp.class="pretty-classic";temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("select");temp.id="smonth" + id;temp.class="pretty-classic";temp.onchange = function(){sgenDays(id); updateData(id);};
