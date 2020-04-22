@@ -31,17 +31,23 @@
           <ul id="tasksList" class="ulList">
             <% if (tasks.length > 0) { %>            
               <% tasks.forEach((task, index) => { %>
-                <li> 
-                  <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
-                  <p><%= task.NoteContent %></p> 
-                  <% if (task.Priority == 0) { %>
-                    <button class="accent2Light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
-                  <% } else if(task.Priority == 1) { %>
-                    <button class="accent3Light-BG" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
-                  <% } else { %>
-                    <button class="accent4Light-BG" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
-                  <% } %>
-                  <button class="accent4-BG" onclick="deleteTask('<%= task.TaskId %>')"><i class="lightText far fa-trash-alt"></i></button>
+                <li class="spaceBetween"> 
+                  <div class="flex">
+                    <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
+                    <p><%= task.NoteContent %></p> 
+                  </div>
+                  
+                  <div class="flex font25px">
+                    <% if (task.Priority == 0) { %>
+                      <button class="accent2Light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
+                    <% } else if(task.Priority == 1) { %>
+                      <button class="accent3Light-BG" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
+                    <% } else { %>
+                      <button class="accent4Light-BG" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
+                    <% } %>
+                    <button class="accent4-BG" onclick="deleteTask('<%= task.TaskId %>')"><i class="lightText far fa-trash-alt"></i></button>
+                  </div>
+                  
               <% }) %>
             <% } %>
           </ul>
@@ -152,15 +158,16 @@
       httpPostAsync(theUrl, data, callback);
     }
     function taskComplete(element, task){
+      var parent = element.parentElement.parentElement;
       checkboxClicked(element);
-      $(element.parentElement.getElementsByTagName("button")).animate({width:'toggle'},200);
-      $(element.parentElement.getElementsByTagName("p")).animate({color: "#EEEEEE"},200);
+      $(parent.getElementsByTagName("button")).animate({width:'toggle'},200);
+      $(parent.getElementsByTagName("p")).animate({color: "#EEEEEE"},200);
 
-      $(element.parentElement).animate({backgroundColor: "#5E895F"}, 200);
+      $(parent).animate({backgroundColor: "#5E895F"}, 200);
 
       
       setTimeout(function(){
-        $(element.parentElement).slideUp("fast");
+        $(parent).slideUp("fast");
         $(element).animate({bottom: "200px"}, 100);
         //element.parentElement.style.display = "none";
       }, 500);
