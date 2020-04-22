@@ -82,13 +82,12 @@ function generateLine(id) {
 
   }
 
-  //Delete button
-  temp = document.createElement("button");temp.id="button";temp.class="deleteButton";temp.className="deleteButton";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "X";
-  newdiv.appendChild(temp);
-
-
   //The Spin thing
   temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "20";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
+  newdiv.appendChild(temp);
+
+  //Delete button
+  temp = document.createElement("button");temp.id="button";temp.class="deleteB";temp.className="deleteB";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "X";
   newdiv.appendChild(temp);
 
   //First Drop Down Option

@@ -55,36 +55,40 @@ white-space: normal;
   top: 0%;
 }
 
-.deleteB {
-  margin-top: 5px;
-  margin-left: 42%;
-  color:rgb(143, 32, 32);
-  background-color: rgb(199, 47, 47);
-  border-color: rgb(143, 32, 32);
-  display: block;
-  font-size: 1.5em;
-  justify-self: right;
-  padding: 2.5px 3px;
-  filter: brightness(110%);
-}
-
 .deleteButton {
-  margin-left: 97%;
+  margin-left: 95%;
   color:rgb(143, 32, 32);
   background-color: rgb(199, 47, 47);
   border-color: rgb(143, 32, 32);
-  display: inline;
+  display: inline-block;
   font-size: 2em;
   justify-self: right;
   padding: 3px 6.5px;
-  filter: brightness(110%);
+  filter: brightness(120%);
+}
+
+.deleteB {
+  position: relative;
+  justify-content: right;
+  color:rgb(143, 32, 32);
+  background-color: rgb(199, 47, 47);
+  border-color: rgb(143, 32, 32);
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 2em;
+  justify-self: right;
+  padding: 3px 6.5px;
+  filter: brightness(120%);
 }
 
 .spinny {
-  
+  margin-right: 70%;
   background-color: rgba(0, 0, 0, 0.051);
-  width: 30%;
+  justify-self: left;
+  width: 25%;
+  display: inline-block;
   visibility: visible;
+  z-index: 9000;
 }
 
 .testing span::before{
