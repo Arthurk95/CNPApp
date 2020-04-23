@@ -123,6 +123,7 @@
                                                 <i class="fas fa-sticky-note darkText"></i>
                                             </a>
                                         </div>
+                                        <textarea id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea>
                                     </div>
 
                                     <!-- Add note behavior forms -->
@@ -227,7 +228,9 @@
                 $('select').selectmenu();
             }
 
-            function behaviorNote(behavior){}
+            function behaviorNote(behavior){
+                console.log(behavior);
+            }
 
             // When the user clicks anywhere outside of the form window, close it
             window.onclick = function(event) {

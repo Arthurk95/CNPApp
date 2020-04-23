@@ -195,11 +195,12 @@ router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
 
 router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next) {
   var behavior_names = req.body.behaviorNames.split(',');
-  var behavior_selection = req.body.studentsBehaviors.split(',');
-  var notes = ['']; //4th param is note--null for now
-
+  var behavior_selection = req.body.studentsBehaviorSelection.split(',');
+  var behavior_notes = req.body.studentsBehaviorNotes.split(',');
+  
+  console.log('push behavior')
   for (var i = 0; i < behavior_names.length; i++ ) {
-    push_behaviors_query = `CALL AddBehavior(${req.body.id}, "${behavior_names[i]}", "${behavior_selection[i]}", "${notes[i]}");`;
+    push_behaviors_query = `CALL AddBehavior(${req.body.id}, "${behavior_names[i]}", "${behavior_selection[i]}", "${behavior_notes[i]}");`;
     (function (query) { 
       con.query(query, function (err, result) {
         if (err) {
