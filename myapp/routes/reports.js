@@ -40,21 +40,11 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
 
             var [pottyAccidents] = accidentCount[0];
             console.log(pottyAccidents);
-            if (pottyAccidents !== undefined) {
-              
             Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
-          } else {
-              Students[i].pottyAccidents = 0;
-            }
 
             var [pottyBreaks] = pottyCount[0];
             console.log(pottyBreaks);
-            if (pottyBreaks !== undefined) {
-              
             Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
-          } else {
-              Students[i].pottyBreaks = 0;
-            }
 
             var looper = act[0];
             looper.forEach(element => {
