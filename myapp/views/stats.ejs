@@ -199,7 +199,7 @@
         data = JSON.parse(data);
         console.log(data);
         var datum = [];
-        var id;
+        var id, total = 0;
         data.forEach((element) => {
           if(element.caller != null) {
             id = element.caller;
@@ -210,16 +210,18 @@
             var temp = document.getElementById('option2' + id).options[document.getElementById('option2' + id).selectedIndex].text;
             if(temp == "Activities"){
               datum[element.activityName] = element.value;
+              total = total + element.value;
             }
             else if(temp == "Friends"){
               datum[element.friend] = element.timestogether;
+              total = total + element.timestogether;
             }
             
           }
         }); 
        chartArray.forEach((chart) => {
           if(chart.myId == id){
-            chart.update(datum);
+            chart.update(datum,total);
           }
         });
       }

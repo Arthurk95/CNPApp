@@ -37,11 +37,9 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
             }
 
             var [pottyAccidents] = accidentCount[0];
-            console.log(pottyAccidents);
             Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
 
             var [pottyBreaks] = pottyCount[0];
-            console.log(pottyBreaks);
             Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
 
             var looper = act[0];

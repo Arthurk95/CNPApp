@@ -30,7 +30,7 @@ class thePie {
         .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
   }
 
-  update(data) {
+  update(data,total) {
     var parentObject = this;
     // Compute the position of each group on the pie:
     var pie = d3.pie()
