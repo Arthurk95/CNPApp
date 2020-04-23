@@ -125,8 +125,8 @@
                 
                 <!-- Allergies/Notes -->
                 <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                  <textarea class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
-                  <textarea class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAccommodations" placeholder="Special Accommodations"></textarea>
+                  <textarea id="allergies-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
+                  <textarea id="accommodations-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAccommodations" placeholder="Special Accommodations"></textarea>
                 </div>
                 
                 <!-- Schedule -->
@@ -520,7 +520,9 @@
       "&fri=" + isDaySelected("fri") + 
       "&sat=" + 0 + 
       "&halfDay=" + dayType + 
-      "&enroll=" + 1 ;
+      "&enroll=" + 1 +
+      "&allergies=" + document.getElementById("allergies-text").value +
+      "&accommodations=" + document.getElementById("accommodations-text").value;
       var callback = reloadIt;
 
       httpPostAsync(theUrl, data, callback);
