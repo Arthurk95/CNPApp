@@ -123,7 +123,7 @@
                                                 <i class="fas fa-sticky-note darkText"></i>
                                             </a>
                                         </div>
-                                        <textarea id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea>
+                                        <!-- <textarea id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea> -->
                                     </div>
 
                                     <!-- Add note behavior forms -->
@@ -132,7 +132,7 @@
                                             <span class="close" onclick="closeForm()">&times;</span>
                                             <p class="font50px marginBottom40 centerText accent2Light-text"><%= behavior.name %></p>
                                             <div class="flex flexColumn flexCenter center flexAlignCenter marginBelowChildren10 width80 width90Mobile">
-                                                <textarea class="width100" id="<%= behavior.name %>Note" placeholder="Note"></textarea>
+                                                <textarea class="width100" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> notes.."></textarea>
                                             </div>
                                             <div class="flex flexCenter">
                                                 <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="behaviorNote(this)">Save Note</a>
