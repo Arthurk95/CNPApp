@@ -20,7 +20,7 @@ class thePie {
      // set the color scale
     this.color = d3.scaleOrdinal()
      .domain(["a", "b", "c", "d", "e", "f"])
-     .range(d3.schemeDark2);
+     .range(d3.schemeSet3, d3.schemeCategory10) 
 
     // append the svg object to the div called 'pie'
     this.svg = d3.select("#" + id)
@@ -98,7 +98,7 @@ class thePie {
       .on('mouseover', function(d) {
         d3.select(this).transition()
              .duration('50')
-             .attr('opacity', '.55');
+             .attr('opacity', '.50');
         div.transition()
              .duration(50)
              .style("opacity", 1);
