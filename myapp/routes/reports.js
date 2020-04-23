@@ -25,7 +25,9 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
       });
       activities_query = "CALL ShowStudentDailyActivitiesToday(" + Students[i].id + ");";
       con.query(activities_query, function (err, act) {
-        if (err) throw err;
+        if (err) {
+          console.log(err);
+        }
 
         con.query(`CALL PullRestroomNumberId(${Students[i].id});`, function (err, pottyCount) {
           if (err) {
@@ -38,11 +40,21 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
 
             var [pottyAccidents] = accidentCount[0];
             console.log(pottyAccidents);
+            if (pottyAccidents !== undefined) {
+              
             Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
+          } else {
+              Students[i].pottyAccidents = 0;
+            }
 
             var [pottyBreaks] = pottyCount[0];
             console.log(pottyBreaks);
+            if (pottyBreaks !== undefined) {
+              
             Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
+          } else {
+              Students[i].pottyBreaks = 0;
+            }
 
             var looper = act[0];
             looper.forEach(element => {
