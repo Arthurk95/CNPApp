@@ -54,13 +54,12 @@ class thePie {
      .style("opacity", 0);
 
     // map to data
+    //path
     var u = this.svg.selectAll("path")
       .data(data_ready)
 
+    //text
     var t = this.svg.selectAll("text")
-      .data(data_ready)
-
-    var h = this.svg.selectAll("hov")
       .data(data_ready)
 
     var arcLabel = d3.arc()
@@ -83,14 +82,13 @@ class thePie {
       .style("stroke-width", "2px")
       .style("opacity", 1)
 
-    //label  
+    //label and hover
     t 
       .enter()
       .append('text')
       .merge(t)
-      .text(function(d){ 
+      .text(function(d) { 
         if (d.data.value > 0)
-          //return " " + d.data.key + "\n" + d.value})
           return "" + d.data.key })
       .attr("transform", function(d) { 
         return "translate(" + arcLabel.centroid(d) + ")";  })
@@ -100,22 +98,22 @@ class thePie {
       .on('mouseover', function(d) {
         d3.select(this).transition()
              .duration('50')
-             .attr('opacity', '.85');
+             .attr('opacity', '.55');
         div.transition()
              .duration(50)
              .style("opacity", 1);
-        div.html(d.value)
+        div.html("Total: " + d.value)
              .style("left", (d3.event.pageX + 10) + "px")
-             .style("top", (d3.event.pageY - 10) + "px");
+             .style("top", (d3.event.pageY - 15) + "px");
       })
 
       .on("mouseout", function(d){
         d3.select(this).transition()
-             .duration('50')
+             .duration('500')
              .attr('opacity', '1');
-        //Makes the new div disappear:
+        //Make new div disappear
         div.transition()
-             .duration('50')
+             .duration('500')
              .style("opacity", 0);
       })
 
