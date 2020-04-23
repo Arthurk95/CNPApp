@@ -102,6 +102,8 @@ white-space: normal;
 }
 
 div.tooltip-pie {
+  white-space: pre-wrap;
+  cursor: pointer;
   position: absolute;
   text-align: center;
   padding: .8rem;
@@ -109,7 +111,6 @@ div.tooltip-pie {
   color: #313639;
   border: 1px solid #313639;
   border-radius: 8px;
-  cursor: pointer;
   pointer-events: none;
   font-size: 1.3rem;
 }
