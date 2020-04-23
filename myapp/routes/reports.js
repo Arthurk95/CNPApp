@@ -6,7 +6,10 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
   var Students = [];
   var daily_query = "CALL PullUnhiddenStudents();";
   con.query(daily_query, function (err, dailyStudents) {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+    }
+
     recurseDailies(Students, dailyStudents, 0, res);
   })
 
@@ -25,7 +28,9 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
       });
       activities_query = "CALL ShowStudentDailyActivitiesToday(" + Students[i].id + ");";
       con.query(activities_query, function (err, act) {
-        if (err) throw err;
+        if (err) {
+          console.log(err);
+        }
 
         con.query(`CALL PullRestroomNumberId(${Students[i].id});`, function (err, pottyCount) {
           if (err) {
@@ -35,12 +40,22 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
             if (err) {
               console.log(err);
             }
-
             var [pottyAccidents] = accidentCount[0];
-            Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
-
+            console.log(pottyAccidents);
+            try {
+              Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
+            } catch (e) {
+              Students[i].pottyAccidents = 'err';
+              console.log(e);
+            }
             var [pottyBreaks] = pottyCount[0];
-            Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
+            console.log(pottyBreaks);
+            try {
+              Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
+            } catch (e) {
+              Students[i].pottyBreaks = 'err';
+              console.log(e);
+            }
 
             var looper = act[0];
             looper.forEach(element => {

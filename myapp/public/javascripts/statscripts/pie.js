@@ -3,6 +3,7 @@ class thePie {
   color = null; 
   radius = null;
   svg = null;
+  tooltip = null;
   myId = null;
 
   constructor(id) {
@@ -19,7 +20,7 @@ class thePie {
      // set the color scale
     this.color = d3.scaleOrdinal()
      .domain(["a", "b", "c", "d", "e", "f"])
-     .range(d3.schemeDark2);
+     .range(d3.schemeSet3, d3.schemeCategory10) 
 
     // append the svg object to the div called 'pie'
     this.svg = d3.select("#" + id)
@@ -28,6 +29,16 @@ class thePie {
         .attr("height", this.height)
       .append("g")
         .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
+
+    this.tooltip = d3.select("#" + id)
+        .append("svg")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
   }
 
   update(data,total) {
@@ -38,10 +49,16 @@ class thePie {
       .sort(function(a, b) { return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
     var data_ready = pie(d3.entries(data))
 
+    var div = d3.select("body").append("div")
+     .attr("class", "tooltip-pie")
+     .style("opacity", 0);
+
     // map to data
+    //path
     var u = this.svg.selectAll("path")
       .data(data_ready)
 
+    //text
     var t = this.svg.selectAll("text")
       .data(data_ready)
 
@@ -65,21 +82,41 @@ class thePie {
       .style("stroke-width", "2px")
       .style("opacity", 1)
 
-    //label  
+    //label and hover
     t 
       .enter()
       .append('text')
       .merge(t)
-      .transition()
-      .duration(1000)
-      .text(function(d){ 
+      .text(function(d) { 
         if (d.data.value > 0)
-          //return " " + d.data.key + "\n" + d.value})
           return "" + d.data.key })
       .attr("transform", function(d) { 
         return "translate(" + arcLabel.centroid(d) + ")";  })
       .style("text-anchor", "middle")
       .style("font-size", 20)
+
+      .on('mouseover', function(d) {
+        d3.select(this).transition()
+             .duration('50')
+             .attr('opacity', '.50');
+        div.transition()
+             .duration(50)
+             .style("opacity", 1);
+        let percent = (Math.round((d.value / d.value) * 100)).toString() + '%';
+        div.html("Total: " + d.value + "\n Percent: %") //+ percent)
+             .style("left", (d3.event.pageX + 20) + "px")
+             .style("top", (d3.event.pageY + 20) + "px");
+      })
+
+      .on("mouseout", function(d){
+        d3.select(this).transition()
+             .duration('500')
+             .attr('opacity', '1');
+        //Make new div disappear
+        div.transition()
+             .duration('500')
+             .style("opacity", 0);
+      })
 
     // remove the group that is not present anymore
     u

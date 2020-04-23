@@ -123,6 +123,8 @@
                                                 <i class="fas fa-sticky-note darkText"></i>
                                             </a>
                                         </div>
+                                        <!-- <textarea id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea> -->
+                                        <!-- if we want a text box to the right instead, will work just the same right away once un-commented -->
                                     </div>
 
                                     <!-- Add note behavior forms -->
@@ -131,11 +133,11 @@
                                             <span class="close" onclick="closeForm()">&times;</span>
                                             <p class="font50px marginBottom40 centerText accent2Light-text"><%= behavior.name %></p>
                                             <div class="flex flexColumn flexCenter center flexAlignCenter marginBelowChildren10 width80 width90Mobile">
-                                                <textarea class="width100" id="<%= behavior.name %>Note" placeholder="Note"></textarea>
+                                                <textarea class="width100" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> notes.."></textarea>
                                             </div>
-                                            <div class="flex flexCenter">
+                                            <!-- <div class="flex flexCenter">
                                                 <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="behaviorNote(this)">Save Note</a>
-                                            </div>
+                                            </div> -->
                                             
                                         </div>
                                     </div>
@@ -227,7 +229,9 @@
                 $('select').selectmenu();
             }
 
-            function behaviorNote(behavior){}
+            function behaviorNote(behavior){
+                console.log(behavior);
+            }
 
             // When the user clicks anywhere outside of the form window, close it
             window.onclick = function(event) {

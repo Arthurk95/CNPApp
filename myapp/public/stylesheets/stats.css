@@ -46,7 +46,7 @@ white-space: normal;
 }
 
 #newchart {
-  margin-top: 60px;
+  margin-top: 75px;
 }
 
 #deleteButton {
@@ -64,6 +64,7 @@ white-space: normal;
   font-size: 2em;
   justify-self: right;
   padding: 3px 6.5px;
+  cursor: pointer;
   filter: brightness(120%);
 }
 
@@ -78,6 +79,7 @@ white-space: normal;
   font-size: 2em;
   justify-self: right;
   padding: 3px 6.5px;
+  cursor: pointer;
   filter: brightness(120%);
 }
 
@@ -97,6 +99,20 @@ white-space: normal;
 
 .startD {
   margin-right: 2em;
+}
+
+div.tooltip-pie {
+  white-space: pre-wrap;
+  cursor: pointer;
+  position: absolute;
+  text-align: center;
+  padding: .8rem;
+  background: #FFFFFF;
+  color: #313639;
+  border: 1px solid #313639;
+  border-radius: 8px;
+  pointer-events: none;
+  font-size: 1.3rem;
 }
 
 .testing span::before{
