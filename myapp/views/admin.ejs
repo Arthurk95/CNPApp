@@ -21,217 +21,379 @@
   </head>
   <body>
 
-    <div class="flex spaceEvenly flexWrap">
+    <div class="flex flexColumn">
 
-      <!-- --------------------- STUDENTS PANEL --------------------- -->
-      <div id="studentsPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-          <p class="marginLeft10 lightText font25px">Students</p>
-          <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
-        </div>
-
-        <!-- Students list -->
-        <div class="heavyPadding maxHeight500px">
-          <ul id="students" class="ulList spaceAround">
-            <% if (students.length > 0) { %>
-              <% students.forEach((student, index) => { %>
-                <% studentSpl = student.StudentName.split(" "); %>
-                  <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
-                    <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
-                    <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-                    <p class="width80"><%= student.StudentName %></p>
-                  </li>
-                <% }) %>
-            <% } %>  
-          </ul>
-
-          <!-- --------------------- New Student Form --------------------- -->
-          <div id="newStudentForm" class="formWindow">
-            <div class="formWindow-content flexContainer">
-              <span class="close" onclick="closeForm()">&times;</span>
-              <p class="font50px marginBottom40 centerText accent2Light-text">Add a Student</p>
-              
-              <!-- Name/Birthday -->
-              <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                <div class="inputWithIcon width45 width90Mobile white-BG">
-                  <i class="fas fa-user"></i>
-                  <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
-                </div>
-                <div class="flex flexAlignCenter width45 width90Mobile">
-                  <label class="accent2Light-text">Birthday:</label>
-                  <select id="year" class="pretty-classic" onchange="genDays();">
-                  </select>
-
-                  <select id="month" class="pretty-classic" onchange="genDays();">
-                    <option value="01">Jan</option>
-                    <option value="02">Feb</option>
-                    <option value="03">Mar</option>
-                    <option value="04">Apr</option>
-                    <option value="05">May</option>
-                    <option value="06">Jun</option>
-                    <option value="07">Jul</option>
-                    <option value="08">Aug</option>
-                    <option value="09">Sep</option>
-                    <option value="10">Oct</option>
-                    <option value="11">Nov</option>
-                    <option value="12">Dec</option>
-                  </select>
-    
-                  <select id="day" class="pretty-classic">
-                  </select>
-                </div>
-              </div>
-
-              <!-- Guardians -->
-              <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                
-                <!-- Guardian 1 -->
-                <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                  <p class="largeFont marginBottom10 accent2Light-text">Guardian 1</p>
-                  <div class="inputWithIcon width100 white-BG">
-                    <i class="fas fa-user"></i>
-                    <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
-                  </div>
-                  <div class="inputWithIcon width100 white-BG">
-                    <i class="fas fa-envelope"></i>
-                    <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
-                  </div>
-                  <div class="inputWithIcon width100 white-BG">
-                    <i class="fas fa-mobile-alt"></i>
-                    <input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number">
-                  </div>
-                </div>
-
-                <!-- Guardian 2 -->
-                <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile">
-                  <p class="largeFont marginBottom10 accent2Light-text">Guardian 2</p>
-                  <div class="inputWithIcon width100 white-BG">
-                    <i class="fas fa-user"></i>
-                    <input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name">
-                  </div>
-                  <div class="inputWithIcon width100 white-BG">
-                    <i class="fas fa-envelope"></i>
-                    <input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email">
-                  </div>
-                  <div class="inputWithIcon width100 white-BG">
-                    <i class="fas fa-mobile-alt"></i>
-                    <input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number">
-                  </div>
-                </div>
-              </div>
-
-              <!-- Allergies/Notes and Schedule -->
-              <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                
-                <!-- Allergies/Notes -->
-                <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                  <textarea id="allergies-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
-                  <textarea id="accommodations-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAccommodations" placeholder="Special Accommodations"></textarea>
-                </div>
-                
-                <!-- Schedule -->
-                <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                  <div class="flex width100">
-                    <ul class="selectableList flex width100 flexCenter marginBottom20">
-                      <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                      <li id="mon" onclick="selectableSelected(this)"><a>M</a></li>
-                      <li id="tue" onclick="selectableSelected(this)"><a>T</a></li>
-                      <li id="wed" onclick="selectableSelected(this)"><a>W</a></li>
-                      <li id="thu" onclick="selectableSelected(this)"><a>T</a></li>
-                      <li id="fri" onclick="selectableSelected(this)"><a>F</a></li>
-                      <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
-                    </ul>
-                  </div>
-                  
-                  <div class="flex flexCenter width100">
-                    <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
-                    <a onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="flex flexCenter">
-                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newStudentSubmit" onclick="callPostStu()">Create</a>
-              </div>
-              
+      <!-- Main wrapper panel: two columns -->
+      <div class="flex spaceAround flexWrap">
+        <!-- Left column, essentially a grid -->
+        <div class="flex spaceAround flexWrap width60 width100Mobile">
+          <!-- Todays Roster Panel -->
+          <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth350px">
+            <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter">
+              <p class="marginLeft10 lightText font25px">Today's Roster</p>
+              <a onclick="" class="lightPadding lightGray2-text font15px">Add Student</a>
             </div>
-          </div> <!-- End new student form-->
-        </div>
-      </div> <!-- End Students Panel-->
-
-
-      <!--  --------------------- ACTIVITIES PANEL --------------------- -->
-      <div id="activitiesPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <!-- Title Bar -->
-        <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
-          <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
-          <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
-          <div class="flex">
-            <a onclick="toggleSearch('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
-              <i class="fas fa-search"></i>
-            </a>
-            <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
-          </div>
-        </div>
-
-        <!-- Activities List -->
-        <div class="heavyPadding maxHeight500px">
-          <ul id="activities" class="ulList">
-            <% if (activities.length > 0) {%>
-              <% activities.forEach((activity, index) => { %>
-                  <% if (activity.Hidden == 1) { %>
-                    <li class="main-BG blackAndWhite spaceBetween">
-                  <% } else { %>
-                    <li class="white-BG spaceBetween">
-                  <% } %>
-                    <p><%= activity.ActivityName %></p>
-                    <div class="flex">
-                      <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                      <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                      <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
-                    </div>
-                  </li>
-              <% }) %>
-            <% } %>
-          </ul>
-
-          <div id="editActivityForm" class="formWindow">
-            <div class="formWindow-content">
-              <span class="close" onclick="closeForm()">&times;</span>
-              <ul>
-                <li class="formTitle">Edit Activity</li>
-                <li><p id="editActivityID" style="display: none"></p></li>
-                <li><input type="text" id="editActivityInput" value=""></li>
-                <li class="flexCenter"><a class="formSubmitButton" onclick="passEditActToPost()">Save Changes</a></li>
+            <div class="heavyPadding maxHeight250px">
+              <ul id="todays_students" class="ulList">
+                <% if (todays_students.length > 0) {%>
+                  <% todays_students.forEach((student, index) => { %>
+                    <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
+                      <li class="white-BG spaceBetween">
+                      
+                      <p><%= student.StudentName %></p>
+                      <div class="flex">
+                      </div>
+                        
+                  <% }) %>
+                <% } %>
+              
               </ul>
             </div>
           </div>
 
-            <!-- New Activity Form -->
-          <div id="newActivityForm" class="formWindow">
-            <div class="formWindow-content">
-              <span class="close" onclick="closeForm()">&times;</span>
-              <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
 
-              <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input type="text" id="newActivityName" placeholder="Activity Name">
+          <!-- --------------------- STUDENTS PANEL --------------------- -->
+          <div id="studentsPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width40">
+            <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+              <p class="marginLeft10 lightText font25px">Students</p>
+              <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+            </div>
+
+            <!-- Students list -->
+            <div class="heavyPadding maxHeight250px">
+              <ul id="students" class="ulList spaceAround">
+                <% if (students.length > 0) { %>
+                  <% students.forEach((student, index) => { %>
+                    <% studentSpl = student.StudentName.split(" "); %>
+                      <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
+                        <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
+                        <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                        <p class="width80"><%= student.StudentName %></p>
+                      </li>
+                    <% }) %>
+                <% } %>  
+              </ul>
+
+              <!-- --------------------- New Student Form --------------------- -->
+              <div id="newStudentForm" class="formWindow">
+                <div class="formWindow-content flexContainer">
+                  <span class="close" onclick="closeForm()">&times;</span>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Add a Student</p>
+                  
+                  <!-- Name/Birthday -->
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                    <div class="inputWithIcon width45 width90Mobile white-BG">
+                      <i class="fas fa-user"></i>
+                      <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
+                    </div>
+                    <div class="flex flexAlignCenter width45 width90Mobile">
+                      <label class="accent2Light-text">Birthday:</label>
+                      <select id="year" class="pretty-classic" onchange="genDays();">
+                      </select>
+
+                      <select id="month" class="pretty-classic" onchange="genDays();">
+                        <option value="01">Jan</option>
+                        <option value="02">Feb</option>
+                        <option value="03">Mar</option>
+                        <option value="04">Apr</option>
+                        <option value="05">May</option>
+                        <option value="06">Jun</option>
+                        <option value="07">Jul</option>
+                        <option value="08">Aug</option>
+                        <option value="09">Sep</option>
+                        <option value="10">Oct</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dec</option>
+                      </select>
+
+                      <select id="day" class="pretty-classic">
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Guardians -->
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                    
+                    <!-- Guardian 1 -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                      <p class="largeFont marginBottom10 accent2Light-text">Guardian 1</p>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-user"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
+                      </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-envelope"></i>
+                        <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
+                      </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-mobile-alt"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number">
+                      </div>
+                    </div>
+
+                    <!-- Guardian 2 -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile">
+                      <p class="largeFont marginBottom10 accent2Light-text">Guardian 2</p>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-user"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name">
+                      </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-envelope"></i>
+                        <input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email">
+                      </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-mobile-alt"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Allergies/Notes and Schedule -->
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                    
+                    <!-- Allergies/Notes -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                      <textarea id="allergies-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
+                      <textarea id="accommodations-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAccommodations" placeholder="Special Accommodations"></textarea>
+                    </div>
+                    
+                    <!-- Schedule -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                      <div class="flex width100">
+                        <ul class="selectableList flex width100 flexCenter marginBottom20">
+                          <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
+                          <li id="mon" onclick="selectableSelected(this)"><a>M</a></li>
+                          <li id="tue" onclick="selectableSelected(this)"><a>T</a></li>
+                          <li id="wed" onclick="selectableSelected(this)"><a>W</a></li>
+                          <li id="thu" onclick="selectableSelected(this)"><a>T</a></li>
+                          <li id="fri" onclick="selectableSelected(this)"><a>F</a></li>
+                          <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
+                        </ul>
+                      </div>
+                      
+                      <div class="flex flexCenter width100">
+                        <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
+                        <a onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newStudentSubmit" onclick="callPostStu()">Create</a>
+                  </div>
+                  
+                </div>
+              </div> <!-- End new student form-->
+            </div>
+          </div> <!-- End Students Panel-->
+
+          <!-- --------------------- REMINDER PANEL --------------------- -->
+          <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall hideOverflow minWidth350px width40">
+            <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+              <p class="marginLeft10 lightText font25px">Reminders</p>
+              <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+            </div>
+            <div class="heavyPadding maxHeight250px">
+              <ul id="reminders" class="ulList">
+                <% if (reminders.length > 0) {%>
+                  
+                  <% reminders.forEach((reminder, index) => { %>
+                    <li class="white-BG spaceBetween">
+                        <p><%= reminder.title %></p>
+                        <div class="flex">
+                          <% if(reminder.value != -1){ %>
+                            <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
+                          <% }; %>
+                        </div>
+                        
+                  <% }) %>
+                <% } %>
+              
+              </ul>
+
+              <!-- --------------------- New Reminder Form --------------------- -->
+              <div id="newReminderForm" class="formWindow">
+                <div class="formWindow-content width40 width90Mobile">
+                  <span class="close" onclick="closeForm()">&times;</span>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Add a Reminder</p>
+
+                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="callPostReminder()">Create</a>
                   </div>
                 </div>
-                <div class="flex width30 width100Mobile">
-                  <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
+              </div> <!-- End new reminder form -->
+            </div> 
+          </div> <!-- End reminder panel -->
+    
+          <!-- --------------------- BEHAVIORS PANEL --------------------- -->
+          <div id="behaviorsPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth350px">
+            <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+              <p class="marginLeft10 lightText font25px">Behaviors</p>
+              <a onclick="openForm('newBehaviorForm')" class="lightPadding accent2Light-text font15px">Add New</a>
+            </div>
+            <div class="heavyPadding maxHeight250px">
+              <ul id="behaviors" class="ulList">
+                <% if (behaviors.length > 0) {%>
+                  <a id=behaviorCount style="visibility: hidden; display: none;"><%= behaviors.length %> </a>
+                  <% behaviors.forEach((behavior, index) => { %>
+                    <a id="behavior<%= index %>" style="visibility: hidden; display: none;"><%= behavior.title %></a>
+                      <% if (behavior.Hidden == 1) { %>
+                        <li class="main-BG blackAndWhite spaceBetween">
+                      <% } else { %>
+                        <li class="white-BG spaceBetween">
+                      <% } %>
+                        <p><%= behavior.title %></p>
+                        <div class="flex">
+                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
+                          <button class="yellow3-BG" onclick="editBehavior('<%= behavior.id %>', '<%= behavior.title.ActivityName %>')"><i class="far fa-edit"></i></button>
+                          <button class="red3-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
+                        </div>
+                  <% }) %>
+                <% } %>
+              </ul>
+            </div>
+
+            <!-- --------------------- New behavior Form --------------------- -->
+            <div id="newBehaviorForm" class="formWindow">
+              <div class="formWindow-content width40 width90Mobile">
+                <span class="close" onclick="closeForm()">&times;</span>
+                <p class="font50px marginBottom40 centerText accent2Light-text">Add a Behavior</p>
+
+                <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                  <div class="flex width60 width100Mobile marginBottom20">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorName" placeholder="Behavior Name"/>
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp1" placeholder="Option 1">
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp2" placeholder="Option 2"/>
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp3" placeholder="Option 3"/>
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp4" placeholder="Option 4"/>
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp5" placeholder="Option 5"/>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flexCenter">
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newBehaviorSubmit" onclick="callPostBehavior()">Create</a>
                 </div>
               </div>
-
-              <div class="flex flexCenter">
-                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
-              </div>
-            
+            </div> <!-- End new behavior form -->
+          </div>
+        </div> <!-- End behavior panel -->
+        
+        <!--  --------------------- ACTIVITIES PANEL --------------------- -->
+        <div id="activitiesPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
+          <!-- Title Bar -->
+          <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
+            <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
+            <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
+            <div class="flex">
+              <a onclick="toggleSearch('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
+                <i class="fas fa-search"></i>
+              </a>
+              <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
             </div>
-          </div> <!-- End activity form -->
-        </div>
-      </div> <!-- End activities panel -->
+          </div>
+
+          <!-- Activities List -->
+          <div class="heavyPadding maxHeight600px">
+            <ul id="activities" class="ulList">
+              <% if (activities.length > 0) {%>
+                <% activities.forEach((activity, index) => { %>
+                    <% if (activity.Hidden == 1) { %>
+                      <li class="main-BG blackAndWhite spaceBetween">
+                    <% } else { %>
+                      <li class="white-BG spaceBetween">
+                    <% } %>
+                      <p><%= activity.ActivityName %></p>
+                      <div class="flex">
+                        <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                        <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                        <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                      </div>
+                    </li>
+                <% }) %>
+              <% } %>
+            </ul>
+
+            <div id="editActivityForm" class="formWindow">
+              <div class="formWindow-content">
+                <span class="close" onclick="closeForm()">&times;</span>
+                <ul>
+                  <li class="formTitle">Edit Activity</li>
+                  <li><p id="editActivityID" style="display: none"></p></li>
+                  <li><input type="text" id="editActivityInput" value=""></li>
+                  <li class="flexCenter"><a class="formSubmitButton" onclick="passEditActToPost()">Save Changes</a></li>
+                </ul>
+              </div>
+            </div>
+
+              <!-- New Activity Form -->
+            <div id="newActivityForm" class="formWindow">
+              <div class="formWindow-content">
+                <span class="close" onclick="closeForm()">&times;</span>
+                <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
+
+                <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input type="text" id="newActivityName" placeholder="Activity Name">
+                    </div>
+                  </div>
+                  <div class="flex width30 width100Mobile">
+                    <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
+                  </div>
+                </div>
+
+                <div class="flex flexCenter">
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
+                </div>
+              
+              </div>
+            </div> <!-- End activity form -->
+          </div>
+        </div> <!-- End activities panel -->
+      </div>
+      
   
       <!-- --------------------- EMAIL PANEL --------------------- -->
       <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
@@ -251,164 +413,10 @@
         </div>
       </div>
     
-      <!-- --------------------- REMINDER PANEL --------------------- -->
-      <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-          <p class="marginLeft10 lightText font25px">Reminders</p>
-          <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
-        </div>
-        <div class="heavyPadding maxHeight500px">
-          <ul id="reminders" class="ulList">
-            <% if (reminders.length > 0) {%>
-              
-              <% reminders.forEach((reminder, index) => { %>
-                <li class="white-BG spaceBetween">
-                    <p><%= reminder.title %></p>
-                    <div class="flex">
-                      <% if(reminder.value != -1){ %>
-                        <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
-                      <% }; %>
-                    </div>
-                    
-              <% }) %>
-            <% } %>
-          
-          </ul>
-
-          <!-- --------------------- New Reminder Form --------------------- -->
-          <div id="newReminderForm" class="formWindow">
-            <div class="formWindow-content width40 width90Mobile">
-              <span class="close" onclick="closeForm()">&times;</span>
-              <p class="font50px marginBottom40 centerText accent2Light-text">Add a Reminder</p>
-
-              <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
-                  </div>
-                </div>
-
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
-                  </div>
-                </div>
-              </div>
-
-              <div class="flex flexCenter">
-                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="callPostReminder()">Create</a>
-              </div>
-            </div>
-          </div> <!-- End new reminder form -->
-        </div> 
-      </div> <!-- End reminder panel -->
-          
-            <!-- --------------------- BEHAVIORS PANEL --------------------- -->
-        <div id="behaviorsPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
-          <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-            <p class="marginLeft10 lightText font25px">Behaviors</p>
-            <a onclick="openForm('newBehaviorForm')" class="lightPadding accent2Light-text font15px">Add New</a>
-          </div>
-          <div class="heavyPadding">
-            <ul id="behaviors" class="ulList">
-              <% if (behaviors.length > 0) {%>
-                <a id=behaviorCount style="visibility: hidden; display: none;" </a><%= behaviors.length %> </a>
-                <% behaviors.forEach((behavior, index) => { %>
-                  <a id="behavior<%= index %>" style="visibility: hidden; display: none;" </a><%= behavior.title %></a>
-                    <% if (behavior.Hidden == 1) { %>
-                      <li class="main-BG blackAndWhite spaceBetween">
-                    <% } else { %>
-                      <li class="white-BG spaceBetween">
-                    <% } %>
-                      <p><%= behavior.title %></p>
-                      <div class="flex">
-                        <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
-                        <button class="yellow3-BG" onclick="editBehavior('<%= behavior.id %>', '<%= behavior.title.ActivityName %>')"><i class="far fa-edit"></i></button>
-                        <button class="red3-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
-                      </div>
-                      
-                <% }) %>
-              <% } %>
-            
-            </ul>
-          </div>
-
-          <!-- --------------------- New behavior Form --------------------- -->
-          <div id="newBehaviorForm" class="formWindow">
-            <div class="formWindow-content width40 width90Mobile">
-              <span class="close" onclick="closeForm()">&times;</span>
-              <p class="font50px marginBottom40 centerText accent2Light-text">Add a Behavior</p>
-
-              <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                <div class="flex width60 width100Mobile marginBottom20">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newBehaviorName" placeholder="Behavior Name"/>
-                  </div>
-                </div>
-
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newBehaviorOp1" placeholder="Option 1">
-                  </div>
-                </div>
-
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newBehaviorOp2" placeholder="Option 2"/>
-                  </div>
-                </div>
-
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newBehaviorOp3" placeholder="Option 3"/>
-                  </div>
-                </div>
-
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newBehaviorOp4" placeholder="Option 4"/>
-                  </div>
-                </div>
-
-                <div class="flex width60 width100Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input name=”notASearchField” type="text" id="newBehaviorOp5" placeholder="Option 5"/>
-                  </div>
-                </div>
-              </div>
-
-              <div class="flex flexCenter">
-                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newBehaviorSubmit" onclick="callPostBehavior()">Create</a>
-              </div>
-            </div>
-          </div> <!-- End new behavior form -->
-        </div>
+      
       </div>
 
-      <!-- Todays Roster Panel -->
-      <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
-        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-          <p class="marginLeft10 lightText font25px">Todays Roster</p>
-          <a onclick="" class="lightPadding accent2Light-text font15px">Add Student</a>
-        </div>
-        <div class="heavyPadding">
-          <ul id="todays_students" class="ulList">
-            <% if (todays_students.length > 0) {%>
-              <% todays_students.forEach((student, index) => { %>
-                <a id="student<%= index %>" style="visibility: hidden; display: none;" </a><%= student.StudentName %></a>
-                  <li class="white-BG spaceBetween">
-                  
-                  <p><%= student.StudentName %></p>
-                  <div class="flex">
-                  </div>
-                    
-              <% }) %>
-            <% } %>
-          
-          </ul>
-        </div>
-      </div>
-    </div>
+      
   </body>
   
   <script>
