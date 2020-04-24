@@ -5,14 +5,16 @@ class thePie {
   svg = null;
   tooltip = null;
   myId = null;
+  total = null;
+  friendBool = null;
 
   constructor(id) {
     this.myId = id;
 
     // set the dimensions and margins of the graph
-    this.width = 450;
-    this.height = 450;
-    this.margin = 40;
+    this.width = 675;
+    this.height = 675;
+    this.margin = 115;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
@@ -30,6 +32,7 @@ class thePie {
       .append("g")
         .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
 
+    //tooltip for label
     this.tooltip = d3.select("#" + id)
         .append("svg")
         .style("position", "absolute")
@@ -41,12 +44,16 @@ class thePie {
         .style("padding", "5px")
   }
 
-  update(data,total) {
+  update(data, total, friendBool) {
+    this.total = total;
+    this.friendBool = friendBool;
+
     var parentObject = this;
     // Compute the position of each group on the pie:
     var pie = d3.pie()
       .value(function(d) {return d.value; })
-      .sort(function(a, b) { return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+      .sort(function(a, b) { return d3.ascending(a.key, b.key);} ) // Make sure that group order remains the same in the pie chart
+    
     var data_ready = pie(d3.entries(data))
 
     var div = d3.select("body").append("div")
@@ -62,6 +69,7 @@ class thePie {
     var t = this.svg.selectAll("text")
       .data(data_ready)
 
+    //arc
     var arcLabel = d3.arc()
         .innerRadius(0)
         .outerRadius(this.radius)
@@ -71,8 +79,8 @@ class thePie {
       .enter()
       .append('path')
       .merge(u)
-      .transition()
-      .duration(1000)
+      //.transition()
+      //.duration(1000)
       .attr('d', d3.arc()
         .innerRadius(0)
         .outerRadius(this.radius)
@@ -81,8 +89,40 @@ class thePie {
       .attr("stroke", "white")
       .style("stroke-width", "2px")
       .style("opacity", 1)
+      
+      //mouseover for each slice of the pie
+      .on('mouseover', function(d) {
+        d3.select(this).transition()
+             .duration('250')
+             .style("opacity", .40)
+        div.transition()
+             .duration(500)
+             .style("opacity", 1);
+        let percent = (Math.round((d.value / total) * 100)).toString() + '%';
+        //if looking at friends
+        if (friendBool == 1) {
+          div.html("Times Together: " + d.value + "\n" + percent)
+             .style("left", (d3.event.pageX + 20) + "px")
+             .style("top", (d3.event.pageY + 20) + "px");}
+        //looking at activities
+        else {
+          div.html(d.data.key + "\n\n Total: " + d.value + "\n" + percent)
+            .style("left", (d3.event.pageX + 20) + "px")
+            .style("top", (d3.event.pageY + 20) + "px");}
+      })
 
-    //label and hover
+      //mouseout for each slice of the pie
+      .on("mouseout", function(d){
+        d3.select(this).transition()
+            .duration('250')
+            .style("opacity", 1);
+        //Make new div disappear
+        div.transition()
+             .duration('500')
+             .style("opacity", 0);
+      })
+
+    //label 
     t 
       .enter()
       .append('text')
@@ -90,33 +130,13 @@ class thePie {
       .text(function(d) { 
         if (d.data.value > 0)
           return "" + d.data.key })
-      .attr("transform", function(d) { 
-        return "translate(" + arcLabel.centroid(d) + ")";  })
-      .style("text-anchor", "middle")
-      .style("font-size", 20)
-
-      .on('mouseover', function(d) {
-        d3.select(this).transition()
-             .duration('50')
-             .attr('opacity', '.50');
-        div.transition()
-             .duration(50)
-             .style("opacity", 1);
-        let percent = (Math.round((d.value / d.value) * 100)).toString() + '%';
-        div.html("Total: " + d.value + "\n Percent: %") //+ percent)
-             .style("left", (d3.event.pageX + 20) + "px")
-             .style("top", (d3.event.pageY + 20) + "px");
-      })
-
-      .on("mouseout", function(d){
-        d3.select(this).transition()
-             .duration('500')
-             .attr('opacity', '1');
-        //Make new div disappear
-        div.transition()
-             .duration('500')
-             .style("opacity", 0);
-      })
+      //.attr("transform", function(d) { 
+        //return "translate(" + arcLabel.centroid(d) + ")";  })
+      .attr("transform", function(d) {  
+          var c = arcLabel.centroid(d);
+          return "translate(" + c[0]*2 + "," + c[1]*2.1 + ")";
+       })
+      .style("font-size", 15)
 
     // remove the group that is not present anymore
     u
