@@ -40,8 +40,7 @@
     </head>
     <body>
         <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
-            <i id="backButton" onclick="toPreviousStep()" class="fas fa-chevron-left icon hugeFont hoverable displayNone"></i>
-            <div id="stepOne" class="flexCenter flexColumn borderBox lightGray1-BG borderRadiusMedium width80">
+            <div id="stepOne" class="flexCenter flexColumn borderBox lightGray1-BG borderRadiusMedium width90">
                 <p class="title accent2-BG">Step 1: Email Template</p>
                 <div class="veryHeavyPadding">
                     <ul class="flex flexColumn">
@@ -66,20 +65,26 @@
                     </ul>
                     <!-- Create the editor container -->
                     
-
-                    <div id="remindersContainer" class="flexContainer borderRadiusMedium marginTop30 relative flexColumn flexCenter border1px darkGray3-border lightGray1-BG heavyPadding width40">          
-                        <div class="flex spaceBetween marginBottom10 width100 flexAlignCenter">
-                            <p class="mediumFont noMargin darkText">Reminders</p>
-                            <a class="addReminder" onclick="addReminder()"><i class="fas fa-plus"></i></a>
+                    <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
+                        <div id="remindersContainer" class="flex flexColumn borderRadiusMedium marginTop30 flexColumn flexCenter width40 width90Mobile heavyPadding white-BG">          
+                            <div class="flex spaceBetween marginBottom30 width100 flexAlignCenter ">
+                                <p class="mediumFont noMargin darkText">Reminders</p>
+                                <a class="accent2-text" onclick="addReminder()">Add</a>
+                            </div>
+                            <ul id="reminders" class="flex flexColumn spaceBetween width100 border1px lightGray1-border maxHeight300px">
+                            </ul>
                         </div>
-                        <ul id="reminders" class="flex flexColumn spaceBetween width100">
-
-                        </ul>
+                        <div class="buttonWithIcon" onclick="toNextStep();">
+                            <p>Next</p>
+                            <i class="fas fa-caret-right"></i>
+                        </div>
                     </div>
+                    
                 </div>
+                
             </div>
 
-            <div id="stepTwo" class="contentWithSidebar displayNone">
+            <div id="stepTwo" class="contentWithSidebar spaceAround">
                 <div class="width70 lightGray1-BG borderRadiusMedium"> <!-- Left column -->
                     <div id="stepTwoTitle" class="title accent1Light-BG flex spaceBetween">
                         <p></p>
@@ -104,7 +109,7 @@
                     </div>
 
                     <div class="content"> <!-- activities and dropdowns -->
-                        <div class="flex spaceBetween">
+                        <div class="flex marginBottom40 spaceBetween">
                             <div id="activities" class="width60">
                                 <p class="mediumFont darkText marginBottom20">Activities</p>
                                 <ul id="activitiesList" class="ulList darkText width50"></ul>
@@ -116,16 +121,17 @@
                                     <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottom10 flexWrap">
                                         <label for="<%= behavior.name %>"><%= behavior.name %></label>
                                         
-                                        <div class="flex spaceAround">
-                                            <select name="<%= behavior.name %>" class="width20">
+                                        <div class="flex spaceAround relative">
+                                            <select id="<%= behavior.name%>Select" name="<%= behavior.name %>" class="width20">
                                             </select>
-                                            <a onclick="openForm('<%= behavior.name %>Form')" class="marginLeft10 borderRadiusSmall accent4Light-BG lightPadding">
+                                            
+                                            <input style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></input>
+                                    
+                                            <a onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name%>Select-button');" class="marginLeft10 borderRadiusSmall accent4Light-BG lightPadding">
                                                 <i class="fas fa-sticky-note darkText"></i>
                                             </a>
                                         </div>
-                                        <!-- <textarea id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea> -->
-                                        <!-- if we want a text box to the right instead, will work just the same right away once un-commented -->
-                                    </div>
+                                        </div>
 
                                     <!-- Add note behavior forms -->
                                     <div id="<%= behavior.name %>Form" class="formWindow">
@@ -147,12 +153,14 @@
                                 <% }) %>
                             </div>
                         </div>
-                        <div class="flexContainer flexRight">
-                            <div id="saveButton" class="stepButton blue2-BG" onclick="studentSaved(<%= JSON.stringify(behaviors) %>);">
+                        <div class="flex spaceBetween flexAlignCenter">
+                            <div class="accent4-BG buttonWithIcon" onclick="toPreviousStep();">
+                                <i class="fas fa-caret-left"></i>
+                                <p>Back</p>
+                            </div>
+                            <div id="saveButton" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>);">
                                 <p>Save</p>
-                                <div class="buttonIcon blue3-BG">
-                                    <i class="fas fa-check"></i>
-                                </div>
+                                <i class="fas fa-check"></i>
                             </div>
                         </div>
                     </div>
@@ -174,10 +182,7 @@
                         <p class="centerText lightPadding">Send Emails</p>
                     </div>
                 </div>
-                    
             </div>
-
-            <i onclick="toNextStep()" id="nextButton" class="fas fa-chevron-right icon hugeFont hoverable"></i>
         </div>
         <script>initEmailerVariables();
         
@@ -198,9 +203,9 @@
             var lunchQuill = new Quill('#lunch', {
                 theme: 'snow'
             });
-            var lunchQuill = new Quill('#review', {
-                theme: 'snow'
-            });
+            //var lunchQuill = new Quill('#review', {
+            //    theme: 'snow'
+            //});
         </script>
 
         <script>
@@ -220,9 +225,16 @@
                 var label = document.createElement("label");
                 label.innerHTML = "Reminder " + numRemindersShown;
                 label.classList = "darkText";
+                var icon = document.createElement("i");
+                icon.classList = "fas fa-minus accent4-text marginRight10 hoverable";
+                icon.onclick = function(){li.parentNode.removeChild(li)};
+                var div = document.createElement("div");
+                div.classList = "flex spaceBetween flexAlignCenter";
                 var li = document.createElement("li");
-                li.classList = "flex spaceBetween flexAlignCenter lightPadding";
-                li.appendChild(label);
+                li.classList = "flex spaceBetween flexAlignCenter mediumPadding";
+                div.appendChild(icon);
+                div.appendChild(label);
+                li.appendChild(div);
                 li.appendChild(select);
                 reminders.appendChild(li);
                 
