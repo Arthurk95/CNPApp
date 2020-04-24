@@ -13,8 +13,6 @@ var approvedList = [];
 var MAX_STEPS = 2;
 var behaviors;
 var formElement;
-var nextButton;
-var backButton;
 var saveButton;
 
 // Init step two data for first student
@@ -37,24 +35,12 @@ function toPreviousStep(){
 function stepChange(){
     if(currentStep == 1){
         hideElement(stepTwo);
-        showElement(stepOne);
-        hideElement(backButton);
-        showElement(nextButton);
+        showElement(stepOne, "");
     }
     else if(currentStep == 2){
         hideElement(stepOne);
-        showElement(stepTwo);
-        hideElement(nextButton);
-        showElement(backButton);
+        showElement(stepTwo, "");
     }
-}
-
-function hideElement(step){
-    step.classList.add("displayNone");
-}
-
-function showElement(step){
-    step.classList.remove("displayNone");
 }
 
 // another student was selected from the list
@@ -135,13 +121,12 @@ function passToJS(r){
 function initEmailerVariables(){
     stepOne = document.getElementById("stepOne");
     stepTwo = document.getElementById("stepTwo");
+    hideElement(stepTwo);
     currentStudentElement = document.getElementById("student0");
     if(listOfStudents != undefined) {currentStudentData = listOfStudents[0];}
     stepTwoTitle = document.getElementById("stepTwoTitle");
     studentsList = document.getElementById("listOfStudents");
     activities = document.getElementById("activitiesList");
-    nextButton = document.getElementById("nextButton");
-    backButton = document.getElementById("backButton");
     saveButton = document.getElementById("saveButton");
     if(currentStudentElement != null){
         currentStudentElement.classList += " selected";

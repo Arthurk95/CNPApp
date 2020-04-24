@@ -385,8 +385,30 @@
         </div>
       </div>
 
-    
-
+      <!-- Todays Roster Panel -->
+      <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 width30 borderRadiusSmall hideOverflow minWidth450px">
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+          <p class="marginLeft10 lightText font25px">Todays Roster</p>
+          <a onclick="" class="lightPadding accent2Light-text font15px">Add Student</a>
+        </div>
+        <div class="heavyPadding">
+          <ul id="todays_students" class="ulList">
+            <% if (todays_students.length > 0) {%>
+              <% todays_students.forEach((student, index) => { %>
+                <a id="student<%= index %>" style="visibility: hidden; display: none;" </a><%= student.StudentName %></a>
+                  <li class="white-BG spaceBetween">
+                  
+                  <p><%= student.StudentName %></p>
+                  <div class="flex">
+                  </div>
+                    
+              <% }) %>
+            <% } %>
+          
+          </ul>
+        </div>
+      </div>
+    </div>
   </body>
   
   <script>

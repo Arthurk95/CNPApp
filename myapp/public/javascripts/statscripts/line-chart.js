@@ -83,7 +83,7 @@ function generateLine(id) {
   }
 
   //The Spin thing
-  temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "20";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
+  temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "100";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
   newdiv.appendChild(temp);
 
   //Delete button
@@ -145,7 +145,7 @@ function generateLine(id) {
       temp2 = document.createElement("option");temp2.value = "02";temp2.innerHTML = "Friends";
       temp.appendChild(temp2);
     }
-    else if(opid1.value == "all"){
+    else if(op1.value == "01" && opid1.value == "all"){
       temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Potty total";
       temp.appendChild(temp2);
 
@@ -156,6 +156,10 @@ function generateLine(id) {
       temp.appendChild(temp2);
 
       temp2 = document.createElement("option");temp2.value = "04";temp2.innerHTML = "Absences";
+      temp.appendChild(temp2);
+    }
+    else if(op1.value == "02"){
+      temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Students";
       temp.appendChild(temp2);
     }
     newdiv.appendChild(temp);
@@ -176,6 +180,12 @@ function generateLine(id) {
 
       studentList.forEach((element)=>{
         temp2 = document.createElement("option");temp2.value = element.StudentId;temp2.innerHTML = element.StudentName;
+        temp.appendChild(temp2);
+      });
+    }
+    else if(op1.value =="02"){
+      activityList.forEach((element)=>{
+        temp2 = document.createElement("option");temp2.value = element.ActivityId;temp2.innerHTML = element.ActivityName;
         temp.appendChild(temp2);
       });
     }
