@@ -146,7 +146,7 @@ const fs = require('fs');
     var activity_query = "CALL ShowAllActivities();";
     var task_query = "SELECT * FROM cnp_data.Tasks;";
     var get_reminders = "CALL ShowUnhiddenRemindersObject();";
-    var get_behaviors = "CALL ShowAllTemplateObject();"
+    var get_behaviors = "CALL ShowAllTemplateObject();";
     var todays_students_query = "CALL PullUnhiddenStudents();"
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
