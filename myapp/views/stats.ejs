@@ -198,7 +198,6 @@
 
       function gotDataPie(data) {
         data = JSON.parse(data);
-        console.log(data);
         var datum = [];
         var id, total = 0;
         data.forEach((element) => {
@@ -256,10 +255,8 @@
       }
 
       function gotDataLine(data) {
-        console.log("hello",data);
         data = JSON.parse(data);
         var id;
-        console.log(data);
         data.forEach((element) => {
           if(element.activityName == null){
             id = element.caller;
