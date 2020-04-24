@@ -10,7 +10,8 @@ const fs = require('fs');
      "','" + req.body.email + "','" + req.body.contactNum + "','" + req.body.contact2 + "','" + req.body.email2 + 
      "','" + req.body.contactNum2 + "','" + req.body.mon + "','" + req.body.tue +
      "','" + req.body.wed + "','" + req.body.thu + "','" + req.body.fri + "','" + req.body.sat + 
-     "','" + req.body.sun + "','" + req.body.halfDay + "','" + req.body.enroll + "');";
+      "','" + req.body.sun + "','" + req.body.halfDay + "','" + req.body.enroll + "','" + req.body.allergies + "','" + req.body.accommodations + "');";
+    console.log(sql);
     con.query(sql, function (err, result) {
         if (err) throw(err);
         res.end();
@@ -210,6 +211,7 @@ const fs = require('fs');
       //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
       //strip away OkPacket, create selected_student as new array
       [selected_student] = result[0];
+      console.log(selected_student);
       res.render('profile.ejs', { title: 'Profile Page', student: selected_student });
     });
   });

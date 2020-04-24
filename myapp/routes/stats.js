@@ -583,7 +583,6 @@ function processData(data,res){
           });
         }
         else if(data.inputs.beta == "Activities"){
-          console.log(data.inputs.start,data.inputs.end);
           data.extras.forEach(extraz =>{
             var student = [];
             var minimeta = {};
@@ -829,15 +828,41 @@ function processData(data,res){
       }
       else{
         if(data.inputs.beta == "Students"){
-          meta.ActivityName = data.primeval[0].ActivityName;
           data.betaval.forEach(element => {
-            var student = {};
-            student.name = element.StudentName;
-            var count = 0;
+            var student = {labelName:element.StudentName};
+            var count = [];
+            var labels = [];
+            var seperators = {start:[], end:[]};
+
+            var timeTraveler = new Date(startday);
+            timeTraveler.setHours(0,0,0,0);
+            for(var e = 0; e < numSeperators; e= e+1){
+              var next;
+              if(e == numSeperators - 1){
+                next = new Date(endday);
+              }
+              else{
+                next = new Date(timeTraveler);
+                if(Math.floor(daysbetween/numSeperators) != Math.round(daysbetween/numSeperators)){
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators + (e%2) - 1);
+                }
+                else{
+                  next.setDate(next.getUTCDate() + daysbetween/numSeperators - 1);
+                }
+              }
+              count.push(0);
+              labels.push("" + timeTraveler.getFullYear() + "-" + (timeTraveler.getMonth() + 1) + "-" + timeTraveler.getUTCDate() + " to " +
+              next.getFullYear() + "-" + (next.getMonth() + 1) + "-" + next.getUTCDate());
+              seperators.start.push(timeTraveler);
+              seperators.end.push(next);
+              next.setDate(next.getUTCDate() + 1);
+              timeTraveler = new Date(next);
+              meta.labels = labels;
+            }
             var prevDate = null, prevType = null;
             data.primeval.forEach(row =>{
               var date = new Date(row.CurrentDate);
-              if(prevDate != null && row.ActivityId == prevType && " " + date.getFullYear()+date.getMonth()+date.getDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getDate()){
+              if(prevDate != null && row.StudentId == prevType && " " + date.getFullYear()+date.getMonth()+date.getUTCDate() == " " +prevDate.getFullYear()+prevDate.getMonth()+prevDate.getUTCDate()){
               }
               else{
                 if(element.StudentName == row.StudentName){
@@ -845,7 +870,7 @@ function processData(data,res){
                   if(data.inputs.weather != "all"){
                     data.weatherVal.forEach(entry =>{
                       var weatherDate = new Date(entry.dateTimes);
-                      if(" " +date.getFullYear()+date.getMonth()+date.getDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getDate()){
+                      if(" " +date.getFullYear()+date.getMonth()+date.getUTCDate() == " " + weatherDate.getFullYear()+weatherDate.getMonth()+weatherDate.getUTCDate()){
                         present = true;
                       }
                     });
@@ -854,17 +879,22 @@ function processData(data,res){
                     present = true;
                   }
                   if(present){
-                    count = count + 1;
+                    for(var e = 0; e < numSeperators; e= e+1){
+                      if(date > seperators.start[e] && date < seperators.end[e]){
+                        count[e] = count[e] + 1;
+                      }
+                    }
                   }
                 }
                 prevDate = date;
                 prevType = row.StudentId;
               }
             });
-            student.value = count;
+            student.values = count;
             outputs.push(student);
           });
         }
+        
       }
     }
   }

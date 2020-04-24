@@ -41,7 +41,7 @@ class thePie {
         .style("padding", "5px")
   }
 
-  update(data) {
+  update(data,total) {
     var parentObject = this;
     // Compute the position of each group on the pie:
     var pie = d3.pie()

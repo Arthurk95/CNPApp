@@ -6,7 +6,10 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
   var Students = [];
   var daily_query = "CALL PullUnhiddenStudents();";
   con.query(daily_query, function (err, dailyStudents) {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+    }
+
     recurseDailies(Students, dailyStudents, 0, res);
   })
 
@@ -37,23 +40,21 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
             if (err) {
               console.log(err);
             }
-
             var [pottyAccidents] = accidentCount[0];
             console.log(pottyAccidents);
-            if (pottyAccidents !== undefined) {
-              
-            Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
-          } else {
-              Students[i].pottyAccidents = 0;
+            try {
+              Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
+            } catch (e) {
+              Students[i].pottyAccidents = 'err';
+              console.log(e);
             }
-
             var [pottyBreaks] = pottyCount[0];
             console.log(pottyBreaks);
-            if (pottyBreaks !== undefined) {
-              
-            Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
-          } else {
-              Students[i].pottyBreaks = 0;
+            try {
+              Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
+            } catch (e) {
+              Students[i].pottyBreaks = 'err';
+              console.log(e);
             }
 
             var looper = act[0];
