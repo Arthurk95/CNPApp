@@ -146,6 +146,7 @@ const fs = require('fs');
     var task_query = "SELECT * FROM cnp_data.Tasks;";
     var get_reminders = "CALL ShowUnhiddenRemindersObject();";
     var get_behaviors = "CALL ShowAllTemplateObject();"
+    var todays_students_query = "CALL PullUnhiddenStudents();"
     con.query(student_query, function (err, sQuery) {
       if (err) throw err;
       con.query(activity_query, function (err, aQuery) {
@@ -183,7 +184,10 @@ const fs = require('fs');
                   Behaviors.push({title: element.NameOf, cat1:element.CategoryOne, cat2:element.CategoryTwo, cat3:element.CategoryThree, cat4:element.CategoryFour, cat5:element.CategoryFive,id:element.TemplateId});
                 })
               }
-              res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors});
+              con.query(todays_students_query, function (err, t_students) {
+                if (err) throw err;
+                res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors, todays_students: t_students[0]});
+              });
             });
           });
         });
