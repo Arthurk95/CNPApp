@@ -81,7 +81,7 @@ router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
   console.log(sql);
   con.query(sql, function (err, primeVal) {
     con.query(sql2, function (err, betaVal) {
-      if(all && ((prime == "Students" && beta == "Activities") || (prime == "Activities" && beta == "Students"))){
+      if(all && (prime == "Students" && beta == "Activities") || (prime == "Activities" && beta == "Students")){
         con.query(sql4, function (err, extraVal){
           if(weather == "all"){
             values = {"primeval":primeVal,"betaval":betaVal,"inputs":inputs,"extras":extraVal};
