@@ -74,17 +74,9 @@
                             <ul id="reminders" class="flex flexColumn spaceBetween width100 border1px lightGray1-border maxHeight300px">
                             </ul>
                         </div>
-                        <div class="buttonWithIcon" onclick="toNextStep();">
+                        <div class="buttonWithIcon" onclick="toNextStep(); updateDailyInfo();">
                             <p>Next</p>
                             <i class="fas fa-caret-right"></i>
-                        </div>
-                    </div>
-                    <div class="flexContainer flexRight">
-                        <div id="saveButton" class="stepButton blue2-BG" onclick="updateDailyInfo();">
-                            <p>Save</p>
-                            <div class="buttonIcon blue3-BG">
-                                <i class="fas fa-check"></i>
-                            </div>
                         </div>
                     </div>
                 </div>
