@@ -1,8 +1,34 @@
 var dropdownToggled = false;
 
 
+function hideElement(element){
+    element.style.display = "none";
+}
+
+function toggleElement(element){
+    if(isElementHidden(element)){
+        showElement(element);
+    }
+    else {hideElement(element);}
+}
+
+function showElement(element){ element.style.display = ""; }
+function showElement(element, displayType){
+    if(displayType === undefined || displayType === null){displayType = "";} 
+    element.style.display = displayType;
+}
+
+function isElementHidden(element){return (element.style.display === "none");}
+
 function isDaySelected(day){
     return convertBoolToInt(document.getElementById(day).classList.contains("selectedElement"));
+}
+
+function toggleSelect(ID){
+    var sel = document.getElementById(ID);
+    var selSpan = sel.parentElement.getElementsByTagName('span')[0];
+
+    toggleElement(selSpan);
 }
 
 function convertBoolToInt(boolVal){
@@ -47,6 +73,21 @@ function checkStudentDayType(element, dayType){
 function textAreaAdjust(textArea) {
     textArea.style.height = "1px";
     textArea.style.height = (textArea.style.fontSize + textArea.scrollHeight)+"px";
+}
+
+// Toggles between two elements
+function toggleBetweenElements(ID, otherID){
+    var element = document.getElementById(ID);
+    var otherElement = document.getElementById(otherID);
+    if(isElementHidden(element)){
+        hideElement(otherElement, "");
+        showElement(element, "");
+    }
+    else{
+        hideElement(element);
+        showElement(otherElement);
+    }
+
 }
 
 function isToggled(id){
