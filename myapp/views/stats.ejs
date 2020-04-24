@@ -198,9 +198,9 @@
 
       function gotDataPie(data) {
         data = JSON.parse(data);
-        console.log(data);
         var datum = [];
-        var id, total = 0;
+        var id, total = 0; 
+        var friendBool = 0;
         data.forEach((element) => {
           if(element.caller != null) {
             id = element.caller;
@@ -212,17 +212,19 @@
             if(temp == "Activities"){
               datum[element.activityName] = element.value;
               total = total + element.value;
+              friendBool = 0;
             }
             else if(temp == "Friends"){
               datum[element.friend] = element.timestogether;
               total = total + element.timestogether;
+              friendBool = 1;
             }
             
           }
         }); 
        chartArray.forEach((chart) => {
           if(chart.myId == id){
-            chart.update(datum,total);
+            chart.update(datum, total, friendBool);
           }
         });
       }
@@ -256,10 +258,8 @@
       }
 
       function gotDataLine(data) {
-        console.log("hello",data);
         data = JSON.parse(data);
         var id;
-        console.log(data);
         data.forEach((element) => {
           if(element.activityName == null){
             id = element.caller;

@@ -83,7 +83,7 @@ function generateLine(id) {
   }
 
   //The Spin thing
-  temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "20";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
+  temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "100";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
   newdiv.appendChild(temp);
 
   //Delete button
