@@ -82,7 +82,7 @@ function bottomLayer(res,Students,){
       }
       else{
         remind.forEach((element) => {
-          console.log(element);
+          // console.log(element);
           Reminders.push({title: element.NameOf, contents: element.MainParagraphs});
         });
       }
@@ -93,12 +93,35 @@ function bottomLayer(res,Students,){
           console.log('Unable to pull daily summary: ' + err);
         } else {
           try {
+            console.log("PULL DAILY SUMMARY:")
+            console.log(sum_result);
+            // console.log('RESULT:');
+            // console.log(sum_result[0]);
             [stripped_result] = sum_result[0];
+            //console.log(stripped_result.MainParagraphs.replace('\n', '\\n')); //SUCCESS, HAVE TO CREATE THAT THING
+
+            // String.prototype.escapeSpecialChars = function() {
+            //   return this.replace(/\\n/g, "\\n")
+            //              .replace(/\\'/g, "\\'")
+            //              .replace(/\\"/g, '\\"')
+            //              .replace(/\\&/g, "\\&")
+            //              .replace(/\\r/g, "\\r")
+            //              .replace(/\\t/g, "\\t")
+            //              .replace(/\\b/g, "\\b")
+            //              .replace(/\\f/g, "\\f");
+            // };
+//             var myJSONString = JSON.stringify(myJSON);
+// var myEscapedJSONString = myJSONString.escapeSpecialChars();
+            
+            // [stripped_result] = sum_result[0];
             if (stripped_result) {
-              var summary = stripped_result.MainParagraphs;
+              var summary = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+              console.log('sending summary to ejs:');
+              console.log(summary);
+              //console.log(JSON.parse(summary));
             }
           } catch (e) {
-            var summary = '';
+            var summary = 'error accessing daily summary';
             console.log(e);
           }
         }
@@ -111,10 +134,10 @@ function bottomLayer(res,Students,){
             try {
               [stripped_result] = snack_result[0];
               if (stripped_result) {
-                var snack = stripped_result.MainParagraphs;
+                var snack = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
               }
             } catch (e) {
-              var snack = '';
+              var snack = 'error accessing snack info';
               console.log(e);
             }
           }
@@ -127,10 +150,10 @@ function bottomLayer(res,Students,){
               try {
                 [stripped_result] = lunch_result[0];
                 if (stripped_result) {
-                  var lunch = stripped_result.MainParagraphs;
+                  var lunch = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
                 }
               } catch (e) {
-                var lunch = '';
+                var lunch = 'error accessing lunch info';
                 console.log(e);
               }
             }
@@ -145,14 +168,19 @@ function bottomLayer(res,Students,){
 }
 
 router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
-  save_template_query = `CALL AddDailySummary("${req.body.text}")`;
-
+  var summary = req.body.text;
+  summary.replace('\n', '\\n');
+  // var parsedSummary = JSON.parse(mystring);
+  // console.log(`old: ${mystring}`);
+  // console.log(`new: ${newString}`);
+  // console.log(jsonString);
+  save_template_query = `CALL AddDailySummary('${summary}');`;
   con.query(save_template_query, function (err, result) {
     if (err) {
-      console.log(`Unable to add [${req.body.text}] to daily summary. ` + err);
+      console.log(`Unable to add [${summary}] to daily summary. ` + err);
       res.end();
     } else {
-      console.log('Daily summary updated: ' + req.body.text);
+      console.log('Daily summary updated: ' + summary);
       res.end();
     }
   });
@@ -162,14 +190,16 @@ router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) 
 
 
 router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
-  save_template_query = `CALL AddDailyAmFood("${req.body.text}")`;
+  var snack = req.body.text;
+  snack.replace('\n', '\\n');
+  save_template_query = `CALL AddDailyAmFood('${snack}');`;
 
   con.query(save_template_query, function (err, result) {
     if (err) {
-      console.log(`Unable to add [${req.body.text}] to AM snack. ` + err);
+      console.log(`Unable to add [${snack}] to AM snack. ` + err);
       res.end();
     } else {
-      console.log('AM snack updated: ' + req.body.text);
+      console.log('AM snack updated: ' + snack);
       res.end();
     }
   });
@@ -178,14 +208,16 @@ router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next)
 });
 
 router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
-  save_template_query = `CALL AddDailyLunch("${req.body.text}")`;
+  var lunch = req.body.text;
+  lunch.replace('\n', '\\n');
+  save_template_query = `CALL AddDailyLunch('${lunch}');`;
 
   con.query(save_template_query, function (err, result) {
     if (err) {
-      console.log(`Unable to add [${req.body.text}] to lunch. ` + err);
+      console.log(`Unable to add [${lunch}] to lunch. ` + err);
       res.end();
     } else {
-      console.log('Lunch updated: ' + req.body.text);
+      console.log('Lunch updated: ' + lunch);
       res.end();
     }
   });

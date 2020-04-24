@@ -48,19 +48,19 @@
                         <li class="marginBottom10">
                             <label for="summary">Summary</label>
                             <div id="summary">
-                                <p><%- summary %></p>
+                                <!-- <%- summary %> -->
                             </div>
                         </li>
                         <li class="marginBottom10">
                             <label for="snack">AM Snack</label>
                             <div id="snack">
-                                <p><%- snack %></p>
+                                <!-- <p><%- snack %></p> -->
                             </div>
                         </li>
                         <li class="marginBottom10">
                             <label for="lunch">Lunch</label>
                             <div id="lunch">
-                                <p><%- lunch %></p>
+                                <!-- <p><%- lunch %></p> -->
                             </div>
                         </li>
                     </ul>
@@ -75,6 +75,14 @@
                         <ul id="reminders" class="flex flexColumn spaceBetween width100">
 
                         </ul>
+                    </div>
+                    <div class="flexContainer flexRight">
+                        <div id="saveButton" class="stepButton blue2-BG" onclick="updateDailyInfo();">
+                            <p>Save</p>
+                            <div class="buttonIcon blue3-BG">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -192,15 +200,37 @@
             var summaryQuill = new Quill('#summary', {
                 theme: 'snow'
             });
+            // var testQuill = new Quill('#test', {
+            //     theme: 'snow'
+            // });
             var snackQuill = new Quill('#snack', {
                 theme: 'snow'
             });
             var lunchQuill = new Quill('#lunch', {
                 theme: 'snow'
             });
-            var lunchQuill = new Quill('#review', {
+            var reviewQuill = new Quill('#review', {
                 theme: 'snow'
             });
+
+            summaryQuill.container.firstChild.innerHTML = '<%- summary %>'
+            snackQuill.container.firstChild.innerHTML = '<%- snack %>'
+            lunchQuill.container.firstChild.innerHTML = '<%- lunch %>'
+
+            function updateDailyInfo() {
+                console.log(summaryQuill.container.firstChild.innerHTML)
+                console.log(snackQuill.container.firstChild.innerHTML)
+                console.log(lunchQuill.container.firstChild.innerHTML)
+                // summaryQuill.container.firstChild.innerHTML.replace(/\>\s+\</g, '>&nbsp;<')
+                // console.log(JSON.stringify(summaryQuill.getContents()));
+                // console.log(JSON.stringify(snackQuill.getContents()));
+                // console.log(JSON.stringify(lunchQuill.getContents()));
+                pushSummary(summaryQuill.container.firstChild.innerHTML);
+                pushAmSnack(snackQuill.container.firstChild.innerHTML);
+                pushLunch(lunchQuill.container.firstChild.innerHTML);
+                // pushAmSnack(JSON.stringify(snackQuill.getContents()));
+                // pushLunch(JSON.stringify(lunchQuill.getContents()));
+            }
         </script>
 
         <script>
@@ -243,21 +273,23 @@
         
         <script>
             //template functions (page 1)
-            function pushSummary(summary_element) {
+            function pushSummary(summary_HTML) {
                 theUrl = window.location.href + '/push-summary';
-                data = "text=" + summary_element.value;
+                // data = "text=" + summary_element.innerHTML;
+                data = "text=" + summary_HTML;
+                // data = "text=" + summary_element.value;
                 httpPostAsync(theUrl, data, null);
             }
 
-            function pushAmSnack(am_snack_element) {
+            function pushAmSnack(snack_HTML) {
                 theUrl = window.location.href + '/push-am-snack';
-                data = "text=" + am_snack_element.value;
+                data = "text=" + snack_HTML;
                 httpPostAsync(theUrl, data, null);
             }
 
-            function pushLunch(lunch_element) {
+            function pushLunch(lunch_HTML) {
                 theUrl = window.location.href + '/push-lunch';
-                data = "text=" + lunch_element.value;
+                data = "text=" + lunch_HTML;
                 httpPostAsync(theUrl, data, null);
             }
         </script>
