@@ -303,16 +303,16 @@ p{margin: 0;}
 
 .white-BG{background: white;}
 
-.main-BG{background: var(--mainBGColor);}
-.content-BG{background: var(--contentBGColor);}
-.accent1-BG{background: var(--accentColor1);}
-.accent1Light-BG{background: var(--accentColor1Light);}
-.accent2-BG{background: var(--accentColor2);}
-.accent2Light-BG{background: var(--accentColor2Light)}
-.accent3-BG{background: var(--accentColor3);}
-.accent3Light-BG{background: var(--accentColor3Light);}
-.accent4-BG{background: var(--accentColor4);}
-.accent4Light-BG{background: var(--accentColor4Light);}
+.main-BG{background: var(--mainBGColor) !important;}
+.content-BG{background: var(--contentBGColor) !important;}
+.accent1-BG{background: var(--accentColor1) !important;}
+.accent1Light-BG{background: var(--accentColor1Light) !important;}
+.accent2-BG{background: var(--accentColor2) !important;}
+.accent2Light-BG{background: var(--accentColor2Light) !important;}
+.accent3-BG{background: var(--accentColor3) !important;}
+.accent3Light-BG{background: var(--accentColor3Light) !important;}
+.accent4-BG{background: var(--accentColor4) !important;}
+.accent4Light-BG{background: var(--accentColor4Light) !important;}
 
 
 /* ----------- BORDER STUFF ----------- */
@@ -621,6 +621,39 @@ p{margin: 0;}
   align-self: center;
 }
 
+/*
+<div class="buttonWithIcon" onclick"">
+  <i></i> // order of these two doesn't matter
+  <p></p> // add class "textRight" to <p> if it's second
+</div>*/
+.buttonWithIcon{
+  cursor: pointer;
+  display: flex;
+  min-width: 150px;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  background: var(--accentColor1Light);
+  overflow: hidden;
+  box-shadow: 0px 2px 2px var(--darkGray3);
+}
+
+.buttonWithIcon i{
+  width: 15%;
+  padding: 14px 10px;
+  text-align: center;
+  align-self: center;
+  background: rgba(0,0,0,0.2);
+  color: var(--lightGray1);
+}
+
+.buttonWithIcon p{
+  color: var(--lightGray2);
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
 /* Use this for any buttons */
 .customButton{
   padding: 8px 25px;
@@ -734,6 +767,7 @@ p{margin: 0;}
   .width90Mobile{width:90% !important; margin-bottom: 10px;}
   .flexContainer{ flex-direction: column;}
   .flexCollapseMobile{flex-direction: column !important; align-items: center !important; justify-content: center !important;}
+  .flexCollapseMobile > * {margin-bottom: 10px;}
   .centerFlexMobile{justify-content: center !important; align-items: center !important;}
 
   .smallFont{font-size: 1em !important;}
