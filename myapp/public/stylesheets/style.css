@@ -506,7 +506,6 @@ p{margin: 0;}
 .spaceAround{
   justify-content: space-around !important;
   justify-items: space-around !important;
-  align-content: center !important;
 }
 .spaceEvenly{justify-content: space-evenly !important;}
 
