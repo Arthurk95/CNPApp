@@ -15,7 +15,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/javascripts/jquery.prettydropdowns.js"></script>
-    <script src="/javascripts/birthdayDropdown.js"></script>
     <script src="/javascripts/utilityScripts.js"></script>
 
   </head>
@@ -86,28 +85,17 @@
                       <i class="fas fa-user"></i>
                       <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
                     </div>
-                    <div class="flex flexAlignCenter width45 width90Mobile">
-                      <label class="accent2Light-text">Birthday:</label>
-                      <select id="year" class="pretty-classic" onchange="genDays();">
-                      </select>
-
-                      <select id="month" class="pretty-classic" onchange="genDays();">
-                        <option value="01">Jan</option>
-                        <option value="02">Feb</option>
-                        <option value="03">Mar</option>
-                        <option value="04">Apr</option>
-                        <option value="05">May</option>
-                        <option value="06">Jun</option>
-                        <option value="07">Jul</option>
-                        <option value="08">Aug</option>
-                        <option value="09">Sep</option>
-                        <option value="10">Oct</option>
-                        <option value="11">Nov</option>
-                        <option value="12">Dec</option>
-                      </select>
-
-                      <select id="day" class="pretty-classic">
-                      </select>
+                    <div class="flex spaceAround flexAlignCenter width45 width90Mobile">
+                      <label class="accent2Light-text font20px marginRight20">Birthday:</label>
+                      <div class="inputWithIcon width15 white-BG">
+                        <input id="month" placeholder="MM" maxlength="2"></input>
+                      </div>
+                      <div class="inputWithIcon width15 white-BG">
+                        <input id="day" placeholder="DD" maxlength="2"></input>
+                      </div>
+                      <div class="inputWithIcon width20 white-BG">
+                        <input id="year" placeholder="YYYY" maxlength="4"></input>
+                      </div>
                     </div>
                   </div>
 
@@ -420,6 +408,18 @@
   </body>
   
   <script>
+    setInputFilter(document.getElementById("day"), function(value) {
+      return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+    });
+    setInputFilter(document.getElementById("month"), function(value) {
+      return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+    });
+    setInputFilter(document.getElementById("year"), function(value) {
+      return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+    });
+  </script>
+
+  <script>
     $dropdown = $('.pretty-classic').prettyDropdown({
         classic: true,
         height: 50,
@@ -577,12 +577,9 @@
 
 
     function getSelectedBirthday(){
-      var years = document.getElementById('year');
-      var year = years.options[years.selectedIndex].text;
-      var months = document.getElementById('month');
-      var month = months.options[months.selectedIndex].value;
-      var days = document.getElementById('day');
-      var day = days.options[days.selectedIndex].text;
+      var year = document.getElementById('year').value;
+      var month = document.getElementById('month').value;
+      var day = document.getElementById('day').value;
 
       return (year + '/' + month + '/' + day);
     }

@@ -12,8 +12,6 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="/javascripts/utilityScripts.js"></script>
-        <script src="/javascripts/birthdayDropdown.js"></script>
-        <script src="/javascripts/jquery.prettydropdowns.js"></script>
         
     </head>
     <body>
@@ -106,27 +104,16 @@
             <li class="spaceBetween marginBottom40">
               <label class="width30">BIRTHDAY</label>
               <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
-              <div class="flexRowSpaceAround">
-                <select id="year" class="pretty-classic smallFontSize" onchange="genDays();">
-                </select>
-
-                <select id="month" class="pretty-classic smallFontSize" onchange="genDays();">
-                  <option value="01">Jan</option>
-                  <option value="02">Feb</option>
-                  <option value="03">Mar</option>
-                  <option value="04">Apr</option>
-                  <option value="05">May</option>
-                  <option value="06">Jun</option>
-                  <option value="07">Jul</option>
-                  <option value="08">Aug</option>
-                  <option value="09">Sep</option>
-                  <option value="10">Oct</option>
-                  <option value="11">Nov</option>
-                  <option value="12">Dec</option>
-                </select>
-        
-                <select id="day" class="pretty-classic smallFontSize">
-                </select>
+              <div class="flex flexRight flexAlignCenter width100 width90Mobile font15px">
+                <div class="inputWithIcon width20 white-BG marginRight10">
+                  <input id="month" placeholder="MM" maxlength="2"></input>
+                </div>
+                <div class="inputWithIcon width20 white-BG marginRight10">
+                  <input id="day" placeholder="DD" maxlength="2"></input>
+                </div>
+                <div class="inputWithIcon width30 white-BG">
+                  <input id="year" placeholder="YYYY" maxlength="4"></input>
+                </div>
               </div>
             </li>
             <li class="profileButtons">
@@ -150,6 +137,8 @@
       } );
     </script>
 
+    
+
     <script>
       var days = document.getElementById("schedule").getElementsByTagName("li");
       var length = days.length;
@@ -165,13 +154,14 @@
             days[i].classList.remove("selectedElement");
           }
         }  
+
+        var birthday = new Date(document.getElementById('studentbirthday').value);
+        document.getElementById('month').value = birthday.getMonth() + 1;
+        document.getElementById('day').value = birthday.getDate();
+        document.getElementById('year').value = birthday.getFullYear();
       });
 
-      $dropdown = $('.pretty-classic').prettyDropdown({
-        classic: true,
-        height: 30,
-        hoverIntent: -1
-      });
+
 
       function saveStudent(){
         
