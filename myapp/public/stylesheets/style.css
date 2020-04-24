@@ -157,6 +157,26 @@ p{margin: 0;}
   padding: 30px;
 }
 
+.mobilePanel ::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobilePanel ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.mobilePanel ::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: var(--lightGray3);
+}
+
+/* Handle on hover */
+.mobilePanel ::-webkit-scrollbar-thumb:hover {
+  filter: brightness(20%);
+}
+
+
 
 
 /* 
@@ -219,6 +239,7 @@ p{margin: 0;}
 
 /* ----------- WITDH STUFF ----------- */
 .width10{width: 10% !important;}
+.width15{width: 15% !important;}
 .width20{width: 20% !important;}
 .width30{width: 30% !important;}
 .width35{width: 35% !important;}
@@ -589,12 +610,16 @@ p{margin: 0;}
   border: 1px solid var(--lightGray2);
 }
 
-.inputWithIcon::selection{
-  border-color: var(--accentColor1Light);
-}
-
 .inputWithIcon input:focus i::after{
   color: var(--accentColor1Light);
+}
+
+.inputWithIcon:focus-within{
+  border: 1px solid var(--accentColor2Light) !important;
+}
+
+.inputWithIcon:focus-within i::after{
+  border-right: 1px solid var(--accentColor2Light) !important;
 }
 
 .inputWithIcon input{
@@ -803,7 +828,7 @@ p{margin: 0;}
   input{
     padding-top: 15px !important;
     padding-bottom: 15px !important;
-    font-size: 2.5em !important;
+    font-size: 2em !important;
   }
 
   textarea{
@@ -825,7 +850,6 @@ p{margin: 0;}
 
 
 input{
-  border-radius: 4px;
   border-style: none;
   outline: none;
   padding: 10px 15px 10px 15px;
@@ -835,6 +859,7 @@ input{
   box-sizing: border-box !important;
   border: none;
   box-shadow: none;
+  color: var(--darkGray3);
 }
 
 input::selection{
