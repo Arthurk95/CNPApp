@@ -8,26 +8,26 @@
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
     <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/form.css' />
-    <link rel='stylesheet' href='/stylesheets/switch.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
-    <link rel='stylesheet' href='/stylesheets/checkbox.css' />
-    <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
+    <link rel='stylesheet' href='/stylesheets/editor.css' />
+    <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/javascripts/jquery.prettydropdowns.js"></script>
     <script src="/javascripts/utilityScripts.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
   </head>
   <body>
 
-    <div class="flex flexColumn">
+    <div class="flex flexColumn width90 center">
 
       <!-- Main wrapper panel: two columns -->
-      <div class="flex spaceAround flexWrap">
+      <div class="flex spaceBetween flexWrap">
         <!-- Left column, essentially a grid -->
-        <div class="flex spaceAround flexWrap width60 width100Mobile">
+        <div class="flex spaceAround flexWrap width65 width100Mobile flexAlignStart">
+
           <!-- Todays Roster Panel -->
-          <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth350px">
+          <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth350px">
             <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter">
               <p class="marginLeft10 lightText font25px">Today's Roster</p>
               <a onclick="" class="lightPadding lightGray2-text font15px">Add Student</a>
@@ -52,7 +52,7 @@
 
 
           <!-- --------------------- STUDENTS PANEL --------------------- -->
-          <div id="studentsPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width40">
+          <div id="studentsPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
             <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
               <p class="marginLeft10 lightText font25px">Students</p>
               <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
@@ -305,104 +305,134 @@
                 </div>
               </div>
             </div> <!-- End new behavior form -->
-          </div>
-        </div> <!-- End behavior panel -->
+          </div> <!-- End behavior panel -->
+        </div> <!-- End left side -->
         
-        <!--  --------------------- ACTIVITIES PANEL --------------------- -->
-        <div id="activitiesPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-          <!-- Title Bar -->
-          <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
-            <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
-            <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
-            <div class="flex">
-              <a onclick="toggleSearch('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
-                <i class="fas fa-search"></i>
-              </a>
-              <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
-            </div>
-          </div>
 
-          <!-- Activities List -->
-          <div class="heavyPadding maxHeight600px">
-            <ul id="activities" class="ulList">
-              <% if (activities.length > 0) {%>
-                <% activities.forEach((activity, index) => { %>
-                    <% if (activity.Hidden == 1) { %>
-                      <li class="main-BG blackAndWhite spaceBetween">
-                    <% } else { %>
-                      <li class="white-BG spaceBetween">
-                    <% } %>
-                      <p><%= activity.ActivityName %></p>
-                      <div class="flex">
-                        <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                        <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                        <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
-                      </div>
-                    </li>
-                <% }) %>
-              <% } %>
-            </ul>
+        <div class="flex flexWrap width30 width100Mobile">
+          <!-- --------------------- EMAIL PANEL --------------------- -->
+          <div id="emailPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth450px width100">
+            <div class="flex spaceBetween flexAlignCenter darkGray3-BG mediumPadding">
+              <p class="marginLeft10 lightText font25px">Email Settings</p>
+              <div>
+                <a class="font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="openForm('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
+                <a class="font15px padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="openForm('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
 
-            <div id="editActivityForm" class="formWindow">
-              <div class="formWindow-content">
-                <span class="close" onclick="closeForm()">&times;</span>
-                <ul>
-                  <li class="formTitle">Edit Activity</li>
-                  <li><p id="editActivityID" style="display: none"></p></li>
-                  <li><input type="text" id="editActivityInput" value=""></li>
-                  <li class="flexCenter"><a class="formSubmitButton" onclick="passEditActToPost()">Save Changes</a></li>
-                </ul>
               </div>
             </div>
-
-              <!-- New Activity Form -->
-            <div id="newActivityForm" class="formWindow">
+            <!-- Edit Header Form -->
+            <div id="editHeaderForm" class="formWindow">
               <div class="formWindow-content">
                 <span class="close" onclick="closeForm()">&times;</span>
-                <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
+                <p class="font50px marginBottom40 centerText accent2Light-text">Edit Header</p>
 
-                <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input type="text" id="newActivityName" placeholder="Activity Name">
-                    </div>
-                  </div>
-                  <div class="flex width30 width100Mobile">
-                    <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
+                <div class="flex flexColumn flexCollapseMobile marginBottom40 width100">
+                  <div id="emailHeader">
                   </div>
                 </div>
 
                 <div class="flex flexCenter">
-                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveHeader()">Save</a>
                 </div>
               
               </div>
-            </div> <!-- End activity form -->
-          </div>
-        </div> <!-- End activities panel -->
-      </div>
-      
-  
-      <!-- --------------------- EMAIL PANEL --------------------- -->
-      <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
-        <div class="darkGray3-BG mediumPadding">
-          <p class="marginLeft10 lightText font25px">Email Settings</p>
+            </div> <!-- End edit header form -->
+
+            <!-- Edit signature Form -->
+            <div id="editSignatureForm" class="formWindow">
+              <div class="formWindow-content">
+                <span class="close" onclick="closeForm()">&times;</span>
+                <p class="font50px marginBottom40 centerText accent2Light-text">Edit Signature</p>
+
+                <div class="flex flexColumn flexCollapseMobile marginBottom40 width100">
+                  <div id="emailSignature" class="maxHeight250px">
+
+                  </div>
+                </div>
+
+                <div class="flex flexCenter">
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveSignature()">Save</a>
+                </div>
+              
+              </div>
+            </div> <!-- End edit signature form -->
+          </div> <!-- End email panel -->
           
-        </div>
-        <div class="heavyPadding maxHeight500px">
-          <ul id="comptasksList" class="ulList">
-            <li onclick="editHeader()" class="accent2Light-BG centerText clickableItem">
-              <p title="Edit Header" class="whiteText centerText textShadow">Edit Header</p>              
-            </li>
-            <li onclick="editSignature()" class="accent2Light-BG centerText clickableItem">
-              <p title="Edit Signature" class="whiteText centerText textShadow">Edit Signature</p>              
-            </li>
-          </ul>
+          <!--  --------------------- ACTIVITIES PANEL --------------------- -->
+          <div id="activitiesPanel" class="mobilePanel flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth450px width100">
+            <!-- Title Bar -->
+            <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
+              <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
+              <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
+              <div class="flex">
+                <a onclick="toggleSearch('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
+                  <i class="fas fa-search"></i>
+                </a>
+                <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+              </div>
+            </div>
+
+            <!-- Activities List -->
+            <div class="heavyPadding maxHeight600px lightGray1-BG ">
+              <ul id="activities" class="ulList">
+                <% if (activities.length > 0) {%>
+                  <% activities.forEach((activity, index) => { %>
+                      <% if (activity.Hidden == 1) { %>
+                        <li class="main-BG blackAndWhite spaceBetween">
+                      <% } else { %>
+                        <li class="white-BG spaceBetween">
+                      <% } %>
+                        <p><%= activity.ActivityName %></p>
+                        <div class="flex">
+                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                          <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                          <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                      </li>
+                  <% }) %>
+                <% } %>
+              </ul>
+
+              <div id="editActivityForm" class="formWindow">
+                <div class="formWindow-content">
+                  <span class="close" onclick="closeForm()">&times;</span>
+                  <ul>
+                    <li class="formTitle">Edit Activity</li>
+                    <li><p id="editActivityID" style="display: none"></p></li>
+                    <li><input type="text" id="editActivityInput" value=""></li>
+                    <li class="flexCenter"><a class="formSubmitButton" onclick="passEditActToPost()">Save Changes</a></li>
+                  </ul>
+                </div>
+              </div>
+
+                <!-- New Activity Form -->
+              <div id="newActivityForm" class="formWindow">
+                <div class="formWindow-content">
+                  <span class="close" onclick="closeForm()">&times;</span>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
+
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input type="text" id="newActivityName" placeholder="Activity Name">
+                      </div>
+                    </div>
+                    <div class="flex width30 width100Mobile">
+                      <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
+                    </div>
+                  </div>
+
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
+                  </div>
+                
+                </div>
+              </div> <!-- End activity form -->
+            </div>
+          </div> <!-- End activities panel -->
         </div>
       </div>
-    
-      
-      </div>
+    </div>
 
       
   </body>
@@ -417,16 +447,18 @@
     setInputFilter(document.getElementById("year"), function(value) {
       return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
     });
+
+    var headerQuill = new Quill('#emailHeader', {
+      theme: 'snow',
+      scrollingContainer: '#emailHeaderContainer'
+    });
+    var signatureQuill = new Quill('#emailSignature', {
+      theme: 'snow',
+      scrollingContainer: '#emailSignature'
+    });
   </script>
 
   <script>
-    $dropdown = $('.pretty-classic').prettyDropdown({
-        classic: true,
-        height: 50,
-        width: '10%',
-        customClass: 'arrow mediumFontSize margins',
-        hoverIntent: -1
-      });
     // Get the modal
     var formElement;
     // opens student profile in same tab when a student is clicked

@@ -1,5 +1,11 @@
+.ql-snow{
+    height: auto;
+
+}
+
 .ql-toolbar{
     display: flex !important;
+    flex-wrap: wrap;
     background: #EFEFEF;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
