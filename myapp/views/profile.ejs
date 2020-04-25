@@ -48,11 +48,11 @@
               <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
                 <div class="flex flexColumn width100 marginBottom30">
                   <p>Allergies</p>
-                  <textarea><%= student.Allergies %></textarea>
+                  <textarea id="allergies"><%= student.Allergies %></textarea>
                 </div>
                 <div class="flex flexColumn width100">
                   <p>Special Accommodations</p>
-                  <textarea><%= student.Accommodation %></textarea>
+                  <textarea id="accommodations"><%= student.Accommodation %></textarea>
                 </div>
               </div>
             </div>
@@ -172,16 +172,17 @@
           `&wed=${isDaySelected("wed")}` +
           `&thu=${isDaySelected("thu")}` +
           `&fri=${isDaySelected("fri")}` +
-          `&fullDayFlag=${convertBoolToInt(document.getElementById("fullDay").checked)}` +
+          `&fullDayFlag=${isToggled("fullDay")}` +
           `&birthdate=${document.getElementById("year").value}/${document.getElementById("month").value}/${document.getElementById("day").value}` +
           `&guardian1Name=${document.getElementById('guardian1Name').value}` +
           `&guardian1Email=${document.getElementById('guardian1Email').value}` +
           `&guardian1Number=${document.getElementById('guardian1Number').value}` +
           `&guardian2Name=${document.getElementById('guardian2Name').value}` +
           `&guardian2Email=${document.getElementById('guardian2Email').value}` +
-          `&guardian2Number=${document.getElementById('guardian2Number').value}`;
+          `&guardian2Number=${document.getElementById('guardian2Number').value}` +
+          `&allergies=${document.getElementById('allergies').value}` +
+          `&accommodations=${document.getElementById('accommodations').value}`;
         
-
         httpPostAsync(`${window.location.href}/save-changes`, data, reloadIt);
 
       }
