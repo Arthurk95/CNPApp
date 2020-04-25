@@ -72,7 +72,8 @@ class thePie {
     //arc
     var arcLabel = d3.arc()
         .innerRadius(0)
-        .outerRadius(this.radius)
+        //.outerRadius(this.radius)
+        .outerRadius(this.radius - 10)
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     u
@@ -134,8 +135,12 @@ class thePie {
         //return "translate(" + arcLabel.centroid(d) + ")";  })
       .attr("transform", function(d) {  
           var c = arcLabel.centroid(d);
-          return "translate(" + c[0]*2 + "," + c[1]*2.1 + ")";
+          //return "translate(" + c[0]*2 + "," + c[1]*2.1 + ")";
+          c[0] *= 2.2;
+          c[1] *= 2.2;
+          return "translate(" + c + ")";
        })
+      .style("text-anchor", "middle")
       .style("font-size", 15)
 
     // remove the group that is not present anymore
