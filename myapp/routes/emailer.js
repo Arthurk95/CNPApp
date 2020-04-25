@@ -93,8 +93,6 @@ function bottomLayer(res,Students,){
           console.log('Unable to pull daily summary: ' + err);
         } else {
           try {
-            console.log("PULL DAILY SUMMARY:")
-            console.log(sum_result);
             // console.log('RESULT:');
             // console.log(sum_result[0]);
             [stripped_result] = sum_result[0];
@@ -116,8 +114,6 @@ function bottomLayer(res,Students,){
             // [stripped_result] = sum_result[0];
             if (stripped_result) {
               var summary = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
-              console.log('sending summary to ejs:');
-              console.log(summary);
               //console.log(JSON.parse(summary));
             }
           } catch (e) {
@@ -128,6 +124,7 @@ function bottomLayer(res,Students,){
 
         var get_snack = `CALL PullDailyAmFoodToday()`;     
         con.query(get_snack, function (err, snack_result) {
+          console.log("IN SNACK QUERY");
           if (err) {
             console.log('Unable to pull AM snack: ' + err);
           } else {
@@ -135,6 +132,10 @@ function bottomLayer(res,Students,){
               [stripped_result] = snack_result[0];
               if (stripped_result) {
                 var snack = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+                console.log(`retrieved snack: ${snack}`)
+              } else {
+                console.log('here');
+                console.log(snack_result)
               }
             } catch (e) {
               var snack = 'error accessing snack info';
@@ -142,7 +143,7 @@ function bottomLayer(res,Students,){
             }
           }
 
-          var get_lunch = `CALL PullDailyLunchToday()`;     
+          var get_lunch = `CALL PullDailyLunchToday()`;
           con.query(get_lunch, function (err, lunch_result) {
             if (err) {
               console.log('Unable to pull lunch: ' + err);
@@ -157,6 +158,9 @@ function bottomLayer(res,Students,){
                 console.log(e);
               }
             }
+            console.log(`summary to ejs: ${summary}`);
+            console.log(`snack to ejs: ${snack}`);
+            console.log(`lunch to ejs: ${lunch}`);
             var header = "Creative Nature Daily Report"
             var footer = "Sincerly, Brandy and Scott Kunakey"
       res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });

@@ -74,7 +74,12 @@
                             <ul id="reminders" class="flex flexColumn spaceBetween width100 border1px lightGray1-border maxHeight300px">
                             </ul>
                         </div>
-                        <div class="buttonWithIcon" onclick="toNextStep(); updateDailyInfo();">
+                        <div id="saveButton" class="buttonWithIcon" onclick="updateDailyInfo();">
+                            <p>Save</p>
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="buttonWithIcon" onclick="toNextStep();">
+                        <!-- updateDailyInfo();"> -->
                             <p>Next</p>
                             <i class="fas fa-caret-right"></i>
                         </div>
@@ -211,9 +216,9 @@
             lunchQuill.container.firstChild.innerHTML = '<%- lunch %>'
 
             function updateDailyInfo() {
-                console.log(summaryQuill.container.firstChild.innerHTML)
-                console.log(snackQuill.container.firstChild.innerHTML)
-                console.log(lunchQuill.container.firstChild.innerHTML)
+                console.log(`summary: ${summaryQuill.container.firstChild.innerHTML}`)
+                console.log(`snack: ${snackQuill.container.firstChild.innerHTML}`)
+                console.log(`lunch: ${lunchQuill.container.firstChild.innerHTML}`)
                 // summaryQuill.container.firstChild.innerHTML.replace(/\>\s+\</g, '>&nbsp;<')
                 // console.log(JSON.stringify(summaryQuill.getContents()));
                 // console.log(JSON.stringify(snackQuill.getContents()));
