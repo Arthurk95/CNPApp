@@ -281,6 +281,7 @@ p{margin: 0;}
 
 
 .maxHeight200px{overflow-y: auto; max-height: 200px;}
+.maxHeight250px{overflow-y: auto; max-height: 250px;}
 .maxHeight300px{overflow-y: auto; max-height: 300px;}
 .maxHeight400px{overflow-y: auto; max-height: 400px;}
 .maxHeight500px{overflow-y: auto; max-height: 500px;}
@@ -288,6 +289,7 @@ p{margin: 0;}
 .maxHeight700px{overflow-y: auto; max-height: 700px;}
 .maxHeight800px{overflow-y: auto; max-height: 800px;}
 
+.height100{height: 100% !important;}
 
 /* ----------- BACKGROUNDS ----------- */
 .lightGray1-BG{background: var(--lightGray1);}
@@ -420,6 +422,10 @@ p{margin: 0;}
 .heavyPadding{padding: 15px !important;}
 .veryHeavyPadding{padding: 50px !important;}
 
+.padding5px10px{padding: 5px 10px;}
+.padding8px15px{padding: 8px 15px;}
+.padding15px30px{padding: 15px 30px;}
+
 .margin10{margin: 10px;}
 .margin15{margin: 15px;}
 .margin20{margin: 20px;}
@@ -520,7 +526,7 @@ p{margin: 0;}
 .flexCenterItems{justify-items: center !important;}
 
 .flexAlignCenter{align-content: center !important; align-items: center !important;}
-
+.flexAlignStart{align-content: flex-start !important; align-items: flex-start !important;}
 .flexLeft{justify-content: flex-start !important;}
 .flexRight{justify-content: flex-end !important;}
 .spaceBetween{justify-content: space-between !important;}
@@ -583,6 +589,11 @@ p{margin: 0;}
   
 }
 
+/* An element that can be clicked and will be "toggled"
+<div>
+  <a class="toggleable toggled" onclick="toggleableToggled(this)">Link</a>
+  <a class="toggleable" onclick="toggleableToggled(this)">Link2</a>
+</div> */
 .toggleable{
   padding: 15px 0px;
   text-align: center;
@@ -783,7 +794,7 @@ p{margin: 0;}
 
 
   .inputWithIcon i{ font-size: 1.5em; width: 60px;}
-  .mobilePanel{width: 90% !important; align-self: center;}
+  .mobilePanel{width: 100% !important; align-self: center;}
   .hiddenMobile{display: inherit !important;}
   .logout{display: none;}
 

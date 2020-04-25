@@ -75,7 +75,7 @@ function textAreaAdjust(textArea) {
     textArea.style.height = (textArea.style.fontSize + textArea.scrollHeight)+"px";
 }
 
-// Toggles between two elements
+// Toggles between two elements (not related to toggleable CSS class)
 function toggleBetweenElements(ID, otherID){
     var element = document.getElementById(ID);
     var otherElement = document.getElementById(otherID);
@@ -90,15 +90,21 @@ function toggleBetweenElements(ID, otherID){
 
 }
 
+/* --------------- TOGGLEABLE (CSS) FUNCTIONS --------------- */
+
+// id = HTML ID of element to check
 function isToggled(id){
     return convertBoolToInt(document.getElementById(id).classList.contains('toggled'));
 }
 
+/* Toggles the passed element.
+    Untoggles any other toggleable elements (if any) that are
+    contained within its parent. */
 function toggleableToggled(element){
     var parent = element.parentElement;
     var others = parent.getElementsByTagName('a');
-    if(element.classList.contains('toggled')){
-        if(others.length === 1){
+    if(element.classList.contains('toggled')){ // already toggled
+        if(others.length === 1){ // the only toggleable child in its parent
             element.classList.remove("toggled");
         }
     }
@@ -110,7 +116,7 @@ function toggleableToggled(element){
     }
 }
 
-/* FORM FUNCTIONS */
+/* --------------- FORM FUNCTIONS --------------- */
 
 function closeForm(){
     formElement.style.display = "none";
