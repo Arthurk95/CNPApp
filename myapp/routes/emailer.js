@@ -228,7 +228,7 @@ router.post('/send', (req, res) => {
     'add@test.com',
     'test@test.com',
     'emails@test.com',
-    'here@test.com',
+    'here@test.com'
   ] //updated later to emails from db
 
   var names = [
@@ -267,6 +267,10 @@ router.post('/send', (req, res) => {
           snack: req.body.snackHTML,
           lunch: req.body.lunchHTML
         })
+        //behavior title[i]
+        //behavior selection[i]
+        //behavior note[i]
+        //select student id from today's roster, based on those id's grab the above stuff and more as needed
         
       });
       
