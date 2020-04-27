@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const auth = require('../public/javascripts/loginScripts');
-
+const nodemailer = require('nodemailer');
+var ejs = require('ejs');
 
 /* GET home page. */
 router.get('/', auth.checkAuthenticated, function(req, res, next) {
@@ -93,28 +94,10 @@ function bottomLayer(res,Students,){
           console.log('Unable to pull daily summary: ' + err);
         } else {
           try {
-            // console.log('RESULT:');
-            // console.log(sum_result[0]);
             [stripped_result] = sum_result[0];
-            //console.log(stripped_result.MainParagraphs.replace('\n', '\\n')); //SUCCESS, HAVE TO CREATE THAT THING
 
-            // String.prototype.escapeSpecialChars = function() {
-            //   return this.replace(/\\n/g, "\\n")
-            //              .replace(/\\'/g, "\\'")
-            //              .replace(/\\"/g, '\\"')
-            //              .replace(/\\&/g, "\\&")
-            //              .replace(/\\r/g, "\\r")
-            //              .replace(/\\t/g, "\\t")
-            //              .replace(/\\b/g, "\\b")
-            //              .replace(/\\f/g, "\\f");
-            // };
-//             var myJSONString = JSON.stringify(myJSON);
-// var myEscapedJSONString = myJSONString.escapeSpecialChars();
-            
-            // [stripped_result] = sum_result[0];
             if (stripped_result) {
               var summary = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
-              //console.log(JSON.parse(summary));
             }
           } catch (e) {
             var summary = 'error accessing daily summary';
@@ -124,7 +107,6 @@ function bottomLayer(res,Students,){
 
         var get_snack = `CALL PullDailyAmFoodToday()`;     
         con.query(get_snack, function (err, snack_result) {
-          console.log("IN SNACK QUERY");
           if (err) {
             console.log('Unable to pull AM snack: ' + err);
           } else {
@@ -132,10 +114,6 @@ function bottomLayer(res,Students,){
               [stripped_result] = snack_result[0];
               if (stripped_result) {
                 var snack = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
-                console.log(`retrieved snack: ${snack}`)
-              } else {
-                console.log('here');
-                console.log(snack_result)
               }
             } catch (e) {
               var snack = 'error accessing snack info';
@@ -158,11 +136,10 @@ function bottomLayer(res,Students,){
                 console.log(e);
               }
             }
-            console.log(`summary to ejs: ${summary}`);
-            console.log(`snack to ejs: ${snack}`);
-            console.log(`lunch to ejs: ${lunch}`);
+
             var header = "Creative Nature Daily Report"
             var footer = "Sincerly, Brandy and Scott Kunakey"
+            console.log(Students);
       res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
         }); // end lunch query
         }); // end snack query
@@ -173,7 +150,6 @@ function bottomLayer(res,Students,){
 
 router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
   var summary = req.body.text;
-  summary.replace('\n', '\\n');
   // var parsedSummary = JSON.parse(mystring);
   // console.log(`old: ${mystring}`);
   // console.log(`new: ${newString}`);
@@ -195,7 +171,6 @@ router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) 
 
 router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
   var snack = req.body.text;
-  snack.replace('\n', '\\n');
   save_template_query = `CALL AddDailyAmFood('${snack}');`;
 
   con.query(save_template_query, function (err, result) {
@@ -213,7 +188,6 @@ router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next)
 
 router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
   var lunch = req.body.text;
-  lunch.replace('\n', '\\n');
   save_template_query = `CALL AddDailyLunch('${lunch}');`;
 
   con.query(save_template_query, function (err, result) {
@@ -248,5 +222,66 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
   }
   res.end();
 });
+
+router.post('/send', (req, res) => {
+  var emails = [
+    'add@test.com',
+    'test@test.com',
+    'emails@test.com',
+    'here@test.com',
+  ] //updated later to emails from db
+
+  var names = [
+    "second name example",
+    "third name example",
+    "fourth name example",
+    "fifth name example"
+  ] //updated later to parent names
+  //add more options for various student info later
+
+  async function sendEmail() {
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // true for 465, false for other ports
+      auth: {
+        user: 'cnp.dev.tester@gmail.com',
+        pass: process.env.EMAIL_PASSWORD
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    });
+    console.log(req.body.summaryHTML);
+    for (var i = 0; i < emails.length; i++) {
+      let info = await transporter.sendMail({
+        from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
+        to: `${emails[i]}`, // list of receivers
+        subject: "CNP Daily Report", // Subject line
+        text: "", // plain text body
+        html: await ejs.renderFile('./views/emailTemplate.ejs', {
+          name: `${names[i]}`,
+          email: `${emails[i]}`,
+          summary: req.body.summaryHTML,
+          snack: req.body.snackHTML,
+          lunch: req.body.lunchHTML
+        })
+        
+      });
+      
+      console.log("Message sent: %s", info.messageId);
+    }
+
+  }
+  try {
+    sendEmail();
+  } catch (e) {
+    console.log(e);
+  }
+  res.end();
+});
+
+
 
   module.exports = router;

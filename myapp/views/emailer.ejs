@@ -42,22 +42,115 @@
         <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
             <div id="stepOne" class="flexCenter flexColumn borderBox lightGray1-BG borderRadiusMedium width90">
                 <p class="title accent2-BG">Step 1: Email Template</p>
+                
                 <div class="veryHeavyPadding">
                     <ul class="flex flexColumn">
                         <li class="marginBottom10">
                             <label for="summary">Summary</label>
+                            <!-- toolbar container should be abstracted later -->
+                            <div id="summary-toolbar-container">
+                                <span class="ql-formats">
+                                  <select class="ql-size">
+                                    <option value="10px">Small</option>
+                                    <option selected>Normal</option>
+                                    <option value="18px">Large</option>
+                                    <option value="32px">Huge</option>
+                                  </select>
+                                </span>
+                                <span class="ql-formats">
+                                  <select class="ql-color">
+                                    <option selected></option>
+                                    <option value="red"></option>
+                                    <option value="orange"></option>
+                                    <option value="yellow"></option>
+                                    <option value="green"></option>
+                                    <option value="blue"></option>
+                                    <option value="purple"></option>
+                                  </select>
+                                  <select class="ql-background">
+                                    <option selected></option>
+                                    <option value="red"></option>
+                                    <option value="orange"></option>
+                                    <option value="yellow"></option>
+                                    <option value="green"></option>
+                                    <option value="blue"></option>
+                                    <option value="purple"></option>
+                                  </select>
+                                </span>
+                              </div>
                             <div id="summary">
                                 <!-- <%- summary %> -->
                             </div>
+                            
                         </li>
                         <li class="marginBottom10">
                             <label for="snack">AM Snack</label>
+                            <div id="snack-toolbar-container">
+                                <span class="ql-formats">
+                                  <select class="ql-size">
+                                    <option value="10px">Small</option>
+                                    <option selected>Normal</option>
+                                    <option value="18px">Large</option>
+                                    <option value="32px">Huge</option>
+                                  </select>
+                                </span>
+                                <span class="ql-formats">
+                                  <select class="ql-color">
+                                    <option selected></option>
+                                    <option value="red"></option>
+                                    <option value="orange"></option>
+                                    <option value="yellow"></option>
+                                    <option value="green"></option>
+                                    <option value="blue"></option>
+                                    <option value="purple"></option>
+                                  </select>
+                                  <select class="ql-background">
+                                    <option selected></option>
+                                    <option value="red"></option>
+                                    <option value="orange"></option>
+                                    <option value="yellow"></option>
+                                    <option value="green"></option>
+                                    <option value="blue"></option>
+                                    <option value="purple"></option>
+                                  </select>
+                                </span>
+                              </div>
                             <div id="snack">
                                 <!-- <p><%- snack %></p> -->
                             </div>
                         </li>
                         <li class="marginBottom10">
                             <label for="lunch">Lunch</label>
+                            <div id="lunch-toolbar-container">
+                                <span class="ql-formats">
+                                  <select class="ql-size">
+                                    <option value="10px">Small</option>
+                                    <option selected>Normal</option>
+                                    <option value="18px">Large</option>
+                                    <option value="32px">Huge</option>
+                                  </select>
+                                </span>
+                                <span class="ql-formats">
+                                  <select class="ql-color">
+                                    <option selected></option>
+                                    <option value="red"></option>
+                                    <option value="orange"></option>
+                                    <option value="yellow"></option>
+                                    <option value="green"></option>
+                                    <option value="blue"></option>
+                                    <option value="purple"></option>
+                                  </select>
+                                  <select class="ql-background">
+                                    <option selected></option>
+                                    <option value="red"></option>
+                                    <option value="orange"></option>
+                                    <option value="yellow"></option>
+                                    <option value="green"></option>
+                                    <option value="blue"></option>
+                                    <option value="purple"></option>
+                                  </select>
+                                </span>
+                              </div>
                             <div id="lunch">
                                 <!-- <p><%- lunch %></p> -->
                             </div>
@@ -182,7 +275,7 @@
                         <li>No Students</li>
                     <% } %>
                     </ul>
-                    <div id="sendEmailButton" class="stepButton center marginBottom20 accent2-BG">
+                    <div id="sendEmailButton" class="stepButton center marginBottom20 accent2-BG" onclick="sendEmail();">
                         <p class="centerText lightPadding">Send Emails</p>
                     </div>
                 </div>
@@ -198,40 +291,55 @@
 
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <script>
+            // var summaryQuill = new Quill('#summary', {
+            //     theme: 'snow'
+            // });
+            var BackgroundClass = Quill.import('attributors/class/background');
+            var ColorClass = Quill.import('attributors/class/color');
+            var SizeStyle = Quill.import('attributors/style/size');
+            Quill.register(BackgroundClass, true);
+            Quill.register(ColorClass, true);
+            Quill.register(SizeStyle, true);
             var summaryQuill = new Quill('#summary', {
+                modules: {
+                    toolbar: '#summary-toolbar-container'
+                },
+                placeholder: 'Daily summary..',
                 theme: 'snow'
-            });
+            })
             var snackQuill = new Quill('#snack', {
+                modules: {
+                    toolbar: '#snack-toolbar-container'
+                },
+                placeholder: 'Snack info..',
                 theme: 'snow'
-            });
+            })
             var lunchQuill = new Quill('#lunch', {
+                modules: {
+                    toolbar: '#lunch-toolbar-container'
+                },
+                placeholder: 'Lunch info..',
                 theme: 'snow'
-            });
-            var reviewQuill = new Quill('#review', {
-                theme: 'snow'
-            });
+            })
+            // var reviewQuill = new Quill('#review', {
+            //     modules: {
+            //         toolbar: '#toolbar-container'
+            //     },
+            //     placeholder: 'Daily summary..',
+            //     theme: 'snow'
+            // })
 
-            summaryQuill.container.firstChild.innerHTML = '<%- summary %>'
-            snackQuill.container.firstChild.innerHTML = '<%- snack %>'
-            lunchQuill.container.firstChild.innerHTML = '<%- lunch %>'
+            summaryQuill.setContents(<%- summary %>);
+            snackQuill.setContents(<%- snack %>)
+            lunchQuill.setContents(<%- lunch %>)
 
             function updateDailyInfo() {
-                console.log(`summary: ${summaryQuill.container.firstChild.innerHTML}`)
-                console.log(`snack: ${snackQuill.container.firstChild.innerHTML}`)
-                console.log(`lunch: ${lunchQuill.container.firstChild.innerHTML}`)
-                // summaryQuill.container.firstChild.innerHTML.replace(/\>\s+\</g, '>&nbsp;<')
-                // console.log(JSON.stringify(summaryQuill.getContents()));
-                // console.log(JSON.stringify(snackQuill.getContents()));
-                // console.log(JSON.stringify(lunchQuill.getContents()));
-                pushSummary(summaryQuill.container.firstChild.innerHTML);
-                pushAmSnack(snackQuill.container.firstChild.innerHTML);
-                pushLunch(lunchQuill.container.firstChild.innerHTML);
-                // pushAmSnack(JSON.stringify(snackQuill.getContents()));
-                // pushLunch(JSON.stringify(lunchQuill.getContents()));
+                pushSummary(JSON.stringify(summaryQuill.getContents()));
+                pushAmSnack(JSON.stringify(snackQuill.getContents()));
+                pushLunch(JSON.stringify(lunchQuill.getContents()));
             }
-            //var lunchQuill = new Quill('#review', {
-            //    theme: 'snow'
-            //});
+
+
         </script>
 
         <script>
@@ -299,6 +407,17 @@
                 theUrl = window.location.href + '/push-lunch';
                 data = "text=" + lunch_HTML;
                 httpPostAsync(theUrl, data, null);
+            }
+        </script>
+
+        <script>
+            function sendEmail(){
+                var theUrl = window.location.href+'/send';
+                console.log(summaryQuill.container.firstChild.innerHTML);
+                var data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}&snackHTML=${snackQuill.container.firstChild.innerHTML}&lunchHTML=${lunchQuill.container.firstChild.innerHTML}`;
+
+                httpPostAsync(theUrl, data, doNothing);
+
             }
         </script>
     </body>
