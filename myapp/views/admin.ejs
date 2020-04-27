@@ -433,7 +433,10 @@
                         <li class="white-BG spaceBetween">
                       <% } %>
                       
-                        <p><%= activity.ActivityName %></p>
+                        <p><%= activity.ActivityName %> 
+                          <% if(activity.Helper == 1) { %>
+                          <i class="fas fa-star accent2Light-text"></i>
+                        <% } %></p>
                         <div class="flex">
                           <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
                           <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
