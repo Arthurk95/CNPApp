@@ -1,24 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<body>
-    <h1>CNP Daily Email</h1>
-    <h2>Summary</h2>
-        <%- summary %>
-    <h2>Snack</h2>
-        <%- snack %>
-    <h2>Lunch</h2>
-        <%- lunch %>
+<head>
+    <style>
+        @media screen and (max-width: 1200px){
+            .container{flex-direction: column;}
+            .sidebar{width:100% !important;}
+            body{font-size: 25px !important;}
+        }
 
-    <h2>PERSONALIZED SECTION</h2>
+        body{
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6{
+            margin-block-start: 0;
+            margin-block-end: 0;
+            margin-inline-start: 0;
+            margin-inline-end: 0;
+        }
+
+        ul{
+            list-style-type: none;
+            margin-block-start: 0;
+            margin-block-end: 0;
+            margin-inline-start: 0;
+            margin-inline-end: 0;
+            padding-inline-start: 0px;
+        }
+
+        .container{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .sidebar{
+            width: 35%;
+            background:#c5e0db;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;
+        }
+
+        .sidebar, .content{
+            padding: 50px 20px;
+        }
+
+        .content{
+            width: 60%;
+        }
+
+        .bg-green{background: #5DB08A;}
+        .bg-green-dark{background: #1C734B;}
+        .bg-blue{background: #317582;}
+        .bg-blue-dark{background: #05414C;}
+        .bg-gray-dark{background: #feffd6;}
+
+        .text-white{color: white;}
+        .text-dark{color: #222;}
+        
+        .margin-bottom-20px{margin-bottom: 20px;}
+        .margin-bottom-40px{margin-bottom: 40px;}
+        .no-margin{margin: 0 !important;}
+        .padding50px0px{padding: 50px 0px;}
+        .padding25px0px{padding: 25px 0px;}
+        .center-text{text-align: center;}
+        .font-40px{font-size: 2.7em;}
+        .font-34px{font-size: 2.3em;}
+        .font-26px{font-size: 1.8em;}
+        .font-22px{font-size: 1.6em;}
+        .font-16px{font-size: 1.1em;}
+
+        .flex{display: flex;}
+        .flex-column{display: flex; flex-direction: column;}
+        .flex-spacearound{justify-content: space-around;}
+        .flex-spacebetween{justify-content: space-between;}
+        .flex-centeralign{align-items: center; align-content: center;}
+        .flex-center{justify-content: center; justify-items: center;}
+
+        .width-100p{width: 100%;}
+        .width-90p{width: 90%;}
+        .width-80p{width: 80%;}
+        .width-45p{width: 45%;}
+
+        a{cursor: pointer; text-decoration: none; color: #1593db;}
+        p{margin: 0; padding: 0;}
+        .behavior-list{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .behavior-list li{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .section{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .sub-section{
+            background: #eee;
+            padding: 15px;
+            width: 90%;
+            align-self: center;
+            margin-bottom: 15px;
+        }
+
+        .title-with-value{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body class="flex-column flex-centeralign">
+    <div class="flex-column bg-gray-dark width-100p padding50px0px text-dark">
+        <p class="font-40px center-text margin-bottom-20px">CNP Daily Email</p>
+        <a class="font-22px center-text">Shutterfly link</a>
+    </div>
+
+    <div class="container">
+
+        <div class="sidebar">
+            <div class="section">
+                <p class="font-34px margin-bottom-20px">Behaviors</p>
+                
+                <div class="sub-section">
+                    <div class="title-with-value">
+                        <p class="font-22px">AM Snack</p>
+                        <p>Kid's snack</p>
+                    </div>
+                    <p><%- snack %></p>
+                </div>
+
+                <div class="sub-section">
+                    <div class="title-with-value">
+                        <p class="font-22px">Lunch</p>
+                        <p>Kid's lunch</p>
+                    </div>
+                    <p><%- lunch %></p>
+                </div>
+
+                <div class="sub-section">
+                    <div class="title-with-value">
+                        <p class="font-22px">Mood</p>
+                        <p>Kid's mood</p>
+                    </div>
+                    <p><!-- note --></p>
+                </div>
+
+                <div class="sub-section">
+                    <div class="title-with-value">
+                        <p class="font-22px">Nap Time</p>
+                        <p>Kid's nap</p>
+                    </div>
+                    <p><!-- note --></p>
+                </div>
+
+                <div class="sub-section">
+                    <div class="title-with-value">
+                        <p class="font-22px">Academic Play</p>
+                        <p>Kid's academic play</p>
+                    </div>
+                    <p><!-- note --></p>
+                </div>
+
+                <div class="sub-section">
+                    <div class="title-with-value">
+                        <p class="font-22px">Restroom Use</p>
+                        <p>Kid's restroom</p>
+                    </div>
+                    <p><!-- note --></p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content">
+            <div class="section width90">
+                <p class="font-26px margin-bottom-20px">Student's notes</p>
+                <p><!-- Notes paragraph --></p>
+            </div>
+            <div class="section width-90p margin-bottom-20px">
+                <p class="font-26px margin-bottom-20px">Summary</p>
+                <p class=""><%- summary %></p>
+
+                
+            </div>
+            <div class="section width-90p"> <!-- Reminders -->
+                <p class="font-26px">Reminders</p>
+            </div>
+        </div>
+    </div>
+
     <!-- behavior title 1: all/none - note -->
-    <p style="padding: 10px 20px; background: #DDD; color: white; width: 100%;">Behaviors</p>
-    <ul style="outline: none; list-style-type: none; display: flex; flex-wrap: wrap; justify-content; space-between;">
-        <li style="display: flex; justify-content: space-between;">
-            <p>Behavior 1</p>
-            <p>Value</p>
-        </li>
-    </ul>
-    <h3>PERSONALIZED NOTE</h3>
+
+    
 </body>
 </html>
