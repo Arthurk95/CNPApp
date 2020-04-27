@@ -17,7 +17,7 @@ router.get('/users', auth.checkAuthenticated, function(req, res, next) {
 });
 
 router.get('/test', (req, res) => {
-  res.render('emailTest');
+  res.render('emailTemplateTest', {summary: '<p>summary var shows up here</p>', snack: '<p>snack var shows up here</p>', lunch: '<p>lunch var shows up here</p>'});
 });
 
 router.post('/send-email', (req, res) => {
