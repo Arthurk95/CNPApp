@@ -14,7 +14,7 @@ class thePie {
     // set the dimensions and margins of the graph
     this.width = 675;
     this.height = 675;
-    this.margin = 115;
+    this.margin = 95;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
@@ -72,7 +72,8 @@ class thePie {
     //arc
     var arcLabel = d3.arc()
         .innerRadius(0)
-        .outerRadius(this.radius)
+        //.outerRadius(this.radius)
+        .outerRadius(this.radius - 10)
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     u
@@ -134,9 +135,16 @@ class thePie {
         //return "translate(" + arcLabel.centroid(d) + ")";  })
       .attr("transform", function(d) {  
           var c = arcLabel.centroid(d);
-          return "translate(" + c[0]*2 + "," + c[1]*2.1 + ")";
+          //return "translate(" + c[0]*2 + "," + c[1]*2.1 + ")";
+          c[0] *= 2.2;
+          c[1] *= 2.2;
+          return "translate(" + c + ")";
        })
-      .style("font-size", 15)
+      .style("text-anchor", "middle")
+      .style("font-size", 16)
+      .style("stroke-width", .8)
+      .style("stroke", "white")
+      .style("paint-order", "stroke fill")
 
     // remove the group that is not present anymore
     u
