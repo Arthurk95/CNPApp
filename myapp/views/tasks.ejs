@@ -91,7 +91,7 @@
               <li class="flex spaceBetween">
                 <p><%= task.NoteContent %></p>
                 <div class="width40 lightGray3-BG centerText">
-                  <p><%= task.CompletedTime %></p>
+                  <p><%= task.CompletedTime.toDateString() %></p>
                 </div>
               </li>
               <% }) %>
