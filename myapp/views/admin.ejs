@@ -315,8 +315,8 @@
             <div class="flex spaceBetween flexAlignCenter darkGray3-BG mediumPadding">
               <p class="marginLeft10 lightText font25px">Email Settings</p>
               <div>
-                <a class="font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="openForm('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
-                <a class="font15px padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="openForm('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
+                <a class="font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="emailSettings('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
+                <a class="font15px padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="emailSettings('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
 
               </div>
             </div>
@@ -326,13 +326,13 @@
                 <span class="close" onclick="closeForm()">&times;</span>
                 <p class="font50px marginBottom40 centerText accent2Light-text">Edit Header</p>
 
-                <div class="flex flexColumn flexCollapseMobile marginBottom40 width100">
+                <div class="flex flexColumn marginBottom40 width100">
                   <div id="emailHeader">
                   </div>
                 </div>
 
                 <div class="flex flexCenter">
-                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveHeader()">Save</a>
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveEmailSettings('header')">Save</a>
                 </div>
               
               </div>
@@ -344,14 +344,14 @@
                 <span class="close" onclick="closeForm()">&times;</span>
                 <p class="font50px marginBottom40 centerText accent2Light-text">Edit Signature</p>
 
-                <div class="flex flexColumn flexCollapseMobile marginBottom40 width100">
+                <div class="flex flexColumn marginBottom40 width100">
                   <div id="emailSignature" class="maxHeight250px">
 
                   </div>
                 </div>
 
                 <div class="flex flexCenter">
-                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveSignature()">Save</a>
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveEmailSettings('signature')">Save</a>
                 </div>
               
               </div>
@@ -699,6 +699,54 @@
       var callback = reloadIt;
       httpPostAsync(theUrl,data,callback);
     }
+    
+    function emailSettingsC(data){
+      data = JSON.parse(data);
+      var textData;
+      console.log(data,data.data.length);
+      if(data.data.length == 0){
+        textData = "";
+      }
+      else
+      {
+        textData = data.data[0].MainParagraphs;
+      }
+      console.log(textData,data.form);
+      
+      if(data.form == "editHeaderForm"){
+        headerQuill.setContents([
+          { insert: textData }
+        ]);
+      }
+      else if(data.form == "editSignatureForm"){
+        signatureQuill.setContents([
+          { insert: textData }
+        ]);
+      }
+      openForm(data.form);
+    }
+
+    function emailSettings(form){
+      var theUrl = window.location.href+'/emailsettings';
+      var data = "form=" + form;
+      var callback = emailSettingsC;
+      httpPostAsync(theUrl,data,callback);
+    }
+
+    function saveEmailSettings(form){
+      var theUrl = window.location.href+'/saveemailsettings';
+      var data;
+      if(form == "header"){
+        var data = "data=" + headerQuill.getText() + "&form=" + form;
+      }
+      else if(form == "signature")
+      {
+        var data = "data=" + signatureQuill.getText() + "&form=" + form;
+      } 
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
+
     
   </script>
 </html>

@@ -133,13 +133,44 @@ const fs = require('fs');
 
   router.post('/deletebehavior', auth.checkAuthenticated, function(req, res){
     var sql = "CALL DeleteTemplateObject('" + req.body.id + "');";
-    console.log(sql);
     con.query(sql, function (err, result) {
         if (err) res.end();
         res.end();
     });
   });
 
+  router.post('/emailsettings', auth.checkAuthenticated, function(req, res){
+    var form = req.body.form;
+    var sql;
+    if(form == "editHeaderForm"){
+      sql = "CALL ShowHeader();";
+    }
+    else if(form == "editSignatureForm"){
+      sql = "CALL ShowFooter();";
+    }
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.send({data:result[0], form:form});
+    });
+  });
+  
+  router.post('/saveemailsettings', auth.checkAuthenticated, function(req, res){
+    var form = req.body.form;
+    var data = req.body.data;
+    var sql;
+    if(form == "header"){
+      sql = "CALL ChangeHeader('" + data + "');";
+    }
+    else if(form == "signature"){
+      sql = "CALL ChangeFooter('" + data + "');";
+    }
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
   /* GET home page. */
   router.get('/', auth.checkAuthenticated, function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 
