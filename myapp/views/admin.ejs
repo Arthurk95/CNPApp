@@ -795,25 +795,20 @@
     function emailSettingsC(data){
       data = JSON.parse(data);
       var textData;
-      console.log(data,data.data.length);
       if(data.data.length == 0){
         textData = "";
       }
       else
       {
-        textData = data.data[0].MainParagraphs;
+        textData = data.data[0].MainParagraphs.replace(/\n/g, '\\n');
+        textData = JSON.parse(textData);
       }
-      console.log(textData,data.form);
-      
+      console.log(textData);
       if(data.form == "editHeaderForm"){
-        headerQuill.setContents([
-          { insert: textData }
-        ]);
+        headerQuill.setContents(textData);
       }
       else if(data.form == "editSignatureForm"){
-        signatureQuill.setContents([
-          { insert: textData }
-        ]);
+        signatureQuill.setContents(textData);
       }
       openForm(data.form);
     }
@@ -827,13 +822,15 @@
 
     function saveEmailSettings(form){
       var theUrl = window.location.href+'/saveemailsettings';
-      var data;
+      var data, textData;
       if(form == "header"){
-        var data = "data=" + headerQuill.getText() + "&form=" + form;
+        textData = JSON.stringify(headerQuill.getContents());
+        var data = "data=" + textData + "&form=" + form;
       }
       else if(form == "signature")
       {
-        var data = "data=" + signatureQuill.getText() + "&form=" + form;
+        textData = JSON.stringify(signatureQuill.getContents())
+        var data = "data=" + textData + "&form=" + form;
       } 
       var callback = reloadIt;
       httpPostAsync(theUrl,data,callback);
