@@ -29,7 +29,10 @@
                 <% activities.forEach((activity, index) => { %>
                 <li onclick="activitySelected(this, <%= activity.ActivityId %>)">
                     <div class="blockContainer">
-                        <p><%= activity.ActivityName %></p>
+                        <p><%= activity.ActivityName %>
+                            <% if(activity.Helper == 1) { %>
+                            <i class="fas fa-star accent2Light-text"></i>
+                          <% } %></p>
                         <div class="checkmarkOverlay">
                             
                         </div>
@@ -52,18 +55,16 @@
     
     <footer>
         <ul id="footer" class="studentFooter">
-            <li id="pottyAndSelect" class="twoButtons">
-                <a id="pottyBreak" class="accent3Light-BG smallerFont" onclick="pottyBreak()">Potty Break</a>
-                <a id="selectButton" class="accent2Light-BG smallerFont" onclick="selectionMade()">Select</a>
+            <li class="flex flexCenter">
+                <a id="pottyBreak" class="flexGrow1 accent3Light-BG smallerFont" onclick="pottyBreak()" style="display: none">Potty Break</a>
+                <a id="backButton" class="flexGrow1 accent4-BG" onclick="goBack()" style="display: none">Back</a>
+                <a id="nextButton" class="flexGrow1 accent2Light-BG smallerFont" onclick="nextStep()" style="display: none">Next</a>
+                <a id="submitButton" onclick="submitToDB()" class="flexGrow1 accent2-BG" style="display: none">Submit</a>
             </li>
-            <li id="backAndSubmit" class="twoButtons">
-                <a id="backButton" class="accent4-BG" onclick="goBack()">Back</a>
-                <a onclick="submitToDB()" class="accent2-BG">Submit</a>
-            </li>
-            <li id="pottyYesNo" class="titleWithTwoButtons">
-                <a class="darkGray3-BG noClick">Accident?</a>
-                <a id="pottyYes" class="accent4-BG" onclick="submitPottyToDB(this, true)">Yes</a>
-                <a id="pottyNo" class="accent2-BG" onclick="submitPottyToDB(this, false)">No</a>
+            <li id="pottyYesNo" class="flex flexCenter">
+                <a class="flexGrow1 darkGray3-BG noClick" style="display: none;">Accident?</a>
+                <a id="pottyYes" class="flexGrow1 accent4-BG" onclick="submitPottyToDB(this, true)" style="display: none;">Yes</a>
+                <a id="pottyNo" class="flexGrow1 accent2-BG" onclick="submitPottyToDB(this, false)" style="display: none;">No</a>
             </li>
         </ul>
     </footer>
