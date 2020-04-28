@@ -241,11 +241,10 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 
 router.post('/send', (req, res) => {
   var emails = [
-    // 'add@test.com',
+    'add@test.com',
     // 'test@test.com',
     // 'emails@test.com',
     // 'here@test.com'
-    'matt.kint@gmail.com'
   ] //updated later to emails from db
 
   var names = [
