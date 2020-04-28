@@ -5,90 +5,104 @@ const nodemailer = require('nodemailer');
 var ejs = require('ejs');
 
 /* GET home page. */
-router.get('/', auth.checkAuthenticated, function(req, res, next) {
+router.get('/', auth.checkAuthenticated, function (req, res, next) {
   var Students = [];
   var daily_query = "CALL PullUnhiddenStudents();";
   con.query(daily_query, function (err, dailyStudents) {
     if (err) throw err;
-    recurseDailies(Students,dailyStudents,0,res);
+    recurseDailies(Students, dailyStudents, 0, res);
   })
 
-  function recurseDailies(Students,dailyStudents,i,res){
-    var Student = { id: 0, name: "", listOfActivities: []};
-    if(i < (dailyStudents[0].length)){
+  function recurseDailies(Students, dailyStudents, i, res) {
+    var Student = { id: 0, name: "", listOfActivities: [] };
+    if (i < (dailyStudents[0].length)) {
       Student.id = dailyStudents[0][i].StudentId;
       Student.name = dailyStudents[0][i].StudentName;
-    
+
       Students.push({
         id: Student.id,
         name: Student.name,
-        listOfActivities: []
+        listOfActivities: [],
+        listOfBehaviors: {}
       });
       activities_query = "CALL ShowStudentDailyActivitiesToday(" + Students[i].id + ");";
-      con.query(activities_query, function(err, act){
-        if(err) throw err;
+      con.query(activities_query, function (err, act) {
+        if (err) throw err;
         var looper = act[0];
+        console.log(activities_query)
         looper.forEach(element => {
-          if(element){
+          if (element) {
             Students[i].listOfActivities.push(element);
           }
         });
-        recurseDailies(Students,dailyStudents,i+1,res);
-        if(i == (dailyStudents[0].length) - 1){
-          bottomLayer(res, Students);
-        }
-      });
+        pull_daily_beh_query = `CALL PullDailyBehaviors(${Students[i].id})`;
+        con.query(pull_daily_beh_query, function (err, result) {
+          if (err) {
+            console.log(err)
+          }
+          [result] = result[0];
+          result = JSON.parse(JSON.stringify(result));
+          Students[i].listOfBehaviors = result;
+
+          recurseDailies(Students, dailyStudents, i + 1, res);
+          if (i == (dailyStudents[0].length) - 1) {
+            console.log(Students)
+            bottomLayer(res, Students);
+          }
+        });//end daily beh query
+      });//end activity query
     }
-    if(0==(dailyStudents[0].length)){
+    if (0 == (dailyStudents[0].length)) {
       bottomLayer(res, Students);
     }
-    
+
   }
 });
-function bottomLayer(res,Students,){
+function bottomLayer(res, Students, ) {
+  console.log('bottom layer')
   var get_template = "CALL ShowUnhiddenTemplateObject();";
-  con.query(get_template, function(err, behave){
+  con.query(get_template, function (err, behave) {
     behave = behave[0];
     var Behaviors = [];
-    if(behave.length == 0){
-      Behaviors.push({name: 'No behaviors in database:'});
+    if (behave.length == 0) {
+      Behaviors.push({ name: 'No behaviors in database:' });
     }
-    else{
+    else {
       behave.forEach((element) => {
-        bObj = {name: element.NameOf};
-        if(element.CategoryOne != "" && element.CategoryOne != null){
+        bObj = { name: element.NameOf };
+        if (element.CategoryOne != "" && element.CategoryOne != null) {
           bObj.op1 = element.CategoryOne;
         }
-        if(element.CategoryTwo != "" && element.CategoryTwo != null){
+        if (element.CategoryTwo != "" && element.CategoryTwo != null) {
           bObj.op2 = element.CategoryTwo;
         }
-        if(element.CategoryThree != "" && element.CategoryThree != null){
+        if (element.CategoryThree != "" && element.CategoryThree != null) {
           bObj.op3 = element.CategoryThree;
         }
-        if(element.CategoryFour != "" && element.CategoryFour != null){
+        if (element.CategoryFour != "" && element.CategoryFour != null) {
           bObj.op4 = element.CategoryFour;
         }
-        if(element.CategoryFive != "" && element.CategoryFive != null){
+        if (element.CategoryFive != "" && element.CategoryFive != null) {
           bObj.op5 = element.CategoryFive;
         }
         Behaviors.push(bObj);
       })
     }
     var get_reminders = "CALL ShowUnhiddenRemindersObject();";
-    con.query(get_reminders, function(err, remind){
+    con.query(get_reminders, function (err, remind) {
       remind = remind[0];
       var Reminders = [];
-      if(remind.length == 0){
-        Reminders.push({title: "No reminders in database"});
+      if (remind.length == 0) {
+        Reminders.push({ title: "No reminders in database" });
       }
-      else{
+      else {
         remind.forEach((element) => {
           // console.log(element);
-          Reminders.push({title: element.NameOf, contents: element.MainParagraphs});
+          Reminders.push({ title: element.NameOf, contents: element.MainParagraphs });
         });
       }
 
-      var get_summary = `CALL PullDailySummaryToday()`;     
+      var get_summary = `CALL PullDailySummaryToday()`;
       con.query(get_summary, function (err, sum_result) {
         if (err) {
           console.log('Unable to pull daily summary: ' + err);
@@ -105,7 +119,7 @@ function bottomLayer(res,Students,){
           }
         }
 
-        var get_snack = `CALL PullDailyAmFoodToday()`;     
+        var get_snack = `CALL PullDailyAmFoodToday()`;
         con.query(get_snack, function (err, snack_result) {
           if (err) {
             console.log('Unable to pull AM snack: ' + err);
@@ -139,9 +153,11 @@ function bottomLayer(res,Students,){
 
             var header = "Creative Nature Daily Report"
             var footer = "Sincerly, Brandy and Scott Kunakey"
+
             console.log(Students);
-      res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
-        }); // end lunch query
+            res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
+
+          }); // end lunch query
         }); // end snack query
       }); // end summary query
     });
@@ -207,11 +223,11 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
   var behavior_names = req.body.behaviorNames.split(',');
   var behavior_selection = req.body.studentsBehaviorSelection.split(',');
   var behavior_notes = req.body.studentsBehaviorNotes.split(',');
-  
+
   console.log('push behavior')
-  for (var i = 0; i < behavior_names.length; i++ ) {
+  for (var i = 0; i < behavior_names.length; i++) {
     push_behaviors_query = `CALL AddBehavior(${req.body.id}, "${behavior_names[i]}", "${behavior_selection[i]}", "${behavior_notes[i]}");`;
-    (function (query) { 
+    (function (query) {
       con.query(query, function (err, result) {
         if (err) {
           console.log(`Unable to add behaviors: ${err}`);
@@ -225,17 +241,18 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 
 router.post('/send', (req, res) => {
   var emails = [
-    'add@test.com',
-    'test@test.com',
-    'emails@test.com',
-    'here@test.com'
+    // 'add@test.com',
+    // 'test@test.com',
+    // 'emails@test.com',
+    // 'here@test.com'
+    'matt.kint@gmail.com'
   ] //updated later to emails from db
 
   var names = [
     "second name example",
-    "third name example",
-    "fourth name example",
-    "fifth name example"
+    // "third name example",
+    // "fourth name example",
+    // "fifth name example"
   ] //updated later to parent names
   //add more options for various student info later
 
@@ -271,9 +288,9 @@ router.post('/send', (req, res) => {
         //behavior selection[i]
         //behavior note[i]
         //select student id from today's roster, based on those id's grab the above stuff and more as needed
-        
+
       });
-      
+
       console.log("Message sent: %s", info.messageId);
     }
 
@@ -288,4 +305,4 @@ router.post('/send', (req, res) => {
 
 
 
-  module.exports = router;
+module.exports = router;
