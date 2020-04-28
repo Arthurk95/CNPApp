@@ -256,6 +256,7 @@
               </ul>
             </div>
 
+            <!-- Edit behavior form -->
             <div id="editBehaviorForm" class="formWindow">
               <div class="formWindow-content">
                 <span class="close" onclick="closeForm()">&times;</span>
@@ -264,7 +265,7 @@
                 <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
                   <div class="flex width60 width100Mobile marginBottom20">
                     <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="editBehaviorName" placeholder="Behavior Name"/>
+                      <input type="text" id="editBehaviorName" value="">
                     </div>
                   </div>
 
@@ -303,7 +304,7 @@
                   <a class="formSubmitButton flexGrow1 maxWidth600px" id="editBehaviorSubmit" onclick="passEditBehaviorToPost()">Save Changes</a>
                 </div>
               </div>
-            </div>
+            </div> <!-- End edit behavior form -->
 
             <!-- --------------------- New behavior Form --------------------- -->
             <div id="newBehaviorForm" class="formWindow">
@@ -431,7 +432,11 @@
                       <% } else { %>
                         <li class="white-BG spaceBetween">
                       <% } %>
-                        <p><%= activity.ActivityName %></p>
+                      
+                        <p><%= activity.ActivityName %> 
+                          <% if(activity.Helper == 1) { %>
+                          <i class="fas fa-star accent2Light-text"></i>
+                        <% } %></p>
                         <div class="flex">
                           <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
                           <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
@@ -620,10 +625,30 @@
     }
 
     function editBehavior(behavior){
-      console.log(behavior['title']);
-      openForm('newBehaviorForm');
-      console.log(behavior['title']);
+      var cat = "cat";
+      console.log(behavior);
+      openForm("editBehaviorForm");
       formElement.querySelector("#editBehaviorName").value = behavior['title'];
+      for(var i = 1; i < 6; i++){
+        var c = cat + i;
+        if(behavior[c] === ""){}
+        else{
+          formElement.querySelector("#editBehaviorOp" + i).value = behavior[c];
+        }
+      }
+    }
+
+    function passEditBehaviorToPost(){
+      /*
+        NEED DB STUFF HERE
+        Variable IDs:
+          - editBehaviorName
+          - editBehaviorOp1
+          - editBehaviorOp2
+          - editBehaviorOp3
+          - editBehaviorOp4
+          - editBehaviorOp5
+      */
     }
 
     //generate perameters for post and call post

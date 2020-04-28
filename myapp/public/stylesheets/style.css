@@ -689,6 +689,15 @@ p{margin: 0;}
   text-align: center;
 }
 
+.buttonWithIcon:hover{
+  filter: brightness(90%);
+}
+
+.buttonWithIcon:hover p, i {filter: brightness(110%);}
+
+.buttonWithIcon:active{
+  box-shadow: 0px 1px 1px var(--darkGray2);}
+
 /* Use this for any buttons */
 .customButton{
   padding: 8px 25px;
