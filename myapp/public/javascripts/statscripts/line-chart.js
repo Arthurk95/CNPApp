@@ -56,7 +56,7 @@ function generateLine(id) {
 
   //Start and End Date
   {
-    temp = document.createElement("label"); temp.innerHTML = "Beginning Date ";
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select");temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
@@ -68,7 +68,7 @@ function generateLine(id) {
     temp = document.createElement("select");temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label");temp.innerHTML = " End Date ";
+    temp = document.createElement("label");temp.innerHTML = " End Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select");temp.id="eyear" + id;temp.class="pretty-classic";temp.onchange = function(){egenDays(id); updateData(id);};
