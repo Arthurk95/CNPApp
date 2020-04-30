@@ -17,10 +17,10 @@
     <script src="/javascripts/jquery.prettydropdowns.js"></script>
   </head>
   <body>
-    <div class="flex spaceBetween centerFlexMobile flexWrap width90 center">
+    <div class="flex spaceBetween centerFlexMobile flexCollapseMobile width90 center">
       
       <!-- ------------ TASKS PANEL ------------ -->
-      <div id="tasksPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width60">
+      <div id="tasksPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px flexGrow1">
         <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
           <p class="marginLeft10 lightText font25px">Tasks</p>
           <a onclick="openForm('newTaskForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
@@ -78,7 +78,7 @@
       </div> <!-- End Tasks Section -->
 
        <!-- ------------ LOG PANEL ------------ -->
-      <div id="logPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width30">
+      <div id="logPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow width450px">
         <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
           <p class="marginLeft10 lightText font25px">Log</p>
           <a onclick="clearLog()" class="marginRight10 lightPadding accent4Light-text font15px">Clear</a>

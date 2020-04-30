@@ -233,6 +233,8 @@ p{margin: 0;}
 }
 
 .hoverable{cursor:pointer;}
+.hoverable:hover{filter:brightness(90%);}
+.hoverable:hover a, p, i{filter:brightness(110%);}
 
 .halfWidth{width: 50% !important;}
 .thirdWidth{width: 30% !important;}
@@ -260,6 +262,7 @@ p{margin: 0;}
 .width400px{width: 400px !important;}
 .width450px{width: 450px !important;}
 .width500px{width: 500px !important;}
+.width600px{width: 600px !important;}
 
 .minWidth250px{min-width: 250px !important;}
 .minWidth300px{min-width: 300px !important;}
@@ -435,6 +438,8 @@ p{margin: 0;}
 .margin40{margin: 40px;}
 
 /* ----------------- TEXT ------------------- */
+.noTextWrap{word-wrap: none !important;}
+
 .smallFont{font-size: 12px !important;}
 .mediumFont{font-size: 18px !important;}
 .largeFont{font-size: 28px !important;}

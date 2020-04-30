@@ -18,13 +18,11 @@
     <link rel='stylesheet' href='/stylesheets/switch.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/checkbox.css' />
-    <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
 
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/javascripts/jquery.prettydropdowns.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
@@ -72,17 +70,23 @@
       </nav>
     </div> <!-- end navigation -->
 
-    <!-- Drop down for adding a new chart -->
+    <!-- Charts -->
     <div id="charts">
-      <select id="newchart" class="pretty-classic">
+
+      <!-- Drop down for adding a new chart -->
+      <select id="newchart" class="ulList">
         <option value="pie">Pie Chart</option>
         <option value="line">Line Chart</option>
       </select>
 
-      <ul id="selectionButtons" class="selectionButtons">
-        <li><a id="studentButton" class="accent2Light-BG" onclick="makeChart()">Add a New Chart</a></li>
-      </ul>
-      </div>
+      <!-- Chart Panel -->
+      <div id="chartPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+          <p class="marginLeft10 lightText font25px">Make a Chart</p>
+            <!-- Drop down for adding a new chart should go here-->
+          <a class="font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="makeChart()" class="marginRight10 lightPadding accent2Light-text font15px">Add Chart</a>
+        </div>
+      </div> <!-- end chart panel --> 
 
       <script>
         var chartArray = [];
@@ -105,6 +109,7 @@
           return colorArray;
         }
 
+        //Make each chart object
         function makeChart() {
           var id = "chartObject" + curId;
           var selected = document.getElementById('newchart').options[document.getElementById('newchart').selectedIndex].value;
@@ -145,6 +150,7 @@
           }
         };
 
+        //Delete chart object
         function deleteChart(id) {
           console.log(chartArray, id);
           chartArray.forEach((element) => {
@@ -153,10 +159,11 @@
             }
           });
           document.getElementById(id).remove();
-          console.log("delete a chart")
         }
 
       </script>
+
+    </div> <!-- End chart --> 
 
 
     <!-- SCATTER PLOT -->

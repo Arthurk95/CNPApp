@@ -160,14 +160,20 @@ class thePie {
 
 function generatePie(id){
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div"); newdiv.id = id;
+  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px ";
   var bottom = document.getElementById("newchart");
   
   var temp;
 
   //Start and End Date
   {
-    temp = document.createElement("label"); temp.innerHTML = "Beginning Date ";
+    temp = document.createElement("title"); temp.innerHTML = "Pie Chart"; temp.className = "darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
+
+    var del = document.createElement("button"); del.id="button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
+    temp.appendChild(del);
+    newdiv.appendChild(temp);
+
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select"); temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
@@ -179,7 +185,7 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = " End Date ";
+    temp = document.createElement("label"); temp.innerHTML = " End Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select"); temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
@@ -194,8 +200,8 @@ function generatePie(id){
   }
  
   //Delete button
-  temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
-  newdiv.appendChild(temp);
+  //temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
+  //newdiv.appendChild(temp);
 
   //Drop Down Options
   temp = document.createElement("div");
