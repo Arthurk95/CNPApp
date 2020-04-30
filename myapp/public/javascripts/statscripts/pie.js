@@ -182,10 +182,11 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
- 
-  //Delete button
-  //temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
-  //newdiv.appendChild(temp);
+    temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
+    newdiv.appendChild(temp);
+
+    temp = document.createElement("label"); temp.innerHTML = " End Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    newdiv.appendChild(temp);
 
     temp = document.createElement("select"); temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(temp);
@@ -199,8 +200,8 @@ function generatePie(id){
   }
  
   //Delete button
-  temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
-  newdiv.appendChild(temp);
+  //temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
+  //newdiv.appendChild(temp);
 
   //Drop Down Options
   temp = document.createElement("div");
