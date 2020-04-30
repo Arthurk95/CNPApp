@@ -160,58 +160,28 @@ class thePie {
 
 function generatePie(id){
   var parent = document.getElementById("charts");
-
-  var newdiv = document.createElement("div"); newdiv.id = id;
-  newdiv.classList = "flex spaceAround flexWrap width80 center relative";
-
-  var optionsDiv = document.createElement("div");
-  optionsDiv.classList = "flex flexColumn width400px heavyPadding lightGray1-BG";
-  
-  var pieDiv = document.createElement("div");
-  pieDiv.classList = "flex flexGrow1 heavyPadding flexAlignCenter";
-
-  var innerOptionDiv = document.createElement("div"); innerOptionDiv.classList = "flex spaceBetween width100";
-
-  var bottom = document.getElementById("newchart");
+  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px ";
+  var bottom = document.getElementById("chartPanel");
   
   var temp;
 
   //Start and End Date
-  temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
-  innerOptionDiv.appendChild(temp);
-  temp = document.createElement("select"); temp.id = "syear"+id; temp.onchange = function(){sgenDays(id); updateData(id);};
-  innerOptionDiv.appendChild(temp);
-  optionsDiv.appendChild(innerOptionDiv);
+  {
+    temp = document.createElement("title"); temp.innerHTML = "Pie Chart"; temp.className = "darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
 
-  temp = document.createElement("select"); temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
-  innerOptionDiv.appendChild(makeMonthS(temp));
-  temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
-  innerOptionDiv.appendChild(temp);
-  optionsDiv.appendChild(innerOptionDiv);
-  innerOptionDiv = document.createElement("div"); innerOptionDiv.classList = "flex spaceBetween width100";
+    var del = document.createElement("button"); del.id="button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
+    temp.appendChild(del);
+    newdiv.appendChild(temp);
 
-  temp = document.createElement("label"); temp.innerHTML = " End Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
-  innerOptionDiv.appendChild(temp);
-  temp = document.createElement("select"); temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
-  innerOptionDiv.appendChild(temp);
-  optionsDiv.appendChild(innerOptionDiv);
-
-  temp = document.createElement("select"); temp.id="emonth" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
-  innerOptionDiv.appendChild(makeMonthS(temp));
-  temp = document.createElement("select"); temp.id="eday" + id; temp.class="newLine"; temp.onchange = function(){updateData(id);};
-  innerOptionDiv.appendChild(temp);
-  optionsDiv.appendChild(innerOptionDiv);
-  innerOptionDiv = document.createElement("div"); innerOptionDiv.classList = "flex spaceBetween width100";
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    newdiv.appendChild(temp);
 
 
 
  
   //Delete button
-  temp = document.createElement("button"); temp.id="button"; 
-  temp.classList = "absolute absoluteRight top10px font40px";
-  temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
-  newdiv.append(temp);
-
+  //temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
+  //newdiv.appendChild(temp);
 
   
  

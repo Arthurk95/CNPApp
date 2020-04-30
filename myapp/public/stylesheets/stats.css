@@ -46,13 +46,14 @@ white-space: normal;
 }
 
 #newchart {
-  margin-top: 75px;
+
 }
 
 #deleteButton {
-  /*position: relative; 
-  */right: 0%;
-  top: 0%;
+  color:rgb(143, 32, 32);
+  background-color: rgb(199, 47, 47);
+  border-color: rgb(143, 32, 32);
+  cursor: pointer;
 }
 
 .deleteButton {
@@ -94,10 +95,12 @@ white-space: normal;
 }
 
 .lab {
-  margin-top: 8em;
+  margin-bottom: 1em;
+  margin-left: 1em;
 }
 
 .startD {
+  margin-top: 3em;
   margin-right: 2em;
 }
 

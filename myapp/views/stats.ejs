@@ -18,13 +18,11 @@
     <link rel='stylesheet' href='/stylesheets/switch.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/checkbox.css' />
-    <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
 
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/javascripts/jquery.prettydropdowns.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
@@ -75,16 +73,17 @@
     <!-- Charts -->
     <div id="charts">
 
-      <!-- Drop down for adding a new chart -->
-      <select id="newchart" class="ulList">
-        <option value="pie">Pie Chart</option>
-        <option value="line">Line Chart</option>
-      </select>
+      
 
       <!-- Chart Panel -->
       <div id="chartPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
         <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-          <p class="marginLeft10 lightText font25px">Make a Chart</p>
+          <p class="marginLeft10 lightText font25px">Make a Chart </p>
+            <!-- Drop down for adding a new chart -->
+            <select id="newchart" class="ulList">
+              <option value="pie">Pie Chart</option>
+              <option value="line">Line Chart</option>
+            </select>
             <!-- Drop down for adding a new chart should go here-->
           <a class="font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="makeChart()">Add Chart</a>
         </div>
@@ -563,10 +562,5 @@
     <script type="text/javascript" src="javascripts/statscripts/pie.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/line-chart.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/navigation.js"></script>
-    <!--<script type="text/javascript" src="javascripts/statscripts/radar-chart.js"></script> --> 
-    <!--<script type="text/javascript" src="javascripts/statscripts/radar-chart.js"></script> --> 
-    <script type="text/javascript" src="javascripts/statscripts/bar-chart.js"></script>
-    <!-- <script type="text/javascript" src="javascripts/statscripts/bubble-chart.js"></script> -->
-    <!-- <script type="text/javascript" src="javascripts/statscripts/scatter-chart.js"></script> -->
   </body>
 </html>
