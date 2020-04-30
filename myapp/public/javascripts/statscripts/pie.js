@@ -161,7 +161,7 @@ class thePie {
 function generatePie(id){
   var parent = document.getElementById("charts");
   var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px ";
-  var bottom = document.getElementById("newchart");
+  var bottom = document.getElementById("chartPanel");
   
   var temp;
 
