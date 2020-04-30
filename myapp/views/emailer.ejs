@@ -306,7 +306,7 @@
                         <li>No Students</li>
                     <% } %>
                     </ul>
-                    <div id="sendEmailButton" class="stepButton center marginBottom20 accent2-BG" onclick="sendEmail();">
+                    <div id="sendEmailButton" class="stepButton center marginBottom20 accent2-BG" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>);">
                         <p class="centerText lightPadding">Send Emails</p>
                     </div>
                 </div>
@@ -440,12 +440,25 @@
         </script>
 
         <script>
-            function sendEmail(){
+            function sendEmails(students, todaysBehaviors){
                 var theUrl = window.location.href+'/send';
-                console.log(summaryQuill.container.firstChild.innerHTML);
-                var data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}&snackHTML=${snackQuill.container.firstChild.innerHTML}&lunchHTML=${lunchQuill.container.firstChild.innerHTML}`;
-                httpPostAsync(theUrl, data, doNothing);
+                var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
+                                        `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
+                                        `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}`;
+                                        //header
+                                        //footer
 
+                students.forEach(student => {
+
+                    var necessary_behaviors = null;
+                    // var list_of_behaviors = <%= JSON.stringify(behaviors) %>
+
+
+                    var personalized_data = `&id=${student.id}` +
+                                            `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
+                                            `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`;
+                    httpPostAsync(theUrl, universal_data + personalized_data, doNothing);
+                });
             }
         </script>
     </body>
