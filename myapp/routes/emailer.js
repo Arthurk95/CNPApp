@@ -29,7 +29,6 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
       con.query(activities_query, function (err, act) {
         if (err) throw err;
         var looper = act[0];
-        console.log(activities_query)
         looper.forEach(element => {
           if (element) {
             Students[i].listOfActivities.push(element);
@@ -46,7 +45,6 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
 
           recurseDailies(Students, dailyStudents, i + 1, res);
           if (i == (dailyStudents[0].length) - 1) {
-            console.log(Students)
             bottomLayer(res, Students);
           }
         });//end daily beh query
@@ -59,7 +57,6 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
   }
 });
 function bottomLayer(res, Students, ) {
-  console.log('bottom layer')
   var get_template = "CALL ShowUnhiddenTemplateObject();";
   con.query(get_template, function (err, behave) {
     behave = behave[0];
@@ -97,7 +94,6 @@ function bottomLayer(res, Students, ) {
       }
       else {
         remind.forEach((element) => {
-          // console.log(element);
           Reminders.push({ title: element.NameOf, contents: element.MainParagraphs });
         });
       }
@@ -154,7 +150,6 @@ function bottomLayer(res, Students, ) {
             var header = "Creative Nature Daily Report"
             var footer = "Sincerly, Brandy and Scott Kunakey"
 
-            console.log(Students);
             res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
 
           }); // end lunch query
@@ -166,10 +161,6 @@ function bottomLayer(res, Students, ) {
 
 router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
   var summary = req.body.text;
-  // var parsedSummary = JSON.parse(mystring);
-  // console.log(`old: ${mystring}`);
-  // console.log(`new: ${newString}`);
-  // console.log(jsonString);
   save_template_query = `CALL AddDailySummary('${summary}');`;
   con.query(save_template_query, function (err, result) {
     if (err) {
@@ -288,24 +279,6 @@ router.post('/send', (req, res) => {
         rejectUnauthorized: false
       }
     });
-    console.log(req.body.summaryHTML);
-    for (var i = 0; i < emails.length; i++) {
-      let info = await transporter.sendMail({
-        from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
-        to: `${emails[i]}`, // list of receivers
-        subject: "CNP Daily Report", // Subject line
-        text: "", // plain text body
-        html: await ejs.renderFile('./views/emailTemplate.ejs', {
-          name: `${names[i]}`,
-          email: `${emails[i]}`,
-          summary: req.body.summaryHTML,
-          snack: req.body.snackHTML,
-          lunch: req.body.lunchHTML
-        })
-        //behavior title[i]
-        //behavior selection[i]
-        //behavior note[i]
-        //select student id from today's roster, based on those id's grab the above stuff and more as needed
 
     let info = await transporter.sendMail({
       from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
