@@ -231,44 +231,27 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 });
 
 router.post('/send', (req, res) => {
-  var activities = JSON.parse(req.body.listOfActivities)
-  var behaviors = JSON.parse(req.body.todaysBehaviorNames)
 
-  con.query(`CALL PullEmail(${req.body.id})`, function (err, email_pull) {
+  con.query(`CALL PullEmail(${req.body.id})`, function (err, result) {
     if (err) {
       console.log(`Unable to add behaviors: ${err}`);
     }
+    [result] = result[0];
+    emails = Object.values(result);
+    try {
+      console.log(`Sending email(s) for student "${req.body.id}" to: ${emails}`)
 
-    pull_daily_beh_query = `CALL PullDailyBehaviors(${req.body.id})`;
-    con.query(pull_daily_beh_query, function (err, behavior_pull) {
-      if (err) {
-        console.log(err)
-      }
-      try {
-        sendEmail(email_pull, behavior_pull);
-      } catch (e) {
-        console.log(e);
-      }
-    });//end daily beh query
-  });
+      //handle behavior stuff
+      // console.log(req.body.listOfBehaviors)
 
-  async function sendEmail(pulled_emails, pulled_personal_behaviors) {
-    var [parent_emails] = pulled_emails[0];
-    parent_emails = Object.values(parent_emails);
-    console.log(`Sending email(s) to: ${parent_emails}`)
+      var behaviorStuff = null;
+      sendEmail(emails, behaviorStuff);
+    } catch (e) {
+      console.log(e);
+    }
+  })
 
-    var [personal_behaviors] = pulled_personal_behaviors[0];
-    personal_behaviors = JSON.parse(JSON.stringify(personal_behaviors))
-
-    var personal_behavior_parsed = [];
-    var todaysBehaviorNames = JSON.parse(req.body.todaysBehaviorNames)
-    todaysBehaviorNames.forEach(behavior_name => {
-      personal_behavior_parsed.push({
-        name: behavior_name,
-        selection: personal_behaviors[behavior_name]
-      })
-    })
-
+  async function sendEmail(parent_emails, behaviorInfo) {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -293,7 +276,7 @@ router.post('/send', (req, res) => {
         summary: req.body.summaryHTML,
         snack: req.body.snackHTML,
         lunch: req.body.lunchHTML,
-        behaviorInfo: personal_behavior_parsed //personal_behavior_parsed[i].name .selection
+        behaviorInfo: behaviorInfo //titles, selection, notes
       })
     });
   }
