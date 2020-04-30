@@ -231,8 +231,6 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 });
 
 router.post('/send', (req, res) => {
-  var activities = JSON.parse(req.body.listOfActivities)
-  var behaviors = JSON.parse(req.body.todaysBehaviorNames)
 
   con.query(`CALL PullEmail(${req.body.id})`, function (err, email_pull) {
     if (err) {
@@ -245,27 +243,26 @@ router.post('/send', (req, res) => {
         console.log(err)
       }
       try {
-        sendEmail(email_pull, behavior_pull);
+        sendEmail(email_pull, req.body.listOfActivities, behavior_pull);
       } catch (e) {
         console.log(e);
       }
     });//end daily beh query
   });
 
-  async function sendEmail(pulled_emails, pulled_personal_behaviors) {
+  async function sendEmail(pulled_emails, activities, pulled_personal_behaviors) {
     var [parent_emails] = pulled_emails[0];
     parent_emails = Object.values(parent_emails);
     console.log(`Sending email(s) to: ${parent_emails}`)
 
     var [personal_behaviors] = pulled_personal_behaviors[0];
-    personal_behaviors = JSON.parse(JSON.stringify(personal_behaviors))
-
     var personal_behavior_parsed = [];
     var todaysBehaviorNames = JSON.parse(req.body.todaysBehaviorNames)
     todaysBehaviorNames.forEach(behavior_name => {
       personal_behavior_parsed.push({
         name: behavior_name,
-        selection: personal_behaviors[behavior_name]
+        selection: personal_behaviors[behavior_name],
+        note: personal_behaviors[behavior_name + 'Note']
       })
     })
 
@@ -290,10 +287,13 @@ router.post('/send', (req, res) => {
       text: "", // plain text body
       html: await ejs.renderFile('./views/emailTemplate.ejs', {
         email: parent_emails,
+        header: 'temp header',
+        footer: 'temp footer',
         summary: req.body.summaryHTML,
         snack: req.body.snackHTML,
         lunch: req.body.lunchHTML,
-        behaviorInfo: personal_behavior_parsed //personal_behavior_parsed[i].name .selection
+        activities: JSON.parse(activities),
+        behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
       })
     });
   }

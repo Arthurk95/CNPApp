@@ -2,7 +2,7 @@
 <html lang="en">
 
 <body>
-    <h1>CNP Daily Email</h1>
+    <h1><%- header %></h1>
     <h2>Summary</h2>
         <%- summary %>
     <h2>Snack</h2>
@@ -11,15 +11,19 @@
         <%- lunch %>
 
     <h2>PERSONALIZED SECTION</h2>
+    <h3>Activities:</h3>
+    <% activities.forEach((activity, index) => { %>
+        <label><%= activity.ActivityName %></label>
+    
+        <% }) %>
     <h3>Behaviors:</h3>
-    <!-- behavior title 1: all/none - note -->
-    <p style="padding: 10px 20px; background: #DDD; color: white; width: 100%;">Behaviors</p>
-    <ul style="outline: none; list-style-type: none; display: flex; flex-wrap: wrap; justify-content; space-between;">
-        <li style="display: flex; justify-content: space-between;">
-            <p>Behavior 1</p>
-            <p>Value</p>
-        </li>
-    </ul>
-    <h3>PERSONALIZED NOTE</h3>
+    <% behaviors.forEach((behavior, index) => { %>
+        <label><%= behavior.name %></label>
+        <label><%= behavior.selection %></label>
+        <label><%= behavior.note %></label>
+    
+        <% }) %>
+        
+    <h1><%- footer %></h1>
 </body>
 </html>
