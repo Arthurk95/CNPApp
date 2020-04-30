@@ -49,17 +49,20 @@ function getRandomColor() {
 
 function generateLine(id) {
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div");newdiv.id = id;
+  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px";
   var bottom = document.getElementById("newchart");
   
   var temp,temp2;
 
   //Start and End Date
   {
+    temp = document.createElement("title"); temp.innerHTML = "Line Chart"; temp.className = "darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
+    newdiv.appendChild(temp);
+
     temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id = "syear" + id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("select");temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
