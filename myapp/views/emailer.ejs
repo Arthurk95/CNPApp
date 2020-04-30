@@ -447,17 +447,27 @@
                                         `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}`;
                                         //header
                                         //footer
+                // console.log(Object.values(todaysBehaviors))
+                var behavior_names = [];
+
+                todaysBehaviors.forEach(behavior => {
+                    behavior_names.push(behavior.name);
+                })
 
                 students.forEach(student => {
 
                     var necessary_behaviors = null;
-                    // var list_of_behaviors = <%= JSON.stringify(behaviors) %>
 
 
                     var personalized_data = `&id=${student.id}` +
                                             `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
-                                            `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`;
+                                            `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                                            // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+
+                    
                     httpPostAsync(theUrl, universal_data + personalized_data, doNothing);
+                    // console.log(student.listOfBehaviors['AM Snack']);
+
                 });
             }
         </script>
