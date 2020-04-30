@@ -306,7 +306,7 @@
                         <li>No Students</li>
                     <% } %>
                     </ul>
-                    <div id="sendEmailButton" class="stepButton center marginBottom20 accent2-BG" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>);">
+                    <div id="sendEmailButton" class="stepButton center marginBottom20 accent2-BG" onclick="sendEmail();">
                         <p class="centerText lightPadding">Send Emails</p>
                     </div>
                 </div>
@@ -440,7 +440,7 @@
         </script>
 
         <script>
-            function sendEmails(students, todaysBehaviors){
+            function sendEmail(){
                 var theUrl = window.location.href+'/send';
                 var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
                                         `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 

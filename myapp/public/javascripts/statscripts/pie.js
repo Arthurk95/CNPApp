@@ -176,25 +176,40 @@ function generatePie(id){
     temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
+    temp = document.createElement("select"); temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    newdiv.appendChild(temp);
 
+    temp = document.createElement("select"); temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    newdiv.appendChild(makeMonthS(temp));
 
  
   //Delete button
   //temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
   //newdiv.appendChild(temp);
 
-  
+    temp = document.createElement("select"); temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
+    newdiv.appendChild(temp);
+
+    temp = document.createElement("select"); temp.id="emonth" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
+    newdiv.appendChild(makeMonthS(temp));
+
+    temp = document.createElement("select"); temp.id="eday" + id; temp.class="newLine"; temp.onchange = function(){updateData(id);};
+    newdiv.appendChild(temp);
+
+  }
  
-  
+  //Delete button
+  temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
+  newdiv.appendChild(temp);
+
   //Drop Down Options
   temp = document.createElement("div");
   temp.id = "opid1" + id;
-  optionsDiv.appendChild(temp);
+  newdiv.appendChild(temp);
   temp = document.createElement("div");
   temp.id = "op2" + id;
-  optionsDiv.appendChild(temp);
+  newdiv.appendChild(temp);
   
-  newdiv.append(optionsDiv);
   parent.insertBefore(newdiv,bottom);
   onUpdateop1(id);
 
