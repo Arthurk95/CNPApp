@@ -442,10 +442,33 @@
         <script>
             function sendEmail(){
                 var theUrl = window.location.href+'/send';
-                console.log(summaryQuill.container.firstChild.innerHTML);
-                var data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}&snackHTML=${snackQuill.container.firstChild.innerHTML}&lunchHTML=${lunchQuill.container.firstChild.innerHTML}`;
-                httpPostAsync(theUrl, data, doNothing);
+                var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
+                                        `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
+                                        `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}`;
+                                        //header
+                                        //footer
+                // console.log(Object.values(todaysBehaviors))
+                var behavior_names = [];
 
+                todaysBehaviors.forEach(behavior => {
+                    behavior_names.push(behavior.name);
+                })
+
+                students.forEach(student => {
+
+                    var necessary_behaviors = null;
+
+
+                    var personalized_data = `&id=${student.id}` +
+                                            `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
+                                            `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                                            // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+
+                    
+                    httpPostAsync(theUrl, universal_data + personalized_data, doNothing);
+                    // console.log(student.listOfBehaviors['AM Snack']);
+
+                });
             }
         </script>
     </body>

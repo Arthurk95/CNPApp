@@ -240,22 +240,44 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 });
 
 router.post('/send', (req, res) => {
-  var emails = [
-    'add@test.com',
-    // 'test@test.com',
-    // 'emails@test.com',
-    // 'here@test.com'
-  ] //updated later to emails from db
+  var activities = JSON.parse(req.body.listOfActivities)
+  var behaviors = JSON.parse(req.body.todaysBehaviorNames)
 
-  var names = [
-    "second name example",
-    // "third name example",
-    // "fourth name example",
-    // "fifth name example"
-  ] //updated later to parent names
-  //add more options for various student info later
+  con.query(`CALL PullEmail(${req.body.id})`, function (err, email_pull) {
+    if (err) {
+      console.log(`Unable to add behaviors: ${err}`);
+    }
 
-  async function sendEmail() {
+    pull_daily_beh_query = `CALL PullDailyBehaviors(${req.body.id})`;
+    con.query(pull_daily_beh_query, function (err, behavior_pull) {
+      if (err) {
+        console.log(err)
+      }
+      try {
+        sendEmail(email_pull, behavior_pull);
+      } catch (e) {
+        console.log(e);
+      }
+    });//end daily beh query
+  });
+
+  async function sendEmail(pulled_emails, pulled_personal_behaviors) {
+    var [parent_emails] = pulled_emails[0];
+    parent_emails = Object.values(parent_emails);
+    console.log(`Sending email(s) to: ${parent_emails}`)
+
+    var [personal_behaviors] = pulled_personal_behaviors[0];
+    personal_behaviors = JSON.parse(JSON.stringify(personal_behaviors))
+
+    var personal_behavior_parsed = [];
+    var todaysBehaviorNames = JSON.parse(req.body.todaysBehaviorNames)
+    todaysBehaviorNames.forEach(behavior_name => {
+      personal_behavior_parsed.push({
+        name: behavior_name,
+        selection: personal_behaviors[behavior_name]
+      })
+    })
+
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -288,16 +310,19 @@ router.post('/send', (req, res) => {
         //behavior note[i]
         //select student id from today's roster, based on those id's grab the above stuff and more as needed
 
-      });
-
-      console.log("Message sent: %s", info.messageId);
-    }
-
-  }
-  try {
-    sendEmail();
-  } catch (e) {
-    console.log(e);
+    let info = await transporter.sendMail({
+      from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
+      to: parent_emails, // list of receivers
+      subject: "CNP Daily Report", // Subject line
+      text: "", // plain text body
+      html: await ejs.renderFile('./views/emailTemplate.ejs', {
+        email: parent_emails,
+        summary: req.body.summaryHTML,
+        snack: req.body.snackHTML,
+        lunch: req.body.lunchHTML,
+        behaviorInfo: personal_behavior_parsed //personal_behavior_parsed[i].name .selection
+      })
+    });
   }
   res.end();
 });
