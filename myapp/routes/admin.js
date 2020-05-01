@@ -158,6 +158,7 @@ const fs = require('fs');
   router.post('/saveemailsettings', auth.checkAuthenticated, function(req, res){
     var form = req.body.form;
     var data = req.body.data;
+    data = data.replace("--::a very ugly string that Nathan made so it wouldn't happen naturally::--",'&');
     var sql;
     if(form == "header"){
       sql = `CALL ChangeHeader('${data}');`;
