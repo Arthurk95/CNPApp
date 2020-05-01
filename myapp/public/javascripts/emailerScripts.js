@@ -51,7 +51,7 @@ function stepChange(){
 }
 
 // another student was selected from the list
-function studentSelected(listElement, studentData, index){
+function studentSelected(listElement, index){
     if(!savedList[currentStudentIndex]){
         // clicked another student without saving, save student's data to database
     }
@@ -78,6 +78,8 @@ function populateData(){
         stepTwoTitle.classList.remove("approved");
     }
     */
+
+
     if(approvedList[currentStudentIndex]){
         setApprovedStyle();
     }
@@ -92,6 +94,26 @@ function populateData(){
         li.innerHTML = currentStudentData.listOfActivities[i].ActivityName;
         activities.appendChild(li);
     }
+
+    var behaviorKeys = Object.keys(currentStudentData.listOfBehaviors);
+    var behaviorValues = Object.values(currentStudentData.listOfBehaviors);
+
+    behaviors = document.getElementById('behaviorsList');
+
+    // updates the behaviors dropdown values to the student's values.
+    // starts at 4 because that's where first behavior shows up in behaviorKeys
+    for(var i = 4; i < behaviorKeys.length; i++){
+        var behaviorElement = document.getElementById(behaviorKeys[i]);
+        if(behaviorElement != null && behaviorElement != null){
+            var element = behaviorElement.getElementsByTagName("select")[0];
+            if(element != null && element != null){
+                if(element.name === behaviorKeys[i]){
+                    element.value = behaviorValues[i];
+                }
+            }
+        }
+    }
+
 
     toggleSaveButtonStyle();
 }
@@ -141,10 +163,8 @@ function initEmailerVariables(){
     activities = document.getElementById("activitiesList");
     saveButton = document.getElementById("saveButton");
     if(currentStudentElement != null){
-        currentStudentElement.classList += " selected";
-        stepTwoTitle.getElementsByTagName("p")[0].innerHTML = currentStudentElement.innerHTML;
-        initActivities();
-        initSavedList();
+        studentSelected(document.getElementById("student0"), 0);
+        document.getElementById("student0").classList.add("selected");
     }
     else{
         stepTwoTitle.getElementsByTagName("p")[0].innerHTML = "No Students";
