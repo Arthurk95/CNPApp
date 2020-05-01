@@ -425,6 +425,11 @@ p{margin: 0;}
 .heavyPadding{padding: 15px !important;}
 .veryHeavyPadding{padding: 50px !important;}
 
+.padding10px{padding: 10px;}
+.padding20px{padding: 20px;}
+.padding30px{padding: 30px;}
+.padding40px{padding: 40px;}
+
 .padding5px10px{padding: 5px 10px;}
 .padding8px15px{padding: 8px 15px;}
 .padding15px30px{padding: 15px 30px;}
@@ -701,7 +706,9 @@ p{margin: 0;}
 .buttonWithIcon:hover p, i {filter: brightness(110%);}
 
 .buttonWithIcon:active{
-  box-shadow: 0px 1px 1px var(--darkGray2);}
+  box-shadow: 0px 1px 1px var(--darkGray2);
+  margin-bottom: -2px;
+}
 
 /* Use this for any buttons */
 .customButton{
