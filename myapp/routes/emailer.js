@@ -328,4 +328,48 @@ console.log(req.body)
 
 
 
+router.post('/render-email-view', (req, res) => {
+  // console.log('rendering page for')
+  // console.log(req.body)
+  pull_daily_beh_query = `CALL PullDailyBehaviors(${req.body.id})`;
+  con.query(pull_daily_beh_query, function (err, behavior_pull) {
+    if (err) {
+      console.log(err)
+    }
+    try {
+      renderEmail(req.body.listOfActivities, behavior_pull);
+    } catch (e) {
+      console.log(e);
+    }
+  });//end daily beh query
+
+  function renderEmail(activities, pulled_personal_behaviors) {
+    var [personal_behaviors] = pulled_personal_behaviors[0];
+    var personal_behavior_parsed = [];
+    var todaysBehaviorNames = JSON.parse(req.body.todaysBehaviorNames)
+    todaysBehaviorNames.forEach(behavior_name => {
+      personal_behavior_parsed.push({
+        name: behavior_name,
+        selection: personal_behaviors[behavior_name],
+        note: personal_behaviors[behavior_name + 'Note']
+      })
+    })
+
+    var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {
+        header: `${req.body.header}`,
+        footer: `${req.body.footer}`,
+        summary: `${req.body.summaryHTML}`,
+        snack: `${req.body.snackHTML}`,
+        lunch: `${req.body.lunchHTML}`,
+        activities: JSON.parse(activities),
+        behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
+      })
+
+    console.log(email_HTML)
+    console.log('res.send')
+    res.send({ rendered_HTML: email_HTML })
+  }
+});
+
+
 module.exports = router;

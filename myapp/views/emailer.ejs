@@ -218,8 +218,9 @@
                     <div id="stepTwoTitle" class="heavyPadding accent1Light-BG flex spaceBetween flexAlignCenter flexWrap">
                         <p class="font50px lightGray1-text marginLeft10"></p>
                         <p class="displayNone" id="currentStudentID"></p>
-                        <div class="buttonWithIcon accent2Light-BG" onclick="openReview()">
-                            <p>Review</p>
+                        <div class="buttonWithIcon accent2Light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
+                            <!-- <div class="buttonWithIcon accent2Light-BG" onclick="openReview()"> -->
+                            <p class="mediumPadding">Review</p>
                         </div>
                     </div>
 
@@ -489,6 +490,40 @@
                     // console.log(student.listOfBehaviors['AM Snack']);
 
                 });
+            }
+
+            function renderView(todaysBehaviors){
+                console.log('renderVIew')
+                var theUrl = window.location.href+'/render-email-view';
+                var header = getHeader();
+                var footer = getFooter();
+                var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
+                                        `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
+                                        `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
+                                        `&header=${header}` +
+                                        `&footer=${footer}`;
+                var behavior_names = [];
+                
+                todaysBehaviors.forEach(behavior => {
+                    behavior_names.push(behavior.name);
+                })
+
+
+                var necessary_behaviors = null;
+
+                var personalized_data = `&id=${currentStudentData.id}` +
+                                        `&listOfActivities=${JSON.stringify(currentStudentData.listOfActivities)}` +
+                                        `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                                        // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+
+                function test(data) {
+                    console.log('here')
+                    console.log(data);
+                }
+                var callback = test;
+                httpPostAsync(theUrl, universal_data + personalized_data, callback);
+                // console.log(student.listOfBehaviors['AM Snack']);
+
             }
         </script>
     </body>

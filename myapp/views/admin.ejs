@@ -729,7 +729,6 @@
 
     function editBehavior(behavior){
       var cat = "cat";
-      console.log(behavior);
       openForm("editBehaviorForm");
       formElement.querySelector("#editBehaviorName").value = behavior['title'];
       for(var i = 1; i < 6; i++){
@@ -903,10 +902,9 @@
       }
       else
       {
-        textData = data.data[0].MainParagraphs.replace(/\n/g, '\\n');
+        textData = (data.data[0].MainParagraphs);
         textData = JSON.parse(textData);
       }
-      console.log(textData);
       if(data.form == "editHeaderForm"){
         headerQuill.setContents(textData);
       }
@@ -928,17 +926,28 @@
       var data, textData;
       if(form == "header"){
         textData = JSON.stringify(headerQuill.getContents());
+        textData = escapeSpecialChars(textData);
+        textData = textData.replace(/\&/g,"--::a very ugly string that Nathan made so it wouldn't happen naturally::--");
         var data = "data=" + textData + "&form=" + form;
       }
       else if(form == "signature")
       {
         textData = JSON.stringify(footerQuill.getContents())
+        textData = escapeSpecialChars(textData);
+        textData = textData.replace(/\&/g,"--::a very ugly string that Nathan made so it wouldn't happen naturally::--");
         var data = "data=" + textData + "&form=" + form;
       } 
       var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
+     httpPostAsync(theUrl,data,callback);
     }
 
-    
+    function escapeSpecialChars(string){ 
+      return string.replace(/\\/g, "\\\\")
+                  .replace(/\n/g, "\\n")
+                  .replace(/\r/g, "\\r")
+                  .replace(/\t/g, "\\t")
+                  .replace(/\f/g, "\\f")
+                  .replace(/\&/g, "\\&"); 
+    }
   </script>
 </html>
