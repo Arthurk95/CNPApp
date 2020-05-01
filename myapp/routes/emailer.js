@@ -147,11 +147,37 @@ function bottomLayer(res, Students, ) {
               }
             }
 
-            var header = "Creative Nature Daily Report"
-            var footer = "Sincerly, Brandy and Scott Kunakey"
+            con.query(`CALL ShowHeader();`, function (err, header_result) {
+              if (err) {
+                console.log(`Unable to pull header: ${err}`)
+              }
+              try {
+                [stripped_result] = header_result[0];
+                if (stripped_result) {
+                  var header = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+                }
+              } catch (e) {
+                var header = 'error grabbing header'
+                console.log(e);
+              }
 
-            res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
+              con.query(`CALL ShowFooter();`, function (err, footer_result) {
+                if (err) {
+                  console.log(`Unable to pull footer: ${err}`)
+                }
+                try {
+                  [stripped_result] = footer_result[0];
+                  if (stripped_result) {
+                    var footer = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+                  }
+                } catch (e) {
+                  var footer = 'error grabbing header'
+                  console.log(e);
+                }
 
+                res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
+              });//end footer query
+            });//end header query
           }); // end lunch query
         }); // end snack query
       }); // end summary query
@@ -231,7 +257,7 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 });
 
 router.post('/send', (req, res) => {
-
+console.log(req.body)
   con.query(`CALL PullEmail(${req.body.id})`, function (err, email_pull) {
     if (err) {
       console.log(`Unable to add behaviors: ${err}`);
@@ -287,11 +313,11 @@ router.post('/send', (req, res) => {
       text: "", // plain text body
       html: await ejs.renderFile('./views/emailTemplate.ejs', {
         email: parent_emails,
-        header: 'temp header',
-        footer: 'temp footer',
-        summary: req.body.summaryHTML,
-        snack: req.body.snackHTML,
-        lunch: req.body.lunchHTML,
+        header: `${req.body.header}`,
+        footer: `${req.body.footer}`,
+        summary: `${req.body.summaryHTML}`,
+        snack: `${req.body.snackHTML}`,
+        lunch: `${req.body.lunchHTML}`,
         activities: JSON.parse(activities),
         behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
       })

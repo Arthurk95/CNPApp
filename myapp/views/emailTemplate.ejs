@@ -2,20 +2,30 @@
 <html lang="en">
 
 <body>
-    <h1><%- header %></h1>
+    <div>
+    <%- header %>
+    </div>
+    <div>
     <h2>Summary</h2>
         <%- summary %>
+    </div>
+        <div>
     <h2>Snack</h2>
         <%- snack %>
+    </div>
+        <div>
     <h2>Lunch</h2>
         <%- lunch %>
-
+    </div>
     <h2>PERSONALIZED SECTION</h2>
+    <div>
     <h3>Activities:</h3>
     <% activities.forEach((activity, index) => { %>
         <label><%= activity.ActivityName %></label>
     
         <% }) %>
+    </div>
+    <div>
     <h3>Behaviors:</h3>
     <% behaviors.forEach((behavior, index) => { %>
         <label><%= behavior.name %></label>
@@ -23,7 +33,9 @@
         <label><%= behavior.note %></label>
     
         <% }) %>
-        
-    <h1><%- footer %></h1>
+    </div>
+    <div>
+    <%- footer %>
+    </div>
 </body>
 </html>
