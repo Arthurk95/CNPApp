@@ -45,8 +45,14 @@ content: "\A\A";
 white-space: normal;
 }
 
-#newchart {
+.pieMin {
+  max-width: 43.75%;
+  max-height: fit-content;
+  display: inline-block;
+}
 
+.inLine {
+  display: inline-block;
 }
 
 #deleteButton {
@@ -95,13 +101,11 @@ white-space: normal;
 }
 
 .lab {
-  margin-bottom: 1em;
-  margin-left: 1em;
+  margin: .5em;
 }
 
 .startD {
   margin-top: 3em;
-  margin-right: 2em;
 }
 
 div.tooltip-pie {
