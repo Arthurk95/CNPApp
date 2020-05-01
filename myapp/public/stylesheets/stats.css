@@ -46,13 +46,10 @@ white-space: normal;
 }
 
 .pieMin {
-  max-width: 43.75%;
-  max-height: fit-content;
+  position: relative;
   display: inline-block;
-}
-
-.inLine {
-  display: inline-block;
+  white-space: nowrap;
+  justify-self: left;
 }
 
 #deleteButton {
@@ -98,10 +95,6 @@ white-space: normal;
   display: inline-block;
   visibility: visible;
   z-index: 9000;
-}
-
-.lab {
-  margin: .5em;
 }
 
 .startD {
