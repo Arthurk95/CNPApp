@@ -251,17 +251,17 @@
                                     <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottom10 flexWrap">
                                         <label for="<%= behavior.name %>" class="width20"><%= behavior.name %></label>
                                         
-                                        <div class="flex spaceAround relative width60">
+                                        <div class="flex spaceAround flexAlignCenter relative width60">
                                             <select id="<%= behavior.name%>Select" name="<%= behavior.name %>">
                                             </select>
                                             
                                             <input style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></input>
                                     
-                                            <a onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name%>Select-button');" class="marginLeft10 borderRadiusSmall accent4Light-BG lightPadding">
+                                            <a onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name %>Select'); toggleClassIfInputNotEmpty('<%=behavior.name %>-text-box', this, 'accent2Light-BG', 'accent4Light-BG');" class="marginLeft10 borderRadiusSmall accent4Light-BG lightPadding">
                                                 <i class="fas fa-sticky-note darkText"></i>
                                             </a>
                                         </div>
-                                        </div>
+                                    </div>
 
                                     <!-- Add note behavior forms -->
                                     <div id="<%= behavior.name %>Form" class="formWindow">
@@ -383,6 +383,7 @@
                 numRemindersShown++;
                 var reminders = document.getElementById('reminders');
                 var select = document.createElement("select");
+                select.classList = "width60";
                 for(var i = 0; i < listOfReminders.length; i++){
                     var option = document.createElement("option");
                     option.text = listOfReminders[i].title;

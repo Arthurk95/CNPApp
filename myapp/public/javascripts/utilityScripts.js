@@ -79,6 +79,8 @@ function textAreaAdjust(textArea) {
 function toggleBetweenElements(ID, otherID){
     var element = document.getElementById(ID);
     var otherElement = document.getElementById(otherID);
+
+    element.style.height = otherElement.offsetHeight + "px";
     if(isElementHidden(element)){
         hideElement(otherElement, "");
         showElement(element, "");
@@ -113,6 +115,26 @@ function toggleableToggled(element){
             others[i].classList.remove('toggled');
         }
         element.classList.add('toggled');
+    }
+}
+
+// toggles between two classes based on if given input element value is empty
+function toggleClassIfInputNotEmpty(inputID, element, className, oldClassName){
+    var input = document.getElementById(inputID);
+
+    console.log(input.value.length);
+
+    if(input.value.length > 0){ // input not empty
+        if(!element.classList.contains(className)){ // not already toggled before
+            element.classList.add(className);
+            element.classList.remove(oldClassName);
+        }
+    }
+    else{ // input empty
+        if(element.classList.contains(className)){ // input was not empty before
+            element.classList.remove(className);
+            element.classList.add(oldClassName);
+        }
     }
 }
 
