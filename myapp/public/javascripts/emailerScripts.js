@@ -259,54 +259,63 @@ function changeMade(){
 
 }
 
-function openReview(){
-    var listDivClassList = "flex flexColumn heavyPadding marginBottom30";
-
-    var studentBehaviors; // = getStudentBehaviorsFromDB(currentStudentData.id);
-    //var summary; // = getSummaryDB(currentStudentData.id);
+function openReview(rendered_HTML) {
     formElement = document.getElementById('reviewForm');
     var emailReviewElement = document.getElementById('reviewData');
     emailReviewElement.innerHTML = "";
     formElement.style.display = "block";
-    
     formElement.querySelector("#reviewTitle").innerHTML = "Reviewing " + currentStudentData.name;
+    emailReviewElement.innerHTML = rendered_HTML;
+}
 
-    var behaviorKeys = Object.keys(currentStudentData.listOfBehaviors);
-    var behaviorValues = Object.values(currentStudentData.listOfBehaviors);
+// function openReview(){
+//     var listDivClassList = "flex flexColumn heavyPadding marginBottom30";
 
-    emailReviewElement.innerHTML += header;
+//     var studentBehaviors; // = getStudentBehaviorsFromDB(currentStudentData.id);
+//     //var summary; // = getSummaryDB(currentStudentData.id);
+//     formElement = document.getElementById('reviewForm');
+//     var emailReviewElement = document.getElementById('reviewData');
+//     emailReviewElement.innerHTML = "";
+//     formElement.style.display = "block";
+    
+//     formElement.querySelector("#reviewTitle").innerHTML = "Reviewing " + currentStudentData.name;
 
-    var listDiv = document.createElement('div'); 
-    listDiv.classList = listDivClassList;
+//     var behaviorKeys = Object.keys(currentStudentData.listOfBehaviors);
+//     var behaviorValues = Object.values(currentStudentData.listOfBehaviors);
+
+//     emailReviewElement.innerHTML += header;
+
+//     var listDiv = document.createElement('div'); 
+//     listDiv.classList = listDivClassList;
 
 
-    for(var i = 0; i < reminders.length; i++){
-        listDiv.appendChild(createTwoColumnDiv(reminders[i].title, reminders[i].contents));
-    }
+//     for(var i = 0; i < reminders.length; i++){
+//         listDiv.appendChild(createTwoColumnDiv(reminders[i].title, reminders[i].contents));
+//     }
 
-    emailReviewElement.appendChild(listDiv);
+//     emailReviewElement.appendChild(listDiv);
 
-    listDiv = document.createElement('div');
-    listDiv.classList = listDivClassList;
-    // starts at 4 because index 4 is first behavior
-    // check this using console.log(behaviorKeys)
-    for(var i = 4; i < behaviorKeys.length; i++){ 
-        var tempDiv = document.createElement('div');
-        tempDiv.classList = twoColumnDivClassList;
-        var p = document.createElement('p');
+//     listDiv = document.createElement('div');
+//     listDiv.classList = listDivClassList;
+//     // starts at 4 because index 4 is first behavior
+//     // check this using console.log(behaviorKeys)
+//     for(var i = 4; i < behaviorKeys.length; i++){ 
+//         var tempDiv = document.createElement('div');
+//         tempDiv.classList = twoColumnDivClassList;
+//         var p = document.createElement('p');
 
-        if(behaviorValues[i].length < 1){}
-        else{
-            listDiv.appendChild(createTwoColumnDiv(behaviorKeys[i], behaviorValues[i]));
-        }
+//         if(behaviorValues[i].length < 1){}
+//         else{
+//             listDiv.appendChild(createTwoColumnDiv(behaviorKeys[i], behaviorValues[i]));
+//         }
 
         
-    }
+//     }
 
-    emailReviewElement.appendChild(listDiv);
+//     emailReviewElement.appendChild(listDiv);
     
-    emailReviewElement.innerHTML += footer;   
-}
+//     emailReviewElement.innerHTML += footer;   
+// }
 
 function createTwoColumnDiv(left, right){
     var p1 = document.createElement('p');

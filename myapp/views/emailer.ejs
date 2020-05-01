@@ -516,11 +516,14 @@
                                         `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
                                         // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
 
-                function test(data) {
+                function handleResponse(data) {
                     console.log('here')
-                    console.log(data);
+                    data = JSON.parse(data)
+                    console.log(data.rendered_HTML);
+                    // document.getElementById("reviewData").innerHTML = data.rendered_HTML;
+                    openReview(data.rendered_HTML);
                 }
-                var callback = test;
+                var callback = handleResponse;
                 httpPostAsync(theUrl, universal_data + personalized_data, callback);
                 // console.log(student.listOfBehaviors['AM Snack']);
 

@@ -154,7 +154,7 @@ function bottomLayer(res, Students, ) {
               try {
                 [stripped_result] = header_result[0];
                 if (stripped_result) {
-                  var header = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+                  var header = stripped_result.MainParagraphs.replace("--::a very ugly string that Nathan made so it wouldn't happen naturally::--",'&');
                 }
               } catch (e) {
                 var header = 'error grabbing header'
@@ -168,7 +168,7 @@ function bottomLayer(res, Students, ) {
                 try {
                   [stripped_result] = footer_result[0];
                   if (stripped_result) {
-                    var footer = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+                    var footer = stripped_result.MainParagraphs.replace("--::a very ugly string that Nathan made so it wouldn't happen naturally::--",'&');
                   }
                 } catch (e) {
                   var footer = 'error grabbing header'
@@ -364,10 +364,9 @@ router.post('/render-email-view', (req, res) => {
         activities: JSON.parse(activities),
         behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
       })
-
-    console.log(email_HTML)
-    console.log('res.send')
-    res.send({ rendered_HTML: email_HTML })
+    email_HTML.then(function (result) {
+      res.send({ rendered_HTML: result })
+    })
   }
 });
 
