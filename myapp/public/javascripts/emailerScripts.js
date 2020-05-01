@@ -20,6 +20,8 @@ var header;
 var footer;
 var reminders;
 
+var twoColumnDivClassList = "flex spaceBetween marginBottom10 width100";
+
 // Init step two data for first student
 
 
@@ -238,7 +240,6 @@ function changeMade(){
 }
 
 function openReview(){
-    var twoColumnDivClassList = "flex spaceBetween marginBottom10 width100";
     var listDivClassList = "flex flexColumn heavyPadding marginBottom30";
 
     var studentBehaviors; // = getStudentBehaviorsFromDB(currentStudentData.id);
@@ -260,17 +261,7 @@ function openReview(){
 
 
     for(var i = 0; i < reminders.length; i++){
-        var p = document.createElement('p');
-        var tempDiv = document.createElement('div'); 
-        tempDiv.classList = twoColumnDivClassList;
-
-        p.innerHTML = reminders[i].title;
-        tempDiv.appendChild(p);
-
-        p = document.createElement('p');
-        p.innerHTML = reminders[i].contents;
-        tempDiv.appendChild(p);
-        listDiv.appendChild(tempDiv);
+        listDiv.appendChild(createTwoColumnDiv(reminders[i].title, reminders[i].contents));
     }
 
     emailReviewElement.appendChild(listDiv);
@@ -286,14 +277,7 @@ function openReview(){
 
         if(behaviorValues[i].length < 1){}
         else{
-            p.innerHTML = behaviorKeys[i];
-            tempDiv.appendChild(p);
-    
-            p = document.createElement('p');
-            p.innerHTML = behaviorValues[i];
-            tempDiv.appendChild(p);
-    
-            listDiv.appendChild(tempDiv);
+            listDiv.appendChild(createTwoColumnDiv(behaviorKeys[i], behaviorValues[i]));
         }
 
         
@@ -301,8 +285,18 @@ function openReview(){
 
     emailReviewElement.appendChild(listDiv);
     
-    emailReviewElement.innerHTML += footer;
-    
+    emailReviewElement.innerHTML += footer;   
+}
 
-    
+function createTwoColumnDiv(left, right){
+    var p1 = document.createElement('p');
+    var p2 = document.createElement('p');
+    var div = document.createElement('div');
+    div.classList = twoColumnDivClassList;
+
+    p1.innerHTML = left;
+    p2.innerHTML = right;
+    div.appendChild(p1);
+    div.appendChild(p2);
+    return div;
 }
