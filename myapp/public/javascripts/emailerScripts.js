@@ -15,6 +15,11 @@ var behaviors;
 var formElement;
 var saveButton;
 
+var summary;
+var header;
+var footer;
+var reminders;
+
 // Init step two data for first student
 
 
@@ -115,6 +120,11 @@ function setNormalStyle(){
 function passToJS(r){
     listOfStudents = r;
 }
+
+function passSummaryToJS(s){summary = s;}
+function passRemindersToJS(r){reminders = r;}
+function passHeaderToJS(h){header = h;}
+function passFooterToJS(f){footer = f;}
 
 // called when emailer page is loaded to fill in content of page
 // and initialize all relevant variables
@@ -228,15 +238,71 @@ function changeMade(){
 }
 
 function openReview(){
+    var twoColumnDivClassList = "flex spaceBetween marginBottom10 width100";
+    var listDivClassList = "flex flexColumn heavyPadding marginBottom30";
+
     var studentBehaviors; // = getStudentBehaviorsFromDB(currentStudentData.id);
-    var summary; // = getSummaryDB(currentStudentData.id);
+    //var summary; // = getSummaryDB(currentStudentData.id);
     formElement = document.getElementById('reviewForm');
-    var summaryElement = document.getElementById('summaryText');
+    var emailReviewElement = document.getElementById('reviewData');
+    emailReviewElement.innerHTML = "";
     formElement.style.display = "block";
     
-    formElement.getElementsByClassName('formTitle')[0].innerHTML = currentStudentData.name;
-    
-    for(var i = 0; i < studentBehaviors.length; i++){
-        summaryElement.append(studentBehaviors[i].name);
+    formElement.querySelector("#reviewTitle").innerHTML = "Reviewing " + currentStudentData.name;
+
+    var behaviorKeys = Object.keys(currentStudentData.listOfBehaviors);
+    var behaviorValues = Object.values(currentStudentData.listOfBehaviors);
+
+    emailReviewElement.innerHTML += header;
+
+    var listDiv = document.createElement('div'); 
+    listDiv.classList = listDivClassList;
+
+
+    for(var i = 0; i < reminders.length; i++){
+        var p = document.createElement('p');
+        var tempDiv = document.createElement('div'); 
+        tempDiv.classList = twoColumnDivClassList;
+
+        p.innerHTML = reminders[i].title;
+        tempDiv.appendChild(p);
+
+        p = document.createElement('p');
+        p.innerHTML = reminders[i].contents;
+        tempDiv.appendChild(p);
+        listDiv.appendChild(tempDiv);
     }
+
+    emailReviewElement.appendChild(listDiv);
+
+    listDiv = document.createElement('div');
+    listDiv.classList = listDivClassList;
+    // starts at 4 because index 4 is first behavior
+    // check this using console.log(behaviorKeys)
+    for(var i = 4; i < behaviorKeys.length; i++){ 
+        var tempDiv = document.createElement('div');
+        tempDiv.classList = twoColumnDivClassList;
+        var p = document.createElement('p');
+
+        if(behaviorValues[i].length < 1){}
+        else{
+            p.innerHTML = behaviorKeys[i];
+            tempDiv.appendChild(p);
+    
+            p = document.createElement('p');
+            p.innerHTML = behaviorValues[i];
+            tempDiv.appendChild(p);
+    
+            listDiv.appendChild(tempDiv);
+        }
+
+        
+    }
+
+    emailReviewElement.appendChild(listDiv);
+    
+    emailReviewElement.innerHTML += footer;
+    
+
+    
 }

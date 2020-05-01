@@ -213,21 +213,22 @@
             </div>
 
             <div id="stepTwo" class="contentWithSidebar spaceAround">
-                <div class="width70 lightGray1-BG borderRadiusMedium"> <!-- Left column -->
-                    <div id="stepTwoTitle" class="title accent1Light-BG flex spaceBetween">
-                        <p></p>
-                        <div class="stepButton green2-BG" onclick="openReview()">
-                            <p>Review</p>
+                <div class="width70 lightGray1-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
+                    <div id="stepTwoTitle" class="heavyPadding accent1Light-BG flex spaceBetween flexAlignCenter">
+                        <p class="font50px lightGray1-text marginLeft10"></p>
+                        <p class="displayNone" id="currentStudentID"></p>
+                        <div class="buttonWithIcon accent2Light-BG" onclick="openReview()">
+                            <p class="mediumPadding">Review</p>
                         </div>
                     </div>
 
                     <!-- Review Form -->
                     <div id="reviewForm" class="formWindow">
                         <div class="formWindow-content flexContainer width60 width90Mobile">
-                            <span class="close" onclick="closeForm()">&times;</span>
-                            <p class="font50px marginBottom40 centerText accent2Light-text">Review</p>
-                            <div class="flex flexColumn flexCenter center flexAlignCenter marginBelowChildren10 width90">
-                                <textarea class="width100" placeholder="Entire email will go here"></textarea>
+                            <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                            <p id="reviewTitle" class="font50px marginBottom40 centerText accent2Light-text">Review</p>
+                            <div class="center width90 white-BG padding30px">
+                                <div id="reviewData"></div>
                             </div>
                             <div class="flex flexCenter">
                                 <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="studentApproved(this)">Approve</a>
@@ -264,7 +265,7 @@
                                     <!-- Add note behavior forms -->
                                     <div id="<%= behavior.name %>Form" class="formWindow">
                                         <div class="formWindow-content width500px width90Mobile flexContainer">
-                                            <span class="close" onclick="closeForm()">&times;</span>
+                                            <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
                                             <p class="font50px marginBottom40 centerText accent2Light-text"><%= behavior.name %></p>
                                             <div class="flex flexColumn flexCenter center flexAlignCenter marginBelowChildren10 width80 width90Mobile">
                                                 <textarea class="width100" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> notes.."></textarea>
@@ -312,7 +313,12 @@
                 </div>
             </div>
         </div>
-        <script>initEmailerVariables();
+        <script>
+        passRemindersToJS(<%- JSON.stringify(reminders) %>);
+        passHeaderToJS(<%- JSON.stringify(header) %>);
+        passFooterToJS(<%- JSON.stringify(footer) %>);
+        
+        initEmailerVariables();
         
         $(document).ready(function(){
             $('select').selectmenu();
