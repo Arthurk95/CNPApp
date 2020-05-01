@@ -1097,3 +1097,21 @@ li {
   box-shadow: none !important;
   border-color: var(--green1);
 }
+
+select{
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border-color: var(--lightGray2);
+}
+
+select:hover{
+  border-color: var(--lightGray3);
+}
+
+select option{
+}
+
+select option:active{
+  background: var(--lightGray3);
+}
