@@ -215,11 +215,11 @@
 
             <div id="stepTwo" class="contentWithSidebar spaceAround">
                 <div class="width70 lightGray1-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
-                    <div id="stepTwoTitle" class="heavyPadding accent1Light-BG flex spaceBetween flexAlignCenter">
+                    <div id="stepTwoTitle" class="heavyPadding accent1Light-BG flex spaceBetween flexAlignCenter flexWrap">
                         <p class="font50px lightGray1-text marginLeft10"></p>
                         <p class="displayNone" id="currentStudentID"></p>
                         <div class="buttonWithIcon accent2Light-BG" onclick="openReview()">
-                            <p class="mediumPadding">Review</p>
+                            <p>Review</p>
                         </div>
                     </div>
 
@@ -283,7 +283,7 @@
                                 <% }) %>
                             </div>
                         </div>
-                        <div class="flex spaceBetween flexAlignCenter">
+                        <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
                             <div class="accent4-BG buttonWithIcon" onclick="toPreviousStep();">
                                 <i class="fas fa-caret-left"></i>
                                 <p>Back</p>
@@ -308,8 +308,8 @@
                         <li>No Students</li>
                     <% } %>
                     </ul>
-                    <div id="sendEmailButton" class="stepButton center marginBottom20 accent2-BG" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>);">
-                        <p class="centerText lightPadding">Send Emails</p>
+                    <div id="sendEmailButton" class="buttonWithIcon marginBottom20 accent2-BG width40 center" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>);">
+                        <p>Send Emails</p>
                     </div>
                 </div>
             </div>
@@ -445,13 +445,13 @@
 
             function getHeader() {
                 var tempCont = document.createElement("div");
-                (new Quill(tempCont)).setContents(<%- header %>);
+                (new Quill(tempCont)).setContents('<%- header %>');
                 return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
             }
 
             function getFooter() {
                 var tempCont = document.createElement("div");
-                (new Quill(tempCont)).setContents(<%- footer %>);
+                (new Quill(tempCont)).setContents('<%- footer %>');
                 return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
             }
         </script>
