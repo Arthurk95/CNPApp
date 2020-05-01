@@ -34,6 +34,7 @@ HTML Formatting:
   /* The actual pop-up box that contains everything in the form */
   .formWindow-content {
     display: flex;
+    position: relative;
     flex-direction: column;
     border-radius: 4px;
     background-color: var(--lightGray1);
@@ -71,13 +72,14 @@ HTML Formatting:
 
   /* The Close Button at the top right */
   .close {
-    position: relative;
+    position: absolute;
     color: var(--darkGray3);
     right: 10px;
     top: 10px;
-    font-size: 80px;
+    height: 60px;
+    font-size: 60px;
     font-weight: bold;
-    line-height: 0;
+    line-height: 100%;
   }
   
   .close:hover,
