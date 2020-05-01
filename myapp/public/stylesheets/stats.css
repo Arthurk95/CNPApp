@@ -45,8 +45,11 @@ content: "\A\A";
 white-space: normal;
 }
 
-#newchart {
-
+.pieMin {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  justify-self: left;
 }
 
 #deleteButton {
@@ -94,14 +97,8 @@ white-space: normal;
   z-index: 9000;
 }
 
-.lab {
-  margin-bottom: 1em;
-  margin-left: 1em;
-}
-
 .startD {
   margin-top: 3em;
-  margin-right: 2em;
 }
 
 div.tooltip-pie {

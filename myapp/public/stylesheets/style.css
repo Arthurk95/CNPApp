@@ -697,6 +697,7 @@ p{margin: 0;}
   margin: 0;
   flex-grow: 1;
   text-align: center;
+  padding: 10px;
 }
 
 .buttonWithIcon:hover{
@@ -708,7 +709,10 @@ p{margin: 0;}
 .buttonWithIcon:active{
   box-shadow: 0px 1px 1px var(--darkGray2);
   margin-bottom: -2px;
+  filter: brightness(80%);
 }
+
+.buttonWithIcon:active p, i {filter: brightness(120%);}
 
 /* Use this for any buttons */
 .customButton{
@@ -877,6 +881,11 @@ p{margin: 0;}
     font-size: 2.5em !important;
     margin-bottom: 20px;
   }
+
+  .buttonWithIcon{
+    font-size: 30px;
+    min-width: 300px;
+  }
 }
 /* END MOBILE FRIENDLY STUFF */
 
@@ -1016,20 +1025,16 @@ h1{
 
 svg {
   background-color: rgba(255, 255, 255, 0.9);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 
 canvas {
   background-color: rgba(255, 255, 255, 0.9);
   display: block;
+  margin-top: auto;
   margin-left: auto;
   margin-right: auto;
-}
-
-.lab {
-  margin-top: 1em;
+  margin-bottom: 5em;
 }
 
 /* heat map  

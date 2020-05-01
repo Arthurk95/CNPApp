@@ -1,3 +1,4 @@
+
 var currentStep = 1;
 var stepOne;
 var stepTwo;
@@ -200,11 +201,13 @@ function studentSaved(behaviors){
     var behaviorNames = [];
 
     for(var i = 0; i < behaviors.length; i++){
-        var sel = document.getElementById(behaviors[i].name);
-        var note = document.getElementById(`${behaviors[i].name}-text-box`)
+        var sel = document.getElementById(behaviors[i].name + "Select");
+        var note = document.getElementById(behaviors[i].name + "-text-box");
         //child at index 2 is currently the dropdown selection.. more elegant way to do this?
-        console.log(note.value);
-        studentsBehaviorSelection.push(sel.children[1].innerText);
+        if(sel.selectedIndex < 0){
+            studentsBehaviorSelection.push("");
+        }
+        else {studentsBehaviorSelection.push(sel.options[sel.selectedIndex].text);}
         studentsBehaviorNotes.push(note.value);
         behaviorNames.push(behaviors[i].name);
     }

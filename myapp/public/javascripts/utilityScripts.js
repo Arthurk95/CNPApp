@@ -204,4 +204,4 @@ function setInputFilter(textbox, inputFilter) {
         }
       });
     });
-  }
+}

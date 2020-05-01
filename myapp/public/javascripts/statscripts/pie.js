@@ -130,7 +130,12 @@ class thePie {
       .merge(t)
       .text(function(d) { 
         if (d.data.value > 0)
-          return "" + d.data.key })
+          {
+            let percent = (Math.round((d.value / total) * 100));
+            if (percent > 3) {
+              return "" + d.data.key }
+          }
+      })
       //.attr("transform", function(d) { 
         //return "translate(" + arcLabel.centroid(d) + ")";  })
       .attr("transform", function(d) {  
@@ -160,7 +165,7 @@ class thePie {
 
 function generatePie(id){
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px ";
+  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "pieMin lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px ";
   var bottom = document.getElementById("chartPanel");
   
   var temp;
@@ -173,10 +178,10 @@ function generatePie(id){
     temp.appendChild(del);
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date"; temp.className = "smallFont padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "syear"+id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "syear"+id; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("select"); temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
@@ -185,7 +190,7 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = " End Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "smallFont padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select"); temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
