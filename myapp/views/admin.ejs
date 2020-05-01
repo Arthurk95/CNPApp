@@ -30,10 +30,10 @@
           <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
             <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter">
               <p class="marginLeft10 lightText font25px">Today's Roster</p>
-              <a onclick="" class="lightPadding lightGray2-text font15px">Add Student</a>
+              <a onclick="openForm('todaysRosterForm')" class="lightPadding lightGray2-text font15px">Add Student</a>
             </div>
             <div class="heavyPadding maxHeight250px">
-              <ul id="todays_students" class="ulList" ondrop="drop(event)" ondragover="allowDrop(event)">
+              <ul id="todays_students" class="ulList">
                 <% if (todays_students.length > 0) {%>
                   <% todays_students.forEach((student, index) => { %>
                     <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
@@ -47,6 +47,10 @@
                 <% } %>
               
               </ul>
+            </div>
+
+            <div id="todaysRosterForm" class="formWindow"> 
+
             </div>
           </div>
 
@@ -64,7 +68,7 @@
                 <% if (students.length > 0) { %>
                   <% students.forEach((student, index) => { %>
                     <% studentSpl = student.StudentName.split(" "); %>
-                      <li draggable="true" ondragstart="drag(event)" class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
+                      <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
                         <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
                         <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
                         <p class="width80"><%= student.StudentName %></p>
