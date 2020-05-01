@@ -10,18 +10,16 @@
     <link rel='stylesheet' href='/stylesheets/switch.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/checkbox.css' />
-    <link rel="stylesheet" href="/stylesheets/prettydropdowns.css">
     <script src="/javascripts/utilityScripts.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/javascripts/jquery.prettydropdowns.js"></script>
   </head>
   <body>
     <div class="flex spaceBetween centerFlexMobile flexCollapseMobile width90 center">
       
       <!-- ------------ TASKS PANEL ------------ -->
       <div id="tasksPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px flexGrow1">
-        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
           <p class="marginLeft10 lightText font25px">Tasks</p>
           <a onclick="openForm('newTaskForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
         </div>
@@ -79,7 +77,7 @@
 
        <!-- ------------ LOG PANEL ------------ -->
       <div id="logPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow width450px">
-        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
           <p class="marginLeft10 lightText font25px">Log</p>
           <a onclick="clearLog()" class="marginRight10 lightPadding accent4Light-text font15px">Clear</a>
         </div>
@@ -107,13 +105,7 @@
   <script src="/javascripts/tabs.js"></script>
   
   <script>
-    $dropdown = $('.pretty-classic').prettyDropdown({
-        classic: true,
-        height: 50,
-        width: '10%',
-        customClass: 'arrow mediumFontSize',
-        hoverIntent: -1
-      });
+   
     // Get the modal
     var formElement;
 
