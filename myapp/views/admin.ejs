@@ -33,7 +33,7 @@
               <a onclick="" class="lightPadding lightGray2-text font15px">Add Student</a>
             </div>
             <div class="heavyPadding maxHeight250px">
-              <ul id="todays_students" class="ulList">
+              <ul id="todays_students" class="ulList" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <% if (todays_students.length > 0) {%>
                   <% todays_students.forEach((student, index) => { %>
                     <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
@@ -64,7 +64,7 @@
                 <% if (students.length > 0) { %>
                   <% students.forEach((student, index) => { %>
                     <% studentSpl = student.StudentName.split(" "); %>
-                      <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
+                      <li draggable="true" ondragstart="drag(event)" class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
                         <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
                         <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
                         <p class="width80"><%= student.StudentName %></p>
@@ -365,8 +365,8 @@
             <div class="flex spaceBetween flexAlignCenter darkGray3-BG mediumPadding">
               <p class="marginLeft10 lightText font25px">Email Settings</p>
               <div>
-                <a class="hoverable font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="emailSettings('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
-                <a class="hoverable font15px padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="emailSettings('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
+                <a class="hoverable font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray1-text" onclick="emailSettings('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
+                <a class="hoverable font15px padding5px10px accent2Light-BG borderRadiusLarge lightGray1-text" onclick="emailSettings('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
 
               </div>
             </div>
