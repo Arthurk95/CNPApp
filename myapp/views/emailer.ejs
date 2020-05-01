@@ -30,6 +30,7 @@
                     else{
                         op = 'op' + i;
                         option.text = list[op]; 
+                        option.value = list[op];
                         select.appendChild(option);
                     }
                 }
@@ -245,13 +246,13 @@
                             </div>
 
                             <!-- Behavior dropdowns -->
-                            <div id="" class="flex flexColumn flexCenter heavyPadding width70">
+                            <div id="behaviorsList" class="flex flexColumn flexCenter heavyPadding width70">
                                 <% behaviors.forEach((behavior, index) => { %>
                                     <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottom10 flexWrap">
-                                        <label for="<%= behavior.name %>"><%= behavior.name %></label>
+                                        <label for="<%= behavior.name %>" class="width20"><%= behavior.name %></label>
                                         
-                                        <div class="flex spaceAround relative">
-                                            <select id="<%= behavior.name%>Select" name="<%= behavior.name %>" class="width20">
+                                        <div class="flex spaceAround relative width60">
+                                            <select id="<%= behavior.name%>Select" name="<%= behavior.name %>">
                                             </select>
                                             
                                             <input style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></input>
@@ -301,7 +302,7 @@
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>
                         <% reports.forEach((report, index) => { %>
-                            <li id="student<%= index %>" onclick="studentSelected(this, <%= JSON.stringify(report) %>, <%= index %>)"><%= report.name %></li>
+                            <li id="student<%= index %>" onclick="studentSelected(this, <%= index %>)"><%= report.name %></li>
                         <% }) %>
                     <% } else { %>
                         <li>No Students</li>
@@ -320,9 +321,7 @@
         
         initEmailerVariables();
         
-        $(document).ready(function(){
-            $('select').selectmenu();
-        })
+        
             
         </script>
 
@@ -407,7 +406,6 @@
                 li.appendChild(select);
                 reminders.appendChild(li);
                 
-                $('select').selectmenu();
             }
 
             function behaviorNote(behavior){
