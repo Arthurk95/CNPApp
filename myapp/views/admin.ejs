@@ -375,13 +375,54 @@
               <div class="formWindow-content">
                 <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
                 <p class="font50px marginBottom40 centerText accent2Light-text">Edit Header</p>
-
+                <div id="header-toolbar-container">
+                  <span class="ql-formats">
+                      <select class="ql-size">
+                          <option value="10px">Small</option>
+                          <option selected>Normal</option>
+                          <option value="18px">Large</option>
+                          <option value="32px">Huge</option>
+                      </select>
+                  </span>
+                  <span class="ql-formats">
+                      <button class="ql-align" value=""></button>
+                      <button class="ql-align" value="center"></button>
+                      <button class="ql-align" value="right"></button>
+                  </span>
+                  <span class="ql-formats">
+                      <select class="ql-color">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                      </select>
+                      <select class="ql-background">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                      </select>
+                  </span>
+                  <span class="ql-formats">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                      <button class="ql-strike"></button>
+                  </span>
+                </div>
                 <div class="flex flexColumn marginBottom40 width100">
-                  <div id="emailHeader">
+                  <div id="header">
                   </div>
                 </div>
 
                 <div class="flex flexCenter">
+                  <!-- <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveHeader()">Save</a> -->
                   <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveEmailSettings('header')">Save</a>
                 </div>
               
@@ -393,15 +434,56 @@
               <div class="formWindow-content">
                 <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
                 <p class="font50px marginBottom40 centerText accent2Light-text">Edit Signature</p>
-
+                <div id="footer-toolbar-container">
+                  <span class="ql-formats">
+                      <select class="ql-size">
+                          <option value="10px">Small</option>
+                          <option selected>Normal</option>
+                          <option value="18px">Large</option>
+                          <option value="32px">Huge</option>
+                      </select>
+                  </span>
+                  <span class="ql-formats">
+                      <button class="ql-align" value=""></button>
+                      <button class="ql-align" value="center"></button>
+                      <button class="ql-align" value="right"></button>
+                  </span>
+                  <span class="ql-formats">
+                      <select class="ql-color">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                      </select>
+                      <select class="ql-background">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                      </select>
+                  </span>
+                  <span class="ql-formats">
+                      <button class="ql-bold"></button>
+                      <button class="ql-italic"></button>
+                      <button class="ql-underline"></button>
+                      <button class="ql-strike"></button>
+                  </span>
+                </div>
                 <div class="flex flexColumn marginBottom40 width100">
-                  <div id="emailSignature" class="maxHeight250px">
+                  <div id="footer" class="maxHeight250px">
 
                   </div>
                 </div>
 
                 <div class="flex flexCenter">
                   <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveEmailSettings('signature')">Save</a>
+                  <!-- <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveFooter()">Save</a> -->
                 </div>
               
               </div>
@@ -503,7 +585,14 @@
       
   </body>
   
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
   <script>
+
+      Quill.register(Quill.import('attributors/style/size'), true);
+      Quill.register(Quill.import('attributors/style/direction'), true);
+      Quill.register(Quill.import('attributors/style/align'), true);
+
+
     setInputFilter(document.getElementById("day"), function(value) {
       return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
     });
@@ -514,14 +603,28 @@
       return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
     });
 
-    var headerQuill = new Quill('#emailHeader', {
-      theme: 'snow',
-      scrollingContainer: '#emailHeaderContainer'
-    });
-    var signatureQuill = new Quill('#emailSignature', {
-      theme: 'snow',
-      scrollingContainer: '#emailSignature'
-    });
+    // var headerQuill = new Quill('#emailHeader', {
+    //   theme: 'snow',
+    //   scrollingContainer: '#emailHeaderContainer'
+    // });
+    // var signatureQuill = new Quill('#emailSignature', {
+    //   theme: 'snow',
+    //   scrollingContainer: '#emailSignature'
+    // });
+      var headerQuill = new Quill('#header', {
+        modules: {
+          toolbar: '#header-toolbar-container'
+        },
+        placeholder: 'Daily summary..',
+        theme: 'snow'
+      })
+      var footerQuill = new Quill('#footer', {
+        modules: {
+          toolbar: '#footer-toolbar-container'
+        },
+        placeholder: 'Snack info..',
+        theme: 'snow'
+      })
   </script>
 
   <script>
@@ -808,7 +911,7 @@
         headerQuill.setContents(textData);
       }
       else if(data.form == "editSignatureForm"){
-        signatureQuill.setContents(textData);
+        footerQuill.setContents(textData);
       }
       openForm(data.form);
     }
@@ -829,7 +932,7 @@
       }
       else if(form == "signature")
       {
-        textData = JSON.stringify(signatureQuill.getContents())
+        textData = JSON.stringify(footerQuill.getContents())
         var data = "data=" + textData + "&form=" + form;
       } 
       var callback = reloadIt;
