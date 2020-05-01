@@ -364,7 +364,7 @@
             summaryQuill.setContents(<%- summary %>);
             snackQuill.setContents(<%- snack %>)
             lunchQuill.setContents(<%- lunch %>)
-
+            
             function updateDailyInfo() {
                 console.log(summaryQuill.container.firstChild.innerHTML);
 
@@ -444,26 +444,32 @@
             }
 
             function getHeader() {
-                return 'temp header..';
+                var tempCont = document.createElement("div");
+                (new Quill(tempCont)).setContents(<%- header %>);
+                return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
             }
 
             function getFooter() {
-                return 'temp footer..';
+                var tempCont = document.createElement("div");
+                (new Quill(tempCont)).setContents(<%- footer %>);
+                return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
             }
         </script>
 
         <script>
             function sendEmails(students, todaysBehaviors){
                 var theUrl = window.location.href+'/send';
+                var header = getHeader();
+                var footer = getFooter();
                 var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
                                         `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
                                         `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
-                                        `&header=${getHeader()}` +
-                                        `&footer=${getFooter()}`;
+                                        `&header=${header}` +
+                                        `&footer=${footer}`;
                 // console.log(Object.values(todaysBehaviors))
                 // console.log(Object.values(todaysBehaviors))
                 var behavior_names = [];
-
+                
                 todaysBehaviors.forEach(behavior => {
                     behavior_names.push(behavior.name);
                 })

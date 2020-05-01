@@ -160,10 +160,10 @@ const fs = require('fs');
     var data = req.body.data;
     var sql;
     if(form == "header"){
-      sql = "CALL ChangeHeader('" + data + "');";
+      sql = `CALL ChangeHeader('${data}');`;
     }
     else if(form == "signature"){
-      sql = "CALL ChangeFooter('" + data + "');";
+      sql = `CALL ChangeFooter('${data}');`;
     }
     console.log(sql);
     con.query(sql, function (err, result) {
