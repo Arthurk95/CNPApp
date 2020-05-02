@@ -172,6 +172,51 @@ const fs = require('fs');
         res.end();
     });
   });
+
+  router.post('/addroster', auth.checkAuthenticated, function(req, res){
+    var student = req.body.id;
+    var sql = "CALL PullHiddenStudents();";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+      if (err) res.end();
+      var found = false;
+      console.log(result);
+      result[0].forEach((element)=>{
+        if(element.studentId == student){
+          found = true;
+        }
+      });
+      if(found){
+        sql = "CALL StudentAppears(" + student + ")";
+      }
+      else{
+        sql = "CALL MarkStudentUnabsent(" + student + ")";
+      }
+      con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+      });
+    });
+  });
+  
+  router.post('/changeroster', auth.checkAuthenticated, function(req, res){
+    var student = req.body.id;
+    var whatdo = req.body.do;
+    var sql;
+    if(whatdo == "remove"){
+      sql = "CALL MarkStudentAbsent("+ student +");";
+    }
+    else if(whatdo == "add"){
+      StudentAppears
+      sql = "CALL MarkStudentUnabsent("+ student +");";
+    }
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
   /* GET home page. */
   router.get('/', auth.checkAuthenticated, function(req, res, next) {
     var student_query = "CALL PullStudentsAndDayType();"; 

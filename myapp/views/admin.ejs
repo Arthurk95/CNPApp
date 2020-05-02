@@ -671,8 +671,10 @@
       button.parentElement.classList.add("blackAndWhite");
       button.parentElement.classList.add("main-BG");
 
-      /* DATEBASE-Y CALL TO SET STUDENT AS ABSENT 
-         RELOAD NOT NECESSARY */
+      var theUrl = window.location.href+'/changeroster';
+      var data = "do=remove" + "&id=" + studentID;
+      var callback = doNothing;
+      httpPostAsync(theUrl, data, callback);
     }
 
     // element: button that was clicked
@@ -683,8 +685,10 @@
       li.getElementsByTagName('p')[0].innerHTML = studentData.StudentName;
       list.appendChild(li);
 
-      /* DATABASE-Y CALL HERE TO ADD STUDENT TO TODAY'S ROSTER 
-         RELOAD NOT NECESSARY*/
+      var theUrl = window.location.href+'/addroster';
+      var data = "id=" + studentData.StudentId;
+      var callback = doNothing;
+      httpPostAsync(theUrl, data, callback);
 
       element.parentElement.parentElement.removeChild(element.parentElement); // delete <li> element in the add drop in popup
     }
