@@ -446,13 +446,13 @@
 
             function getHeader() {
                 var tempCont = document.createElement("div");
-                (new Quill(tempCont)).setContents('<%- header %>');
+                (new Quill(tempCont)).setContents(<%- header %>);
                 return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
             }
 
             function getFooter() {
                 var tempCont = document.createElement("div");
-                (new Quill(tempCont)).setContents('<%- footer %>');
+                (new Quill(tempCont)).setContents(<%- footer %>);
                 return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
             }
         </script>
