@@ -346,6 +346,8 @@ p{margin: 0;}
 .border2px{border: 2px solid;}
 .border5px{border: 5px solid;}
 
+.bottomBorder1px{border-bottom: 1px solid;}
+
 .borderRadiusSmall{border-radius: 4px !important;}
 .borderRadiusMedium{border-radius: 8px !important;}
 .borderRadiusLarge{border-radius: 16px !important;}
@@ -432,6 +434,7 @@ p{margin: 0;}
 
 .padding5px10px{padding: 5px 10px;}
 .padding8px15px{padding: 8px 15px;}
+.padding8px25px{padding: 8px 25px;}
 .padding15px30px{padding: 15px 30px;}
 
 .margin10{margin: 10px;}
@@ -1119,4 +1122,26 @@ select option{
 
 select option:active{
   background: var(--lightGray3);
+}
+
+
+.popup{
+  display: block;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 0px 0px 6px 2px var(--darkGray2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  position: fixed;
+  margin-left: -10px;
+  margin-top: 15px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent; 
+  
+  border-right: 10px solid white; 
 }

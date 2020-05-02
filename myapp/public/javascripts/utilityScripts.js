@@ -138,6 +138,44 @@ function toggleClassIfInputNotEmpty(inputID, element, className, oldClassName){
     }
 }
 
+function fillTodaysRosterPopup(ID, allStudents, todaysStudents){
+    var elementToFill = document.getElementById(ID);
+
+    for(var i = 0; i < allStudents.length; i++){
+        // is allStudents[i].StudentID in todaysStudents
+        // if not, add it to the popup
+        if(todaysStudents.some(student => student.StudentId === allStudents[i].StudentId)){}
+        else{
+            var button = document.createElement('button');
+            button.innerHTML = "<i class='lightGray1-text font25px fas fa-plus'></i>";
+            button.classList = "accent2Light-BG";
+            button.setAttribute("onclick", "addToTodaysRoster(this, " + JSON.stringify(allStudents[i]) + ");");
+            var li = document.createElement('li');
+            li.classList = "spaceBetween lightGray1-BG";
+            var p = document.createElement('p');
+            p.innerHTML = allStudents[i].StudentName;
+
+            li.appendChild(p); li.appendChild(button);
+            elementToFill.appendChild(li);
+        }
+    }
+}
+
+/* POPUP FUNCTIONS */
+
+// opens a popup from the right of the passed element
+function openPopup(element, popupID){
+    var popup = document.getElementById(popupID);
+    var rect = element.getBoundingClientRect();
+    popup.style.left = (rect.right + 10) + "px";
+    popup.style.top = (rect.top - 10) + "px";
+    if(isElementHidden(popup)){
+        showElement(popup);
+    }
+    else{hideElement(popup);}
+    
+}
+
 /* --------------- FORM FUNCTIONS --------------- */
 
 function closeForm(){
@@ -204,4 +242,15 @@ function setInputFilter(textbox, inputFilter) {
         }
       });
     });
+}
+
+
+var twoColDivClasses = "flex spaceBetween marginBottom10 width100";
+function twoColDiv(left, right){
+    var div = document.createElement('div');
+    div.classList = twoColDivClasses;
+
+    div.appendChild(left);
+    div.appendChild(right);
+    return div;
 }
