@@ -182,7 +182,7 @@ const fs = require('fs');
       var found = false;
       console.log(result);
       result[0].forEach((element)=>{
-        if(element.studentId == student){
+        if(element.StudentId == student){
           found = true;
         }
       });
@@ -192,6 +192,7 @@ const fs = require('fs');
       else{
         sql = "CALL MarkStudentUnabsent(" + student + ")";
       }
+      console.log(sql);
       con.query(sql, function (err, result) {
         if (err) res.end();
         res.end();
