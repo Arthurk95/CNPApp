@@ -201,6 +201,19 @@ router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) 
 
 });
 
+router.post('/refresh-behaviors', auth.checkAuthenticated, function (req, res, next) {
+  pull_daily_beh_query = `CALL PullDailyBehaviors(${req.body.id})`;
+  con.query(pull_daily_beh_query, function (err, result) {
+    if (err) {
+      console.log(err)
+      res.end()
+    }
+    [result] = result[0];
+    // result = JSON.parse(JSON.stringify(result));
+    res.send(result);
+  });
+});
+
 
 router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
   var snack = req.body.text;

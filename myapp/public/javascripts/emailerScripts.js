@@ -70,6 +70,8 @@ function studentSelected(listElement, index){
 
 // populates the activities and behaviors in the content panel
 // of the second step
+
+
 function populateData(){
     /*
     if(report.approved == true && !stepTwoTitle.parentElement.classList.contains("approved")){
@@ -78,8 +80,11 @@ function populateData(){
     else if(report.approved == 0){
         stepTwoTitle.classList.remove("approved");
     }
+                var theUrl = window.location.href+'/send';
     */
-
+    var data = `id=${currentStudentData.id}`;
+    httpPostAsync(window.location.href+'/refresh-behaviors', data, doNothing);
+    
 
     if(approvedList[currentStudentIndex]){
         setApprovedStyle();
@@ -96,24 +101,31 @@ function populateData(){
         activities.appendChild(li);
     }
 
-    var behaviorKeys = Object.keys(currentStudentData.listOfBehaviors);
-    var behaviorValues = Object.values(currentStudentData.listOfBehaviors);
+    var data = `id=${currentStudentData.id}`;
+    httpPostAsync(window.location.href + '/refresh-behaviors', data, function (result) {
+        // result = JSON.stringify(result)
+        result = JSON.parse(result)
+        currentStudentData.listOfBehaviors = result;
+        var behaviorKeys = Object.keys(currentStudentData.listOfBehaviors);
+        var behaviorValues = Object.values(currentStudentData.listOfBehaviors);
 
-    behaviors = document.getElementById('behaviorsList');
+        behaviors = document.getElementById('behaviorsList');
 
-    // updates the behaviors dropdown values to the student's values.
-    // starts at 4 because that's where first behavior shows up in behaviorKeys
-    for(var i = 4; i < behaviorKeys.length; i++){
-        var behaviorElement = document.getElementById(behaviorKeys[i]);
-        if(behaviorElement != null && behaviorElement != null){
-            var element = behaviorElement.getElementsByTagName("select")[0];
-            if(element != null && element != null){
-                if(element.name === behaviorKeys[i]){
-                    element.value = behaviorValues[i];
+        // updates the behaviors dropdown values to the student's values.
+        // starts at 4 because that's where first behavior shows up in behaviorKeys
+        for(var i = 4; i < behaviorKeys.length; i++){
+            var behaviorElement = document.getElementById(behaviorKeys[i]);
+            if(behaviorElement != null && behaviorElement != null){
+                var element = behaviorElement.getElementsByTagName("select")[0];
+                if(element != null && element != null){
+                    if(element.name === behaviorKeys[i]){
+                        element.value = behaviorValues[i];
+                    }
                 }
             }
         }
-    }
+    });
+
 
 
     toggleSaveButtonStyle();
