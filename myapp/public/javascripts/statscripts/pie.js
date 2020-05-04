@@ -12,9 +12,9 @@ class thePie {
     this.myId = id;
 
     // set the dimensions and margins of the graph
-    this.width = 675;
-    this.height = 675;
-    this.margin = 95;
+    this.width = 625;
+    this.height = 625;
+    this.margin = 120;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
@@ -27,10 +27,10 @@ class thePie {
     // append the svg object to the div called 'pie'
     this.svg = d3.select("#" + id)
       .append("svg")
-        .attr("width", this.width)
+        .attr("width", this.width-95)
         .attr("height", this.height)
       .append("g")
-        .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
+        .attr("transform", "translate(" + this.width / 2.27 + "," + this.height / 2 + ")")
 
     //tooltip for label
     this.tooltip = d3.select("#" + id)
@@ -165,7 +165,7 @@ class thePie {
 
 function generatePie(id){
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "pieMin lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px ";
+  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "pieMin lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px";
   var bottom = document.getElementById("chartPanel");
   
   var temp;
@@ -187,7 +187,7 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id="smonth" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id="sday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "smallFont padding5px10px accent2Light-BG borderRadiusLarge whiteText";
