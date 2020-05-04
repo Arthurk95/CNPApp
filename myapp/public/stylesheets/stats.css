@@ -59,7 +59,12 @@ white-space: normal;
   cursor: pointer;
 }
 
+.arrow-down-make {
+  max-width: fit-content;
+}
+
 .arrow-down {
+  background-color: rgba(255, 255, 255, 0.555);
   max-width: fit-content;
 }
 
