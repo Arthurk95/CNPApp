@@ -181,25 +181,25 @@ function generatePie(id){
     temp = document.createElement("label"); temp.innerHTML = "Beginning Date"; temp.className = "smallFont padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "syear"+id; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "syear" + id; temp.className= "arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id="smonth" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id="sday" + id; temp.class="startD"; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "smallFont padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id="eyear" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id="eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id="emonth" + id; temp.class="pretty-classic"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id="emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id="eday" + id; temp.class="newLine"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id="eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
   }
@@ -241,7 +241,7 @@ function generatePie(id){
     }
     temp = document.createElement("select");
     temp.id="option2" + id;
-    temp.class="pretty-classic";
+    temp.className="arrow-down";
     temp.onchange = function(){updateData(id);};
     temp2 = document.createElement("option");
     temp2.innerHTML = "Activities";
@@ -262,7 +262,7 @@ function generatePie(id){
     }
     temp = document.createElement("select");
     temp.id="optionid1" + id;
-    temp.class="pretty-classic";
+    temp.className="arrow-down";
     temp.onchange = function(){updateData(id);updateOp2(id);};
     temp2 = document.createElement("option");
     temp2.value = "all";

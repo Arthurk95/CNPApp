@@ -59,6 +59,10 @@ white-space: normal;
   cursor: pointer;
 }
 
+.arrow-down {
+  max-width: fit-content;
+}
+
 .deleteButton {
   margin-left: 95%;
   color:rgb(143, 32, 32);

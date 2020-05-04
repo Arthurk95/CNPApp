@@ -65,25 +65,25 @@ function generateLine(id) {
     temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "syear" + id; temp.class="lab"; temp.className="lab"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id = "syear" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="smonth" + id; temp.class="pretty-classic"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id="smonth" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id="sday" + id; temp.class="startD"; temp.className="startD"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select");temp.id="sday" + id; temp.class="startD"; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label");temp.innerHTML = " End Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="eyear" + id;temp.class="pretty-classic";temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id="eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="emonth" + id;temp.class="pretty-classic";temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id="emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id="eday" + id;temp.class="pretty-classic";temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select");temp.id="eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
   }
@@ -97,9 +97,9 @@ function generateLine(id) {
   //newdiv.appendChild(temp);
 
   //First Drop Down Option
-  temp = document.createElement("select");temp.id="option1" + id;temp.class="newLine";temp.className="newLine";temp.onchange = function(){onUpdateop1(id);};
+  temp = document.createElement("select");temp.id="option1" + id;temp.class="newLine";temp.className="newLine arrow-down";temp.onchange = function(){onUpdateop1(id);};
   {
-    temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Students";
+    temp2 = document.createElement("option"); temp2.value = "01"; temp2.innerHTML = "Students";
     temp.appendChild(temp2);
 
     temp2 = document.createElement("option");temp2.value = "02";temp2.innerHTML = "Activities";
@@ -111,7 +111,7 @@ function generateLine(id) {
   temp = document.createElement("div");temp.id = "opid1" + id;
   newdiv.appendChild(temp);
 
-  temp = document.createElement("div");temp.id = "op2" + id;temp.class="secondOption";temp.className = "secondOption";
+  temp = document.createElement("div");temp.id = "op2" + id;temp.class="secondOption";temp.className = "arrow-down";
   newdiv.appendChild(temp);
 
   temp = document.createElement("canvas");temp.id = "canvas" + id;temp.className = "canvasObj";
@@ -142,7 +142,7 @@ function generateLine(id) {
       document.getElementById("option2" + id).remove();
     }
 
-    temp = document.createElement("select");temp.id="option2" + id;temp.class="pretty-classic";temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select");temp.id="option2" + id;temp.className="arrow-down";temp.onchange = function(){updateData(id);};
     if(op1.value == "01" && opid1.value != "all")
     {
       temp2 = document.createElement("option");temp2.value = "01";temp2.innerHTML = "Activities";
@@ -178,10 +178,10 @@ function generateLine(id) {
     if(newdiv.hasChildNodes()){
       document.getElementById("optionid1" + id).remove();
     }
-    temp = document.createElement("select");temp.id="optionid1" + id;temp.class="pretty-classic";temp.onchange = function(){updateOp2(id);updateData(id);};
+    temp = document.createElement("select");temp.id="optionid1" + id; temp.className="arrow-down";temp.onchange = function(){updateOp2(id);updateData(id);};
     if(op1.value == "01")
     {
-      temp2 = document.createElement("option");temp2.value = "all";temp2.innerHTML = "All Students";
+      temp2 = document.createElement("option");temp2.value = "all"; temp2.innerHTML = "All Students";
       temp.appendChild(temp2);
 
       studentList.forEach((element)=>{
