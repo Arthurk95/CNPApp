@@ -141,12 +141,14 @@ const fs = require('fs');
 
   router.post('/hidebehavior', auth.checkAuthenticated, function(req, res){
     var sql;
-    if(req.body.hide){
+    console.log(req.body.hide,"bye");
+    if(req.body.hide == "true"){
       sql = "CALL HideTemplateObject('" + req.body.id + "');";
     }
     else{
       sql = "CALL UnhideTemplateObject('" + req.body.id + "');";
     }
+    console.log(sql);
     con.query(sql, function (err, result) {
         if (err) res.end();
         res.end();
