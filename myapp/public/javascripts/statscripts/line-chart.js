@@ -62,7 +62,7 @@ function generateLine(id) {
     temp.appendChild(del);
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    temp = document.createElement("label"); temp.innerHTML = "\nBeginning Date "; temp.className = "label";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select");temp.id = "syear" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
@@ -74,7 +74,7 @@ function generateLine(id) {
     temp = document.createElement("select");temp.id="sday" + id; temp.class="startD"; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label");temp.innerHTML = " End Date "; temp.className = "font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    temp = document.createElement("label");temp.innerHTML = " End Date "; temp.className = "label";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select");temp.id="eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
@@ -86,6 +86,8 @@ function generateLine(id) {
     temp = document.createElement("select");temp.id="eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
+    temp = document.createElement("label"); temp.innerHTML = "\n\n"; temp.className = "label";
+    newdiv.appendChild(temp);
   }
 
   //The Spin thing
