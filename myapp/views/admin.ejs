@@ -779,6 +779,7 @@
     }
 
     function hideBehavior(id,isHidden){
+      console.log(isHidden);
       var theUrl = window.location.href+'/hidebehavior';
       var data = "id=" + id + "&hide=" + !isHidden;
       var callback = reloadIt;
