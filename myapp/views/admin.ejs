@@ -252,7 +252,7 @@
                       <% } %>
                         <p><%= behavior.title %></p>
                         <div class="flex">
-                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
+                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior('<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
                           <button class="yellow3-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i class="far fa-edit"></i></button>
                           <button class="red3-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
                         </div>
@@ -778,6 +778,14 @@
       }
     }
 
+    function hideBehavior(id,isHidden){
+      var theUrl = window.location.href+'/hidebehavior';
+      var data = "id=" + id + "&hide=" + !isHidden;
+      var callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
+    }
+
     function editBehavior(behavior){
       var cat = "cat";
       openForm("editBehaviorForm");
@@ -837,10 +845,10 @@
 
     function callPostAct(){
       var helper = isToggled("helper");
-      theUrl = window.location.href+'/addactivity';
-      data = "name=" + document.getElementById("newActivityName").value +
+      var theUrl = window.location.href+'/addactivity';
+      var data = "name=" + document.getElementById("newActivityName").value +
             "&helper=" + helper;
-      callback = reloadIt;
+      var callback = reloadIt;
 
       httpPostAsync(theUrl, data, callback);
     }

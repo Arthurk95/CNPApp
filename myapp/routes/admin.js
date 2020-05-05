@@ -139,6 +139,20 @@ const fs = require('fs');
     });
   });
 
+  router.post('/hidebehavior', auth.checkAuthenticated, function(req, res){
+    var sql;
+    if(req.body.hide){
+      sql = "CALL HideTemplateObject('" + req.body.id + "');";
+    }
+    else{
+      sql = "CALL UnhideTemplateObject('" + req.body.id + "');";
+    }
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
   router.post('/emailsettings', auth.checkAuthenticated, function(req, res){
     var form = req.body.form;
     var sql;
@@ -260,7 +274,7 @@ const fs = require('fs');
               }
               else{
                 behave.forEach((element) => {
-                  Behaviors.push({title: element.NameOf, cat1:element.CategoryOne, cat2:element.CategoryTwo, cat3:element.CategoryThree, cat4:element.CategoryFour, cat5:element.CategoryFive,id:element.TemplateId});
+                  Behaviors.push({title: element.NameOf, cat1:element.CategoryOne, cat2:element.CategoryTwo, cat3:element.CategoryThree, cat4:element.CategoryFour, cat5:element.CategoryFive,id:element.TemplateId,Hidden:element.Hidden});
                 })
               }
               con.query(todays_students_query, function (err, t_students) {
