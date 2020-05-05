@@ -22,6 +22,14 @@ const auth = require('../public/javascripts/loginScripts');
     });
   });
 
+  router.put('/cleartask', auth.checkAuthenticated, function(req, res){
+    var sql = "DELETE FROM cnp_data.Tasks WHERE Completed = 1 AND TaskId > 0;";
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
   router.put('/completetask', auth.checkAuthenticated, function(req, res){
     var sql = "CALL CompleteTask(" + req.body.id + ");";
     console.log(sql);

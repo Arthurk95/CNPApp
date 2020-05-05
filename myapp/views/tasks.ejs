@@ -131,13 +131,18 @@
     }
 
     function changePriority(task,cur) {
-      theUrl = window.location.href+'/changetask';
-      data = "id=" + task + "&priority=" + (cur + 1) % 3;
-      callback = reloadIt; 
+      var theUrl = window.location.href+'/changetask';
+      var data = "id=" + task + "&priority=" + (cur + 1) % 3;
+      var callback = reloadIt; 
       httpPutAsync(theUrl,data,callback);  
     }
 
-    function clearLog(){}
+    function clearLog(){
+      var theUrl = window.location.href+'/cleartask';
+      var data = "wut=ALLOFEM";
+      var callback = reloadIt; 
+      httpPutAsync(theUrl,data,callback);
+    }
 
     function addTaskPost(){
       var theUrl = window.location.href+'/addtask';
@@ -152,7 +157,6 @@
     }
 
     function deleteTask(task) {
-      var helper = convertBoolToInt(document.getElementById("helper").checked);
       theUrl = window.location.href+'/deletetask';
       data = "id=" + task;
       callback = reloadIt;
