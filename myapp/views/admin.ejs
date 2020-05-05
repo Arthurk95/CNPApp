@@ -217,16 +217,62 @@
                         <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
                       </div>
                     </div>
-
+<!-- 
                     <div class="flex width60 width100Mobile">
                       <div class="inputWithIcon width100 white-BG">
                         <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
                       </div>
                     </div>
+                  </div> -->
+                  <div id="reminder-toolbar-container">
+                    <span class="ql-formats">
+                        <select class="ql-size">
+                            <option value="10px">Small</option>
+                            <option selected>Normal</option>
+                            <option value="18px">Large</option>
+                            <option value="32px">Huge</option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-align" value=""></button>
+                        <button class="ql-align" value="center"></button>
+                        <button class="ql-align" value="right"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-color">
+                            <option selected></option>
+                            <option value="red"></option>
+                            <option value="orange"></option>
+                            <option value="yellow"></option>
+                            <option value="green"></option>
+                            <option value="blue"></option>
+                            <option value="purple"></option>
+                        </select>
+                        <select class="ql-background">
+                            <option selected></option>
+                            <option value="red"></option>
+                            <option value="orange"></option>
+                            <option value="yellow"></option>
+                            <option value="green"></option>
+                            <option value="blue"></option>
+                            <option value="purple"></option>
+                        </select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
+                    </span>
                   </div>
+                  <div class="flex flexColumn marginBottom40 width100">
+                    <div id="reminder">
+                    </div>
+                  </div>
+                </div>
 
                   <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="callPostReminder()">Create</a>
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="saveReminder()">Create</a>
                   </div>
                 </div>
               </div> <!-- End new reminder form -->
@@ -620,14 +666,21 @@
         modules: {
           toolbar: '#header-toolbar-container'
         },
-        placeholder: 'Daily summary..',
+        placeholder: 'Header text..',
         theme: 'snow'
       })
       var footerQuill = new Quill('#footer', {
         modules: {
           toolbar: '#footer-toolbar-container'
         },
-        placeholder: 'Snack info..',
+        placeholder: 'Footer text..',
+        theme: 'snow'
+      })
+      var reminderQuill = new Quill('#reminder', {
+        modules: {
+          toolbar: '#reminder-toolbar-container'
+        },
+        placeholder: 'Reminder info..',
         theme: 'snow'
       })
   </script>
@@ -905,14 +958,14 @@
       httpPutAsync(theUrl,data,callback); 
 
     }
-    function callPostReminder(){
-      var name = document.getElementById("newReminderName").value;
-      var paragraph = document.getElementById("newReminderParagraph").value;
-      var theUrl = window.location.href+'/addreminder';
-      var data = "name=" + name + "&paragraph=" +  paragraph;
-      var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
-    }
+    // function callPostReminder(){
+    //   var name = document.getElementById("newReminderName").value;
+    //   var paragraph = document.getElementById("newReminderParagraph").value;
+    //   var theUrl = window.location.href+'/addreminder';
+    //   var data = "name=" + name + "&paragraph=" +  paragraph;
+    //   var callback = reloadIt;
+    //   httpPostAsync(theUrl,data,callback);
+    // }
 
     function deleteReminder(id){
       var theUrl = window.location.href+'/deletereminder';
@@ -953,7 +1006,19 @@
       var callback = reloadIt;
       httpPostAsync(theUrl,data,callback);
     }
-    
+
+    function saveReminder() {
+      var theUrl = window.location.href+'/addreminder';
+      var data, textData;
+      textData = JSON.stringify(reminderQuill.getContents());
+      textData = escapeSpecialChars(textData);
+      textData = textData.replace(/\&/g,"--::a very ugly string that Nathan made so it wouldn't happen naturally::--");
+      var name = document.getElementById("newReminderName").value;
+      var data = `name=${name}&data=${textData}`;// + "&form=" + form;
+      var callback = reloadIt;
+     httpPostAsync(theUrl,data,callback);
+    }
+
     function emailSettingsC(data){
       data = JSON.parse(data);
       var textData;

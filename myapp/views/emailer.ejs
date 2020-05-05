@@ -445,14 +445,29 @@
             }
 
             function getHeader() {
-                var tempCont = document.createElement("div");
-                (new Quill(tempCont)).setContents(<%- header %>);
-                return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
+                return converQuillDeltaToHTML(<%- header %>);
             }
 
             function getFooter() {
+                return converQuillDeltaToHTML(<%- footer %>);
+
+            }
+
+            function getReminders() {
+                var remindersHTML = [];
+                reminders.forEach(reminder => {
+                    remindersHTML.push({
+                        title: reminder.title,
+                        contents: converQuillDeltaToHTML(JSON.parse(reminder.contents))
+                    }
+                    )
+                })
+                return JSON.stringify(remindersHTML);
+            }
+
+            function converQuillDeltaToHTML(delta) {
                 var tempCont = document.createElement("div");
-                (new Quill(tempCont)).setContents(<%- footer %>);
+                (new Quill(tempCont)).setContents(delta);
                 return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
             }
         </script>
@@ -462,7 +477,7 @@
                 var theUrl = window.location.href+'/send';
                 var header = getHeader();
                 var footer = getFooter();
-                var reminders_string = JSON.stringify(reminders);
+                var reminders_string = getReminders();
                 var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
                                         `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
                                         `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
@@ -495,17 +510,17 @@
             }
 
             function renderView(todaysBehaviors){
-                console.log('renderVIew')
                 var theUrl = window.location.href+'/render-email-view';
                 var header = getHeader();
                 var footer = getFooter();
-                var reminders_string = JSON.stringify(reminders);
+                // var reminders_string = JSON.stringify(reminders);
+                var reminders = getReminders();
                 var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
                                         `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
                                         `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
                                         `&header=${header}` +
                                         `&footer=${footer}` +
-                                        `&reminders=${reminders_string}`;
+                                        `&reminders=${reminders}`;
                 var behavior_names = [];
                 
                 todaysBehaviors.forEach(behavior => {
@@ -521,9 +536,7 @@
                                         // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
 
                 function handleResponse(data) {
-                    console.log('here')
                     data = JSON.parse(data)
-                    console.log(data.rendered_HTML);
                     // document.getElementById("reviewData").innerHTML = data.rendered_HTML;
                     openReview(data.rendered_HTML);
                 }

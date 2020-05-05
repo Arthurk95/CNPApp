@@ -104,14 +104,14 @@ const fs = require('fs');
     });
   });
 
-  router.post('/addreminder', auth.checkAuthenticated, function(req, res){
-    var sql = "CALL AddRemindersObject('" + req.body.name + "', '" + req.body.paragraph + "');";
-    console.log(sql);
-    con.query(sql, function (err, result) {
-        if (err) res.end();
-        res.end();
-    });
-  });
+  // router.post('/addreminder', auth.checkAuthenticated, function(req, res){
+  //   var sql = "CALL AddRemindersObject('" + req.body.name + "', '" + req.body.paragraph + "');";
+  //   console.log(sql);
+  //   con.query(sql, function (err, result) {
+  //       if (err) res.end();
+  //       res.end();
+  //   });
+  // });
 
   router.post('/deletereminder', auth.checkAuthenticated, function(req, res){
     var sql = "CALL DeleteRemindersObject('" + req.body.id + "');";
@@ -148,6 +148,18 @@ const fs = require('fs');
     else{
       sql = "CALL UnhideTemplateObject('" + req.body.id + "');";
     }
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
+  console.log(req.body)
+  var data = req.body.data;
+  data = data.replace("--::a very ugly string that Nathan made so it wouldn't happen naturally::--",'&');
+    var sql = "CALL AddRemindersObject('" + req.body.name + "', '" + data + "');";
     console.log(sql);
     con.query(sql, function (err, result) {
         if (err) res.end();
