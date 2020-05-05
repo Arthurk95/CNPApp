@@ -462,11 +462,13 @@
                 var theUrl = window.location.href+'/send';
                 var header = getHeader();
                 var footer = getFooter();
+                var reminders_string = JSON.stringify(reminders);
                 var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
                                         `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
                                         `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
                                         `&header=${header}` +
-                                        `&footer=${footer}`;
+                                        `&footer=${footer}` +
+                                        `&reminders=${reminders_string}`;
                 // console.log(Object.values(todaysBehaviors))
                 // console.log(Object.values(todaysBehaviors))
                 var behavior_names = [];
@@ -497,11 +499,13 @@
                 var theUrl = window.location.href+'/render-email-view';
                 var header = getHeader();
                 var footer = getFooter();
+                var reminders_string = JSON.stringify(reminders);
                 var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
                                         `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
                                         `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
                                         `&header=${header}` +
-                                        `&footer=${footer}`;
+                                        `&footer=${footer}` +
+                                        `&reminders=${reminders_string}`;
                 var behavior_names = [];
                 
                 todaysBehaviors.forEach(behavior => {

@@ -35,6 +35,14 @@
         <% }) %>
     </div>
     <div>
+        <h3>Reminders:</h3>
+        <% reminders.forEach((reminder, index) => { %>
+            <label><%= reminder.title %></label>
+            <label><%= reminder.contents %></label>
+        <% }) %>
+
+    </div>
+    <div>
     <%- footer %>
     </div>
 </body>

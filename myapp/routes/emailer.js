@@ -274,7 +274,6 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 });
 
 router.post('/send', (req, res) => {
-console.log(req.body)
   con.query(`CALL PullEmail(${req.body.id})`, function (err, email_pull) {
     if (err) {
       console.log(`Unable to add behaviors: ${err}`);
@@ -330,11 +329,12 @@ console.log(req.body)
       text: "", // plain text body
       html: await ejs.renderFile('./views/emailTemplate.ejs', {
         email: parent_emails,
-        header: `${req.body.header}`,
-        footer: `${req.body.footer}`,
-        summary: `${req.body.summaryHTML}`,
-        snack: `${req.body.snackHTML}`,
-        lunch: `${req.body.lunchHTML}`,
+        header: req.body.header,
+        footer: req.body.footer,
+        summary: req.body.summaryHTML,
+        reminders: JSON.parse(req.body.reminders),
+        snack: req.body.snackHTML,
+        lunch: req.body.lunchHTML,
         activities: JSON.parse(activities),
         behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
       })
@@ -373,11 +373,12 @@ router.post('/render-email-view', (req, res) => {
     })
 
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {
-        header: `${req.body.header}`,
-        footer: `${req.body.footer}`,
-        summary: `${req.body.summaryHTML}`,
-        snack: `${req.body.snackHTML}`,
-        lunch: `${req.body.lunchHTML}`,
+        header: req.body.header,
+        footer: req.body.footer,
+        summary: req.body.summaryHTML,
+        reminders: JSON.parse(req.body.reminders),
+        snack: req.body.snackHTML,
+        lunch: req.body.lunchHTML,
         activities: JSON.parse(activities),
         behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
       })
