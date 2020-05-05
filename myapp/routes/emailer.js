@@ -39,10 +39,14 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
           if (err) {
             console.log(err)
           }
-          [result] = result[0];
-          result = JSON.parse(JSON.stringify(result));
-          Students[i].listOfBehaviors = result;
 
+          [result] = result[0];
+          try {
+            result = JSON.parse(JSON.stringify(result));
+            Students[i].listOfBehaviors = result;
+          } catch (e) {
+            console.log(e);
+          }
           recurseDailies(Students, dailyStudents, i + 1, res);
           if (i == (dailyStudents[0].length) - 1) {
             bottomLayer(res, Students);
