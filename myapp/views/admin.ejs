@@ -205,7 +205,7 @@
                         <p><%= reminder.title %></p>
                         <div class="flex">
                           <% if(reminder.value != -1){ %>
-                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder('<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
+                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder(this, '<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
                             <button class="yellow3-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
                             <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
                           <% }; %>
@@ -386,7 +386,7 @@
                       <% } %>
                         <p><%= behavior.title %></p>
                         <div class="flex">
-                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior('<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
+                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
                           <button class="yellow3-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i class="far fa-edit"></i></button>
                           <button class="red3-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
                         </div>
@@ -843,13 +843,13 @@
       }
       else{ theUrl = window.location.href+'/hideactivity'; }
       data = "id=" + id;
-      toggleActivityHide(element.parentElement.parentElement)
+      toggleElementHide(element.parentElement.parentElement)
       callback = doNothing;
 
       httpPutAsync(theUrl, data, callback);
     }
 
-    function toggleActivityHide(element){
+    function toggleElementHide(element){
       if(element.classList.contains("blackAndWhite")){
         element.classList.remove("blackAndWhite");
         element.classList.remove("main-BG");
@@ -901,10 +901,13 @@
       }
     }
 
-    function hideBehavior(id,isHidden){
+    function hideBehavior(element, id, isHidden){
       var theUrl = window.location.href+'/hidebehavior';
       var data = "id=" + id + "&hide=" + !isHidden;
-      var callback = reloadIt;
+
+      toggleElementHide(element.parentElement.parentElement);
+
+      var callback = doNothing;
 
       httpPostAsync(theUrl, data, callback);
     }
@@ -1030,11 +1033,12 @@
 
     }
 
-    function hideReminder(id, isHidden){
-      console.log(isHidden);
+    function hideReminder(element, id, isHidden){
       var theUrl = window.location.href+'/hidereminder';
       var data = "id=" + id + "&hide=" + !isHidden;
-      var callback = reloadIt;
+      var callback = doNothing;
+
+      toggleElementHide(element.parentElement.parentElement);
 
       httpPostAsync(theUrl, data, callback);
     }
