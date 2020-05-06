@@ -120,6 +120,7 @@
                 <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
                 <a onclick="saveStudent()" class="saveButton">Save Changes</a>
             </li>
+            <li class="flex flexCenter"><a class="font20px width100 accent1Light-BG lightGray1-text centerText hoverable padding10px" href="/admin">Back to Admin</a></li>
             <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST"></form>
               <label><font color="green"><%- messages.upload_successful %></font></label>
               <label><font color="green"><%- messages.changes_saved %></font></label>
