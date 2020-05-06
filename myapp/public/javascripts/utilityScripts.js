@@ -1,5 +1,5 @@
 var dropdownToggled = false;
-
+var MOBILE_WIDTH = 1200;
 
 function hideElement(element){
     element.style.display = "none";
@@ -167,13 +167,35 @@ function fillTodaysRosterPopup(ID, allStudents, todaysStudents){
 function openPopup(element, popupID){
     var popup = document.getElementById(popupID);
     var rect = element.getBoundingClientRect();
-    popup.style.left = (rect.right + 10) + "px";
-    popup.style.top = (rect.top - 10) + "px";
+
     if(isElementHidden(popup)){
         showElement(popup);
     }
     else{hideElement(popup);}
+
+    if((rect.right + popup.offsetWidth) > document.body.clientWidth){
+        popup.style.left = (rect.right - popup.offsetWidth - 10) + "px";
+    }
+    else{popup.style.left = (rect.right + 10) + "px";}
     
+    
+    popup.style.top = (rect.top - 10) + "px";
+
+    window.onresize = function(){
+        var popup = document.getElementById(popupID);
+        var rect = element.getBoundingClientRect();
+        if((rect.right + popup.offsetWidth) > document.body.clientWidth){ // outside of bounds of page
+            popup.style.left = (rect.right - popup.offsetWidth - 10) + "px";
+        }
+        else{popup.style.left = (rect.right + 10) + "px";}
+        popup.style.top = (rect.top - 10) + "px";
+        
+        
+    }
+}
+
+function closePopup(popupID){
+    document.getElementById(popupID).style.display = "none";
 }
 
 /* --------------- FORM FUNCTIONS --------------- */

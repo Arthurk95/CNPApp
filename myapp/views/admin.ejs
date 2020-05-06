@@ -3,10 +3,7 @@
   <head>
     <nav><%- include header.ejs %></nav>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
-    <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
-    <link rel='stylesheet' href='/stylesheets/tabs.css' />
     <link rel='stylesheet' href='/stylesheets/form.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/editor.css' />
@@ -28,9 +25,11 @@
 
           <!-- Todays Roster Panel -->
           <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
-            <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter">
+            <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
               <p class="marginLeft10 lightText font25px">Today's Roster</p>
-              <a onclick="openPopup(this, 'addToTodaysRoster')" class="lightPadding lightGray2-text font15px">Add Student</a>
+              <!-- Hidden div there to get original text when closing popup -->
+              <a onclick="openPopup(this, 'addToTodaysRoster')" class="lightPadding lightGray2-text font15px">Add Student <div style="display: none">Add Student</div></a>
+              
             </div>
             <div class="heavyPadding maxHeight250px">
               <ul id="todays_students" class="ulList">
@@ -47,9 +46,10 @@
               </ul>
             </div>
 
-            <div id="addToTodaysRoster" class="popup minWidth250px white-BG" style="display: none;"> 
+            <div id="addToTodaysRoster" class="popup width250px white-BG" style="display: none;"> 
               <div class="arrow-left"></div>
-              <ul id="todaysRosterList" class="ulList padding20px">
+              <a class="closeIcon" onclick="closePopup('addToTodaysRoster')"><i class="fas fa-times"></i></a>
+              <ul id="todaysRosterList" class="ulList padding20px marginTop10">
               </ul>
             </div>
             <script>fillTodaysRosterPopup('todaysRosterList', <%- JSON.stringify(students) %>, <%- JSON.stringify(todays_students) %>)</script>
