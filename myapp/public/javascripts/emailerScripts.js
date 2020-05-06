@@ -11,6 +11,7 @@ var listOfStudents;
 var currentStudentIndex = 0;
 var savedList = []; // array with true/false value for if corresponding student is saved
 var approvedList = [];
+var approvedStudentIds = [];
 var MAX_STEPS = 2;
 var behaviors;
 var formElement;
@@ -134,6 +135,7 @@ function populateData(){
 function studentApproved(button){
     setApprovedStyle();
     approvedList[currentStudentIndex] = true;
+    approvedStudentIds.push(currentStudentData.id);
 
     // get all values from form text fields and stuff
     // post it to DB
