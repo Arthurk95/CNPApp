@@ -14,7 +14,7 @@ class thePie {
     // set the dimensions and margins of the graph
     this.width = 625;
     this.height = 625;
-    this.margin = 120;
+    this.margin = 125;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
@@ -27,10 +27,10 @@ class thePie {
     // append the svg object to the div called 'pie'
     this.svg = d3.select("#" + id)
       .append("svg")
-        .attr("width", this.width-95)
+        .attr("width", this.width)
         .attr("height", this.height)
       .append("g")
-        .attr("transform", "translate(" + this.width / 2.27 + "," + this.height / 2 + ")")
+        .attr("transform", "translate(" + this.width / 2.45 + "," + this.height / 2 + ")")
 
     //tooltip for label
     this.tooltip = d3.select("#" + id)
