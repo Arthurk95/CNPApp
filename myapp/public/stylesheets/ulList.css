@@ -138,15 +138,13 @@
         45deg,
         white,
         white 20px,
-        var(--accentColor2Light) 20px,
-        var(--accentColor2Light) 40px
+        var(--lightGray2) 20px,
+        var(--lightGray2) 40px
       ) !important;
       
   }
 .stripedBackground p{
-    color: white;
-    mix-blend-mode: difference;
-    filter: brightness(200%);
+    color: var(--darkGray2);
 }
 
 @media screen and (max-width: 1200px){
