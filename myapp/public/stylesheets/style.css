@@ -124,6 +124,13 @@ a{
 
 p{margin: 0;}
 
+/* quill box toolbar stuff */
+svg{
+  margin-top: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 0 !important;
+}
 
 /* 
    Global classes that can be used to style elements easily. 
