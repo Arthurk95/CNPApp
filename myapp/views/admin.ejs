@@ -776,30 +776,14 @@
     // element: button that was clicked
     function addToTodaysRoster(element, studentData){
       var list = document.getElementById("todays_students");
-      var temp = document.createElement("a");
-      temp.id = studentData.StudentId;
-      temp.style="visibility: hidden; display: none;"
-      temp.innerHTML = studentData.StudentName;
-      var temp2 = document.createElement("li");
-      temp2.class = "flex white-BG spaceBetween flexAlignCenter";
-      var temp3 = document.createElement("p");
-      temp3.innerHTML = studentData.StudentName;
-      temp2.appendChild(temp3);
-      temp.appendChild(temp2);
-      temp2 = document.createElement("a");
-      temp2.onclick = "studentAbsent(this, "+studentData.StudentId+")";
-      temp2.class = "padding8px25px red3-BG darkGray2-text hoverable";
-      temp3 = document.createElement("i");
-      temp3.class = "fas fa-question";
-      temp2.appendChild(temp3);
-      temp.appendChild(temp2);
+      
+      var li = list.getElementsByTagName('li')[0]; // get first <li> to copy
+      var newLi = li.cloneNode(true);
 
-      var li = temp;
-      
-      list.appendChild(li);
-      
-      
-                        
+      // absent button
+      newLi.getElementsByTagName('a')[0].setAttribute("onclick", "studentAbsent(this, "+studentData.StudentId+")");
+      newLi.getElementsByTagName('p')[0].innerHTML = studentData.StudentName; // student name
+      list.appendChild(newLi);
 
       var theUrl = window.location.href+'/addroster';
       var data = "id=" + studentData.StudentId;
