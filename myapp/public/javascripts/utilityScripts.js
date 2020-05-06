@@ -14,6 +14,13 @@ function toggleElement(element){
     else {hideElement(element);}
 }
 
+function toggleStyle(element, style){
+    if(element.classList.contains(style)){
+        element.classList.remove(style);
+    }
+    else{element.classList.add(style);}
+}
+
 function showElement(element){ element.style.display = ""; }
 function showElement(element, displayType){
     if(displayType === undefined || displayType === null){displayType = "";} 
