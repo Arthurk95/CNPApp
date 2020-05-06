@@ -28,7 +28,7 @@
             <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
               <p class="marginLeft10 lightText font25px">Today's Roster</p>
               <!-- Hidden div there to get original text when closing popup -->
-              <a onclick="openPopup(this, 'addToTodaysRoster')" class="lightPadding lightGray2-text font15px">Add Student <div style="display: none">Add Student</div></a>
+              <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding lightGray2-text font15px">Add Student <div style="display: none">Add Student</div></a>
               
             </div>
             <div class="heavyPadding maxHeight250px">
@@ -38,7 +38,7 @@
                     <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
                       <li class="flex white-BG spaceBetween flexAlignCenter">
                         <p><%= student.StudentName %></p>
-                       <a onclick="studentAbsent(this, <%= student.StudentId %>)" class="padding8px25px red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></a>
+                       <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></button>
                         
                   <% }) %>
                 <% } else { %>
@@ -50,7 +50,8 @@
               </ul>
             </div>
 
-            <div id="addToTodaysRoster" class="popup width250px white-BG" style="display: none;"> 
+            <!-- Add to roster popup -->
+            <div id="addToTodaysRoster" class="popup width300px white-BG" style="display: none;"> 
               <div class="arrow-left"></div>
               <a class="closeIcon" onclick="closePopup('addToTodaysRoster')"><i class="fas fa-times"></i></a>
               <ul id="todaysRosterList" class="ulList padding20px marginTop10">
@@ -734,30 +735,16 @@
 
   <script>
     // Get the modal
-    var formElement;
     // opens student profile in same tab when a student is clicked
+
+    var formElement;
+
     function studentSelected(studentID){
       window.location.href ="/admin/student-profile/" + studentID;
     }
 
     // Get the <span> element that closes the modal
     var closeButton = document.getElementsByClassName("close");
-
-    // When the user clicks on the button, open the modal
-    function addStudent() {
-      formElement = document.getElementById("newStudentForm");
-      formElement.style.display = "block";
-    }
-
-    function addActivity(){
-      formElement = document.getElementById("newActivityForm");
-      formElement.style.display = "block";
-    }
-
-    function addTask(){
-      formElement = document.getElementById("newTaskForm");
-      formElement.style.display = "block";
-    }
 
     function editHeader(){
       

@@ -1,6 +1,8 @@
 var dropdownToggled = false;
 var MOBILE_WIDTH = 1200;
 
+var formElement;
+
 function hideElement(element){
     element.style.display = "none";
 }
@@ -168,10 +170,10 @@ function openPopup(element, popupID){
     var popup = document.getElementById(popupID);
     var rect = element.getBoundingClientRect();
 
-    if(isElementHidden(popup)){
-        showElement(popup);
-    }
-    else{hideElement(popup);}
+    
+    
+
+    toggleElement(popup);
 
     if((rect.right + popup.offsetWidth) > document.body.clientWidth){
         popup.style.left = (rect.right - popup.offsetWidth - 10) + "px";
@@ -192,10 +194,18 @@ function openPopup(element, popupID){
         
         
     }
+    
 }
 
 function closePopup(popupID){
     document.getElementById(popupID).style.display = "none";
+}
+
+function hideAllPopups(){
+    var popups = document.getElementsByClassName('popup');
+    for(var i = 0; i < popups.length; i++){
+        hideElement(popups[i]);
+    }
 }
 
 /* --------------- FORM FUNCTIONS --------------- */
@@ -205,6 +215,7 @@ function closeForm(){
   }
 
 function openForm(formID){
+    hideAllPopups();
     formElement = document.getElementById(formID);
     formElement.style.display = "block";
 }
