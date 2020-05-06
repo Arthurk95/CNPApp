@@ -206,7 +206,7 @@
             </div>
 
             <div id="stepTwo" class="contentWithSidebar spaceAround">
-                <div class="width70 lightGray1-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
+                <div class="width70 width90Mobile lightGray1-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
                     <div id="stepTwoTitle" class="heavyPadding accent1Light-BG flex spaceBetween flexAlignCenter flexWrap">
                         <p class="font50px lightGray1-text marginLeft10"></p>
                         <p class="displayNone" id="currentStudentID"></p>
@@ -290,7 +290,7 @@
                 </div>
                 
                 <!-- Right column (students) -->
-                <div class="sidebar width20 lightGray1-BG">
+                <div class="sidebar width20 width90Mobile lightGray1-BG">
                     <ul id="listOfStudents" class="studentsList maxHeight500px" >
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>
