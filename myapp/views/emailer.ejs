@@ -44,7 +44,7 @@
             <div id="stepOne" class="flexCenter flexColumn borderBox lightGray1-BG borderRadiusMedium width90">
                 <p class="title accent2-BG">Step 1: Email Template</p>
                 <div class="veryHeavyPadding">
-                    <ul class="flex flexColumn">
+                    <ul class="flex flexColumn marginBottom40">
                         <li class="marginBottom10">
                             <label for="summary">Summary</label>
                             <!-- toolbar container should be abstracted later -->
@@ -192,14 +192,6 @@
                     <!-- Create the editor container -->
                     
                     <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                        <div id="remindersContainer" class="flex flexColumn borderRadiusMedium marginTop30 flexColumn flexCenter width40 width90Mobile heavyPadding white-BG">          
-                            <div class="flex spaceBetween marginBottom30 width100 flexAlignCenter ">
-                                <p class="mediumFont noMargin darkText">Reminders</p>
-                                <a class="accent2-text" onclick="addReminder()">Add</a>
-                            </div>
-                            <ul id="reminders" class="flex flexColumn spaceBetween width100 border1px lightGray1-border maxHeight300px">
-                            </ul>
-                        </div>
                         <div id="saveButton" class="buttonWithIcon" onclick="updateDailyInfo();">
                             <p>Save</p>
                             <i class="fas fa-check"></i>
@@ -493,18 +485,19 @@
                 })
 
                 students.forEach(student => {
+                    if(approvedStudentIds.includes(student.id)) {
+                        var necessary_behaviors = null;
 
-                    var necessary_behaviors = null;
+                        
+                        var personalized_data = `&id=${student.id}` +
+                                                `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
+                                                `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                                                // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
 
-
-                    var personalized_data = `&id=${student.id}` +
-                                            `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
-                                            `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
-                                            // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
-
-                    
-                    httpPostAsync(theUrl, universal_data + personalized_data, doNothing);
-                    // console.log(student.listOfBehaviors['AM Snack']);
+                        
+                        httpPostAsync(theUrl, universal_data + personalized_data, doNothing);
+                        // console.log(student.listOfBehaviors['AM Snack']);
+                    } //else student was not approved
 
                 });
             }
