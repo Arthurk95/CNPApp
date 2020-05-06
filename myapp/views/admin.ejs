@@ -386,6 +386,13 @@
                       <input name=”notASearchField” type="text" id="editBehaviorOp5" placeholder="Option 5"/>
                     </div>
                   </div>
+
+                  <div style="display: none; visibility:hidden">
+                    <div >
+                      <input name=”notASearchField” type="text" id="editBehaviorId">
+                    </div>
+                  </div>
+                </div>
                 </div>
 
                 <div class="flex flexCenter">
@@ -879,6 +886,7 @@
       var cat = "cat";
       openForm("editBehaviorForm");
       formElement.querySelector("#editBehaviorName").value = behavior['title'];
+      formElement.querySelector("#editBehaviorId").value = behavior['id'];
       for(var i = 1; i < 6; i++){
         var c = cat + i;
         if(behavior[c] === ""){}
@@ -889,16 +897,17 @@
     }
 
     function passEditBehaviorToPost(){
-      /*
-        NEED DB STUFF HERE
-        Variable IDs:
-          - editBehaviorName
-          - editBehaviorOp1
-          - editBehaviorOp2
-          - editBehaviorOp3
-          - editBehaviorOp4
-          - editBehaviorOp5
-      */
+      var name = formElement.querySelector("#editBehaviorName").value;
+      var op1 = formElement.querySelector("#editBehaviorOp1").value;
+      var op2 = formElement.querySelector("#editBehaviorOp2").value;
+      var op3 = formElement.querySelector("#editBehaviorOp3").value;
+      var op4 = formElement.querySelector("#editBehaviorOp4").value;
+      var op5 = formElement.querySelector("#editBehaviorOp5").value;
+      var id = formElement.querySelector("#editBehaviorId").value
+      var theUrl = window.location.href+'/editbehavior';
+      var data = "id=" + id + "&name=" + name + "&op1=" + op1 + "&op2=" + op2 + "&op3=" + op3 + "&op4=" + op4 + "&op5=" + op5;
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
     }
 
     //generate perameters for post and call post

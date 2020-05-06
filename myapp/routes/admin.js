@@ -154,6 +154,15 @@ const fs = require('fs');
     });
   });
 
+  router.post('/editbehavior', auth.checkAuthenticated, function(req, res){
+    var sql = "UPDATE cnp_data.TemplateObject SET NameOf = '" + req.body.name + "', CategoryOne = '" + req.body.op1 + "', CategoryTwo = '" + req.body.op2 + "', CategoryThree = '" + req.body.op3 + "', CategoryFour = '" + req.body.op4 + "', CategoryFive = '" + req.body.op5 + "' WHERE TemplateId = '" + req.body.id + "';";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
   router.post('/hidebehavior', auth.checkAuthenticated, function(req, res){
     var sql;
     if(req.body.hide == "true"){
