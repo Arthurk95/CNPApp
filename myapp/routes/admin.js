@@ -235,11 +235,12 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
           found = true;
         }
       });
+
       if(found){
-        sql = "CALL StudentAppears(" + student + ")";
+        sql = "CALL StudentAppears(" + student + ");";
       }
       else{
-        sql = "CALL MarkStudentUnabsent(" + student + ")";
+        sql = "CALL MarkStudentUnabsent(" + student + ");";
       }
       console.log(sql);
       con.query(sql, function (err, result) {
@@ -274,55 +275,60 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
     var task_query = "SELECT * FROM cnp_data.Tasks;";
     var get_reminders = "CALL ShowAllRemindersObject();";
     var get_behaviors = "CALL ShowAllTemplateObject();";
-    var todays_students_query = "CALL PullUnhiddenStudents();"
-    con.query(student_query, function (err, sQuery) {
-      if (err) throw err;
-      con.query(activity_query, function (err, aQuery) {
+    var todays_students_query = "CALL PullUnhiddenStudents();";
+    var present_students = "SELECT s.StudentId, s.StudentName FROM cnp_data.Students s, cnp_data.ClassSession cs WHERE s.StudentId = cs.StudentId AND cs.CurrentDate=CURRENT_DATE AND cs.Absent=0;";
+    con.query(present_students, function(err,pStudents) {
+      if(err) throw err;
+      con.query(student_query, function (err, sQuery) {
         if (err) throw err;
-        con.query(task_query,function (err, tQuery){
-          if(err) throw err;
-          var tasks = [], completed = [];
-          for(var i = 0;i < tQuery.length;++i){
-            if(tQuery[i].Completed == 0){
-              tasks.push(tQuery[i]);
-            }
-            else{
-              completed.push(tQuery[i]);
-            }
-          }
-          con.query(get_reminders, function(err, remind){
-            remind = remind[0];
-            var Reminders = [];
-            if(remind.length == 0){
-              Reminders.push({title: "No reminders in database", value:-1});
-            }
-            else{
-              remind.forEach((element) => {
-                Reminders.push({title: element.NameOf, contents: element.MainParagraphs, id: element.TemplateId,hidden:element.Hidden});
-              });
-            }
-            
-            con.query(get_behaviors, function(err, behave){
-              behave = behave[0];
-              var Behaviors = [];
-              if(behave.length == 0){
-                Behaviors.push({title: "No behaviors in database", value:-1});
+        con.query(activity_query, function (err, aQuery) {
+          if (err) throw err;
+          con.query(task_query,function (err, tQuery){
+            if(err) throw err;
+            var tasks = [], completed = [];
+            for(var i = 0;i < tQuery.length;++i){
+              if(tQuery[i].Completed == 0){
+                tasks.push(tQuery[i]);
               }
               else{
-                behave.forEach((element) => {
-                  Behaviors.push({title: element.NameOf, cat1:element.CategoryOne, cat2:element.CategoryTwo, cat3:element.CategoryThree, cat4:element.CategoryFour, cat5:element.CategoryFive,id:element.TemplateId,Hidden:element.Hidden});
-                })
+                completed.push(tQuery[i]);
               }
-              con.query(todays_students_query, function (err, t_students) {
-                if (err) throw err;
-                res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors, todays_students: t_students[0]});
+            }
+            con.query(get_reminders, function(err, remind){
+              remind = remind[0];
+              var Reminders = [];
+              if(remind.length == 0){
+                Reminders.push({title: "No reminders in database", value:-1});
+              }
+              else{
+                remind.forEach((element) => {
+                  Reminders.push({title: element.NameOf, contents: element.MainParagraphs, id: element.TemplateId,hidden:element.Hidden});
+                });
+              }
+              
+              con.query(get_behaviors, function(err, behave){
+                behave = behave[0];
+                var Behaviors = [];
+                if(behave.length == 0){
+                  Behaviors.push({title: "No behaviors in database", value:-1});
+                }
+                else{
+                  behave.forEach((element) => {
+                    Behaviors.push({title: element.NameOf, cat1:element.CategoryOne, cat2:element.CategoryTwo, cat3:element.CategoryThree, cat4:element.CategoryFour, cat5:element.CategoryFive,id:element.TemplateId,Hidden:element.Hidden});
+                  })
+                }
+                con.query(todays_students_query, function (err, t_students) {
+                  if (err) throw err;
+                  console.log(pStudents,"bye");
+                  res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors, todays_students: t_students[0],present:pStudents});
+                });
               });
             });
           });
+          
         });
-        
       });
-    });
+  })
     
   });
 
