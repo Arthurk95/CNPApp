@@ -39,14 +39,10 @@
   margin-bottom: 70px;
 }
 
-.newLine {
-display: block;
-content: "\A\A";
-white-space: normal;
-}
-
 .pieMin {
   max-width: 45%;
+  width: fit-content;
+  height: fit-content;
   position: relative;
   display: inline-block;
   white-space: nowrap;
@@ -60,12 +56,23 @@ white-space: normal;
   cursor: pointer;
 }
 
+.label {
+  white-space: pre-wrap;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 12pt;
+  padding-left: 7px;
+  padding-right: 5px;
+}
+
 .arrow-down-make {
+  font-family: 'Times New Roman', Times, serif;
   max-width: fit-content;
 }
 
 .arrow-down {
-  background-color: rgba(255, 255, 255, 0.493);
+  font-family: 'Times New Roman', Times, serif;
+  background-color: rgba(255, 255, 255, 0.301);
   max-width: fit-content;
 }
 

@@ -178,7 +178,7 @@ function generatePie(id){
     temp.appendChild(del);
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = "Beginning Date"; temp.className = "smallFont padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    temp = document.createElement("label"); temp.innerHTML = "\n Beginning Date "; temp.className = "label";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select"); temp.id = "syear" + id; temp.className= "arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
@@ -190,7 +190,7 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id="sday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "smallFont padding5px10px accent2Light-BG borderRadiusLarge whiteText";
+    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label";
     newdiv.appendChild(temp);
 
     temp = document.createElement("select"); temp.id="eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
@@ -202,6 +202,8 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id="eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
+    temp = document.createElement("label"); temp.innerHTML = "\n\n"; temp.className = "label";
+    newdiv.appendChild(temp);
   }
  
   //Delete button
@@ -257,6 +259,7 @@ function generatePie(id){
   function updateOpid1(id){
     var newdiv = document.getElementById("opid1" + id);
     var temp,temp2;
+
     if(newdiv.hasChildNodes()){
       document.getElementById("optionid1" + id).remove();
     }

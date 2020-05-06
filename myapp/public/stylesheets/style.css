@@ -1028,6 +1028,12 @@ h1{
 
 svg {
   background-color: rgba(255, 255, 255, 0.9);
+  max-width: fit-content;
+  height: auto;
+  margin-top: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
 }
 
 canvas {
@@ -1036,7 +1042,7 @@ canvas {
   margin-top: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 5em;
+  margin-bottom: 2em;
 }
 
 /* heat map  
