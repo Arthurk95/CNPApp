@@ -98,9 +98,15 @@ function populateData(){
 
     for(var i = 0; i < currentStudentData.listOfActivities.length; i++){
         var li = document.createElement("li");
+        li.classList = "flexAlignCenter padding5px0px";
         li.innerHTML = currentStudentData.listOfActivities[i].ActivityName;
+        
+        if(currentStudentData.listOfActivities[i].Helper === 1){
+            li.innerHTML += "&nbsp" + "<i class='fas fa-star accent2Light-text'></i>"
+        }
         activities.appendChild(li);
     }
+
 
     var data = `id=${currentStudentData.id}`;
     httpPostAsync(window.location.href + '/refresh-behaviors', data, function (result) {
