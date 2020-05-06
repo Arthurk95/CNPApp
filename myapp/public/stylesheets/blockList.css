@@ -32,6 +32,7 @@ HTML Format:
     text-align: center;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 120px;
 }
 
 /* Image in each listing with border around it */
@@ -69,7 +70,6 @@ HTML Format:
 /* On small screens, show three students per row */
 @media screen and (max-width: 1200px) {
     .blockList{
-        margin-bottom: 30vh;
     }
     .blockList li { 
         max-width: 38%; 
