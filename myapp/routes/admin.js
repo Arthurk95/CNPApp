@@ -22,7 +22,7 @@ const fs = require('fs');
               "', '" + req.body.G1Phone + "', '" + req.body.G2Name + "', '" + req.body.G2EMail + "', '" + req.body.G2Phone + "', '" + req.body.mon + 
               "', '" + req.body.tue + "', '" + req.body.wed + "', '" + req.body.thu + "', '" + req.body.fri + "', '" + 0 + "', '" + 0 + "', '" + req.body.fullday + 
               "', '" + 1 + "');";
-              console.log(sql);
+    console.log(sql);
     con.query(sql, function (err, result) {
         if (err) res.end();
         res.end();
@@ -104,14 +104,29 @@ const fs = require('fs');
     });
   });
 
-  // router.post('/addreminder', auth.checkAuthenticated, function(req, res){
-  //   var sql = "CALL AddRemindersObject('" + req.body.name + "', '" + req.body.paragraph + "');";
-  //   console.log(sql);
-  //   con.query(sql, function (err, result) {
-  //       if (err) res.end();
-  //       res.end();
-  //   });
-  // });
+  router.post('/hidereminder', auth.checkAuthenticated, function(req, res){
+    var sql;
+    if(req.body.hide == "true"){
+      sql = "CALL HideRemindersObject('" + req.body.id + "');";
+    }
+    else{
+      sql = "CALL UnhideRemindersObject('" + req.body.id + "');";
+    }
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
+
+  router.post('/editreminder', auth.checkAuthenticated, function(req, res){
+    var sql = "UPDATE cnp_data.RemindersObject SET NameOf = '" + req.body.name + "', MainParagraphs = '" + req.body.content + "' WHERE TemplateId = '" + req.body.id + "';";
+    console.log(sql);
+    con.query(sql, function (err, result) {
+        if (err) res.end();
+        res.end();
+    });
+  });
 
   router.post('/deletereminder', auth.checkAuthenticated, function(req, res){
     var sql = "CALL DeleteRemindersObject('" + req.body.id + "');";
@@ -141,7 +156,6 @@ const fs = require('fs');
 
   router.post('/hidebehavior', auth.checkAuthenticated, function(req, res){
     var sql;
-    console.log(req.body.hide,"bye");
     if(req.body.hide == "true"){
       sql = "CALL HideTemplateObject('" + req.body.id + "');";
     }
@@ -156,7 +170,6 @@ const fs = require('fs');
   });
 
 router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
-  console.log(req.body)
   var data = req.body.data;
   data = data.replace("--::a very ugly string that Nathan made so it wouldn't happen naturally::--",'&');
     var sql = "CALL AddRemindersObject('" + req.body.name + "', '" + data + "');";
@@ -208,7 +221,6 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
     con.query(sql, function (err, result) {
       if (err) res.end();
       var found = false;
-      console.log(result);
       result[0].forEach((element)=>{
         if(element.StudentId == student){
           found = true;
@@ -251,7 +263,7 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
     var student_query = "CALL PullStudentsAndDayType();"; 
     var activity_query = "CALL ShowAllActivities();";
     var task_query = "SELECT * FROM cnp_data.Tasks;";
-    var get_reminders = "CALL ShowUnhiddenRemindersObject();";
+    var get_reminders = "CALL ShowAllRemindersObject();";
     var get_behaviors = "CALL ShowAllTemplateObject();";
     var todays_students_query = "CALL PullUnhiddenStudents();"
     con.query(student_query, function (err, sQuery) {
@@ -277,9 +289,10 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
             }
             else{
               remind.forEach((element) => {
-                Reminders.push({title: element.NameOf, contents: element.MainParagraphs, id: element.TemplateId});
+                Reminders.push({title: element.NameOf, contents: element.MainParagraphs, id: element.TemplateId,hidden:element.Hidden});
               });
             }
+            
             con.query(get_behaviors, function(err, behave){
               behave = behave[0];
               var Behaviors = [];
@@ -317,7 +330,6 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
       //'result' contains requested student [index 0] as well as 'OkPacket' [index 1]
       //strip away OkPacket, create selected_student as new array
       [selected_student] = result[0];
-      console.log(selected_student);
       res.render('profile.ejs', { title: 'Profile Page', student: selected_student });
     });
   });

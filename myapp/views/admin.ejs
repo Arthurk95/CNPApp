@@ -192,10 +192,16 @@
                 <% if (reminders.length > 0) {%>
                   
                   <% reminders.forEach((reminder, index) => { %>
-                    <li class="white-BG spaceBetween">
+                    <% if (reminder.hidden == 1) { %>
+                      <li class="main-BG blackAndWhite spaceBetween">
+                    <% } else { %>
+                      <li class="white-BG spaceBetween">
+                    <% } %>
                         <p><%= reminder.title %></p>
                         <div class="flex">
                           <% if(reminder.value != -1){ %>
+                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder('<%= reminder.id %>', <%= reminder.Hidden %>)"><i class="far fa-eye"></i></button>
+                            <button class="yellow3-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
                             <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
                           <% }; %>
                         </div>
@@ -204,6 +210,37 @@
                 <% } %>
               
               </ul>
+              <!-- Edit reminder form -->
+              <div id="editReminderForm" class="formWindow">
+                <div class="formWindow-content">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Edit a Reminder</p>
+
+                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                    <div class="flex width60 width100Mobile marginBottom20">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input type="text" id="editReminderName" value="">
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="editReminder" placeholder="Reminder info">
+                      </div>
+                    </div>
+
+                    <div style="display: none; visibility:hidden">
+                      <div >
+                        <input name=”notASearchField” type="text" id="editReminderId">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="editReminderSubmit" onclick="passEditReminderToPost()">Save Changes</a>
+                  </div>
+                </div>
+              </div> <!-- End edit reminder form -->
 
               <!-- --------------------- New Reminder Form --------------------- -->
               <div id="newReminderForm" class="formWindow">
@@ -750,7 +787,6 @@
       temp3.class = "fas fa-question";
       temp2.appendChild(temp3);
       temp.appendChild(temp2);
-      console.log("hi",list,temp,"bye");
 
       var li = temp;
       
@@ -832,7 +868,6 @@
     }
 
     function hideBehavior(id,isHidden){
-      console.log(isHidden);
       var theUrl = window.location.href+'/hidebehavior';
       var data = "id=" + id + "&hide=" + !isHidden;
       var callback = reloadIt;
@@ -958,18 +993,37 @@
       httpPutAsync(theUrl,data,callback); 
 
     }
-    // function callPostReminder(){
-    //   var name = document.getElementById("newReminderName").value;
-    //   var paragraph = document.getElementById("newReminderParagraph").value;
-    //   var theUrl = window.location.href+'/addreminder';
-    //   var data = "name=" + name + "&paragraph=" +  paragraph;
-    //   var callback = reloadIt;
-    //   httpPostAsync(theUrl,data,callback);
-    // }
+
+    function hideReminder(id, isHidden){
+      var theUrl = window.location.href+'/hidereminder';
+      var data = "id=" + id + "&hide=" + !isHidden;
+      var callback = reloadIt;
+
+      httpPostAsync(theUrl, data, callback);
+    }
+
+    function editReminder(reminder){
+      var cat = "cat";
+      console.log(reminder);
+      openForm("editReminderForm");
+      formElement.querySelector("#editReminderName").value = reminder['title'];
+      formElement.querySelector("#editReminder").value = reminder['contents'];
+      formElement.querySelector("#editReminderId").value = reminder['id'];
+    }
 
     function deleteReminder(id){
       var theUrl = window.location.href+'/deletereminder';
       var data = "id=" + id;
+      var callback = reloadIt;
+      httpPostAsync(theUrl,data,callback);
+    }
+
+    function passEditReminderToPost(){
+      var name = formElement.querySelector("#editReminderName").value;
+      var content = formElement.querySelector("#editReminder").value;
+      var id = formElement.querySelector("#editReminderId").value
+      var theUrl = window.location.href+'/editreminder';
+      var data = "id=" + id + "&name=" + name + "&content=" + content;
       var callback = reloadIt;
       httpPostAsync(theUrl,data,callback);
     }
