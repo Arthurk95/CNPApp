@@ -124,7 +124,6 @@ function toggleableToggled(element){
 function toggleClassIfInputNotEmpty(inputID, element, className, oldClassName){
     var input = document.getElementById(inputID);
 
-    console.log(input.value.length);
 
     if(input.value.length > 0){ // input not empty
         if(!element.classList.contains(className)){ // not already toggled before
@@ -142,7 +141,6 @@ function toggleClassIfInputNotEmpty(inputID, element, className, oldClassName){
 
 function fillTodaysRosterPopup(ID, allStudents, todaysStudents){
     var elementToFill = document.getElementById(ID);
-    console.log("hi",allStudents,todaysStudents,"bye");
     for(var i = 0; i < allStudents.length; i++){
         // is allStudents[i].StudentID in todaysStudents
         // if not, add it to the popup

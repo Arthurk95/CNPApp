@@ -319,7 +319,6 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
                 }
                 con.query(todays_students_query, function (err, t_students) {
                   if (err) throw err;
-                  console.log(pStudents,"bye");
                   res.render('admin.ejs', {title: 'Admin Page', students: sQuery[0],  activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors, todays_students: t_students[0],present:pStudents});
                 });
               });

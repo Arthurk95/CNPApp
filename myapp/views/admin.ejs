@@ -205,7 +205,7 @@
                         <p><%= reminder.title %></p>
                         <div class="flex">
                           <% if(reminder.value != -1){ %>
-                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder('<%= reminder.id %>', <%= reminder.Hidden %>)"><i class="far fa-eye"></i></button>
+                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder('<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
                             <button class="yellow3-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
                             <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
                           <% }; %>
@@ -1030,6 +1030,7 @@
     }
 
     function hideReminder(id, isHidden){
+      console.log(isHidden);
       var theUrl = window.location.href+'/hidereminder';
       var data = "id=" + id + "&hide=" + !isHidden;
       var callback = reloadIt;
@@ -1039,7 +1040,6 @@
 
     function editReminder(reminder){
       var cat = "cat";
-      console.log(reminder);
       openForm("editReminderForm");
       formElement.querySelector("#editReminderName").value = reminder['title'];
       // formElement.querySelector("#editReminder").value = reminder['contents'];
