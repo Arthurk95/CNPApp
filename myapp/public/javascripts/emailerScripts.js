@@ -11,11 +11,14 @@ var listOfStudents;
 var currentStudentIndex = 0;
 var savedList = []; // array with true/false value for if corresponding student is saved
 var approvedList = [];
-var approvedStudentIds = [];
 var MAX_STEPS = 2;
 var behaviors;
 var formElement;
 var saveButton;
+
+var APPROVED_COLOR = "accent2Light-BG";
+var APPROVED_COLOR_DARK = "accent2-BG";
+var SAVED_COLOR = "accent2Light-BG";
 
 var summary;
 var header;
@@ -132,17 +135,31 @@ function populateData(){
             }
         }
     });
+    toggleSavedStyle();
+}
 
+function checkIfAllApproved(){
+    var sendEmailBtn = document.getElementById("sendEmailButton");
+    if(allStudentsApproved()){
+        toggleStyle(sendEmailBtn, "disabledButton");
+    }
+    else{
+        if(!sendEmailBtn.classList.contains("disabledButton")){toggleStyle(sendEmailBtn, "disabledButton");}
+    }
+}
 
-
-    toggleSaveButtonStyle();
+function allStudentsApproved(){
+    for(var i = 0; i < approvedList.length; i++){
+        if(approvedList[i] === false){
+            return false;
+        }
+    }
+    return true;
 }
 
 function studentApproved(button){
-    setApprovedStyle();
     approvedList[currentStudentIndex] = true;
-    approvedStudentIds.push(currentStudentData.id);
-
+    toggleApprovedStyle();
     // get all values from form text fields and stuff
     // post it to DB
     // DO NOT RELOAD PAGE AS CALLBACK
@@ -151,19 +168,24 @@ function studentApproved(button){
 }
 
 function setApprovedStyle(){
-    if(!stepTwoTitle.classList.contains("accent2Light-BG")){
-        stepTwoTitle.classList.add("accent2Light-BG");
+    if(!stepTwoTitle.classList.contains(APPROVED_COLOR)){
+        stepTwoTitle.classList.add(APPROVED_COLOR);
         currentStudentElement.classList.add("approved");
+        document.getElementById("reviewButton").classList.remove(APPROVED_COLOR);
     }
 }
 
 function setNormalStyle(){
-    stepTwoTitle.classList.remove("accent2Light-BG");
+    stepTwoTitle.classList.remove(APPROVED_COLOR);
+    currentStudentElement.classList.remove("approved");
+    currentStudentElement.classList.add("selected")
+    document.getElementById("reviewButton").classList.add(APPROVED_COLOR);
 }
 
 // node.js "reports" variable passed to JS
 function passToJS(r){
     listOfStudents = r;
+    initSavedList();
 }
 
 function passSummaryToJS(s){summary = s;}
@@ -182,7 +204,7 @@ function initEmailerVariables(){
     stepTwoTitle = document.getElementById("stepTwoTitle");
     studentsList = document.getElementById("listOfStudents");
     activities = document.getElementById("activitiesList");
-    saveButton = document.getElementById("saveButton");
+    saveButton = document.getElementById("saveButtonStep2");
     if(currentStudentElement != null){
         studentSelected(document.getElementById("student0"), 0);
         document.getElementById("student0").classList.add("selected");
@@ -238,38 +260,42 @@ function studentSaved(behaviors){
    var db_data = `id=${currentStudentData.id}&behaviorNames=${behaviorNames}&studentsBehaviorSelection=${studentsBehaviorSelection}&studentsBehaviorNotes=${studentsBehaviorNotes}`;
    httpPostAsync(`/emailer/push-behavior/`, db_data, null);
     
-    if(!savedList[currentStudentIndex]){ savedStyle(); } // isn't already saved
     savedList[currentStudentIndex] = true;
+
+    if(!savedList[currentStudentIndex]){ toggleSavedStyle(); } // isn't already saved
+    approvedList[currentStudentIndex] = false;
+    toggleApprovedStyle();
 }
 
+function toggleApprovedStyle(){
+    if(approvedList[currentStudentIndex]){
+        setApprovedStyle();
+    }
+    else{setNormalStyle();}
+    
+    checkIfAllApproved();
+}
 
 function toggleSaveButtonStyle(){
     if(savedList[currentStudentIndex]){savedStyle();}
     else{unsavedStyle();}
 }
 
+function toggleSavedStyle(){
+    if(savedList[currentStudentIndex]){savedStyle();}
+    else{unsavedStyle();}
+}
+
 // changes saveButton style to green to indicate that it's saved
 function savedStyle(){
-    if(saveButton.classList.contains("blue2-BG")){
-        saveButton.classList.remove("blue2-BG");
-        saveButton.classList.add("green2-BG");
-        var icon = saveButton.getElementsByClassName("buttonIcon")[0];
-        icon.classList.remove("blue3-BG");
-        icon.classList.add("green3-BG");
-        saveButton.getElementsByTagName("p")[0].innerHTML = "Saved";
+    if(!saveButton.classList.contains(SAVED_COLOR)){
+        saveButton.classList.add(SAVED_COLOR);
     }
 }
 
 // makes saveButton blue
 function unsavedStyle(){
-    if(saveButton.classList.contains("green2-BG")){
-        saveButton.classList.add("blue2-BG");
-        saveButton.classList.remove("green2-BG");
-        var icon = saveButton.getElementsByClassName("buttonIcon")[0];
-        icon.classList.add("blue3-BG");
-        icon.classList.remove("green3-BG");
-        saveButton.getElementsByTagName("p")[0].innerHTML = "Save";
-    }
+    saveButton.classList.remove(SAVED_COLOR);
 }
 
 // Added for when we implement recognizing when a change has been made

@@ -192,7 +192,7 @@
                     <!-- Create the editor container -->
                     
                     <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                        <div id="saveButton" class="buttonWithIcon" onclick="updateDailyInfo();">
+                        <div id="saveButtonStep1" class="buttonWithIcon" onclick="updateDailyInfo();">
                             <p>Save</p>
                             <i class="fas fa-check"></i>
                         </div>
@@ -210,7 +210,7 @@
                     <div id="stepTwoTitle" class="heavyPadding accent1Light-BG flex spaceBetween flexAlignCenter flexWrap">
                         <p class="font50px lightGray1-text marginLeft10"></p>
                         <p class="displayNone" id="currentStudentID"></p>
-                        <div class="buttonWithIcon accent2Light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
+                        <div id="reviewButton" class="buttonWithIcon accent2Light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
                             <!-- <div class="buttonWithIcon accent2Light-BG" onclick="openReview()"> -->
                             <p class="mediumPadding">Review</p>
                         </div>
@@ -281,7 +281,7 @@
                                 <i class="fas fa-caret-left"></i>
                                 <p>Back</p>
                             </div>
-                            <div id="saveButton" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>);">
+                            <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>); toggleStyle(this, 'accent2Light-BG');">
                                 <p>Save</p>
                                 <i class="fas fa-check"></i>
                             </div>
@@ -301,7 +301,7 @@
                         <li>No Students</li>
                     <% } %>
                     </ul>
-                    <div id="sendEmailButton" class="buttonWithIcon marginBottom20 accent2-BG width40 center" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>);">
+                    <div id="sendEmailButton" class="buttonWithIcon marginBottom20 accent2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>);">
                         <p>Send Emails</p>
                     </div>
                 </div>
@@ -466,40 +466,39 @@
 
         <script>
             function sendEmails(students, todaysBehaviors){
-                var theUrl = window.location.href+'/send';
-                var header = getHeader();
-                var footer = getFooter();
-                var reminders_string = getReminders();
-                var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
-                                        `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
-                                        `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
-                                        `&header=${header}` +
-                                        `&footer=${footer}` +
-                                        `&reminders=${reminders_string}`;
-                // console.log(Object.values(todaysBehaviors))
-                // console.log(Object.values(todaysBehaviors))
-                var behavior_names = [];
-                
-                todaysBehaviors.forEach(behavior => {
-                    behavior_names.push(behavior.name);
-                })
+                if(allStudentsApproved()){
+                    var theUrl = window.location.href+'/send';
+                    var header = getHeader();
+                    var footer = getFooter();
+                    var reminders_string = getReminders();
+                    var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
+                                            `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
+                                            `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
+                                            `&header=${header}` +
+                                            `&footer=${footer}` +
+                                            `&reminders=${reminders_string}`;
+                    // console.log(Object.values(todaysBehaviors))
+                    // console.log(Object.values(todaysBehaviors))
+                    var behavior_names = [];
+                    
+                    todaysBehaviors.forEach(behavior => {
+                        behavior_names.push(behavior.name);
+                    })
 
-                students.forEach(student => {
-                    if(approvedStudentIds.includes(student.id)) {
+                    students.forEach(student => {
                         var necessary_behaviors = null;
-
-                        
                         var personalized_data = `&id=${student.id}` +
                                                 `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
                                                 `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
                                                 // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
 
-                        
+                            
                         httpPostAsync(theUrl, universal_data + personalized_data, doNothing);
                         // console.log(student.listOfBehaviors['AM Snack']);
-                    } //else student was not approved
 
-                });
+                    });
+                }
+                
             }
 
             function renderView(todaysBehaviors){

@@ -629,6 +629,9 @@ svg{
   
 }
 
+.disabledButton{filter: grayscale(100%) !important; cursor: default !important;}
+.disabledButton:hover, .disabledButton:active{filter: grayscale(100%) !important;}
+
 /* An element that can be clicked and will be "toggled"
 <div>
   <a class="toggleable toggled" onclick="toggleableToggled(this)">Link</a>
