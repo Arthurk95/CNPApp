@@ -219,7 +219,6 @@
 @media screen and (max-width: 1200px){
     .contentWithSidebar .sidebar{
         margin-bottom: 40px;
-        width: 90%;
         align-self: center !important;
     }
 
@@ -231,9 +230,5 @@
         flex-direction: column-reverse !important;
         justify-items: center !important;
         align-items: center !important;
-    }
-
-    .contentWithSidebar .content{
-        width: 90% !important;
     }
 }

@@ -872,7 +872,6 @@ svg{
   .toggleable{font-size: 40px; padding: 1em 0px;}
 
   .contentWithSidebar{flex-direction: column-reverse; align-items: center;}
-  .sidebar{width: 100% !important;}
 
   .buttonAreaGrid{
     width: 80%;
