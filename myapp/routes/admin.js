@@ -276,7 +276,7 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
     var get_reminders = "CALL ShowAllRemindersObject();";
     var get_behaviors = "CALL ShowAllTemplateObject();";
     var todays_students_query = "CALL PullUnhiddenStudents();";
-    var present_students = "SELECT s.StudentId, s.StudentName FROM cnp_data.Students s, cnp_data.ClassSession cs WHERE s.StudentId = cs.StudentId AND cs.CurrentDate=CURRENT_DATE;";
+    var present_students = "SELECT s.StudentId, s.StudentName FROM cnp_data.Students s, cnp_data.ClassSession cs WHERE s.StudentId = cs.StudentId AND cs.CurrentDate=CURRENT_DATE AND cs.Absent=0;";
     con.query(present_students, function(err,pStudents) {
       if(err) throw err;
       con.query(student_query, function (err, sQuery) {
