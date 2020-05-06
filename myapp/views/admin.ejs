@@ -34,8 +34,8 @@
             </div>
             <div class="heavyPadding maxHeight250px">
               <ul id="todays_students" class="ulList">
-                <% if (todays_students.length > 0) {%>
-                  <% todays_students.forEach((student, index) => { %>
+                <% if (present.length > 0) {%>
+                  <% present.forEach((student, index) => {  %>
                     <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
                       <li class="flex white-BG spaceBetween flexAlignCenter">
                         <p><%= student.StudentName %></p>
