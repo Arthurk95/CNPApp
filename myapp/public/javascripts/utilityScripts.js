@@ -140,7 +140,7 @@ function toggleClassIfInputNotEmpty(inputID, element, className, oldClassName){
 
 function fillTodaysRosterPopup(ID, allStudents, todaysStudents){
     var elementToFill = document.getElementById(ID);
-
+    console.log("hi",allStudents,todaysStudents,"bye");
     for(var i = 0; i < allStudents.length; i++){
         // is allStudents[i].StudentID in todaysStudents
         // if not, add it to the popup
