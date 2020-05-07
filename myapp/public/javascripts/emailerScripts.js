@@ -101,7 +101,7 @@ function populateData(){
 
     for(var i = 0; i < currentStudentData.listOfActivities.length; i++){
         var li = document.createElement("li");
-        li.classList = "flexAlignCenter padding10px margin10 lightGray2-BG";
+        li.classList = "padding10px centerText margin10 lightGray2-BG width35";
         li.innerHTML = currentStudentData.listOfActivities[i].ActivityName;
         
         if(currentStudentData.listOfActivities[i].Helper === 1){
