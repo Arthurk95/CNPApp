@@ -20,10 +20,11 @@
 
       <!-- Main wrapper panel: two columns -->
       <div class="flex spaceAround flexCollapseMobile width100">
+      
         <!-- Left column, essentially a grid -->
         <div class="flex spaceAround flexGrow1 flexWrap width100Mobile flexAlignStart">
-
           <!-- Todays Roster Panel -->
+          
           <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
             <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
               <p class="marginLeft10 lightText font25px">Today's Roster</p>
@@ -596,12 +597,16 @@
           <!-- --------------------- EMAIL PANEL --------------------- -->
           <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width100">
             <div class="flex spaceBetween flexAlignCenter darkGray3-BG mediumPadding">
-              <p class="marginLeft10 lightText font25px">Email Settings</p>
+              <p class="marginLeft10 lightText font25px">Other Settings</p>
               <div>
                 <a class="hoverable font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray1-text" onclick="emailSettings('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
                 <a class="hoverable font15px padding5px10px accent2Light-BG borderRadiusLarge lightGray1-text" onclick="emailSettings('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
 
               </div>
+            </div>
+            <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
+              <button href="/reset-password">Reset Password</button>
+              <button href="/register">Add User</button>
             </div>
             <!-- Edit Header Form -->
             <div id="editHeaderForm" class="formWindow">
