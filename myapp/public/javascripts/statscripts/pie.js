@@ -12,9 +12,9 @@ class thePie {
     this.myId = id;
 
     // set the dimensions and margins of the graph
-    this.width = 500;
-    this.height = 525;
-    this.margin = 50;
+    this.width = 625;
+    this.height = 625;
+    this.margin = 75;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
@@ -29,7 +29,7 @@ class thePie {
       .classed("svg", true)
       .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 500 525")
+        .attr("viewBox", "0 0 625 625")
         .attr("width", this.width)
         .attr("height", this.height)
       .append("g")
@@ -135,7 +135,7 @@ class thePie {
         if (d.data.value > 0)
           {
             let percent = (Math.round((d.value / total) * 100));
-            if (percent > 3) {
+            if (percent > 4) {
               return "" + d.data.key }
           }
       })
@@ -149,7 +149,7 @@ class thePie {
           return "translate(" + c + ")";
        })
       .style("text-anchor", "middle")
-      .style("font-size", 16)
+      .style("font-size", 15)
       .style("stroke-width", .8)
       .style("stroke", "white")
       .style("paint-order", "stroke fill")
