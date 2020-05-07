@@ -321,13 +321,14 @@ router.post('/send', (req, res) => {
         rejectUnauthorized: false
       }
     });
-
+    console.log(req.body.name)
     let info = await transporter.sendMail({
       from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
       to: parent_emails, // list of receivers
       subject: "CNP Daily Report", // Subject line
       text: "", // plain text body
       html: await ejs.renderFile('./views/emailTemplate.ejs', {
+        name: req.body.name,
         email: parent_emails,
         header: req.body.header,
         footer: req.body.footer,
@@ -373,6 +374,7 @@ router.post('/render-email-view', (req, res) => {
     })
 
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {
+        name: req.body.name,
         header: req.body.header,
         footer: req.body.footer,
         summary: req.body.summaryHTML,
