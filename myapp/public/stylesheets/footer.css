@@ -28,6 +28,7 @@
     justify-self: stretch;
     padding: 12px 80px;
     color: var(--lightGray1);
+    margin: auto;
 }
 
 @media screen and (max-width: 1200px){
@@ -36,10 +37,14 @@
         margin: 0;
     }
 
+    .studentFooter a{
+        padding: 4vh 0 4vh 0;
+    }
+
     /* Make the big footer buttons full width on small screens */
     .studentFooter .twoButtons a{
-        font-size: 8vw;
-        padding: 4vh 0 4vh 0;
+        font-size: 100px !important;
+        padding: 30px 0 30px 0;
         width: 50%;
     }
 
@@ -48,34 +53,8 @@
         width: 100%;
     }
 
-    .studentFooter .titleWithTwoButtons{
-        width: 100%;
-    }
-
-    .studentFooter .titleWithTwoButtons a{ font-size: 5vw !important;}
-    
-    .studentFooter .smallerFont{
-        font-size: 6vw !important; 
-    }
-
     .studentFooter .noClick{ 
         width: 40vw !important;}
-    
-    .studentFooter .titleWithTwoButtons a{
-        width: 20vw;
-    }
-}
-
-.studentFooter .twoButtons{
-    display: none;
-    justify-content: center;
-    flex-wrap: nowrap;
-}
-
-.studentFooter .titleWithTwoButtons{
-    display: none;
-    justify-content: center;
-    flex-wrap: nowrap;
 }
 
 .studentFooter a:hover{

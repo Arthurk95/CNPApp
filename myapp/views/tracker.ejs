@@ -55,13 +55,13 @@
     
     <footer>
         <ul id="footer" class="studentFooter">
-            <li class="flex flexCenter">
-                <a id="pottyBreak" class="flexGrow1 accent3Light-BG smallerFont" onclick="pottyBreak()" style="display: none">Potty Break</a>
+            <li class="flex flexCenter flexStretch">
+                <a id="pottyBreak" class="flexGrow1 accent3Light-BG" onclick="pottyBreak()" style="display: none">Potty Break</a>
                 <a id="backButton" class="flexGrow1 accent4-BG" onclick="goBack()" style="display: none">Back</a>
-                <a id="nextButton" class="flexGrow1 accent2Light-BG smallerFont" onclick="nextStep()" style="display: none">Next</a>
+                <a id="nextButton" class="flexGrow1 accent2Light-BG" onclick="nextStep()" style="display: none">Next</a>
                 <a id="submitButton" onclick="submitToDB()" class="flexGrow1 accent2-BG" style="display: none">Submit</a>
             </li>
-            <li id="pottyYesNo" class="flex flexCenter">
+            <li id="pottyYesNo" class="flex flexCenter flexStretch">
                 <a class="flexGrow1 darkGray3-BG noClick" style="display: none;">Accident?</a>
                 <a id="pottyYes" class="flexGrow1 accent4-BG" onclick="submitPottyToDB(this, true)" style="display: none;">Yes</a>
                 <a id="pottyNo" class="flexGrow1 accent2-BG" onclick="submitPottyToDB(this, false)" style="display: none;">No</a>

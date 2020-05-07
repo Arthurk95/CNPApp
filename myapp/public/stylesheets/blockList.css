@@ -70,6 +70,7 @@ HTML Format:
 /* On small screens, show three students per row */
 @media screen and (max-width: 1200px) {
     .blockList{
+        margin-bottom: 210px;
     }
     .blockList li { 
         max-width: 38%; 
@@ -83,8 +84,10 @@ HTML Format:
         max-width: 90% !important;
     }
 
+    .selectionButtons li{width: 90% !important;}
+
     .selectionButtons a{
-        padding: 15vh 0px 15vh 0px !important;
+        padding: 15vh 30px 15vh 30px !important;
     }
 
     /* Size of Activities text */
@@ -160,7 +163,7 @@ HTML Format:
   /* Each li is the container for the button */
   .selectionButtons li{
     display: inline-block;
-    width: 80%;
+    width: 60%;
     margin-bottom: 30px;
   }
 
@@ -168,8 +171,8 @@ HTML Format:
   .selectionButtons a{
     transition: 0.1s all;
     color: var(--lightGray1);
-    font-size: 6em;
-    padding: 10vh 0px 10vh 0px;
+    font-size: 70px;
+    padding: 10vh 10px 10vh 10px;
     display: block;
     text-decoration: none;
     cursor: pointer;
