@@ -3,16 +3,7 @@
 
 <head>
     <style>
-        @media screen and (max-width: 1200px){
-            .container{flex-direction: column;}
-            .sidebar{width:100% !important;}
-            body{font-size: 25px !important;}
-        }
-
-        body{
-            margin: 0;
-            padding: 0;
-            font-size: 14px;
+        .email-template-container{
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -21,192 +12,212 @@
             margin-block-end: 0;
             margin-inline-start: 0;
             margin-inline-end: 0;
+            font-weight: 300;
         }
 
-        ul{
-            list-style-type: none;
-            margin-block-start: 0;
-            margin-block-end: 0;
-            margin-inline-start: 0;
-            margin-inline-end: 0;
-            padding-inline-start: 0px;
+        p{margin: 0;}
+
+        .section{
+            padding: 50px 30px;
+            margin: 0;
         }
 
-        .container{
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
+        .value-section{
+            margin-bottom: 10px;
+            padding: 15px;
+            background: #F9F9F9;
+            border-left: 4px solid #5DB08A;
         }
 
-        .sidebar{
-            width: 35%;
-            background:#c5e0db;
-            display: flex;
-            flex-direction: column;
-            align-content: center;
-            align-items: center;
+        .value-section h2{font-size: 1.5em; margin-bottom: 10px;}
+
+        .value-section p{
+            line-height: 1.5em;
         }
 
-        .sidebar, .content{
-            padding: 50px 20px;
-        }
+        .value-section h4{font-size: 1em; font-weight: 300;}
 
-        .content{
-            width: 60%;
+        .email-template-container .section h2{ margin-bottom: 20px; }
+        .email-template-container .section p{ line-height: 1.6em;}
+        .width10{width: 10% !important;}
+        .width15{width: 15% !important;}
+        .width20{width: 20% !important;}
+        .width30{width: 30% !important;}
+        .width35{width: 35% !important;}
+        .width40{width: 40% !important;}
+        .width45{width: 45% !important;}
+        .width50{width: 50% !important;}
+        .width60{width: 60% !important;}
+        .width65{width: 65% !important;}
+        .width70{width: 70% !important;}
+        .width80{width: 80% !important;}
+        .width90{width: 90% !important;}
+        .width100{width: 100% !important;}
+
+        .note{font-style: italic; color:#5DB08A; }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .column{float: left; width: 50%;}
+
+        .list{ margin: 10px 0px; }
+        .list-item{float: left; width: 50%;}
+        .list-item-value{}
+
+        /* Clear floats after the columns */
+        .list:after {
+            content: "";
+            display: table;
+            clear: both;
         }
 
         .bg-green{background: #5DB08A;}
         .bg-green-dark{background: #1C734B;}
         .bg-blue{background: #317582;}
         .bg-blue-dark{background: #05414C;}
-        .bg-gray-dark{background: #feffd6;}
+        .bg-gray-dark{background: #333;}
+        .bg-gray{background: #EEE;}
 
         .text-white{color: white;}
-        .text-dark{color: #222;}
+        .text-dark{color: #333;}
         
+        .behavior-value{text-align: right; color: #222;}
+        .behavior-title{text-align: left; font-size: 1.2em; }
+        @media screen and (max-width: 1200px){
+            .column{width: 100% !important;}
+            .list-item{width: 100% !important;}
+            p{font-size: 20px;}
+            h2, h3{ font-size: 30px; }
+            .behavior-value{text-align: center;}
+            .behavior-title{text-align: center; margin-bottom: 5px;}
+            .list{margin: 15px 0px;}
+            .value-section h4{font-size: 1.3em;}
+        }
+
+        .reminders-section{border-left: 4px solid #9e1414;}
+
         .margin-bottom-20px{margin-bottom: 20px;}
         .margin-bottom-40px{margin-bottom: 40px;}
         .no-margin{margin: 0 !important;}
         .padding50px0px{padding: 50px 0px;}
         .padding25px0px{padding: 25px 0px;}
+        
+        .padding10px30px{padding: 10px 30px;}
         .center-text{text-align: center;}
+        .right-text{text-align: right;}
         .font-40px{font-size: 2.7em;}
         .font-34px{font-size: 2.3em;}
         .font-26px{font-size: 1.8em;}
         .font-22px{font-size: 1.6em;}
         .font-16px{font-size: 1.1em;}
-
-        .flex{display: flex;}
-        .flex-column{display: flex; flex-direction: column;}
-        .flex-spacearound{justify-content: space-around;}
-        .flex-spacebetween{justify-content: space-between;}
-        .flex-centeralign{align-items: center; align-content: center;}
-        .flex-center{justify-content: center; justify-items: center;}
-
-        .width-100p{width: 100%;}
-        .width-90p{width: 90%;}
-        .width-80p{width: 80%;}
-        .width-45p{width: 45%;}
-
-        a{cursor: pointer; text-decoration: none; color: #1593db;}
-        p{margin: 0; padding: 0;}
-        .behavior-list{
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .behavior-list li{
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .section{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            margin-bottom: 40px;
-        }
-
-        .sub-section{
-            background: #eee;
-            padding: 15px;
-            width: 90%;
-            align-self: center;
-            margin-bottom: 15px;
-        }
-
-        .title-with-value{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            align-content: center;
-            margin-bottom: 15px;
-        }
+        .partial-border{width: 50%; margin: 0 auto; content: ""; border-bottom: 1px solid #CCC;}
     </style>
 </head>
-
-<body class="flex-column flex-centeralign">
-    <div class="flex-column bg-gray-dark width-100p padding50px0px text-dark">
-        <p class="font-40px center-text margin-bottom-20px">CNP Daily Email</p>
-        <a class="font-22px center-text">Shutterfly link</a>
-    </div>
-
-    <div class="container">
-
-        <div class="sidebar">
-            <div class="section">
-                <p class="font-34px margin-bottom-20px">Behaviors</p>
-                
-                <div class="sub-section">
-                    <div class="title-with-value">
-                        <p class="font-22px">AM Snack</p>
-                        <p>Kid's snack</p>
+<body>
+    <div class="email-template-container">
+        <div class="section center-text bg-gray margin-bottom-40px">
+            <%- header %>
+            <div class="margin-bottom-20px">
+                <%- summary %>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="section padding10px30px">
+                        <div class="value-section">
+                            <h2>Today's Snack</h2>
+                            <%- snack %>
+                        </div>
                     </div>
-                    <p><%- snack %></p>
+                    
                 </div>
 
-                <div class="sub-section">
-                    <div class="title-with-value">
-                        <p class="font-22px">Lunch</p>
-                        <p>Kid's lunch</p>
+                <div class="column">
+                    <div class="section padding10px30px">
+                        <div class="value-section">
+                            <h2>Today's Lunch</h2>
+                            <%- lunch %>
+                        </div>
                     </div>
-                    <p><%- lunch %></p>
-                </div>
-
-                <div class="sub-section">
-                    <div class="title-with-value">
-                        <p class="font-22px">Mood</p>
-                        <p>Kid's mood</p>
-                    </div>
-                    <p><!-- note --></p>
-                </div>
-
-                <div class="sub-section">
-                    <div class="title-with-value">
-                        <p class="font-22px">Nap Time</p>
-                        <p>Kid's nap</p>
-                    </div>
-                    <p><!-- note --></p>
-                </div>
-
-                <div class="sub-section">
-                    <div class="title-with-value">
-                        <p class="font-22px">Academic Play</p>
-                        <p>Kid's academic play</p>
-                    </div>
-                    <p><!-- note --></p>
-                </div>
-
-                <div class="sub-section">
-                    <div class="title-with-value">
-                        <p class="font-22px">Restroom Use</p>
-                        <p>Kid's restroom</p>
-                    </div>
-                    <p><!-- note --></p>
+                    
                 </div>
             </div>
         </div>
 
-
-        <div class="content">
-            <div class="section width90">
-                <p class="font-26px margin-bottom-20px">Student's notes</p>
-                <p><!-- Notes paragraph --></p>
+        <div class="row">
+            <h2 class="center-text">-Student's- Day at CNP</h2>
+            <div class="column width60">
+                <div class="section">
+                    <% behaviors.forEach((behavior, index) => { %>
+                    <div class="value-section row">
+                        <div class="column behavior-title width40">
+                            <% if(behavior.name.length == 0) { %>
+                                <h4>N/A</h4>
+                            <% } else { %>
+                                <h4><%= behavior.name %></h4>
+                            <% } %>
+                        </div>
+                        <div class="column behavior-value width60">
+                            <% if(behavior.selection.length == 0) { %>
+                                <p>N/A</p>
+                            <% } else { %>
+                                <p><%= behavior.selection %></p>
+                            <% } %>
+                        </div>
+                        <% if(behavior.note.length > 0) { %>
+                            <p class="note">NOTE: <%= behavior.note %></p>
+                        <% } %>
+                    </div>
+                    <% }) %>
+                </div>
             </div>
-            <div class="section width-90p margin-bottom-20px">
-                <p class="font-26px margin-bottom-20px">Summary</p>
-                <p class=""><%- summary %></p>
 
-                
-            </div>
-            <div class="section width-90p"> <!-- Reminders -->
-                <p class="font-26px">Reminders</p>
+            <div class="column width40">
+                <div class="section">
+                    <div class="value-section">
+                        <h2>Activities</h2>
+                        <% activities.forEach((activity, index) => { %>
+                            <% if(activity.Helper != 1) { %>
+                                <p><%= activity.ActivityName %> 
+                                    <% if(index >= activities.length) { %>
+                                    ,
+                                    <% } %>
+                                </p>
+                            <% } %>
+                        <% }) %>
+                    </div>
+                    <div class="value-section">
+                        <h2>Helper Jobs</h2>
+                        <% activities.forEach((activity, index) => { %>
+                            <% if(activity.Helper == 1) { %>
+                                <p><%= activity.ActivityName %>
+                                    <% if(index >= activities.length) { %>
+                                    ,
+                                    <% } %>
+                                </p>
+                            <% } %>
+                        <% }) %>
+                    </div>
+                </div>
             </div>
         </div>
+        
+
+        <% if(reminders.length > 0) { %>
+            <% reminders.forEach((reminder, index) => { %>
+            <div class="value-section reminders-section">
+                    <%- reminder.contents %>
+            </div>
+            <% }) %>
+        <% } %>
+        
+        <div class="section center-text bg-gray">
+            <%- footer %>
+        </div>
     </div>
-
-    <!-- behavior title 1: all/none - note -->
-
     
 </body>
 </html>
