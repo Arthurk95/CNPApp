@@ -14,7 +14,7 @@ class thePie {
     // set the dimensions and margins of the graph
     this.width = 625;
     this.height = 625;
-    this.margin = 120;
+    this.margin = 75;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
@@ -26,11 +26,14 @@ class thePie {
 
     // append the svg object to the div called 'pie'
     this.svg = d3.select("#" + id)
+      .classed("svg", true)
       .append("svg")
-        .attr("width", this.width-95)
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 625 625")
+        .attr("width", this.width)
         .attr("height", this.height)
       .append("g")
-        .attr("transform", "translate(" + this.width / 2.27 + "," + this.height / 2 + ")")
+        .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
 
     //tooltip for label
     this.tooltip = d3.select("#" + id)
@@ -132,7 +135,7 @@ class thePie {
         if (d.data.value > 0)
           {
             let percent = (Math.round((d.value / total) * 100));
-            if (percent > 3) {
+            if (percent > 4) {
               return "" + d.data.key }
           }
       })
@@ -146,7 +149,7 @@ class thePie {
           return "translate(" + c + ")";
        })
       .style("text-anchor", "middle")
-      .style("font-size", 16)
+      .style("font-size", 15)
       .style("stroke-width", .8)
       .style("stroke", "white")
       .style("paint-order", "stroke fill")
