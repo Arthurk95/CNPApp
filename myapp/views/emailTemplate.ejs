@@ -61,7 +61,7 @@
             margin: 0px !important;
         }
 
-        .email-template-container p{margin: 0px !important; padding: 0px !important; font-size: 15px !important;}
+        .email-template-container p{margin: 0px !important; padding: 0px !important; font-size: 14px !important; line-height: 1.3em;}
 
         .section{
             padding: 20px 30px;
@@ -84,22 +84,10 @@
         .value-section h4{font-size: 1em; font-weight: 300;}
 
         .email-template-container .section h2{ margin-bottom: 20px; }
-        .width10{width: 10% !important;}
-        .width15{width: 15% !important;}
-        .width20{width: 20% !important;}
-        .width30{width: 30% !important;}
-        .width35{width: 35% !important;}
-        .width40{width: 40% !important;}
-        .width45{width: 45% !important;}
-        .width50{width: 50% !important;}
-        .width60{width: 60% !important;}
-        .width65{width: 65% !important;}
-        .width70{width: 70% !important;}
-        .width80{width: 80% !important;}
         .width90{width: 90% !important;}
         .width100{width: 100% !important;}
 
-        .note{font-style: italic; color:#5DB08A; }
+        .note{font-style: italic; color:#5DB08A; text-align: right; }
 
         .bg-green{background: #5DB08A;}
         .bg-green-dark{background: #1C734B;}
@@ -112,9 +100,9 @@
         .text-dark{color: #333;}
         
         .behavior-value{text-align: right; color: #222;}
-        .behavior-title{text-align: left; font-size: 1.2em; }
+        .behavior-title{text-align: left; font-size: 1.1em; }
         @media screen and (max-width: 1200px){
-            .email-template-container p{font-size: 20px !important;}
+            .email-template-container p{font-size: 16px !important;}
             .email-template-container h2, h3{ font-size: 30px !important; }
             .behavior-title{ margin-bottom: 5px;}
             .value-section h4{font-size: 1.3em;}
@@ -133,9 +121,9 @@
         .center-text{text-align: center;}
         .right-text{text-align: right;}
         .font-40px{font-size: 2.7em;}
-        .font-34px{font-size: 2.3em;}
+        .font-30px{font-size: 30px;}
         .font-26px{font-size: 1.8em;}
-        .font-22px{font-size: 1.6em;}
+        .font-22px{font-size: 22px;}
         .font-16px{font-size: 1.1em;}
         .partial-border{width: 50%; margin: 0 auto; content: ""; border-bottom: 1px solid #CCC;}
     </style>
@@ -146,68 +134,77 @@
         <div class="margin-bottom-20px">
             <%- summary %>
         </div>
-        <div class="section padding10px30px">
-            <div class="value-section">
-                <h2>Today's Snack</h2>
-                <%- snack %>
-            </div>
+        <div class="value-section">
+            <table class="width100">
+                <tr>
+                    <td class="behavior-title">Today's Snack</td>
+                    <td class="behavior-value"><%- snack %></td>
+                </tr>
+            </table>
         </div>
 
-        <div class="section padding10px30px">
-            <div class="value-section">
-                <h2>Today's Lunch</h2>
-                <%- lunch %>
-            </div>
+        <div class="value-section">
+            <table class="width100">
+                <tr>
+                    <td class="behavior-title">Today's Lunch</td>
+                    <td class="behavior-value"><%- lunch %></td>
+                </tr>
+            </table>
         </div>
     </div>
 
+    <div class="section bg-gray margin-bottom-40px">
+        <div class="margin-bottom-20px">
+            <h2 class="center-text font-22px"><%= name %>'s Day at CNP</h2>
+        </div>
+        <% behaviors.forEach((behavior, index) => { %>
+            <div class="value-section">
+                <table class="width100">
+                    <tr>
+                        <td class="behavior-title"><%= behavior.name %></td>
+                        <td class="behavior-value"><% if(behavior.selection.length == 0) { %>
+                            N/A
+                            <% } else { %>
+                                <%= behavior.selection %>
+                            <% } %></td>
+                    </tr>
+                </table>
+                
+                <% if(behavior.note.length > 0) { %>
+                    <p class="note"><%= behavior.note %></p>
+                <% } %>
+            </div>
+            <% }) %>
+            <div class="value-section">
+                <table class="width100">
+                    <tr>
+                        <td class="behavior-title">Activities</td>
+                        <td class="behavior-value">
+                        <% activities.forEach((activity, index) => { %>
+                            <% if(activity.Helper != 1) { %>
+                                <%= activity.ActivityName %>,
+                            <% } %>
+                        <% }) %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="value-section">
+                <table class="width100">
+                    <tr>
+                        <td class="behavior-title">Helper Jobs</td>
+                        <td class="behavior-value">
+                        <% activities.forEach((activity, index) => { %>
+                            <% if(activity.Helper == 1) { %>
+                                <%= activity.ActivityName %>,
+                            <% } %>
+                        <% }) %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    </div>
     
-    <% behaviors.forEach((behavior, index) => { %>
-    <div class="value-section">
-        <table class="width100">
-            <tr>
-                <td class="behavior-title"><%= behavior.name %></td>
-                <td class="behavior-value"><% if(behavior.selection.length == 0) { %>
-                    N/A
-                    <% } else { %>
-                        <%= behavior.selection %>
-                    <% } %></td>
-            </tr>
-        </table>
-        
-        <% if(behavior.note.length > 0) { %>
-            <p class="note">NOTE: <%= behavior.note %></p>
-        <% } %>
-    </div>
-    <% }) %>
-    <div class="value-section">
-        <table class="width100">
-            <tr>
-                <td class="behavior-title">Activities</td>
-                <td class="behavior-value">
-                <% activities.forEach((activity, index) => { %>
-                    <% if(activity.Helper != 1) { %>
-                        <%= activity.ActivityName %>,
-                    <% } %>
-                <% }) %>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="value-section margin-bottom-40px">
-        <table class="width100">
-            <tr>
-                <td class="behavior-title">Helper Jobs</td>
-                <td class="behavior-value">
-                <% activities.forEach((activity, index) => { %>
-                    <% if(activity.Helper == 1) { %>
-                        <%= activity.ActivityName %>,
-                    <% } %>
-                <% }) %>
-                </td>
-            </tr>
-        </table>
-    </div>
     
 
     <% if(reminders.length > 0) { %>
