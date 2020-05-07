@@ -231,6 +231,28 @@
                         </div>
                     </div>
 
+                    <!-- Email Report Form -->
+                    <div id="reportForm" class="formWindow">
+                        <div class="formWindow-content flexContainer width80 width90Mobile">
+                            <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                            <p id="reportTitle" class="font40px marginBottom40 centerText accent2Light-text">Email Report</p>
+                            <div class="center width90 white-BG padding30px">
+                                <div id="reportData">
+                                    <table id="reportTable">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email(s)</th>
+                                            <th>Result</th>
+                                            <th></th>
+                                            <!-- last column does not need title, just for showing error message if needed -->
+                                        </tr>
+                                    </table>
+                                    <p id="reportStatus"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="content"> <!-- activities and dropdowns -->
                         <div class="flex marginBottom40 spaceBetween">
                             <div id="activities" class="width60">
@@ -466,6 +488,8 @@
 
         <script>
             function sendEmails(students, todaysBehaviors, next){
+                openEmailReport(null, false);
+
                 var studentSuccessObjects = [];
 
                 if(allStudentsApproved()){
@@ -514,6 +538,7 @@
             function handleEmailResults(results) {
                 console.log('Email Results:')
                 console.log(results);
+                openEmailReport(results, true);
             }
 
             function renderView(todaysBehaviors){

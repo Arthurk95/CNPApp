@@ -320,6 +320,33 @@ function openReview(rendered_HTML) {
     emailReviewElement.innerHTML = rendered_HTML;
 }
 
+
+function openEmailReport(results, isDone) {
+    formElement = document.getElementById('reportForm');
+    formElement.style.display = "block";
+    var emailReviewElement = document.getElementById('reportData');
+    formElement.querySelector("#reportTitle").innerHTML = "Email Report";
+
+    if (isDone === true) {
+        formElement.querySelector('#reportStatus').innerHTML = ""
+
+        results.forEach((result, index) => {
+            var row = formElement.querySelector('#reportTable').insertRow(index + 1)
+            var cell0 = row.insertCell(0);
+            var cell1 = row.insertCell(1);
+            var cell2 = row.insertCell(2);
+            var cell3 = row.insertCell(3);
+
+            cell0.innerHTML = result.name;
+            cell1.innerHTML = result.emails;
+            cell2.innerHTML = result.status;
+            cell3.innerHTML = result.message;
+        })
+    } else {
+        formElement.querySelector('#reportStatus').innerHTML = "Generating report..."
+    }
+}
+
 // function openReview(){
 //     var listDivClassList = "flex flexColumn heavyPadding marginBottom30";
 
