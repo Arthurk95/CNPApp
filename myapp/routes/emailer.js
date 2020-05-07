@@ -7,7 +7,7 @@ var ejs = require('ejs');
 /* GET home page. */
 router.get('/', auth.checkAuthenticated, function (req, res, next) {
   var Students = [];
-  var daily_query = "CALL PullUnhiddenStudents();";
+  var daily_query = "CALL PullUnhiddenStudentsEmail();";
   con.query(daily_query, function (err, dailyStudents) {
     if (err) throw err;
     recurseDailies(Students, dailyStudents, 0, res);
