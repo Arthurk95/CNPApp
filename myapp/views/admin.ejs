@@ -505,6 +505,94 @@
         
         <!-- --------------------- Right Column --------------------- -->
         <div class="flex flexWrap width600px width100Mobile">
+          <!--  --------------------- ACTIVITIES PANEL --------------------- -->
+          <div id="activitiesPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100">
+            <!-- Title Bar -->
+            <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
+              <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
+              <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
+              <div class="flex">
+                <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
+                  <i class="fas fa-search"></i>
+                </a>
+                <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+              </div>
+            </div>
+
+            <!-- Activities List -->
+            <div class="heavyPadding maxHeight600px lightGray1-BG ">
+              <ul id="activities" class="ulList">
+                <% if (activities.length > 0) {%>
+                  <% activities.forEach((activity, index) => { %>
+                      <% if (activity.Hidden == 1) { %>
+                        <li class="main-BG blackAndWhite spaceBetween">
+                      <% } else { %>
+                        <li class="white-BG spaceBetween">
+                      <% } %>
+                      
+                        <p><%= activity.ActivityName %> 
+                          <% if(activity.Helper == 1) { %>
+                          <i class="fas fa-star accent2Light-text"></i>
+                        <% } %></p>
+                        <div class="flex">
+                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                          <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                          <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                        </div>
+                      </li>
+                  <% }) %>
+                <% } %>
+              </ul>
+
+              <!-- Edit activity form -->
+              <div id="editActivityForm" class="formWindow">
+                <div class="formWindow-content">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Edit an Activity</p>
+
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <p id="editActivityID" style="display: none"></p>
+                        <input type="text" id="editActivityInput" value="">
+                      </div>
+                    </div>
+                    <div class="flex width30 width100Mobile">
+                      <a class="toggleable" id="editHelper" onclick="toggleableToggled(this)">Helper</a>
+                    </div>
+                  </div>
+
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="passEditActToPost()">Save Changes</a>
+                  </div>
+                </div>
+              </div> <!-- End edit activity form -->
+
+                <!-- New Activity Form -->
+              <div id="newActivityForm" class="formWindow">
+                <div class="formWindow-content">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
+
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input type="text" id="newActivityName" placeholder="Activity Name">
+                      </div>
+                    </div>
+                    <div class="flex width30 width100Mobile">
+                      <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
+                    </div>
+                  </div>
+
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
+                  </div>
+                
+                </div>
+              </div> <!-- End activity form -->
+            </div>
+          </div> <!-- End activities panel -->
           <!-- --------------------- EMAIL PANEL --------------------- -->
           <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width100">
             <div class="flex spaceBetween flexAlignCenter darkGray3-BG mediumPadding">
@@ -635,94 +723,7 @@
             </div> <!-- End edit signature form -->
           </div> <!-- End email panel -->
           
-          <!--  --------------------- ACTIVITIES PANEL --------------------- -->
-          <div id="activitiesPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100">
-            <!-- Title Bar -->
-            <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
-              <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
-              <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
-              <div class="flex">
-                <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
-                  <i class="fas fa-search"></i>
-                </a>
-                <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
-              </div>
-            </div>
-
-            <!-- Activities List -->
-            <div class="heavyPadding maxHeight600px lightGray1-BG ">
-              <ul id="activities" class="ulList">
-                <% if (activities.length > 0) {%>
-                  <% activities.forEach((activity, index) => { %>
-                      <% if (activity.Hidden == 1) { %>
-                        <li class="main-BG blackAndWhite spaceBetween">
-                      <% } else { %>
-                        <li class="white-BG spaceBetween">
-                      <% } %>
-                      
-                        <p><%= activity.ActivityName %> 
-                          <% if(activity.Helper == 1) { %>
-                          <i class="fas fa-star accent2Light-text"></i>
-                        <% } %></p>
-                        <div class="flex">
-                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                          <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                          <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
-                        </div>
-                      </li>
-                  <% }) %>
-                <% } %>
-              </ul>
-
-              <!-- Edit activity form -->
-              <div id="editActivityForm" class="formWindow">
-                <div class="formWindow-content">
-                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Edit an Activity</p>
-
-                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <p id="editActivityID" style="display: none"></p>
-                        <input type="text" id="editActivityInput" value="">
-                      </div>
-                    </div>
-                    <div class="flex width30 width100Mobile">
-                      <a class="toggleable" id="editHelper" onclick="toggleableToggled(this)">Helper</a>
-                    </div>
-                  </div>
-
-                  <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="passEditActToPost()">Save Changes</a>
-                  </div>
-                </div>
-              </div> <!-- End edit activity form -->
-
-                <!-- New Activity Form -->
-              <div id="newActivityForm" class="formWindow">
-                <div class="formWindow-content">
-                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
-
-                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input type="text" id="newActivityName" placeholder="Activity Name">
-                      </div>
-                    </div>
-                    <div class="flex width30 width100Mobile">
-                      <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
-                    </div>
-                  </div>
-
-                  <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
-                  </div>
-                
-                </div>
-              </div> <!-- End activity form -->
-            </div>
-          </div> <!-- End activities panel -->
+          
         </div>
       </div>
     </div>
