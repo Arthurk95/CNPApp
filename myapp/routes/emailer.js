@@ -284,11 +284,7 @@ router.post('/send', (req, res) => {
       if (err) {
         console.log(err)
       }
-      try {
-        sendEmail(email_pull, req.body.listOfActivities, behavior_pull);
-      } catch (e) {
-        console.log(e);
-      }
+      sendEmail(email_pull, req.body.listOfActivities, behavior_pull);
     });//end daily beh query
   });
 
@@ -296,7 +292,7 @@ router.post('/send', (req, res) => {
     var [parent_emails] = pulled_emails[0];
     parent_emails = Object.values(parent_emails);
     console.log(`Sending email(s) to: ${parent_emails}`)
-
+    var name = req.body.name
     var [personal_behaviors] = pulled_personal_behaviors[0];
     var personal_behavior_parsed = [];
     var todaysBehaviorNames = JSON.parse(req.body.todaysBehaviorNames)
@@ -321,29 +317,32 @@ router.post('/send', (req, res) => {
         rejectUnauthorized: false
       }
     });
-    console.log(req.body.name)
-    let info = await transporter.sendMail({
-      from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
-      to: parent_emails, // list of receivers
-      subject: "CNP Daily Report", // Subject line
-      text: "", // plain text body
-      html: await ejs.renderFile('./views/emailTemplate.ejs', {
-        name: req.body.name,
-        email: parent_emails,
-        header: req.body.header,
-        footer: req.body.footer,
-        summary: req.body.summaryHTML,
-        reminders: JSON.parse(req.body.reminders),
-        snack: req.body.snackHTML,
-        lunch: req.body.lunchHTML,
-        activities: JSON.parse(activities),
-        behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
-      })
-    });
+    try {
+      let info = await transporter.sendMail({
+        from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
+        to: parent_emails, // list of receivers
+        subject: "CNP Daily Report", // Subject line
+        text: "", // plain text body
+        html: await ejs.renderFile('./views/emailTemplate.ejs', {
+          name: name,
+          email: parent_emails,
+          header: req.body.header,
+          footer: req.body.footer,
+          summary: req.body.summaryHTML,
+          reminders: JSON.parse(req.body.reminders),
+          snack: req.body.snackHTML,
+          lunch: req.body.lunchHTML,
+          activities: JSON.parse(activities),
+          behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
+        })
+      });
+      res.send({ name: name, emails: parent_emails, status: 'Sent', message: '' })
+    } catch (e) {
+      res.send({ name: name, emails: parent_emails, status: 'Error', message: e.message})
+    }
   }
-  res.end();
+  // res.end();
 });
-
 
 
 router.post('/render-email-view', (req, res) => {
@@ -362,6 +361,7 @@ router.post('/render-email-view', (req, res) => {
   });//end daily beh query
 
   function renderEmail(activities, pulled_personal_behaviors) {
+    var name = req.body.name;
     var [personal_behaviors] = pulled_personal_behaviors[0];
     var personal_behavior_parsed = [];
     var todaysBehaviorNames = JSON.parse(req.body.todaysBehaviorNames)
@@ -374,7 +374,7 @@ router.post('/render-email-view', (req, res) => {
     })
 
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {
-        name: req.body.name,
+        name: name,
         header: req.body.header,
         footer: req.body.footer,
         summary: req.body.summaryHTML,

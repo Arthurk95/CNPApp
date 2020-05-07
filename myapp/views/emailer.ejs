@@ -465,7 +465,9 @@
         </script>
 
         <script>
-            function sendEmails(students, todaysBehaviors){
+            function sendEmails(students, todaysBehaviors, next){
+                var studentSuccessObjects = [];
+
                 if(allStudentsApproved()){
                     var theUrl = window.location.href+'/send';
                     var header = getHeader();
@@ -492,16 +494,28 @@
                                                 `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
                                                 `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
                                                 // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+                        function handleSuccessReport(data) {
+                            data = JSON.parse(data);
+                            studentSuccessObjects.push(data);
 
-                            
-                        httpPostAsync(theUrl, universal_data + personalized_data, doNothing);
+                            if(students.length === studentSuccessObjects.length) {
+                                handleEmailResults(studentSuccessObjects);
+                            }
+                        }
+                        
+                        httpPostAsync(theUrl, universal_data + personalized_data, handleSuccessReport);
                         // console.log(student.listOfBehaviors['AM Snack']);
 
                     });
+
                 }
-                
             }
-            
+
+            function handleEmailResults(results) {
+                console.log('Email Results:')
+                console.log(results);
+            }
+
             function renderView(todaysBehaviors){
                 var theUrl = window.location.href+'/render-email-view';
                 var header = getHeader();
