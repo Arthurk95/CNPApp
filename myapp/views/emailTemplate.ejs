@@ -153,6 +153,7 @@
         </div>
     </div>
 
+    <!-- Behaviors and Activities -->
     <div class="section bg-gray margin-bottom-40px">
         <div class="margin-bottom-20px">
             <h2 class="center-text font-22px"><%= name %>'s Day at CNP</h2>
@@ -175,6 +176,7 @@
                 <% } %>
             </div>
             <% }) %>
+
             <div class="value-section">
                 <table class="width100">
                     <tr>
@@ -189,6 +191,7 @@
                     </tr>
                 </table>
             </div>
+
             <div class="value-section">
                 <table class="width100">
                     <tr>
@@ -205,16 +208,17 @@
             </div>
     </div>
     
-    
-
+    <!-- REMINDERS -->
     <% if(reminders.length > 0) { %>
+    <div class="section bg-gray margin-bottom-40px">
+        <div class="margin-bottom-20px"><h2 class="center-text font-22px">Reminders</h2></div>
         <% reminders.forEach((reminder, index) => { %>
         <div class="value-section reminders-section">
                 <%- reminder.contents %>
         </div>
         <% }) %>
+    </div>
     <% } %>
-    
     <div class="section center-text bg-gray margin-top-40px">
         <%- footer %>
     </div>
