@@ -101,7 +101,7 @@ function populateData(){
 
     for(var i = 0; i < currentStudentData.listOfActivities.length; i++){
         var li = document.createElement("li");
-        li.classList = "flexAlignCenter padding5px0px";
+        li.classList = "flexAlignCenter padding10px margin10 lightGray2-BG";
         li.innerHTML = currentStudentData.listOfActivities[i].ActivityName;
         
         if(currentStudentData.listOfActivities[i].Helper === 1){
@@ -130,6 +130,8 @@ function populateData(){
                 if(element != null && element != null){
                     if(element.name === behaviorKeys[i]){
                         element.value = behaviorValues[i];
+                        document.getElementById(behaviorKeys[i] + "-text-box").value = behaviorValues[i + 1];
+                        toggleClassIfInputNotEmpty(behaviorKeys[i] + "-text-box", document.getElementById(behaviorKeys[i] + "-note-button"), 'accent2Light-BG', 'accent4Light-BG');
                     }
                 }
             }
@@ -159,6 +161,7 @@ function allStudentsApproved(){
 
 function studentApproved(button){
     approvedList[currentStudentIndex] = true;
+    console.log(currentStudentData);
     toggleApprovedStyle();
     // get all values from form text fields and stuff
     // post it to DB
