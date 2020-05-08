@@ -52,45 +52,65 @@ function getRandomColor() {
 //generates the line
 function generateLine(id) {
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px";
+  var container = document.createElement("div");; container.className = "lightGray1-BG width90 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
   var bottom = document.getElementById("chartPanel");
-  
-  var temp,temp2;
+  var twoColContainer = document.createElement("div");
+  twoColContainer.classList = "flex flexWrap spaceBetween heavyPadding";
+  twoColContainer.id = id;
+  var chartColumn = document.createElement('div'); chartColumn.id = id + "right";
+  chartColumn.classList = "width60 flex flexColumn";
+
+  var optionsColumn = document.createElement('div');
+  optionsColumn.classList = "width30 center width100Mobile flex flexColumn flexAlignCenter marginBelowChildren10";
+
+
+  var temp;
 
   //Start and End Date
-  {
-    temp = document.createElement("title"); temp.innerHTML = "Line Chart"; temp.className = "darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
+  { 
+    temp = document.createElement("title"); temp.className = "width100 darkGray3-BG flex spaceBetween flexAlignCenter marginLeft lightText font25px";
 
-    var del = document.createElement("button"); del.id = "button"; del.className = "marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
+    var title = document.createElement('h2'); title.innerHTML = "Pie Chart"; title.classList = "heavyPadding";
+
+    temp.appendChild(title);
+    var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);
-    newdiv.appendChild(temp);
+    container.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = "\nBeginning Date "; temp.className = "label";
-    newdiv.appendChild(temp);
+    // Beginning date select
+    var twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex flexWrap spaceBetween flexAlignCenter";
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "label width30";
+    twoColDiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "syear" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
-    newdiv.appendChild(temp);
+    var selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50 minWidth300px";
+    temp = document.createElement("select"); temp.id = "syear" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    selectDiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "smonth" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
-    newdiv.appendChild(makeMonthS(temp));
+    temp = document.createElement("select"); temp.id = "smonth" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    selectDiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id = "sday" + id; temp.class="startD"; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
-    newdiv.appendChild(temp);
+    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){updateData(id);};
+    selectDiv.appendChild(temp);
+    twoColDiv.appendChild(selectDiv);
+    optionsColumn.appendChild(twoColDiv);
 
-    temp = document.createElement("label");temp.innerHTML = " End Date "; temp.className = "label";
-    newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
-    newdiv.appendChild(temp);
+    // end date select
+    twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex flexWrap spaceBetween flexAlignCenter";
+    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label width30";
+    twoColDiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
-    newdiv.appendChild(makeMonthS(temp));
+    selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50 minWidth300px";
+    temp = document.createElement("select"); temp.id = "eyear" + id; temp.className="width30 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    selectDiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id = "eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
-    newdiv.appendChild(temp);
+    temp = document.createElement("select"); temp.id = "emonth" + id; temp.className="width30 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    selectDiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("label"); temp.innerHTML = "\n\n"; temp.className = "label";
-    newdiv.appendChild(temp);
+    temp = document.createElement("select"); temp.id = "eday" + id; temp.className="width30 arrow-down"; temp.onchange = function(){updateData(id);};
+    selectDiv.appendChild(temp);
+    twoColDiv.appendChild(selectDiv);
+    optionsColumn.appendChild(twoColDiv);
   }
 
   //The spin thing
@@ -98,7 +118,7 @@ function generateLine(id) {
   //newdiv.appendChild(temp);
   temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER"; temp.min = "2"; temp.max = "100"; temp.step = "1"; temp.value= "10"; temp.onchange = function(){updateData(id);};
   temp.style = "display: none; visibility:hidden;"
-  newdiv.appendChild(temp);
+  optionsColumn.appendChild(temp);
 
   //First Drop Down Option
   temp = document.createElement("select");temp.id="option1" + id;temp.class="newLine";temp.className="newLine arrow-down";temp.onchange = function(){onUpdateop1(id);};
@@ -109,19 +129,24 @@ function generateLine(id) {
     temp2 = document.createElement("option");temp2.value = "02";temp2.innerHTML = "Activities";
     temp.appendChild(temp2);
   }
-  newdiv.appendChild(temp);
+  optionsColumn.appendChild(temp);
 
   //Second Drop Down (I think)
   temp = document.createElement("div");temp.id = "opid1" + id;temp.class="secondOption arrow-down";
-  newdiv.appendChild(temp);
+  optionsColumn.appendChild(temp);
 
   temp = document.createElement("div");temp.id = "op2" + id;temp.class="secondOption arrow-down";
-  newdiv.appendChild(temp);
+  optionsColumn.appendChild(temp);
 
   temp = document.createElement("canvas");temp.id = "canvas" + id;temp.className = "canvasObj";
-  newdiv.appendChild(temp);
+  temp.classList = "width50";
+  optionsColumn.appendChild(temp);
 
-  parent.insertBefore(newdiv,bottom);
+  twoColContainer.appendChild(optionsColumn);
+
+  container.appendChild(twoColContainer);
+
+  parent.insertBefore(container,bottom);
   onUpdateop1(id);
 
   function onUpdateop1(id) {
