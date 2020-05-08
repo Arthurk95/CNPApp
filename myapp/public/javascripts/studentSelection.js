@@ -1,6 +1,7 @@
 var selectedStudentIDs = [];
 var numSelectedStudents = 0;
-var selectedActivityID = undefined;
+var selectedActivityIDs = [];
+var numSelectedActivities = 0;
 var SUBMIT_BUTTON_DISPLAY_TYPE = "flex";
 var SELECT_BUTTON_DISPLAY_TYPE = "inline-block";
 var LIST_DISPLAY_TYPE = "flex";
@@ -44,7 +45,7 @@ function studentSelected(studentElement, studentID){
     }
     // the passed student is being selected
     else {
-        studentElement.classList += " selectedStudent";
+        studentElement.classList.add("selectedStudent");
         addStudentToList(studentID);
         // first selected student -> show "Select Activity" button
         if(numSelectedStudents == 1){
@@ -64,21 +65,31 @@ function addStudentToList(studentID){
     selectedStudentIDs.push(studentID);
 }
 
+function removeActivityFromList(activityID){
+    numSelectedActivities--;
+    var indexOf = selectedActivityIDs.indexOf(activityID);
+    selectedActivityIDs.splice(indexOf, 1);
+}
+
+function addActivityToList(activityID){
+    numSelectedActivities++;
+    selectedActivityIDs.push(activityID);
+}
+
 /* Activity <li> element clicked, either make it green or de-select it */
 function activitySelected(element, activityId){
     // activity is already selected, deselect it
     if(element.classList.contains("selectedStudent")){
         element.classList.remove("selectedStudent");
-        selectedActivityID = undefined;
-        hideButtons();
+        removeActivityFromList(activityId);
+        if(numSelectedActivities == 0){
+            hideButtons();
+        }
     }
     // activity is not selected
     else{
-        if(selectedActivityID != undefined){ // another is selected -
-            clearActivitySelection();
-        }
-        
-        selectedActivityID = activityId;
+
+        addActivityToList(activityId);
         element.classList.add("selectedStudent");
 
         showButtons();
@@ -86,7 +97,6 @@ function activitySelected(element, activityId){
 }
 
 function showButtons(){
-    console.log(studentStep + " " + activityStep + " " + currentStep + " " + FINAL_STEP);
     if(studentStep === FINAL_STEP){ // activities chosen first
         if(currentStep === studentStep){ // step 2: To submit
             if(selectedStudentIDs.length != 0){
