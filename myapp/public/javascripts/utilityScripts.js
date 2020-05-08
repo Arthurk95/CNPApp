@@ -3,8 +3,21 @@ var MOBILE_WIDTH = 1200;
 
 var formElement;
 
+function toggleBodyOverflow(){
+    if(document.body.style.overflow != "hidden"){
+        document.body.style.overflow = "hidden";
+    }
+    else{
+        document.body.style.overflow = "visible";
+    }
+}
+
 function hideElement(element){
     element.style.display = "none";
+}
+
+function toggleElementID(id){
+    toggleElement(document.getElementById(id));
 }
 
 function toggleElement(element){
@@ -21,7 +34,7 @@ function toggleStyle(element, style){
     else{element.classList.add(style);}
 }
 
-function showElement(element){ element.style.display = ""; }
+function showElement(element){ element.style.display = "";}
 function showElement(element, displayType){
     if(displayType === undefined || displayType === null){displayType = "";} 
     element.style.display = displayType;
@@ -99,6 +112,30 @@ function toggleBetweenElements(ID, otherID){
         showElement(otherElement);
     }
 
+}
+
+function animateOpenClose(button, elementId){
+    var element = document.getElementById(elementId);
+    var arrow = element.parentElement.getElementsByTagName('i')[0];
+
+    if(element.style.display === "none"){
+        if(arrow != null && arrow != undefined){
+            if(arrow.classList.contains("fa-chevron-down")){
+                arrow.classList = "fas fa-chevron-up";
+            }
+        }
+        $(element).slideDown();
+        button.classList.add("active");
+    }
+    else{
+        if(arrow != null && arrow != undefined){
+            if(arrow.classList.contains("fa-chevron-up")){
+                arrow.classList = "fas fa-chevron-down";
+            }
+        }
+        $(element).slideUp();
+        button.classList.remove("active");
+    }
 }
 
 /* --------------- TOGGLEABLE (CSS) FUNCTIONS --------------- */
@@ -291,4 +328,18 @@ function twoColDiv(left, right){
     div.appendChild(left);
     div.appendChild(right);
     return div;
+}
+
+
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send( null );
+    }
 }
