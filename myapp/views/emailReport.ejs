@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <nav><%- include header.ejs %></nav>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <head>
+            <nav><%- include header.ejs %></nav>
+            <link rel='stylesheet' href='/stylesheets/style.css' />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       </head>
       <body> 
-            <% reports.forEach((report, index) => { %>
-
-                  <h1><%= report.name %></h1>
-                  <h1><%= report.emails %></h1>
-                  <h1><%= report.status %></h1>
-                  <h1><%= report.message %></h1>
-
-
-            <% }) %>
-
+            <div class="flex flexWrap spaceAround width90 center">
+                  <% reports.forEach((report, index) => { %>
+                        <div class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
+                              <div class="<% if(report.status == 'Failed') { %> accent4Light-BG <% } else { %> accent2-BG <% } %>
+                                    mediumPadding flex spaceBetween flexAlignCenter relative">
+                                    <p class="marginLeft10 lightText font25px"><%= report.name %></p>
+                              </div>
+                              <div class="heavyPadding flex flexColumn">
+                                    <div class="flex spaceBetween">
+                                          <p><%= report.emails %></p>
+                                          <p class="accent2Light-text"><%= report.status %></p>
+                                    </div>
+                                    <p><%= report.message %></p>
+                              </div>
+                        </div>
+                  <% }) %>
+            </div>
       </body>
 </html>
