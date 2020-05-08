@@ -3,6 +3,12 @@ var router = express.Router();
 const auth = require('../public/javascripts/loginScripts');
 const nodemailer = require('nodemailer');
 var ejs = require('ejs');
+var sentEmails = [];
+var sentEmailData = [];
+
+router.get('/emailReport', auth.checkAuthenticated, (req, res) => {
+  res.render('emailReport.ejs', {emails: sentEmails});
+});
 
 /* GET home page. */
 router.get('/', auth.checkAuthenticated, function (req, res, next) {
@@ -273,6 +279,8 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
   res.end();
 });
 
+
+
 router.post('/send', (req, res) => {
   con.query(`CALL PullEmail(${req.body.id})`, function (err, email_pull) {
     if (err) {
@@ -336,9 +344,23 @@ router.post('/send', (req, res) => {
           behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
         })
       });
+      sentEmailData ={
+        StudentName: name,
+        parentEmails: parent_emails,
+        Status: 1,
+        message: ''
+      }
+      sentEmails.push(sentEmailData);
       res.send({ name: name, emails: parent_emails, status: 'Sent', message: '' })
     } catch (e) {
-      res.send({ name: name, emails: parent_emails, status: 'Error', message: e.message})
+      sentEmailData ={
+        StudentName: name,
+        parentEmails: parent_emails,
+        Status: 1,
+        message: e.message
+      }
+      sentEmails.push(sentEmailData);
+      res.send({ name: name, emails: parent_emails, status: 'Failed', message: e.message})
     }
   }
   // res.end();
@@ -389,6 +411,7 @@ router.post('/render-email-view', (req, res) => {
     })
   }
 });
+
 
 
 module.exports = router;
