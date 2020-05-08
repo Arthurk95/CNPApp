@@ -17,6 +17,7 @@ class thePie {
      .range(d3.schemeSet3, d3.schemeCategory10) 
 
     // append the svg object to the div called 'pie'
+    
     this.svg = d3.select("#" + id + "right")
       .classed("svg", true)
       .append("svg")
@@ -26,7 +27,6 @@ class thePie {
         .attr("height", this.height)
       .append("g")
         .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
-
     //tooltip for label
     this.tooltip = d3.select("#" + id + "right")
         .append("tooltip")
@@ -168,34 +168,37 @@ class thePie {
 // generate a pie
 function generatePie(id){
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "lightGray1-BG width100 margin10 flexGrow1 borderRadiusSmall minWidth400px";
+  var container = document.createElement("div"); container.id = id; container.className = "lightGray1-BG width70 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
   var bottom = document.getElementById("chartPanel");
   var twoColContainer = document.createElement("div");
-  twoColContainer.classList = "flex flexWrap spaceBetween heavyPadding";
+  twoColContainer.classList = "flex flexColumn spaceBetween heavyPadding";
   
-  var rightCol = document.createElement('div'); rightCol.id = id + "right";
-  rightCol.classList = "width60 flex flexColumn";
+  var pieRow = document.createElement('div'); pieRow.id = id + "right";
+  pieRow.classList = "width100 flex flexColumn";
 
-  var leftCol = document.createElement('div');
-  leftCol.classList = "width35 flex flexColumn flexAlignCenter marginBelowChildren10";
+  var optionsRow = document.createElement('div');
+  optionsRow.classList = "width60 center width100Mobile flex flexColumn flexAlignCenter marginBelowChildren10";
 
 
   var temp;
 
   //Start and End Date
   { 
-    temp = document.createElement("title"); temp.innerHTML = "Pie Chart"; temp.className = "width100 darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
+    temp = document.createElement("title"); temp.className = "width100 darkGray3-BG flex spaceBetween flexAlignCenter marginLeft lightText font25px";
 
+    var title = document.createElement('h2'); title.innerHTML = "Pie Chart"; title.classList = "heavyPadding";
+
+    temp.appendChild(title);
     var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);
-    newdiv.appendChild(temp);
+    container.appendChild(temp);
 
     // Beginning date select
-    var twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex spaceBetween flexAlignCenter";
+    var twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex flexWrap spaceBetween flexAlignCenter";
     temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "label width30";
     twoColDiv.appendChild(temp);
 
-    var selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50";
+    var selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50 minWidth300px";
     temp = document.createElement("select"); temp.id = "syear" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     selectDiv.appendChild(temp);
 
@@ -205,15 +208,15 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){updateData(id);};
     selectDiv.appendChild(temp);
     twoColDiv.appendChild(selectDiv);
-    leftCol.appendChild(twoColDiv);
+    optionsRow.appendChild(twoColDiv);
 
 
     // end date select
-    twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex spaceBetween flexAlignCenter";
+    twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex flexWrap spaceBetween flexAlignCenter";
     temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label width30";
     twoColDiv.appendChild(temp);
 
-    selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50";
+    selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50 minWidth300px";
     temp = document.createElement("select"); temp.id = "eyear" + id; temp.className="width30 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     selectDiv.appendChild(temp);
 
@@ -223,11 +226,11 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id = "eday" + id; temp.className="width30 arrow-down"; temp.onchange = function(){updateData(id);};
     selectDiv.appendChild(temp);
     twoColDiv.appendChild(selectDiv);
-    leftCol.appendChild(twoColDiv);
+    optionsRow.appendChild(twoColDiv);
   }
 
   //Drop Down Options
-  twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex spaceBetween flexAlignCenter";
+  twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex flexWrap spaceBetween flexAlignCenter";
   temp = document.createElement("div");
   temp.id = "opid1" + id;
   twoColDiv.appendChild(temp);
@@ -235,14 +238,14 @@ function generatePie(id){
   temp.id = "op2" + id;
   twoColDiv.appendChild(temp);
   
-  leftCol.appendChild(twoColDiv);
+  optionsRow.appendChild(twoColDiv);
 
-  twoColContainer.appendChild(leftCol);
-  twoColContainer.appendChild(rightCol);
+  twoColContainer.appendChild(pieRow);
+  twoColContainer.appendChild(optionsRow);
 
-  newdiv.appendChild(twoColContainer);
+  container.appendChild(twoColContainer);
 
-  parent.insertBefore(newdiv,bottom);
+  parent.insertBefore(container,bottom);
   onUpdateop1(id);
 
   
