@@ -20,6 +20,7 @@ function theLine(id, data) {
     }
   });
   
+  //create a new line chart
   var chart = new Chart(document.getElementById("canvas" + id), {
     type: 'line',
     data: {
@@ -38,6 +39,7 @@ function theLine(id, data) {
   return chart;
 }
 
+//generates a random color for each line
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -47,6 +49,7 @@ function getRandomColor() {
   return color;
 }
 
+//generates the line
 function generateLine(id) {
   var parent = document.getElementById("charts");
   var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px";
@@ -58,7 +61,7 @@ function generateLine(id) {
   {
     temp = document.createElement("title"); temp.innerHTML = "Line Chart"; temp.className = "darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
 
-    var del = document.createElement("button"); del.id="button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
+    var del = document.createElement("button"); del.id = "button"; del.className = "marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);
     newdiv.appendChild(temp);
 
@@ -68,35 +71,31 @@ function generateLine(id) {
     temp = document.createElement("select");temp.id = "syear" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="smonth" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id = "smonth" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id="sday" + id; temp.class="startD"; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select");temp.id = "sday" + id; temp.class="startD"; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label");temp.innerHTML = " End Date "; temp.className = "label";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id = "eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select");temp.id="emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select");temp.id = "emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select");temp.id="eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select");temp.id = "eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label"); temp.innerHTML = "\n\n"; temp.className = "label";
     newdiv.appendChild(temp);
   }
 
-  //The Spin thing
-  temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER";temp.min = "2";temp.max = "100";temp.step = "1";temp.value= "10";temp.onchange = function(){updateData(id);};
+  //The spin thing
+  temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER"; temp.min = "2"; temp.max = "100"; temp.step = "1"; temp.value= "10"; temp.onchange = function(){updateData(id);};
   newdiv.appendChild(temp);
-
-  //Delete button
-  //temp = document.createElement("button");temp.id="button";temp.class="deleteB";temp.className="deleteB";temp.onclick = function(){deleteChart(id);};temp.innerHTML = "X";
-  //newdiv.appendChild(temp);
 
   //First Drop Down Option
   temp = document.createElement("select");temp.id="option1" + id;temp.class="newLine";temp.className="newLine arrow-down";temp.onchange = function(){onUpdateop1(id);};

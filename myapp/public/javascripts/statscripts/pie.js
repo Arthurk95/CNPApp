@@ -14,7 +14,7 @@ class thePie {
     // set the dimensions and margins of the graph
     this.width = 625;
     this.height = 625;
-    this.margin = 75;
+    this.margin = 100;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
@@ -37,7 +37,7 @@ class thePie {
 
     //tooltip for label
     this.tooltip = d3.select("#" + id)
-        .append("svg")
+        .append("tooltip")
         .style("position", "absolute")
         .style("visibility", "hidden")
         .style("background-color", "white")
@@ -47,6 +47,7 @@ class thePie {
         .style("padding", "5px")
   }
 
+  // update the data
   update(data, total, friendBool) {
     this.total = total;
     this.friendBool = friendBool;
@@ -75,7 +76,6 @@ class thePie {
     //arc
     var arcLabel = d3.arc()
         .innerRadius(0)
-        //.outerRadius(this.radius)
         .outerRadius(this.radius - 10)
 
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
@@ -83,6 +83,7 @@ class thePie {
       .enter()
       .append('path')
       .merge(u)
+      //Transition will break the code
       //.transition()
       //.duration(1000)
       .attr('d', d3.arc()
@@ -139,15 +140,14 @@ class thePie {
               return "" + d.data.key }
           }
       })
-      //.attr("transform", function(d) { 
-        //return "translate(" + arcLabel.centroid(d) + ")";  })
+
       .attr("transform", function(d) {  
           var c = arcLabel.centroid(d);
-          //return "translate(" + c[0]*2 + "," + c[1]*2.1 + ")";
           c[0] *= 2.2;
           c[1] *= 2.2;
           return "translate(" + c + ")";
        })
+
       .style("text-anchor", "middle")
       .style("font-size", 15)
       .style("stroke-width", .8)
@@ -166,6 +166,7 @@ class thePie {
   };
 };
 
+// generate a pie
 function generatePie(id){
   var parent = document.getElementById("charts");
   var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "pieMin lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px";
@@ -177,41 +178,37 @@ function generatePie(id){
   {
     temp = document.createElement("title"); temp.innerHTML = "Pie Chart"; temp.className = "darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
 
-    var del = document.createElement("button"); del.id="button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
+    var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);
     newdiv.appendChild(temp);
 
     temp = document.createElement("label"); temp.innerHTML = "\n Beginning Date "; temp.className = "label";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "syear" + id; temp.className= "arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "syear" + id; temp.className = "arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id="smonth" + id; temp.className="arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "smonth" + id; temp.className = "arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id="sday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label";
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id="eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id="emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     newdiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id="eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id = "eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
     newdiv.appendChild(temp);
 
     temp = document.createElement("label"); temp.innerHTML = "\n\n"; temp.className = "label";
     newdiv.appendChild(temp);
   }
- 
-  //Delete button
-  //temp = document.createElement("button"); temp.id="button"; temp.class="deleteButton"; temp.className="deleteButton"; temp.onclick = function(){deleteChart(id);}; temp.innerHTML = "X";
-  //newdiv.appendChild(temp);
 
   //Drop Down Options
   temp = document.createElement("div");
@@ -233,10 +230,12 @@ function generatePie(id){
     updateData(id);
   }
 
+  //update data
   function updateData(id) {
     getRecordsPie('all', id);
   }
 
+  //update the second option 
   function updateOp2(id) {
     var newdiv = document.getElementById("op2" + id);
     var opid1 = document.getElementById("optionid1" + id)[document.getElementById("optionid1" + id).selectedIndex].value;
@@ -259,6 +258,7 @@ function generatePie(id){
     newdiv.appendChild(temp);
   }
 
+  //update the first option
   function updateOpid1(id){
     var newdiv = document.getElementById("opid1" + id);
     var temp,temp2;
@@ -283,6 +283,7 @@ function generatePie(id){
     newdiv.appendChild(temp);
   }
   
+  //make the months
   function makeMonth(val, html){
     var temp2 = document.createElement("option");
     temp2.value = val;
