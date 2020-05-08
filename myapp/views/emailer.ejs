@@ -323,8 +323,8 @@
                         <li>No Students</li>
                     <% } %>
                     </ul>
-                    <div id="sendEmailButton" class="buttonWithIcon marginBottom20 accent2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>);">
-                        <p>Send Emails</p>
+                    <div id="sendEmailButton" class="buttonWithIcon width60 marginBottom20 accent2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); toggleElementID('spinner'); ">
+                        <p class="width100">Send Emails<div style="display: none" id="spinner" class="spinning-loader marginLeft10"></div></p>
                     </div>
                 </div>
             </div>
