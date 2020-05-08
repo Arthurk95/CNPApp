@@ -94,7 +94,10 @@ function generateLine(id) {
   }
 
   //The spin thing
+  //temp = document.createElement("label");temp.innerHTML = "Chart segments";temp.className = "label";
+  //newdiv.appendChild(temp);
   temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER"; temp.min = "2"; temp.max = "100"; temp.step = "1"; temp.value= "10"; temp.onchange = function(){updateData(id);};
+  temp.style = "display: none; visibility:hidden;"
   newdiv.appendChild(temp);
 
   //First Drop Down Option
@@ -109,10 +112,10 @@ function generateLine(id) {
   newdiv.appendChild(temp);
 
   //Second Drop Down (I think)
-  temp = document.createElement("div");temp.id = "opid1" + id;
+  temp = document.createElement("div");temp.id = "opid1" + id;temp.class="secondOption arrow-down";
   newdiv.appendChild(temp);
 
-  temp = document.createElement("div");temp.id = "op2" + id;temp.class="secondOption";temp.className = "arrow-down";
+  temp = document.createElement("div");temp.id = "op2" + id;temp.class="secondOption arrow-down";
   newdiv.appendChild(temp);
 
   temp = document.createElement("canvas");temp.id = "canvas" + id;temp.className = "canvasObj";
