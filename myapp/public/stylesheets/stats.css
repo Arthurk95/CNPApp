@@ -29,6 +29,8 @@
   margin: 0;
 }
 
+canvas{width: 50% !important; max-height: 400px;}
+
 .headerStyle2 a:hover{
   background-color: var(--blue3);
 }
@@ -288,6 +290,8 @@ top: 0;
 .headerStyle{
   display: none;
 }
+
+canvas{width: 100% !important; max-height: 1000px;}
 
 .mobileHeader{
   display: block;
