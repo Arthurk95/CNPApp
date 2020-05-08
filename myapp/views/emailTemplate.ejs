@@ -163,7 +163,7 @@
                 <table class="width100">
                     <tr>
                         <td class="behavior-title"><%= behavior.name %></td>
-                        <td class="behavior-value"><% if(behavior.selection.length == 0) { %>
+                        <td class="behavior-value"><% if(behavior.selection == null || behavior.selection.length == 0) { %>
                             N/A
                             <% } else { %>
                                 <%= behavior.selection %>
