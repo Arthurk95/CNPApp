@@ -45,6 +45,7 @@
 
   </head>
 
+
   <body>
 
     <!-- Navigation -->
@@ -77,8 +78,6 @@
     <!-- Charts -->
     <div id="charts">
 
-      
-
       <!-- Chart Panel -->
       <div id="chartPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
         <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
@@ -88,7 +87,7 @@
               <option value="pie">Pie Chart</option>
               <option value="line">Line Chart</option>
             </select>
-            <!-- Drop down for adding a new chart should go here-->
+            <!-- Make Chart button-->
           <a class="font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray2-text" onclick="makeChart()">Add Chart</a>
         </div>
       </div> <!-- end chart panel --> 
@@ -208,6 +207,7 @@
         httpPostAsync(theUrl,data,callback); 
       }
 
+      //Pie Data
       function gotDataPie(data) {
         data = JSON.parse(data);
         var datum = [];
@@ -269,6 +269,7 @@
         httpPostAsync(theUrl,data,callback); 
       }
 
+      //Line Data
       function gotDataLine(data) {
         data = JSON.parse(data);
         var id;
@@ -566,5 +567,6 @@
     <script type="text/javascript" src="javascripts/statscripts/pie.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/line-chart.js"></script>
     <script type="text/javascript" src="javascripts/statscripts/navigation.js"></script>
+    
   </body>
 </html>
