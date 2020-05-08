@@ -3,6 +3,13 @@ class thePie {
   constructor(id) {
     this.myId = id;
 
+    this.color = null; 
+    this.radius = null;
+    this.svg = null;
+    this.tooltip = null;
+    this.myId = null;
+    this.total = null;
+    this.friendBool = null;
     // set the dimensions and margins of the graph
     this.width = 625;
     this.height = 625;
@@ -39,13 +46,7 @@ class thePie {
         .style("padding", "5px")
   }
 
-  color = null; 
-  radius = null;
-  svg = null;
-  tooltip = null;
-  myId = null;
-  total = null;
-  friendBool = null;
+  
   // update the data
   update(data, total, friendBool) {
     this.total = total;
