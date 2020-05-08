@@ -1,15 +1,15 @@
 class thePie {
-
+  color = null; 
+  radius = null;
+  svg = null;
+  tooltip = null;
+  myId = null;
+  total = null;
+  friendBool = null;
   constructor(id) {
     this.myId = id;
 
-    this.color = null; 
-    this.radius = null;
-    this.svg = null;
-    this.tooltip = null;
-    this.myId = null;
-    this.total = null;
-    this.friendBool = null;
+    
     // set the dimensions and margins of the graph
     this.width = 625;
     this.height = 625;
@@ -24,7 +24,7 @@ class thePie {
      .range(d3.schemeSet3, d3.schemeCategory10) 
 
     // append the svg object to the div called 'pie'
-    this.svg = d3.select("#" + id)
+    this.svg = d3.select("#" + id + "right")
       .classed("svg", true)
       .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
@@ -35,7 +35,7 @@ class thePie {
         .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")")
 
     //tooltip for label
-    this.tooltip = d3.select("#" + id)
+    this.tooltip = d3.select("#" + id + "right")
         .append("tooltip")
         .style("position", "absolute")
         .style("visibility", "hidden")
@@ -169,55 +169,80 @@ class thePie {
 // generate a pie
 function generatePie(id){
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "pieMin lightGray1-BG width100 margin10 flexGrow1 borderRadiusSmall minWidth400px";
+  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "lightGray1-BG width100 margin10 flexGrow1 borderRadiusSmall minWidth400px";
   var bottom = document.getElementById("chartPanel");
+  var twoColContainer = document.createElement("div");
+  twoColContainer.classList = "flex flexWrap spaceBetween heavyPadding";
   
+  var rightCol = document.createElement('div'); rightCol.id = id + "right";
+  rightCol.classList = "width60 flex flexColumn";
+
+  var leftCol = document.createElement('div');
+  leftCol.classList = "width35 flex flexColumn flexAlignCenter marginBelowChildren10";
+
+
   var temp;
 
   //Start and End Date
-  {
+  { 
     temp = document.createElement("title"); temp.innerHTML = "Pie Chart"; temp.className = "width100 darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
 
     var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);
     newdiv.appendChild(temp);
 
-    temp = document.createElement("label"); temp.innerHTML = "\n Beginning Date "; temp.className = "label";
-    newdiv.appendChild(temp);
+    // Beginning date select
+    var twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex spaceBetween flexAlignCenter";
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "label width30";
+    twoColDiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "syear" + id; temp.className = "arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
-    newdiv.appendChild(temp);
+    var selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50";
+    temp = document.createElement("select"); temp.id = "syear" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    selectDiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "smonth" + id; temp.className = "arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
-    newdiv.appendChild(makeMonthS(temp));
+    temp = document.createElement("select"); temp.id = "smonth" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    selectDiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "arrow-down"; temp.onchange = function(){updateData(id);};
-    newdiv.appendChild(temp);
+    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){updateData(id);};
+    selectDiv.appendChild(temp);
+    twoColDiv.appendChild(selectDiv);
+    leftCol.appendChild(twoColDiv);
 
-    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label";
-    newdiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "eyear" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
-    newdiv.appendChild(temp);
+    // end date select
+    twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex spaceBetween flexAlignCenter";
+    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label width30";
+    twoColDiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "emonth" + id; temp.className="arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
-    newdiv.appendChild(makeMonthS(temp));
+    selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50";
+    temp = document.createElement("select"); temp.id = "eyear" + id; temp.className="width30 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    selectDiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "eday" + id; temp.className="arrow-down"; temp.onchange = function(){updateData(id);};
-    newdiv.appendChild(temp);
+    temp = document.createElement("select"); temp.id = "emonth" + id; temp.className="width30 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    selectDiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("label"); temp.innerHTML = "\n\n"; temp.className = "label";
-    newdiv.appendChild(temp);
+    temp = document.createElement("select"); temp.id = "eday" + id; temp.className="width30 arrow-down"; temp.onchange = function(){updateData(id);};
+    selectDiv.appendChild(temp);
+    twoColDiv.appendChild(selectDiv);
+    leftCol.appendChild(twoColDiv);
   }
 
   //Drop Down Options
+  twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex spaceBetween flexAlignCenter";
   temp = document.createElement("div");
   temp.id = "opid1" + id;
-  newdiv.appendChild(temp);
+  twoColDiv.appendChild(temp);
   temp = document.createElement("div");
   temp.id = "op2" + id;
-  newdiv.appendChild(temp);
+  twoColDiv.appendChild(temp);
   
+  leftCol.appendChild(twoColDiv);
+
+  twoColContainer.appendChild(leftCol);
+  twoColContainer.appendChild(rightCol);
+
+  newdiv.appendChild(twoColContainer);
+
   parent.insertBefore(newdiv,bottom);
   onUpdateop1(id);
 
