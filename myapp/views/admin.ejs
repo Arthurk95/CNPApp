@@ -18,621 +18,622 @@
 
   </head>
   <body>
-
-    <div class="side-header-wrapper darkGray2-BG">
-      <div class="side-header">
-        <div class="side-header-top">
-          <a class="side-header-link" href="/">Home</a>
-          <a class="side-header-link" href="/tracker">Tracker</a>
-          <a class="side-header-link" href="/reports">Reports</a>
-          <a class="side-header-link accent1Light-BG" href="/admin">Admin</a>
-          <a class="side-header-link" href="/stats">Stats</a>
-          <a class="side-header-link" href="/emailer">Email</a>
-          <a class="side-header-link" href="/tasks">Tasks</a>
-        </div>
-        
-        <div class="side-header-bottom">
-          <a class="side-header-link" onclick="emailSettings('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
-          <a class="side-header-link" onclick="emailSettings('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
-
-          <form class="side-header-link" action="/logout?_method=DELETE" method="POST">
-            <a class="side-header-link noPadding" href="/logout?_method=DELETE">Logout <i class="fas fa-sign-out-alt marginLeft10"></i></a>
-          </form>
-        </div>
-     </div>
-    </div>
-
-    <div class="content-with-side-header">
-
-      <!-- Main wrapper panel: two columns -->
-      <div class="flex spaceAround flexCollapseMobile width100">
-        <!-- Left column, essentially a grid -->
-        <div class="flex spaceAround flexGrow1 flexWrap width100Mobile flexAlignStart">
-          <!-- Todays Roster Panel -->
-          
-          <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
-            <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
-              <p class="marginLeft10 lightText font25px">Today's Roster</p>
-              <!-- Hidden div there to get original text when closing popup -->
-              <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding lightGray2-text font15px">Add Student <div style="display: none">Add Student</div></a>
-              
+    <div class="page-with-side-menu">
+      <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div id="sideHeader" class="side-header-wrapper">
+        <div class="side-header">
+          <div class="side-header-top width100">
+            <a class="side-header-link" href="/">Home</a>
+            <a class="side-header-link" href="/tracker">Tracker</a>
+            <a class="side-header-link" href="/reports">Reports</a>
+            <a class="side-header-link accent1Light-BG" href="/admin">Admin</a>
+            <a class="side-header-link" href="/stats">Stats</a>
+            <a class="side-header-link" href="/emailer">Email</a>
+            <a class="side-header-link" href="/tasks">Tasks</a>
+            <div class="flex flexColumn width100">
+              <a onclick="animateOpenClose(this, 'emailSettingsMenu')" class="side-header-title">Email Settings <i class="fas fa-chevron-down"></i></a>
+              <div id="emailSettingsMenu" class="side-header-submenu" style="display: none;">
+                <a class="side-header-link side-header-submenu-link" onclick="emailSettings('editHeaderForm')">Edit Header</a>
+                <a class="side-header-link side-header-submenu-link" onclick="emailSettings('editSignatureForm')">Edit Signature</a>
+              </div>
             </div>
-            <div class="heavyPadding maxHeight250px">
-              <ul id="todays_students" class="ulList">
-                <% if (present.length > 0) {%>
-                  <% present.forEach((student, index) => {  %>
-                    <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
-                      <li class="flex white-BG spaceBetween flexAlignCenter">
-                        <p><%= student.StudentName %></p>
-                       <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></button>
-                        
-                  <% }) %>
-                <% } else { %>
-                  <li class="flex white-BG spaceBetween flexAlignCenter">
-                    <p>No Students Today</p>
-                   <a class="padding8px25px red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></a>
-                <% } %>
-              
-              </ul>
+            <div class="flex flexColumn width100">
+              <a onclick="animateOpenClose(this, 'accountSettingsMenu')" class="side-header-title">Accounts <i class="fas fa-chevron-down"></i></a>
+              <div id="accountSettingsMenu" class="side-header-submenu" style="display: none;">
+                <a class="side-header-link side-header-submenu-link" href="/admin/reset-password">Reset Password</a>
+                <a class="side-header-link side-header-submenu-link" href="/register">Add User</a>
+              </div>
             </div>
-
-            <!-- Add to roster popup -->
-            <div id="addToTodaysRoster" class="popup width300px white-BG" style="display: none;"> 
-              <div class="arrow-left"></div>
-              <a class="closeIcon" onclick="closePopup('addToTodaysRoster')"><i class="fas fa-times"></i></a>
-              <ul id="todaysRosterList" class="ulList padding20px marginTop10">
-              </ul>
-            </div>
-            <script>fillTodaysRosterPopup('todaysRosterList', <%- JSON.stringify(students) %>, <%- JSON.stringify(present) %>)</script>
           </div>
 
+          <div class="side-header-bottom">
+            <form action="/logout?_method=DELETE" method="POST">
+              <button class="side-header-link resetButton width100 leftText noBorder" href="/logout?_method=DELETE" type="submit"><i class="rotate180 fas fa-sign-out-alt marginRight10"></i> Logout</button>
+            </form>
+          </div>
+      </div>
+      </div>
 
-          <!-- --------------------- STUDENTS PANEL --------------------- -->
-          <div id="studentsPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px width45">
-            <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-              <p class="marginLeft10 lightText font25px">Students</p>
-              <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+      <div class="content-with-side-header">
+        <!-- Main wrapper panel: two columns -->
+        <div class="flex spaceAround flexCollapseMobile width100">
+          <!-- Left column, essentially a grid -->
+          <div class="flex spaceAround flexGrow1 flexWrap width100Mobile flexAlignStart">
+            <!-- Todays Roster Panel -->
+            
+            <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
+              <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
+                <p class="marginLeft10 lightText font25px">Today's Roster</p>
+                <!-- Hidden div there to get original text when closing popup -->
+                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding lightGray2-text font15px">Add Student <div style="display: none">Add Student</div></a>
+                
+              </div>
+              <div class="heavyPadding maxHeight250px">
+                <ul id="todays_students" class="ulList">
+                  <% if (present.length > 0) {%>
+                    <% present.forEach((student, index) => {  %>
+                      <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
+                        <li class="flex white-BG spaceBetween flexAlignCenter">
+                          <p><%= student.StudentName %></p>
+                        <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></button>
+                          
+                    <% }) %>
+                  <% } else { %>
+                    <li class="flex white-BG spaceBetween flexAlignCenter">
+                      <p>No Students Today</p>
+                    <a class="padding8px25px red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></a>
+                  <% } %>
+                
+                </ul>
+              </div>
+
+              <!-- Add to roster popup -->
+              <div id="addToTodaysRoster" class="popup width300px white-BG" style="display: none;"> 
+                <div class="arrow-left"></div>
+                <a class="closeIcon" onclick="closePopup('addToTodaysRoster')"><i class="fas fa-times"></i></a>
+                <ul id="todaysRosterList" class="ulList padding20px marginTop10">
+                </ul>
+              </div>
+              <script>fillTodaysRosterPopup('todaysRosterList', <%- JSON.stringify(students) %>, <%- JSON.stringify(present) %>)</script>
             </div>
 
-            <!-- Students list -->
-            <div class="heavyPadding maxHeight250px">
-              <ul id="students" class="ulList spaceAround">
-                <% if (students.length > 0) { %>
-                  <% students.forEach((student, index) => { %>
-                    <% studentSpl = student.StudentName.split(" "); %>
-                      <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
-                        <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
-                        <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-                        <p class="width80"><%= student.StudentName %></p>
-                      </li>
-                    <% }) %>
-                <% } %>  
-              </ul>
 
-              <!-- --------------------- New Student Form --------------------- -->
-              <div id="newStudentForm" class="formWindow">
-                <div class="formWindow-content flexContainer">
-                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Add a Student</p>
-                  
-                  <!-- Name/Birthday -->
-                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                    <div class="inputWithIcon width45 width90Mobile white-BG">
-                      <i class="fas fa-user"></i>
-                      <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
-                    </div>
-                    <div class="flex spaceAround flexAlignCenter width45 width90Mobile">
-                      <label class="accent2Light-text font20px marginRight20">Birthday:</label>
-                      <div class="inputWithIcon width15 white-BG">
-                        <input id="month" placeholder="MM" maxlength="2"></input>
-                      </div>
-                      <div class="inputWithIcon width15 white-BG">
-                        <input id="day" placeholder="DD" maxlength="2"></input>
-                      </div>
-                      <div class="inputWithIcon width20 white-BG">
-                        <input id="year" placeholder="YYYY" maxlength="4"></input>
-                      </div>
-                    </div>
-                  </div>
+            <!-- --------------------- STUDENTS PANEL --------------------- -->
+            <div id="studentsPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px width45">
+              <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+                <p class="marginLeft10 lightText font25px">Students</p>
+                <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+              </div>
 
-                  <!-- Guardians -->
-                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+              <!-- Students list -->
+              <div class="heavyPadding maxHeight250px">
+                <ul id="students" class="ulList spaceAround">
+                  <% if (students.length > 0) { %>
+                    <% students.forEach((student, index) => { %>
+                      <% studentSpl = student.StudentName.split(" "); %>
+                        <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
+                          <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
+                          <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                          <p class="width80"><%= student.StudentName %></p>
+                        </li>
+                      <% }) %>
+                  <% } %>  
+                </ul>
+
+                <!-- --------------------- New Student Form --------------------- -->
+                <div id="newStudentForm" class="formWindow">
+                  <div class="formWindow-content flexContainer">
+                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                    <p class="font50px marginBottom40 centerText accent2Light-text">Add a Student</p>
                     
-                    <!-- Guardian 1 -->
-                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                      <p class="largeFont marginBottom10 accent2Light-text">Guardian 1</p>
-                      <div class="inputWithIcon width100 white-BG">
+                    <!-- Name/Birthday -->
+                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                      <div class="inputWithIcon width45 width90Mobile white-BG">
                         <i class="fas fa-user"></i>
-                        <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
+                        <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
                       </div>
-                      <div class="inputWithIcon width100 white-BG">
-                        <i class="fas fa-envelope"></i>
-                        <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
-                      </div>
-                      <div class="inputWithIcon width100 white-BG">
-                        <i class="fas fa-mobile-alt"></i>
-                        <input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number">
+                      <div class="flex spaceAround flexAlignCenter width45 width90Mobile">
+                        <label class="accent2Light-text font20px marginRight20">Birthday:</label>
+                        <div class="inputWithIcon width15 white-BG">
+                          <input id="month" placeholder="MM" maxlength="2"></input>
+                        </div>
+                        <div class="inputWithIcon width15 white-BG">
+                          <input id="day" placeholder="DD" maxlength="2"></input>
+                        </div>
+                        <div class="inputWithIcon width20 white-BG">
+                          <input id="year" placeholder="YYYY" maxlength="4"></input>
+                        </div>
                       </div>
                     </div>
 
-                    <!-- Guardian 2 -->
-                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile">
-                      <p class="largeFont marginBottom10 accent2Light-text">Guardian 2</p>
-                      <div class="inputWithIcon width100 white-BG">
-                        <i class="fas fa-user"></i>
-                        <input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name">
+                    <!-- Guardians -->
+                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                      
+                      <!-- Guardian 1 -->
+                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                        <p class="largeFont marginBottom10 accent2Light-text">Guardian 1</p>
+                        <div class="inputWithIcon width100 white-BG">
+                          <i class="fas fa-user"></i>
+                          <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
+                        </div>
+                        <div class="inputWithIcon width100 white-BG">
+                          <i class="fas fa-envelope"></i>
+                          <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
+                        </div>
+                        <div class="inputWithIcon width100 white-BG">
+                          <i class="fas fa-mobile-alt"></i>
+                          <input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number">
+                        </div>
                       </div>
-                      <div class="inputWithIcon width100 white-BG">
-                        <i class="fas fa-envelope"></i>
-                        <input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email">
-                      </div>
-                      <div class="inputWithIcon width100 white-BG">
-                        <i class="fas fa-mobile-alt"></i>
-                        <input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number">
-                      </div>
-                    </div>
-                  </div>
 
-                  <!-- Allergies/Notes and Schedule -->
-                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                    
-                    <!-- Allergies/Notes -->
-                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                      <textarea id="allergies-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
-                      <textarea id="accommodations-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAccommodations" placeholder="Special Accommodations"></textarea>
+                      <!-- Guardian 2 -->
+                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile">
+                        <p class="largeFont marginBottom10 accent2Light-text">Guardian 2</p>
+                        <div class="inputWithIcon width100 white-BG">
+                          <i class="fas fa-user"></i>
+                          <input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name">
+                        </div>
+                        <div class="inputWithIcon width100 white-BG">
+                          <i class="fas fa-envelope"></i>
+                          <input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email">
+                        </div>
+                        <div class="inputWithIcon width100 white-BG">
+                          <i class="fas fa-mobile-alt"></i>
+                          <input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number">
+                        </div>
+                      </div>
                     </div>
-                    
-                    <!-- Schedule -->
-                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                      <div class="flex width100">
-                        <ul class="selectableList flex width100 flexCenter marginBottom20">
-                          <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                          <li id="mon" onclick="selectableSelected(this)"><a>M</a></li>
-                          <li id="tue" onclick="selectableSelected(this)"><a>T</a></li>
-                          <li id="wed" onclick="selectableSelected(this)"><a>W</a></li>
-                          <li id="thu" onclick="selectableSelected(this)"><a>T</a></li>
-                          <li id="fri" onclick="selectableSelected(this)"><a>F</a></li>
-                          <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
-                        </ul>
+
+                    <!-- Allergies/Notes and Schedule -->
+                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                      
+                      <!-- Allergies/Notes -->
+                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                        <textarea id="allergies-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
+                        <textarea id="accommodations-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAccommodations" placeholder="Special Accommodations"></textarea>
                       </div>
                       
-                      <div class="flex flexCenter width100">
-                        <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
-                        <a onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newStudentSubmit" onclick="callPostStu()">Create</a>
-                  </div>
-                  
-                </div>
-              </div> <!-- End new student form-->
-            </div>
-          </div> <!-- End Students Panel-->
-
-          <!-- --------------------- REMINDER PANEL --------------------- -->
-          <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall hideOverflow minWidth400px width40">
-            <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-              <p class="marginLeft10 lightText font25px">Reminders</p>
-              <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
-            </div>
-            <div class="heavyPadding maxHeight250px">
-              <ul id="reminders" class="ulList">
-                <% if (reminders.length > 0) {%>
-                  
-                  <% reminders.forEach((reminder, index) => { %>
-                    <% if (reminder.hidden == 1) { %>
-                      <li class="main-BG blackAndWhite spaceBetween">
-                    <% } else { %>
-                      <li class="white-BG spaceBetween">
-                    <% } %>
-                        <p><%= reminder.title %></p>
-                        <div class="flex">
-                          <% if(reminder.value != -1){ %>
-                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder(this, '<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
-                            <button class="yellow3-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
-                            <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
-                          <% }; %>
+                      <!-- Schedule -->
+                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                        <div class="flex width100">
+                          <ul class="selectableList flex width100 flexCenter marginBottom20">
+                            <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
+                            <li id="mon" onclick="selectableSelected(this)"><a>M</a></li>
+                            <li id="tue" onclick="selectableSelected(this)"><a>T</a></li>
+                            <li id="wed" onclick="selectableSelected(this)"><a>W</a></li>
+                            <li id="thu" onclick="selectableSelected(this)"><a>T</a></li>
+                            <li id="fri" onclick="selectableSelected(this)"><a>F</a></li>
+                            <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
+                          </ul>
                         </div>
                         
-                  <% }) %>
-                <% } %>
-              
-              </ul>
-              <!-- Edit reminder form -->
-              <div id="editReminderForm" class="formWindow">
-                <div class="formWindow-content width60">
-                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Edit a Reminder</p>
-
-                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                    <div class="flex width80 width100Mobile marginBottom20">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input type="text" id="editReminderName" value="">
+                        <div class="flex flexCenter width100">
+                          <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
+                          <a onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
+                        </div>
                       </div>
                     </div>
 
-                    <!-- <div class="flex width80 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="editReminder" placeholder="Reminder info">
+                    <div class="flex flexCenter">
+                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newStudentSubmit" onclick="callPostStu()">Create</a>
+                    </div>
+                    
+                  </div>
+                </div> <!-- End new student form-->
+              </div>
+            </div> <!-- End Students Panel-->
+
+            <!-- --------------------- REMINDER PANEL --------------------- -->
+            <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall hideOverflow minWidth400px width40">
+              <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+                <p class="marginLeft10 lightText font25px">Reminders</p>
+                <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+              </div>
+              <div class="heavyPadding maxHeight250px">
+                <ul id="reminders" class="ulList">
+                  <% if (reminders.length > 0) {%>
+                    
+                    <% reminders.forEach((reminder, index) => { %>
+                      <% if (reminder.hidden == 1) { %>
+                        <li class="main-BG blackAndWhite spaceBetween">
+                      <% } else { %>
+                        <li class="white-BG spaceBetween">
+                      <% } %>
+                          <p><%= reminder.title %></p>
+                          <div class="flex">
+                            <% if(reminder.value != -1){ %>
+                              <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder(this, '<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
+                              <button class="yellow3-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
+                              <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
+                            <% }; %>
+                          </div>
+                          
+                    <% }) %>
+                  <% } %>
+                
+                </ul>
+                <!-- Edit reminder form -->
+                <div id="editReminderForm" class="formWindow">
+                  <div class="formWindow-content width60">
+                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                    <p class="font50px marginBottom40 centerText accent2Light-text">Edit a Reminder</p>
+
+                    <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                      <div class="flex width80 width100Mobile marginBottom20">
+                        <div class="inputWithIcon width100 white-BG">
+                          <input type="text" id="editReminderName" value="">
+                        </div>
+                      </div>
+
+                      <!-- <div class="flex width80 width100Mobile">
+                        <div class="inputWithIcon width100 white-BG">
+                          <input name=”notASearchField” type="text" id="editReminder" placeholder="Reminder info">
+                        </div>
+                      </div> -->
+
+                      <div style="display: none; visibility:hidden">
+                        <div >
+                          <input name=”notASearchField” type="text" id="editReminderId">
+                        </div>
+                      </div>
+                    
+
+                    <div id="edit-reminder-toolbar-container">
+                      <span class="ql-formats">
+                          <select class="ql-size">
+                              <option value="10px">Small</option>
+                              <option selected>Normal</option>
+                              <option value="18px">Large</option>
+                              <option value="32px">Huge</option>
+                          </select>
+                      </span>
+                      <span class="ql-formats">
+                          <button class="ql-align" value=""></button>
+                          <button class="ql-align" value="center"></button>
+                          <button class="ql-align" value="right"></button>
+                      </span>
+                      <span class="ql-formats">
+                          <select class="ql-color">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="orange"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                              <option value="blue"></option>
+                              <option value="purple"></option>
+                          </select>
+                          <select class="ql-background">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="orange"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                              <option value="blue"></option>
+                              <option value="purple"></option>
+                          </select>
+                      </span>
+                      <span class="ql-formats">
+                          <button class="ql-bold"></button>
+                          <button class="ql-italic"></button>
+                          <button class="ql-underline"></button>
+                          <button class="ql-strike"></button>
+                      </span>
+                    </div>
+                    <div class="flex flexColumn marginBottom40 width100">
+                      <div id="edit-reminder">
+                      </div>
+                    </div>
+                  </div>
+                    <div class="flex flexCenter">
+                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="editReminderSubmit" onclick="passEditReminderToPost()">Save Changes</a>
+                    </div>
+                  </div>
+                </div> <!-- End edit reminder form -->
+
+                <!-- --------------------- New Reminder Form --------------------- -->
+                <div id="newReminderForm" class="formWindow">
+                  <div class="formWindow-content width60 width90Mobile">
+                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                    <p class="font50px marginBottom40 centerText accent2Light-text">Add a Reminder</p>
+
+                    <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                      <div class="flex width60 width100Mobile">
+                        <div class="inputWithIcon width100 white-BG">
+                          <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
+                        </div>
+                      </div>
+  <!-- 
+                      <div class="flex width60 width100Mobile">
+                        <div class="inputWithIcon width100 white-BG">
+                          <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
+                        </div>
                       </div>
                     </div> -->
+                    <div id="reminder-toolbar-container" class="width100 noMargin">
+                      <span class="ql-formats">
+                          <select class="ql-size">
+                              <option value="10px">Small</option>
+                              <option selected>Normal</option>
+                              <option value="18px">Large</option>
+                              <option value="32px">Huge</option>
+                          </select>
+                      </span>
+                      <span class="ql-formats">
+                          <button class="ql-align" value=""></button>
+                          <button class="ql-align" value="center"></button>
+                          <button class="ql-align" value="right"></button>
+                      </span>
+                      <span class="ql-formats">
+                          <select class="ql-color">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="orange"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                              <option value="blue"></option>
+                              <option value="purple"></option>
+                          </select>
+                          <select class="ql-background">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="orange"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                              <option value="blue"></option>
+                              <option value="purple"></option>
+                          </select>
+                      </span>
+                      <span class="ql-formats">
+                          <button class="ql-bold"></button>
+                          <button class="ql-italic"></button>
+                          <button class="ql-underline"></button>
+                          <button class="ql-strike"></button>
+                      </span>
+                    </div>
+                    <div class="flex flexColumn marginBottom40 width100">
+                      <div id="reminder">
+                      </div>
+                    </div>
+                  </div>
+
+                    <div class="flex flexCenter">
+                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="saveReminder()">Create</a>
+                    </div>
+                  </div>
+                </div> <!-- End new reminder form -->
+              </div> 
+            </div> <!-- End reminder panel -->
+      
+            <!-- --------------------- BEHAVIORS PANEL --------------------- -->
+            <div id="behaviorsPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth400px">
+              <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
+                <p class="marginLeft10 lightText font25px">Behaviors</p>
+                <a onclick="openForm('newBehaviorForm')" class="lightPadding accent2Light-text font15px">Add New</a>
+              </div>
+              <div class="heavyPadding maxHeight250px">
+                <ul id="behaviors" class="ulList">
+                  <% if (behaviors.length > 0) {%>
+                    <a id=behaviorCount style="visibility: hidden; display: none;"><%= behaviors.length %> </a>
+                    <% behaviors.forEach((behavior, index) => { %>
+                      <a id="behavior<%= index %>" style="visibility: hidden; display: none;"><%= behavior.title %></a>
+                        <% if (behavior.Hidden == 1) { %>
+                          <li class="main-BG blackAndWhite spaceBetween">
+                        <% } else { %>
+                          <li class="white-BG spaceBetween">
+                        <% } %>
+                          <p><%= behavior.title %></p>
+                          <div class="flex">
+                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
+                            <button class="yellow3-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i class="far fa-edit"></i></button>
+                            <button class="red3-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
+                          </div>
+                    <% }) %>
+                  <% } %>
+                </ul>
+              </div>
+
+              <!-- Edit behavior form -->
+              <div id="editBehaviorForm" class="formWindow">
+                <div class="formWindow-content">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Edit a Behavior</p>
+
+                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                    <div class="flex width60 width100Mobile marginBottom20">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input type="text" id="editBehaviorName" value="" disabled>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="editBehaviorOp1" placeholder="Option 1">
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="editBehaviorOp2" placeholder="Option 2"/>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="editBehaviorOp3" placeholder="Option 3"/>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="editBehaviorOp4" placeholder="Option 4"/>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="editBehaviorOp5" placeholder="Option 5"/>
+                      </div>
+                    </div>
 
                     <div style="display: none; visibility:hidden">
                       <div >
-                        <input name=”notASearchField” type="text" id="editReminderId">
+                        <input name=”notASearchField” type="text" id="editBehaviorId">
                       </div>
                     </div>
-                  
+                  </div>
 
-                  <div id="edit-reminder-toolbar-container">
-                    <span class="ql-formats">
-                        <select class="ql-size">
-                            <option value="10px">Small</option>
-                            <option selected>Normal</option>
-                            <option value="18px">Large</option>
-                            <option value="32px">Huge</option>
-                        </select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-align" value=""></button>
-                        <button class="ql-align" value="center"></button>
-                        <button class="ql-align" value="right"></button>
-                    </span>
-                    <span class="ql-formats">
-                        <select class="ql-color">
-                            <option selected></option>
-                            <option value="red"></option>
-                            <option value="orange"></option>
-                            <option value="yellow"></option>
-                            <option value="green"></option>
-                            <option value="blue"></option>
-                            <option value="purple"></option>
-                        </select>
-                        <select class="ql-background">
-                            <option selected></option>
-                            <option value="red"></option>
-                            <option value="orange"></option>
-                            <option value="yellow"></option>
-                            <option value="green"></option>
-                            <option value="blue"></option>
-                            <option value="purple"></option>
-                        </select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-bold"></button>
-                        <button class="ql-italic"></button>
-                        <button class="ql-underline"></button>
-                        <button class="ql-strike"></button>
-                    </span>
-                  </div>
-                  <div class="flex flexColumn marginBottom40 width100">
-                    <div id="edit-reminder">
-                    </div>
-                  </div>
-                </div>
                   <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="editReminderSubmit" onclick="passEditReminderToPost()">Save Changes</a>
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="editBehaviorSubmit" onclick="passEditBehaviorToPost()">Save Changes</a>
                   </div>
                 </div>
-              </div> <!-- End edit reminder form -->
+              </div> <!-- End edit behavior form -->
 
-              <!-- --------------------- New Reminder Form --------------------- -->
-              <div id="newReminderForm" class="formWindow">
-                <div class="formWindow-content width60 width90Mobile">
+              <!-- --------------------- New behavior Form --------------------- -->
+              <div id="newBehaviorForm" class="formWindow">
+                <div class="formWindow-content width40 width90Mobile">
                   <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Add a Reminder</p>
+                  <p class="font50px marginBottom40 centerText accent2Light-text">Add a Behavior</p>
 
                   <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                    <div class="flex width60 width100Mobile">
+                    <div class="flex width60 width100Mobile marginBottom20">
                       <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
+                        <input name=”notASearchField” type="text" id="newBehaviorName" placeholder="Behavior Name"/>
                       </div>
                     </div>
-<!-- 
+
                     <div class="flex width60 width100Mobile">
                       <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
+                        <input name=”notASearchField” type="text" id="newBehaviorOp1" placeholder="Option 1">
                       </div>
                     </div>
-                  </div> -->
-                  <div id="reminder-toolbar-container" class="width100 noMargin">
-                    <span class="ql-formats">
-                        <select class="ql-size">
-                            <option value="10px">Small</option>
-                            <option selected>Normal</option>
-                            <option value="18px">Large</option>
-                            <option value="32px">Huge</option>
-                        </select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-align" value=""></button>
-                        <button class="ql-align" value="center"></button>
-                        <button class="ql-align" value="right"></button>
-                    </span>
-                    <span class="ql-formats">
-                        <select class="ql-color">
-                            <option selected></option>
-                            <option value="red"></option>
-                            <option value="orange"></option>
-                            <option value="yellow"></option>
-                            <option value="green"></option>
-                            <option value="blue"></option>
-                            <option value="purple"></option>
-                        </select>
-                        <select class="ql-background">
-                            <option selected></option>
-                            <option value="red"></option>
-                            <option value="orange"></option>
-                            <option value="yellow"></option>
-                            <option value="green"></option>
-                            <option value="blue"></option>
-                            <option value="purple"></option>
-                        </select>
-                    </span>
-                    <span class="ql-formats">
-                        <button class="ql-bold"></button>
-                        <button class="ql-italic"></button>
-                        <button class="ql-underline"></button>
-                        <button class="ql-strike"></button>
-                    </span>
-                  </div>
-                  <div class="flex flexColumn marginBottom40 width100">
-                    <div id="reminder">
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="newBehaviorOp2" placeholder="Option 2"/>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="newBehaviorOp3" placeholder="Option 3"/>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="newBehaviorOp4" placeholder="Option 4"/>
+                      </div>
+                    </div>
+
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="newBehaviorOp5" placeholder="Option 5"/>
+                      </div>
                     </div>
                   </div>
-                </div>
 
                   <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="saveReminder()">Create</a>
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newBehaviorSubmit" onclick="callPostBehavior()">Create</a>
                   </div>
                 </div>
-              </div> <!-- End new reminder form -->
-            </div> 
-          </div> <!-- End reminder panel -->
-    
-          <!-- --------------------- BEHAVIORS PANEL --------------------- -->
-          <div id="behaviorsPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth400px">
-            <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-              <p class="marginLeft10 lightText font25px">Behaviors</p>
-              <a onclick="openForm('newBehaviorForm')" class="lightPadding accent2Light-text font15px">Add New</a>
-            </div>
-            <div class="heavyPadding maxHeight250px">
-              <ul id="behaviors" class="ulList">
-                <% if (behaviors.length > 0) {%>
-                  <a id=behaviorCount style="visibility: hidden; display: none;"><%= behaviors.length %> </a>
-                  <% behaviors.forEach((behavior, index) => { %>
-                    <a id="behavior<%= index %>" style="visibility: hidden; display: none;"><%= behavior.title %></a>
-                      <% if (behavior.Hidden == 1) { %>
-                        <li class="main-BG blackAndWhite spaceBetween">
-                      <% } else { %>
-                        <li class="white-BG spaceBetween">
-                      <% } %>
-                        <p><%= behavior.title %></p>
-                        <div class="flex">
-                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
-                          <button class="yellow3-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i class="far fa-edit"></i></button>
-                          <button class="red3-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
+              </div> <!-- End new behavior form -->
+            </div> <!-- End behavior panel -->
+          </div> <!-- End left side -->
+          
+          <!-- --------------------- Right Column --------------------- -->
+          <div class="flex flexWrap width600px width100Mobile">
+            <!--  --------------------- ACTIVITIES PANEL --------------------- -->
+            <div id="activitiesPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100">
+              <!-- Title Bar -->
+              <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
+                <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
+                <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
+                <div class="flex">
+                  <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
+                    <i class="fas fa-search"></i>
+                  </a>
+                  <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+                </div>
+              </div>
+
+              <!-- Activities List -->
+              <div class="heavyPadding maxHeight600px lightGray1-BG ">
+                <ul id="activities" class="ulList">
+                  <% if (activities.length > 0) {%>
+                    <% activities.forEach((activity, index) => { %>
+                        <% if (activity.Hidden == 1) { %>
+                          <li class="main-BG blackAndWhite spaceBetween">
+                        <% } else { %>
+                          <li class="white-BG spaceBetween">
+                        <% } %>
+                        
+                          <p><%= activity.ActivityName %> 
+                            <% if(activity.Helper == 1) { %>
+                            <i class="fas fa-star accent2Light-text"></i>
+                          <% } %></p>
+                          <div class="flex">
+                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                            <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                            <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                          </div>
+                        </li>
+                    <% }) %>
+                  <% } %>
+                </ul>
+
+                <!-- Edit activity form -->
+                <div id="editActivityForm" class="formWindow">
+                  <div class="formWindow-content">
+                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                    <p class="font50px marginBottom40 centerText accent2Light-text">Edit an Activity</p>
+
+                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                      <div class="flex width60 width100Mobile">
+                        <div class="inputWithIcon width100 white-BG">
+                          <p id="editActivityID" style="display: none"></p>
+                          <input type="text" id="editActivityInput" value="">
                         </div>
-                  <% }) %>
-                <% } %>
-              </ul>
-            </div>
+                      </div>
+                      <div class="flex width30 width100Mobile">
+                        <a class="toggleable" id="editHelper" onclick="toggleableToggled(this)">Helper</a>
+                      </div>
+                    </div>
 
-            <!-- Edit behavior form -->
-            <div id="editBehaviorForm" class="formWindow">
-              <div class="formWindow-content">
-                <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                <p class="font50px marginBottom40 centerText accent2Light-text">Edit a Behavior</p>
-
-                <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                  <div class="flex width60 width100Mobile marginBottom20">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input type="text" id="editBehaviorName" value="" disabled>
+                    <div class="flex flexCenter">
+                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="passEditActToPost()">Save Changes</a>
                     </div>
                   </div>
+                </div> <!-- End edit activity form -->
 
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="editBehaviorOp1" placeholder="Option 1">
-                    </div>
-                  </div>
+                  <!-- New Activity Form -->
+                <div id="newActivityForm" class="formWindow">
+                  <div class="formWindow-content">
+                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                    <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
 
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="editBehaviorOp2" placeholder="Option 2"/>
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="editBehaviorOp3" placeholder="Option 3"/>
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="editBehaviorOp4" placeholder="Option 4"/>
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="editBehaviorOp5" placeholder="Option 5"/>
-                    </div>
-                  </div>
-
-                  <div style="display: none; visibility:hidden">
-                    <div >
-                      <input name=”notASearchField” type="text" id="editBehaviorId">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex flexCenter">
-                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="editBehaviorSubmit" onclick="passEditBehaviorToPost()">Save Changes</a>
-                </div>
-              </div>
-            </div> <!-- End edit behavior form -->
-
-            <!-- --------------------- New behavior Form --------------------- -->
-            <div id="newBehaviorForm" class="formWindow">
-              <div class="formWindow-content width40 width90Mobile">
-                <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                <p class="font50px marginBottom40 centerText accent2Light-text">Add a Behavior</p>
-
-                <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                  <div class="flex width60 width100Mobile marginBottom20">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="newBehaviorName" placeholder="Behavior Name"/>
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="newBehaviorOp1" placeholder="Option 1">
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="newBehaviorOp2" placeholder="Option 2"/>
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="newBehaviorOp3" placeholder="Option 3"/>
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="newBehaviorOp4" placeholder="Option 4"/>
-                    </div>
-                  </div>
-
-                  <div class="flex width60 width100Mobile">
-                    <div class="inputWithIcon width100 white-BG">
-                      <input name=”notASearchField” type="text" id="newBehaviorOp5" placeholder="Option 5"/>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex flexCenter">
-                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newBehaviorSubmit" onclick="callPostBehavior()">Create</a>
-                </div>
-              </div>
-            </div> <!-- End new behavior form -->
-          </div> <!-- End behavior panel -->
-        </div> <!-- End left side -->
-        
-        <!-- --------------------- Right Column --------------------- -->
-        <div class="flex flexWrap width600px width100Mobile">
-          <!--  --------------------- ACTIVITIES PANEL --------------------- -->
-          <div id="activitiesPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100">
-            <!-- Title Bar -->
-            <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
-              <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
-              <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
-              <div class="flex">
-                <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
-                  <i class="fas fa-search"></i>
-                </a>
-                <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
-              </div>
-            </div>
-
-            <!-- Activities List -->
-            <div class="heavyPadding maxHeight600px lightGray1-BG ">
-              <ul id="activities" class="ulList">
-                <% if (activities.length > 0) {%>
-                  <% activities.forEach((activity, index) => { %>
-                      <% if (activity.Hidden == 1) { %>
-                        <li class="main-BG blackAndWhite spaceBetween">
-                      <% } else { %>
-                        <li class="white-BG spaceBetween">
-                      <% } %>
-                      
-                        <p><%= activity.ActivityName %> 
-                          <% if(activity.Helper == 1) { %>
-                          <i class="fas fa-star accent2Light-text"></i>
-                        <% } %></p>
-                        <div class="flex">
-                          <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                          <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                          <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                      <div class="flex width60 width100Mobile">
+                        <div class="inputWithIcon width100 white-BG">
+                          <input type="text" id="newActivityName" placeholder="Activity Name">
                         </div>
-                      </li>
-                  <% }) %>
-                <% } %>
-              </ul>
-
-              <!-- Edit activity form -->
-              <div id="editActivityForm" class="formWindow">
-                <div class="formWindow-content">
-                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Edit an Activity</p>
-
-                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <p id="editActivityID" style="display: none"></p>
-                        <input type="text" id="editActivityInput" value="">
+                      </div>
+                      <div class="flex width30 width100Mobile">
+                        <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
                       </div>
                     </div>
-                    <div class="flex width30 width100Mobile">
-                      <a class="toggleable" id="editHelper" onclick="toggleableToggled(this)">Helper</a>
+
+                    <div class="flex flexCenter">
+                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
                     </div>
+                  
                   </div>
-
-                  <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="passEditActToPost()">Save Changes</a>
-                  </div>
-                </div>
-              </div> <!-- End edit activity form -->
-
-                <!-- New Activity Form -->
-              <div id="newActivityForm" class="formWindow">
-                <div class="formWindow-content">
-                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
-
-                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input type="text" id="newActivityName" placeholder="Activity Name">
-                      </div>
-                    </div>
-                    <div class="flex width30 width100Mobile">
-                      <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
-                    </div>
-                  </div>
-
-                  <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
-                  </div>
-                
-                </div>
-              </div> <!-- End activity form -->
-            </div>
-          </div> <!-- End activities panel -->
-          <!-- --------------------- EMAIL PANEL --------------------- -->
-          <div id="emailPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px width100">
-            <div class="flex spaceBetween flexAlignCenter darkGray3-BG mediumPadding">
-              <p class="marginLeft10 lightText font25px">Other Settings</p>
-              <div>
-                <a class="hoverable font15px marginRight10 padding5px10px accent2Light-BG borderRadiusLarge lightGray1-text" onclick="emailSettings('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
-                <a class="hoverable font15px padding5px10px accent2Light-BG borderRadiusLarge lightGray1-text" onclick="emailSettings('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
-
+                </div> <!-- End activity form -->
               </div>
-            </div>
-            <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
-              <button href="/reset-password">Reset Password</button>
-              <button href="/register">Add User</button>
-            </div>
+            </div> <!-- End activities panel -->
+
+            <!-- EMAIL FORMS -->
             <!-- Edit Header Form -->
             <div id="editHeaderForm" class="formWindow">
               <div class="formWindow-content">
@@ -751,13 +752,12 @@
               
               </div>
             </div> <!-- End edit signature form -->
-          </div> <!-- End email panel -->
-          
-          
+            
+            
+          </div>
         </div>
       </div>
     </div>
-
       
   </body>
   
