@@ -65,13 +65,11 @@
 
 .arrow-down-make {
   font-family: 'Times New Roman', Times, serif;
-  max-width: fit-content;
 }
 
 .arrow-down {
   font-family: 'Times New Roman', Times, serif;
   background-color: rgba(255, 255, 255, 0.301);
-  max-width: fit-content;
 }
 
 .deleteButton {
