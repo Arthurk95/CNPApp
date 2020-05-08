@@ -111,7 +111,7 @@ function showButtons(){
     }
     else{ // students chosen first
         if(currentStep === activityStep){ // step 2: To submit
-            if(selectedActivityID != undefined){
+            if(selectedActivityIDs.length > 0){
                 showElement(submitButton);
                 showElement(backButton);
             }
