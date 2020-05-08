@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var request = require('request-promise');
 const auth = require('../public/javascripts/loginScripts');
-
+var recurseCount = 0;
+var target;
 /* GET home page. */
 router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var activity_query = "CALL PullUnhiddenActivities";
@@ -23,8 +24,8 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
 });
 
 router.post('/addstudentActivity', auth.checkAuthenticated, function(req, res){
-  stus = req.body.stu.split(",");
-
+  var stus = req.body.stu.split(",");
+  var acts = req.body.act.split(",");
   var sql = "SELECT dateTimes FROM Weather WHERE weatherID = (SELECT MAX(weatherID) FROM Weather);";
   con.query(sql, function(err,result){
     var recent = '';
@@ -41,19 +42,31 @@ router.post('/addstudentActivity', auth.checkAuthenticated, function(req, res){
     }
   })
   
-
-  recursepost(0,stus,req.body.act,req.body.numStu,res, con);
+  target = req.body.numAct-1;
+  for(var i = 0; i < req.body.numAct;i = i + 1){
+    recursepost(0,stus,acts[i],req.body.numStu,res, con);
+  }
   
 });
 
+
+function recurseEnd(res){
+  ++recurseCount;
+  if(recurseCount == target)
+  {
+    res.end();
+  }
+}
+
 function recursepost(i,stus,act,num,res, con){
   var sql = "CALL AddDailyActivity('" + stus[i] + "','" + act + "');";
+  console.log(sql);
   con.query(sql, function (err, result) {
-    if(i < num){
+    if(i < num-1){
       recursepost(i+1,stus,act,num,res, con);
     }
-    if(i == num){
-      res.end();
+    if(i == num-1){
+      recurseEnd(res);
     }
   });
 }
