@@ -205,8 +205,10 @@ function generatePie(id){
     temp = document.createElement("select"); temp.id = "smonth" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     selectDiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    // temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){updateData(id);};
     selectDiv.appendChild(temp);
+
     twoColDiv.appendChild(selectDiv);
     optionsRow.appendChild(twoColDiv);
 
@@ -225,6 +227,7 @@ function generatePie(id){
 
     temp = document.createElement("select"); temp.id = "eday" + id; temp.className="width30 arrow-down"; temp.onchange = function(){updateData(id);};
     selectDiv.appendChild(temp);
+    
     twoColDiv.appendChild(selectDiv);
     optionsRow.appendChild(twoColDiv);
   }
