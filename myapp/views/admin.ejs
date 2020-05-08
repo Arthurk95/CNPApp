@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <nav><%- include header.ejs %></nav>
+    <nav></nav>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
     <link rel='stylesheet' href='/stylesheets/form.css' />
     <link rel='stylesheet' href='/stylesheets/ulList.css' />
     <link rel='stylesheet' href='/stylesheets/editor.css' />
     <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+    <script src="/javascripts/post.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/javascripts/utilityScripts.js"></script>
@@ -16,11 +19,33 @@
   </head>
   <body>
 
-    <div class="flex flexColumn">
+    <div class="side-header-wrapper darkGray2-BG">
+      <div class="side-header">
+        <div class="side-header-top">
+          <a class="side-header-link" href="/">Home</a>
+          <a class="side-header-link" href="/tracker">Tracker</a>
+          <a class="side-header-link" href="/reports">Reports</a>
+          <a class="side-header-link accent1Light-BG" href="/admin">Admin</a>
+          <a class="side-header-link" href="/stats">Stats</a>
+          <a class="side-header-link" href="/emailer">Email</a>
+          <a class="side-header-link" href="/tasks">Tasks</a>
+        </div>
+        
+        <div class="side-header-bottom">
+          <a class="side-header-link" onclick="emailSettings('editHeaderForm')"><i class="far fa-edit"></i> Header</a>
+          <a class="side-header-link" onclick="emailSettings('editSignatureForm')"><i class="far fa-edit"></i> Signature</a>
+
+          <form class="side-header-link" action="/logout?_method=DELETE" method="POST">
+            <a class="side-header-link noPadding" href="/logout?_method=DELETE">Logout <i class="fas fa-sign-out-alt marginLeft10"></i></a>
+          </form>
+        </div>
+     </div>
+    </div>
+
+    <div class="content-with-side-header">
 
       <!-- Main wrapper panel: two columns -->
       <div class="flex spaceAround flexCollapseMobile width100">
-      
         <!-- Left column, essentially a grid -->
         <div class="flex spaceAround flexGrow1 flexWrap width100Mobile flexAlignStart">
           <!-- Todays Roster Panel -->

@@ -434,6 +434,7 @@ svg{
 .heavyPadding{padding: 15px !important;}
 .veryHeavyPadding{padding: 50px !important;}
 
+.noPadding{padding: 0px !important;}
 .padding10px{padding: 10px;}
 .padding20px{padding: 20px;}
 .padding30px{padding: 30px;}
@@ -837,6 +838,51 @@ svg{
   background: none;
   outline: none;
   border: none;
+}
+
+.content-with-side-header{
+  margin-left: 200px;
+  padding: 30px;
+}
+
+.side-header-wrapper{
+  height: 100%;
+  position: fixed;
+  left: 0;
+}
+
+/* Links wrapper:*/
+.side-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--darkGray2);
+  height: 90%;
+  margin: auto 0;
+  width: 100%;
+}
+
+.side-header-top{
+  display: flex;
+  flex-direction: column;
+}
+
+.side-header-bottom{
+  display: flex;
+  flex-direction: column;
+}
+
+.side-header-link{
+  text-decoration: none;
+  font-size: 14px;
+  padding: 15px 40px;
+  color: var(--lightGray1);
+  text-align: center;
+  border-bottom: 2px solid var(--darkGray3);
+}
+
+.side-header-link:hover{
+  background: var(--darkGray3);
 }
 
 .hiddenMobile{display: none !important;}
