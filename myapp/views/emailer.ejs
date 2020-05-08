@@ -329,6 +329,9 @@
                 </div>
             </div>
         </div>
+        <form id="emailReportForm" method="POST" action="/emailer/emailReport">
+            <input id="report" name="report" type="hidden">
+        </form>
         <script>
         passRemindersToJS(<%- JSON.stringify(reminders) %>);
         passHeaderToJS(<%- JSON.stringify(header) %>);
@@ -488,7 +491,7 @@
 
         <script>
             function sendEmails(students, todaysBehaviors, next){
-                openEmailReport(null, false);
+                // openEmailReport(null, false);
 
                 var studentSuccessObjects = [];
 
@@ -537,9 +540,11 @@
             }
 
             function handleEmailResults(results) {
-                console.log('Email Results:')
-                console.log(results);
-                openEmailReport(results, true);
+                // openEmailReport(results, true);
+                var reportForm = document.getElementById("emailReportForm");
+                var reportText = document.getElementById("report");
+                reportText.value = JSON.stringify(results);
+                reportForm.submit();
             }
 
             function renderView(todaysBehaviors){

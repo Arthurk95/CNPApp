@@ -169,14 +169,14 @@ class thePie {
 // generate a pie
 function generatePie(id){
   var parent = document.getElementById("charts");
-  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "pieMin lightGray1-BG margin10 flexGrow1 borderRadiusSmall minWidth400px";
+  var newdiv = document.createElement("div"); newdiv.id = id; newdiv.className = "pieMin lightGray1-BG width100 margin10 flexGrow1 borderRadiusSmall minWidth400px";
   var bottom = document.getElementById("chartPanel");
   
   var temp;
 
   //Start and End Date
   {
-    temp = document.createElement("title"); temp.innerHTML = "Pie Chart"; temp.className = "darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
+    temp = document.createElement("title"); temp.innerHTML = "Pie Chart"; temp.className = "width100 darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginLeft lightText font25px";
 
     var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);

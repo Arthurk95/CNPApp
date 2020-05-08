@@ -42,7 +42,7 @@
 .pieMin {
   width: fit-content;
   height: auto;
-  max-width: 45%;
+  max-width: 85%;
   position: relative;
   display: inline-block;
   white-space: nowrap;
