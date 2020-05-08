@@ -485,6 +485,7 @@
         var date = new Date();
         var moreThanZero = false;
         var startdate = document.getElementById('hiddenstartDate').value;
+        var badVariableName = new Date(startdate);
         startdate = (new Date(startdate)).getFullYear();
         var yearDrop = document.getElementById('syear' + id);
 
@@ -499,11 +500,18 @@
             yearDrop.appendChild(option);
         }
         if(moreThanZero) {
+          yearDrop.selectedIndex = 1;
           document.getElementById('smonth' + id).selectedIndex = date.getMonth();
+        }
+        else{
+          document.getElementById('smonth' + id).selectedIndex = badVariableName.getMonth();
         }
         sgenDays(id);
         if(moreThanZero) {
-          document.getElementById('sday' + id).selectedIndex = date.getMonth() - 1;
+          document.getElementById('sday' + id).selectedIndex = date.getDate() - 1;
+        }
+        else{
+          document.getElementById('sday' + id).selectedIndex = badVariableName.getDate() - 1;
         }
         
         yearDrop = document.getElementById('eyear' + id);
