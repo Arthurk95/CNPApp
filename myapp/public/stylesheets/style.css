@@ -948,6 +948,16 @@ svg{
 .content-with-side-header .formWindow{left: 200px; width: calc((100%) - 200px);}
 
 @media screen and (max-width: 1200px){
+  .maxHeight200px{overflow-y: auto; max-height: 400px;}
+  .maxHeight250px{overflow-y: auto; max-height: 500px;}
+  .maxHeight300px{overflow-y: auto; max-height: 600px;}
+  .maxHeight400px{overflow-y: auto; max-height: 800px;}
+  .maxHeight500px{overflow-y: auto; max-height: 1000px;}
+  .maxHeight600px{overflow-y: auto; max-height: 1200px;}
+  .maxHeight700px{overflow-y: auto; max-height: 1400px;}
+  .maxHeight800px{overflow-y: auto; max-height: 1600px;}
+}
+@media screen and (max-width: 1200px){
   .side-header-wrapper{width: 70%; height: 100vh; left: calc(-1 * (70vw));}
   .side-header-mobile-burger.active + .side-header-wrapper{left: 0;}
   .side-header-mobile-burger.active ~ .content-with-side-header{ margin-left: 70vw; margin-right: calc(-1* (70vw)); width: 100%;}
@@ -1177,18 +1187,6 @@ textarea:focus{
 
 h1{
   color:rgb(255, 255, 255);
-}
-
-svg {
-  background-color: rgba(255, 255, 255, 0.9);
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  max-height: auto;
-  margin-top: 1.5em;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2em;
 }
 
 canvas {
