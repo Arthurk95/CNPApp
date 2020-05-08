@@ -94,9 +94,10 @@ function generateLine(id) {
   }
 
   //The spin thing
-  temp = document.createElement("label");temp.innerHTML = "Chart segments";temp.className = "label";
-  newdiv.appendChild(temp);
+  //temp = document.createElement("label");temp.innerHTML = "Chart segments";temp.className = "label";
+  //newdiv.appendChild(temp);
   temp = document.createElement("input");temp.id="section" + id; temp.class="spinny"; temp.className = "spinny"; temp.type = "NUMBER"; temp.min = "2"; temp.max = "100"; temp.step = "1"; temp.value= "10"; temp.onchange = function(){updateData(id);};
+  temp.style = "display: none; visibility:hidden;"
   newdiv.appendChild(temp);
 
   //First Drop Down Option
