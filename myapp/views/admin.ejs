@@ -856,6 +856,8 @@
       var li = list.getElementsByTagName('li')[0]; // get first <li> to copy
       var newLi = li.cloneNode(true);
 
+      newLi.classList.remove('blackAndWhite');
+      newLi.classList.remove('main-BG');
       newLi.getElementsByTagName('a')[0].setAttribute("onclick", "studentAbsent(this, "+studentData.StudentId+")"); // absent button
       newLi.getElementsByTagName('p')[0].innerHTML = studentData.StudentName; // student name
       list.appendChild(newLi);
