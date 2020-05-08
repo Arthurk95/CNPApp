@@ -3,6 +3,7 @@ var router = express.Router();
 var uploads = require('../public/javascripts/uploads');
 const jo = require('jpeg-autorotate');
 const auth = require('../public/javascripts/loginScripts');
+const bcrypt = require('bcrypt');
 const fs = require('fs');
 
   router.post('/addstudent', auth.checkAuthenticated, function(req, res){
@@ -434,7 +435,34 @@ router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, functi
       req.flash('changes_saved', "Profile Updated!");
     }
     res.end();
-  });
+});
+  
+
+router.get('/reset-password', auth.checkAuthenticated, (req, res) => {
+  res.render('resetPassword.ejs');
+});
+
+router.post('/reset-password', auth.checkAuthenticated, async (req, res) => {
+  if (req.body.email !== 'default@cnp.com') {
+    try {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10); //10 is good hash default value
+      push_user = `UPDATE Admins set Passwords = "${hashedPassword}" WHERE Email = "${req.body.email}";`//(Username, Email, Passwords, Names) VALUES ("${req.body.name}", "${req.body.email}", "${hashedPassword}", "temp");`
+      con.query(push_user, function (err, result) {
+        if (err) {
+          console.log(err);
+          res.send(err.sqlMessage)
+        } else {
+          res.redirect('/admin');
+        }
+      });
+    } catch (e) {
+      console.log(e);
+      res.redirect('/admin');
+    };
+  } else {
+    res.send('Cannot reset default password.');
+  }
+});
 
 
 module.exports = router;
