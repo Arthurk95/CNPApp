@@ -1,5 +1,4 @@
 class thePie {
-
   constructor(id) {
     this.myId = id;
 
@@ -39,13 +38,13 @@ class thePie {
         .style("border-radius", "5px")
         .style("padding", "5px")
   }
-  color = null; 
-  radius = null;
-  svg = null;
-  tooltip = null;
-  myId = null;
-  total = null;
-  friendBool = null;
+  static color = null; 
+  static radius = null;
+  static svg = null;
+  static tooltip = null;
+  static myId = null;
+  static total = null;
+  static friendBool = null;
   
   // update the data
   update(data, total, friendBool) {
