@@ -112,10 +112,10 @@ function generateLine(id) {
   newdiv.appendChild(temp);
 
   //Second Drop Down (I think)
-  temp = document.createElement("div");temp.id = "opid1" + id;
+  temp = document.createElement("div");temp.id = "opid1" + id;temp.class="secondOption arrow-down";
   newdiv.appendChild(temp);
 
-  temp = document.createElement("div");temp.id = "op2" + id;temp.class="secondOption";temp.className = "arrow-down";
+  temp = document.createElement("div");temp.id = "op2" + id;temp.class="secondOption arrow-down";
   newdiv.appendChild(temp);
 
   temp = document.createElement("canvas");temp.id = "canvas" + id;temp.className = "canvasObj";
