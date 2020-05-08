@@ -7,6 +7,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       </head>
       <body> 
-            <script>console.log(<%- JSON.stringify(results) %>);</script>
+            <% reports.forEach((report, index) => { %>
+
+                  <h1><%= report.name %></h1>
+                  <h1><%= report.emails %></h1>
+                  <h1><%= report.status %></h1>
+                  <h1><%= report.message %></h1>
+
+
+            <% }) %>
+
       </body>
 </html>
