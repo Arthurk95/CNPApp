@@ -21,7 +21,7 @@ HTML Formatting:
 .formWindow {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 7; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -39,7 +39,7 @@ HTML Formatting:
     border-radius: 4px;
     background-color: var(--lightGray1);
     margin: 2% auto; /* 15% from the top and centered */
-    width: 1000px; /* Could be more or less, depending on screen size */
+    width: 900px; /* Could be more or less, depending on screen size */
     padding: 30px;
     box-shadow: 0px 0px 15px 1px var(--darkGray2);
   }

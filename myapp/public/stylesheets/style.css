@@ -945,7 +945,7 @@ svg{
 
 .rotate180{transform: rotate(180deg);}
 
-.content-with-side-header .formWindow{left: 190px;}
+.content-with-side-header .formWindow{left: 200px; width: calc((100%) - 200px);}
 
 @media screen and (max-width: 1200px){
   .side-header-wrapper{width: 70%; height: 100vh; left: calc(-1 * (70vw));}
@@ -958,7 +958,7 @@ svg{
   .content-with-side-header{margin-left: 0; padding-top: calc(var(--sideHeaderBurgerHeight) + 15px);}
   .side-header-mobile-burger{display: block; z-index: 6;}
   .page-with-side-menu{display: flex; overflow-x: hidden;}
-  .content-with-side-header .formWindow{left: 0;}
+  .content-with-side-header .formWindow{left: 0; width: 100%;}
 }
 /* Mobile friendly stuff */
 @media screen and (max-width: 1200px) {
