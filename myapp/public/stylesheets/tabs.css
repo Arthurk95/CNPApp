@@ -1,5 +1,5 @@
 .tabsContainer{
-  background-color: var(--darkGray3);
+  background-color: var(--dark-textColorLight);
 }
 /* <ul> list of tab buttons */
 .tabs {
@@ -14,18 +14,18 @@
   display: block;
   padding: 5px 30px;
   text-decoration: none;
-  color: var(--lightGray2);
-  background: var(--accentColor2Light);
+  color: var(--light-textColorDark);
+  background: var(--ThemeColor2Light);
   outline: none;
 }
 
 /* Change background color of buttons on hover */
 .tabs a:hover {
-  color: var(--darkGray3);
-  background: var(--lightGray3);
+  color: var(--dark-textColorLight);
+  background: var(--LightContentBackgroundDark);
 }
 
-.tabs a:active{color: var(--lightGray2);}
+.tabs a:active{color: var(--light-textColorDark);}
 
 .tabs li{
   display: inline-block;
@@ -71,10 +71,10 @@ an accordion when on mobile */
 }
 
 .tabbed-content .tabs li a{
-  color: var(--lightGray1);
+  color: var(--light-textColor);
   padding: 10px 30px;
   display: block;
-  background: var(--accentColor2Light) !important;
+  background: var(--ThemeColor2Light) !important;
   text-shadow: 0px 0px 1px var(--darkGray3);
 }
 
@@ -107,10 +107,10 @@ an accordion when on mobile */
   /* This is the accordion header for each tab */
   .tabbed-content .item::before{ 
     text-align: center;
-    color: var(--lightGray2);
+    color: var(--light-textColorDark);
     font-size: 9vw;
     padding: 10px 0px 10px 20px;
-    background: var(--accentColor1);
+    background: var(--ThemeColor1);
     cursor: pointer;
     display: block; 
     content: attr(data-title) !important;

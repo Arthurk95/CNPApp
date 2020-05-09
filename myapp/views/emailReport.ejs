@@ -9,15 +9,15 @@
       <body> 
             <div class="flex flexWrap spaceAround width90 center">
                   <% reports.forEach((report, index) => { %>
-                        <div class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
-                              <div class="<% if(report.status == 'Failed') { %> accent4Light-BG <% } else { %> accent2-BG <% } %>
+                        <div class="mobilePanel light-content-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
+                              <div class="<% if(report.status == 'Failed') { %> theme-color4-light-BG <% } else { %> theme-color2-BG <% } %>
                                     mediumPadding flex spaceBetween flexAlignCenter relative">
-                                    <p class="marginLeft10 lightText font25px"><%= report.name %></p>
+                                    <p class="marginLeft10 light-text font25px"><%= report.name %></p>
                               </div>
                               <div class="heavyPadding flex flexColumn">
                                     <div class="flex spaceBetween">
                                           <p><%= report.emails %></p>
-                                          <p class="accent2Light-text"><%= report.status %></p>
+                                          <p class="theme-color2-light-text"><%= report.status %></p>
                                     </div>
                                     <p><%= report.message %></p>
                               </div>

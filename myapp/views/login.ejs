@@ -8,21 +8,21 @@
     <body>
         <div class="flex flexCenter veryHeavyPadding">
             <div class="width30 width90Mobile veryHeavyPadding white-BG flex flexColumn flexAlignCenter borderRadiusSmall shadowSmall">
-                <h1 class="marginBottom40 darkText font40px">Login</h1>
+                <h1 class="marginBottom40 dark-text font40px">Login</h1>
                     <% if (messages.error) { %>
                         <%= messages.error %>
                     <% } %>
                 <form class="marginBottom10" action="/login" method="POST">
-                    <div class="width100 marginBottom10 flex spaceBetween lightGray1-BG flexAlignCenter borderRadiusSmall">
+                    <div class="width100 marginBottom10 flex spaceBetween light-content-BG flexAlignCenter borderRadiusSmall">
                         <i class="fas fa-envelope marginLeft10 mediumFont"></i>
                         <input class="blankInput" type="email" id="email" name="email" placeholder="Email" required>
                     </div>
-                    <div class="width100 marginBottom20 flex spaceBetween lightGray1-BG flexAlignCenter borderRadiusSmall">
+                    <div class="width100 marginBottom20 flex spaceBetween light-content-BG flexAlignCenter borderRadiusSmall">
                         <i class="fas fa-key marginLeft10 mediumFont"></i>
                         <input class="blankInput" type="password" id="password" name="password" placeholder="Password" required>
                     </div>
                     <div class="flex flexCenter">
-                        <button class="customButton width70 mediumFont accent1-BG" type="submit">Login</button>
+                        <button class="customButton width70 mediumFont theme-color1-BG" type="submit">Login</button>
                     </div>
                     
                 </form>

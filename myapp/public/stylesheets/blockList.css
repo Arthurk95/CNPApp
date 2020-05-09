@@ -52,7 +52,7 @@ HTML Format:
     position: relative;
     transition: box-shadow 0.1s !important;
     transition: opacity 0.2s ease-in;
-    background: var(--lightGray1);
+    background: var(--LightContentBackground);
     border-radius: 20px;
     margin: 5px;
     display: inline-block;
@@ -101,7 +101,7 @@ HTML Format:
 }
 
 .name{
-    color: var(--darkGray4);
+    color: var(--dark-textColorLight);
     font-size: 1.8em;
 }
 
@@ -109,7 +109,7 @@ HTML Format:
    on the tracking page */
 .selectedStudent{
     position: relative;
-    background-color: var(--lightGray3) !important;
+    background-color: var(--light-textColorDark) !important;
     box-shadow: inset 0px 0px 6px 3px var(--darkGray3) !important;
 }
 
@@ -130,7 +130,7 @@ HTML Format:
     width: 100%;
     opacity: 0;
     transition: 0.1s;
-    background-color: var(--accentColor2Light);
+    background-color: var(--ThemeColor2Light);
   }
 
   .selectedStudent .checkmarkOverlay{ opacity: 0.3; }
@@ -170,7 +170,7 @@ HTML Format:
   /* This is the button itself */
   .selectionButtons a{
     transition: 0.1s all;
-    color: var(--lightGray1);
+    color: var(--light-textColor);
     font-size: 70px;
     padding: 10vh 10px 10vh 10px;
     display: block;
@@ -189,7 +189,7 @@ HTML Format:
       padding: 20px;
       margin: 0;
       font-size: 3vw;
-      color: var(--darkGray3);
+      color: var(--dark-textColorLight);
   }
 
   /* Shows less Activities per row since the text is on one line */

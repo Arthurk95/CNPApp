@@ -17,6 +17,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.0",
     "express-sessions": "^1.0.6",
+    "fs": "0.0.1-security",
     "http-errors": "^1.6.3",
     "jpeg-autorotate": "^5.0.3",
     "method-override": "^3.0.0",

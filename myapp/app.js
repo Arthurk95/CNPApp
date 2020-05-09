@@ -31,6 +31,7 @@ var reportsRouter = require('./routes/reports');
 var emailerRouter = require('./routes/emailer');
 var tasksRouter = require('./routes/tasks');
 var statsRouter = require('./routes/stats');
+var styleSettingsRouter = require('./routes/styleSettings');
 
 var app = express();
 
@@ -66,6 +67,7 @@ app.use('/reports', reportsRouter);
 app.use('/emailer', emailerRouter);
 app.use('/tasks', tasksRouter);
 app.use('/stats', statsRouter);
+app.use('/styleSettings', styleSettingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

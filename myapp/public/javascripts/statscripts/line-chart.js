@@ -52,7 +52,7 @@ function getRandomColor() {
 //generates the line
 function generateLine(id) {
   var parent = document.getElementById("charts");
-  var container = document.createElement("div");; container.className = "lightGray1-BG width90 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
+  var container = document.createElement("div");; container.className = "light-content-BG width90 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
   var bottom = document.getElementById("chartPanel");
   var twoColContainer = document.createElement("div");
   twoColContainer.classList = "flex flexWrap spaceBetween heavyPadding";
@@ -68,12 +68,12 @@ function generateLine(id) {
 
   //Start and End Date
   { 
-    temp = document.createElement("title"); temp.className = "width100 darkGray3-BG flex spaceBetween flexAlignCenter marginLeft lightText font25px";
+    temp = document.createElement("title"); temp.className = "width100 dark-content-light-BG flex spaceBetween flexAlignCenter marginLeft light-text font25px";
 
     var title = document.createElement('h2'); title.innerHTML = "Pie Chart"; title.classList = "heavyPadding";
 
     temp.appendChild(title);
-    var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding lightText red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
+    var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding light-text red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);
     container.appendChild(temp);
 

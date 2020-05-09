@@ -8,7 +8,7 @@
     text-align: left;
     margin-top: 0px;
     margin-bottom: 30px;
-    background: var(--accentColor1);
+    background: var(--ThemeColor1);
     box-shadow: 0px 0px 5px var(--darkGray2);
   }
   
@@ -23,21 +23,21 @@
     position: relative;
     transition: 0.2s background-color;
     display: inline-block;
-    color: var(--lightGray2);
+    color: var(--light-textColor);
     text-decoration: none;
     padding: 20px 30px;
     margin: 0;
   }
 
 .headerStyle a:hover{
-    background: var(--accentColor1Light);
+    background: var(--ThemeColor1Light);
   }
 
   /* hopefully a temporary solution. Would like to re-use the above a:hover for this */
 .currentPage{
   font-size: 1.4em;
-  color: var(--lightGray2) !important;
-  background: var(--accentColor1Light);
+  color: var(--light-textColor) !important;
+  background: var(--ThemeColor1Light);
 }
 
 .currentPage:hover{
@@ -48,7 +48,7 @@
   display: none;
   height: 150px;
   margin-bottom: 30px;
-  background: var(--accentColor1);
+  background: var(--ThemeColor1);
 }
 
 /* Div full of header links <a> tags */
@@ -60,15 +60,15 @@
   top: 150px;
   z-index: 10;
   width: 100%;
-  color: var(--lightGray2);
-  background: var(--accentColor1);
+  color: var(--light-textColor);
+  background: var(--ThemeColor1);
 }
 
 /* Actual links */
 .mobileHeader .links a{
   text-align: center;
   text-decoration: none;
-  color: var(--lightGray2);
+  color: var(--light-textColor);
   align-self: center;
   width: 100%;
   border-bottom: 1px solid var(--lightGray3);
@@ -84,7 +84,7 @@
   
   padding: 14px 16px;
   background: none;
-  color: var(--lightGray1);
+  color: var(--light-textColor);
   font-size: 80px;
   display: block;
   position: absolute;

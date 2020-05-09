@@ -10,8 +10,8 @@
 
 .customTable thead th{
     border: none;
-    background: var(--accentColor2);
-    color: var(--lightGray2);
+    background: var(--ThemeColor2);
+    color: var(--light-textColorDark);
     font-size: 2.2em;
     padding: 10px 0;
     font-weight: 500;
@@ -29,8 +29,8 @@
 }
 
 .customTable tr{
-    color: var(--darkGray2);
-    background: var(--lightGray1);
+    color: var(--dark-textColor);
+    background: var(--LightContentBackground);
     border-bottom: 3px solid var(--darkGray3);
 }
 

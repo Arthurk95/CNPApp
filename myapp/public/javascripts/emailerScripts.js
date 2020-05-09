@@ -16,9 +16,9 @@ var behaviors;
 var formElement;
 var saveButton;
 
-var APPROVED_COLOR = "accent2Light-BG";
-var APPROVED_COLOR_DARK = "accent2-BG";
-var SAVED_COLOR = "accent2Light-BG";
+var APPROVED_COLOR = "theme-color2-light-BG";
+var APPROVED_COLOR_DARK = "theme-color2-BG";
+var SAVED_COLOR = "theme-color2-light-BG";
 
 var summary;
 var header;
@@ -101,11 +101,11 @@ function populateData(){
 
     for(var i = 0; i < currentStudentData.listOfActivities.length; i++){
         var li = document.createElement("li");
-        li.classList = "padding10px centerText margin10 lightGray2-BG width35";
+        li.classList = "padding10px centerText margin10 light-content-dark-BG width35";
         li.innerHTML = currentStudentData.listOfActivities[i].ActivityName;
         
         if(currentStudentData.listOfActivities[i].Helper === 1){
-            li.innerHTML += "&nbsp" + "<i class='fas fa-star accent2Light-text'></i>"
+            li.innerHTML += "&nbsp" + "<i class='fas fa-star theme-color2-light-text'></i>"
         }
         activities.appendChild(li);
     }
@@ -131,7 +131,7 @@ function populateData(){
                     if(element.name === behaviorKeys[i]){
                         element.value = behaviorValues[i];
                         document.getElementById(behaviorKeys[i] + "-text-box").value = behaviorValues[i + 1];
-                        toggleClassIfInputNotEmpty(behaviorKeys[i] + "-text-box", document.getElementById(behaviorKeys[i] + "-note-button"), 'accent2Light-BG', 'accent4Light-BG');
+                        toggleClassIfInputNotEmpty(behaviorKeys[i] + "-text-box", document.getElementById(behaviorKeys[i] + "-note-button"), 'theme-color2-light-BG', 'theme-color4-light-BG');
                     }
                 }
             }

@@ -16,14 +16,14 @@
     <% if (students.length > 0) {%>
         <% if (activities.length > 0) {%>
             <ul id="selectionButtons" class="selectionButtons">
-                <li><a id="studentButton" class="accent2Light-BG" onclick="startWithStudents()">Select Students</a></li>
-                <li><a id="activitiesButton" class="accent3Light-BG" onclick="startWithActivities()">Select Activity</a></li>
+                <li><a id="studentButton" class="theme-color2-light-BG" onclick="startWithStudents()">Select Students</a></li>
+                <li><a id="activitiesButton" class="theme-color3-light-BG" onclick="startWithActivities()">Select Activity</a></li>
             </ul>
             <%- include listOfStudents.ejs %></ul>
 
             <ul id="activities" class="blockList activitiesList">
                 <li class="flex flexAlignCenter">
-                    <input class="margin10 lightGray1-BG font40px" onkeyup="updateSearch('activities', this)"></input>
+                    <input class="margin10 light-content-BG font40px" onkeyup="updateSearch('activities', this)"></input>
                     <i class="font50px marginRight20 fas fa-search"></i>
                 </li>
                 <% activities.forEach((activity, index) => { %>
@@ -31,7 +31,7 @@
                     <div class="blockContainer">
                         <p><%= activity.ActivityName %>
                             <% if(activity.Helper == 1) { %>
-                            <i class="fas fa-star accent2Light-text"></i>
+                            <i class="fas fa-star theme-color2-light-text"></i>
                           <% } %></p>
                         <div class="checkmarkOverlay">
                             
@@ -56,15 +56,15 @@
     <footer>
         <ul id="footer" class="studentFooter">
             <li class="flex flexCenter flexStretch">
-                <a id="pottyBreak" class="flexGrow1 accent3Light-BG" onclick="pottyBreak()" style="display: none">Potty Break</a>
-                <a id="backButton" class="flexGrow1 accent4-BG" onclick="goBack()" style="display: none">Back</a>
-                <a id="nextButton" class="flexGrow1 accent2Light-BG" onclick="nextStep()" style="display: none">Next</a>
-                <a id="submitButton" onclick="submitToDB()" class="flexGrow1 accent2-BG" style="display: none">Submit</a>
+                <a id="pottyBreak" class="flexGrow1 theme-color3-light-BG" onclick="pottyBreak()" style="display: none">Potty Break</a>
+                <a id="backButton" class="flexGrow1 theme-color4-BG" onclick="goBack()" style="display: none">Back</a>
+                <a id="nextButton" class="flexGrow1 theme-color2-light-BG" onclick="nextStep()" style="display: none">Next</a>
+                <a id="submitButton" onclick="submitToDB()" class="flexGrow1 theme-color2-BG" style="display: none">Submit</a>
             </li>
             <li id="pottyYesNo" class="flex flexCenter flexStretch">
-                <a class="flexGrow1 darkGray3-BG noClick" style="display: none;">Accident?</a>
-                <a id="pottyYes" class="flexGrow1 accent4-BG" onclick="submitPottyToDB(this, true)" style="display: none;">Yes</a>
-                <a id="pottyNo" class="flexGrow1 accent2-BG" onclick="submitPottyToDB(this, false)" style="display: none;">No</a>
+                <a class="flexGrow1 dark-content-light-BG noClick" style="display: none;">Accident?</a>
+                <a id="pottyYes" class="flexGrow1 theme-color4-BG" onclick="submitPottyToDB(this, true)" style="display: none;">Yes</a>
+                <a id="pottyNo" class="flexGrow1 theme-color2-BG" onclick="submitPottyToDB(this, false)" style="display: none;">No</a>
             </li>
         </ul>
     </footer>

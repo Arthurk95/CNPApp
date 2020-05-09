@@ -27,7 +27,7 @@
     font-size: 3em;
     justify-self: stretch;
     padding: 12px 80px;
-    color: var(--lightGray1);
+    color: var(--light-textColor);
     margin: auto;
 }
 
@@ -62,11 +62,11 @@
 }
 
 .studentFooter .noClick{
-    color: var(--lightGray2);
+    color: var(--light-textColorDark);
     cursor: default; 
     border-right: 3px solid var(--darkGray2);
 }
 
 .studentFooter .noClick:hover{ filter: none;}
 
-.noClick:hover{background-color: var(--darkGray3) !important;}
+.noClick:hover{background-color: var(--dark-textColorLight) !important;}

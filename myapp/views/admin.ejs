@@ -28,7 +28,7 @@
             <a class="side-header-link" href="/">Home</a>
             <a class="side-header-link" href="/tracker">Tracker</a>
             <a class="side-header-link" href="/reports">Reports</a>
-            <a class="side-header-link accent1Light-BG" href="/admin">Admin</a>
+            <a class="side-header-link theme-color1-light-BG" href="/admin">Admin</a>
             <a class="side-header-link" href="/stats">Stats</a>
             <a class="side-header-link" href="/emailer">Email</a>
             <a class="side-header-link" href="/tasks">Tasks</a>
@@ -53,7 +53,7 @@
               <button class="side-header-link resetButton width100 leftText noBorder" href="/logout?_method=DELETE" type="submit"><i class="rotate180 fas fa-sign-out-alt marginRight10"></i> Logout</button>
             </form>
           </div>
-      </div>
+        </div>
       </div>
 
       <div class="content-with-side-header">
@@ -63,11 +63,11 @@
           <div class="flex spaceAround flexGrow1 flexWrap width100Mobile flexAlignStart">
             <!-- Todays Roster Panel -->
             
-            <div id="rosterPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
-              <div class="accent2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
-                <p class="marginLeft10 lightText font25px">Today's Roster</p>
+            <div id="rosterPanel" class="mobilePanel light-content-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
+              <div class="theme-color2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
+                <p class="marginLeft10 light-text font25px">Today's Roster</p>
                 <!-- Hidden div there to get original text when closing popup -->
-                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding lightGray2-text font15px">Add Student <div style="display: none">Add Student</div></a>
+                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text-dark font15px">Add Student <div style="display: none">Add Student</div></a>
                 
               </div>
               <div class="heavyPadding maxHeight250px">
@@ -77,13 +77,13 @@
                       <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
                         <li class="flex white-BG spaceBetween flexAlignCenter">
                           <p><%= student.StudentName %></p>
-                        <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></button>
+                        <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red-BG dark-text hoverable"><i class="fas fa-question"></i></button>
                           
                     <% }) %>
                   <% } else { %>
                     <li class="flex white-BG spaceBetween flexAlignCenter">
                       <p>No Students Today</p>
-                    <a class="padding8px25px red3-BG darkGray2-text hoverable"><i class="fas fa-question"></i></a>
+                    <a class="padding8px25px red-BG dark-text hoverable"><i class="fas fa-question"></i></a>
                   <% } %>
                 
                 </ul>
@@ -101,10 +101,10 @@
 
 
             <!-- --------------------- STUDENTS PANEL --------------------- -->
-            <div id="studentsPanel" class="mobilePanel lightGray1-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px width45">
-              <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-                <p class="marginLeft10 lightText font25px">Students</p>
-                <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+            <div id="studentsPanel" class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px width45">
+              <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
+                <p class="marginLeft10 light-text font25px">Students</p>
+                <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
               </div>
 
               <!-- Students list -->
@@ -126,7 +126,7 @@
                 <div id="newStudentForm" class="formWindow">
                   <div class="formWindow-content flexContainer">
                     <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText accent2Light-text">Add a Student</p>
+                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Student</p>
                     
                     <!-- Name/Birthday -->
                     <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
@@ -135,7 +135,7 @@
                         <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
                       </div>
                       <div class="flex spaceAround flexAlignCenter width45 width90Mobile">
-                        <label class="accent2Light-text font20px marginRight20">Birthday:</label>
+                        <label class="theme-color2-light-text font20px marginRight20">Birthday:</label>
                         <div class="inputWithIcon width15 white-BG">
                           <input id="month" placeholder="MM" maxlength="2"></input>
                         </div>
@@ -153,7 +153,7 @@
                       
                       <!-- Guardian 1 -->
                       <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                        <p class="largeFont marginBottom10 accent2Light-text">Guardian 1</p>
+                        <p class="largeFont marginBottom10 theme-color2-light-text">Guardian 1</p>
                         <div class="inputWithIcon width100 white-BG">
                           <i class="fas fa-user"></i>
                           <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
@@ -170,7 +170,7 @@
 
                       <!-- Guardian 2 -->
                       <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile">
-                        <p class="largeFont marginBottom10 accent2Light-text">Guardian 2</p>
+                        <p class="largeFont marginBottom10 theme-color2-light-text">Guardian 2</p>
                         <div class="inputWithIcon width100 white-BG">
                           <i class="fas fa-user"></i>
                           <input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name">
@@ -226,10 +226,10 @@
             </div> <!-- End Students Panel-->
 
             <!-- --------------------- REMINDER PANEL --------------------- -->
-            <div id="remindersPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 borderRadiusSmall hideOverflow minWidth400px width40">
-              <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-                <p class="marginLeft10 lightText font25px">Reminders</p>
-                <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+            <div id="remindersPanel" class="mobilePanel light-content-BG margin10 flexGrow1 borderRadiusSmall hideOverflow minWidth400px width40">
+              <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
+                <p class="marginLeft10 light-text font25px">Reminders</p>
+                <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
               </div>
               <div class="heavyPadding maxHeight250px">
                 <ul id="reminders" class="ulList">
@@ -244,9 +244,9 @@
                           <p><%= reminder.title %></p>
                           <div class="flex">
                             <% if(reminder.value != -1){ %>
-                              <button class="green3-BG noBlackAndWhiteHover" onclick="hideReminder(this, '<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
-                              <button class="yellow3-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
-                              <button class="red3-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
+                              <button class="green-BG noBlackAndWhiteHover" onclick="hideReminder(this, '<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
+                              <button class="yellow-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
+                              <button class="red-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
                             <% }; %>
                           </div>
                           
@@ -258,7 +258,7 @@
                 <div id="editReminderForm" class="formWindow">
                   <div class="formWindow-content width60">
                     <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText accent2Light-text">Edit a Reminder</p>
+                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit a Reminder</p>
 
                     <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
                       <div class="flex width80 width100Mobile marginBottom20">
@@ -336,7 +336,7 @@
                 <div id="newReminderForm" class="formWindow">
                   <div class="formWindow-content width60 width90Mobile">
                     <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText accent2Light-text">Add a Reminder</p>
+                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Reminder</p>
 
                     <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
                       <div class="flex width60 width100Mobile">
@@ -407,10 +407,10 @@
             </div> <!-- End reminder panel -->
       
             <!-- --------------------- BEHAVIORS PANEL --------------------- -->
-            <div id="behaviorsPanel" class="mobilePanel lightGray1-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth400px">
-              <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter">
-                <p class="marginLeft10 lightText font25px">Behaviors</p>
-                <a onclick="openForm('newBehaviorForm')" class="lightPadding accent2Light-text font15px">Add New</a>
+            <div id="behaviorsPanel" class="mobilePanel light-content-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth400px">
+              <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
+                <p class="marginLeft10 light-text font25px">Behaviors</p>
+                <a onclick="openForm('newBehaviorForm')" class="lightPadding theme-color2-light-text font15px">Add New</a>
               </div>
               <div class="heavyPadding maxHeight250px">
                 <ul id="behaviors" class="ulList">
@@ -425,9 +425,9 @@
                         <% } %>
                           <p><%= behavior.title %></p>
                           <div class="flex">
-                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
-                            <button class="yellow3-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i class="far fa-edit"></i></button>
-                            <button class="red3-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
+                            <button class="green-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
+                            <button class="yellow-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i class="far fa-edit"></i></button>
+                            <button class="red-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
                           </div>
                     <% }) %>
                   <% } %>
@@ -438,7 +438,7 @@
               <div id="editBehaviorForm" class="formWindow">
                 <div class="formWindow-content">
                   <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Edit a Behavior</p>
+                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit a Behavior</p>
 
                   <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
                     <div class="flex width60 width100Mobile marginBottom20">
@@ -494,7 +494,7 @@
               <div id="newBehaviorForm" class="formWindow">
                 <div class="formWindow-content width40 width90Mobile">
                   <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText accent2Light-text">Add a Behavior</p>
+                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Behavior</p>
 
                   <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
                     <div class="flex width60 width100Mobile marginBottom20">
@@ -547,19 +547,19 @@
             <!--  --------------------- ACTIVITIES PANEL --------------------- -->
             <div id="activitiesPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100">
               <!-- Title Bar -->
-              <div class="darkGray3-BG mediumPadding flex flexAlignCenter spaceBetween">
-                <p id="activityTitle" class="marginLeft10 lightText font25px">Activities</p>
+              <div class="dark-content-light-BG mediumPadding flex flexAlignCenter spaceBetween">
+                <p id="activityTitle" class="marginLeft10 light-text font25px">Activities</p>
                 <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
                 <div class="flex">
-                  <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')" class="marginRight20 lightText font20px">
+                  <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')" class="marginRight20 light-text font20px">
                     <i class="fas fa-search"></i>
                   </a>
-                  <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+                  <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
                 </div>
               </div>
 
               <!-- Activities List -->
-              <div class="heavyPadding maxHeight600px lightGray1-BG ">
+              <div class="heavyPadding maxHeight600px light-content-BG ">
                 <ul id="activities" class="ulList">
                   <% if (activities.length > 0) {%>
                     <% activities.forEach((activity, index) => { %>
@@ -571,12 +571,12 @@
                         
                           <p><%= activity.ActivityName %> 
                             <% if(activity.Helper == 1) { %>
-                            <i class="fas fa-star accent2Light-text"></i>
+                            <i class="fas fa-star theme-color2-light-text"></i>
                           <% } %></p>
                           <div class="flex">
-                            <button class="green3-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                            <button class="yellow3-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                            <button class="red3-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
+                            <button class="green-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
+                            <button class="yellow-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
+                            <button class="red-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
                           </div>
                         </li>
                     <% }) %>
@@ -587,7 +587,7 @@
                 <div id="editActivityForm" class="formWindow">
                   <div class="formWindow-content">
                     <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText accent2Light-text">Edit an Activity</p>
+                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit an Activity</p>
 
                     <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
                       <div class="flex width60 width100Mobile">
@@ -611,7 +611,7 @@
                 <div id="newActivityForm" class="formWindow">
                   <div class="formWindow-content">
                     <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText accent2Light-text">Add an Activity</p>
+                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Add an Activity</p>
 
                     <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
                       <div class="flex width60 width100Mobile">
@@ -638,7 +638,7 @@
             <div id="editHeaderForm" class="formWindow">
               <div class="formWindow-content">
                 <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                <p class="font50px marginBottom40 centerText accent2Light-text">Edit Header</p>
+                <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit Header</p>
                 <div id="header-toolbar-container">
                   <span class="ql-formats">
                       <select class="ql-size">
@@ -697,7 +697,7 @@
             <div id="editSignatureForm" class="formWindow">
               <div class="formWindow-content">
                 <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                <p class="font50px marginBottom40 centerText accent2Light-text">Edit Signature</p>
+                <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit Signature</p>
                 <div id="footer-toolbar-container">
                   <span class="ql-formats">
                       <select class="ql-size">

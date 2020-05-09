@@ -41,8 +41,8 @@
     </head>
     <body>
         <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
-            <div id="stepOne" class="flexCenter flexColumn borderBox lightGray1-BG borderRadiusMedium width90">
-                <p class="title accent2-BG">Step 1: Email Template</p>
+            <div id="stepOne" class="flexCenter flexColumn borderBox light-content-BG borderRadiusMedium width90">
+                <p class="title theme-color2-BG">Step 1: Email Template</p>
                 <div class="veryHeavyPadding">
                     <ul class="flex flexColumn marginBottom40">
                         <li class="marginBottom10">
@@ -206,12 +206,12 @@
             </div>
 
             <div id="stepTwo" class="contentWithSidebar spaceAround">
-                <div class="width70 width90Mobile lightGray1-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
-                    <div id="stepTwoTitle" class="heavyPadding accent1Light-BG flex spaceBetween flexAlignCenter flexWrap">
-                        <p class="font50px lightGray1-text marginLeft10"></p>
+                <div class="width70 width90Mobile light-content-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
+                    <div id="stepTwoTitle" class="heavyPadding theme-color1-light-BG flex spaceBetween flexAlignCenter flexWrap">
+                        <p class="font50px light-text marginLeft10"></p>
                         <p class="displayNone" id="currentStudentID"></p>
-                        <div id="reviewButton" class="buttonWithIcon accent2Light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
-                            <!-- <div class="buttonWithIcon accent2Light-BG" onclick="openReview()"> -->
+                        <div id="reviewButton" class="buttonWithIcon theme-color2-light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
+                            <!-- <div class="buttonWithIcon theme-color2-light-BG" onclick="openReview()"> -->
                             <p class="mediumPadding">Review</p>
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                     <div id="reviewForm" class="formWindow">
                         <div class="formWindow-content flexContainer width80 width90Mobile">
                             <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                            <p id="reviewTitle" class="font40px marginBottom40 centerText accent2Light-text">Review</p>
+                            <p id="reviewTitle" class="font40px marginBottom40 centerText theme-color2-light-text">Review</p>
                             <div class="center width90 white-BG padding30px">
                                 <div id="reviewData"></div>
                             </div>
@@ -235,7 +235,7 @@
                     <div id="reportForm" class="formWindow">
                         <div class="formWindow-content flexContainer width80 width90Mobile">
                             <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                            <p id="reportTitle" class="font40px marginBottom40 centerText accent2Light-text">Email Report</p>
+                            <p id="reportTitle" class="font40px marginBottom40 centerText theme-color2-light-text">Email Report</p>
                             <div class="center width90 white-BG padding30px">
                                 <div id="reportData">
                                     <table id="reportTable">
@@ -256,8 +256,8 @@
                     <div class="content"> <!-- activities and dropdowns -->
                         <div class="flex flexCollapseMobile marginBottom40 spaceBetween">
                             <div id="activities" class="width60 width100Mobile">
-                                <p class="mediumFont darkText marginBottom20 centerText">Activities</p>
-                                <ul id="activitiesList" class="flex flexWrap spaceAround darkText width90 center"></ul>
+                                <p class="mediumFont dark-text marginBottom20 centerText">Activities</p>
+                                <ul id="activitiesList" class="flex flexWrap spaceAround dark-text width90 center"></ul>
                             </div>
 
                             <!-- Behavior dropdowns -->
@@ -272,8 +272,8 @@
                                             
                                             <input style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></input>
                                     
-                                            <a id="<%= behavior.name %>-note-button" onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name %>Select'); toggleClassIfInputNotEmpty('<%=behavior.name %>-text-box', this, 'accent2Light-BG', 'accent4Light-BG');" class="marginLeft10 borderRadiusSmall accent4Light-BG lightPadding">
-                                                <i class="fas fa-sticky-note darkText"></i>
+                                            <a id="<%= behavior.name %>-note-button" onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name %>Select'); toggleClassIfInputNotEmpty('<%=behavior.name %>-text-box', this, 'theme-color2-light-BG', 'theme-color4-light-BG');" class="marginLeft10 borderRadiusSmall theme-color4-light-BG lightPadding">
+                                                <i class="fas fa-sticky-note dark-text"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -282,7 +282,7 @@
                                     <div id="<%= behavior.name %>Form" class="formWindow">
                                         <div class="formWindow-content width500px width90Mobile flexContainer">
                                             <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                                            <p class="font50px marginBottom40 centerText accent2Light-text"><%= behavior.name %></p>
+                                            <p class="font50px marginBottom40 centerText theme-color2-light-text"><%= behavior.name %></p>
                                             <div class="flex flexColumn flexCenter center flexAlignCenter marginBelowChildren10 width80 width90Mobile">
                                                 <textarea class="width100" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> notes.."></textarea>
                                             </div>
@@ -299,11 +299,11 @@
                             </div>
                         </div>
                         <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                            <div class="accent4-BG buttonWithIcon" onclick="toPreviousStep();">
+                            <div class="theme-color4-BG buttonWithIcon" onclick="toPreviousStep();">
                                 <i class="fas fa-caret-left"></i>
                                 <p>Back</p>
                             </div>
-                            <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>); toggleStyle(this, 'accent2Light-BG');">
+                            <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>); toggleStyle(this, 'theme-color2-light-BG');">
                                 <p>Save</p>
                                 <i class="fas fa-check"></i>
                             </div>
@@ -312,7 +312,7 @@
                 </div>
                 
                 <!-- Right column (students) -->
-                <div class="sidebar width20 width90Mobile lightGray1-BG">
+                <div class="sidebar width20 width90Mobile light-content-BG">
                     <ul id="listOfStudents" class="studentsList maxHeight500px" >
                     <% if (reports.length > 0) { %>
                         <script>passToJS(<%- JSON.stringify(reports) %>);</script>
@@ -323,7 +323,7 @@
                         <li>No Students</li>
                     <% } %>
                     </ul>
-                    <div id="sendEmailButton" class="buttonWithIcon width60 marginBottom20 accent2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); toggleElementID('spinner'); ">
+                    <div id="sendEmailButton" class="buttonWithIcon width60 marginBottom20 theme-color2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); toggleElementID('spinner'); ">
                         <p class="width100">Send Emails<div style="display: none" id="spinner" class="spinning-loader marginLeft10"></div></p>
                     </div>
                 </div>
@@ -411,9 +411,9 @@
 
                 var label = document.createElement("label");
                 label.innerHTML = "Reminder " + numRemindersShown;
-                label.classList = "darkText";
+                label.classList = "dark-text";
                 var icon = document.createElement("i");
-                icon.classList = "fas fa-minus accent4-text marginRight10 hoverable";
+                icon.classList = "fas fa-minus theme-color4-text marginRight10 hoverable";
                 icon.onclick = function(){li.parentNode.removeChild(li)};
                 var div = document.createElement("div");
                 div.classList = "flex spaceBetween flexAlignCenter";

@@ -191,11 +191,11 @@ function fillTodaysRosterPopup(ID, allStudents, todaysStudents){
         if(todaysStudents.some(student => student.StudentId === allStudents[i].StudentId)){}
         else{
             var button = document.createElement('button');
-            button.innerHTML = "<i class='lightGray1-text font25px fas fa-plus'></i>";
-            button.classList = "accent2Light-BG";
+            button.innerHTML = "<i class='light-text font25px fas fa-plus'></i>";
+            button.classList = "theme-color2-light-BG";
             button.setAttribute("onclick", "addToTodaysRoster(this, " + JSON.stringify(allStudents[i]) + ");");
             var li = document.createElement('li');
-            li.classList = "spaceBetween lightGray1-BG";
+            li.classList = "spaceBetween light-content-BG";
             var p = document.createElement('p');
             p.innerHTML = allStudents[i].StudentName;
 

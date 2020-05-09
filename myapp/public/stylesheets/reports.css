@@ -18,7 +18,7 @@
     width: 30%;
     float: right;
     background: var(--blue1);
-    color: var(--darkGray2);
+    color: var(--dark-textColor);
     box-shadow: inset 0px 0px 3px var(--darkGray1);
 }
 

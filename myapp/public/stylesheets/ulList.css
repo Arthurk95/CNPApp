@@ -40,7 +40,7 @@
 
 .ulList li p{
     align-self: center;
-    color: var(--darkGray3);
+    color: var(--dark-textColorLight);
     font-size: 16px;
     margin: 5px 0px 5px 0px;
 }
@@ -52,7 +52,7 @@
     width: 3vw;
     border: none;
     outline: none;
-    color: var(--darkGray2);
+    color: var(--dark-textColor);
     transition: 0.1s box-shadow linear;
 }
 
@@ -67,14 +67,14 @@
 
 .ulList .addElement p{
     text-align: center;
-    color: var(--lightGray2) !important;
+    color: var(--light-textColorDark) !important;
 }
 
 .ulList .addElement a{
     justify-self: center;
     align-self: center;
     text-decoration: none;
-    color: var(--lightGray1);
+    color: var(--light-textColor);
     text-align: center;
     font-size: 2.5em;
     width: 100%;
@@ -92,7 +92,7 @@
     border-radius: 50%;
     overflow: hidden;
     font-size: var(--circleSize);
-    color: var(--lightGray2);
+    color: var(--light-textColorDark);
     box-shadow: 0px 0px 2px var(--darkGray3);
     transition: width 0.1s ease-in-out, height 0.1s ease-in-out, 
         font-size 0.1s ease-in-out, margin 0.1s ease-in-out;
@@ -144,7 +144,7 @@
       
   }
 .stripedBackground p{
-    color: var(--darkGray2);
+    color: var(--dark-textColor);
 }
 
 @media screen and (max-width: 1200px){

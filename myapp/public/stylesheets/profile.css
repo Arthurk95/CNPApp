@@ -36,12 +36,12 @@
     background: none;
     box-shadow: none;
     width: 70%;
-    color: var(--darkGray3);
+    color: var(--dark-textColorLight);
 }
 
 label{
     float: left;
-    color: var(--darkGray3);
+    color: var(--dark-textColorLight);
 }
 
 
@@ -131,7 +131,7 @@ label{
 
 .deleteButton{
     background: var(--reportsColorDark);
-    color: var(--lightGray2);
+    color: var(--light-textColorDark);
 }
 
 .deleteButton:hover{
@@ -145,7 +145,7 @@ label{
 
 .saveButton{
     background: var(--adminColor);
-    color: var(--lightGray1);
+    color: var(--light-textColor);
 }
 
 .saveButton:hover{

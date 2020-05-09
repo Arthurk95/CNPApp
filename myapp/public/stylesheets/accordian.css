@@ -3,7 +3,7 @@
     display: block;
     margin: 0 auto;
     background-color: var(--green3);
-    color: var(--lightGray2);
+    color: var(--light-textColorDark);
     cursor: pointer;
     padding: 18px 0;
     width: 95%;
@@ -18,7 +18,7 @@
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .accordion:hover {
     background-color: var(--green4);
-    color: var(--lightGray1);
+    color: var(--light-textColor);
   }
 
   .ui-accordion-header {
@@ -27,7 +27,7 @@
 
   /* jQuery override for the color of the buttons */
   .ui-accordion-header.ui-state-active{
-    color: var(--lightGray1) !important;
+    color: var(--light-textColor) !important;
     background-color: var(--green5) !important;
   }
   

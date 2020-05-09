@@ -22,17 +22,17 @@
         <div class="flex flexColumn width65 flexAlignCenter width100Mobile">
 
           <!-- -------------------- INFO PANEL --------------------- -->
-          <div id="infoPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100 lightGray1-BG">
+          <div id="infoPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100 light-content-BG">
             <div class="flexContainer spaceAround flexWrap heavyPadding">
               <ul class="width40 width100Mobile">
-                <li class="darkText largeFont marginBottom10">Guardian #1</li>
+                <li class="dark-text largeFont marginBottom10">Guardian #1</li>
                 <li><input class="lineInput"name="guardian1Name" type="text" id="guardian1Name" placeholder="Guardian Name" value="<%- student.RelativeName %>"></li>
                 <li><input class="lineInput" name="guardian1Email" type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
                 <li><input class="lineInput marginBottom30" name="guardian1Number" type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
               </ul>
 
               <ul class="width40 width100Mobile">
-                <li class="darkText largeFont">Guardian #2</li>
+                <li class="dark-text largeFont">Guardian #2</li>
                 <li><input class="lineInput" name="guardian2Name" type="text" id="guardian2Name" placeholder="Guardian Name" value="<%- student.RelativeName2 %>"></li>
                 <li><input class="lineInput" name="guardian2Email" type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
                 <li><input class="lineInput" name="guardian2Number" type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
@@ -44,7 +44,7 @@
 
           <div class="flex flex width100 flexCollapseMobile spaceBetween centerFlexMobile">
           <!-- -------------------- EXTRA INFO PANEL --------------------- -->
-            <div id="extraInfoPanel" class="mobilePanel width60 lightGray1-BG borderRadiusSmall hideOverflow">
+            <div id="extraInfoPanel" class="mobilePanel width60 light-content-BG borderRadiusSmall hideOverflow">
               <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
                 <div class="flex flexColumn width100 marginBottom30">
                   <p>Allergies</p>
@@ -58,7 +58,7 @@
             </div>
   
             <!-- -------------------- SCHEDULE PANEL --------------------- -->
-            <div id="schedulePanel" class="mobilePanel lightGray1-BG borderRadiusSmall hideOverflow marginLeft10 flexGrow1">
+            <div id="schedulePanel" class="mobilePanel light-content-BG borderRadiusSmall hideOverflow marginLeft10 flexGrow1">
               <div class="flexContainer flexColumn flexCenterMobile spaceAround flexWrap heavyPadding">
                 <div class="flex flexCenter flexAlignCenter width100 marginBottom30">
                   <% if(student.DayType == 1) { %>
@@ -84,7 +84,7 @@
         
 
         <!-- -------------------- STUDENT PROFILE (RIGHT SIDE) --------------------- -->
-        <div class="profileSection lightGray1-BG margin10">
+        <div class="profileSection light-content-BG margin10">
           <ul class="width90 flexListColumn heavyPadding">
             <li>
               <label for="file-input" class="imageContainer tooltip marginBottom40 marginTop20">
@@ -120,7 +120,7 @@
                 <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
                 <a onclick="saveStudent()" class="saveButton">Save Changes</a>
             </li>
-            <li class="flex flexCenter"><a class="font20px width100 accent1Light-BG lightGray1-text centerText hoverable padding10px" href="/admin">Back to Admin</a></li>
+            <li class="flex flexCenter"><a class="font20px width100 theme-color1-light-BG light-text centerText hoverable padding10px" href="/admin">Back to Admin</a></li>
             <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST"></form>
               <label><font color="green"><%- messages.upload_successful %></font></label>
               <label><font color="green"><%- messages.changes_saved %></font></label>

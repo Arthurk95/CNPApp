@@ -18,10 +18,10 @@
     <div class="flex spaceBetween centerFlexMobile flexCollapseMobile width90 center">
       
       <!-- ------------ TASKS PANEL ------------ -->
-      <div id="tasksPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow minWidth450px flexGrow1">
-        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
-          <p class="marginLeft10 lightText font25px">Tasks</p>
-          <a onclick="openForm('newTaskForm')" class="marginRight10 lightPadding accent2Light-text font15px">Add New</a>
+      <div id="tasksPanel" class="mobilePanel light-content-BG margin10 borderRadiusSmall hideOverflow minWidth450px flexGrow1">
+        <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
+          <p class="marginLeft10 light-text font25px">Tasks</p>
+          <a onclick="openForm('newTaskForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
         </div>
         <div class="heavyPadding maxHeight500px">
           <ul id="tasksList" class="ulList">
@@ -35,13 +35,13 @@
                   
                   <div class="flex font25px">
                     <% if (task.Priority == 0) { %>
-                      <button class="accent2Light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
+                      <button class="theme-color2-light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
                     <% } else if(task.Priority == 1) { %>
-                      <button class="accent3Light-BG" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
+                      <button class="theme-color3-light-BG" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
                     <% } else { %>
-                      <button class="accent4Light-BG" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
+                      <button class="theme-color4-light-BG" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
                     <% } %>
-                    <button class="accent4-BG" onclick="deleteTask('<%= task.TaskId %>')"><i class="lightText far fa-trash-alt"></i></button>
+                    <button class="theme-color4-BG" onclick="deleteTask('<%= task.TaskId %>')"><i class="light-text far fa-trash-alt"></i></button>
                   </div>
                   
               <% }) %>
@@ -51,7 +51,7 @@
           <div id="newTaskForm" class="formWindow">
             <div class="formWindow-content">
               <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-              <p class="font50px centerText accent2Light-text marginBottom40">Add a Task</p>
+              <p class="font50px centerText theme-color2-light-text marginBottom40">Add a Task</p>
               
               <div class="flex spaceBetween flexAlignCenter flexCollapseMobile marginBottom40 marginBelowChildren10 marginBottom40 width100">
                 <div class="flex width50 width90Mobile">
@@ -76,10 +76,10 @@
       </div> <!-- End Tasks Section -->
 
        <!-- ------------ LOG PANEL ------------ -->
-      <div id="logPanel" class="mobilePanel lightGray1-BG margin10 borderRadiusSmall hideOverflow width500px minWidth500px">
-        <div class="darkGray3-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
-          <p class="marginLeft10 lightText font25px">Log</p>
-          <a onclick="clearLog()" class="marginRight10 lightPadding accent4Light-text font15px">Clear</a>
+      <div id="logPanel" class="mobilePanel light-content-BG margin10 borderRadiusSmall hideOverflow width500px minWidth500px">
+        <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
+          <p class="marginLeft10 light-text font25px">Log</p>
+          <a onclick="clearLog()" class="marginRight10 lightPadding theme-color4-light-text font15px">Clear</a>
         </div>
         <div class="heavyPadding maxHeight500px">
           
@@ -88,7 +88,7 @@
               <% compTasks.forEach((task, index) => {%>
               <li class="flex spaceBetween">
                 <p><%= task.NoteContent %></p>
-                <div class="width40 lightGray3-BG centerText">
+                <div class="width40 light-content-dark-BG centerText">
                   <p><%= task.CompletedTime.toDateString() %></p>
                 </div>
               </li>
