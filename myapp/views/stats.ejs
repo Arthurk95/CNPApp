@@ -205,7 +205,7 @@
         var selection = "Students";
         var beta = document.getElementById('option2' + caller).options[document.getElementById('option2' + caller).selectedIndex].text;
         var id = document.getElementById('optionid1' + caller).options[document.getElementById('optionid1' + caller).selectedIndex].value;
-        var start = document.getElementById('syear'+caller).value + '-' + document.getElementById('smonth'+caller).value + '-' + document.getElementById('sday'+caller).value;
+        var start = document.getElementById('syear' + caller).value + '-' + document.getElementById('smonth' + caller).value + '-' + document.getElementById('sday' + caller).value;
         var end = document.getElementById('eyear'+caller).value + '-' + document.getElementById('emonth'+caller).value + '-' + document.getElementById('eday'+caller).value;
         theUrl = window.location.href+'/getdata';
         data = "id=" + id + "&prime=" + selection + "&beta=" + beta + "&weather=" + weather + "&start=" + start + "&end=" + end + "&caller=" + caller + "&chart=Pie";
@@ -542,7 +542,7 @@
         var years = document.getElementById('syear' + id);
         var year = years.options[years.selectedIndex].text;
         var day = document.getElementById('sday' + id);
-        month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
+        month = new Date (2012,(parseInt(month)), 1, 1, 1, 1 ).getMonth()+1
         var daysinmonth = new Date(year, month, 0).getDate();
         $(day).empty();
         for(var i = 1; i <= daysinmonth; ++i){
@@ -559,7 +559,7 @@
         var years = document.getElementById('eyear' + id);
         var year = years.options[years.selectedIndex].text;
         var day = document.getElementById('eday' + id);
-        month = new Date(Date.parse(month +" 1, 2012")).getMonth()+1
+        month = new Date (2012,(parseInt(month)), 1, 1, 1, 1 ).getMonth()+1
         var daysinmonth = new Date(year, month, 0).getDate();
         $(day).empty();
         for(var i = 1; i <= daysinmonth; ++i){
