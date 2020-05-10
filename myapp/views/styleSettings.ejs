@@ -55,62 +55,102 @@
           </div>
         </div>
       </div>
+      
 
       <div class="content-with-side-header">
-        <div class="flex flexWrap spaceAround">
+        <div class="flex flexWrap spaceBetween">
+          <!-- ----- Theme Colors Panel ----- -->
+          <div class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth450px width450px">
+            <h2 class="width100 dark-content-BG padding10px light-text">Theme Colors</h2>
+            <div class="heavyPadding">
+              <% themeColors.forEach((variable, index) => {  %>
+                <div class="flex spaceBetween flexAlignCenter padding5px">
+                  <p><%= variable.Name %></p>
+                  <div class="flex flexRight width40 flexAlignCenter">
+                    <input maxlength="7" id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
+                    <div class="color-box" style="background:<%= variable.Value %>"></div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+
+          <div class="flex flexColumn flexAlignCenter flexGrow1 minWidth450px width450px">
+            <!-- ----- Text Colors Panel ----- -->
+            <div class="mobilePanel light-content-BG marginBottom10 marginTop10 borderRadiusSmall hideOverflow width450px">
+              <h2 class="width100 dark-content-BG padding10px light-text">Text Colors</h2>
+              <div class="heavyPadding">
+                <% textColors.forEach((variable, index) => {  %>
+                  <div class="flex spaceBetween flexAlignCenter">
+                    <p><%= variable.Name %></p>
+                    <div class="flex flexRight width40 flexAlignCenter">
+                      <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
+                      <div class="color-box" style="background:<%= variable.Value %>"></div>
+                    </div>
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+
+            <!-- ----- Content Colors Panel ----- -->
+            <div class="mobilePanel light-content-BG marginBottom10 marginTop10 borderRadiusSmall hideOverflow width450px">
+              <h2 class="width100 dark-content-BG padding10px light-text">Content Colors</h2>
+              <div class="heavyPadding">
+                <% contentColors.forEach((variable, index) => {  %>
+                  <div class="flex spaceBetween flexAlignCenter">
+                    <p><%= variable.Name %></p>
+                    <div class="flex flexRight width40 flexAlignCenter">
+                      <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
+                      <div class="color-box" style="background:<%= variable.Value %>"></div>
+                    </div>
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+          </div>
           
-                <div class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px">
-                  <h2 class="width100 dark-content-BG heavyPadding light-text">Theme Colors</h2>
-                  <div class="heavyPadding">
-                    <% themeColors.forEach((variable, index) => {  %>
-                      <div class="flex spaceBetween flexAlignCenter">
-                        <p><%= variable.Name %></p>
-                        <p><%= variable.Value %></p>
-                      </div>
-                    <% }) %>
-                  </div>
-                </div>
 
-                <div class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px">
-                  <h2 class="width100 dark-content-BG padding10px light-text">Text Colors</h2>
-                  <div class="heavyPadding">
-                    <% textColors.forEach((variable, index) => {  %>
-                      <div class="flex spaceBetween flexAlignCenter">
-                        <p><%= variable.Name %></p>
-                        <p><%= variable.Value %></p>
-                      </div>
-                    <% }) %>
+          <!-- ----- Other Variables Panel ----- -->
+          <div class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth450px width450px">
+            <h2 class="width100 dark-content-BG padding10px light-text">Other Variables</h2>
+            <div class="heavyPadding">
+              <% otherVariables.forEach((variable, index) => {  %>
+                <div class="flex spaceBetween flexAlignCenter">
+                  <p><%= variable.Name %></p>
+                  <div class="flex flexRight width40 flexAlignCenter">
+                    <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
+                    <% if (variable.Value.indexOf('#') > -1) { %>
+                      <div class="color-box" style="background:<%= variable.Value %>"></div>
+                    <% } %>
                   </div>
                 </div>
-
-                <div class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px">
-                  <h2 class="width100 dark-content-BG padding10px light-text">Content Colors</h2>
-                  <div class="heavyPadding">
-                    <% contentColors.forEach((variable, index) => {  %>
-                      <div class="flex spaceBetween flexAlignCenter">
-                        <p><%= variable.Name %></p>
-                        <p><%= variable.Value %></p>
-                      </div>
-                    <% }) %>
-                  </div>
-                  
-                </div>
-
-                <div class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px">
-                  <h2 class="width100 dark-content-BG padding10px light-text">Other Variables</h2>
-                  <div class="heavyPadding">
-                    <% otherVariables.forEach((variable, index) => {  %>
-                      <div class="flex spaceBetween flexAlignCenter">
-                        <p><%= variable.Name %></p>
-                        <p><%= variable.Value %></p>
-                      </div>
-                    <% }) %>
-                  </div>
-                </div>
-            
+              <% }) %>
+            </div>
+          </div>
         </div>
         
+    <a onclick="saveData();">Save</a>
+    <a onclick="window.location.href += '/reset-to-defaults'">Reset</a>
       </div>
     </div>
+    <script>
+      function saveData(){
+        var vals = <%- JSON.stringify(themeColors) %>;
+        vals = vals.concat(<%- JSON.stringify(textColors) %>);
+        vals = vals.concat(<%- JSON.stringify(contentColors) %>);
+        vals = vals.concat(<%- JSON.stringify(otherVariables) %>);
+        var data = "";
+        var toPost = false;
+        for(var i = 0; i < vals.length; i++){
+          data += `&varName=` + vals[i].Name + '&varVal=' + document.getElementById(vals[i].Name + "-value").value;
+          if(i === vals.length - 1){
+            toPost = true;
+          }
+        }
+        if(toPost){
+          httpPostAsync(window.location.href+"/write", data, reloadIt);
+        }
+      }
+    </script>
   </body>
 </html>
