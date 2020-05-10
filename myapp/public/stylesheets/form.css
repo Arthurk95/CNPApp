@@ -37,7 +37,7 @@ HTML Formatting:
     position: relative;
     flex-direction: column;
     border-radius: 4px;
-    background-color: var(--light-textColor);
+    background-color: var(--LightTextColor);
     margin: 2% auto; /* 15% from the top and centered */
     width: 900px; /* Could be more or less, depending on screen size */
     padding: 30px;
@@ -62,7 +62,7 @@ HTML Formatting:
   
   .formSubmitButton:hover{
     background: var(--adminColor);
-    color: var(--light-textColor);
+    color: var(--LightTextColor);
   }
 
   .formSubmitButton:active{
@@ -73,7 +73,7 @@ HTML Formatting:
   /* The Close Button at the top right */
   .close {
     position: absolute;
-    color: var(--dark-textColorLight);
+    color: var(--DarkTextColorLight);
     right: 10px;
     top: 10px;
     height: 60px;

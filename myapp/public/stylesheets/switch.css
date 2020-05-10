@@ -29,7 +29,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--dark-textColorLight);
+    background-color: var(--DarkTextColorLight);
     box-shadow: inset 0px 0px 3px var(--darkGray2);
   }
   
@@ -41,7 +41,7 @@
     height: calc(var(--height) - 8px);
     left: 4px;
     bottom: 4px;
-    background-color: var(--light-textColor);
+    background-color: var(--LightTextColor);
   }
   
   input:checked + .slider {
@@ -68,7 +68,7 @@
   .switchLabel{
       font-size: 24px;
       margin-right: 10px;
-      color: var(--dark-textColorLight);
+      color: var(--DarkTextColorLight);
   }
 
   /* td container for the switch */

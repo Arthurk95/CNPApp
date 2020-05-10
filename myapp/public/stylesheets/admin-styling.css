@@ -1,6 +1,6 @@
 .attending{
     border: 1px solid var(--weekdayColor) !important;
-    color: var(--light-textColor) !important;
+    color: var(--LightTextColor) !important;
     background: var(--weekdayColor) !important;
 }
 
@@ -41,7 +41,7 @@
     line-height: 100%;
     transition: 0.1s all;
     text-decoration: none;
-    color: var(--light-textColor);
+    color: var(--LightTextColor);
     font-size: 20em;
     font-weight: 700;
     position: absolute;
@@ -92,5 +92,5 @@
 }
 
 .addActivity p{
-    color: var(--light-textColor) !important;
+    color: var(--LightTextColor) !important;
 }

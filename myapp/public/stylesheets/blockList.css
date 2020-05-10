@@ -101,7 +101,7 @@ HTML Format:
 }
 
 .name{
-    color: var(--dark-textColorLight);
+    color: var(--DarkTextColorLight);
     font-size: 1.8em;
 }
 
@@ -109,7 +109,7 @@ HTML Format:
    on the tracking page */
 .selectedStudent{
     position: relative;
-    background-color: var(--light-textColorDark) !important;
+    background-color: var(--LightTextColorDark) !important;
     box-shadow: inset 0px 0px 6px 3px var(--darkGray3) !important;
 }
 
@@ -170,7 +170,7 @@ HTML Format:
   /* This is the button itself */
   .selectionButtons a{
     transition: 0.1s all;
-    color: var(--light-textColor);
+    color: var(--LightTextColor);
     font-size: 70px;
     padding: 10vh 10px 10vh 10px;
     display: block;
@@ -189,7 +189,7 @@ HTML Format:
       padding: 20px;
       margin: 0;
       font-size: 3vw;
-      color: var(--dark-textColorLight);
+      color: var(--DarkTextColorLight);
   }
 
   /* Shows less Activities per row since the text is on one line */

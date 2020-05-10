@@ -24,7 +24,7 @@
 
 .emailerContainer .sideButton i{
     transition: font-size 0.2s ease-in-out;
-    color: var(--light-textColorDark);
+    color: var(--LightTextColorDark);
 }
 
 .emailerContainer .sideButton i:hover{
@@ -154,14 +154,14 @@
     text-align: center;
     font-size: 1.5em;
     background: var(--LightContentBackgroundDark);
-    color: var(--dark-textColor);
+    color: var(--DarkTextColor);
     align-items: center;
 }
 
 /* Student is selected in the studentsList */
 .studentsList .selected {
     background: var(--ThemeColor1Light);
-    color: var(--light-textColor) !important;
+    color: var(--LightTextColor) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
 
@@ -176,7 +176,7 @@
 /* Student's email was approved */
 .approved{
     background: var(--ThemeColor2Light) !important;
-    color: var(--light-textColor) !important;
+    color: var(--LightTextColor) !important;
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
 
@@ -195,7 +195,7 @@
     background: var(--blue3);
     border-radius: 20px;
     font-size: 1em;
-    color: var(--light-textColor);
+    color: var(--LightTextColor);
     margin-right: 10px;
 }
 
@@ -213,7 +213,7 @@
     font-size: 1.2em;
     margin-bottom: 0px;
     padding: 6px;
-    color: var(--dark-textColorLight);
+    color: var(--DarkTextColorLight);
 }
 
 @media screen and (max-width: 1200px){

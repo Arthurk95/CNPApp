@@ -40,7 +40,7 @@
 
 .ulList li p{
     align-self: center;
-    color: var(--dark-textColorLight);
+    color: var(--DarkTextColorLight);
     font-size: 16px;
     margin: 5px 0px 5px 0px;
 }
@@ -52,7 +52,7 @@
     width: 3vw;
     border: none;
     outline: none;
-    color: var(--dark-textColor);
+    color: var(--DarkTextColor);
     transition: 0.1s box-shadow linear;
 }
 
@@ -67,14 +67,14 @@
 
 .ulList .addElement p{
     text-align: center;
-    color: var(--light-textColorDark) !important;
+    color: var(--LightTextColorDark) !important;
 }
 
 .ulList .addElement a{
     justify-self: center;
     align-self: center;
     text-decoration: none;
-    color: var(--light-textColor);
+    color: var(--LightTextColor);
     text-align: center;
     font-size: 2.5em;
     width: 100%;
@@ -92,7 +92,7 @@
     border-radius: 50%;
     overflow: hidden;
     font-size: var(--circleSize);
-    color: var(--light-textColorDark);
+    color: var(--LightTextColorDark);
     box-shadow: 0px 0px 2px var(--darkGray3);
     transition: width 0.1s ease-in-out, height 0.1s ease-in-out, 
         font-size 0.1s ease-in-out, margin 0.1s ease-in-out;
@@ -126,6 +126,7 @@
 
 .blackAndWhite{
     filter: grayscale(100%);
+    background: var(--LightContentBackgroundDark);
 }
 
 .noBlackAndWhiteHover:hover {
@@ -144,7 +145,7 @@
       
   }
 .stripedBackground p{
-    color: var(--dark-textColor);
+    color: var(--DarkTextColor);
 }
 
 @media screen and (max-width: 1200px){

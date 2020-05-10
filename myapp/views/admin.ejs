@@ -67,7 +67,7 @@
               <div class="theme-color2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
                 <p class="marginLeft10 light-text font25px">Today's Roster</p>
                 <!-- Hidden div there to get original text when closing popup -->
-                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text-dark font15px">Add Student <div style="display: none">Add Student</div></a>
+                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text font15px">Add Student <div style="display: none">Add Student</div></a>
                 
               </div>
               <div class="heavyPadding maxHeight250px">
@@ -564,7 +564,7 @@
                   <% if (activities.length > 0) {%>
                     <% activities.forEach((activity, index) => { %>
                         <% if (activity.Hidden == 1) { %>
-                          <li class="main-BG blackAndWhite spaceBetween">
+                          <li class="blackAndWhite spaceBetween">
                         <% } else { %>
                           <li class="white-BG spaceBetween">
                         <% } %>
@@ -770,13 +770,13 @@
 
 
     setInputFilter(document.getElementById("day"), function(value) {
-      return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+      return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
     });
     setInputFilter(document.getElementById("month"), function(value) {
-      return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+      return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
     });
     setInputFilter(document.getElementById("year"), function(value) {
-      return /^\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+      return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
     });
 
     // var headerQuill = new Quill('#emailHeader', {
@@ -885,13 +885,11 @@
     function toggleElementHide(element){
       if(element.classList.contains("blackAndWhite")){
         element.classList.remove("blackAndWhite");
-        element.classList.remove("main-BG");
         element.classList.add("white-BG");
       }
       else{
         element.classList.remove("white-BG");
         element.classList.add("blackAndWhite");
-        element.classList.add("main-BG");
 
       }
     }

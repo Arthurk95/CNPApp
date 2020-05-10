@@ -23,7 +23,7 @@
 .headerStyle2 a {
   transition: 0.2s background-color;
   display: inline-block;
-  color: var(--light-textColor);
+  color: var(--LightTextColor);
   text-decoration: none;
   padding: 20px 30px;
   margin: 0;
@@ -264,7 +264,7 @@ max-height: 100%;
 .mobileHeader .links a{
 text-align: center;
 text-decoration: none;
-color: var(--light-textColor);
+color: var(--LightTextColor);
 width: 100%;
 font-size: 10vh;
 padding: 20px 0px;
