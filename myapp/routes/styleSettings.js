@@ -53,7 +53,7 @@ router.post('/write', auth.checkAuthenticated, function (req, res, next) {
     res.end();
 });
 
-router.get('/reset-to-defaults', auth.checkAuthenticated, (req, res) => {
+router.post('/reset-to-defaults', auth.checkAuthenticated, (req, res) => {
     fs.readFile('./public/stylesheets/style-backup.css', function(err, data) {
         fs.writeFile("./public/stylesheets/style.css", data.toString("utf8"), function (err) {
             if (err) throw err;
