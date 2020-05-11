@@ -67,6 +67,23 @@ function convertBoolToInt(boolVal){
     else return 0;
 }
 
+function weekdaySelected(element){
+    if(element.classList.contains('half-day')){
+        element.classList.remove('half-day');
+        element.classList.add('full-day');
+    }
+    else if(element.classList.contains('full-day')){
+        element.classList.remove('full-day');
+    }
+    else{element.classList.add('half-day');}
+}
+
+function selectedDayType(element){
+    if(element.classList.contains('half-day')){return 2;}
+    if(element.classList.contains('full-day')){return 1;}
+    else {return 0;}
+}
+
 function selectableSelected(element){
     if(element.classList.contains("selectedElement")){
       element.classList.remove("selectedElement");
@@ -85,10 +102,9 @@ function checkboxClicked(element) {
     }
 }
 
-// Half day is 0
 function checkStudentDayType(element, dayType){
-    if(dayType == 0){
-      element.classList += " stripedBackground";
+    if(dayType == 1){
+      element.classList.add("stripedBackground")
     }
   }
 
@@ -328,18 +344,4 @@ function twoColDiv(left, right){
     div.appendChild(left);
     div.appendChild(right);
     return div;
-}
-
-
-var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
-        var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() { 
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                aCallback(anHttpRequest.responseText);
-        }
-
-        anHttpRequest.open( "GET", aUrl, true );            
-        anHttpRequest.send( null );
-    }
 }

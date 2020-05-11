@@ -70,12 +70,13 @@
                 <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text font15px">Add Student <div style="display: none">Add Student</div></a>
                 
               </div>
-              <div class="heavyPadding maxHeight250px">
+              <div class="heavyPadding maxHeight300px">
                 <ul id="todays_students" class="ulList">
                   <% if (present.length > 0) {%>
                     <% present.forEach((student, index) => {  %>
                       <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
-                        <li class="flex white-BG spaceBetween flexAlignCenter">
+                        <script>checkStudentDayType("today<%= student.StudentID %>", <%= student.DayType %>);</script>
+                        <li id="today<%= student.StudentId %>" class="flex white-BG spaceBetween flexAlignCenter">
                           <p><%= student.StudentName %></p>
                         <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red-BG dark-text hoverable"><i class="fas fa-question"></i></button>
                           
@@ -108,7 +109,7 @@
               </div>
 
               <!-- Students list -->
-              <div class="heavyPadding maxHeight250px">
+              <div class="heavyPadding maxHeight300px">
                 <ul id="students" class="ulList spaceAround">
                   <% if (students.length > 0) { %>
                     <% students.forEach((student, index) => { %>
@@ -134,17 +135,20 @@
                         <i class="fas fa-user"></i>
                         <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
                       </div>
-                      <div class="flex spaceAround flexAlignCenter width45 width90Mobile">
-                        <label class="theme-color2-light-text font20px marginRight20">Birthday:</label>
-                        <div class="inputWithIcon width15 white-BG">
-                          <input id="month" placeholder="MM" maxlength="2"></input>
+                      <div class="flex spaceAround flexCollapseMobile flexAlignCenter width45 width90Mobile">
+                        <label class="theme-color2-light-text font20px marginRight20 width20">Birthday:</label>
+                        <div class="flex flexRight width70 width100Mobile">
+                          <div class="inputWithIcon width20 white-BG">
+                            <input id="month" placeholder="MM" maxlength="2"></input>
+                          </div>
+                          <div class="inputWithIcon width20 white-BG">
+                            <input id="day" placeholder="DD" maxlength="2"></input>
+                          </div>
+                          <div class="inputWithIcon width40 white-BG">
+                            <input id="year" placeholder="YYYY" maxlength="4"></input>
+                          </div>
                         </div>
-                        <div class="inputWithIcon width15 white-BG">
-                          <input id="day" placeholder="DD" maxlength="2"></input>
-                        </div>
-                        <div class="inputWithIcon width20 white-BG">
-                          <input id="year" placeholder="YYYY" maxlength="4"></input>
-                        </div>
+                        
                       </div>
                     </div>
 
@@ -200,18 +204,13 @@
                         <div class="flex width100">
                           <ul class="selectableList flex width100 flexCenter marginBottom20">
                             <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                            <li id="mon" onclick="selectableSelected(this)"><a>M</a></li>
-                            <li id="tue" onclick="selectableSelected(this)"><a>T</a></li>
-                            <li id="wed" onclick="selectableSelected(this)"><a>W</a></li>
-                            <li id="thu" onclick="selectableSelected(this)"><a>TH</a></li>
-                            <li id="fri" onclick="selectableSelected(this)"><a>F</a></li>
+                            <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
+                            <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
+                            <li id="wed" onclick="weekdaySelected(this)"><a>W</a></li>
+                            <li id="thu" onclick="weekdaySelected(this)"><a>TH</a></li>
+                            <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
                             <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
                           </ul>
-                        </div>
-                        
-                        <div class="flex flexCenter width100">
-                          <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
-                          <a onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
                         </div>
                       </div>
                     </div>
@@ -231,7 +230,7 @@
                 <p class="marginLeft10 light-text font25px">Reminders</p>
                 <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
               </div>
-              <div class="heavyPadding maxHeight250px">
+              <div class="heavyPadding maxHeight300px">
                 <ul id="reminders" class="ulList">
                   <% if (reminders.length > 0) {%>
                     
@@ -344,7 +343,7 @@
                           <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
                         </div>
                       </div>
-  <!-- 
+                      <!-- 
                       <div class="flex width60 width100Mobile">
                         <div class="inputWithIcon width100 white-BG">
                           <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
@@ -412,7 +411,7 @@
                 <p class="marginLeft10 light-text font25px">Behaviors</p>
                 <a onclick="openForm('newBehaviorForm')" class="lightPadding theme-color2-light-text font15px">Add New</a>
               </div>
-              <div class="heavyPadding maxHeight250px">
+              <div class="heavyPadding maxHeight300px">
                 <ul id="behaviors" class="ulList">
                   <% if (behaviors.length > 0) {%>
                     <a id=behaviorCount style="visibility: hidden; display: none;"><%= behaviors.length %> </a>
@@ -559,7 +558,7 @@
               </div>
 
               <!-- Activities List -->
-              <div class="heavyPadding maxHeight600px light-content-BG ">
+              <div class="heavyPadding maxHeight700px light-content-BG ">
                 <ul id="activities" class="ulList">
                   <% if (activities.length > 0) {%>
                     <% activities.forEach((activity, index) => { %>
@@ -974,7 +973,6 @@
     //generate perameters for post and call post
     function callPostStu(){
       var theUrl = window.location.href+'/addstudent';
-      var dayType = isToggled("fullDay"); // 0 = half, 1 = full
       birthday = getSelectedBirthday();
 
       var data = 
@@ -987,13 +985,13 @@
       "&contactNum2=" + document.getElementById("newStudentContactNumber2").value + 
       "&birthday=" + birthday + 
       "&sun=" + 0 + 
-      "&mon=" + isDaySelected("mon") + 
-      "&tue=" + isDaySelected("tue") + 
-      "&wed=" + isDaySelected("wed") + 
-      "&thu=" + isDaySelected("thu") + 
-      "&fri=" + isDaySelected("fri") + 
+      "&mon=" + selectedDayType(document.getElementById("mon")) + 
+      "&tue=" + selectedDayType(document.getElementById("tue")) + 
+      "&wed=" + selectedDayType(document.getElementById("wed")) + 
+      "&thu=" + selectedDayType(document.getElementById("thu")) + 
+      "&fri=" + selectedDayType(document.getElementById("fri")) + 
       "&sat=" + 0 + 
-      "&halfDay=" + dayType + 
+      "&halfDay=" + '0' + 
       "&enroll=" + 1 +
       "&allergies=" + document.getElementById("allergies-text").value +
       "&accommodations=" + document.getElementById("accommodations-text").value;

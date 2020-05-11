@@ -58,25 +58,14 @@
             </div>
   
             <!-- -------------------- SCHEDULE PANEL --------------------- -->
-            <div id="schedulePanel" class="mobilePanel light-content-BG borderRadiusSmall hideOverflow marginLeft10 flexGrow1">
-              <div class="flexContainer flexColumn flexCenterMobile spaceAround flexWrap heavyPadding">
-                <div class="flex flexCenter flexAlignCenter width100 marginBottom30">
-                  <% if(student.DayType == 1) { %>
-                    <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable toggled">Full Day</a>
-                    <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable">Half Day</a>
-                  <% } else { %>
-                    <a id="fullDay" onclick="toggleableToggled(this)" class="toggleable">Full Day</a>
-                    <a id="halfDay" onclick="toggleableToggled(this)" class="toggleable toggled">Half Day</a>
-                  <% } %>
-                </div>
-                <ul id="schedule" class="selectableList flexWrap width100 flexCenter">
-                  <li id="mon" value="<%- student.Monday %>" onclick="selectableSelected(this)"><a>M</a></li>
-                  <li id="tue" value="<%- student.Tuesday %>" onclick="selectableSelected(this)"><a>T</a></li>
-                  <li id="wed" value="<%- student.Wednesday %>" onclick="selectableSelected(this)"><a>W</a></li>
-                  <li id="thu" value="<%- student.Thursday %>" onclick="selectableSelected(this)"><a>TH</a></li>
-                  <li id="fri" value="<%- student.Friday %>" onclick="selectableSelected(this)"><a>F</a></li>
-                </ul>
-              </div>
+            <div id="schedulePanel" class="flex mobilePanel heavyPadding light-content-BG borderRadiusSmall hideOverflow marginLeft10 flexGrow1 flexAlignCenter">
+              <ul id="schedule" class="selectableList flexWrap width100 flexCenter">
+                <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
+                <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
+                <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
+                <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>TH</a></li>
+                <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
+              </ul>
             </div>
           </div>
           </div>
@@ -99,8 +88,8 @@
               </form>
             </li>
             <li class="spaceBetween">
-              <label class="width30">NAME</label>
-              <input class="hiddenInput rightText" name="studentName" id="studentName" value="<%- student.StudentName %>">
+              <label class="width30 font20px">NAME</label>
+              <input class="hiddenInput rightText font20px" name="studentName" id="studentName" value="<%- student.StudentName %>">
             <li class="spaceBetween marginBottom40">
               <label class="width30">BIRTHDAY</label>
               <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
@@ -116,9 +105,9 @@
                 </div>
               </div>
             </li>
-            <li class="profileButtons">
-                <a onclick="deleteStudent(this)" class="deleteButton">Delete Student</a>
-                <a onclick="saveStudent()" class="saveButton">Save Changes</a>
+            <li class="flex flexCenter font20px centerText light-text">
+                <a onclick="deleteStudent(this)" class="flexGrow1 theme-color4-light-BG padding10px hoverable">Delete Student</a>
+                <a onclick="saveStudent()" class="flexGrow1 theme-color2-light-BG padding10px hoverable">Save Changes</a>
             </li>
             <li class="flex flexCenter"><a class="font20px width100 theme-color1-light-BG light-text centerText hoverable padding10px" href="/admin">Back to Admin</a></li>
             <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST"></form>
@@ -131,15 +120,7 @@
       </div>
     </body>
 
-
-    <script>
-      $( function() {
-        $( "#tabs" ).tabs();
-      } );
-    </script>
-
     
-
     <script>
       var days = document.getElementById("schedule").getElementsByTagName("li");
       var length = days.length;
@@ -148,11 +129,12 @@
       $(document).ready(function(){
         for (var i = 0; i < length; i++){
           val = days[i].getAttribute("value");
+          console.log(val);
           if(val == 1){
-            days[i].classList += " selectedElement";
+            days[i].classList.add("full-day");
           }
-          else {
-            days[i].classList.remove("selectedElement");
+          else if(val == 2){
+            days[i].classList.add("half-day");
           }
         }  
 
@@ -168,11 +150,11 @@
         
         var data = 
           `studentName=${document.getElementById('studentName').value}` +
-          `&mon=${isDaySelected("mon")}` +
-          `&tue=${isDaySelected("tue")}` +
-          `&wed=${isDaySelected("wed")}` +
-          `&thu=${isDaySelected("thu")}` +
-          `&fri=${isDaySelected("fri")}` +
+          `&mon=${selectedDayType(document.getElementById("mon"))}` +
+          `&tue=${selectedDayType(document.getElementById("tue"))}` +
+          `&wed=${selectedDayType(document.getElementById("wed"))}` +
+          `&thu=${selectedDayType(document.getElementById("thu"))}` +
+          `&fri=${selectedDayType(document.getElementById("fri"))}` +
           `&fullDayFlag=${isToggled("fullDay")}` +
           `&birthdate=${document.getElementById("year").value}/${document.getElementById("month").value}/${document.getElementById("day").value}` +
           `&guardian1Name=${document.getElementById('guardian1Name').value}` +
