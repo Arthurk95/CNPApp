@@ -46,7 +46,7 @@
   --ThemeColor4: #992540;
   --ThemeColor4Light: #EA7C96;
 
-  --MainFontSize: 16px;
+  --MainFontSize: 14px;
 
   font-family: 'Roboto Slab', sans-serif;
 }
@@ -127,24 +127,13 @@ svg{
   padding: 30px;
 }
 
-.mobilePanel ::-webkit-scrollbar {
-  width: 6px;
-}
-
-.mobilePanel ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
+.mobilePanel ::-webkit-scrollbar {width: 6px;}
+.mobilePanel ::-webkit-scrollbar-track {background: #f1f1f1;}
 /* Handle */
-.mobilePanel ::-webkit-scrollbar-thumb {
-  border-radius: 6px;
-  background: var(--LightContentBackgroundDark);
+.mobilePanel ::-webkit-scrollbar-thumb {border-radius: 6px; background: var(--lightGray3);
 }
-
 /* Handle on hover */
-.mobilePanel ::-webkit-scrollbar-thumb:hover {
-  filter: brightness(20%);
-}
+.mobilePanel ::-webkit-scrollbar-thumb:hover {filter: brightness(20%);}
 
 
 
@@ -528,13 +517,16 @@ svg{
 
 /* Add margin between list elements */
 .selectableList li{
-  background: var(--LightContentBackgroundDark);
+  flex-grow: 1;
   cursor: pointer;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  margin: 5px;
+  margin: 3px;
   min-width: 2em;
   align-self: center;
+  font-size: 1.4em;
+  color: var(--LightTextColorDark);
+  border: 1px solid var(--LightTextColorDark);
 }
 
 
@@ -543,6 +535,22 @@ svg{
   background: var(--ThemeColor2Light);
   color: var(--LightTextColor);
 }
+
+.half-day{
+  border-color: var(--ThemeColor2Light) !important;
+  color: var(--ThemeColor2Light) !important;
+  background: repeating-linear-gradient(
+  45deg,
+  var(--ThemeColor2Light),
+  var(--ThemeColor2Light) 15%,
+  var(--LightContentBackground) 15%,
+  var(--LightContentBackground) 85%,
+  var(--ThemeColor2Light) 85%,
+  var(--ThemeColor2Light) 100%
+  ) !important;
+}
+
+.full-day{background: var(--ThemeColor2Light); border-color: var(--ThemeColor2Light) !important; color: var(--LightTextColor) !important;}
 
 
 .customTable .dark-text{color: var(--DarkTextColor) !important;}
@@ -667,7 +675,7 @@ svg{
 }
 
 .buttonWithIcon p{
-  color: var(--LightTextColorDark);
+  color: var(--LightTextColor);
   margin: 0;
   flex-grow: 1;
   text-align: center;
@@ -975,7 +983,8 @@ svg{
   .largeFont{font-size: 2.5em !important;}
 
   .selectableList li{
-    font-size: 24px;
+    font-size: 2em;
+    padding: 0.5em;
     min-width: 48px;
   }
 
@@ -1004,6 +1013,7 @@ svg{
     padding-top: 15px !important;
     padding-bottom: 15px !important;
     font-size: 2em !important;
+    margin: 30px 0px;
   }
 
   textarea{

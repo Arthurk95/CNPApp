@@ -55,13 +55,13 @@ HTML Formatting:
     padding: 10px;
     font-size: 2em;
     border-radius: 2px;
-    color: var(--adminColor);
-    border: 2px solid var(--adminColor);
+    color: var(--ThemeColor2Light);
+    border: 2px solid var(--ThemeColor2Light);
     margin-top: 20px;
   }
   
   .formSubmitButton:hover{
-    background: var(--adminColor);
+    background: var(--ThemeColor2Light);
     color: var(--LightTextColor);
   }
 
