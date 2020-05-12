@@ -890,6 +890,12 @@ svg{
   background: var(--DarkContentBackgroundLight);
 }
 
+.side-header-link.active{
+  border-left: 4px solid var(--ThemeColor2Light);
+  margin-left: 4px;
+  background: var(--DarkContentBackgroundLight);
+}
+
 .site-header-logout{
   width: 100%;
   height: 100%;
@@ -953,6 +959,7 @@ svg{
   .side-header-mobile-burger.active ~ .content-with-side-header{ margin-left: 70vw; margin-right: calc(-1* (70vw)); width: 100%;}
   .side-header{margin-top: calc(var(--sideHeaderBurgerHeight) + 10px); height: calc((100vh) - (var(--sideHeaderBurgerHeight) + 10px))}
   .side-header-link{padding: 50px 15px; font-size: 40px; width: auto; }
+  .side-header-link.active{border-left: 8px solid var(--ThemeColor2Light);}
   .side-header-title{padding: 50px 15px; font-size: 40px;}
   .side-header-submenu-link{font-size: 35px !important;}
   .content-with-side-header{margin-left: 0; padding-top: calc(var(--sideHeaderBurgerHeight) + 15px) !important;}
