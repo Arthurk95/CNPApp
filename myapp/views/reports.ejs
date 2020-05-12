@@ -38,7 +38,7 @@
                       <% } %>
                     </td>
                     <td class="right">
-                      <button class="red-BG" onclick=""><i class="far fa-trash-alt"></i></button>
+                      <button class="red-BG" onclick="deleteActivity('<%= activity.ActivityId %>','<%= report.id %>');"><i class="far fa-trash-alt"></i></button>
                     </td>
                   </tr>
                   <% }) %>
@@ -56,6 +56,14 @@
         <% } %>
       </div>
     </div>
-    
+    <script>
+      function deleteActivity(actId,stuId){
+        console.log(actId,stuId);
+        var theUrl = window.location.href+'/deleteevent';
+        var data = "actId=" + actId + "&stuId=" + stuId;
+        var callback = reloadIt;
+        httpPostAsync(theUrl,data,callback);
+      }
+    </script>
   </body>
   </html>

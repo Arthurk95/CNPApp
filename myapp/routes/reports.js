@@ -80,7 +80,16 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
 
 });
 function bottomLayer(res, Students, con) {
-  console.log(Students);
   res.render('reports.ejs', { title: 'CNP Daily Report', reports: Students });
 }
+
+router.post('/deleteevent', auth.checkAuthenticated, function(req, res){
+  var sql = "CALL DeleteDailyActivity('" + req.body.stuId + "','" + req.body.actId + "');";
+  con.query(sql, function (err, result) {
+      if (err) res.end();
+      res.end();
+  });
+  
+});
+
 module.exports = router;
