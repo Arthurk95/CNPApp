@@ -40,7 +40,6 @@
 }
 
 label{
-    float: left;
     color: var(--DarkTextColorLight);
 }
 
@@ -63,7 +62,6 @@ label{
 /* Tooltip container */
 .edit-image-tooltip {
     position: relative;
-    display: inline-block;
   }
   
 /* Tooltip text */
@@ -90,6 +88,7 @@ label{
     text-align: center;
     position: relative;
     width: 100%;
+    min-width: 300px;
 }
 
 .imageContainer:hover{
@@ -99,10 +98,8 @@ label{
 
 .imageContainer img{
     border: 1px solid black;
-    border-radius: 50%;
-    width: 20vw;
-    height: 20vw;
-    margin: 0 auto 20px auto !important;
+    width: 100%;
+    min-width: 300px;
 }
 
 .imageContainer img:hover{

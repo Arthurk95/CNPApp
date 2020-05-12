@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <nav><%- include header.ejs %></nav>
+        <%- include headerlinks.ejs %>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/tabs.css' />
         <link rel='stylesheet' href='/stylesheets/profile.css' />
@@ -15,112 +15,118 @@
         
     </head>
     <body>
-
-      <div class="contentWithSidebar width90 center">
-
-        <!-- -------------------- LEFT SIDE --------------------- -->
-        <div class="flex flexColumn width65 flexAlignCenter width100Mobile">
-
-          <!-- -------------------- INFO PANEL --------------------- -->
-          <div id="infoPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100 light-content-BG">
-            <div class="flexContainer spaceAround flexWrap heavyPadding">
-              <ul class="width40 width100Mobile">
-                <li class="dark-text largeFont marginBottom10">Guardian #1</li>
-                <li><input class="lineInput"name="guardian1Name" type="text" id="guardian1Name" placeholder="Guardian Name" value="<%- student.RelativeName %>"></li>
-                <li><input class="lineInput" name="guardian1Email" type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
-                <li><input class="lineInput marginBottom30" name="guardian1Number" type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
-              </ul>
-
-              <ul class="width40 width100Mobile">
-                <li class="dark-text largeFont">Guardian #2</li>
-                <li><input class="lineInput" name="guardian2Name" type="text" id="guardian2Name" placeholder="Guardian Name" value="<%- student.RelativeName2 %>"></li>
-                <li><input class="lineInput" name="guardian2Email" type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
-                <li><input class="lineInput" name="guardian2Number" type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
-              </ul>
-              
-            </div>
-          </div>
-
-
-          <div class="flex flex width100 flexCollapseMobile spaceBetween centerFlexMobile">
-          <!-- -------------------- EXTRA INFO PANEL --------------------- -->
-            <div id="extraInfoPanel" class="mobilePanel width60 light-content-BG borderRadiusSmall hideOverflow">
-              <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
-                <div class="flex flexColumn width100 marginBottom30">
-                  <p>Allergies</p>
-                  <textarea id="allergies"><%= student.Allergies %></textarea>
-                </div>
-                <div class="flex flexColumn width100">
-                  <p>Special Accommodations</p>
-                  <textarea id="accommodations"><%= student.Accommodation %></textarea>
-                </div>
-              </div>
-            </div>
-  
-            <!-- -------------------- SCHEDULE PANEL --------------------- -->
-            <div id="schedulePanel" class="flex mobilePanel heavyPadding light-content-BG borderRadiusSmall hideOverflow marginLeft10 flexGrow1 flexAlignCenter">
-              <ul id="schedule" class="selectableList flexWrap width100 flexCenter">
-                <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
-                <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
-                <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
-                <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>TH</a></li>
-                <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
-              </ul>
-            </div>
-          </div>
-          </div>
-          
-        
-
-        <!-- -------------------- STUDENT PROFILE (RIGHT SIDE) --------------------- -->
-        <div class="profileSection light-content-BG margin10">
-          <ul class="width90 flexListColumn heavyPadding">
-            <li>
-              <label for="file-input" class="imageContainer tooltip marginBottom40 marginTop20">
-                <div class="edit-image-tooltip">
-                  <span class="tooltiptext">Edit Image</span>
-                <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-              </label>
-              <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
-                <div class="file-field input-field hiddenUpload">
-                  <input id="file-input" name="student-image-id" type="file" onchange="form.submit()">
-                  </div>
-              </form>
-            </li>
-            <li class="spaceBetween">
-              <label class="width30 font20px">NAME</label>
-              <input class="hiddenInput rightText font20px" name="studentName" id="studentName" value="<%- student.StudentName %>">
-            <li class="spaceBetween marginBottom40">
-              <label class="width30">BIRTHDAY</label>
-              <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
-              <div class="flex flexRight flexAlignCenter width100 width90Mobile font15px">
-                <div class="inputWithIcon width20 white-BG marginRight10">
-                  <input id="month" placeholder="MM" maxlength="2"></input>
-                </div>
-                <div class="inputWithIcon width20 white-BG marginRight10">
-                  <input id="day" placeholder="DD" maxlength="2"></input>
-                </div>
-                <div class="inputWithIcon width30 white-BG">
-                  <input id="year" placeholder="YYYY" maxlength="4"></input>
-                </div>
-              </div>
-            </li>
-            <li class="flex flexCenter font20px centerText light-text">
-                <a onclick="deleteStudent(this)" class="flexGrow1 theme-color4-light-BG padding10px hoverable">Delete Student</a>
-                <a onclick="saveStudent()" class="flexGrow1 theme-color2-light-BG padding10px hoverable">Save Changes</a>
-            </li>
-            <li class="flex flexCenter"><a class="font20px width100 theme-color1-light-BG light-text centerText hoverable padding10px" href="/admin">Back to Admin</a></li>
-            <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST"></form>
-              <label><font color="green"><%- messages.upload_successful %></font></label>
-              <label><font color="green"><%- messages.changes_saved %></font></label>
-              <label><font color="red"><%- messages.changes_error %></font></label>
-              <label><font color="red"><%- messages.upload_error %></font></label>
-          </ul>
+      <div class="page-with-sidemenu">
+        <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+          <i class="fa fa-bars"></i>
         </div>
-      </div>
-    </body>
+        <%- include header.ejs %>
+        <div class="content-with-side-header">
+          <!-- Profile container -->
+          <div class="flex flexColumn flexAlignCenter width100">
+            <!-- Picture/name/birthday/schedule -->
+            <div class="light-content-BG flex flexAlignCenter width90 flexCollapseMobile marginBottom40 padding10px">
+              <!-- Picture -->
+              <div class="flex flexCenter width30 width100Mobile minWidth300px">
+                <label for="file-input" class="imageContainer tooltip">
+                  <div class="edit-image-tooltip">
+                    <span class="tooltiptext">Edit Image</span>
+                  </div>
+                  <img src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
+                </label>
+                <form action="<%-student.StudentId%>/upload" method="POST" enctype="multipart/form-data">
+                  <div class="file-field input-field hiddenUpload">
+                    <input id="file-input" name="student-image-id" type="file" onchange="form.submit()">
+                  </div>
+                </form>
+              </div>
+              
+              <!-- Name, birthday, schedule -->
+              <div class="width60 width100Mobile centerFlexMobile flex flexColumn margin30">
+                <input class="hiddenInput font40px marginBottom20" name="studentName" id="studentName" value="<%- student.StudentName %>">
+                <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
+                
+                <div class="flex width100 centerFlexMobile font15px marginBottom30"> <!-- Birthday -->
+                  <div class="inputWithIcon width20 white-BG marginRight10">
+                    <input id="month" placeholder="MM" maxlength="2"></input>
+                  </div>
+                  <div class="inputWithIcon width20 white-BG marginRight10">
+                    <input id="day" placeholder="DD" maxlength="2"></input>
+                  </div>
+                  <div class="inputWithIcon width30 white-BG">
+                    <input id="year" placeholder="YYYY" maxlength="4"></input>
+                  </div>
+                </div> <!-- End birthday -->
 
+                <ul id="schedule" class="selectableList flexWrap width100 flexCenter marginBottom40">
+                  <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
+                  <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
+                  <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
+                  <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>TH</a></li>
+                  <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
+                </ul>
+
+                <div class="flex flexCenter font20px centerText light-text marginBottom20 width100Mobile">
+                  <a onclick="deleteStudent(this)" class="flexGrow1 theme-color4-light-BG padding10px hoverable">Delete Student</a>
+                  <a onclick="saveStudent()" class="flexGrow1 theme-color2-light-BG padding10px hoverable">Save Changes</a>
+                </div>
+
+                <div class="width100 flex font20px">
+                  <a class="width100 theme-color1-light-BG light-text centerText hoverable padding10px width100Mobile" href="/admin">Back to Admin</a>
+                </div>
+
+                <div class="centerText marginTop20">
+                  <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST">
+                    <label><font color="green"><%- messages.upload_successful %></font></label>
+                    <label><font color="green"><%- messages.changes_saved %></font></label>
+                    <label><font color="red"><%- messages.changes_error %></font></label>
+                    <label><font color="red"><%- messages.upload_error %></font></label>
+                  </form>
+                </div>
+                
+                
+              </div><!-- End name/birthday/schedule -->
+            </div> <!-- End picture/name/birthday/schedule  -->
+
+            <!-- Info Panels -->
+            <div class="flex spaceBetween flexCollapseMobile width90 center">
+              <!-- Guardians -->
+              <div id="infoPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width60 light-content-BG width100Mobile">
+                <div class="flexContainer spaceAround flexWrap heavyPadding">
+                  <ul class="width40 width100Mobile marginBottom30 marginBelowChildren10">
+                    <li class="dark-text largeFont marginBottom10">Guardian #1</li>
+                    <li><input name="guardian1Name" type="text" id="guardian1Name" placeholder="Guardian Name" value="<%- student.RelativeName %>"></li>
+                    <li><input name="guardian1Email" type="text" id="guardian1Email" placeholder="Guardian Email" value=<%- student.RelativeEmail %>></li>
+                    <li><input name="guardian1Number" type="text" id="guardian1Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone %>></li>
+                  </ul>
     
+                  <ul class="width40 width100Mobile marginBelowChildren10">
+                    <li class="dark-text largeFont">Guardian #2</li>
+                    <li><input name="guardian2Name" type="text" id="guardian2Name" placeholder="Guardian Name" value="<%- student.RelativeName2 %>"></li>
+                    <li><input name="guardian2Email" type="text" id="guardian2Email" placeholder="Guardian Email" value=<%- student.RelativeEmail2 %>></li>
+                    <li><input name="guardian2Number" type="text" id="guardian2Number" placeholder="Guardian's Phone Number" value=<%- student.RelativePhone2 %>></li>
+                  </ul>
+                </div>
+              </div> <!-- End Guardians -->
+
+              <!-- -------------------- EXTRA INFO PANEL --------------------- -->
+              <div id="extraInfoPanel" class="mobilePanel width35 light-content-BG borderRadiusSmall hideOverflow margin10 width100Mobile">
+                <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
+                  <div class="flex flexColumn width100 marginBottom30">
+                    <p>Allergies</p>
+                    <textarea id="allergies"><%= student.Allergies %></textarea>
+                  </div>
+                  <div class="flex flexColumn width100">
+                    <p>Special Accommodations</p>
+                    <textarea id="accommodations"><%= student.Accommodation %></textarea>
+                  </div>
+                </div>
+              </div> <!-- End extra info panel-->
+            </div> <!-- End info panels -->
+          </div> <!-- End profile container -->
+        </div> <!-- End side header content container -->
+      </div> <!-- End page with side menu container -->
+    </body>
+  
     <script>
       var days = document.getElementById("schedule").getElementsByTagName("li");
       var length = days.length;
