@@ -11,7 +11,7 @@
 .customTable thead th{
     border: none;
     background: var(--ThemeColor2);
-    color: var(--LightTextColorDark);
+    color: var(--LightTextColor);
     font-size: 2.2em;
     padding: 10px 0;
     font-weight: 500;
