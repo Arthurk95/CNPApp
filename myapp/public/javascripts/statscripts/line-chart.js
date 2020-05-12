@@ -52,16 +52,16 @@ function getRandomColor() {
 //generates the line
 function generateLine(id) {
   var parent = document.getElementById("charts");
-  var container = document.createElement("div");; container.className = "light-content-BG width90 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
+  var container = document.createElement("div");; container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
   var bottom = document.getElementById("chartPanel");
   var twoColContainer = document.createElement("div");
-  twoColContainer.classList = "flex flexWrap spaceBetween heavyPadding";
+  twoColContainer.classList = "flex flexCollapseMobile spaceBetween heavyPadding";
   twoColContainer.id = id;
   var chartColumn = document.createElement('div'); chartColumn.id = id + "right";
   chartColumn.classList = "width60 flex flexColumn";
 
   var optionsColumn = document.createElement('div');
-  optionsColumn.classList = "width30 center width100Mobile flex flexColumn flexAlignCenter marginBelowChildren10";
+  optionsColumn.classList = "width20 center width100Mobile flex flexColumn flexAlignCenter marginBelowChildren10";
 
 
   var temp;
@@ -70,47 +70,43 @@ function generateLine(id) {
   { 
     temp = document.createElement("title"); temp.className = "width100 dark-content-light-BG flex spaceBetween flexAlignCenter marginLeft light-text font25px";
 
-    var title = document.createElement('h2'); title.innerHTML = "Pie Chart"; title.classList = "heavyPadding";
+    var title = document.createElement('h2'); title.innerHTML = "Line Chart"; title.classList = "heavyPadding";
 
     temp.appendChild(title);
-    var del = document.createElement("button"); del.id = "button"; del.className="marginRight10 lightPadding light-text red3-BG red4-border hoverable font15px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
+    var del = document.createElement("a"); del.id = "button"; del.className="marginRight10 padding10px light-text theme-color4-BG hoverable font25px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
     temp.appendChild(del);
     container.appendChild(temp);
 
     // Beginning date select
-    var twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex flexWrap spaceBetween flexAlignCenter";
-    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.className = "label width30";
-    twoColDiv.appendChild(temp);
+    temp = document.createElement("label"); temp.innerHTML = "Beginning Date "; temp.classList = "label width90 center marginBottom10";
+    optionsColumn.appendChild(temp);
 
-    var selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50 minWidth300px";
-    temp = document.createElement("select"); temp.id = "syear" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    var selectDiv = document.createElement('div'); selectDiv.classList = "flex-column";
+    temp = document.createElement("select"); temp.id = "syear" + id; temp.className = "width100 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     selectDiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "smonth" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "smonth" + id; temp.className = "width100 arrow-down"; temp.onchange = function(){sgenDays(id); updateData(id);};
     selectDiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width30 arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id = "sday" + id; temp.className = "width100 arrow-down"; temp.onchange = function(){updateData(id);};
     selectDiv.appendChild(temp);
-    twoColDiv.appendChild(selectDiv);
-    optionsColumn.appendChild(twoColDiv);
+    optionsColumn.appendChild(selectDiv);
 
 
     // end date select
-    twoColDiv = document.createElement("div"); twoColDiv.classList = "width100 flex flexWrap spaceBetween flexAlignCenter";
-    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label width30";
-    twoColDiv.appendChild(temp);
+    temp = document.createElement("label"); temp.innerHTML = "End Date"; temp.className = "label width90 center marginBottom10";
+    optionsColumn.appendChild(temp);
 
-    selectDiv = document.createElement('div'); selectDiv.classList = "flex spaceBetween width50 minWidth300px";
-    temp = document.createElement("select"); temp.id = "eyear" + id; temp.className="width30 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    selectDiv = document.createElement('div'); selectDiv.classList = "flex-column";
+    temp = document.createElement("select"); temp.id = "eyear" + id; temp.className="width100 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     selectDiv.appendChild(temp);
 
-    temp = document.createElement("select"); temp.id = "emonth" + id; temp.className="width30 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
+    temp = document.createElement("select"); temp.id = "emonth" + id; temp.className="width100 arrow-down"; temp.onchange = function(){egenDays(id); updateData(id);};
     selectDiv.appendChild(makeMonthS(temp));
 
-    temp = document.createElement("select"); temp.id = "eday" + id; temp.className="width30 arrow-down"; temp.onchange = function(){updateData(id);};
+    temp = document.createElement("select"); temp.id = "eday" + id; temp.className="width100 arrow-down"; temp.onchange = function(){updateData(id);};
     selectDiv.appendChild(temp);
-    twoColDiv.appendChild(selectDiv);
-    optionsColumn.appendChild(twoColDiv);
+    optionsColumn.appendChild(selectDiv);
   }
 
   //The spin thing
@@ -146,7 +142,7 @@ function generateLine(id) {
 
   container.appendChild(twoColContainer);
 
-  parent.insertBefore(container,bottom);
+  parent.appendChild(container);
   onUpdateop1(id);
 
   function onUpdateop1(id) {

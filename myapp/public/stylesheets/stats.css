@@ -1,45 +1,12 @@
-/* <ul> list for Header bar */
-.headerStyle {
-  margin-bottom: 0px;
-}
-
-.headerStyle2 {
-  font-size: 1.6em;
-  font-weight: 400;
-  display: inline-block;
-  list-style-type: none;
-  text-align: left;
-  background: rgba(10, 65, 76);
-  color: white;
-}
-
-/* Each li is an element in the header, usually an <a> tag */
-.headerStyle2 li{
-  display: inline; /* List everything horizontally */
-  
-}
-
-/* Actual header button styling */
-.headerStyle2 a {
-  transition: 0.2s background-color;
-  display: inline-block;
-  color: var(--LightTextColor);
-  text-decoration: none;
-  padding: 20px 30px;
-  margin: 0;
-}
-
-canvas{width: 50% !important; max-height: 400px;}
-
-.headerStyle2 a:hover{
-  background-color: var(--blue3);
-}
+canvas{width: 75% !important;}
 
 .canvasObj {
   background-color: white;
   margin-top: 65px;
   margin-bottom: 70px;
 }
+
+svg {flex-grow: 1; width: 100% !important; height: auto !important;}
 
 .pieMin {
   width: fit-content;
@@ -49,6 +16,17 @@ canvas{width: 50% !important; max-height: 400px;}
   display: inline-block;
   white-space: nowrap;
   justify-self: left;
+}
+
+.select-column{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.select-column select{
+  margin-bottom: 10px;
 }
 
 #deleteButton {
@@ -71,7 +49,6 @@ canvas{width: 50% !important; max-height: 400px;}
 
 .arrow-down {
   font-family: 'Times New Roman', Times, serif;
-  background-color: rgba(255, 255, 255, 0.301);
 }
 
 .deleteButton {

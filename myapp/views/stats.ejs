@@ -52,14 +52,8 @@
   <body>
 
     <!-- Navigation -->
-    <div class="headerStyle2" id ="navigation">
+    <div id ="navigation">
       <nav class="navbar-expand-lg">
-        <span class="navbar-brand">CNP Statistics
-          <% if (startDate == null) { %>
-            <%= "No Data" %>
-          <% } %>  
-        </span>
-        
           <!-- Month selection -->
           <ul class="navbar-nav">
             <li class="nav-item">
@@ -79,25 +73,25 @@
     </div> <!-- end navigation -->
 
     <!-- Charts -->
-    <div id="charts">
-
+    <div id="charts" class="flex flexColumn flexAlignCenter width90 center">
       <!-- Chart Panel -->
-      <div id="chartPanel" class="mobilePanel width90 center light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
-        <div class="dark-content-light-BG heavyPadding flex spaceBetween flexAlignCenter">
-          <p class="marginLeft10 light-text font25px width30">Select a Chart </p>
-          <div class="flex spaceBetween width50 flexAlignCenter">
+      <div id="chartPanel" class="mobilePanel width15 center flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
+        <div class="dark-content-light-BG heavyPadding flex flexColumn flexAlignCenter">
+          <p class="marginLeft10 light-text font25px width100 centerText marginBottom40">Select a Chart </p>
+          
+          <div class="width90 center flex spaceBetween marginBottom30 flexAlignCenter">
             <!-- Drop down for adding a new chart -->
-            <select id="newchart" class="arrow-down-make width60">
+            <select id="newchart" class="arrow-down-make width40">
               <option value="pie">Pie Chart</option>
               <option value="line">Line Chart</option>
             </select>
+
             <!-- Make Chart button-->
-            <a class="font15px marginRight10 padding5px10px theme-color2-light-BG borderRadiusLarge light-text-dark width15 centerText" onclick="makeChart()">Add Chart</a>
-          </div>  
-         
+            <a class="font15px marginRight10 padding10px theme-color2-light-BG borderRadiusLarge light-text width40 centerText" onclick="makeChart()">Add Chart</a> 
+          </div>
+          
         </div>
       </div> <!-- end chart panel --> 
-
       <script>
         var chartArray = [];
         var curId = 0;
