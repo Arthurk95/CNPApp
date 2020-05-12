@@ -57,8 +57,15 @@
       </div>
       
 
-      <div class="content-with-side-header">
-        <div class="flex flexWrap spaceBetween">
+      <div class="content-with-side-header noPadding">
+        <!-- Save/Reset buttons -->
+        <div class="width100 dark-content-BG flex flexRight centerFlexMobile width90Mobile center">
+          <div class="padding20px">
+            <a onclick="httpPostAsync(window.location.href+'/reset-to-defaults', '', reloadIt);" class="light-text hoverable padding10px30px theme-color4-light-BG">Reset to Defaults</a>
+            <a onclick="saveData();" class="padding10px30px theme-color1-light-BG light-text hoverable">Save</a>
+          </div>
+        </div>
+        <div class="flex flexWrap spaceBetween padding30px">
           <!-- ----- Theme Colors Panel ----- -->
           <div class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth450px width450px">
             <h2 class="width100 dark-content-BG padding10px light-text">Theme Colors</h2>
@@ -67,8 +74,8 @@
                 <div class="flex spaceBetween flexAlignCenter padding5px">
                   <p><%= variable.Name %></p>
                   <div class="flex flexRight width40 flexAlignCenter">
-                    <input maxlength="7" id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
-                    <div class="color-box" style="background:<%= variable.Value %>"></div>
+                    <input maxlength="7" id="<%= variable.Name %>-value" value="<%= variable.Value %>" onkeyup="updateColor(this, '<%= variable.Name %>');" />
+                    <div id="<%= variable.Name %>-colorbox" class="color-box" style="background:<%= variable.Value %>" ></div>
                   </div>
                 </div>
               <% }) %>
@@ -84,8 +91,8 @@
                   <div class="flex spaceBetween flexAlignCenter">
                     <p><%= variable.Name %></p>
                     <div class="flex flexRight width40 flexAlignCenter">
-                      <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
-                      <div class="color-box" style="background:<%= variable.Value %>"></div>
+                      <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" onkeyup="updateColor(this, '<%= variable.Name %>');" />
+                      <div id="<%= variable.Name %>-colorbox" class="color-box" style="background:<%= variable.Value %>"></div>
                     </div>
                   </div>
                 <% }) %>
@@ -101,7 +108,7 @@
                     <p><%= variable.Name %></p>
                     <div class="flex flexRight width40 flexAlignCenter">
                       <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
-                      <div class="color-box" style="background:<%= variable.Value %>"></div>
+                      <div id="<%= variable.Name %>-colorbox" class="color-box" style="background:<%= variable.Value %>"></div>
                     </div>
                   </div>
                 <% }) %>
@@ -118,9 +125,9 @@
                 <div class="flex spaceBetween flexAlignCenter">
                   <p><%= variable.Name %></p>
                   <div class="flex flexRight width40 flexAlignCenter">
-                    <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" />
+                    <input id="<%= variable.Name %>-value" value="<%= variable.Value %>" onkeyup="updateColor(this, '<%= variable.Name %>');" />
                     <% if (variable.Value.indexOf('#') > -1) { %>
-                      <div class="color-box" style="background:<%= variable.Value %>"></div>
+                      <div id="<%= variable.Name %>-colorbox" class="color-box" style="background:<%= variable.Value %>"></div>
                     <% } %>
                   </div>
                 </div>
@@ -129,10 +136,8 @@
           </div>
         </div>
         
-    <a onclick="saveData();">Save</a>
-    <a onclick="httpPostAsync(window.location.href+'/reset-to-defaults', '', reloadIt);">Reset</a>
-      </div>
-    </div>
+      </div> <!-- End Settings panels -->
+    </div> <!-- End side-content wrapper div -->
     <script>
       function saveData(){
         var vals = <%- JSON.stringify(themeColors) %>;
@@ -150,6 +155,12 @@
         if(toPost){
           httpPostAsync(window.location.href+"/write", data, reloadIt);
         }
+      }
+
+      function updateColor(element, varName){
+        console.log(element);
+        console.log(varName);
+        element.parentElement.querySelector("#" + varName + "-colorbox").style.backgroundColor = element.value;
       }
     </script>
   </body>
