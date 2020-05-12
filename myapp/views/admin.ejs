@@ -68,7 +68,7 @@
               <div class="theme-color2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
                 <p class="marginLeft10 light-text font25px">Today's Roster</p>
                 <!-- Hidden div there to get original text when closing popup -->
-                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text font15px">Add Student <div style="display: none">Add Student</div></a>
+                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text font15px">Add Student</a>
                 
               </div>
               <div class="heavyPadding maxHeight300px">
@@ -858,7 +858,7 @@
 
       newLi.classList.remove('blackAndWhite');
       newLi.classList.remove('main-BG');
-      newLi.getElementsByTagName('a')[0].setAttribute("onclick", "studentAbsent(this, "+studentData.StudentId+")"); // absent button
+      newLi.getElementsByTagName('p')[0].setAttribute("onclick", "studentAbsent(this, "+studentData.StudentId+")"); // absent button
       newLi.getElementsByTagName('p')[0].innerHTML = studentData.StudentName; // student name
       list.appendChild(newLi);
 
