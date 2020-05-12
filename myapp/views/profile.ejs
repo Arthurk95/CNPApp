@@ -42,7 +42,7 @@
               
               <!-- Name, birthday, schedule -->
               <div class="width60 width100Mobile centerFlexMobile flex flexColumn margin30">
-                <input class="hiddenInput font40px marginBottom20" name="studentName" id="studentName" value="<%- student.StudentName %>">
+                <h2 class="font40px marginBottom30"><%= student.StudentName %></h2>
                 <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
                 
                 <div class="flex width100 centerFlexMobile font15px marginBottom30"> <!-- Birthday -->
@@ -65,13 +65,17 @@
                   <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
                 </ul>
 
-                <div class="flex flexCenter font20px centerText light-text marginBottom20 width100Mobile">
-                  <a onclick="deleteStudent(this)" class="flexGrow1 theme-color4-light-BG padding10px hoverable">Delete Student</a>
-                  <a onclick="saveStudent()" class="flexGrow1 theme-color2-light-BG padding10px hoverable">Save Changes</a>
-                </div>
+                <div class="flex spaceBetween flexWrap centerFlexMobile flexCollapseMobile font20px centerText light-text marginBottom20 width100Mobile">
+                  <div onclick="window.location.href = '/admin'" class="buttonWithIcon padding8px15px">
+                    <p>Back to Admin</p>
+                  </div>
 
-                <div class="width100 flex font20px">
-                  <a class="width100 theme-color1-light-BG light-text centerText hoverable padding10px width100Mobile" href="/admin">Back to Admin</a>
+                  <div onclick="deleteStudent(this)" class="buttonWithIcon theme-color4-light-BG padding8px15px">
+                    <p>Delete Student</p>
+                  </div>
+                  <div onclick="saveStudent()" class="buttonWithIcon theme-color2-light-BG padding8px15px">
+                    <p>Save Changes</p>
+                  </div>
                 </div>
 
                 <div class="centerText marginTop20">
@@ -177,20 +181,20 @@
       }
 
       function deleteStudent(button){
-        if(button.classList.contains("deleteButtonActive")){
+        if(button.classList.contains("deleteButtonConfirm")){
           form = document.getElementById("delete-student-form");
           form.submit();
         }
 
         else {
-          button.classList += " deleteButtonActive";
+          button.classList.add("deleteButtonConfirm");
           button.innerHTML = "Are you sure?";
         }
 
 
         window.onclick = function(event) {
           if (event.target != button) {
-            button.classList.remove("deleteButtonActive");
+            button.classList.remove("deleteButtonConfirm");
             button.innerHTML = "Delete Student";
           }
         }

@@ -126,18 +126,9 @@ label{
     margin-bottom: 20px;
 }
 
-.deleteButton{
-    background: var(--reportsColorDark);
-    color: var(--LightTextColorDark);
-}
-
-.deleteButton:hover{
-    filter: brightness(110%);
-}
-
-.deleteButtonActive{
-    background: var(--reportsColor) !important;
-    box-shadow: 0px 0px 6px var(--reportsColorDark) !important;
+.deleteButtonConfirm{
+    background: var(--ThemeColor4) !important;
+    box-shadow: 0px 0px 6px var(--ThemeColor4) !important;
 }
 
 .saveButton{
