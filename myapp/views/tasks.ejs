@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<nav><%- include header.ejs %></nav>
-<link rel='stylesheet' href='/stylesheets/style.css' />
+<html>
+  <head>
+    <%- include headerlinks.ejs %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/admin-styling.css' />
     <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
@@ -15,91 +17,99 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
-    <div class="flex spaceBetween centerFlexMobile flexCollapseMobile width90 center">
-      
-      <!-- ------------ TASKS PANEL ------------ -->
-      <div id="tasksPanel" class="mobilePanel light-content-BG margin10 borderRadiusSmall hideOverflow minWidth450px flexGrow1">
-        <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
-          <p class="marginLeft10 light-text font25px">Tasks</p>
-          <a onclick="openForm('newTaskForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
-        </div>
-        <div class="heavyPadding maxHeight500px">
-          <ul id="tasksList" class="ulList">
-            <% if (tasks.length > 0) { %>            
-              <% tasks.forEach((task, index) => { %>
-                <li class="spaceBetween"> 
-                  <div class="flex">
-                    <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
-                    <p><%= task.NoteContent %></p> 
-                  </div>
-                  
-                  <div class="flex font25px">
-                    <% if (task.Priority == 0) { %>
-                      <button class="theme-color2-light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
-                    <% } else if(task.Priority == 1) { %>
-                      <button class="theme-color3-light-BG" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
-                    <% } else { %>
-                      <button class="theme-color4-light-BG" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
-                    <% } %>
-                    <button class="theme-color4-BG" onclick="deleteTask('<%= task.TaskId %>')"><i class="light-text far fa-trash-alt"></i></button>
-                  </div>
-                  
-              <% }) %>
-            <% } %>
-          </ul>
-          <!-- --------------------- New Task Form --------------------- -->
-          <div id="newTaskForm" class="formWindow">
-            <div class="formWindow-content">
-              <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-              <p class="font50px centerText theme-color2-light-text marginBottom40">Add a Task</p>
-              
-              <div class="flex spaceBetween flexAlignCenter flexCollapseMobile marginBottom40 marginBelowChildren10 marginBottom40 width100">
-                <div class="flex width50 width90Mobile">
-                  <div class="inputWithIcon width100 white-BG">
-                    <input type="text" id="newTaskName" placeholder="Task Name">
-                  </div>
-                </div>
-
-                <div id="newTaskPriority" class="flex flexCenter width40 width90Mobile">
-                  <a id="low" onclick="toggleableToggled(this)" class="toggleable toggled">Low</a>
-                  <a id="mid" onclick="toggleableToggled(this)" class="toggleable">Mid</a>
-                  <a id="high" onclick="toggleableToggled(this)" class="toggleable">High</a>
-                </div>
-              </div>
-
-              <div class="flex flexCenter">
-                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newTaskSubmit" onclick="addTaskPost()">Add</a>
-              </div>
-            </div>
-          </div> <!-- End new task form -->
-        </div>
-      </div> <!-- End Tasks Section -->
-
-       <!-- ------------ LOG PANEL ------------ -->
-      <div id="logPanel" class="mobilePanel light-content-BG margin10 borderRadiusSmall hideOverflow width500px minWidth500px">
-        <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
-          <p class="marginLeft10 light-text font25px">Log</p>
-          <a onclick="clearLog()" class="marginRight10 lightPadding theme-color4-light-text font15px">Clear</a>
-        </div>
-        <div class="heavyPadding maxHeight500px">
-          
-          <ul id="comptasksList" class="ulList">
-            <% if (compTasks.length > 0) { %> 
-              <% compTasks.forEach((task, index) => {%>
-              <li class="flex spaceBetween">
-                <p><%= task.NoteContent %></p>
-                <div class="width40 light-content-dark-BG centerText">
-                  <p><%= task.CompletedTime.toDateString() %></p>
-                </div>
-              </li>
-              <% }) %>
-            <% } else {%>
-              <li><p>Log is empty</p></li>
-            <% } %>
-          </ul>
-        </div>
+    <div class="page-with-sidemenu">
+      <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+        <i class="fa fa-bars"></i>
       </div>
-    </div> <!-- CONTAINER END -->
+      <%- include header.ejs %>
+      <div class="content-with-side-header">
+        <div class="flex spaceBetween centerFlexMobile flexCollapseMobile width90 center">
+          <!-- ------------ TASKS PANEL ------------ -->
+          <div id="tasksPanel" class="mobilePanel light-content-BG margin10 borderRadiusSmall hideOverflow minWidth450px flexGrow1">
+            <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
+              <p class="marginLeft10 light-text font25px">Tasks</p>
+              <a onclick="openForm('newTaskForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
+            </div>
+            <div class="heavyPadding maxHeight500px">
+              <ul id="tasksList" class="ulList">
+                <% if (tasks.length > 0) { %>            
+                  <% tasks.forEach((task, index) => { %>
+                    <li class="spaceBetween"> 
+                      <div class="flex">
+                        <a class="checkBox" onclick="taskComplete(this, '<%= task.TaskId %>') "></a>
+                        <p><%= task.NoteContent %></p> 
+                      </div>
+                      
+                      <div class="flex font25px">
+                        <% if (task.Priority == 0) { %>
+                          <button class="theme-color2-light-BG" onclick="changePriority('<%= task.TaskId %>',0)"><i class="far fa-flag"></i></button>  
+                        <% } else if(task.Priority == 1) { %>
+                          <button class="theme-color3-light-BG" onclick="changePriority('<%= task.TaskId %>',1)"><i class="far fa-flag"></i></button>
+                        <% } else { %>
+                          <button class="theme-color4-light-BG" onclick="changePriority('<%= task.TaskId %>',2)"><i class="far fa-flag"></i></button>
+                        <% } %>
+                        <button class="theme-color4-BG" onclick="deleteTask('<%= task.TaskId %>')"><i class="light-text far fa-trash-alt"></i></button>
+                      </div>
+                      
+                  <% }) %>
+                <% } %>
+              </ul>
+              <!-- --------------------- New Task Form --------------------- -->
+              <div id="newTaskForm" class="formWindow">
+                <div class="formWindow-content">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px centerText theme-color2-light-text marginBottom40">Add a Task</p>
+                  
+                  <div class="flex spaceBetween flexAlignCenter flexCollapseMobile marginBottom40 marginBelowChildren10 marginBottom40 width100">
+                    <div class="flex width50 width90Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input type="text" id="newTaskName" placeholder="Task Name">
+                      </div>
+                    </div>
+    
+                    <div id="newTaskPriority" class="flex flexCenter width40 width90Mobile">
+                      <a id="low" onclick="toggleableToggled(this)" class="toggleable toggled">Low</a>
+                      <a id="mid" onclick="toggleableToggled(this)" class="toggleable">Mid</a>
+                      <a id="high" onclick="toggleableToggled(this)" class="toggleable">High</a>
+                    </div>
+                  </div>
+    
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newTaskSubmit" onclick="addTaskPost()">Add</a>
+                  </div>
+                </div>
+              </div> <!-- End new task form -->
+            </div>
+          </div> <!-- End Tasks Section -->
+    
+           <!-- ------------ LOG PANEL ------------ -->
+          <div id="logPanel" class="mobilePanel light-content-BG margin10 borderRadiusSmall hideOverflow width500px minWidth500px">
+            <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter marginBottom10">
+              <p class="marginLeft10 light-text font25px">Log</p>
+              <a onclick="clearLog()" class="marginRight10 lightPadding theme-color4-light-text font15px">Clear</a>
+            </div>
+            <div class="heavyPadding maxHeight500px">
+              
+              <ul id="comptasksList" class="ulList">
+                <% if (compTasks.length > 0) { %> 
+                  <% compTasks.forEach((task, index) => {%>
+                  <li class="flex spaceBetween">
+                    <p><%= task.NoteContent %></p>
+                    <div class="width40 light-content-dark-BG centerText">
+                      <p><%= task.CompletedTime.toDateString() %></p>
+                    </div>
+                  </li>
+                  <% }) %>
+                <% } else {%>
+                  <li><p>Log is empty</p></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div> <!-- CONTAINER END -->
+      </div> <!-- End content with side header-->
+    </div>
+    
   </body>
 
   <script src="/javascripts/tabs.js"></script>

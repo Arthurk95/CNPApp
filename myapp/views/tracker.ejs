@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <nav><%- include header.ejs %></nav>
   <head>
+    <%- include headerlinks.ejs %>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/blockList.css' />
@@ -11,62 +11,69 @@
     <script src="/javascripts/utilityScripts.js"></script>
   </head>
   <body>
-    
-      <!-- Only display if there are students AND activities-->
-    <% if (students.length > 0) {%>
-        <% if (activities.length > 0) {%>
-            <ul id="selectionButtons" class="selectionButtons">
-                <li><a id="studentButton" class="theme-color2-light-BG" onclick="startWithStudents()">Select Students</a></li>
-                <li><a id="activitiesButton" class="theme-color3-light-BG" onclick="startWithActivities()">Select Activity</a></li>
-            </ul>
-            <%- include listOfStudents.ejs %></ul>
+    <div class="page-with-side-menu">
+        <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+            <i class="fa fa-bars"></i>
+          </div>
+        <%- include header.ejs %>
+        <div class="content-with-side-header">
+            <!-- Only display if there are students AND activities-->
+            <% if (students.length > 0) {%>
+                <% if (activities.length > 0) {%>
+                    <ul id="selectionButtons" class="selectionButtons">
+                        <li><a id="studentButton" class="theme-color2-light-BG" onclick="startWithStudents()">Select Students</a></li>
+                        <li><a id="activitiesButton" class="theme-color3-light-BG" onclick="startWithActivities()">Select Activity</a></li>
+                    </ul>
+                    <%- include listOfStudents.ejs %></ul>
 
-            <ul id="activities" class="blockList activitiesList">
-                <li class="flex flexAlignCenter">
-                    <input class="margin10 light-content-BG font40px" onkeyup="updateSearch('activities', this)"></input>
-                    <i class="font50px marginRight20 fas fa-search"></i>
-                </li>
-                <% activities.forEach((activity, index) => { %>
-                <li onclick="activitySelected(this, <%= activity.ActivityId %>)">
-                    <div class="blockContainer">
-                        <p><%= activity.ActivityName %>
-                            <% if(activity.Helper == 1) { %>
-                            <i class="fas fa-star theme-color2-light-text"></i>
-                          <% } %></p>
-                        <div class="checkmarkOverlay">
-                            
-                        </div>
+                    <ul id="activities" class="blockList activitiesList">
+                        <li class="flex flexAlignCenter">
+                            <input class="margin10 light-content-BG font40px" onkeyup="updateSearch('activities', this)"></input>
+                            <i class="font50px marginRight20 fas fa-search"></i>
+                        </li>
+                        <% activities.forEach((activity, index) => { %>
+                        <li onclick="activitySelected(this, <%= activity.ActivityId %>)">
+                            <div class="blockContainer">
+                                <p><%= activity.ActivityName %>
+                                    <% if(activity.Helper == 1) { %>
+                                    <i class="fas fa-star theme-color2-light-text"></i>
+                                <% } %></p>
+                                <div class="checkmarkOverlay">
+                                    
+                                </div>
+                            </div>
+                        </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <div class="missingContainer">
+                        <h2>No Activities</h2>
+                        <a href="/admin">Add Activities</a>
                     </div>
-                </li>
-                <% }) %>
-            </ul>
-        <% } else { %>
-            <div class="missingContainer">
-                <h2>No Activities</h2>
-                <a href="/admin">Add Activities</a>
-            </div>
-        <% } %>
-    <% } else { %>
-        <div class="missingContainer">
-            <h2>No Students Today</h2>
-            <a href="/admin">Add Students</a>
+                <% } %>
+            <% } else { %>
+                <div class="missingContainer">
+                    <h2>No Students Today</h2>
+                    <a href="/admin">Add Students</a>
+                </div>
+            <% } %>
+
+            <footer>
+                <ul id="footer" class="studentFooter">
+                    <li class="flex flexCenter flexStretch">
+                        <a id="pottyBreak" class="flexGrow1 theme-color3-light-BG" onclick="pottyBreak()" style="display: none">Potty Break</a>
+                        <a id="backButton" class="flexGrow1 theme-color4-BG" onclick="goBack()" style="display: none">Back</a>
+                        <a id="nextButton" class="flexGrow1 theme-color2-light-BG" onclick="nextStep()" style="display: none">Next</a>
+                        <a id="submitButton" onclick="submitToDB()" class="flexGrow1 theme-color2-BG" style="display: none">Submit</a>
+                    </li>
+                    <li id="pottyYesNo" class="flex flexCenter flexStretch">
+                        <a class="flexGrow1 dark-content-light-BG noClick" style="display: none;">Accident?</a>
+                        <a id="pottyYes" class="flexGrow1 theme-color4-BG" onclick="submitPottyToDB(this, true)" style="display: none;">Yes</a>
+                        <a id="pottyNo" class="flexGrow1 theme-color2-BG" onclick="submitPottyToDB(this, false)" style="display: none;">No</a>
+                    </li>
+                </ul>
+            </footer>
         </div>
-    <% } %>
-    
-    <footer>
-        <ul id="footer" class="studentFooter">
-            <li class="flex flexCenter flexStretch">
-                <a id="pottyBreak" class="flexGrow1 theme-color3-light-BG" onclick="pottyBreak()" style="display: none">Potty Break</a>
-                <a id="backButton" class="flexGrow1 theme-color4-BG" onclick="goBack()" style="display: none">Back</a>
-                <a id="nextButton" class="flexGrow1 theme-color2-light-BG" onclick="nextStep()" style="display: none">Next</a>
-                <a id="submitButton" onclick="submitToDB()" class="flexGrow1 theme-color2-BG" style="display: none">Submit</a>
-            </li>
-            <li id="pottyYesNo" class="flex flexCenter flexStretch">
-                <a class="flexGrow1 dark-content-light-BG noClick" style="display: none;">Accident?</a>
-                <a id="pottyYes" class="flexGrow1 theme-color4-BG" onclick="submitPottyToDB(this, true)" style="display: none;">Yes</a>
-                <a id="pottyNo" class="flexGrow1 theme-color2-BG" onclick="submitPottyToDB(this, false)" style="display: none;">No</a>
-            </li>
-        </ul>
-    </footer>
+    </div>
   </body>
 </html>

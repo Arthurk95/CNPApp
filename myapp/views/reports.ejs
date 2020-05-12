@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <nav><%- include header.ejs %></nav>
   <head>
+    <%- include headerlinks.ejs %>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/reports.css' />
     <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
-    <% if(reports.length > 0) {%>
-      <ul class="reportsList grid">
-      <% reports.forEach((report, index) => {%>
-        <li>
-          <table class="customTable grid-item">
-            <thead>
-              <tr><th colspan=2><%= report.name %></th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="center">
-                  Potty Breaks: <%= report.pottyBreaks %> (<%= report.pottyAccidents %> Accidents)
-                </td>
-              </tr>
-              <% report.listOfActivities.forEach((activity, index) => {%>
-              <tr>
-                <td class="left">
-                  <%= activity.ActivityName %>
-                  <% if(activity.Helper == 1) { %>
-                    <i class="fas fa-star theme-color2-light-text"></i>
-                  <% } %>
-                </td>
-              </tr>
-              <% }) %>
-            </tbody>
-          </table>
-        </li>
-      <% }) %>
-      
-    </ul>
-    <% } else {%>
-      <div class="missingContainer">
-        <h2>No Reports</h2>
-        <a href="/students">Add a Report</a>
+    <div class="page-with-sidemenu">
+      <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+        <i class="fa fa-bars"></i>
       </div>
-    <% } %>
+      <%- include header.ejs %>
+      <div class="content-with-side-header">
+        <% if(reports.length > 0) {%>
+          <ul class="reportsList grid">
+          <% reports.forEach((report, index) => {%>
+            <li>
+              <table class="customTable grid-item">
+                <thead>
+                  <tr><th colspan=2><%= report.name %></th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="center">
+                      Potty Breaks: <%= report.pottyBreaks %> (<%= report.pottyAccidents %> Accidents)
+                    </td>
+                  </tr>
+                  <% report.listOfActivities.forEach((activity, index) => {%>
+                  <tr>
+                    <td class="left">
+                      <%= activity.ActivityName %>
+                      <% if(activity.Helper == 1) { %>
+                        <i class="fas fa-star theme-color2-light-text"></i>
+                      <% } %>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </li>
+          <% }) %>
+          
+        </ul>
+        <% } else {%>
+          <div class="missingContainer">
+            <h2>No Reports</h2>
+            <a href="/students">Add a Report</a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+    
   </body>
   </html>

@@ -1,57 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='/stylesheets/header.css' />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
-    <script src="/javascripts/post.js"></script>
-  </head>
    <body>
-      <ul class="headerStyle">
-         <li><a href="/">Home</a></li>
-         <li><a href="/tracker">Tracker</a></li>
-         <li><a href="/reports">Reports</a></li>
-         <li><a href="/admin">Admin</a></li>
-         <li><a href="/stats">Stats</a></li>
-         <li><a href="/emailer">Email</a></li>
-         <li><a href="/tasks">Tasks</a></li>
-      </ul>
-      <div id="logout" class="logout">
-        <form action="/logout?_method=DELETE" method="POST">
-          <button class="flex customButton red-BG" type="submit">Logout <i class="fas fa-sign-out-alt marginLeft10"></i></button>
-        </form>
-      </div>
-      
-
-      <div onclick="openNav()" id="mobileHeader" class="mobileHeader">
-        <a id="hamburger" href="javascript:void(0);" class="icon" onclick="">
-          <i class="fa fa-bars"></i>
-        </a>
-        <div id="links" class="links">
-          <a href="/">Home</a>
-          <a href="/tracker">Tracker</a>
-          <a href="/reports">Reports</a>
-          <a href="/admin">Admin</a>
-          <a href="/stats">Stats</a>
-          <a href="/emailer">Email</a>
-          <a href="/tasks">Tasks</a>
-          <a>
-            <form action="/logout?_method=DELETE" method="POST">
-              <button class="resetButton smallFont light-text" type="submit">Logout</button>
-            </form>
-          </a>
+    <div id="sideHeader" class="side-header-wrapper">
+      <div class="side-header">
+        <div id="links" class="side-header-top width100">
+          <a class="side-header-link" href="/">Home</a>
+          <a class="side-header-link" href="/tracker">Tracker</a>
+          <a class="side-header-link" href="/reports">Reports</a>
+          <a class="side-header-link" href="/admin">Admin</a>
+          <a class="side-header-link" href="/stats">Stats</a>
+          <a class="side-header-link" href="/emailer">Email</a>
+          <a class="side-header-link" href="/tasks">Tasks</a>
+          <a class="side-header-link" href="/styleSettings">App Style</a>
         </div>
-        
+
+        <div class="side-header-bottom">
+          <form action="/logout?_method=DELETE" method="POST">
+            <button class="side-header-link resetButton width100 leftText noBorder" href="/logout?_method=DELETE" type="submit"><i class="rotate180 fas fa-sign-out-alt marginRight10"></i> Logout</button>
+          </form>
+        </div>
       </div>
+    </div>
   </body>
     <script>
       let current_url = document.location;
       var aTags = document.getElementsByTagName("a");
       var links = document.getElementById("links");
-      links.style.display = "none";
       for(var i = 0; i < aTags.length; i++){
         if(aTags[i].href == current_url){
-          aTags[i].classList += " currentPage";
+          aTags[i].classList.add("active");
         }
       }
 

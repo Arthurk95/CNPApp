@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html>
       <head>
-            <nav><%- include header.ejs %></nav>
+            <%- include headerlinks.ejs %>
             <link rel='stylesheet' href='/stylesheets/style.css' />
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       </head>
       <body> 
-            <div class="flex flexWrap spaceAround width90 center">
-                  <% reports.forEach((report, index) => { %>
-                        <div class="mobilePanel light-content-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
-                              <div class="<% if(report.status == 'Failed') { %> theme-color4-light-BG <% } else { %> theme-color2-BG <% } %>
-                                    mediumPadding flex spaceBetween flexAlignCenter relative">
-                                    <p class="marginLeft10 light-text font25px"><%= report.name %></p>
-                              </div>
-                              <div class="heavyPadding flex flexColumn">
-                                    <div class="flex spaceBetween">
-                                          <p><%= report.emails %></p>
-                                          <p class="theme-color2-light-text"><%= report.status %></p>
+            <div class="page-with-side-menu">
+                  <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+                        <i class="fa fa-bars"></i>
+                      </div>
+                  <%- include header.ejs %>
+                  <div class="content-with-side-header">
+                        <div class="flex flexWrap spaceAround width90 center">
+                              <% reports.forEach((report, index) => { %>
+                                    <div class="mobilePanel light-content-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
+                                          <div class="<% if(report.status == 'Failed') { %> theme-color4-light-BG <% } else { %> theme-color2-BG <% } %>
+                                                mediumPadding flex spaceBetween flexAlignCenter relative">
+                                                <p class="marginLeft10 light-text font25px"><%= report.name %></p>
+                                          </div>
+                                          <div class="heavyPadding flex flexColumn">
+                                                <div class="flex spaceBetween">
+                                                      <p><%= report.emails %></p>
+                                                      <p class="theme-color2-light-text"><%= report.status %></p>
+                                                </div>
+                                                <p><%= report.message %></p>
+                                          </div>
                                     </div>
-                                    <p><%= report.message %></p>
-                              </div>
+                              <% }) %>
                         </div>
-                  <% }) %>
+                  </div>
+                  
             </div>
+
+            
       </body>
 </html>

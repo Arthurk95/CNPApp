@@ -3,7 +3,7 @@
 <html>
 
   <head>
-    <nav><%- include header.ejs %></nav>
+    <%- include headerlinks.ejs %>
     <meta charset="utf-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/stats.css' />
@@ -52,7 +52,7 @@
   <body>
 
     <!-- Navigation -->
-    <div id ="navigation">
+    <div id ="navigation" style="display:none">
       <nav class="navbar-expand-lg">
           <!-- Month selection -->
           <ul class="navbar-nav">
@@ -72,26 +72,40 @@
       </nav>
     </div> <!-- end navigation -->
 
-    <!-- Charts -->
-    <div id="charts" class="flex flexColumn flexAlignCenter width90 center">
-      <!-- Chart Panel -->
-      <div id="chartPanel" class="mobilePanel width15 center flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
-        <div class="dark-content-light-BG heavyPadding flex flexColumn flexAlignCenter">
-          <p class="marginLeft10 light-text font25px width100 centerText marginBottom40">Select a Chart </p>
-          
-          <div class="width90 center flex spaceBetween marginBottom30 flexAlignCenter">
-            <!-- Drop down for adding a new chart -->
-            <select id="newchart" class="arrow-down-make width40">
-              <option value="pie">Pie Chart</option>
-              <option value="line">Line Chart</option>
-            </select>
+    <div class="page-with-sidemenu">
+      <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+        <i class="fa fa-bars"></i>
+      </div>
+      <%- include header.ejs %>
+      <div class="content-with-side-header noPadding">
+        <!-- chart panel bar -->
+        <div class="width100 dark-content-BG flex centerFlexMobile width90Mobile center">
+           <!-- Chart Panel -->
+          <div id="chartPanel" class="mobilePanel width200 center flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth350px width45">
+            <div class="heavyPadding flex spaceBetween flexCollapseMobile flexAlignCenter width90 center">
+              <p class="marginLeft10 light-text font25px width100">Select a Chart </p>
+              
+              <div class="width90 center flex spaceBetween flexCollapseMobile flexAlignCenter">
+                <!-- Drop down for adding a new chart -->
+                <select id="newchart" class="arrow-down-make width40 width100Mobile">
+                  <option value="pie">Pie Chart</option>
+                  <option value="line">Line Chart</option>
+                </select>
 
-            <!-- Make Chart button-->
-            <a class="font15px marginRight10 padding10px theme-color2-light-BG borderRadiusLarge light-text width40 centerText" onclick="makeChart()">Add Chart</a> 
-          </div>
+                <!-- Make Chart button-->
+                <a class="font15px marginRight10 padding10px theme-color2-light-BG borderRadiusLarge light-text width40 width100Mobile centerText" onclick="makeChart()">Add Chart</a> 
+              </div>
+            </div>
+          </div> <!-- end chart panel --> 
+        </div> <!-- End chart panel bar -->
+
+        <!-- Charts -->
+        <div id="charts" class="flex flexColumn flexAlignCenter width90 center">
           
         </div>
-      </div> <!-- end chart panel --> 
+      </div>
+    </div> <!-- End chart --> 
+    
       <script>
         var chartArray = [];
         var curId = 0;
@@ -167,7 +181,6 @@
 
       </script>
 
-    </div> <!-- End chart --> 
 
 
     <!-- SCATTER PLOT -->

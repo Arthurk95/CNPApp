@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <nav><%- include header.ejs %></nav>
     <head>
+        <%- include headerlinks.ejs %>
         <link rel='stylesheet' href='/stylesheets/style.css' />
         <link rel='stylesheet' href='/stylesheets/emailer.css' />
         <link rel='stylesheet' href='/stylesheets/form.css' />
@@ -40,296 +40,305 @@
 
     </head>
     <body>
-        <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
-            <div id="stepOne" class="flexCenter flexColumn borderBox light-content-BG borderRadiusMedium width90">
-                <p class="title theme-color2-BG">Step 1: Email Template</p>
-                <div class="veryHeavyPadding">
-                    <ul class="flex flexColumn marginBottom40">
-                        <li class="marginBottom10">
-                            <label for="summary">Summary</label>
-                            <!-- toolbar container should be abstracted later -->
-                            <div id="summary-toolbar-container">
-                                <span class="ql-formats">
-                                    <select class="ql-size">
-                                        <option value="10px">Small</option>
-                                        <option selected>Normal</option>
-                                        <option value="18px">Large</option>
-                                        <option value="32px">Huge</option>
-                                    </select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-align" value=""></button>
-                                    <button class="ql-align" value="center"></button>
-                                    <button class="ql-align" value="right"></button>
-                                </span>
-                                <span class="ql-formats">
-                                    <select class="ql-color">
-                                        <option selected></option>
-                                        <option value="red"></option>
-                                        <option value="orange"></option>
-                                        <option value="yellow"></option>
-                                        <option value="green"></option>
-                                        <option value="blue"></option>
-                                        <option value="purple"></option>
-                                    </select>
-                                    <select class="ql-background">
-                                        <option selected></option>
-                                        <option value="red"></option>
-                                        <option value="orange"></option>
-                                        <option value="yellow"></option>
-                                        <option value="green"></option>
-                                        <option value="blue"></option>
-                                        <option value="purple"></option>
-                                    </select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-bold"></button>
-                                    <button class="ql-italic"></button>
-                                    <button class="ql-underline"></button>
-                                    <button class="ql-strike"></button>
-                                </span>
-                              </div>
-                            <div id="summary">
-                                <!-- <%- summary %> -->
-                            </div>
+        <div class="page-with-side-menu">
+            <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+                <i class="fa fa-bars"></i>
+              </div>
+            <div class="content-with-side-header">
+                <%- include header.ejs %>
+                <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
+                    <div id="stepOne" class="flexCenter flexColumn borderBox light-content-BG borderRadiusMedium width90">
+                        <p class="title theme-color2-BG">Step 1: Email Template</p>
+                        <div class="veryHeavyPadding">
+                            <ul class="flex flexColumn marginBottom40">
+                                <li class="marginBottom10">
+                                    <label for="summary">Summary</label>
+                                    <!-- toolbar container should be abstracted later -->
+                                    <div id="summary-toolbar-container">
+                                        <span class="ql-formats">
+                                            <select class="ql-size">
+                                                <option value="10px">Small</option>
+                                                <option selected>Normal</option>
+                                                <option value="18px">Large</option>
+                                                <option value="32px">Huge</option>
+                                            </select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-align" value=""></button>
+                                            <button class="ql-align" value="center"></button>
+                                            <button class="ql-align" value="right"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-color">
+                                                <option selected></option>
+                                                <option value="red"></option>
+                                                <option value="orange"></option>
+                                                <option value="yellow"></option>
+                                                <option value="green"></option>
+                                                <option value="blue"></option>
+                                                <option value="purple"></option>
+                                            </select>
+                                            <select class="ql-background">
+                                                <option selected></option>
+                                                <option value="red"></option>
+                                                <option value="orange"></option>
+                                                <option value="yellow"></option>
+                                                <option value="green"></option>
+                                                <option value="blue"></option>
+                                                <option value="purple"></option>
+                                            </select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                            <button class="ql-strike"></button>
+                                        </span>
+                                      </div>
+                                    <div id="summary">
+                                        <!-- <%- summary %> -->
+                                    </div>
+                                    
+                                </li>
+                                <li class="marginBottom10">
+                                    <label for="snack">AM Snack</label>
+                                    <div id="snack-toolbar-container">
+                                        <span class="ql-formats">
+                                            <select class="ql-size">
+                                                <option value="10px">Small</option>
+                                                <option selected>Normal</option>
+                                                <option value="18px">Large</option>
+                                                <option value="32px">Huge</option>
+                                            </select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-align" value=""></button>
+                                            <button class="ql-align" value="center"></button>
+                                            <button class="ql-align" value="right"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-color">
+                                                <option selected></option>
+                                                <option value="red"></option>
+                                                <option value="orange"></option>
+                                                <option value="yellow"></option>
+                                                <option value="green"></option>
+                                                <option value="blue"></option>
+                                                <option value="purple"></option>
+                                            </select>
+                                            <select class="ql-background">
+                                                <option selected></option>
+                                                <option value="red"></option>
+                                                <option value="orange"></option>
+                                                <option value="yellow"></option>
+                                                <option value="green"></option>
+                                                <option value="blue"></option>
+                                                <option value="purple"></option>
+                                            </select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                            <button class="ql-strike"></button>
+                                        </span>
+                                      </div>
+                                    <div id="snack">
+                                        <!-- <p><%- snack %></p> -->
+                                    </div>
+                                </li>
+                                <li class="marginBottom10">
+                                    <label for="lunch">Lunch</label>
+                                    <div id="lunch-toolbar-container">
+                                        <span class="ql-formats">
+                                            <select class="ql-size">
+                                                <option value="10px">Small</option>
+                                                <option selected>Normal</option>
+                                                <option value="18px">Large</option>
+                                                <option value="32px">Huge</option>
+                                            </select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-align" value=""></button>
+                                            <button class="ql-align" value="center"></button>
+                                            <button class="ql-align" value="right"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-color">
+                                                <option selected></option>
+                                                <option value="red"></option>
+                                                <option value="orange"></option>
+                                                <option value="yellow"></option>
+                                                <option value="green"></option>
+                                                <option value="blue"></option>
+                                                <option value="purple"></option>
+                                            </select>
+                                            <select class="ql-background">
+                                                <option selected></option>
+                                                <option value="red"></option>
+                                                <option value="orange"></option>
+                                                <option value="yellow"></option>
+                                                <option value="green"></option>
+                                                <option value="blue"></option>
+                                                <option value="purple"></option>
+                                            </select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                            <button class="ql-strike"></button>
+                                        </span>
+                                      </div>
+                                    <div id="lunch">
+                                        <!-- <p><%- lunch %></p> -->
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- Create the editor container -->
                             
-                        </li>
-                        <li class="marginBottom10">
-                            <label for="snack">AM Snack</label>
-                            <div id="snack-toolbar-container">
-                                <span class="ql-formats">
-                                    <select class="ql-size">
-                                        <option value="10px">Small</option>
-                                        <option selected>Normal</option>
-                                        <option value="18px">Large</option>
-                                        <option value="32px">Huge</option>
-                                    </select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-align" value=""></button>
-                                    <button class="ql-align" value="center"></button>
-                                    <button class="ql-align" value="right"></button>
-                                </span>
-                                <span class="ql-formats">
-                                    <select class="ql-color">
-                                        <option selected></option>
-                                        <option value="red"></option>
-                                        <option value="orange"></option>
-                                        <option value="yellow"></option>
-                                        <option value="green"></option>
-                                        <option value="blue"></option>
-                                        <option value="purple"></option>
-                                    </select>
-                                    <select class="ql-background">
-                                        <option selected></option>
-                                        <option value="red"></option>
-                                        <option value="orange"></option>
-                                        <option value="yellow"></option>
-                                        <option value="green"></option>
-                                        <option value="blue"></option>
-                                        <option value="purple"></option>
-                                    </select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-bold"></button>
-                                    <button class="ql-italic"></button>
-                                    <button class="ql-underline"></button>
-                                    <button class="ql-strike"></button>
-                                </span>
-                              </div>
-                            <div id="snack">
-                                <!-- <p><%- snack %></p> -->
-                            </div>
-                        </li>
-                        <li class="marginBottom10">
-                            <label for="lunch">Lunch</label>
-                            <div id="lunch-toolbar-container">
-                                <span class="ql-formats">
-                                    <select class="ql-size">
-                                        <option value="10px">Small</option>
-                                        <option selected>Normal</option>
-                                        <option value="18px">Large</option>
-                                        <option value="32px">Huge</option>
-                                    </select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-align" value=""></button>
-                                    <button class="ql-align" value="center"></button>
-                                    <button class="ql-align" value="right"></button>
-                                </span>
-                                <span class="ql-formats">
-                                    <select class="ql-color">
-                                        <option selected></option>
-                                        <option value="red"></option>
-                                        <option value="orange"></option>
-                                        <option value="yellow"></option>
-                                        <option value="green"></option>
-                                        <option value="blue"></option>
-                                        <option value="purple"></option>
-                                    </select>
-                                    <select class="ql-background">
-                                        <option selected></option>
-                                        <option value="red"></option>
-                                        <option value="orange"></option>
-                                        <option value="yellow"></option>
-                                        <option value="green"></option>
-                                        <option value="blue"></option>
-                                        <option value="purple"></option>
-                                    </select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-bold"></button>
-                                    <button class="ql-italic"></button>
-                                    <button class="ql-underline"></button>
-                                    <button class="ql-strike"></button>
-                                </span>
-                              </div>
-                            <div id="lunch">
-                                <!-- <p><%- lunch %></p> -->
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- Create the editor container -->
-                    
-                    <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                        <div id="saveButtonStep1" class="buttonWithIcon" onclick="updateDailyInfo();">
-                            <p>Save</p>
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="buttonWithIcon" onclick="toNextStep();">
-                            <p>Next</p>
-                            <i class="fas fa-caret-right"></i>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-
-            <div id="stepTwo" class="contentWithSidebar spaceAround">
-                <div class="width70 width90Mobile light-content-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
-                    <div id="stepTwoTitle" class="heavyPadding theme-color1-light-BG flex spaceBetween flexAlignCenter flexWrap">
-                        <p class="font50px light-text marginLeft10"></p>
-                        <p class="displayNone" id="currentStudentID"></p>
-                        <div id="reviewButton" class="buttonWithIcon theme-color2-light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
-                            <!-- <div class="buttonWithIcon theme-color2-light-BG" onclick="openReview()"> -->
-                            <p class="mediumPadding">Review</p>
-                        </div>
-                    </div>
-
-                    <!-- Review Form -->
-                    <div id="reviewForm" class="formWindow">
-                        <div class="formWindow-content flexContainer width80 width90Mobile">
-                            <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                            <p id="reviewTitle" class="font40px marginBottom40 centerText theme-color2-light-text">Review</p>
-                            <div class="center width90 white-BG padding30px">
-                                <div id="reviewData"></div>
-                            </div>
-                            <div class="flex flexCenter">
-                                <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="studentApproved(this)">Approve</a>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <!-- Email Report Form -->
-                    <div id="reportForm" class="formWindow">
-                        <div class="formWindow-content flexContainer width80 width90Mobile">
-                            <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                            <p id="reportTitle" class="font40px marginBottom40 centerText theme-color2-light-text">Email Report</p>
-                            <div class="center width90 white-BG padding30px">
-                                <div id="reportData">
-                                    <table id="reportTable">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email(s)</th>
-                                            <th>Result</th>
-                                            <th></th>
-                                            <!-- last column does not need title, just for showing error message if needed -->
-                                        </tr>
-                                    </table>
-                                    <p id="reportStatus"></p>
+                            <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
+                                <div id="saveButtonStep1" class="buttonWithIcon" onclick="updateDailyInfo();">
+                                    <p>Save</p>
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="buttonWithIcon" onclick="toNextStep();">
+                                    <p>Next</p>
+                                    <i class="fas fa-caret-right"></i>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
-
-                    <div class="content"> <!-- activities and dropdowns -->
-                        <div class="flex flexCollapseMobile marginBottom40 spaceBetween">
-                            <div id="activities" class="width60 width100Mobile">
-                                <p class="mediumFont dark-text marginBottom20 centerText">Activities</p>
-                                <ul id="activitiesList" class="flex flexWrap spaceAround dark-text width90 center"></ul>
+        
+                    <div id="stepTwo" class="contentWithSidebar spaceAround">
+                        <div class="width70 width90Mobile light-content-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
+                            <div id="stepTwoTitle" class="heavyPadding theme-color1-light-BG flex spaceBetween flexAlignCenter flexWrap">
+                                <p class="font50px light-text marginLeft10"></p>
+                                <p class="displayNone" id="currentStudentID"></p>
+                                <div id="reviewButton" class="buttonWithIcon theme-color2-light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
+                                    <!-- <div class="buttonWithIcon theme-color2-light-BG" onclick="openReview()"> -->
+                                    <p class="mediumPadding">Review</p>
+                                </div>
                             </div>
-
-                            <!-- Behavior dropdowns -->
-                            <div id="behaviorsList" class="flex flexColumn flexCenter heavyPadding width70 width100Mobile">
-                                <% behaviors.forEach((behavior, index) => { %>
-                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween flexCollapseMobile marginBottom10 flexWrap">
-                                        <label for="<%= behavior.name %>" class="width20 width100Mobile"><%= behavior.name %></label>
-                                        
-                                        <div class="flex spaceAround flexAlignCenter relative width60 width100Mobile">
-                                            <select id="<%= behavior.name%>Select" name="<%= behavior.name %>">
-                                            </select>
-                                            
-                                            <input style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></input>
+        
+                            <!-- Review Form -->
+                            <div id="reviewForm" class="formWindow">
+                                <div class="formWindow-content flexContainer width80 width90Mobile">
+                                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                                    <p id="reviewTitle" class="font40px marginBottom40 centerText theme-color2-light-text">Review</p>
+                                    <div class="center width90 white-BG padding30px">
+                                        <div id="reviewData"></div>
+                                    </div>
+                                    <div class="flex flexCenter">
+                                        <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="studentApproved(this)">Approve</a>
+                                    </div>
                                     
-                                            <a id="<%= behavior.name %>-note-button" onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name %>Select'); toggleClassIfInputNotEmpty('<%=behavior.name %>-text-box', this, 'theme-color2-light-BG', 'theme-color4-light-BG');" class="marginLeft10 borderRadiusSmall theme-color4-light-BG lightPadding">
-                                                <i class="fas fa-sticky-note dark-text"></i>
-                                            </a>
+                                </div>
+                            </div>
+        
+                            <!-- Email Report Form -->
+                            <div id="reportForm" class="formWindow">
+                                <div class="formWindow-content flexContainer width80 width90Mobile">
+                                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                                    <p id="reportTitle" class="font40px marginBottom40 centerText theme-color2-light-text">Email Report</p>
+                                    <div class="center width90 white-BG padding30px">
+                                        <div id="reportData">
+                                            <table id="reportTable">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email(s)</th>
+                                                    <th>Result</th>
+                                                    <th></th>
+                                                    <!-- last column does not need title, just for showing error message if needed -->
+                                                </tr>
+                                            </table>
+                                            <p id="reportStatus"></p>
                                         </div>
                                     </div>
-
-                                    <!-- Add note behavior forms -->
-                                    <div id="<%= behavior.name %>Form" class="formWindow">
-                                        <div class="formWindow-content width500px width90Mobile flexContainer">
-                                            <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                                            <p class="font50px marginBottom40 centerText theme-color2-light-text"><%= behavior.name %></p>
-                                            <div class="flex flexColumn flexCenter center flexAlignCenter marginBelowChildren10 width80 width90Mobile">
-                                                <textarea class="width100" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> notes.."></textarea>
-                                            </div>
-                                            <!-- <div class="flex flexCenter">
-                                                <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="behaviorNote(this)">Save Note</a>
-                                            </div> -->
+                                </div>
+                            </div>
+        
+                            <div class="content"> <!-- activities and dropdowns -->
+                                <div class="flex flexCollapseMobile marginBottom40 spaceBetween">
+                                    <div id="activities" class="width60 width100Mobile">
+                                        <p class="mediumFont dark-text marginBottom20 centerText">Activities</p>
+                                        <ul id="activitiesList" class="flex flexWrap spaceAround dark-text width90 center"></ul>
+                                    </div>
+        
+                                    <!-- Behavior dropdowns -->
+                                    <div id="behaviorsList" class="flex flexColumn flexCenter heavyPadding width70 width100Mobile">
+                                        <% behaviors.forEach((behavior, index) => { %>
+                                            <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween flexCollapseMobile marginBottom10 flexWrap">
+                                                <label for="<%= behavior.name %>" class="width20 width100Mobile"><%= behavior.name %></label>
+                                                
+                                                <div class="flex spaceAround flexAlignCenter relative width60 width100Mobile">
+                                                    <select id="<%= behavior.name%>Select" name="<%= behavior.name %>">
+                                                    </select>
+                                                    
+                                                    <input style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></input>
                                             
-                                        </div>
+                                                    <a id="<%= behavior.name %>-note-button" onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name %>Select'); toggleClassIfInputNotEmpty('<%=behavior.name %>-text-box', this, 'theme-color2-light-BG', 'theme-color4-light-BG');" class="marginLeft10 borderRadiusSmall theme-color4-light-BG lightPadding">
+                                                        <i class="fas fa-sticky-note dark-text"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+        
+                                            <!-- Add note behavior forms -->
+                                            <div id="<%= behavior.name %>Form" class="formWindow">
+                                                <div class="formWindow-content width500px width90Mobile flexContainer">
+                                                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                                                    <p class="font50px marginBottom40 centerText theme-color2-light-text"><%= behavior.name %></p>
+                                                    <div class="flex flexColumn flexCenter center flexAlignCenter marginBelowChildren10 width80 width90Mobile">
+                                                        <textarea class="width100" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> notes.."></textarea>
+                                                    </div>
+                                                    <!-- <div class="flex flexCenter">
+                                                        <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="behaviorNote(this)">Save Note</a>
+                                                    </div> -->
+                                                    
+                                                </div>
+                                            </div>
+        
+                                            <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>);</script>
+                                                
+                                        <% }) %>
                                     </div>
-
-                                    <script>fillSelect('<%= behavior.name %>', <%- JSON.stringify(behavior) %>);</script>
-                                        
+                                </div>
+                                <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
+                                    <div class="theme-color4-BG buttonWithIcon" onclick="toPreviousStep();">
+                                        <i class="fas fa-caret-left"></i>
+                                        <p>Back</p>
+                                    </div>
+                                    <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>); toggleStyle(this, 'theme-color2-light-BG');">
+                                        <p>Save</p>
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right column (students) -->
+                        <div class="sidebar width20 width90Mobile light-content-BG">
+                            <ul id="listOfStudents" class="studentsList maxHeight500px" >
+                            <% if (reports.length > 0) { %>
+                                <script>passToJS(<%- JSON.stringify(reports) %>);</script>
+                                <% reports.forEach((report, index) => { %>
+                                    <li id="student<%= index %>" onclick="studentSelected(this, <%= index %>)"><%= report.name %></li>
                                 <% }) %>
+                            <% } else { %>
+                                <li>No Students</li>
+                            <% } %>
+                            </ul>
+                            <div id="sendEmailButton" class="buttonWithIcon width60 marginBottom20 theme-color2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); toggleElementID('spinner'); ">
+                                <p>Send Emails</p>
+                                <div style="display: none" id="spinner" class="spinning-loader marginLeft10 marginRight20"></div>
                             </div>
                         </div>
-                        <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                            <div class="theme-color4-BG buttonWithIcon" onclick="toPreviousStep();">
-                                <i class="fas fa-caret-left"></i>
-                                <p>Back</p>
-                            </div>
-                            <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>); toggleStyle(this, 'theme-color2-light-BG');">
-                                <p>Save</p>
-                                <i class="fas fa-check"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Right column (students) -->
-                <div class="sidebar width20 width90Mobile light-content-BG">
-                    <ul id="listOfStudents" class="studentsList maxHeight500px" >
-                    <% if (reports.length > 0) { %>
-                        <script>passToJS(<%- JSON.stringify(reports) %>);</script>
-                        <% reports.forEach((report, index) => { %>
-                            <li id="student<%= index %>" onclick="studentSelected(this, <%= index %>)"><%= report.name %></li>
-                        <% }) %>
-                    <% } else { %>
-                        <li>No Students</li>
-                    <% } %>
-                    </ul>
-                    <div id="sendEmailButton" class="buttonWithIcon width60 marginBottom20 theme-color2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); toggleElementID('spinner'); ">
-                        <p>Send Emails</p>
-                        <div style="display: none" id="spinner" class="spinning-loader marginLeft10 marginRight20"></div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <form id="emailReportForm" method="POST" action="/emailer/emailReport">
             <input id="report" name="report" type="hidden">
         </form>
