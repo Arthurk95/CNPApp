@@ -32,9 +32,13 @@
                   <tr>
                     <td class="left">
                       <%= activity.ActivityName %>
+                      
                       <% if(activity.Helper == 1) { %>
                         <i class="fas fa-star theme-color2-light-text"></i>
                       <% } %>
+                    </td>
+                    <td class="right">
+                      <button class="red-BG" onclick=""><i class="far fa-trash-alt"></i></button>
                     </td>
                   </tr>
                   <% }) %>
