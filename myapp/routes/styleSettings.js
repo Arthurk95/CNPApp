@@ -104,8 +104,6 @@ function getVariables(root){
 // made this because substr and trim() affected other variables as well (pointers or something idk)
 function replaceLineWith(line, lineIndex){
     var lines = originalRoot.split('\n');
-    console.log(lineIndex + ": " + lines[lineIndex]);
-    console.log(lineIndex + ": " + line);
     lines[lineIndex] = line;
     root = lines.join('\n');
 }
