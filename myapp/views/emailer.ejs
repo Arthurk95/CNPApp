@@ -261,12 +261,12 @@
                             </div>
 
                             <!-- Behavior dropdowns -->
-                            <div id="behaviorsList" class="flex flexColumn flexCenter heavyPadding width70">
+                            <div id="behaviorsList" class="flex flexColumn flexCenter heavyPadding width70 width100Mobile">
                                 <% behaviors.forEach((behavior, index) => { %>
-                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween marginBottom10 flexWrap">
-                                        <label for="<%= behavior.name %>" class="width20"><%= behavior.name %></label>
+                                    <div id="<%= behavior.name %>" class="flex flexAlignCenter spaceBetween flexCollapseMobile marginBottom10 flexWrap">
+                                        <label for="<%= behavior.name %>" class="width20 width100Mobile"><%= behavior.name %></label>
                                         
-                                        <div class="flex spaceAround flexAlignCenter relative width60">
+                                        <div class="flex spaceAround flexAlignCenter relative width60 width100Mobile">
                                             <select id="<%= behavior.name%>Select" name="<%= behavior.name %>">
                                             </select>
                                             
@@ -324,7 +324,8 @@
                     <% } %>
                     </ul>
                     <div id="sendEmailButton" class="buttonWithIcon width60 marginBottom20 theme-color2-BG width40 center disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); toggleElementID('spinner'); ">
-                        <p class="width100">Send Emails<div style="display: none" id="spinner" class="spinning-loader marginLeft10"></div></p>
+                        <p>Send Emails</p>
+                        <div style="display: none" id="spinner" class="spinning-loader marginLeft10 marginRight20"></div>
                     </div>
                 </div>
             </div>

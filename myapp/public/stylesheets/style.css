@@ -1032,9 +1032,14 @@ svg{
   }
 
   .buttonWithIcon{
-    font-size: 30px;
-    min-width: 300px;
+    font-size: 2em !important;
+    min-width: 400px;
   }
+
+  .buttonWithIcon i{font-size: 2em !important; width: 25%;}
+
+  select{font-size: 2em !important;}
+  label{font-size: 2em !important;}
 }
 /* END MOBILE FRIENDLY STUFF */
 
@@ -1131,14 +1136,6 @@ textarea:focus{
 
 /**** Statistics ****/
 
-/* Navigation styling */
-#navigation {
-  display: flex;
-  top: 0px;
-  width: 100%;
-  margin-bottom: 25px;
-  z-index: 9999;
-}
 
 .section {
   padding-top: 70px;
@@ -1201,15 +1198,6 @@ text.axis-worktime {
   fill: #000;
 } */
 
-/* Navigation styling */
-#navigation {
-  display: flex;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  width: 100%;
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
 
 #navigationPie{
   display: flex;
@@ -1252,6 +1240,7 @@ select{
   padding: 10px;
   font-size: 1em;
   border-color: var(--LightTextColorDark);
+  color: var(--DarkTextColor);
 }
 
 select:hover{
@@ -1264,6 +1253,8 @@ select option{
 select option:active{
   background: var(--LightContentBackgroundDark);
 }
+
+label{color: var(--DarkTextColor);}
 
 
 .popup{
