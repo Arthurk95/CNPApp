@@ -3,7 +3,6 @@
   <head>
     <%- include headerlinks.ejs %>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/reports.css' />
     <link rel='stylesheet' href='/stylesheets/custom-table.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
@@ -14,46 +13,37 @@
       </div>
       <%- include header.ejs %>
       <div class="content-with-side-header">
-        <% if(reports.length > 0) {%>
-          <ul class="reportsList grid">
-          <% reports.forEach((report, index) => {%>
-            <li>
-              <table class="customTable grid-item">
-                <thead>
-                  <tr><th colspan=2><%= report.name %></th></tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="center">
-                      Potty Breaks: <%= report.pottyBreaks %> (<%= report.pottyAccidents %> Accidents)
-                    </td>
-                  </tr>
+        <div class="flex flexWrap flexCollapseMobile width100">
+          <% if(reports.length > 0) { %>
+            <% reports.forEach((report, index) => {%>
+                <ul class="custom-table width40">
+                  <li class="title-row">
+                    <h2 class="light-text"><%= report.name %></h2>
+                  </li>
+                  <li class="row">
+                    <p class="column centerText">Potty Breaks: <%= report.pottyBreaks %> (<%= report.pottyAccidents %> Accidents)</p>
+                  </li>
                   <% report.listOfActivities.forEach((activity, index) => {%>
-                  <tr>
-                    <td class="left">
+                  <li class="row">
+                    <p class="column width80">
                       <%= activity.ActivityName %>
-                      
-                      <% if(activity.Helper == 1) { %>
-                        <i class="fas fa-star theme-color2-light-text"></i>
-                      <% } %>
-                    </td>
-                    <td class="right">
-                      <button class="red-BG" onclick="deleteActivity('<%= activity.ActivityId %>','<%= report.id %>');"><i class="far fa-trash-alt"></i></button>
-                    </td>
-                  </tr>
+                        <% if(activity.Helper == 1) { %>
+                          <i class="fas fa-star theme-color2-light-text"></i>
+                        <% } %>
+                    </p>
+                    <a class="column centerText theme-color4-light-BG width10 padding10px hoverable" onclick="deleteActivity('<%= activity.ActivityId %>','<%= report.id %>');"><i class="far fa-trash-alt"></i></a>
+                  </li>
                   <% }) %>
-                </tbody>
-              </table>
-            </li>
-          <% }) %>
-          
-        </ul>
-        <% } else {%>
-          <div class="missingContainer">
-            <h2>No Reports</h2>
-            <a href="/students">Add a Report</a>
-          </div>
-        <% } %>
+                </ul>
+            <% }) %>
+          <% } else {%>
+            <div class="missingContainer">
+              <h2>No Reports</h2>
+              <a href="/students">Add a Report</a>
+            </div>
+          <% } %>
+        </div>
+        
       </div>
     </div>
     <script>

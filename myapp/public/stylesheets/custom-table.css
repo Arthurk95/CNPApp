@@ -1,41 +1,45 @@
-.customTable{
-    border-collapse: collapse;
-    text-align: center;
-    width: 100%;
+.custom-table{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
-    filter: drop-shadow(0px 3px 2px var(--darkGray3));
+    filter: drop-shadow(0px 1px 2px var(--darkGray3));
+    margin-bottom: 30px;
 }
 
-.customTable thead th{
-    border: none;
+.custom-table .title-row{
+    text-align: center;
     background: var(--ThemeColor2);
-    color: var(--LightTextColor);
-    font-size: 2.2em;
-    padding: 10px 0;
-    font-weight: 500;
-}
-
-.customTable thead tr{
-    background: none;
-    border: none;
-}
-
-.customTable td{
-    vertical-align: top;
-    font-size: 1.2em;
+    width: 100%;
+    font-size: 1.5em;
     padding: 10px;
 }
 
-.customTable tr{
-    color: var(--DarkTextColor);
+.custom-table .row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: var(--LightContentBackground);
-    border-bottom: 3px solid var(--darkGray3);
+    width: 100%;
+    border-bottom: 1px solid var(--DarkContentBackgroundLight);
 }
 
-.customTable tr:last-child{
+.custom-table .row p{padding: 10px 20px;}
+
+.custom-table .column {
+    flex-grow: 1;
+}
+
+.customTable li:last-child{
     border-bottom: none;
+}
+
+@media screen and (max-width: 1200px){
+    .custom-table{width: 100% !important;}
 }
 
 
