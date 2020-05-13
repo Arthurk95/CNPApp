@@ -170,6 +170,8 @@ function generatePie(id){
   var parent = document.getElementById("charts");
   var container = document.createElement("div"); container.id = id; container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
   var bottom = document.getElementById("chartPanel");
+  bottom.className = "width100 dark-content-BG flex centerFlexMobile width90Mobile center";
+
   var twoColContainer = document.createElement("div");
   twoColContainer.classList = "flex flexCollapseMobile spaceBetween heavyPadding";
   
@@ -179,14 +181,13 @@ function generatePie(id){
   var optionsRow = document.createElement('div');
   optionsRow.classList = "width20 center width100Mobile flex flexColumn flexAlignCenter marginBelowChildren10";
 
-
   var temp;
 
   //Start and End Date
   { 
     temp = document.createElement("title"); temp.className = "width100 dark-content-light-BG flex spaceBetween flexAlignCenter marginLeft light-text font25px";
 
-    var title = document.createElement('h2'); title.innerHTML = "Pie Chart"; title.classList = "heavyPadding";
+    var title = document.createElement('h2'); title.innerHTML = "Pie Chart"; title.classList = "light-text heavyPadding";
 
     temp.appendChild(title);
     var del = document.createElement("a"); del.id = "button"; del.className="marginRight10 padding10px light-text theme-color4-BG hoverable font25px"; del.onclick = function(){deleteChart(id);}; del.innerHTML = "X";
@@ -246,6 +247,8 @@ function generatePie(id){
 
   parent.appendChild(container);
   onUpdateop1(id);
+
+  parent.appendChild(bottom);
 
   
   function onUpdateop1(id) {
