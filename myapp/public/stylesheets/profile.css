@@ -87,8 +87,6 @@ label{
 .imageContainer{
     text-align: center;
     position: relative;
-    width: 100%;
-    min-width: 300px;
 }
 
 .imageContainer:hover{
@@ -98,8 +96,8 @@ label{
 
 .imageContainer img{
     border: 1px solid black;
-    width: 100%;
-    min-width: 300px;
+    max-width: 100%;
+    border-radius: 16px;
 }
 
 .imageContainer img:hover{
