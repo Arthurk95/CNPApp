@@ -171,7 +171,6 @@
 
 
       function saveStudent(){
-        
         var data = 
           `studentName=${document.getElementById('studentName').innerHTML}` +
           `&mon=${selectedDayType(document.getElementById("mon"))}` +
@@ -189,7 +188,6 @@
           `&guardian2Number=${document.getElementById('guardian2Number').value}` +
           `&allergies=${document.getElementById('allergies').value}` +
           `&accommodations=${document.getElementById('accommodations').value}`;
-        
         httpPostAsync(`${window.location.href}/save-changes`, data, reloadIt);
 
       }
