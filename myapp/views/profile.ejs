@@ -24,10 +24,10 @@
           <!-- Profile container -->
           <div class="flex flexColumn flexAlignCenter width70 center width90Mobile">
             <!-- Picture/name/birthday/schedule -->
-            <div class="light-content-BG flex width100 flexCollapseMobile marginBottom40 padding10px">
+            <div class="flexCollapseMobile heavyPadding margin10 borderRadiusSmall minWidth450px width92 light-content-BG width100Mobile">
               <!-- Picture -->
-              <div class="flex flexColumn width20 width100Mobile padding30px">
-                <div class="flex flexCenter width90 center width100Mobile">
+              <div class="flex flexColumn width30 width100Mobile padding10px">
+                <div class="flex flexCenter width80 center width100Mobile">
                   <label for="file-input" class="imageContainer width100 tooltip">
                     <div class="edit-image-tooltip">
                       <span class="tooltiptext">Edit Image</span>
@@ -41,13 +41,13 @@
                   </form>
                 </div>
 
-                <div class="flex spaceBetween width80 center marginTop30 marginBottom30">
+                <div class="flex spaceBetween width80 center marginTop30 marginBottom10">
                   <a onclick="window.location.href = '/admin'" class="font25px theme-color1-BG padding15px">
                     <i class="light-text fas fa-arrow-left"></i>
                   </a>
 
                   <a onclick="deleteStudent(this)" class="font25px theme-color4-light-BG padding15px">
-                    <i class="light-text fas fa-user-minus"></i>
+                    <i class="light-text fas fa-trash-alt"></i>
                   </a>
                   <a onclick="saveStudent()" class="font25px theme-color2-light-BG padding15px">
                     <i class="light-text far fa-save"></i>
@@ -57,12 +57,14 @@
               
               
               <!-- Name, birthday, schedule -->
-              <div class="width60 width100Mobile centerFlexMobile flex flexColumn spaceBetween padding30px">
-                <h2 class="font40px marginBottom30"><%= student.StudentName %></h2>
+              <div class="width50 width100Mobile centerFlexMobile flex flexColumn spaceBetween padding15px">
+                <h2 class="largeFont marginBottom20"><%= student.StudentName %></h2>
+                <h2 class="font15px marginBottom10">Birthdate</h2>
                 <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
                 
-                <div class="flex width100 centerFlexMobile font15px marginBottom30"> <!-- Birthday -->
+                <div class="flex width100 centerFlexMobile font15px marginBottom10"> <!-- Birthday -->
                   <div class="inputWithIcon width20 white-BG marginRight10">
+                    
                     <input id="month" placeholder="MM" maxlength="2"></input>
                   </div>
                   <div class="inputWithIcon width20 white-BG marginRight10">
@@ -72,8 +74,8 @@
                     <input id="year" placeholder="YYYY" maxlength="4"></input>
                   </div>
                 </div> <!-- End birthday -->
-
-                <ul id="schedule" class="selectableList flexWrap width100 flexCenter marginBottom40">
+                <h2 class="font15px marginBottom10">Schedule</h2>
+                <ul id="schedule" class="selectableList flexWrap width70 flexCenter marginBottom10">
                   <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
                   <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
                   <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
@@ -97,9 +99,9 @@
             <!-- Info Panels -->
             <div class="flex spaceBetween flexCollapseMobile width100">
               <!-- Guardians -->
-              <div id="infoPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width60 light-content-BG width100Mobile">
-                <div class="flexContainer spaceAround flexWrap heavyPadding">
-                  <div class="width40 width90Mobile center padding15px">
+              <div id="infoPanel" class="mobilePanel heavyPadding margin10 borderRadiusSmall hideOverflow minWidth450px width60 light-content-BG width100Mobile">
+                <div class="flexContainer spaceAround flexWrap">
+                  <div class="width40 width100Mobile center padding15px">
                     <ul class="marginBelowChildren10">
                       <li class="dark-text largeFont marginBottom10">Guardian #1</li>
                       <li><input name="guardian1Name" type="text" id="guardian1Name" placeholder="Guardian Name" value="<%- student.RelativeName %>"></li>
