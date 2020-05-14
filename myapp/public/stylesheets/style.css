@@ -593,6 +593,8 @@ svg{
   
 }
 
+.no-click{pointer-events: none;}
+
 .disabledButton{filter: grayscale(100%) !important; cursor: default !important;}
 .disabledButton:hover, .disabledButton:active{filter: grayscale(100%) !important;}
 
