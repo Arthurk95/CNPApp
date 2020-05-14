@@ -844,7 +844,7 @@
 
       var theUrl = window.location.href+'/changeroster';
       var data = "do=remove" + "&id=" + studentID;
-      var callback = doNothing;
+      var callback = reloadIt;
       httpPostAsync(theUrl, data, callback);
     }
 
@@ -864,7 +864,7 @@
 
       var theUrl = window.location.href+'/addroster';
       var data = "id=" + studentData.StudentId;
-      var callback = doNothing;
+      var callback = reloadIt;
       httpPostAsync(theUrl, data, callback);
 
       element.parentElement.parentElement.removeChild(element.parentElement); // delete <li> element in the add drop in popup
