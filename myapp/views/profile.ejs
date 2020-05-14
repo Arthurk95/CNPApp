@@ -42,15 +42,14 @@
 
               <!-- Buttons -->
               <div class="flex spaceBetween width70 center marginTop30 marginBottom10">
-                <a onclick="window.location.href = '/admin'" class="centerText font25px theme-color1-BG padding10px0px width30">
-                  <i class="light-text fas fa-arrow-left"></i>
+                <a id="backButton" onclick="window.location.href = '/admin'" class="centerText font25px theme-color1-BG padding10px0px width30">
+                  <i onclick="window.location.href = '/admin'" class="light-text fas fa-arrow-left"></i>
                 </a>
-
-                <a onclick="deleteStudent(this)" class="centerText font25px theme-color4-light-BG padding10px0px width30">
-                  <i class="light-text fas fa-trash-alt"></i>
+                <a id="deleteButton" onclick="deleteStudent(this)" class="centerText font25px theme-color4-light-BG padding10px0px width30">
+                  <i class="light-text fas fa-trash-alt no-click"></i>
                 </a>
-                <a onclick="saveStudent()" class="centerText font25px theme-color2-light-BG padding10px0px width30">
-                  <i class="light-text far fa-save"></i>
+                <a id="saveButton" onclick="saveStudent()" class="centerText font25px theme-color2-light-BG padding10px0px width30">
+                  <i onclick="saveStudent()" class="light-text far fa-save"></i>
                 </a>
               </div>
 
@@ -202,6 +201,9 @@
         }
 
         else {
+          hideElement(document.getElementById("saveButton"));
+          hideElement(document.getElementById("backButton"));
+          button.classList.add("width90");
           button.classList.add("deleteButtonConfirm");
           button.innerHTML = "Are you sure?";
         }
@@ -209,8 +211,11 @@
 
         window.onclick = function(event) {
           if (event.target != button) {
+            showElement(document.getElementById("saveButton"));
+            showElement(document.getElementById("backButton"));
+            button.classList.remove("width90");
             button.classList.remove("deleteButtonConfirm");
-            button.innerHTML = "Delete Student";
+            button.innerHTML = "<i class='light-text fas fa-trash-alt no-click'></i>";
           }
         }
       }
