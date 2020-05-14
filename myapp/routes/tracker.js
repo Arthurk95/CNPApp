@@ -42,7 +42,7 @@ router.post('/addstudentActivity', auth.checkAuthenticated, function(req, res){
     }
   })
   
-  target = req.body.numAct-1;
+  target = req.body.numAct;
   for(var i = 0; i < req.body.numAct;i = i + 1){
     recursepost(0,stus,acts[i],req.body.numStu,res, con);
   }
@@ -52,7 +52,7 @@ router.post('/addstudentActivity', auth.checkAuthenticated, function(req, res){
 
 function recurseEnd(res){
   ++recurseCount;
-  if(recurseCount == target)
+  if(recurseCount >= target)
   {
     res.end();
   }

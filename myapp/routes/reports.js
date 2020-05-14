@@ -41,20 +41,16 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
               console.log(err);
             }
             var [pottyAccidents] = accidentCount[0];
-            console.log(pottyAccidents);
             try {
               Students[i].pottyAccidents = pottyAccidents.RestroomAccidentNumber;
             } catch (e) {
               Students[i].pottyAccidents = 'err';
-              console.log(e);
             }
             var [pottyBreaks] = pottyCount[0];
-            console.log(pottyBreaks);
             try {
               Students[i].pottyBreaks = pottyBreaks.RestroomActivityNumber;
             } catch (e) {
               Students[i].pottyBreaks = 'err';
-              console.log(e);
             }
 
             var looper = act[0];
