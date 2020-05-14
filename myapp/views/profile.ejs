@@ -172,9 +172,8 @@
 
 
       function saveStudent(){
-        
         var data = 
-          `studentName=${document.getElementById('studentName').value}` +
+          `studentName=${document.getElementById('studentName').innerHTML}` +
           `&mon=${selectedDayType(document.getElementById("mon"))}` +
           `&tue=${selectedDayType(document.getElementById("tue"))}` +
           `&wed=${selectedDayType(document.getElementById("wed"))}` +
@@ -190,7 +189,6 @@
           `&guardian2Number=${document.getElementById('guardian2Number').value}` +
           `&allergies=${document.getElementById('allergies').value}` +
           `&accommodations=${document.getElementById('accommodations').value}`;
-        console.log(data);
         httpPostAsync(`${window.location.href}/save-changes`, data, reloadIt);
 
       }
