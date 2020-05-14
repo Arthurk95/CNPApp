@@ -241,6 +241,15 @@ svg{
 .maxWidth600px{max-width: 600px !important;}
 .maxWidth650px{max-width: 650px !important;}
 
+.minHeight150px{overflow-y: auto; min-height: 150px;}
+.minHeight200px{overflow-y: auto; min-height: 200px;}
+.minHeight250px{overflow-y: auto; min-height: 250px;}
+.minHeight300px{overflow-y: auto; min-height: 300px;}
+.minHeight350px{overflow-y: auto; min-height: 400px;}
+.minHeight400px{overflow-y: auto; min-height: 500px;}
+.minHeight450px{overflow-y: auto; min-height: 600px;}
+.minHeight500px{overflow-y: auto; min-height: 700px;}
+.minHeight550px{overflow-y: auto; min-height: 800px;}
 
 .maxHeight200px{overflow-y: auto; max-height: 200px;}
 .maxHeight250px{overflow-y: auto; max-height: 250px;}
@@ -946,6 +955,17 @@ svg{
 }
 
 @media screen and (max-width: 1200px){
+  .minHeight150px{overflow-y: auto; min-height: 300px;}
+  .minHeight200px{overflow-y: auto; min-height: 400px;}
+  .minHeight250px{overflow-y: auto; min-height: 500px;}
+  .minHeight300px{overflow-y: auto; min-height: 600px;}
+  .minHeight350px{overflow-y: auto; min-height: 800px;}
+  .minHeight400px{overflow-y: auto; min-height: 1000px;}
+  .minHeight450px{overflow-y: auto; min-height: 1200px;}
+  .minHeight500px{overflow-y: auto; min-height: 1400px;}
+  .minHeight550px{overflow-y: auto; min-height: 1600px;}
+
+  .maxHeight150px{overflow-y: auto; max-height: 300px;}
   .maxHeight200px{overflow-y: auto; max-height: 400px;}
   .maxHeight250px{overflow-y: auto; max-height: 500px;}
   .maxHeight300px{overflow-y: auto; max-height: 600px;}
@@ -1000,6 +1020,7 @@ svg{
   .flexCollapseMobile{flex-direction: column !important; align-items: center !important; justify-content: center !important;}
   .flexCollapseMobile > * {margin-bottom: 10px;}
   .centerFlexMobile{justify-content: center !important; align-items: center !important;}
+  .centerMobile{margin: 0 auto;}
 
   .smallFont{font-size: 1em !important;}
   .mediumFont{font-size: 1.8em !important;}
