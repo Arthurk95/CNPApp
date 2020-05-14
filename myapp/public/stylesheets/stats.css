@@ -1,4 +1,4 @@
-canvas{width: 80% !important;}
+canvas{width: 70% !important; margin: auto; height: auto !important; font-size: 16px !important;}
 
 .canvasObj {
   background-color: white;
@@ -6,7 +6,7 @@ canvas{width: 80% !important;}
   margin-bottom: 70px;
 }
 
-svg {flex-grow: 1; width: 100% !important; height: auto !important;}
+svg {flex-grow: 1; margin: auto;}
 
 .pieMin {
   width: fit-content;

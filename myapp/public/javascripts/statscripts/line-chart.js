@@ -52,13 +52,11 @@ function getRandomColor() {
 //generates the line
 function generateLine(id) {
   var parent = document.getElementById("charts");
-  var container = document.createElement("div"); container.id = id; container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
-  var bottom = document.getElementById("chartPanel");
-  bottom.className = "width100 dark-content-BG flex centerFlexMobile width90Mobile center";
+  var container = document.createElement("div"); container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
 
   var twoColContainer = document.createElement("div");
   twoColContainer.classList = "flex flexCollapseMobile spaceBetween heavyPadding";
-  //twoColContainer.id = id;
+  twoColContainer.id = id;
 
   var chartColumn = document.createElement('div'); chartColumn.id = id + "right";
   chartColumn.classList = "width60 flex flexColumn";
