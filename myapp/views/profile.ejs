@@ -22,11 +22,10 @@
         <%- include header.ejs %>
         <div class="content-with-side-header">
           <!-- Profile container -->
-          <div class="flex flexColumn flexAlignCenter width70 center width90Mobile">
-            <!-- Picture/name/birthday/schedule -->
-            <div class="flexCollapseMobile heavyPadding margin10 borderRadiusSmall minWidth450px width92 light-content-BG width100Mobile">
-              <!-- Picture -->
-              <div class="flex flexColumn width30 width100Mobile padding10px">
+          <div class="flex flexColumn flexAlignCenter width90 center">
+            <!-- Picture/name/birthday/schedule wrapper -->
+            <div class="flex flexCollapseMobile borderRadiusSmall minWidth450px width100 light-content-BG width100Mobile">
+              <div class="flex flexColumn width30 width100Mobile margin20">
                 <div class="flex flexCenter width80 center width100Mobile">
                   <label for="file-input" class="imageContainer width100 tooltip">
                     <div class="edit-image-tooltip">
@@ -41,7 +40,8 @@
                   </form>
                 </div>
 
-                <div class="flex spaceBetween width80 center marginTop30 marginBottom10">
+                <!-- Buttons -->
+                <div class="flex spaceBetween width70 center marginTop30 marginBottom10">
                   <a onclick="window.location.href = '/admin'" class="font25px theme-color1-BG padding15px">
                     <i class="light-text fas fa-arrow-left"></i>
                   </a>
@@ -57,31 +57,37 @@
               
               
               <!-- Name, birthday, schedule -->
-              <div class="width50 width100Mobile centerFlexMobile flex flexColumn spaceBetween padding15px">
+              <div class="width70 width100Mobile centerFlexMobile flex flexColumn spaceBetween margin20">
                 <h2 class="largeFont marginBottom20"><%= student.StudentName %></h2>
-                <h2 class="font15px marginBottom10">Birthdate</h2>
+                
                 <input id="studentbirthday" value="<%- student.Birthdate %>" style="display: none;"></input>
                 
-                <div class="flex width100 centerFlexMobile font15px marginBottom10"> <!-- Birthday -->
-                  <div class="inputWithIcon width20 white-BG marginRight10">
-                    
-                    <input id="month" placeholder="MM" maxlength="2"></input>
-                  </div>
-                  <div class="inputWithIcon width20 white-BG marginRight10">
-                    <input id="day" placeholder="DD" maxlength="2"></input>
-                  </div>
-                  <div class="inputWithIcon width30 white-BG">
-                    <input id="year" placeholder="YYYY" maxlength="4"></input>
-                  </div>
-                </div> <!-- End birthday -->
-                <h2 class="font15px marginBottom10">Schedule</h2>
-                <ul id="schedule" class="selectableList flexWrap width70 flexCenter marginBottom10">
-                  <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
-                  <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
-                  <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
-                  <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>TH</a></li>
-                  <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
-                </ul>
+                <div class="width100 width90Mobile center">
+                  <p class="marginBottom10">Birthdate</p>
+                  <div class="flex width100 centerFlexMobile font15px marginBottom10"> <!-- Birthday -->
+                    <div class="inputWithIcon width25 white-BG marginRight10">
+                      <input id="month" placeholder="MM" maxlength="2"></input>
+                    </div>
+                    <div class="inputWithIcon width25 white-BG marginRight10">
+                      <input id="day" placeholder="DD" maxlength="2"></input>
+                    </div>
+                    <div class="inputWithIcon width40 white-BG">
+                      <input id="year" placeholder="YYYY" maxlength="4"></input>
+                    </div>
+                  </div> <!-- End birthday -->
+                </div>
+                
+                <div class="width100 width90Mobile center">
+                  <p class="marginBottom10">Schedule</p>
+                  <ul id="schedule" class="selectableList flexWrap width70 center flexCenter marginBottom10">
+                    <li id="mon" value="<%- student.Monday %>" onclick="weekdaySelected(this)"><a>M</a></li>
+                    <li id="tue" value="<%- student.Tuesday %>" onclick="weekdaySelected(this)"><a>T</a></li>
+                    <li id="wed" value="<%- student.Wednesday %>" onclick="weekdaySelected(this)"><a>W</a></li>
+                    <li id="thu" value="<%- student.Thursday %>" onclick="weekdaySelected(this)"><a>TH</a></li>
+                    <li id="fri" value="<%- student.Friday %>" onclick="weekdaySelected(this)"><a>F</a></li>
+                  </ul>
+                </div>
+                
 
                 <div class="centerText marginTop20">
                   <form action="<%-student.StudentId%>/delete-student" id="delete-student-form" method="POST">
@@ -91,17 +97,16 @@
                     <label><font color="red"><%- messages.upload_error %></font></label>
                   </form>
                 </div>
-                
-                
-              </div><!-- End name/birthday/schedule -->
+              </div><!-- End name/birthday/schedule -->  
+              
             </div> <!-- End picture/name/birthday/schedule  -->
 
             <!-- Info Panels -->
-            <div class="flex spaceBetween flexCollapseMobile width100">
+            <div class="flex spaceBetween flexCollapseMobile width100 marginTop10">
               <!-- Guardians -->
-              <div id="infoPanel" class="mobilePanel heavyPadding margin10 borderRadiusSmall hideOverflow minWidth450px width60 light-content-BG width100Mobile">
-                <div class="flexContainer spaceAround flexWrap">
-                  <div class="width40 width100Mobile center padding15px">
+              <div id="infoPanel" class="mobilePanel borderRadiusSmall hideOverflow minWidth450px width45 light-content-BG width100Mobile">
+                <div class="flexContainer spaceAround flexWrap heavyPadding">
+                  <div class="width40 width90Mobile center padding15px">
                     <ul class="marginBelowChildren10">
                       <li class="dark-text largeFont marginBottom10">Guardian #1</li>
                       <li><input name="guardian1Name" type="text" id="guardian1Name" placeholder="Guardian Name" value="<%- student.RelativeName %>"></li>
@@ -124,8 +129,8 @@
               </div> <!-- End Guardians -->
 
               <!-- -------------------- EXTRA INFO PANEL --------------------- -->
-              <div id="extraInfoPanel" class="mobilePanel width35 light-content-BG borderRadiusSmall hideOverflow margin10 width100Mobile">
-                <div class="flexContainer flexColumn spaceAround flexWrap padding15px">
+              <div id="extraInfoPanel" class="mobilePanel width50 light-content-BG borderRadiusSmall hideOverflow width100Mobile">
+                <div class="flexContainer flexColumn spaceAround flexWrap heavyPadding">
                   <div class="flex flexColumn width90 center padding15px">
                     <p>Allergies</p>
                     <textarea id="allergies"><%= student.Allergies %></textarea>
