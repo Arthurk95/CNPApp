@@ -248,8 +248,6 @@ function generatePie(id){
   parent.appendChild(container);
   onUpdateop1(id);
 
-  parent.appendChild(bottom);
-
   
   function onUpdateop1(id) {
     updateOpid1(id);
