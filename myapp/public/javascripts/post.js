@@ -1,5 +1,6 @@
 function httpPostAsync(theUrl, data, callback)
 {
+    
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -29,6 +30,7 @@ function httpPutAsync(theUrl, data, callback)
 function logit(datum){
     console.log(datum);
 }
+
 function reloadIt(datum){
     location.reload(true);
 }
