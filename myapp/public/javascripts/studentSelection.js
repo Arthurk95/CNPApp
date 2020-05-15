@@ -204,7 +204,7 @@ function submitToDB(){
     var data = "&stu=" + selectedStudentIDs + "&act=" + selectedActivityIDs + "&numStu=" + selectedStudentIDs.length +
         "&numAct=" + selectedActivityIDs.length;
     var callback = reloadIt;
-
+    console.log(theUrl,data,callback);
     httpPostAsync(theUrl,data,callback);
     
 }
