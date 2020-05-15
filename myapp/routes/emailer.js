@@ -279,7 +279,21 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
   res.end();
 });
 
+router.post('/student-approved', auth.checkAuthenticated, function (req, res) {
+  var call_query = `CALL ApproveChanges(${req.body.id});`
+  con.query(call_query, function(err, msg){
+    if(err){console.log(err);}
+    else{res.end();}
+  });
+});
 
+router.post('/student-unapproved', auth.checkAuthenticated, function (req, res) {
+  var call_query = `CALL UnapproveChanges(${req.body.id});`
+  con.query(call_query, function(err, msg){
+    if(err){console.log(err);}
+    else{res.end();}
+  })
+});
 
 router.post('/send', (req, res) => {
   con.query(`CALL PullEmail(${req.body.id})`, function (err, email_pull) {

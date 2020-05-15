@@ -166,6 +166,9 @@ function studentApproved(button){
     // post it to DB
     // DO NOT RELOAD PAGE AS CALLBACK
 
+    var data = `id=${currentStudentData.id}`;
+    httpPostAsync(`/emailer/student-approved/`, data, null);
+
     formElement.style.display = "none";
 }
 
@@ -188,7 +191,6 @@ function setNormalStyle(){
 function passToJS(r){
     listOfStudents = r;
     initSavedList();
-    initApprovedList();
 }
 
 function passSummaryToJS(s){summary = s;}
@@ -200,9 +202,10 @@ function initApprovedList(){
     for(var i = 0; i < listOfStudents.length; i++){
         if(listOfStudents[i].listOfBehaviors["Approved"] === 1){
             document.getElementById("student" + i).classList.add("approved");
-            approvedList[i] === true;
+            approvedList[i] = true;
         }
     }
+    checkIfAllApproved();
 }
 
 // called when emailer page is loaded to fill in content of page
@@ -217,13 +220,17 @@ function initEmailerVariables(){
     studentsList = document.getElementById("listOfStudents");
     activities = document.getElementById("activitiesList");
     saveButton = document.getElementById("saveButtonStep2");
+    initApprovedList();
     if(currentStudentElement != null){
         studentSelected(document.getElementById("student0"), 0);
         document.getElementById("student0").classList.add("selected");
+        if(approvedList[0]){setApprovedStyle()}
     }
     else{
         stepTwoTitle.getElementsByTagName("p")[0].innerHTML = "No Students";
     }
+    
+    
 }
 
 function initActivities(){
@@ -277,6 +284,9 @@ function studentSaved(behaviors){
     if(!savedList[currentStudentIndex]){ toggleSavedStyle(); } // isn't already saved
     approvedList[currentStudentIndex] = false;
     toggleApprovedStyle();
+
+    var approveDB = `id=${currentStudentData.id}`;
+    httpPostAsync(`/emailer/student-unapproved/`, approveDB, null);
 }
 
 function toggleApprovedStyle(){
