@@ -156,7 +156,7 @@
     <!-- Behaviors and Activities -->
     <div class="section bg-gray margin-bottom-40px">
         <div class="margin-bottom-20px">
-            <h2 class="center-text font-22px"><%= name %>'s Day at CNP</h2>
+            <h2 class="center-text font-22px"><%= name.split(" ")[0] %>'s Day at CNP</h2>
         </div>
         <% behaviors.forEach((behavior, index) => { %>
             <div class="value-section">
@@ -177,14 +177,17 @@
             </div>
             <% }) %>
 
+            <% var actList = []; activities.forEach((activity, index) => {if(activity.Helper != 1){actList.push(activity);}}) %>
+            <% var helpers = []; activities.forEach((activity, index) => {if(activity.Helper == 1){helpers.push(activity);}}) %>
+
             <div class="value-section">
                 <table class="width100">
                     <tr>
                         <td class="behavior-title">Activities</td>
                         <td class="behavior-value">
-                        <% activities.forEach((activity, index) => { %>
+                        <% actList.forEach((activity, index) => { %>
                             <% if(activity.Helper != 1) { %>
-                                <%= activity.ActivityName %>,
+                                <%= activity.ActivityName %><% if(index != actList.length - 1) { %>,<% } %>
                             <% } %>
                         <% }) %>
                         </td>
@@ -192,20 +195,22 @@
                 </table>
             </div>
 
+            <% if(helpers.length > 0) { %>
             <div class="value-section">
                 <table class="width100">
                     <tr>
                         <td class="behavior-title">Helper Jobs</td>
                         <td class="behavior-value">
-                        <% activities.forEach((activity, index) => { %>
+                        <% helpers.forEach((activity, index) => { %>
                             <% if(activity.Helper == 1) { %>
-                                <%= activity.ActivityName %>,
+                                <%= activity.ActivityName %><% if(index != helpers.length - 1) { %>,<% } %>
                             <% } %>
                         <% }) %>
                         </td>
                     </tr>
                 </table>
             </div>
+            <% } %>
     </div>
     
     <!-- REMINDERS -->
