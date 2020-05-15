@@ -146,12 +146,12 @@
     margin: 10px;
     cursor: pointer;
     width: 100%;
-    min-width: 300px;
+    min-width: 200px;
     padding: 6px 0px;
     margin-bottom: 20px;
     border-radius: 8px;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1em;
     background: var(--LightContentBackgroundDark);
     color: var(--DarkTextColor);
     align-items: center;
@@ -230,5 +230,5 @@
         align-items: center !important;
     }
 
-    .studentsList li{min-width: 400px;}
+    .studentsList li{min-width: 400px; font-size: 1.8em;}
 }
