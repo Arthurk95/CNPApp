@@ -138,16 +138,15 @@
 
 .studentsList{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
 .studentsList li{
+    margin: 10px;
     cursor: pointer;
     width: 100%;
-    max-width: 300px;
+    min-width: 300px;
     padding: 6px 0px;
     margin-bottom: 20px;
     border-radius: 8px;
@@ -222,13 +221,14 @@
         align-self: center !important;
     }
 
-    .emailerContainer .studentsList{
-        flex-direction: row;
+    .studentsList{
+        padding: 50px 0px;
     }
 
     .contentWithSidebar{
-        flex-direction: column-reverse !important;
         justify-items: center !important;
         align-items: center !important;
     }
+
+    .studentsList li{min-width: 400px;}
 }

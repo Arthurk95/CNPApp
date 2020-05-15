@@ -231,6 +231,7 @@ svg{
 .minWidth500px{min-width: 500px !important;}
 .minWidth600px{min-width: 600px !important;}
 
+.maxWidth200px{max-width: 200px !important;}
 .maxWidth250px{max-width: 250px !important;}
 .maxWidth300px{max-width: 300px !important;}
 .maxWidth350px{max-width: 350px !important;}
@@ -448,6 +449,7 @@ svg{
 .inlineBlock{display: inline-block;}
 .borderBox{box-sizing: border-box !important;}
 .hideOverflow{overflow: hidden !important;}
+.side-scrollable{overflow-y: hidden; overflow-x: auto;}
 
 /* ------------ POSITIONING ------------- */
 .relative{position: relative;}
@@ -956,19 +958,6 @@ svg{
   border: 1px solid var(--lightGray3);
 }
 
-
-.side-scroll-container{
-  overflow-y: auto;
-  overflow-x: hidden;
-  transform: rotate(-90deg);
-  transform-origin: right top;
-  transform: rotate(-90deg) translateY(-100px);
-}
-.side-scroll-child{
-  transform: rotate(90deg);
-  transform-origin: right top;
-}
-
 @media screen and (max-width: 1200px){
   .minHeight150px{overflow-y: auto; min-height: 300px;}
   .minHeight200px{overflow-y: auto; min-height: 400px;}
@@ -999,9 +988,9 @@ svg{
   .side-header-link.active{border-left: 8px solid var(--ThemeColor2Light);}
   .side-header-title{padding: 50px 15px; font-size: 40px;}
   .side-header-submenu-link{font-size: 35px !important;}
-  .content-with-side-header{margin-left: 0; padding-top: calc(var(--sideHeaderBurgerHeight) + 15px) !important;}
+  .content-with-side-header{margin-left: 0; padding-top: calc(var(--sideHeaderBurgerHeight) + 50px) !important;}
   .side-header-mobile-burger{display: block; z-index: 6;}
-  .page-with-side-menu{display: flex; overflow-x: hidden;}
+  .page-with-side-menu{overflow-x: hidden;}
   .content-with-side-header .formWindow{left: 0; width: 100%;}
 }
 /* Mobile friendly stuff */
@@ -1049,8 +1038,6 @@ svg{
   }
 
   .toggleable{font-size: 40px; padding: 1em 0px;}
-
-  .contentWithSidebar{flex-direction: column-reverse; align-items: center;}
 
   .buttonAreaGrid{
     width: 80%;
