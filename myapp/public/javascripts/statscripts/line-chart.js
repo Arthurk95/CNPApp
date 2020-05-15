@@ -34,7 +34,7 @@ function theLine(id, data) {
       }
     }
   });
-  chart.myId = id;
+  chart.myId = id + "canvasCol";
   chart.className = "canvasObj";
   return chart;
 }
@@ -53,12 +53,11 @@ function getRandomColor() {
 function generateLine(id) {
   var parent = document.getElementById("charts");
   var container = document.createElement("div"); container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
-  container.id = id;
 
-  var twoColContainer = document.createElement("div"); twoColContainer.id = id + "right";
+  var twoColContainer = document.createElement("div"); twoColContainer.id = id;
   twoColContainer.classList = "flex flexCollapseMobile spaceBetween heavyPadding";
 
-  var chartColumn = document.createElement('div'); chartColumn.id = id + "right";
+  var chartColumn = document.createElement('div'); chartColumn.id = id + "canvasCol";
   chartColumn.classList = "width60 flex flexColumn";
 
   var optionsColumn = document.createElement('div');
@@ -140,7 +139,7 @@ function generateLine(id) {
   optionsColumn.appendChild(temp);
 
   twoColContainer.appendChild(optionsColumn);
-
+  twoColContainer.appendChild(chartColumn);
   container.appendChild(twoColContainer);
 
   parent.appendChild(container);
