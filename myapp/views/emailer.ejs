@@ -48,7 +48,7 @@
             <div class="content-with-side-header noPadding">
                 <div id="mainEmailerContainer" class="flexContainer spaceAround flexAlignCenter">
                     <div id="stepOne" class="flexCenter flexColumn borderBox light-content-BG borderRadiusMedium width90 marginTop30">
-                        <p class="title theme-color2-BG">Step 1: Email Template</p>
+                        <p class="title theme-color2-BG font30px padding20px">Step 1: Email Template</p>
                         <div class="veryHeavyPadding">
                             <ul class="flex flexColumn marginBottom40">
                                 <li class="marginBottom10">
@@ -219,24 +219,11 @@
                                 <div style="display: none" id="spinner" class="spinning-loader marginLeft10 marginRight20"></div>
                             </div>
                         </div>
-                        <!-- Right column (students) -->
-                        <div class="width90 center light-content-BG marginBottom40">
-                            <ul id="listOfStudents" class="studentsList side-scrollable marginBottom20 width90 center" >
-                            <% if (reports.length > 0) { %>
-                                <script>passToJS(<%- JSON.stringify(reports) %>);</script>
-                                <% reports.forEach((report, index) => { %>
-                                    <li id="student<%= index %>" onclick="studentSelected(this, <%= index %>)"><%= report.name %></li>
-                                <% }) %>
-                            <% } else { %>
-                                <li>No Students</li>
-                            <% } %>
-                            </ul>
-                            
-                        </div>
-
-                        <div class="width90 center light-content-BG borderRadiusMedium hideOverflow"> <!-- Left column -->
+                        
+                        <!-- Content -->
+                        <div class="width90 center light-content-BG borderRadiusMedium hideOverflow marginBottom10"> 
                             <div id="stepTwoTitle" class="heavyPadding theme-color1-light-BG flex spaceBetween flexAlignCenter flexWrap">
-                                <p class="font50px light-text marginLeft10"></p>
+                                <p class="font30px light-text marginLeft10"></p>
                                 <p class="displayNone" id="currentStudentID"></p>
                                 <div id="reviewButton" class="buttonWithIcon theme-color2-light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
                                     <!-- <div class="buttonWithIcon theme-color2-light-BG" onclick="openReview()"> -->
@@ -337,10 +324,23 @@
                                     </div>
                                 </div>
                             </div>
+                        </div> <!-- End content -->
+                        
+                        <!-- Right column (students) -->
+                        <div class="width90 center light-content-BG marginBottom10">
+                            <ul id="listOfStudents" class="studentsList flexWrap width90 center" >
+                            <% if (reports.length > 0) { %>
+                                <script>passToJS(<%- JSON.stringify(reports) %>);</script>
+                                <% reports.forEach((report, index) => { %>
+                                    <li id="student<%= index %>" onclick="studentSelected(this, <%= index %>)"><%= report.name %></li>
+                                <% }) %>
+                            <% } else { %>
+                                <li>No Students</li>
+                            <% } %>
+                            </ul>
+                            
                         </div>
-                        
-                        
-                    </div>
+                    </div> <!-- End step two -->
                 </div>
             </div>
         </div>

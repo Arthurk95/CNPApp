@@ -138,6 +138,7 @@
 
 .studentsList{
     display: flex;
+    justify-content: center;
     align-items: center;
     padding: 20px;
 }
@@ -145,10 +146,8 @@
 .studentsList li{
     margin: 10px;
     cursor: pointer;
-    width: 100%;
     min-width: 200px;
     padding: 6px 0px;
-    margin-bottom: 20px;
     border-radius: 8px;
     text-align: center;
     font-size: 1em;
