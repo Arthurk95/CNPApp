@@ -1016,6 +1016,7 @@ svg{
 
   .heavyPadding{padding: 30px !important;}
 
+  .mobileMarginBottom30{margin-bottom: 30px;}
   .width100Mobile{width: 100% !important; margin-bottom: 10px;}
   .width90Mobile{width:90% !important; margin-bottom: 10px;}
   .flexContainer{ flex-direction: column;}
