@@ -3,12 +3,12 @@ var router = express.Router();
 const auth = require('../public/javascripts/loginScripts');
 const bcrypt = require('bcrypt');
 
-router.get('/', auth.checkAuthenticated, (req, res) => {
+router.get('/', (req, res) => {
     res.render('register.ejs');
 })
 
 //need async for try/catch ?
-router.post('/', auth.checkAuthenticated, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10); //10 is good hash default value
         push_user = `INSERT INTO Admins (Username, Email, Passwords, Names) VALUES ("${req.body.name}", "${req.body.email}", "${hashedPassword}", "temp");`
