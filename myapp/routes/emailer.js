@@ -318,7 +318,7 @@ router.post('/send', (req, res) => {
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
-        user: 'cnp.dev.tester@gmail.com',
+        user: 'cnp.daily.report@gmail.com',
         pass: process.env.EMAIL_PASSWORD
       },
       tls: {
@@ -327,9 +327,10 @@ router.post('/send', (req, res) => {
     });
     try {
       let info = await transporter.sendMail({
-        from: '"Creative Nature Playschool" <cnp.dev.tester@gmail.com>', // sender address
+        from: '"Creative Nature Playschool" <cnp.daily.report@gmail.com>', // sender address
         to: parent_emails, // list of receivers
         subject: "CNP Daily Report", // Subject line
+        cc: 'matt.kint@gmail.com',
         text: "", // plain text body
         html: await ejs.renderFile('./views/emailTemplate.ejs', {
           name: name,
