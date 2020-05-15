@@ -956,6 +956,19 @@ svg{
   border: 1px solid var(--lightGray3);
 }
 
+
+.side-scroll-container{
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: rotate(-90deg);
+  transform-origin: right top;
+  transform: rotate(-90deg) translateY(-100px);
+}
+.side-scroll-child{
+  transform: rotate(90deg);
+  transform-origin: right top;
+}
+
 @media screen and (max-width: 1200px){
   .minHeight150px{overflow-y: auto; min-height: 300px;}
   .minHeight200px{overflow-y: auto; min-height: 400px;}
