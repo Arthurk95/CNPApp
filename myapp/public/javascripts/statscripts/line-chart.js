@@ -52,13 +52,13 @@ function getRandomColor() {
 //generates the line
 function generateLine(id) {
   var parent = document.getElementById("charts");
-  var container = document.createElement("div"); container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
+  var container = document.createElement("div"); container.id = id; container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
 
-  var twoColContainer = document.createElement("div"); twoColContainer.id = id;
+  var twoColContainer = document.createElement("div");
   twoColContainer.classList = "flex flexCollapseMobile spaceBetween heavyPadding";
 
   var chartColumn = document.createElement('div'); chartColumn.id = id + "canvasCol";
-  chartColumn.classList = "width60 flex flexColumn";
+  chartColumn.classList = "width100";
 
   var optionsColumn = document.createElement('div');
   optionsColumn.classList = "width20 left width100Mobile flex flexColumn flexAlignCenter marginBelowChildren10";
@@ -135,9 +135,7 @@ function generateLine(id) {
   optionsColumn.appendChild(temp);
 
   temp = document.createElement("canvas");temp.id = "canvas" + id;temp.className = "canvasObj";
-  temp.classList = "width50";
-  optionsColumn.appendChild(temp);
-
+  chartColumn.appendChild(temp);
   twoColContainer.appendChild(optionsColumn);
   twoColContainer.appendChild(chartColumn);
   container.appendChild(twoColContainer);
