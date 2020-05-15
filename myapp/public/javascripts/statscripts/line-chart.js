@@ -53,10 +53,10 @@ function getRandomColor() {
 function generateLine(id) {
   var parent = document.getElementById("charts");
   var container = document.createElement("div"); container.className = "light-content-BG width100 margin10 center flexGrow1 borderRadiusSmall minWidth400px width100Mobile";
+  container.id = id;
 
-  var twoColContainer = document.createElement("div");
+  var twoColContainer = document.createElement("div"); twoColContainer.id = id + "right";
   twoColContainer.classList = "flex flexCollapseMobile spaceBetween heavyPadding";
-  twoColContainer.id = id;
 
   var chartColumn = document.createElement('div'); chartColumn.id = id + "right";
   chartColumn.classList = "width60 flex flexColumn";
