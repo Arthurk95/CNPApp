@@ -201,7 +201,7 @@ function submitToDB(){
     
     var theUrl = window.location.href+'/addstudentActivity';
 
-    var data = "&stu=" + selectedStudentIDs + "&act=" + selectedActivityIDs + "&numStu=" + selectedStudentIDs.length +
+    var data = "stu=" + selectedStudentIDs + "&act=" + selectedActivityIDs + "&numStu=" + selectedStudentIDs.length +
         "&numAct=" + selectedActivityIDs.length;
     var callback = reloadIt;
     console.log(theUrl,data,callback);
