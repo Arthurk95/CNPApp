@@ -14,7 +14,8 @@ const fs = require('fs');
       "','" + req.body.sun + "','" + req.body.halfDay + "','" + req.body.enroll + "','" + req.body.allergies + "','" + req.body.accommodations + "');";
     console.log(sql);
     con.query(sql, function (err, result) {
-        if (err) throw(err);
+        if (err) {
+          throw(err);}
         res.end();
     });
   });
@@ -25,7 +26,8 @@ const fs = require('fs');
               "', '" + 1 + "');";
     console.log(sql);
     con.query(sql, function (err, result) {
-        if (err) res.end();
+        if (err){
+          res.end();}
         res.end();
     });
   });
@@ -408,7 +410,6 @@ router.post('/addreminder', auth.checkAuthenticated, function (req, res) {
   });
     
 router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, function (req, res) {
-  console.log(req.body)
     var sql_calls = [
       `CALL UpdateStudentGuardian1(${req.params.id}, "${req.body.guardian1Name}", "${req.body.guardian1Email}", "${req.body.guardian1Number}");`,
       `CALL UpdateStudentGuardian2(${req.params.id}, "${req.body.guardian2Name}", "${req.body.guardian2Email}", "${req.body.guardian2Number}");`,
@@ -418,7 +419,7 @@ router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, functi
       `CALL UpdateAllergies(${req.params.id}, "${req.body.allergies}");`,
       `CALL UpdateStudentSchedule(${req.params.id}, ${req.body.mon}, ${req.body.tue}, ${req.body.wed}, ${req.body.thu}, ${req.body.fri}, ${req.body.fullDayFlag}, 1);`//${req.body.fullDayFlag}, ${req.body.isEnrolled});`
   ]
-
+  
     for (var i = 0; i < sql_calls.length; i++){
       update_student_query = sql_calls[i];
       var error_flag = false;
@@ -428,17 +429,22 @@ router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, functi
             error_flag = true;
             console.log(err);
           }
+          if(i == sql_calls.length-1){
+            synccleaner(res,req,error_flag);
+          }
         });
       })(update_student_query, error_flag); //closure necesssary for async
     }
-    if (error_flag) {
-      req.flash('changes_error', "Error Updating Profile");
-    } else {
-      req.flash('changes_saved', "Profile Updated!");
-    }
-    res.end();
 });
-  
+
+function synccleaner(res,req,error_flag){
+  if (error_flag) {
+    req.flash('changes_error', "Error Updating Profile");
+  } else {
+    req.flash('changes_saved', "Profile Updated!");
+  }
+  res.end();
+}
 
 router.get('/reset-password', auth.checkAuthenticated, (req, res) => {
   res.render('resetPassword.ejs');
