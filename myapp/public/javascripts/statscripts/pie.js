@@ -12,7 +12,7 @@ class thePie {
     // set the dimensions and margins of the graph
     this.width = 600;
     this.height = 600;
-    this.margin = 50;
+    this.margin = 85;
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     this.radius = Math.min(this.width, this.height) / 2 - this.margin;
