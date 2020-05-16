@@ -435,9 +435,6 @@ router.post('/student-profile/:id/save-changes', auth.checkAuthenticated, functi
         });
       })(update_student_query, error_flag); //closure necesssary for async
     }
-    if(error_flag){req.flash('changes_error', "Save unsuccessful");}
-    else{req.flash('changes_saved', "Profile Saved!");}
-    res.redirect(`/admin/student-profile/${req.params.id}`);
 });
 
 function synccleaner(res,req,error_flag){
