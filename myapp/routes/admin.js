@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const fs = require('fs');
 
   router.post('/addstudent', auth.checkAuthenticated, function(req, res){
+    
     var sql = "CALL CreateNewStudentFinal('" + req.body.name + "','" + req.body.birthday + "','" + req.body.contact +
      "','" + req.body.email + "','" + req.body.contactNum + "','" + req.body.contact2 + "','" + req.body.email2 + 
      "','" + req.body.contactNum2 + "','" + req.body.mon + "','" + req.body.tue +
@@ -15,7 +16,7 @@ const fs = require('fs');
     console.log(sql);
     con.query(sql, function (err, result) {
         if (err) {
-          throw(err);}
+          res.end();}
         res.end();
     });
   });
