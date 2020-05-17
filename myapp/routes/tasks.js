@@ -55,11 +55,11 @@ const auth = require('../public/javascripts/loginScripts');
     var task_query = "SELECT * FROM cnp_data.Tasks;";
     var compl_task_query = "CALL ShowFinished6MonthsTask();";
     con.query(student_query, function (err, sQuery) {
-      if (err) throw err;
+      if (err) res.end();
       con.query(activity_query, function (err, aQuery) {
-        if (err) throw err;
+        if (err) res.end();
         con.query(task_query,function (err, tQuery){
-          if(err) throw err;
+          if(err) res.end();
           var tasks = [];
           for(var i = 0;i < tQuery.length;++i){
             if(tQuery[i].Completed == 0){
@@ -68,7 +68,7 @@ const auth = require('../public/javascripts/loginScripts');
           }
           var completed = []
           con.query(compl_task_query,function (err, completedQuery){
-            if(err) throw err;
+            if(err) res.end();
             for(var i = 0;i < completedQuery.length;++i){
               completed.push(completedQuery[i]);
             }

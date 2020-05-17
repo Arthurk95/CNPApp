@@ -6,7 +6,7 @@ const auth = require('../public/javascripts/loginScripts');
 router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var student_query = "SELECT * FROM cnp_data.Students st, cnp_data.Schedual sc, cnp_data.Relatives r where st.StudentId = sc.StudentId and st.StudentId = r.StudentId;"; 
   con.query(student_query, function (err, student) {
-    if (err) throw err;
+    if (err) res.end();
     res.render('profile.ejs', {title: 'Profile Page', student: student});
     })
 });

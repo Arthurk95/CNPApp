@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var activity_query = "CALL ShowAllActivities();";
     con.query(activity_query, function (err, result) {
-      if (err) throw err;
+      if (err) res.end();
       res.render('activities.ejs', { title: 'CNP Activities', activities: result[0] });
     })
   });

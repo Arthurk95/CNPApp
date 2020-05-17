@@ -14,9 +14,9 @@ router.get('/', auth.checkAuthenticated, function(req, res, next) {
   /* var student_query = "CALL ShowAllStudents();"; */
 
   con.query(student_query, function (err, sQuery) {
-    if (err) throw err;
+    if (err) res.end();
     con.query(activity_query, function (err, aQuery) {
-      if (err) throw err;
+      if (err) res.end();
       res.render('tracker.ejs', {title: 'Student Page', students: sQuery[0],  activities: aQuery[0]});
     })
   })

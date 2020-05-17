@@ -47,7 +47,7 @@ router.post('/write', auth.checkAuthenticated, function (req, res, next) {
     else{
         var newContent = originalFileContent.replace(originalRoot, root);
         fs.writeFile("./public/stylesheets/style.css", newContent, function (err) {
-            if (err) throw err;
+            if (err) res.end();
           });
     }
     res.end();
@@ -56,7 +56,7 @@ router.post('/write', auth.checkAuthenticated, function (req, res, next) {
 router.post('/reset-to-defaults', auth.checkAuthenticated, (req, res) => {
     fs.readFile('./public/stylesheets/style-backup.css', function(err, data) {
         fs.writeFile("./public/stylesheets/style.css", data.toString("utf8"), function (err) {
-            if (err) throw err;
+            if (err) res.end();
             res.end();
         });
     });
