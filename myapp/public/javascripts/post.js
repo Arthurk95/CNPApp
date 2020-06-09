@@ -15,6 +15,9 @@ function httpPostAsync(theUrl, data, callback)
 
 function httpPutAsync(theUrl, data, callback)
 {
+    if(callback === null || callback === undefined){
+        callback = doNothing;
+    }
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
