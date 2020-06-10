@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+    </head>
+    <body>
+        <div class="flex flexCenter veryHeavyPadding">
+            <div class="width30 width90Mobile veryHeavyPadding white-BG flex flexColumn flexAlignCenter borderRadiusSmall shadowSmall">
+                <h1 class="marginBottom40 dark-text font40px">Password Reset</h1>
+                    <% if (messages.error) { %>
+                        <%= messages.error %>
+                    <% } %>
+                <form class="marginBottom10" action="/reset-password" method="POST">
+                    <div class="width100 marginBottom10 flex spaceBetween light-content-BG flexAlignCenter borderRadiusSmall">
+                        <i class="fas fa-envelope marginLeft10 mediumFont"></i>
+                        <input class="blankInput" type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="flex flexCenter">
+                        <button class="customButton width70 mediumFont theme-color1-BG" type="submit">Send Temporary Password</button>
+                    </div>
+                    
+                </form>
+            </div>
+            
+        </div>
+        
+    </body>
+    
+</html>

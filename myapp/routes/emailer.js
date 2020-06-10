@@ -344,7 +344,7 @@ router.post('/send', (req, res) => {
         from: '"Creative Nature Playschool" <cnp.daily.report@gmail.com>', // sender address
         to: parent_emails, // list of receivers
         subject: "CNP Daily Report", // Subject line
-        cc: 'creativenatureplayschool@gmail.com',
+        cc: '',//'creativenatureplayschool@gmail.com',
         text: "", // plain text body
         html: await ejs.renderFile('./views/emailTemplate.ejs', {
           name: name,
