@@ -314,7 +314,7 @@
                                     </div>
                                 </div>
                                 <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                                    <div class="theme-color4-BG buttonWithIcon" onclick="toPreviousStep();">
+                                    <div class="theme-color4-BG buttonWithIcon" onclick="toPreviousStep(); resetQuills();">
                                         <i class="fas fa-caret-left"></i>
                                         <p>Back</p>
                                     </div>
@@ -411,16 +411,29 @@
             //     theme: 'snow'
             // })
 
-            summaryQuill.setContents(<%- summary %>);
-            snackQuill.setContents(<%- snack %>)
-            lunchQuill.setContents(<%- lunch %>)
+            summaryQuill.setContents(<%- summary.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>);
+            snackQuill.setContents(<%- snack.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>)
+            lunchQuill.setContents(<%- lunch.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>)
             
+            // summaryQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
+            // snackQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
+            // lunchQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
+
             function updateDailyInfo() {
                 console.log(summaryQuill.container.firstChild.innerHTML);
+                var filteredSummary = JSON.stringify(summaryQuill.getContents());
+                filteredSummary = escapeSpecialChars(filteredSummary);
+                var filteredSnack = JSON.stringify(snackQuill.getContents());
+                filteredSnack = escapeSpecialChars(filteredSnack);
+                var filteredLunch = JSON.stringify(lunchQuill.getContents());
+                filteredLunch = escapeSpecialChars(filteredLunch);
 
-                pushSummary(JSON.stringify(summaryQuill.getContents()));
-                pushAmSnack(JSON.stringify(snackQuill.getContents()));
-                pushLunch(JSON.stringify(lunchQuill.getContents()));
+                pushSummary(filteredSummary);
+                pushAmSnack(filteredSnack);
+                pushLunch(filteredLunch);
+                // pushSummary(JSON.stringify(summaryQuill.getContents()));
+                // pushAmSnack(JSON.stringify(snackQuill.getContents()));
+                // pushLunch(JSON.stringify(lunchQuill.getContents()));
             }
 
 
@@ -494,13 +507,38 @@
             }
 
             function getHeader() {
-                return converQuillDeltaToHTML(<%- header %>);
+                return converQuillDeltaToHTML(<%- header.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>);
             }
 
             function getFooter() {
-                return converQuillDeltaToHTML(<%- footer %>);
+                return converQuillDeltaToHTML(<%- footer.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>);
 
             }
+
+            function escapeSpecialChars(string) {
+                        var x = string.replace(/\\/g, "\\\\")
+                            .replace(/\&/g, "CLEANSED AMPERSAND STRING")
+                            .replace(/\+/g, "CLEANSED ADDITION STRING")
+                            .replace(/\'/g, "CLEANSED APSTR STRING")
+                            .replace(/\n/g, "\\n")
+                            .replace(/\r/g, "\\r")
+                            .replace(/\t/g, "\\t")
+                            .replace(/\f/g, "\\f");
+
+                        console.log(`Formatted: ${x}`);
+                        return x;
+                    }
+
+                    function escapeSpecialCharsHTML(string) {
+                        var x = string.replace(/\&/g, "CLEANSED AMPERSAND STRING")
+                            .replace(/\+/g, "CLEANSED ADDITION STRING")
+                            .replace(/\</g, "CLEANSED LT STRING")
+                            .replace(/\>/g, "CLEANSED GT STRING")
+                            .replace(/\'/g, "CLEANSED APSTR STRING")
+
+                        console.log(`Formatted2: ${x}`);
+                        return x;
+                    }
 
             function getReminders() {
                 var remindersHTML = [];
@@ -516,13 +554,18 @@
 
             function converQuillDeltaToHTML(delta) {
                 var tempCont = document.createElement("div");
-                (new Quill(tempCont)).setContents(delta);
-                return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
+                var delta_string = JSON.stringify(delta);
+                var deltaParsed = escapeSpecialCharsHTML(delta_string);
+                (new Quill(tempCont)).setContents(JSON.parse(deltaParsed));
+
+                var result = tempCont.getElementsByClassName("ql-editor")[0].innerHTML
+                return result;
             }
         </script>
 
         <script>
             function sendEmails(students, todaysBehaviors, next){
+                console.log('ejs send email');
                 // openEmailReport(null, false);
 
                 var studentSuccessObjects = [];
@@ -531,10 +574,14 @@
                     var theUrl = window.location.href+'/send';
                     var header = getHeader();
                     var footer = getFooter();
+
+                    var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
+                    var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
+                    var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
                     var reminders_string = getReminders();
-                    var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
-                                            `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
-                                            `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
+                    var universal_data = `summaryHTML=${summaryHTML}` + 
+                                            `&snackHTML=${snackHTML}` + 
+                                            `&lunchHTML=${lunchHTML}` +
                                             `&header=${header}` +
                                             `&footer=${footer}` +
                                             `&reminders=${reminders_string}`;
@@ -583,14 +630,18 @@
                 var theUrl = window.location.href+'/render-email-view';
                 var header = getHeader();
                 var footer = getFooter();
-                // var reminders_string = JSON.stringify(reminders);
-                var reminders = getReminders();
-                var universal_data = `summaryHTML=${summaryQuill.container.firstChild.innerHTML}` + 
-                                        `&snackHTML=${snackQuill.container.firstChild.innerHTML}` + 
-                                        `&lunchHTML=${lunchQuill.container.firstChild.innerHTML}` +
-                                        `&header=${header}` +
-                                        `&footer=${footer}` +
-                                        `&reminders=${reminders}`;
+                // var reminders_string = JSON.stringify(reminders);                
+                    var reminders = getReminders();
+                    var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
+                    var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
+                    var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
+                    var reminders_string = getReminders();
+                    var universal_data = `summaryHTML=${summaryHTML}` + 
+                                            `&snackHTML=${snackHTML}` + 
+                                            `&lunchHTML=${lunchHTML}` +
+                                            `&header=${header}` +
+                                            `&footer=${footer}` +
+                                            `&reminders=${reminders}`;
                 var behavior_names = [];
                 
                 todaysBehaviors.forEach(behavior => {
@@ -616,6 +667,14 @@
                 // console.log(student.listOfBehaviors['AM Snack']);
 
             }
+        </script>
+        <script>
+
+                    function resetQuills() {
+                        summaryQuill.setContents(<%- summary.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+') %>);
+                        snackQuill.setContents(<%- snack.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+') %>)
+                        lunchQuill.setContents(<%- lunch.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+') %>)
+                    }
         </script>
     </body>
 </html>

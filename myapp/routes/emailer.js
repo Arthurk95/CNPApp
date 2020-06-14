@@ -7,7 +7,7 @@ var ejs = require('ejs');
 router.post('/emailReport', auth.checkAuthenticated, (req, res) => {
   var reports = JSON.parse(req.body.report);
   console.log(reports);
-  res.render('emailReport.ejs', {reports: reports});
+  res.render('emailReport.ejs', { reports: reports });
 });
 
 /* GET home page. */
@@ -66,7 +66,7 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
 
   }
 });
-function bottomLayer(res, Students, ) {
+function bottomLayer(res, Students,) {
   var get_template = "CALL ShowUnhiddenTemplateObject();";
   con.query(get_template, function (err, behave) {
     behave = behave[0];
@@ -117,7 +117,7 @@ function bottomLayer(res, Students, ) {
             [stripped_result] = sum_result[0];
 
             if (stripped_result) {
-              var summary = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+              var summary = stripped_result.MainParagraphs;
             }
           } catch (e) {
             var summary = 'error accessing daily summary';
@@ -133,7 +133,7 @@ function bottomLayer(res, Students, ) {
             try {
               [stripped_result] = snack_result[0];
               if (stripped_result) {
-                var snack = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+                var snack = stripped_result.MainParagraphs;
               }
             } catch (e) {
               var snack = 'error accessing snack info';
@@ -149,7 +149,7 @@ function bottomLayer(res, Students, ) {
               try {
                 [stripped_result] = lunch_result[0];
                 if (stripped_result) {
-                  var lunch = stripped_result.MainParagraphs.replace(/\n/g, '\\n');
+                  var lunch = stripped_result.MainParagraphs;
                 }
               } catch (e) {
                 var lunch = 'error accessing lunch info';
@@ -164,7 +164,9 @@ function bottomLayer(res, Students, ) {
               try {
                 [stripped_result] = header_result[0];
                 if (stripped_result) {
-                  var header = stripped_result.MainParagraphs.replace("--::a very ugly string that Nathan made so it wouldn't happen naturally::--",'&');
+                  var header = stripped_result.MainParagraphs.replace(/CLEANSED AMPERSAND STRING/g, '&')
+                    .replace(/CLEANSED ADDITION STRING/g, '+')
+                    .replace(/CLEANSED APSTR STRING/g, "'");
                 }
               } catch (e) {
                 var header = 'error grabbing header'
@@ -178,7 +180,9 @@ function bottomLayer(res, Students, ) {
                 try {
                   [stripped_result] = footer_result[0];
                   if (stripped_result) {
-                    var footer = stripped_result.MainParagraphs.replace("--::a very ugly string that Nathan made so it wouldn't happen naturally::--",'&');
+                    var footer = stripped_result.MainParagraphs.replace(/CLEANSED AMPERSAND STRING/g, '&')
+                      .replace(/CLEANSED ADDITION STRING/g, '+')
+                      .replace(/CLEANSED APSTR STRING/g, "'");
                   }
                 } catch (e) {
                   var footer = 'error grabbing header'
@@ -197,6 +201,9 @@ function bottomLayer(res, Students, ) {
 
 router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
   var summary = req.body.text;
+  summary = summary.replace(/CLEANSED AMPERSAND STRING/g, '&')
+    .replace(/CLEANSED ADDITION STRING/g, '+')
+    .replace(/CLEANSED APSTR STRING/g, "'");
   save_template_query = `CALL AddDailySummary('${summary}');`;
   con.query(save_template_query, function (err, result) {
     if (err) {
@@ -227,6 +234,9 @@ router.post('/refresh-behaviors', auth.checkAuthenticated, function (req, res, n
 
 router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
   var snack = req.body.text;
+  snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
+    .replace(/CLEANSED ADDITION STRING/g, '+')
+    .replace(/CLEANSED APSTR STRING/g, "'");
   save_template_query = `CALL AddDailyAmFood('${snack}');`;
 
   con.query(save_template_query, function (err, result) {
@@ -244,6 +254,9 @@ router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next)
 
 router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
   var lunch = req.body.text;
+  lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
+    .replace(/CLEANSED ADDITION STRING/g, '+')
+    .replace(/CLEANSED APSTR STRING/g, "'");
   save_template_query = `CALL AddDailyLunch('${lunch}');`;
 
   con.query(save_template_query, function (err, result) {
@@ -281,17 +294,17 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
 
 router.post('/student-approved', auth.checkAuthenticated, function (req, res) {
   var call_query = `CALL ApproveChanges(${req.body.id});`
-  con.query(call_query, function(err, msg){
-    if(err){console.log(err);}
-    else{res.end();}
+  con.query(call_query, function (err, msg) {
+    if (err) { console.log(err); }
+    else { res.end(); }
   });
 });
 
 router.post('/student-unapproved', auth.checkAuthenticated, function (req, res) {
   var call_query = `CALL UnapproveChanges(${req.body.id});`
-  con.query(call_query, function(err, msg){
-    if(err){console.log(err);}
-    else{res.end();}
+  con.query(call_query, function (err, msg) {
+    if (err) { console.log(err); }
+    else { res.end(); }
   })
 });
 
@@ -311,9 +324,17 @@ router.post('/send', (req, res) => {
   });
 
   async function sendEmail(pulled_emails, activities, pulled_personal_behaviors) {
+    console.log('SEND EMAIL');
     var [parent_emails] = pulled_emails[0];
     parent_emails = Object.values(parent_emails);
     console.log(`Sending email(s) to: ${parent_emails}`)
+    for (var key in req.body) {
+      req.body[key] = req.body[key].replace(/CLEANSED AMPERSAND STRING/g, '&')
+        .replace(/CLEANSED ADDITION STRING/g, '+')
+        .replace(/CLEANSED GT STRING/g, '>')
+        .replace(/CLEANSED LT STRING/g, '<')
+        .replace(/CLEANSED APSTR STRING/g, "'")
+    }
     var name = req.body.name
     var [personal_behaviors] = pulled_personal_behaviors[0];
     var personal_behavior_parsed = [];
@@ -344,7 +365,7 @@ router.post('/send', (req, res) => {
         from: '"Creative Nature Playschool" <cnp.daily.report@gmail.com>', // sender address
         to: parent_emails, // list of receivers
         subject: "CNP Daily Report", // Subject line
-        cc: '',//'creativenatureplayschool@gmail.com',
+        cc: 'matt.kint@gmail.com',//'creativenatureplayschool@gmail.com',
         text: "", // plain text body
         html: await ejs.renderFile('./views/emailTemplate.ejs', {
           name: name,
@@ -361,7 +382,7 @@ router.post('/send', (req, res) => {
       });
       res.send({ name: name, emails: parent_emails, status: 'Sent', message: '' })
     } catch (e) {
-      res.send({ name: name, emails: parent_emails, status: 'Failed', message: e.message})
+      res.send({ name: name, emails: parent_emails, status: 'Failed', message: e.message })
     }
   }
   // res.end();
@@ -369,8 +390,15 @@ router.post('/send', (req, res) => {
 
 
 router.post('/render-email-view', (req, res) => {
-  // console.log('rendering page for')
-  // console.log(req.body)
+
+  for (var key in req.body) {
+    req.body[key] = req.body[key].replace(/CLEANSED AMPERSAND STRING/g, '&')
+      .replace(/CLEANSED ADDITION STRING/g, '+')
+      .replace(/CLEANSED GT STRING/g, '>')
+      .replace(/CLEANSED LT STRING/g, '<')
+      .replace(/CLEANSED APSTR STRING/g, "'")
+  }
+
   pull_daily_beh_query = `CALL PullDailyBehaviors(${req.body.id})`;
   con.query(pull_daily_beh_query, function (err, behavior_pull) {
     if (err) {
@@ -397,16 +425,16 @@ router.post('/render-email-view', (req, res) => {
     })
 
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {
-        name: name,
-        header: req.body.header,
-        footer: req.body.footer,
-        summary: req.body.summaryHTML,
-        reminders: JSON.parse(req.body.reminders),
-        snack: req.body.snackHTML,
-        lunch: req.body.lunchHTML,
-        activities: JSON.parse(activities),
-        behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
-      })
+      name: name,
+      header: req.body.header,
+      footer: req.body.footer,
+      summary: req.body.summaryHTML,
+      reminders: JSON.parse(req.body.reminders),
+      snack: req.body.snackHTML,
+      lunch: req.body.lunchHTML,
+      activities: JSON.parse(activities),
+      behaviors: personal_behavior_parsed //personal_behavior_parsed[i].name .selection .note
+    })
     email_HTML.then(function (result) {
       res.send({ rendered_HTML: result })
     })

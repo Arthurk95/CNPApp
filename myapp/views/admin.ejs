@@ -1,324 +1,356 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <nav></nav>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/stylesheets/blockList.css' />
-    <link rel='stylesheet' href='/stylesheets/form.css' />
-    <link rel='stylesheet' href='/stylesheets/ulList.css' />
-    <link rel='stylesheet' href='/stylesheets/editor.css' />
-    <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
-    <script src="/javascripts/post.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="/javascripts/utilityScripts.js"></script>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-  </head>
-  <body>
-    <div class="page-with-side-menu">
-      <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
-        <i class="fa fa-bars"></i>
-      </div>
-      <div id="sideHeader" class="side-header-wrapper">
-        <div class="side-header">
-          <div class="side-header-top width100">
-            <a class="side-header-link" href="/">Home</a>
-            <a class="side-header-link" href="/tracker">Tracker</a>
-            <a class="side-header-link" href="/reports">Reports</a>
-            <a class="side-header-link active" href="/admin">Admin</a>
-            <a class="side-header-link" href="/stats">Stats</a>
-            <a class="side-header-link" href="/emailer">Email</a>
-            <a class="side-header-link" href="/tasks">Tasks</a>
-            <a class="side-header-link" href="/styleSettings">App Style</a>
-            <div class="flex flexColumn width100">
-              <a onclick="animateOpenClose(this, 'emailSettingsMenu')" class="side-header-title">Email Settings <i class="fas fa-chevron-down"></i></a>
-              <div id="emailSettingsMenu" class="side-header-submenu" style="display: none;">
-                <a class="side-header-link side-header-submenu-link" onclick="emailSettings('editHeaderForm')">Edit Header</a>
-                <a class="side-header-link side-header-submenu-link" onclick="emailSettings('editSignatureForm')">Edit Signature</a>
-              </div>
-            </div>
-            <div class="flex flexColumn width100">
-              <a onclick="animateOpenClose(this, 'accountSettingsMenu')" class="side-header-title">Accounts <i class="fas fa-chevron-down"></i></a>
-              <div id="accountSettingsMenu" class="side-header-submenu" style="display: none;">
-                <a class="side-header-link side-header-submenu-link" href="/admin/reset-password">Reset Password</a>
-                <a class="side-header-link side-header-submenu-link" href="/register">Add User</a>
-              </div>
+<head>
+  <nav></nav>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/blockList.css' />
+  <link rel='stylesheet' href='/stylesheets/form.css' />
+  <link rel='stylesheet' href='/stylesheets/ulList.css' />
+  <link rel='stylesheet' href='/stylesheets/editor.css' />
+  <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+  <script src="/javascripts/post.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="/javascripts/utilityScripts.js"></script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+</head>
+
+<body>
+  <div class="page-with-side-menu">
+    <div onclick="$(this).toggleClass('active'); toggleBodyOverflow();" class="side-header-mobile-burger">
+      <i class="fa fa-bars"></i>
+    </div>
+    <div id="sideHeader" class="side-header-wrapper">
+      <div class="side-header">
+        <div class="side-header-top width100">
+          <a class="side-header-link" href="/">Home</a>
+          <a class="side-header-link" href="/tracker">Tracker</a>
+          <a class="side-header-link" href="/reports">Reports</a>
+          <a class="side-header-link active" href="/admin">Admin</a>
+          <a class="side-header-link" href="/stats">Stats</a>
+          <a class="side-header-link" href="/emailer">Email</a>
+          <a class="side-header-link" href="/tasks">Tasks</a>
+          <a class="side-header-link" href="/styleSettings">App Style</a>
+          <div class="flex flexColumn width100">
+            <a onclick="animateOpenClose(this, 'emailSettingsMenu')" class="side-header-title">Email Settings <i
+                class="fas fa-chevron-down"></i></a>
+            <div id="emailSettingsMenu" class="side-header-submenu" style="display: none;">
+              <a class="side-header-link side-header-submenu-link" onclick="emailSettings('editHeaderForm')">Edit
+                Header</a>
+              <a class="side-header-link side-header-submenu-link" onclick="emailSettings('editSignatureForm')">Edit
+                Signature</a>
             </div>
           </div>
-
-          <div class="side-header-bottom">
-            <form action="/logout?_method=DELETE" method="POST">
-              <button class="side-header-link resetButton width100 leftText noBorder" href="/logout?_method=DELETE" type="submit"><i class="rotate180 fas fa-sign-out-alt marginRight10"></i> Logout</button>
-            </form>
+          <div class="flex flexColumn width100">
+            <a onclick="animateOpenClose(this, 'accountSettingsMenu')" class="side-header-title">Accounts <i
+                class="fas fa-chevron-down"></i></a>
+            <div id="accountSettingsMenu" class="side-header-submenu" style="display: none;">
+              <a class="side-header-link side-header-submenu-link" href="/admin/reset-password">Reset Password</a>
+              <a class="side-header-link side-header-submenu-link" href="/register">Add User</a>
+            </div>
           </div>
         </div>
+
+        <div class="side-header-bottom">
+          <form action="/logout?_method=DELETE" method="POST">
+            <button class="side-header-link resetButton width100 leftText noBorder" href="/logout?_method=DELETE"
+              type="submit"><i class="rotate180 fas fa-sign-out-alt marginRight10"></i> Logout</button>
+          </form>
+        </div>
       </div>
+    </div>
 
-      <div class="content-with-side-header">
-        <!-- Main wrapper panel: two columns -->
-        <div class="flex spaceAround flexCollapseMobile width100">
-          <!-- Left column, essentially a grid -->
-          <div class="flex spaceAround flexGrow1 flexWrap width100Mobile flexAlignStart">
-            <!-- Todays Roster Panel -->
-            
-            <div id="rosterPanel" class="mobilePanel light-content-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
-              <div class="theme-color2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
-                <p class="marginLeft10 light-text font25px">Today's Roster</p>
-                <!-- Hidden div there to get original text when closing popup -->
-                <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text font15px">Add Student</a>
-                
-              </div>
-              <div class="heavyPadding maxHeight300px">
-                <ul id="todays_students" class="ulList">
-                  <% if (present.length > 0) {%>
-                    <% present.forEach((student, index) => {  %>
-                      <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
-                        <script>checkStudentDayType("today<%= student.StudentID %>", <%= student.DayType %>);</script>
-                        <li id="today<%= student.StudentId %>" class="flex white-BG spaceBetween flexAlignCenter">
-                          <p><%= student.StudentName %></p>
-                        <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red-BG dark-text hoverable"><i class="fas fa-question"></i></button>
-                          
-                    <% }) %>
+    <div class="content-with-side-header">
+      <!-- Main wrapper panel: two columns -->
+      <div class="flex spaceAround flexCollapseMobile width100">
+        <!-- Left column, essentially a grid -->
+        <div class="flex spaceAround flexGrow1 flexWrap width100Mobile flexAlignStart">
+          <!-- Todays Roster Panel -->
+
+          <div id="rosterPanel"
+            class="mobilePanel light-content-BG margin10 flexGrow1 width45 borderRadiusSmall hideOverflow minWidth400px">
+            <div class="theme-color2-BG mediumPadding flex spaceBetween flexAlignCenter relative">
+              <p class="marginLeft10 light-text font25px">Today's Roster</p>
+              <!-- Hidden div there to get original text when closing popup -->
+              <a onclick="openPopup(this, 'addToTodaysRoster');" class="lightPadding light-text font15px">Add
+                Student</a>
+
+            </div>
+            <div class="heavyPadding maxHeight300px">
+              <ul id="todays_students" class="ulList">
+                <% if (present.length > 0) {%>
+                <% present.forEach((student, index) => {  %>
+                <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
+                <script>checkStudentDayType("today<%= student.StudentID %>", <%= student.DayType %>);</script>
+                <li id="today<%= student.StudentId %>" class="flex white-BG spaceBetween flexAlignCenter">
+                  <p><%= student.StudentName %></p>
+                  <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red-BG dark-text hoverable"><i
+                      class="fas fa-question"></i></button>
+
+                  <% }) %>
                   <% } else { %>
-                    <li class="flex white-BG spaceBetween flexAlignCenter">
-                      <p>No Students Today</p>
-                    <a class="padding8px25px red-BG dark-text hoverable"><i class="fas fa-question"></i></a>
+                <li class="flex white-BG spaceBetween flexAlignCenter">
+                  <p>No Students Today</p>
+                  <a class="padding8px25px red-BG dark-text hoverable"><i class="fas fa-question"></i></a>
                   <% } %>
-                
-                </ul>
-              </div>
 
-              <!-- Add to roster popup -->
-              <div id="addToTodaysRoster" class="popup width300px white-BG" style="display: none;"> 
-                <div class="arrow-left"></div>
-                <a class="closeIcon" onclick="closePopup('addToTodaysRoster')"><i class="fas fa-times"></i></a>
-                <ul id="todaysRosterList" class="ulList padding20px marginTop10">
-                </ul>
-              </div>
-              <script>fillTodaysRosterPopup('todaysRosterList', <%- JSON.stringify(students) %>, <%- JSON.stringify(present) %>)</script>
+              </ul>
             </div>
 
+            <!-- Add to roster popup -->
+            <div id="addToTodaysRoster" class="popup width300px white-BG" style="display: none;">
+              <div class="arrow-left"></div>
+              <a class="closeIcon" onclick="closePopup('addToTodaysRoster')"><i class="fas fa-times"></i></a>
+              <ul id="todaysRosterList" class="ulList padding20px marginTop10">
+              </ul>
+            </div>
+            <script>fillTodaysRosterPopup('todaysRosterList', <% - JSON.stringify(students) %>, <% - JSON.stringify(present) %>)</script>
+          </div>
 
-            <!-- --------------------- STUDENTS PANEL --------------------- -->
-            <div id="studentsPanel" class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px width45">
-              <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
-                <p class="marginLeft10 light-text font25px">Students</p>
-                <a onclick="openForm('newStudentForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
-              </div>
 
-              <!-- Students list -->
-              <div class="heavyPadding maxHeight300px">
-                <ul id="students" class="ulList spaceAround">
-                  <% if (students.length > 0) { %>
-                    <% students.forEach((student, index) => { %>
-                      <% studentSpl = student.StudentName.split(" "); %>
-                        <li class="profileList white-BG clickableItem" id="<%= index %>" onclick="studentSelected(<%= student.StudentId %>)">
-                          <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
-                          <img class="leftCircle" src="/uploads/images/<%- student.Img %>" onerror="this.src='/uploads/images/default.png'">
-                          <p class="width80"><%= student.StudentName %></p>
-                        </li>
-                      <% }) %>
-                  <% } %>  
-                </ul>
+          <!-- --------------------- STUDENTS PANEL --------------------- -->
+          <div id="studentsPanel"
+            class="mobilePanel light-content-BG flexGrow1 margin10 borderRadiusSmall hideOverflow minWidth400px width45">
+            <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
+              <p class="marginLeft10 light-text font25px">Students</p>
+              <a onclick="openForm('newStudentForm')"
+                class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
+            </div>
 
-                <!-- --------------------- New Student Form --------------------- -->
-                <div id="newStudentForm" class="formWindow">
-                  <div class="formWindow-content flexContainer">
-                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Student</p>
-                    
-                    <!-- Name/Birthday -->
-                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                      <div class="inputWithIcon width45 width90Mobile white-BG">
-                        <i class="fas fa-user"></i>
-                        <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name"/>
-                      </div>
-                      <div class="flex spaceAround flexCollapseMobile flexAlignCenter width45 width90Mobile">
-                        <label class="theme-color2-light-text font20px marginRight20 width20">Birthday:</label>
-                        <div class="flex flexRight width70 width100Mobile">
-                          <div class="inputWithIcon width20 white-BG">
-                            <input id="month" placeholder="MM" maxlength="2"></input>
-                          </div>
-                          <div class="inputWithIcon width20 white-BG">
-                            <input id="day" placeholder="DD" maxlength="2"></input>
-                          </div>
-                          <div class="inputWithIcon width40 white-BG">
-                            <input id="year" placeholder="YYYY" maxlength="4"></input>
-                          </div>
-                        </div>
-                        
-                      </div>
+            <!-- Students list -->
+            <div class="heavyPadding maxHeight300px">
+              <ul id="students" class="ulList spaceAround">
+                <% if (students.length > 0) { %>
+                <% students.forEach((student, index) => { %>
+                <% studentSpl = student.StudentName.split(" "); %>
+                <li class="profileList white-BG clickableItem" id="<%= index %>"
+                  onclick="studentSelected(<%= student.StudentId %>)">
+                  <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
+                  <img class="leftCircle" src="/uploads/images/<%- student.Img %>"
+                    onerror="this.src='/uploads/images/default.png'">
+                  <p class="width80"><%= student.StudentName %></p>
+                </li>
+                <% }) %>
+                <% } %>
+              </ul>
+
+              <!-- --------------------- New Student Form --------------------- -->
+              <div id="newStudentForm" class="formWindow">
+                <div class="formWindow-content flexContainer">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Student</p>
+
+                  <!-- Name/Birthday -->
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+                    <div class="inputWithIcon width45 width90Mobile white-BG">
+                      <i class="fas fa-user"></i>
+                      <input name=”notASearchField” type="text" id="newStudentName" placeholder="Student Name" />
                     </div>
-
-                    <!-- Guardians -->
-                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                      
-                      <!-- Guardian 1 -->
-                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                        <p class="largeFont marginBottom10 theme-color2-light-text">Guardian 1</p>
-                        <div class="inputWithIcon width100 white-BG">
-                          <i class="fas fa-user"></i>
-                          <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
+                    <div class="flex spaceAround flexCollapseMobile flexAlignCenter width45 width90Mobile">
+                      <label class="theme-color2-light-text font20px marginRight20 width20">Birthday:</label>
+                      <div class="flex flexRight width70 width100Mobile">
+                        <div class="inputWithIcon width20 white-BG">
+                          <input id="month" placeholder="MM" maxlength="2"></input>
                         </div>
-                        <div class="inputWithIcon width100 white-BG">
-                          <i class="fas fa-envelope"></i>
-                          <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
+                        <div class="inputWithIcon width20 white-BG">
+                          <input id="day" placeholder="DD" maxlength="2"></input>
                         </div>
-                        <div class="inputWithIcon width100 white-BG">
-                          <i class="fas fa-mobile-alt"></i>
-                          <input name=”notASearchField” type="text" id="newStudentContactNumber" placeholder="Guardian's Phone Number">
+                        <div class="inputWithIcon width40 white-BG">
+                          <input id="year" placeholder="YYYY" maxlength="4"></input>
                         </div>
                       </div>
 
-                      <!-- Guardian 2 -->
-                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile">
-                        <p class="largeFont marginBottom10 theme-color2-light-text">Guardian 2</p>
-                        <div class="inputWithIcon width100 white-BG">
-                          <i class="fas fa-user"></i>
-                          <input name=”notASearchField” type="text" id="newStudentContact2" placeholder="2nd Guardian Name">
-                        </div>
-                        <div class="inputWithIcon width100 white-BG">
-                          <i class="fas fa-envelope"></i>
-                          <input name=”notASearchField” type="text" id="newStudentEmail2" placeholder="2nd Guardian Email">
-                        </div>
-                        <div class="inputWithIcon width100 white-BG">
-                          <i class="fas fa-mobile-alt"></i>
-                          <input name=”notASearchField” type="text" id="newStudentContactNumber2" placeholder="2nd Guardian's Phone Number">
-                        </div>
-                      </div>
                     </div>
-
-                    <!-- Allergies/Notes and Schedule -->
-                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                      
-                      <!-- Allergies/Notes -->
-                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                        <textarea id="allergies-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
-                        <textarea id="accommodations-text" class="width100" onkeyup="textAreaAdjust(this)" name="notASearchField" id="newStudentAccommodations" placeholder="Special Accommodations"></textarea>
-                      </div>
-                      
-                      <!-- Schedule -->
-                      <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
-                        <div class="flex width100">
-                          <ul class="selectableList flex width100 flexCenter marginBottom20">
-                            <li style="display: none;"><p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p></li>
-                            <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
-                            <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
-                            <li id="wed" onclick="weekdaySelected(this)"><a>W</a></li>
-                            <li id="thu" onclick="weekdaySelected(this)"><a>TH</a></li>
-                            <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
-                            <li style="display: none;"><p id="sat" onclick="weekdaySelected(this)">S</p></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="flex flexCenter">
-                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newStudentSubmit" onclick="callPostStu()">Create</a>
-                    </div>
-                    
                   </div>
-                </div> <!-- End new student form-->
-              </div>
-            </div> <!-- End Students Panel-->
 
-            <!-- --------------------- REMINDER PANEL --------------------- -->
-            <div id="remindersPanel" class="mobilePanel light-content-BG margin10 flexGrow1 borderRadiusSmall hideOverflow minWidth400px width40">
-              <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
-                <p class="marginLeft10 light-text font25px">Reminders</p>
-                <a onclick="openForm('newReminderForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
-              </div>
-              <div class="heavyPadding maxHeight300px">
-                <ul id="reminders" class="ulList">
-                  <% if (reminders.length > 0) {%>
-                    
-                    <% reminders.forEach((reminder, index) => { %>
-                      <% if (reminder.hidden == 1) { %>
-                        <li class="main-BG blackAndWhite spaceBetween">
-                      <% } else { %>
-                        <li class="white-BG spaceBetween">
-                      <% } %>
-                          <p><%= reminder.title %></p>
-                          <div class="flex">
-                            <% if(reminder.value != -1){ %>
-                              <button class="green-BG noBlackAndWhiteHover" onclick="hideReminder(this, '<%= reminder.id %>', <%= reminder.hidden %>)"><i class="far fa-eye"></i></button>
-                              <button class="yellow-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i class="far fa-edit"></i></button>
-                              <button class="red-BG" onclick="deleteReminder(<%= reminder.id %>)"><i class="far fa-trash-alt"></i></button>              
-                            <% }; %>
-                          </div>
-                          
-                    <% }) %>
-                  <% } %>
-                
-                </ul>
-                <!-- Edit reminder form -->
-                <div id="editReminderForm" class="formWindow">
-                  <div class="formWindow-content width60">
-                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit a Reminder</p>
+                  <!-- Guardians -->
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
 
-                    <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                      <div class="flex width80 width100Mobile marginBottom20">
-                        <div class="inputWithIcon width100 white-BG">
-                          <input type="text" id="editReminderName" value="">
-                        </div>
+                    <!-- Guardian 1 -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                      <p class="largeFont marginBottom10 theme-color2-light-text">Guardian 1</p>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-user"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContact" placeholder="Guardian Name">
                       </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-envelope"></i>
+                        <input name=”notASearchField” type="text" id="newStudentEmail" placeholder="Guardian Email">
+                      </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-mobile-alt"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContactNumber"
+                          placeholder="Guardian's Phone Number">
+                      </div>
+                    </div>
 
-                      <!-- <div class="flex width80 width100Mobile">
+                    <!-- Guardian 2 -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile">
+                      <p class="largeFont marginBottom10 theme-color2-light-text">Guardian 2</p>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-user"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContact2"
+                          placeholder="2nd Guardian Name">
+                      </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-envelope"></i>
+                        <input name=”notASearchField” type="text" id="newStudentEmail2"
+                          placeholder="2nd Guardian Email">
+                      </div>
+                      <div class="inputWithIcon width100 white-BG">
+                        <i class="fas fa-mobile-alt"></i>
+                        <input name=”notASearchField” type="text" id="newStudentContactNumber2"
+                          placeholder="2nd Guardian's Phone Number">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Allergies/Notes and Schedule -->
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
+
+                    <!-- Allergies/Notes -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                      <textarea id="allergies-text" class="width100" onkeyup="textAreaAdjust(this)"
+                        name="notASearchField" id="newStudentAllergies" placeholder="Student Allergies"></textarea>
+                      <textarea id="accommodations-text" class="width100" onkeyup="textAreaAdjust(this)"
+                        name="notASearchField" id="newStudentAccommodations"
+                        placeholder="Special Accommodations"></textarea>
+                    </div>
+
+                    <!-- Schedule -->
+                    <div class="flex flexColumn marginBelowChildren10 width45 width90Mobile marginBottom20">
+                      <div class="flex width100">
+                        <ul class="selectableList flex width100 flexCenter marginBottom20">
+                          <li style="display: none;">
+                            <p id="sun" onclick="weekdaySelected(this)" style="visibility: hidden;">S</p>
+                          </li>
+                          <li id="mon" onclick="weekdaySelected(this)"><a>M</a></li>
+                          <li id="tue" onclick="weekdaySelected(this)"><a>T</a></li>
+                          <li id="wed" onclick="weekdaySelected(this)"><a>W</a></li>
+                          <li id="thu" onclick="weekdaySelected(this)"><a>TH</a></li>
+                          <li id="fri" onclick="weekdaySelected(this)"><a>F</a></li>
+                          <li style="display: none;">
+                            <p id="sat" onclick="weekdaySelected(this)">S</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newStudentSubmit"
+                      onclick="callPostStu()">Create</a>
+                  </div>
+
+                </div>
+              </div> <!-- End new student form-->
+            </div>
+          </div> <!-- End Students Panel-->
+
+          <!-- --------------------- REMINDER PANEL --------------------- -->
+          <div id="remindersPanel"
+            class="mobilePanel light-content-BG margin10 flexGrow1 borderRadiusSmall hideOverflow minWidth400px width40">
+            <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
+              <p class="marginLeft10 light-text font25px">Reminders</p>
+              <a onclick="openForm('newReminderForm')"
+                class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
+            </div>
+            <div class="heavyPadding maxHeight300px">
+              <ul id="reminders" class="ulList">
+                <% if (reminders.length > 0) {%>
+
+                <% reminders.forEach((reminder, index) => { %>
+                <% if (reminder.hidden == 1) { %>
+                <li class="main-BG blackAndWhite spaceBetween">
+                  <% } else { %>
+                <li class="white-BG spaceBetween">
+                  <% } %>
+                  <p><%= reminder.title %></p>
+                  <div class="flex">
+                    <% if(reminder.value != -1){ %>
+                    <button class="green-BG noBlackAndWhiteHover"
+                      onclick="hideReminder(this, '<%= reminder.id %>', <%= reminder.hidden %>)"><i
+                        class="far fa-eye"></i></button>
+                    <button class="yellow-BG" onclick="editReminder(<%= JSON.stringify(reminder) %>)"><i
+                        class="far fa-edit"></i></button>
+                    <button class="red-BG" onclick="deleteReminder(<%= reminder.id %>)"><i
+                        class="far fa-trash-alt"></i></button>
+                    <% }; %>
+                  </div>
+
+                  <% }) %>
+                  <% } %>
+
+              </ul>
+              <!-- Edit reminder form -->
+              <div id="editReminderForm" class="formWindow">
+                <div class="formWindow-content width60">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit a Reminder</p>
+
+                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                    <div class="flex width80 width100Mobile marginBottom20">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input type="text" id="editReminderName" value="">
+                      </div>
+                    </div>
+
+                    <!-- <div class="flex width80 width100Mobile">
                         <div class="inputWithIcon width100 white-BG">
                           <input name=”notASearchField” type="text" id="editReminder" placeholder="Reminder info">
                         </div>
                       </div> -->
 
-                      <div style="display: none; visibility:hidden">
-                        <div >
-                          <input name=”notASearchField” type="text" id="editReminderId">
-                        </div>
+                    <div style="display: none; visibility:hidden">
+                      <div>
+                        <input name=”notASearchField” type="text" id="editReminderId">
                       </div>
-                    
+                    </div>
+
 
                     <div id="edit-reminder-toolbar-container">
                       <span class="ql-formats">
-                          <select class="ql-size">
-                              <option value="10px">Small</option>
-                              <option selected>Normal</option>
-                              <option value="18px">Large</option>
-                              <option value="32px">Huge</option>
-                          </select>
+                        <select class="ql-size">
+                          <option value="10px">Small</option>
+                          <option selected>Normal</option>
+                          <option value="18px">Large</option>
+                          <option value="32px">Huge</option>
+                        </select>
                       </span>
                       <span class="ql-formats">
-                          <button class="ql-align" value=""></button>
-                          <button class="ql-align" value="center"></button>
-                          <button class="ql-align" value="right"></button>
+                        <button class="ql-align" value=""></button>
+                        <button class="ql-align" value="center"></button>
+                        <button class="ql-align" value="right"></button>
                       </span>
                       <span class="ql-formats">
-                          <select class="ql-color">
-                              <option selected></option>
-                              <option value="red"></option>
-                              <option value="orange"></option>
-                              <option value="yellow"></option>
-                              <option value="green"></option>
-                              <option value="blue"></option>
-                              <option value="purple"></option>
-                          </select>
-                          <select class="ql-background">
-                              <option selected></option>
-                              <option value="red"></option>
-                              <option value="orange"></option>
-                              <option value="yellow"></option>
-                              <option value="green"></option>
-                              <option value="blue"></option>
-                              <option value="purple"></option>
-                          </select>
+                        <select class="ql-color">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                        </select>
+                        <select class="ql-background">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                        </select>
                       </span>
                       <span class="ql-formats">
-                          <button class="ql-bold"></button>
-                          <button class="ql-italic"></button>
-                          <button class="ql-underline"></button>
-                          <button class="ql-strike"></button>
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
                       </span>
                     </div>
                     <div class="flex flexColumn marginBottom40 width100">
@@ -326,25 +358,26 @@
                       </div>
                     </div>
                   </div>
-                    <div class="flex flexCenter">
-                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="editReminderSubmit" onclick="passEditReminderToPost()">Save Changes</a>
-                    </div>
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="editReminderSubmit"
+                      onclick="passEditReminderToPost()">Save Changes</a>
                   </div>
-                </div> <!-- End edit reminder form -->
+                </div>
+              </div> <!-- End edit reminder form -->
 
-                <!-- --------------------- New Reminder Form --------------------- -->
-                <div id="newReminderForm" class="formWindow">
-                  <div class="formWindow-content width60 width90Mobile">
-                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Reminder</p>
+              <!-- --------------------- New Reminder Form --------------------- -->
+              <div id="newReminderForm" class="formWindow">
+                <div class="formWindow-content width60 width90Mobile">
+                  <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Reminder</p>
 
-                    <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                      <div class="flex width60 width100Mobile">
-                        <div class="inputWithIcon width100 white-BG">
-                          <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name"/>
-                        </div>
+                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                    <div class="flex width60 width100Mobile">
+                      <div class="inputWithIcon width100 white-BG">
+                        <input name=”notASearchField” type="text" id="newReminderName" placeholder="Reminder Name" />
                       </div>
-                      <!-- 
+                    </div>
+                    <!-- 
                       <div class="flex width60 width100Mobile">
                         <div class="inputWithIcon width100 white-BG">
                           <input name=”notASearchField” type="text" id="newReminderParagraph" placeholder="Reminder Text">
@@ -353,43 +386,43 @@
                     </div> -->
                     <div id="reminder-toolbar-container" class="width100 noMargin">
                       <span class="ql-formats">
-                          <select class="ql-size">
-                              <option value="10px">Small</option>
-                              <option selected>Normal</option>
-                              <option value="18px">Large</option>
-                              <option value="32px">Huge</option>
-                          </select>
+                        <select class="ql-size">
+                          <option value="10px">Small</option>
+                          <option selected>Normal</option>
+                          <option value="18px">Large</option>
+                          <option value="32px">Huge</option>
+                        </select>
                       </span>
                       <span class="ql-formats">
-                          <button class="ql-align" value=""></button>
-                          <button class="ql-align" value="center"></button>
-                          <button class="ql-align" value="right"></button>
+                        <button class="ql-align" value=""></button>
+                        <button class="ql-align" value="center"></button>
+                        <button class="ql-align" value="right"></button>
                       </span>
                       <span class="ql-formats">
-                          <select class="ql-color">
-                              <option selected></option>
-                              <option value="red"></option>
-                              <option value="orange"></option>
-                              <option value="yellow"></option>
-                              <option value="green"></option>
-                              <option value="blue"></option>
-                              <option value="purple"></option>
-                          </select>
-                          <select class="ql-background">
-                              <option selected></option>
-                              <option value="red"></option>
-                              <option value="orange"></option>
-                              <option value="yellow"></option>
-                              <option value="green"></option>
-                              <option value="blue"></option>
-                              <option value="purple"></option>
-                          </select>
+                        <select class="ql-color">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                        </select>
+                        <select class="ql-background">
+                          <option selected></option>
+                          <option value="red"></option>
+                          <option value="orange"></option>
+                          <option value="yellow"></option>
+                          <option value="green"></option>
+                          <option value="blue"></option>
+                          <option value="purple"></option>
+                        </select>
                       </span>
                       <span class="ql-formats">
-                          <button class="ql-bold"></button>
-                          <button class="ql-italic"></button>
-                          <button class="ql-underline"></button>
-                          <button class="ql-strike"></button>
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
                       </span>
                     </div>
                     <div class="flex flexColumn marginBottom40 width100">
@@ -398,809 +431,843 @@
                     </div>
                   </div>
 
-                    <div class="flex flexCenter">
-                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit" onclick="saveReminder()">Create</a>
+                  <div class="flex flexCenter">
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newReminderSubmit"
+                      onclick="saveReminder()">Create</a>
+                  </div>
+                </div>
+              </div> <!-- End new reminder form -->
+            </div>
+          </div> <!-- End reminder panel -->
+
+          <!-- --------------------- BEHAVIORS PANEL --------------------- -->
+          <div id="behaviorsPanel"
+            class="mobilePanel light-content-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth400px">
+            <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
+              <p class="marginLeft10 light-text font25px">Behaviors</p>
+              <a onclick="openForm('newBehaviorForm')" class="lightPadding theme-color2-light-text font15px">Add New</a>
+            </div>
+            <div class="heavyPadding maxHeight300px">
+              <ul id="behaviors" class="ulList">
+                <% if (behaviors.length > 0) {%>
+                <a id=behaviorCount style="visibility: hidden; display: none;"><%= behaviors.length %> </a>
+                <% behaviors.forEach((behavior, index) => { %>
+                <a id="behavior<%= index %>" style="visibility: hidden; display: none;"><%= behavior.title %></a>
+                <% if (behavior.Hidden == 1) { %>
+                <li class="main-BG blackAndWhite spaceBetween">
+                  <% } else { %>
+                <li class="white-BG spaceBetween">
+                  <% } %>
+                  <p><%= behavior.title %></p>
+                  <div class="flex">
+                    <button class="green-BG noBlackAndWhiteHover"
+                      onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i
+                        class="far fa-eye"></i></button>
+                    <button class="yellow-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i
+                        class="far fa-edit"></i></button>
+                    <button class="red-BG" onclick=deleteBehavior(<%= behavior.id %>)><i
+                        class="far fa-trash-alt"></i></button>
+                  </div>
+                  <% }) %>
+                  <% } %>
+              </ul>
+            </div>
+
+            <!-- Edit behavior form -->
+            <div id="editBehaviorForm" class="formWindow">
+              <div class="formWindow-content">
+                <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit a Behavior</p>
+
+                <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                  <div class="flex width60 width100Mobile marginBottom20">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input type="text" id="editBehaviorName" value="" disabled>
                     </div>
                   </div>
-                </div> <!-- End new reminder form -->
-              </div> 
-            </div> <!-- End reminder panel -->
-      
-            <!-- --------------------- BEHAVIORS PANEL --------------------- -->
-            <div id="behaviorsPanel" class="mobilePanel light-content-BG margin10 flexGrow1 width40 borderRadiusSmall hideOverflow minWidth400px">
-              <div class="dark-content-light-BG mediumPadding flex spaceBetween flexAlignCenter">
-                <p class="marginLeft10 light-text font25px">Behaviors</p>
-                <a onclick="openForm('newBehaviorForm')" class="lightPadding theme-color2-light-text font15px">Add New</a>
-              </div>
-              <div class="heavyPadding maxHeight300px">
-                <ul id="behaviors" class="ulList">
-                  <% if (behaviors.length > 0) {%>
-                    <a id=behaviorCount style="visibility: hidden; display: none;"><%= behaviors.length %> </a>
-                    <% behaviors.forEach((behavior, index) => { %>
-                      <a id="behavior<%= index %>" style="visibility: hidden; display: none;"><%= behavior.title %></a>
-                        <% if (behavior.Hidden == 1) { %>
-                          <li class="main-BG blackAndWhite spaceBetween">
-                        <% } else { %>
-                          <li class="white-BG spaceBetween">
-                        <% } %>
-                          <p><%= behavior.title %></p>
-                          <div class="flex">
-                            <button class="green-BG noBlackAndWhiteHover" onclick="hideBehavior(this, '<%= behavior.id %>', <%= behavior.Hidden %>)"><i class="far fa-eye"></i></button>
-                            <button class="yellow-BG" onclick="editBehavior(<%= JSON.stringify(behavior) %>)"><i class="far fa-edit"></i></button>
-                            <button class="red-BG" onclick=deleteBehavior(<%= behavior.id %>)><i class="far fa-trash-alt"></i></button>
-                          </div>
-                    <% }) %>
-                  <% } %>
-                </ul>
-              </div>
 
-              <!-- Edit behavior form -->
-              <div id="editBehaviorForm" class="formWindow">
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="editBehaviorOp1" placeholder="Option 1">
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="editBehaviorOp2" placeholder="Option 2" />
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="editBehaviorOp3" placeholder="Option 3" />
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="editBehaviorOp4" placeholder="Option 4" />
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="editBehaviorOp5" placeholder="Option 5" />
+                    </div>
+                  </div>
+
+                  <div style="display: none; visibility:hidden">
+                    <div>
+                      <input name=”notASearchField” type="text" id="editBehaviorId">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flexCenter">
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="editBehaviorSubmit"
+                    onclick="passEditBehaviorToPost()">Save Changes</a>
+                </div>
+              </div>
+            </div> <!-- End edit behavior form -->
+
+            <!-- --------------------- New behavior Form --------------------- -->
+            <div id="newBehaviorForm" class="formWindow">
+              <div class="formWindow-content width40 width90Mobile">
+                <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+                <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Behavior</p>
+
+                <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
+                  <div class="flex width60 width100Mobile marginBottom20">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorName" placeholder="Behavior Name" />
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp1" placeholder="Option 1">
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp2" placeholder="Option 2" />
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp3" placeholder="Option 3" />
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp4" placeholder="Option 4" />
+                    </div>
+                  </div>
+
+                  <div class="flex width60 width100Mobile">
+                    <div class="inputWithIcon width100 white-BG">
+                      <input name=”notASearchField” type="text" id="newBehaviorOp5" placeholder="Option 5" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flexCenter">
+                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newBehaviorSubmit"
+                    onclick="callPostBehavior()">Create</a>
+                </div>
+              </div>
+            </div> <!-- End new behavior form -->
+          </div> <!-- End behavior panel -->
+        </div> <!-- End left side -->
+
+        <!-- --------------------- Right Column --------------------- -->
+        <div class="flex flexWrap width600px width100Mobile">
+          <!--  --------------------- ACTIVITIES PANEL --------------------- -->
+          <div id="activitiesPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100">
+            <!-- Title Bar -->
+            <div class="dark-content-light-BG mediumPadding flex flexAlignCenter spaceBetween">
+              <p id="activityTitle" class="marginLeft10 light-text font25px">Activities</p>
+              <input class="width60" id="activitySearch" style="display: none"
+                onkeyup="updateSearch('activities', this)"></input>
+              <div class="flex">
+                <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')"
+                  class="marginRight20 light-text font20px">
+                  <i class="fas fa-search light-text"></i>
+                </a>
+                <a onclick="openForm('newActivityForm')"
+                  class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
+              </div>
+            </div>
+
+            <!-- Activities List -->
+            <div class="heavyPadding maxHeight700px light-content-BG ">
+              <ul id="activities" class="ulList">
+                <% if (activities.length > 0) {%>
+                <% activities.forEach((activity, index) => { %>
+                <% if (activity.Hidden == 1) { %>
+                <li class="blackAndWhite spaceBetween">
+                  <% } else { %>
+                <li class="white-BG spaceBetween">
+                  <% } %>
+
+                  <p><%= activity.ActivityName %>
+                    <% if(activity.Helper == 1) { %>
+                    <i class="fas fa-star theme-color2-light-text"></i>
+                    <% } %></p>
+                  <div class="flex">
+                    <button class="green-BG noBlackAndWhiteHover"
+                      onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i
+                        class="far fa-eye"></i></button>
+                    <button class="yellow-BG"
+                      onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i
+                        class="far fa-edit"></i></button>
+                    <button class="red-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i
+                        class="far fa-trash-alt"></i></button>
+                  </div>
+                </li>
+                <% }) %>
+                <% } %>
+              </ul>
+
+              <!-- Edit activity form -->
+              <div id="editActivityForm" class="formWindow">
                 <div class="formWindow-content">
                   <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit a Behavior</p>
+                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit an Activity</p>
 
-                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                    <div class="flex width60 width100Mobile marginBottom20">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input type="text" id="editBehaviorName" value="" disabled>
-                      </div>
-                    </div>
-
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
                     <div class="flex width60 width100Mobile">
                       <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="editBehaviorOp1" placeholder="Option 1">
+                        <p id="editActivityID" style="display: none"></p>
+                        <input type="text" id="editActivityInput" value="">
                       </div>
                     </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="editBehaviorOp2" placeholder="Option 2"/>
-                      </div>
-                    </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="editBehaviorOp3" placeholder="Option 3"/>
-                      </div>
-                    </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="editBehaviorOp4" placeholder="Option 4"/>
-                      </div>
-                    </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="editBehaviorOp5" placeholder="Option 5"/>
-                      </div>
-                    </div>
-
-                    <div style="display: none; visibility:hidden">
-                      <div >
-                        <input name=”notASearchField” type="text" id="editBehaviorId">
-                      </div>
+                    <div class="flex width30 width100Mobile">
+                      <a class="toggleable" id="editHelper" onclick="toggleableToggled(this)">Helper</a>
                     </div>
                   </div>
 
                   <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="editBehaviorSubmit" onclick="passEditBehaviorToPost()">Save Changes</a>
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit"
+                      onclick="passEditActToPost()">Save Changes</a>
                   </div>
                 </div>
-              </div> <!-- End edit behavior form -->
+              </div> <!-- End edit activity form -->
 
-              <!-- --------------------- New behavior Form --------------------- -->
-              <div id="newBehaviorForm" class="formWindow">
-                <div class="formWindow-content width40 width90Mobile">
+              <!-- New Activity Form -->
+              <div id="newActivityForm" class="formWindow">
+                <div class="formWindow-content">
                   <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Add a Behavior</p>
+                  <p class="font50px marginBottom40 centerText theme-color2-light-text">Add an Activity</p>
 
-                  <div class="flex flexColumn flexAlignCenter marginBelowChildren10 marginBottom40 width100">
-                    <div class="flex width60 width100Mobile marginBottom20">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newBehaviorName" placeholder="Behavior Name"/>
-                      </div>
-                    </div>
-
+                  <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
                     <div class="flex width60 width100Mobile">
                       <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newBehaviorOp1" placeholder="Option 1">
+                        <input type="text" id="newActivityName" placeholder="Activity Name">
                       </div>
                     </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newBehaviorOp2" placeholder="Option 2"/>
-                      </div>
-                    </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newBehaviorOp3" placeholder="Option 3"/>
-                      </div>
-                    </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newBehaviorOp4" placeholder="Option 4"/>
-                      </div>
-                    </div>
-
-                    <div class="flex width60 width100Mobile">
-                      <div class="inputWithIcon width100 white-BG">
-                        <input name=”notASearchField” type="text" id="newBehaviorOp5" placeholder="Option 5"/>
-                      </div>
+                    <div class="flex width30 width100Mobile">
+                      <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
                     </div>
                   </div>
 
                   <div class="flex flexCenter">
-                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newBehaviorSubmit" onclick="callPostBehavior()">Create</a>
+                    <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit"
+                      onclick="callPostAct()">Create</a>
                   </div>
+
                 </div>
-              </div> <!-- End new behavior form -->
-            </div> <!-- End behavior panel -->
-          </div> <!-- End left side -->
-          
-          <!-- --------------------- Right Column --------------------- -->
-          <div class="flex flexWrap width600px width100Mobile">
-            <!--  --------------------- ACTIVITIES PANEL --------------------- -->
-            <div id="activitiesPanel" class="mobilePanel margin10 borderRadiusSmall hideOverflow minWidth450px width100">
-              <!-- Title Bar -->
-              <div class="dark-content-light-BG mediumPadding flex flexAlignCenter spaceBetween">
-                <p id="activityTitle" class="marginLeft10 light-text font25px">Activities</p>
-                <input class="width60" id="activitySearch" style="display: none" onkeyup="updateSearch('activities', this)"></input>
-                <div class="flex">
-                  <a onclick="toggleBetweenElements('activitySearch', 'activityTitle')" class="marginRight20 light-text font20px">
-                    <i class="fas fa-search light-text"></i>
-                  </a>
-                  <a onclick="openForm('newActivityForm')" class="marginRight10 lightPadding theme-color2-light-text font15px">Add New</a>
+              </div> <!-- End activity form -->
+            </div>
+          </div> <!-- End activities panel -->
+
+          <!-- EMAIL FORMS -->
+          <!-- Edit Header Form -->
+          <div id="editHeaderForm" class="formWindow">
+            <div class="formWindow-content">
+              <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+              <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit Header</p>
+              <div id="header-toolbar-container">
+                <span class="ql-formats">
+                  <select class="ql-size">
+                    <option value="10px">Small</option>
+                    <option selected>Normal</option>
+                    <option value="18px">Large</option>
+                    <option value="32px">Huge</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <button class="ql-align" value=""></button>
+                  <button class="ql-align" value="center"></button>
+                  <button class="ql-align" value="right"></button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option selected></option>
+                    <option value="red"></option>
+                    <option value="orange"></option>
+                    <option value="yellow"></option>
+                    <option value="green"></option>
+                    <option value="blue"></option>
+                    <option value="purple"></option>
+                  </select>
+                  <select class="ql-background">
+                    <option selected></option>
+                    <option value="red"></option>
+                    <option value="orange"></option>
+                    <option value="yellow"></option>
+                    <option value="green"></option>
+                    <option value="blue"></option>
+                    <option value="purple"></option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <button class="ql-bold"></button>
+                  <button class="ql-italic"></button>
+                  <button class="ql-underline"></button>
+                  <button class="ql-strike"></button>
+                </span>
+              </div>
+              <div class="flex flexColumn marginBottom40 width100">
+                <div id="header">
                 </div>
               </div>
 
-              <!-- Activities List -->
-              <div class="heavyPadding maxHeight700px light-content-BG ">
-                <ul id="activities" class="ulList">
-                  <% if (activities.length > 0) {%>
-                    <% activities.forEach((activity, index) => { %>
-                        <% if (activity.Hidden == 1) { %>
-                          <li class="blackAndWhite spaceBetween">
-                        <% } else { %>
-                          <li class="white-BG spaceBetween">
-                        <% } %>
-                        
-                          <p><%= activity.ActivityName %> 
-                            <% if(activity.Helper == 1) { %>
-                            <i class="fas fa-star theme-color2-light-text"></i>
-                          <% } %></p>
-                          <div class="flex">
-                            <button class="green-BG noBlackAndWhiteHover" onclick="hideActivity(this, '<%= activity.ActivityId %>', <%= activity.Hidden %>)"><i class="far fa-eye"></i></button>
-                            <button class="yellow-BG" onclick="editActivity('<%= activity.ActivityId %>', '<%= activity.ActivityName %>')"><i class="far fa-edit"></i></button>
-                            <button class="red-BG" onclick="deleteActivity('<%= activity.ActivityId %>')"><i class="far fa-trash-alt"></i></button>
-                          </div>
-                        </li>
-                    <% }) %>
-                  <% } %>
-                </ul>
-
-                <!-- Edit activity form -->
-                <div id="editActivityForm" class="formWindow">
-                  <div class="formWindow-content">
-                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit an Activity</p>
-
-                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                      <div class="flex width60 width100Mobile">
-                        <div class="inputWithIcon width100 white-BG">
-                          <p id="editActivityID" style="display: none"></p>
-                          <input type="text" id="editActivityInput" value="">
-                        </div>
-                      </div>
-                      <div class="flex width30 width100Mobile">
-                        <a class="toggleable" id="editHelper" onclick="toggleableToggled(this)">Helper</a>
-                      </div>
-                    </div>
-
-                    <div class="flex flexCenter">
-                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="passEditActToPost()">Save Changes</a>
-                    </div>
-                  </div>
-                </div> <!-- End edit activity form -->
-
-                  <!-- New Activity Form -->
-                <div id="newActivityForm" class="formWindow">
-                  <div class="formWindow-content">
-                    <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                    <p class="font50px marginBottom40 centerText theme-color2-light-text">Add an Activity</p>
-
-                    <div class="flex spaceAround flexCollapseMobile marginBottom40 width100">
-                      <div class="flex width60 width100Mobile">
-                        <div class="inputWithIcon width100 white-BG">
-                          <input type="text" id="newActivityName" placeholder="Activity Name">
-                        </div>
-                      </div>
-                      <div class="flex width30 width100Mobile">
-                        <a class="toggleable" id="helper" onclick="toggleableToggled(this)">Helper</a>
-                      </div>
-                    </div>
-
-                    <div class="flex flexCenter">
-                      <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="callPostAct()">Create</a>
-                    </div>
-                  
-                  </div>
-                </div> <!-- End activity form -->
+              <div class="flex flexCenter">
+                <!-- <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveHeader()">Save</a> -->
+                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit"
+                  onclick="saveEmailSettings('header')">Save</a>
               </div>
-            </div> <!-- End activities panel -->
 
-            <!-- EMAIL FORMS -->
-            <!-- Edit Header Form -->
-            <div id="editHeaderForm" class="formWindow">
-              <div class="formWindow-content">
-                <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit Header</p>
-                <div id="header-toolbar-container">
-                  <span class="ql-formats">
-                      <select class="ql-size">
-                          <option value="10px">Small</option>
-                          <option selected>Normal</option>
-                          <option value="18px">Large</option>
-                          <option value="32px">Huge</option>
-                      </select>
-                  </span>
-                  <span class="ql-formats">
-                      <button class="ql-align" value=""></button>
-                      <button class="ql-align" value="center"></button>
-                      <button class="ql-align" value="right"></button>
-                  </span>
-                  <span class="ql-formats">
-                      <select class="ql-color">
-                          <option selected></option>
-                          <option value="red"></option>
-                          <option value="orange"></option>
-                          <option value="yellow"></option>
-                          <option value="green"></option>
-                          <option value="blue"></option>
-                          <option value="purple"></option>
-                      </select>
-                      <select class="ql-background">
-                          <option selected></option>
-                          <option value="red"></option>
-                          <option value="orange"></option>
-                          <option value="yellow"></option>
-                          <option value="green"></option>
-                          <option value="blue"></option>
-                          <option value="purple"></option>
-                      </select>
-                  </span>
-                  <span class="ql-formats">
-                      <button class="ql-bold"></button>
-                      <button class="ql-italic"></button>
-                      <button class="ql-underline"></button>
-                      <button class="ql-strike"></button>
-                  </span>
-                </div>
-                <div class="flex flexColumn marginBottom40 width100">
-                  <div id="header">
-                  </div>
-                </div>
+            </div>
+          </div> <!-- End edit header form -->
 
-                <div class="flex flexCenter">
-                  <!-- <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveHeader()">Save</a> -->
-                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveEmailSettings('header')">Save</a>
-                </div>
-              
+          <!-- Edit signature Form -->
+          <div id="editSignatureForm" class="formWindow">
+            <div class="formWindow-content">
+              <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+              <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit Signature</p>
+              <div id="footer-toolbar-container">
+                <span class="ql-formats">
+                  <select class="ql-size">
+                    <option value="10px">Small</option>
+                    <option selected>Normal</option>
+                    <option value="18px">Large</option>
+                    <option value="32px">Huge</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <button class="ql-align" value=""></button>
+                  <button class="ql-align" value="center"></button>
+                  <button class="ql-align" value="right"></button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option selected></option>
+                    <option value="red"></option>
+                    <option value="orange"></option>
+                    <option value="yellow"></option>
+                    <option value="green"></option>
+                    <option value="blue"></option>
+                    <option value="purple"></option>
+                  </select>
+                  <select class="ql-background">
+                    <option selected></option>
+                    <option value="red"></option>
+                    <option value="orange"></option>
+                    <option value="yellow"></option>
+                    <option value="green"></option>
+                    <option value="blue"></option>
+                    <option value="purple"></option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <button class="ql-bold"></button>
+                  <button class="ql-italic"></button>
+                  <button class="ql-underline"></button>
+                  <button class="ql-strike"></button>
+                </span>
               </div>
-            </div> <!-- End edit header form -->
+              <div class="flex flexColumn marginBottom40 width100">
+                <div id="footer" class="maxHeight250px">
 
-            <!-- Edit signature Form -->
-            <div id="editSignatureForm" class="formWindow">
-              <div class="formWindow-content">
-                <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
-                <p class="font50px marginBottom40 centerText theme-color2-light-text">Edit Signature</p>
-                <div id="footer-toolbar-container">
-                  <span class="ql-formats">
-                      <select class="ql-size">
-                          <option value="10px">Small</option>
-                          <option selected>Normal</option>
-                          <option value="18px">Large</option>
-                          <option value="32px">Huge</option>
-                      </select>
-                  </span>
-                  <span class="ql-formats">
-                      <button class="ql-align" value=""></button>
-                      <button class="ql-align" value="center"></button>
-                      <button class="ql-align" value="right"></button>
-                  </span>
-                  <span class="ql-formats">
-                      <select class="ql-color">
-                          <option selected></option>
-                          <option value="red"></option>
-                          <option value="orange"></option>
-                          <option value="yellow"></option>
-                          <option value="green"></option>
-                          <option value="blue"></option>
-                          <option value="purple"></option>
-                      </select>
-                      <select class="ql-background">
-                          <option selected></option>
-                          <option value="red"></option>
-                          <option value="orange"></option>
-                          <option value="yellow"></option>
-                          <option value="green"></option>
-                          <option value="blue"></option>
-                          <option value="purple"></option>
-                      </select>
-                  </span>
-                  <span class="ql-formats">
-                      <button class="ql-bold"></button>
-                      <button class="ql-italic"></button>
-                      <button class="ql-underline"></button>
-                      <button class="ql-strike"></button>
-                  </span>
                 </div>
-                <div class="flex flexColumn marginBottom40 width100">
-                  <div id="footer" class="maxHeight250px">
-
-                  </div>
-                </div>
-
-                <div class="flex flexCenter">
-                  <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveEmailSettings('signature')">Save</a>
-                  <!-- <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveFooter()">Save</a> -->
-                </div>
-              
               </div>
-            </div> <!-- End edit signature form -->
-            
-            
-          </div>
+
+              <div class="flex flexCenter">
+                <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit"
+                  onclick="saveEmailSettings('signature')">Save</a>
+                <!-- <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveFooter()">Save</a> -->
+              </div>
+
+            </div>
+          </div> <!-- End edit signature form -->
+
+
         </div>
       </div>
     </div>
-      
-  </body>
-  
-  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-  <script>
+  </div>
 
-      Quill.register(Quill.import('attributors/style/size'), true);
-      Quill.register(Quill.import('attributors/style/direction'), true);
-      Quill.register(Quill.import('attributors/style/align'), true);
+</body>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+
+  Quill.register(Quill.import('attributors/style/size'), true);
+  Quill.register(Quill.import('attributors/style/direction'), true);
+  Quill.register(Quill.import('attributors/style/align'), true);
 
 
-    setInputFilter(document.getElementById("day"), function(value) {
-      return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-    });
-    setInputFilter(document.getElementById("month"), function(value) {
-      return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-    });
-    setInputFilter(document.getElementById("year"), function(value) {
-      return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-    });
+  setInputFilter(document.getElementById("day"), function (value) {
+    return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+  });
+  setInputFilter(document.getElementById("month"), function (value) {
+    return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+  });
+  setInputFilter(document.getElementById("year"), function (value) {
+    return /\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+  });
 
-    // var headerQuill = new Quill('#emailHeader', {
-    //   theme: 'snow',
-    //   scrollingContainer: '#emailHeaderContainer'
-    // });
-    // var signatureQuill = new Quill('#emailSignature', {
-    //   theme: 'snow',
-    //   scrollingContainer: '#emailSignature'
-    // });
-      var headerQuill = new Quill('#header', {
-        modules: {
-          toolbar: '#header-toolbar-container'
-        },
-        placeholder: 'Header text..',
-        theme: 'snow'
-      })
-      var footerQuill = new Quill('#footer', {
-        modules: {
-          toolbar: '#footer-toolbar-container'
-        },
-        placeholder: 'Footer text..',
-        theme: 'snow'
-      })
-      var reminderQuill = new Quill('#reminder', {
-        modules: {
-          toolbar: '#reminder-toolbar-container'
-        },
-        placeholder: 'Reminder info..',
-        theme: 'snow'
-      })
-      var editReminderQuill = new Quill('#edit-reminder', {
-        modules: {
-          toolbar: '#edit-reminder-toolbar-container'
-        },
-        placeholder: 'Reminder info..',
-        theme: 'snow'
-      })
-  </script>
+  // var headerQuill = new Quill('#emailHeader', {
+  //   theme: 'snow',
+  //   scrollingContainer: '#emailHeaderContainer'
+  // });
+  // var signatureQuill = new Quill('#emailSignature', {
+  //   theme: 'snow',
+  //   scrollingContainer: '#emailSignature'
+  // });
+  var headerQuill = new Quill('#header', {
+    modules: {
+      toolbar: '#header-toolbar-container'
+    },
+    placeholder: 'Header text..',
+    theme: 'snow'
+  })
+  var footerQuill = new Quill('#footer', {
+    modules: {
+      toolbar: '#footer-toolbar-container'
+    },
+    placeholder: 'Footer text..',
+    theme: 'snow'
+  })
+  var reminderQuill = new Quill('#reminder', {
+    modules: {
+      toolbar: '#reminder-toolbar-container'
+    },
+    placeholder: 'Reminder info..',
+    theme: 'snow'
+  })
+  var editReminderQuill = new Quill('#edit-reminder', {
+    modules: {
+      toolbar: '#edit-reminder-toolbar-container'
+    },
+    placeholder: 'Reminder info..',
+    theme: 'snow'
+  })
+</script>
 
-  <script>
-    // Get the modal
-    // opens student profile in same tab when a student is clicked
+<script>
+  // Get the modal
+  // opens student profile in same tab when a student is clicked
 
-    var formElement;
+  var formElement;
 
-    function studentSelected(studentID){
-      window.location.href ="/admin/student-profile/" + studentID;
+  function studentSelected(studentID) {
+    window.location.href = "/admin/student-profile/" + studentID;
+  }
+
+  // Get the <span> element that closes the modal
+  var closeButton = document.getElementsByClassName("close");
+
+  function editHeader() {
+
+  }
+
+  function editSignature() {
+
+  }
+
+  function studentAbsent(button, studentID) {
+    button.parentElement.classList.add("blackAndWhite");
+    button.parentElement.classList.add("main-BG");
+
+    var theUrl = window.location.href + '/changeroster';
+    var data = "do=remove" + "&id=" + studentID;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
+
+  // element: button that was clicked
+  function addToTodaysRoster(element, studentData) {
+    var list = document.getElementById("todays_students");
+    var temp = document.createElement("a");
+
+    var li = list.getElementsByTagName('li')[0]; // get first <li> to copy
+    var newLi = li.cloneNode(true);
+
+    newLi.classList.remove('blackAndWhite');
+    newLi.classList.remove('main-BG');
+    newLi.getElementsByTagName('p')[0].setAttribute("onclick", "studentAbsent(this, " + studentData.StudentId + ")"); // absent button
+    newLi.getElementsByTagName('p')[0].innerHTML = studentData.StudentName; // student name
+    list.appendChild(newLi);
+
+    var theUrl = window.location.href + '/addroster';
+    var data = "id=" + studentData.StudentId;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+
+    element.parentElement.parentElement.removeChild(element.parentElement); // delete <li> element in the add drop in popup
+  }
+
+  function hideActivity(element, id, hidden) {
+    if (hidden) {
+      theUrl = window.location.href + '/unhideactivity';
     }
+    else { theUrl = window.location.href + '/hideactivity'; }
+    data = "id=" + id;
+    toggleElementHide(element.parentElement.parentElement)
+    callback = doNothing;
 
-    // Get the <span> element that closes the modal
-    var closeButton = document.getElementsByClassName("close");
+    httpPutAsync(theUrl, data, callback);
+  }
 
-    function editHeader(){
-      
+  function toggleElementHide(element) {
+    if (element.classList.contains("blackAndWhite")) {
+      element.classList.remove("blackAndWhite");
+      element.classList.add("white-BG");
     }
+    else {
+      element.classList.remove("white-BG");
+      element.classList.add("blackAndWhite");
 
-    function editSignature(){
-      
     }
+  }
 
-    function studentAbsent(button, studentID){
-      button.parentElement.classList.add("blackAndWhite");
-      button.parentElement.classList.add("main-BG");
+  function editActivity(id, oldName) {
+    //take new input
+    formElement = document.getElementById("editActivityForm");
+    formElement.style.display = "block";
+    formElement.querySelector("#editActivityID").innerHTML = id;
+    formElement.querySelector("#editActivityInput").value = oldName;
+  }
 
-      var theUrl = window.location.href+'/changeroster';
-      var data = "do=remove" + "&id=" + studentID;
-      var callback = reloadIt;
-      httpPostAsync(theUrl, data, callback);
+  function passEditActToPost() {
+    var actID = formElement.querySelector("#editActivityID").innerHTML;
+    var newName = formElement.querySelector("#editActivityInput").value;
+
+    editActivityPost(actID, newName);
+  }
+
+  function editActivityPost(id, name) {
+    theUrl = window.location.href + '/editactivity';
+    data = "id=" + id + "&name=" + name;
+    callback = reloadIt;
+
+    httpPutAsync(theUrl, data, callback);
+  }
+
+  function deleteActivity(element) {
+    theUrl = window.location.href + '/deleteactivity';
+    data = "id=" + element;
+    callback = reloadIt;
+
+    httpPostAsync(theUrl, data, callback);
+  }
+
+  // When the user clicks anywhere outside of the form window, close it
+  window.onclick = function (event) {
+    if (event.target == formElement) {
+      formElement.style.display = "none";
     }
+  }
 
-    // element: button that was clicked
-    function addToTodaysRoster(element, studentData){
-      var list = document.getElementById("todays_students");
-      var temp = document.createElement("a");
+  function hideBehavior(element, id, isHidden) {
+    var theUrl = window.location.href + '/hidebehavior';
+    var data = "id=" + id + "&hide=" + !isHidden;
 
-      var li = list.getElementsByTagName('li')[0]; // get first <li> to copy
-      var newLi = li.cloneNode(true);
+    toggleElementHide(element.parentElement.parentElement);
 
-      newLi.classList.remove('blackAndWhite');
-      newLi.classList.remove('main-BG');
-      newLi.getElementsByTagName('p')[0].setAttribute("onclick", "studentAbsent(this, "+studentData.StudentId+")"); // absent button
-      newLi.getElementsByTagName('p')[0].innerHTML = studentData.StudentName; // student name
-      list.appendChild(newLi);
+    var callback = doNothing;
 
-      var theUrl = window.location.href+'/addroster';
-      var data = "id=" + studentData.StudentId;
-      var callback = reloadIt;
-      httpPostAsync(theUrl, data, callback);
+    httpPostAsync(theUrl, data, callback);
+  }
 
-      element.parentElement.parentElement.removeChild(element.parentElement); // delete <li> element in the add drop in popup
-    }
-
-    function hideActivity(element, id, hidden){
-      if(hidden){
-        theUrl = window.location.href+'/unhideactivity';
+  function editBehavior(behavior) {
+    var cat = "cat";
+    openForm("editBehaviorForm");
+    formElement.querySelector("#editBehaviorName").value = behavior['title'];
+    formElement.querySelector("#editBehaviorId").value = behavior['id'];
+    for (var i = 1; i < 6; i++) {
+      var c = cat + i;
+      if (behavior[c] === "") { }
+      else {
+        formElement.querySelector("#editBehaviorOp" + i).value = behavior[c];
       }
-      else{ theUrl = window.location.href+'/hideactivity'; }
-      data = "id=" + id;
-      toggleElementHide(element.parentElement.parentElement)
-      callback = doNothing;
-
-      httpPutAsync(theUrl, data, callback);
     }
+  }
 
-    function toggleElementHide(element){
-      if(element.classList.contains("blackAndWhite")){
-        element.classList.remove("blackAndWhite");
-        element.classList.add("white-BG");
-      }
-      else{
-        element.classList.remove("white-BG");
-        element.classList.add("blackAndWhite");
+  function passEditBehaviorToPost() {
+    var name = formElement.querySelector("#editBehaviorName").value;
+    var op1 = formElement.querySelector("#editBehaviorOp1").value;
+    var op2 = formElement.querySelector("#editBehaviorOp2").value;
+    var op3 = formElement.querySelector("#editBehaviorOp3").value;
+    var op4 = formElement.querySelector("#editBehaviorOp4").value;
+    var op5 = formElement.querySelector("#editBehaviorOp5").value;
+    var id = formElement.querySelector("#editBehaviorId").value
+    var theUrl = window.location.href + '/editbehavior';
+    var data = "id=" + id + "&name=" + name + "&op1=" + op1 + "&op2=" + op2 + "&op3=" + op3 + "&op4=" + op4 + "&op5=" + op5;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
 
-      }
-    }
+  //generate perameters for post and call post
+  function callPostStu() {
+    var theUrl = window.location.href + '/addstudent';
+    birthday = getSelectedBirthday();
 
-    function editActivity(id, oldName){
-      //take new input
-      formElement = document.getElementById("editActivityForm");
-      formElement.style.display = "block";
-      formElement.querySelector("#editActivityID").innerHTML = id;
-      formElement.querySelector("#editActivityInput").value = oldName;
-    }
-
-    function passEditActToPost(){
-      var actID = formElement.querySelector("#editActivityID").innerHTML;
-      var newName = formElement.querySelector("#editActivityInput").value;
-
-      editActivityPost(actID, newName);
-    }
-
-    function editActivityPost(id,name){
-      theUrl = window.location.href+'/editactivity';
-      data = "id=" + id + "&name=" + name;
-      callback = reloadIt;
-
-      httpPutAsync(theUrl, data, callback);
-    }
-
-    function deleteActivity(element){
-      theUrl = window.location.href+'/deleteactivity';
-      data = "id=" + element;
-      callback = reloadIt;
-
-      httpPostAsync(theUrl, data, callback);
-    }
-
-    // When the user clicks anywhere outside of the form window, close it
-    window.onclick = function(event) {
-      if (event.target == formElement) {
-        formElement.style.display = "none";
-      }
-    }
-
-    function hideBehavior(element, id, isHidden){
-      var theUrl = window.location.href+'/hidebehavior';
-      var data = "id=" + id + "&hide=" + !isHidden;
-
-      toggleElementHide(element.parentElement.parentElement);
-
-      var callback = doNothing;
-
-      httpPostAsync(theUrl, data, callback);
-    }
-
-    function editBehavior(behavior){
-      var cat = "cat";
-      openForm("editBehaviorForm");
-      formElement.querySelector("#editBehaviorName").value = behavior['title'];
-      formElement.querySelector("#editBehaviorId").value = behavior['id'];
-      for(var i = 1; i < 6; i++){
-        var c = cat + i;
-        if(behavior[c] === ""){}
-        else{
-          formElement.querySelector("#editBehaviorOp" + i).value = behavior[c];
-        }
-      }
-    }
-
-    function passEditBehaviorToPost(){
-      var name =formElement.querySelector("#editBehaviorName").value;
-      var op1 = formElement.querySelector("#editBehaviorOp1").value;
-      var op2 = formElement.querySelector("#editBehaviorOp2").value;
-      var op3 = formElement.querySelector("#editBehaviorOp3").value;
-      var op4 = formElement.querySelector("#editBehaviorOp4").value;
-      var op5 = formElement.querySelector("#editBehaviorOp5").value;
-      var id = formElement.querySelector("#editBehaviorId").value
-      var theUrl = window.location.href+'/editbehavior';
-      var data = "id=" + id + "&name=" +name + "&op1=" + op1 + "&op2=" + op2 + "&op3=" + op3 + "&op4=" + op4 + "&op5=" + op5;
-      var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
-    }
-
-    //generate perameters for post and call post
-    function callPostStu(){
-      var theUrl = window.location.href+'/addstudent';
-      birthday = getSelectedBirthday();
-
-      var data = 
-      "name=" + document.getElementById("newStudentName").value + 
-      "&contact=" + document.getElementById("newStudentContact").value + 
-      "&email=" + document.getElementById("newStudentEmail").value + 
-      "&contactNum=" + document.getElementById("newStudentContactNumber").value + 
-      "&contact2=" + document.getElementById("newStudentContact2").value + 
-      "&email2=" + document.getElementById("newStudentEmail2").value + 
-      "&contactNum2=" + document.getElementById("newStudentContactNumber2").value + 
-      "&birthday=" + birthday + 
-      "&sun=" + 0 + 
-      "&mon=" + selectedDayType(document.getElementById("mon")) + 
-      "&tue=" + selectedDayType(document.getElementById("tue")) + 
-      "&wed=" + selectedDayType(document.getElementById("wed")) + 
-      "&thu=" + selectedDayType(document.getElementById("thu")) + 
-      "&fri=" + selectedDayType(document.getElementById("fri")) + 
-      "&sat=" + 0 + 
-      "&halfDay=" + '0' + 
+    var data =
+      "name=" + document.getElementById("newStudentName").value +
+      "&contact=" + document.getElementById("newStudentContact").value +
+      "&email=" + document.getElementById("newStudentEmail").value +
+      "&contactNum=" + document.getElementById("newStudentContactNumber").value +
+      "&contact2=" + document.getElementById("newStudentContact2").value +
+      "&email2=" + document.getElementById("newStudentEmail2").value +
+      "&contactNum2=" + document.getElementById("newStudentContactNumber2").value +
+      "&birthday=" + birthday +
+      "&sun=" + 0 +
+      "&mon=" + selectedDayType(document.getElementById("mon")) +
+      "&tue=" + selectedDayType(document.getElementById("tue")) +
+      "&wed=" + selectedDayType(document.getElementById("wed")) +
+      "&thu=" + selectedDayType(document.getElementById("thu")) +
+      "&fri=" + selectedDayType(document.getElementById("fri")) +
+      "&sat=" + 0 +
+      "&halfDay=" + '0' +
       "&enroll=" + 1 +
       "&allergies=" + document.getElementById("allergies-text").value +
       "&accommodations=" + document.getElementById("accommodations-text").value;
-      var callback = reloadIt;
+    var callback = reloadIt;
 
-      httpPostAsync(theUrl, data, callback);
-    }
+    httpPostAsync(theUrl, data, callback);
+  }
 
-    function callPostAct(){
-      var helper = isToggled("helper");
-      var theUrl = window.location.href+'/addactivity';
-      var data = "name=" + document.getElementById("newActivityName").value +
-            "&helper=" + helper;
-      var callback = reloadIt;
+  function callPostAct() {
+    var helper = isToggled("helper");
+    var theUrl = window.location.href + '/addactivity';
+    var data = "name=" + document.getElementById("newActivityName").value +
+      "&helper=" + helper;
+    var callback = reloadIt;
 
-      httpPostAsync(theUrl, data, callback);
-    }
+    httpPostAsync(theUrl, data, callback);
+  }
 
-    function changePriority(task,cur) {
-      theUrl = window.location.href+'/changetask';
-      data = "id=" + task + "&priority=" + (cur + 1) % 3;
-      callback = reloadIt; 
-      httpPutAsync(theUrl,data,callback);  
-    }
+  function changePriority(task, cur) {
+    theUrl = window.location.href + '/changetask';
+    data = "id=" + task + "&priority=" + (cur + 1) % 3;
+    callback = reloadIt;
+    httpPutAsync(theUrl, data, callback);
+  }
 
 
-    function getSelectedBirthday(){
-      var year = document.getElementById('year').value;
-      var month = document.getElementById('month').value;
-      var day = document.getElementById('day').value;
+  function getSelectedBirthday() {
+    var year = document.getElementById('year').value;
+    var month = document.getElementById('month').value;
+    var day = document.getElementById('day').value;
 
-      return (year + '/' + month + '/' + day);
-    }
+    return (year + '/' + month + '/' + day);
+  }
 
-    function addTaskPost(){
-      var theUrl = window.location.href+'/addtask';
-      var data = "name=" + document.getElementById("newTaskName").value +
-      "&priority=" +  document.getElementById("newTaskPriority").value;
-      var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
-    }
+  function addTaskPost() {
+    var theUrl = window.location.href + '/addtask';
+    var data = "name=" + document.getElementById("newTaskName").value +
+      "&priority=" + document.getElementById("newTaskPriority").value;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
 
-    function deleteTask(task) {
-      theUrl = window.location.href+'/deletetask';
-      data = "id=" + task;
-      callback = reloadIt;
+  function deleteTask(task) {
+    theUrl = window.location.href + '/deletetask';
+    data = "id=" + task;
+    callback = reloadIt;
 
-      httpPostAsync(theUrl, data, callback);
-    }
-    function taskComplete(element, task){
-      checkboxClicked(element);
-      $(element.parentElement.getElementsByTagName("button")).animate({width:'toggle'},200);
-      $(element.parentElement.getElementsByTagName("p")).animate({color: "#EEEEEE"},200);
+    httpPostAsync(theUrl, data, callback);
+  }
+  function taskComplete(element, task) {
+    checkboxClicked(element);
+    $(element.parentElement.getElementsByTagName("button")).animate({ width: 'toggle' }, 200);
+    $(element.parentElement.getElementsByTagName("p")).animate({ color: "#EEEEEE" }, 200);
 
-      $(element.parentElement).animate({backgroundColor: "#5E895F"}, 200);
+    $(element.parentElement).animate({ backgroundColor: "#5E895F" }, 200);
 
-      
-      setTimeout(function(){
-        $(element.parentElement).slideUp("fast");
-        $(element).animate({bottom: "200px"}, 100);
-        //element.parentElement.style.display = "none";
-      }, 500);
 
-      theUrl = window.location.href+'/completetask';
-      data = "id=" + task + "&completed=" + 1;
-      callback = reloadIt; 
-      httpPutAsync(theUrl,data,callback); 
+    setTimeout(function () {
+      $(element.parentElement).slideUp("fast");
+      $(element).animate({ bottom: "200px" }, 100);
+      //element.parentElement.style.display = "none";
+    }, 500);
 
-    }
+    theUrl = window.location.href + '/completetask';
+    data = "id=" + task + "&completed=" + 1;
+    callback = reloadIt;
+    httpPutAsync(theUrl, data, callback);
 
-    function hideReminder(element, id, isHidden){
-      var theUrl = window.location.href+'/hidereminder';
-      var data = "id=" + id + "&hide=" + !isHidden;
-      var callback = doNothing;
+  }
 
-      toggleElementHide(element.parentElement.parentElement);
+  function hideReminder(element, id, isHidden) {
+    var theUrl = window.location.href + '/hidereminder';
+    var data = "id=" + id + "&hide=" + !isHidden;
+    var callback = doNothing;
 
-      httpPostAsync(theUrl, data, callback);
-    }
+    toggleElementHide(element.parentElement.parentElement);
 
-    function editReminder(reminder){
-      var cat = "cat";
-      openForm("editReminderForm");
-      formElement.querySelector("#editReminderName").value = reminder['title'];
-      // formElement.querySelector("#editReminder").value = reminder['contents'];
-      editReminderQuill.setContents(JSON.parse(reminder['contents']))
-      formElement.querySelector("#editReminderId").value = reminder['id'];
-    }
+    httpPostAsync(theUrl, data, callback);
+  }
 
-    function deleteReminder(id){
-      var theUrl = window.location.href+'/deletereminder';
-      var data = "id=" + id;
-      var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
-    }
+  function editReminder(reminder) {
+    var cat = "cat";
+    openForm("editReminderForm");
+    formElement.querySelector("#editReminderName").value = reminder['title'];
+    // formElement.querySelector("#editReminder").value = reminder['contents'];
+    editReminderQuill.setContents(JSON.parse(reminder['contents'].replace(/CLEANSED AMPERSAND STRING/g, '&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'")));
+    formElement.querySelector("#editReminderId").value = reminder['id'];
+  }
 
-    function passEditReminderToPost(){
-      var name = formElement.querySelector("#editReminderName").value;
-      var content = JSON.stringify(editReminderQuill.getContents());
-      content = escapeSpecialChars(content);
-      content = content.replace(/\&/g,"--::a very ugly string that Nathan made so it wouldn't happen naturally::--");
-      // var content = formElement.querySelector("#editReminder").value;
-      var id = formElement.querySelector("#editReminderId").value
-      var theUrl = window.location.href+'/editreminder';
-      var data = "id=" + id + "&name=" + name + "&content=" + content;
-      var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
-    }
+  function deleteReminder(id) {
+    var theUrl = window.location.href + '/deletereminder';
+    var data = "id=" + id;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
 
-    function callPostBehavior(){
-      var name = document.getElementById("newBehaviorName").value;
-      var op1 = document.getElementById("newBehaviorOp1").value;
-      var op2 = document.getElementById("newBehaviorOp2").value;
-      var op3 = document.getElementById("newBehaviorOp3").value;
-      var op4 = document.getElementById("newBehaviorOp4").value;
-      var op5 = document.getElementById("newBehaviorOp5").value;
-      var theUrl = window.location.href+'/addbehavior';
-      var data = "name=" + name + "&op1=" +  op1 + "&op2=" +  op2 + "&op3=" +  op3 + "&op4=" +  op4 + "&op5=" +  op5;
-      var callback = reloadIt;
-      var count = document.getElementById("behaviorCount").text;
-      var found = false;
-      for(var i = 0 ; i < count ; i = i + 1){
-        var comp = document.getElementById("behavior" + i).text;
-        if(comp == name){
-          found = true;
-        }
-      }
-      if(found){
-        reloadIt();
-      }
-      else{
-        httpPostAsync(theUrl,data,callback);
+  function passEditReminderToPost() {
+    var name = formElement.querySelector("#editReminderName").value;
+    var content = JSON.stringify(editReminderQuill.getContents());
+    content = escapeSpecialChars(content);
+    // /CLEANSED AMPERSAND STRING/g
+    // content = content.replace(/\&/g,"CLEANSED AMPERSAND STRING");
+    // var content = formElement.querySelector("#editReminder").value;
+    var id = formElement.querySelector("#editReminderId").value
+    var theUrl = window.location.href + '/editreminder';
+    var data = "id=" + id + "&name=" + name + "&content=" + content;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
+
+  function callPostBehavior() {
+    var name = document.getElementById("newBehaviorName").value;
+    var op1 = document.getElementById("newBehaviorOp1").value;
+    var op2 = document.getElementById("newBehaviorOp2").value;
+    var op3 = document.getElementById("newBehaviorOp3").value;
+    var op4 = document.getElementById("newBehaviorOp4").value;
+    var op5 = document.getElementById("newBehaviorOp5").value;
+    var theUrl = window.location.href + '/addbehavior';
+    var data = "name=" + name + "&op1=" + op1 + "&op2=" + op2 + "&op3=" + op3 + "&op4=" + op4 + "&op5=" + op5;
+    var callback = reloadIt;
+    var count = document.getElementById("behaviorCount").text;
+    var found = false;
+    for (var i = 0; i < count; i = i + 1) {
+      var comp = document.getElementById("behavior" + i).text;
+      if (comp == name) {
+        found = true;
       }
     }
-
-    function deleteBehavior(id){
-      var theUrl = window.location.href+'/deletebehavior';
-      var data = "id=" + id;
-      var callback = reloadIt;
-      httpPostAsync(theUrl,data,callback);
+    if (found) {
+      reloadIt();
     }
+    else {
+      httpPostAsync(theUrl, data, callback);
+    }
+  }
 
-    function saveReminder() {
-      var theUrl = window.location.href+'/addreminder';
-      var data, textData;
-      textData = JSON.stringify(reminderQuill.getContents());
+  function deleteBehavior(id) {
+    var theUrl = window.location.href + '/deletebehavior';
+    var data = "id=" + id;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
+
+  function saveReminder() {
+    var theUrl = window.location.href + '/addreminder';
+    var data, textData;
+    textData = JSON.stringify(reminderQuill.getContents());
+    textData = escapeSpecialChars(textData);
+    // textData = textData.replace(/\&/g,"CLEANSED AMPERSAND STRING");
+    var name = document.getElementById("newReminderName").value;
+    var data = `name=${name}&data=${textData}`;// + "&form=" + form;
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
+
+  function emailSettingsC(data) {
+    data = JSON.parse(data);
+    var textData;
+    if (data.data.length == 0) {
+      textData = "";
+    }
+    else {
+      textData = (data.data[0].MainParagraphs);
+      // textData = 'JSON.parse(textData);'
+      textData = JSON.parse(textData);
+      console.log(textData)
+    }
+    if (data.form == "editHeaderForm") {
+      headerQuill.setContents(textData);
+    }
+    else if (data.form == "editSignatureForm") {
+      footerQuill.setContents(textData);
+    }
+    openForm(data.form);
+  }
+
+  function emailSettings(form) {
+    var theUrl = window.location.href + '/emailsettings';
+    var data = "form=" + form;
+    var callback = emailSettingsC;
+    httpPostAsync(theUrl, data, callback);
+  }
+
+  function saveEmailSettings(form) {
+    var theUrl = window.location.href + '/saveemailsettings';
+    //var data, textData;
+    if (form == "header") {
+      textData = JSON.stringify(headerQuill.getContents());
       textData = escapeSpecialChars(textData);
-      textData = textData.replace(/\&/g,"--::a very ugly string that Nathan made so it wouldn't happen naturally::--");
-      var name = document.getElementById("newReminderName").value;
-      var data = `name=${name}&data=${textData}`;// + "&form=" + form;
-      var callback = reloadIt;
-     httpPostAsync(theUrl,data,callback);
+      // textData = textData.replace(/\&/g,"CLEANSED AMPERSAND STRING");
+      var data = "data=" + textData + "&form=" + form;
     }
+    else if (form == "signature") {
+      textData = JSON.stringify(footerQuill.getContents())
+      console.log(textData);
+      textData = escapeSpecialChars(textData);
+      var data = "data=" + textData + "&form=" + form;
+    }
+    var callback = reloadIt;
+    httpPostAsync(theUrl, data, callback);
+  }
 
-    function emailSettingsC(data){
-      data = JSON.parse(data);
-      var textData;
-      if(data.data.length == 0){
-        textData = "";
-      }
-      else
-      {
-        textData = (data.data[0].MainParagraphs);
-        textData = JSON.parse(textData);
-      }
-      if(data.form == "editHeaderForm"){
-        headerQuill.setContents(textData);
-      }
-      else if(data.form == "editSignatureForm"){
-        footerQuill.setContents(textData);
-      }
-      openForm(data.form);
-    }
+  function escapeSpecialChars(string) {
+    var x = string.replace(/\\/g, "\\\\")
+      .replace(/\&/g, "CLEANSED AMPERSAND STRING")
+      .replace(/\+/g, "CLEANSED ADDITION STRING")
+      .replace(/\'/g, "\\'")
+      .replace(/\n/g, "\\n")
+      .replace(/\r/g, "\\r")
+      .replace(/\t/g, "\\t")
+      .replace(/\f/g, "\\f");
 
-    function emailSettings(form){
-      var theUrl = window.location.href+'/emailsettings';
-      var data = "form=" + form;
-      var callback = emailSettingsC;
-      httpPostAsync(theUrl,data,callback);
-    }
+    console.log(`Formatted: ${x}`);
+    return x;
+  }
 
-    function saveEmailSettings(form){
-      var theUrl = window.location.href+'/saveemailsettings';
-      var data, textData;
-      if(form == "header"){
-        textData = JSON.stringify(headerQuill.getContents());
-        textData = escapeSpecialChars(textData);
-        textData = textData.replace(/\&/g,"--::a very ugly string that Nathan made so it wouldn't happen naturally::--");
-        var data = "data=" + textData + "&form=" + form;
-      }
-      else if(form == "signature")
-      {
-        textData = JSON.stringify(footerQuill.getContents())
-        textData = escapeSpecialChars(textData);
-        textData = textData.replace(/\&/g,"--::a very ugly string that Nathan made so it wouldn't happen naturally::--");
-        var data = "data=" + textData + "&form=" + form;
-      } 
-      var callback = reloadIt;
-     httpPostAsync(theUrl,data,callback);
-    }
+  function sanitizeInput(string) {
+    return 'test';
+  }
+  function desanitizeInput(string) {
+    return 'test';
+  }
+</script>
 
-    function escapeSpecialChars(string){ 
-      return string.replace(/\\/g, "\\\\")
-                  .replace(/\n/g, "\\n")
-                  .replace(/\r/g, "\\r")
-                  .replace(/\t/g, "\\t")
-                  .replace(/\f/g, "\\f")
-                  .replace(/\&/g, "\\&"); 
-    }
-  </script>
 </html>
