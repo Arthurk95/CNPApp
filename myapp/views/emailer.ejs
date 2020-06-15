@@ -411,11 +411,13 @@
             //     theme: 'snow'
             // })
 
-
+            summaryQuill.setContents(<%- summary.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>);
+            snackQuill.setContents(<%- snack.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>)
+            lunchQuill.setContents(<%- lunch.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+').replace(/CLEANSED APSTR STRING/g, "'") %>)
             
-            summaryQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
-            snackQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
-            lunchQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
+            // summaryQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
+            // snackQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
+            // lunchQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
 
             function updateDailyInfo() {
                 console.log(summaryQuill.container.firstChild.innerHTML);

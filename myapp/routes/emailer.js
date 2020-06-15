@@ -115,12 +115,13 @@ function bottomLayer(res, Students,) {
         } else {
           try {
             [stripped_result] = sum_result[0];
-
+            var summary = '';
             if (stripped_result) {
-              var summary = stripped_result.MainParagraphs;
+               summary = stripped_result.MainParagraphs;
+              console.log(summary);
             }
           } catch (e) {
-            var summary = 'error accessing daily summary';
+             summary = 'error accessing daily summary';
             console.log(e);
           }
         }
@@ -130,13 +131,14 @@ function bottomLayer(res, Students,) {
           if (err) {
             console.log('Unable to pull AM snack: ' + err);
           } else {
+            var snack = '';
             try {
               [stripped_result] = snack_result[0];
               if (stripped_result) {
-                var snack = stripped_result.MainParagraphs;
+                 snack = stripped_result.MainParagraphs;
               }
             } catch (e) {
-              var snack = 'error accessing snack info';
+               snack = 'error accessing snack info';
               console.log(e);
             }
           }
@@ -146,13 +148,14 @@ function bottomLayer(res, Students,) {
             if (err) {
               console.log('Unable to pull lunch: ' + err);
             } else {
+              var lunch = '';
               try {
                 [stripped_result] = lunch_result[0];
                 if (stripped_result) {
-                  var lunch = stripped_result.MainParagraphs;
+                  lunch = stripped_result.MainParagraphs;
                 }
               } catch (e) {
-                var lunch = 'error accessing lunch info';
+                lunch = 'error accessing lunch info';
                 console.log(e);
               }
             }
@@ -188,7 +191,7 @@ function bottomLayer(res, Students,) {
                   var footer = 'error grabbing header'
                   console.log(e);
                 }
-
+                console.log(summary);
                 res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
               });//end footer query
             });//end header query
