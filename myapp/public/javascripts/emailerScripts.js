@@ -150,7 +150,8 @@ function checkIfAllApproved(){
     }
 }
 
-function allStudentsApproved(){
+function allStudentsApproved() {
+    console.log(approvedList)
     for(var i = 0; i < approvedList.length; i++){
         if(approvedList[i] === false){
             return false;
@@ -282,7 +283,7 @@ function studentSaved(behaviors){
     savedList[currentStudentIndex] = true;
 
     if(!savedList[currentStudentIndex]){ toggleSavedStyle(); } // isn't already saved
-    approvedList[currentStudentIndex] = false;
+    approvedList[currentStudentIndex] = true; //was false, swapped to true
     toggleApprovedStyle();
 
     var approveDB = `id=${currentStudentData.id}`;
