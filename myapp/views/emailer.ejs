@@ -539,10 +539,17 @@
 
             function getReminders() {
                 var remindersHTML = [];
+                console.log(reminders);
                 reminders.forEach(reminder => {
+                    var temp;
+                    try{ // contents is undefined if there are no reminders, causes error
+                        temp = converQuillDeltaToHTML(JSON.parse(reminder.contents));
+                    } catch{
+                        temp = "";
+                    }
                     remindersHTML.push({
                         title: reminder.title,
-                        contents: converQuillDeltaToHTML(JSON.parse(reminder.contents))
+                        contents: temp
                     }
                     )
                 })
