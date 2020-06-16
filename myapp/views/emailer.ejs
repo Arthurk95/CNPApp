@@ -420,7 +420,6 @@
             // lunchQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
 
             function updateDailyInfo() {
-                console.log(summaryQuill.container.firstChild.innerHTML);
                 var filteredSummary = JSON.stringify(summaryQuill.getContents());
                 filteredSummary = escapeSpecialChars(filteredSummary);
                 var filteredSnack = JSON.stringify(snackQuill.getContents());
@@ -525,7 +524,6 @@
                             .replace(/\t/g, "\\t")
                             .replace(/\f/g, "\\f");
 
-                        console.log(`Formatted: ${x}`);
                         return x;
                     }
 
@@ -536,7 +534,6 @@
                             .replace(/\>/g, "CLEANSED GT STRING")
                             .replace(/\'/g, "CLEANSED APSTR STRING")
 
-                        console.log(`Formatted2: ${x}`);
                         return x;
                     }
 
@@ -565,7 +562,7 @@
 
         <script>
             function sendEmails(students, todaysBehaviors, next){
-                console.log('ejs send email');
+                
                 // openEmailReport(null, false);
 
                 var studentSuccessObjects = [];
