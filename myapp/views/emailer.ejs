@@ -89,8 +89,8 @@
                                             </select>
                                         </span>
                                         <span class="ql-formats">
-                                            <button class="ql-bold"></button>
-                                            <button class="ql-italic"></button>
+                                            <!-- <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button> -->
                                             <button class="ql-underline"></button>
                                             <button class="ql-strike"></button>
                                         </span>
@@ -137,8 +137,8 @@
                                             </select>
                                         </span>
                                         <span class="ql-formats">
-                                            <button class="ql-bold"></button>
-                                            <button class="ql-italic"></button>
+                                            <!-- <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button> -->
                                             <button class="ql-underline"></button>
                                             <button class="ql-strike"></button>
                                         </span>
@@ -184,8 +184,8 @@
                                             </select>
                                         </span>
                                         <span class="ql-formats">
-                                            <button class="ql-bold"></button>
-                                            <button class="ql-italic"></button>
+                                            <!-- <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button> -->
                                             <button class="ql-underline"></button>
                                             <button class="ql-strike"></button>
                                         </span>
@@ -198,11 +198,11 @@
                             <!-- Create the editor container -->
                             
                             <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                                <div id="saveButtonStep1" class="buttonWithIcon" onclick="updateDailyInfo();">
+                                <div id="saveButtonStep1" class="buttonWithIcon" onclick="saving_content(this); updateDailyInfo();">
                                     <p>Save</p>
                                     <i class="fas fa-check"></i>
                                 </div>
-                                <div class="buttonWithIcon" onclick="toNextStep();">
+                                <div id='next-button-first-page' class="buttonWithIcon" onclick="toNextStep();">
                                     <p>Next</p>
                                     <i class="fas fa-caret-right"></i>
                                 </div>
@@ -314,7 +314,7 @@
                                     </div>
                                 </div>
                                 <div class="flex spaceBetween flexAlignCenter flexCollapseMobile">
-                                    <div class="theme-color4-BG buttonWithIcon" onclick="toPreviousStep(); resetQuills();">
+                                    <div class="theme-color4-BG buttonWithIcon" onclick="toPreviousStep();">
                                         <i class="fas fa-caret-left"></i>
                                         <p>Back</p>
                                     </div>
@@ -419,6 +419,23 @@
             // snackQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
             // lunchQuill.setContents(`{"ops":[{"insert":"reset"}]}`);
 
+            // function updateDailyInfo() {
+            //     var filteredSummary = JSON.stringify(summaryQuill.getContents());
+            //     filteredSummary = escapeSpecialChars(filteredSummary);
+            //     var filteredSnack = JSON.stringify(snackQuill.getContents());
+            //     filteredSnack = escapeSpecialChars(filteredSnack);
+            //     var filteredLunch = JSON.stringify(lunchQuill.getContents());
+            //     filteredLunch = escapeSpecialChars(filteredLunch);
+
+            //     pushSummary(filteredSummary);
+            //     pushAmSnack(filteredSnack);
+            //     pushLunch(filteredLunch);
+            //     // pushSummary(JSON.stringify(summaryQuill.getContents()));
+            //     // pushAmSnack(JSON.stringify(snackQuill.getContents()));
+            //     // pushLunch(JSON.stringify(lunchQuill.getContents()));
+            //     // callback();
+            // }
+
             function updateDailyInfo() {
                 var filteredSummary = JSON.stringify(summaryQuill.getContents());
                 filteredSummary = escapeSpecialChars(filteredSummary);
@@ -427,14 +444,15 @@
                 var filteredLunch = JSON.stringify(lunchQuill.getContents());
                 filteredLunch = escapeSpecialChars(filteredLunch);
 
-                pushSummary(filteredSummary);
-                pushAmSnack(filteredSnack);
-                pushLunch(filteredLunch);
-                // pushSummary(JSON.stringify(summaryQuill.getContents()));
-                // pushAmSnack(JSON.stringify(snackQuill.getContents()));
-                // pushLunch(JSON.stringify(lunchQuill.getContents()));
+                pushDailies(filteredSummary, filteredSnack, filteredLunch);
             }
 
+            function saving_content(save_button) {
+                save_button.innerHTML='<p>Saving...</p>'
+                var next_button = document.getElementById('next-button-first-page');
+                next_button.onclick = '';
+                toggleStyle(next_button, 'disabledButton');
+            }
 
         </script>
 
@@ -485,6 +503,16 @@
         
         <script>
             //template functions (page 1)
+            function pushDailies(summary_HTML, snack_HTML, lunch_HTML) {
+                theUrl = window.location.href + '/push-dailies';
+                // data = "text=" + summary_element.innerHTML;
+                var data = `summary_HTML=${summary_HTML}` + 
+                            `&snack_HTML=${snack_HTML}` + 
+                            `&lunch_HTML=${lunch_HTML}`;
+                // data = "text=" + summary_element.value;
+                httpPostAsync(theUrl, data, reloadIt);
+            }
+
             function pushSummary(summary_HTML) {
                 theUrl = window.location.href + '/push-summary';
                 // data = "text=" + summary_element.innerHTML;
@@ -562,7 +590,9 @@
                 var deltaParsed = escapeSpecialCharsHTML(delta_string);
                 (new Quill(tempCont)).setContents(JSON.parse(deltaParsed));
 
-                var result = tempCont.getElementsByClassName("ql-editor")[0].innerHTML
+                var result = tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
+                console.log(delta);
+                console.log(result);
                 return result;
             }
         </script>
@@ -671,14 +701,6 @@
                 // console.log(student.listOfBehaviors['AM Snack']);
 
             }
-        </script>
-        <script>
-
-                    function resetQuills() {
-                        summaryQuill.setContents(<%- summary.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+') %>);
-                        snackQuill.setContents(<%- snack.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+') %>)
-                        lunchQuill.setContents(<%- lunch.replace(/CLEANSED AMPERSAND STRING/g,'&').replace(/CLEANSED ADDITION STRING/g, '+') %>)
-                    }
         </script>
     </body>
 </html>

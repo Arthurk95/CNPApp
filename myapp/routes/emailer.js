@@ -201,25 +201,58 @@ function bottomLayer(res, Students,) {
     });
   });
 }
-
-router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
-  var summary = req.body.text;
+router.post('/push-dailies', auth.checkAuthenticated, function (req, res, next) {
+  var summary = req.body.summary_HTML;
+  var snack = req.body.snack_HTML;
+  var lunch = req.body.lunch_HTML;
   summary = summary.replace(/CLEANSED AMPERSAND STRING/g, '&')
     .replace(/CLEANSED ADDITION STRING/g, '+')
     .replace(/CLEANSED APSTR STRING/g, "'");
-  save_template_query = `CALL AddDailySummary('${summary}');`;
-  con.query(save_template_query, function (err, result) {
-    if (err) {
-      console.log(`Unable to add [${summary}] to daily summary. ` + err);
-      res.end();
-    } else {
-      console.log('Daily summary updated: ' + summary);
-      res.end();
-    }
+    snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
+    .replace(/CLEANSED ADDITION STRING/g, '+')
+    .replace(/CLEANSED APSTR STRING/g, "'");
+    lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
+    .replace(/CLEANSED ADDITION STRING/g, '+')
+    .replace(/CLEANSED APSTR STRING/g, "'");
+  
+    var sql_calls = [
+      `CALL AddDailySummary('${summary}');`,
+      `CALL AddDailyAmFood('${snack}');`,
+      `CALL AddDailyLunch('${lunch}');`
+  ]
+  for (var i = 0; i < sql_calls.length; i++) {
+    var push_daily_query = sql_calls[i];
+    (function (query) {
+      con.query(query, function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(query);
+        }
+      });
+    })(push_daily_query); //closure necesssary for async
+  }
+  res.end();
   });
 
+// router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
+//   var summary = req.body.text;
+//   summary = summary.replace(/CLEANSED AMPERSAND STRING/g, '&')
+//     .replace(/CLEANSED ADDITION STRING/g, '+')
+//     .replace(/CLEANSED APSTR STRING/g, "'");
+//   save_template_query = `CALL AddDailySummary('${summary}');`;
+//   con.query(save_template_query, function (err, result) {
+//     if (err) {
+//       console.log(`Unable to add [${summary}] to daily summary. ` + err);
+//       res.end();
+//     } else {
+//       console.log('Daily summary updated: ' + summary);
+//       res.end();
+//     }
+//   });
 
-});
+
+// });
 
 router.post('/refresh-behaviors', auth.checkAuthenticated, function (req, res, next) {
   pull_daily_beh_query = `CALL PullDailyBehaviors(${req.body.id})`;
@@ -235,45 +268,45 @@ router.post('/refresh-behaviors', auth.checkAuthenticated, function (req, res, n
 });
 
 
-router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
-  var snack = req.body.text;
-  snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
-    .replace(/CLEANSED ADDITION STRING/g, '+')
-    .replace(/CLEANSED APSTR STRING/g, "'");
-  save_template_query = `CALL AddDailyAmFood('${snack}');`;
+// router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
+//   var snack = req.body.text;
+//   snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
+//     .replace(/CLEANSED ADDITION STRING/g, '+')
+//     .replace(/CLEANSED APSTR STRING/g, "'");
+//   save_template_query = `CALL AddDailyAmFood('${snack}');`;
 
-  con.query(save_template_query, function (err, result) {
-    if (err) {
-      console.log(`Unable to add [${snack}] to AM snack. ` + err);
-      res.end();
-    } else {
-      console.log('AM snack updated: ' + snack);
-      res.end();
-    }
-  });
-
-
-});
-
-router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
-  var lunch = req.body.text;
-  lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
-    .replace(/CLEANSED ADDITION STRING/g, '+')
-    .replace(/CLEANSED APSTR STRING/g, "'");
-  save_template_query = `CALL AddDailyLunch('${lunch}');`;
-
-  con.query(save_template_query, function (err, result) {
-    if (err) {
-      console.log(`Unable to add [${lunch}] to lunch. ` + err);
-      res.end();
-    } else {
-      console.log('Lunch updated: ' + lunch);
-      res.end();
-    }
-  });
+//   con.query(save_template_query, function (err, result) {
+//     if (err) {
+//       console.log(`Unable to add [${snack}] to AM snack. ` + err);
+//       res.end();
+//     } else {
+//       console.log('AM snack updated: ' + snack);
+//       res.end();
+//     }
+//   });
 
 
-});
+// });
+
+// router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
+//   var lunch = req.body.text;
+//   lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
+//     .replace(/CLEANSED ADDITION STRING/g, '+')
+//     .replace(/CLEANSED APSTR STRING/g, "'");
+//   save_template_query = `CALL AddDailyLunch('${lunch}');`;
+
+//   con.query(save_template_query, function (err, result) {
+//     if (err) {
+//       console.log(`Unable to add [${lunch}] to lunch. ` + err);
+//       res.end();
+//     } else {
+//       console.log('Lunch updated: ' + lunch);
+//       res.end();
+//     }
+//   });
+
+
+// });
 
 router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next) {
   var behavior_names = req.body.behaviorNames.split(',');
@@ -393,7 +426,6 @@ router.post('/send', (req, res) => {
 
 
 router.post('/render-email-view', (req, res) => {
-
   for (var key in req.body) {
     req.body[key] = req.body[key].replace(/CLEANSED AMPERSAND STRING/g, '&')
       .replace(/CLEANSED ADDITION STRING/g, '+')
@@ -422,11 +454,11 @@ router.post('/render-email-view', (req, res) => {
     todaysBehaviorNames.forEach(behavior_name => {
       personal_behavior_parsed.push({
         name: behavior_name,
-        selection: personal_behaviors[behavior_name],
-        note: personal_behaviors[behavior_name + 'Note']
+        selection: '' + personal_behaviors[behavior_name],
+        note: '' + personal_behaviors[behavior_name + 'Note']
       })
     })
-
+    console.log(personal_behavior_parsed);
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {
       name: name,
       header: req.body.header,
