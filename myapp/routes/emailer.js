@@ -458,7 +458,6 @@ router.post('/render-email-view', (req, res) => {
         note: '' + personal_behaviors[behavior_name + 'Note']
       })
     })
-    console.log(personal_behavior_parsed);
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {
       name: name,
       header: req.body.header,

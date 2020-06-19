@@ -151,7 +151,6 @@ function checkIfAllApproved(){
 }
 
 function allStudentsApproved() {
-    console.log(approvedList)
     for(var i = 0; i < approvedList.length; i++){
         if(approvedList[i] === false){
             return false;
