@@ -1135,7 +1135,7 @@ textarea{
   padding: 10px 15px;
   max-width: 100%;
   min-height: 3em;
-  resize: none;
+  resize: vertical;
   overflow-y: auto;
 }
 
