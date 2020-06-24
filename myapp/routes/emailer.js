@@ -14,9 +14,27 @@ router.post('/emailReport', auth.checkAuthenticated, (req, res) => {
 router.get('/', auth.checkAuthenticated, function (req, res, next) {
   var Students = [];
   var daily_query = "CALL PullUnhiddenStudentsEmail();";
-  con.query(daily_query, function (err, dailyStudents) {
-    if (err) res.end();
-    recurseDailies(Students, dailyStudents, 0, res);
+  //clear previous 'daily' entries--no need to keep them day-to-day (space saving)
+  //unable to alter database remotely so this fix will work for now
+  con.query('DELETE FROM DailySummary WHERE Dates < CURRENT_DATE', function (err) {
+    if (err) {
+      console.log(err);
+    }
+    con.query('DELETE FROM DailyAmFood WHERE Dates < CURRENT_DATE', function (err) {
+      if (err) {
+        console.log(err);
+      }
+      con.query('DELETE FROM DailyLunch WHERE Dates < CURRENT_DATE', function (err) {
+        if (err) {
+          console.log(err);
+        } else {
+          con.query(daily_query, function (err, dailyStudents) {
+            if (err) res.end();
+            recurseDailies(Students, dailyStudents, 0, res);
+          })
+        }
+      })
+    })
   })
 
   function recurseDailies(Students, dailyStudents, i, res) {
@@ -33,7 +51,9 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
       });
       activities_query = "CALL ShowStudentDailyActivitiesToday(" + Students[i].id + ");";
       con.query(activities_query, function (err, act) {
-        if (err) res.end();
+        if (err) {
+          console.log(err);
+        }
         var looper = act[0];
         looper.forEach(element => {
           if (element) {
@@ -191,7 +211,6 @@ function bottomLayer(res, Students,) {
                   var footer = 'error grabbing header'
                   console.log(e);
                 }
-                console.log(summary);
                 res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
               });//end footer query
             });//end header query
@@ -379,7 +398,7 @@ router.post('/send', (req, res) => {
       personal_behavior_parsed.push({
         name: behavior_name,
         selection: personal_behaviors[behavior_name],
-        note: personal_behaviors[behavior_name + 'Note']
+        note: ('' + personal_behaviors[behavior_name + 'Note']).replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",")
       })
     })
 
@@ -455,7 +474,7 @@ router.post('/render-email-view', (req, res) => {
       personal_behavior_parsed.push({
         name: behavior_name,
         selection: '' + personal_behaviors[behavior_name],
-        note: '' + personal_behaviors[behavior_name + 'Note']
+        note: ('' + personal_behaviors[behavior_name + 'Note']).replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",")
       })
     })
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {

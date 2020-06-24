@@ -1,4 +1,5 @@
 node_modules
 myapp/config.json
+myapp/config_.json
 myapp/package-lock.json
 myapp/.env

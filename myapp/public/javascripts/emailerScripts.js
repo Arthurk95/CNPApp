@@ -118,19 +118,18 @@ function populateData(){
         currentStudentData.listOfBehaviors = result;
         var behaviorKeys = Object.keys(currentStudentData.listOfBehaviors);
         var behaviorValues = Object.values(currentStudentData.listOfBehaviors);
-
         behaviors = document.getElementById('behaviorsList');
 
         // updates the behaviors dropdown values to the student's values.
         // starts at 4 because that's where first behavior shows up in behaviorKeys
-        for(var i = 4; i < behaviorKeys.length; i++){
+        for (var i = 4; i < behaviorKeys.length; i++){
             var behaviorElement = document.getElementById(behaviorKeys[i]);
             if(behaviorElement != null && behaviorElement != null){
                 var element = behaviorElement.getElementsByTagName("select")[0];
                 if(element != null && element != null){
                     if(element.name === behaviorKeys[i]){
                         element.value = behaviorValues[i];
-                        document.getElementById(behaviorKeys[i] + "-text-box").value = behaviorValues[i + 1];
+                        document.getElementById(behaviorKeys[i] + "-text-box").value = (behaviorValues[i + 1]).replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",");
                         toggleClassIfInputNotEmpty(behaviorKeys[i] + "-text-box", document.getElementById(behaviorKeys[i] + "-note-button"), 'theme-color2-light-BG', 'theme-color4-light-BG');
                     }
                 }
@@ -269,7 +268,7 @@ function studentSaved(behaviors){
             studentsBehaviorSelection.push("");
         }
         else {studentsBehaviorSelection.push(sel.options[sel.selectedIndex].text);}
-        studentsBehaviorNotes.push(note.value);
+        studentsBehaviorNotes.push((note.value).replace(/\,/g, "CLEANSED COMMA STRING").replace(/\&/g, "CLEANSED AMPERSAND STRING"));
         behaviorNames.push(behaviors[i].name);
     }
 
