@@ -282,10 +282,9 @@
                                                 <label for="<%= behavior.name %>" class="width20 width100Mobile"><%= behavior.name %></label>
                                                 
                                                 <div class="flex spaceAround flexAlignCenter relative width60 width100Mobile">
-                                                    <select id="<%= behavior.name%>Select" name="<%= behavior.name %>">
-                                                    </select>
+                                                    <select id="<%= behavior.name%>Select" name="<%= behavior.name %>"></select>
                                                     
-                                                    <textarea style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea>
+                                                    <textarea maxlength="500" style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea>
                                             
                                                     <a id="<%= behavior.name %>-note-button" onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name %>Select'); toggleClassIfInputNotEmpty('<%=behavior.name %>-text-box', this, 'theme-color2-light-BG', 'theme-color4-light-BG');" class="marginLeft10 borderRadiusSmall theme-color4-light-BG lightPadding">
                                                         <i class="fas fa-sticky-note dark-text"></i>

@@ -328,6 +328,9 @@ router.post('/refresh-behaviors', auth.checkAuthenticated, function (req, res, n
 // });
 
 router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next) {
+  con.query('select * from INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME="Behavior"', function (err, result) {
+    console.log(result);
+  });
   var behavior_names = req.body.behaviorNames.split(',');
   var behavior_selection = req.body.studentsBehaviorSelection.split(',');
   var behavior_notes = req.body.studentsBehaviorNotes.split(',');
