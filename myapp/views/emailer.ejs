@@ -598,57 +598,56 @@
 
         <script>
             function sendEmails(students, todaysBehaviors, next){
-                
-                // openEmailReport(null, false);
+                console.log("sendEmails() ON HOLD**");
 
-                var studentSuccessObjects = [];
+                // var studentSuccessObjects = [];
 
-                if(allStudentsApproved()){
-                    var theUrl = window.location.href+'/send';
-                    var header = getHeader();
-                    var footer = getFooter();
+                // if(allStudentsApproved()){
+                //     var theUrl = window.location.href+'/send';
+                //     var header = getHeader();
+                //     var footer = getFooter();
 
-                    var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
-                    var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
-                    var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
-                    var reminders_string = getReminders();
-                    var universal_data = `summaryHTML=${summaryHTML}` + 
-                                            `&snackHTML=${snackHTML}` + 
-                                            `&lunchHTML=${lunchHTML}` +
-                                            `&header=${header}` +
-                                            `&footer=${footer}` +
-                                            `&reminders=${reminders_string}`;
-                    // console.log(Object.values(todaysBehaviors))
-                    // console.log(Object.values(todaysBehaviors))
-                    var behavior_names = [];
+                //     var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
+                //     var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
+                //     var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
+                //     var reminders_string = getReminders();
+                //     var universal_data = `summaryHTML=${summaryHTML}` + 
+                //                             `&snackHTML=${snackHTML}` + 
+                //                             `&lunchHTML=${lunchHTML}` +
+                //                             `&header=${header}` +
+                //                             `&footer=${footer}` +
+                //                             `&reminders=${reminders_string}`;
+                //     // console.log(Object.values(todaysBehaviors))
+                //     // console.log(Object.values(todaysBehaviors))
+                //     var behavior_names = [];
                     
-                    todaysBehaviors.forEach(behavior => {
-                        behavior_names.push(behavior.name);
-                    })
+                //     todaysBehaviors.forEach(behavior => {
+                //         behavior_names.push(behavior.name);
+                //     })
 
-                    students.forEach(student => {
-                        var necessary_behaviors = null;
-                        var personalized_data = `&id=${student.id}` +
-                                                `&name=${student.name}` +
-                                                `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
-                                                `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
-                                                // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
-                        function handleSuccessReport(data) {
-                            data = JSON.parse(data);
-                            studentSuccessObjects.push(data);
+                //     students.forEach(student => {
+                //         var necessary_behaviors = null;
+                //         var personalized_data = `&id=${student.id}` +
+                //                                 `&name=${student.name}` +
+                //                                 `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
+                //                                 `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                //                                 // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+                //         function handleSuccessReport(data) {
+                //             data = JSON.parse(data);
+                //             studentSuccessObjects.push(data);
 
-                            if(students.length === studentSuccessObjects.length) {
-                                //window.location.href = "/emailReport";
-                                handleEmailResults(studentSuccessObjects);
-                            }
-                        }
+                //             if(students.length === studentSuccessObjects.length) {
+                //                 //window.location.href = "/emailReport";
+                //                 handleEmailResults(studentSuccessObjects);
+                //             }
+                //         }
                         
-                        httpPostAsync(theUrl, universal_data + personalized_data, handleSuccessReport);
-                        // console.log(student.listOfBehaviors['AM Snack']);
+                //         httpPostAsync(theUrl, universal_data + personalized_data, handleSuccessReport);
+                //         // console.log(student.listOfBehaviors['AM Snack']);
 
-                    });
+                //     });
 
-                }
+                // }
             }
 
             function handleEmailResults(results) {
