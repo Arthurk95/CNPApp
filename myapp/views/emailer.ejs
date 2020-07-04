@@ -222,7 +222,7 @@
                                 <input id="emailPasswordInput" type="text" placeholder="Email Password..." onkeyup="setSendButtonStatus()">
                             </div>
                             <div id="sendEmailButton" class="buttonWithIcon width30 width90Mobile theme-color2-BG width40 marginLeft10 marginTop10 marginBottom10 disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); sendEmailSpinnerCheck();">
-                                <p>Send Email To Approved Recipients</p>
+                                <p id="sendEmailsButtonTitle">Send Email To Approved Recipients (0 Total)</p>
                                 <div style="display: none" id="spinner" class="spinning-loader marginLeft10 marginRight20"></div>
                             </div>
                         </div>
@@ -662,27 +662,29 @@
                         })
 
                         // students.forEach(student => {
-                        approved_s.forEach(student => {
-                            var necessary_behaviors = null;
-                            var personalized_data = `&id=${student.id}` +
-                                                    `&name=${student.name}` +
-                                                    `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
-                                                    `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
-                                                    // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
-                            function handleSuccessReport(data) {
-                                data = JSON.parse(data);
-                                studentSuccessObjects.push(data);
+                        approved_s.forEach((student, index) => {
+                            setTimeout(function() {
+                                document.getElementById('sendEmailsButtonTitle').innerHTML = `Sending emails... (${index+1}/${approvedTotal()})`;
+                                var necessary_behaviors = null;
+                                var personalized_data = `&id=${student.id}` +
+                                                        `&name=${student.name}` +
+                                                        `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
+                                                        `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                                                        // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+                                function handleSuccessReport(data) {
+                                    data = JSON.parse(data);
+                                    studentSuccessObjects.push(data);
 
-                                if(approved_s.length === studentSuccessObjects.length) {
-                                    //window.location.href = "/emailReport";
-                                    handleEmailResults(studentSuccessObjects);
+                                    if(approved_s.length === studentSuccessObjects.length) {
+                                        //window.location.href = "/emailReport";
+                                        handleEmailResults(studentSuccessObjects);
+                                    }
                                 }
-                            }
-                            
-                            //add timeout here?
-                            httpPostAsync(theUrl, universal_data + personalized_data, handleSuccessReport);
-                            // console.log(student.listOfBehaviors['AM Snack']);
-
+                                
+                                //add timeout here?
+                                httpPostAsync(theUrl, universal_data + personalized_data, handleSuccessReport);
+                                // console.log(student.listOfBehaviors['AM Snack']);
+                            }, index*5000) //each timer runs concurrently, splits up their times to 5, 10, 15, 20, etc seconds
                         });
 
                     // }
