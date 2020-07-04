@@ -35,6 +35,30 @@ router.put('/savestudent', auth.checkAuthenticated, function (req, res) {
   });
 });
 
+router.post('/editEmailSender', auth.checkAuthenticated, function (req, res) {
+    push_user = `UPDATE Admins SET Email="${req.body.email}" WHERE Username="SenderAdmin";`
+    //(Username, Email, Passwords, Names) VALUES ("SenderAdmin", "${req.body.email}", "${hashedPassword}", "temp");`
+    con.query(push_user, function (err, result) {
+        if (err) {
+            res.send(err.sqlMessage)
+        } else {
+            res.send('updated');
+        }
+    });
+});
+
+router.post('/resetEmailSender', auth.checkAuthenticated, async function (req, res) {
+    push_user = `UPDATE Admins SET Email="cnp.daily.report@gmail.com" WHERE Username="SenderAdmin";`
+    //(Username, Email, Passwords, Names) VALUES ("SenderAdmin", "${req.body.email}", "${hashedPassword}", "temp");`
+    con.query(push_user, function (err, result) {
+        if (err) {
+            res.send(err.sqlMessage)
+        } else {
+            res.send('updated');
+        }
+    });
+});
+
 router.post('/addactivity', auth.checkAuthenticated, function (req, res) {
   var sql = "CALL CreateNewActivity('" + req.body.name + "', '" + req.body.helper + "');";
   con.query(sql, function (err, result) {
@@ -216,14 +240,11 @@ router.post('/emailsettings', auth.checkAuthenticated, function (req, res) {
 });
 
 router.post('/saveemailsettings', auth.checkAuthenticated, function (req, res) {
-  console.log('DATA:**************')
-  // console.log(req.body.data)
   var form = req.body.form;
   var data = req.body.data;
   data = data.replace(/CLEANSED AMPERSAND STRING/g, '&')
     .replace(/CLEANSED ADDITION STRING/g, '+')
     .replace(/CLEANSED APSTR STRING/g, "'");
-  console.log(data);
   // .replace("a very ugly string that Matt made so it would not happen naturally","'");
   var sql;
   if (form == "header") {
@@ -232,7 +253,6 @@ router.post('/saveemailsettings', auth.checkAuthenticated, function (req, res) {
   else if (form == "signature") {
     sql = `CALL ChangeFooter('${data}');`;
   }
-  console.log('SQL:*************')
   console.log(sql);
   con.query(sql, function (err, result) {
     if (err) {
@@ -296,7 +316,7 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
   var get_reminders = "CALL ShowAllRemindersObject();";
   var get_behaviors = "CALL ShowAllTemplateObject();";
   var todays_students_query = "CALL PullUnhiddenStudents();";
-  var present_students = "SELECT s.StudentId, s.StudentName FROM cnp_data.Students s, cnp_data.ClassSession cs WHERE s.StudentId = cs.StudentId AND cs.CurrentDate=CURRENT_DATE AND cs.Absent=0;";
+  var present_students = "SELECT s.StudentId, s.StudentName FROM cnp_data.Students s, cnp_data.ClassSession cs WHERE s.StudentId = cs.StudentId AND cs.CurrentDate=CURRENT_DATE AND cs.Absent=0 ORDER BY s.StudentName ASC;";
   con.query(present_students, function (err, pStudents) {
     if (err) res.end();
     con.query(student_query, function (err, sQuery) {
@@ -339,7 +359,22 @@ router.get('/', auth.checkAuthenticated, function (req, res, next) {
               }
               con.query(todays_students_query, function (err, t_students) {
                 if (err) res.end();
-                res.render('admin.ejs', { title: 'Admin Page', students: sQuery[0], activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors, todays_students: t_students[0], present: pStudents });
+
+                con.query(`SELECT Email FROM Admins WHERE Username="SenderAdmin"`, function (err, email_address) {
+                  if (err) res.end();
+                  email_address = email_address[0].Email;
+
+
+                  pStudents.forEach((p_student, p_student_index) => {
+                    sQuery[0].forEach((student, student_index) => {
+                      if (p_student.StudentId === student.StudentId) {
+                        p_student[(new Date().toLocaleString('en-us', { weekday: 'long' }))] = student[(new Date().toLocaleString('en-us', { weekday: 'long' }))];
+                      }
+                    })
+                  })
+                      res.render('admin.ejs', { title: 'Admin Page', students: sQuery[0], activities: aQuery[0], tasks: tasks, compTasks: completed, reminders: Reminders, behaviors: Behaviors, todays_students: t_students[0], present: pStudents, emailSender: email_address});
+                  // });
+                });
               });
             });
           });

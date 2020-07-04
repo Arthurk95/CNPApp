@@ -6,7 +6,6 @@ var ejs = require('ejs');
 
 router.post('/emailReport', auth.checkAuthenticated, (req, res) => {
   var reports = JSON.parse(req.body.report);
-  console.log(reports);
   res.render('emailReport.ejs', { reports: reports });
 });
 
@@ -138,7 +137,6 @@ function bottomLayer(res, Students,) {
             var summary = '';
             if (stripped_result) {
                summary = stripped_result.MainParagraphs;
-              console.log(summary);
             }
           } catch (e) {
              summary = 'error accessing daily summary';
@@ -211,7 +209,13 @@ function bottomLayer(res, Students,) {
                   var footer = 'error grabbing header'
                   console.log(e);
                 }
-                res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer });
+
+                con.query(`SELECT Email FROM Admins WHERE Username="SenderAdmin"`, function (err, email_sender) {
+                  if (err) res.end();
+                  email_sender = email_sender[0].Email;
+                  
+                  res.render('emailer.ejs', { title: 'CNP Daily Report', reports: Students, behaviors: Behaviors, reminders: Reminders, summary: summary, snack: snack, lunch: lunch, header: header, footer: footer, emailSender: email_sender});
+                });//end sender info query
               });//end footer query
             });//end header query
           }); // end lunch query
@@ -332,7 +336,6 @@ router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next)
   var behavior_selection = req.body.studentsBehaviorSelection.split(',');
   var behavior_notes = req.body.studentsBehaviorNotes.split(',');
 
-  console.log('push behavior')
   for (var i = 0; i < behavior_names.length; i++) {
     push_behaviors_query = `CALL AddBehavior(${req.body.id}, "${behavior_names[i]}", "${behavior_selection[i]}", "${behavior_notes[i]}");`;
     (function (query) {
@@ -379,7 +382,6 @@ router.post('/send', (req, res) => {
   });
 
   async function sendEmail(pulled_emails, activities, pulled_personal_behaviors) {
-    console.log('SEND EMAIL');
     var [parent_emails] = pulled_emails[0];
     parent_emails = Object.values(parent_emails);
     console.log(`Sending email(s) to: ${parent_emails}`)
@@ -401,15 +403,21 @@ router.post('/send', (req, res) => {
         note: ('' + personal_behaviors[behavior_name + 'Note']).replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",")
       })
     })
-
+    var cc_email = '';
+    if (req.body.email === 'cnp.daily.report@gmail.com') {
+      cc_email = 'creativenatureplayschool@gmail.com';
+      req.body.emailPassword = process.env.EMAIL_PASSWORD;
+    } else {
+      req.body.emailPassword = req.body.emailPassword.replace(/CLEANSED AMPERSAND STRING/g, '&');
+    }
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
-        user: 'cnp.daily.report@gmail.com',
-        pass: process.env.EMAIL_PASSWORD
+        user: req.body.email,
+        pass: req.body.emailPassword
       },
       tls: {
         rejectUnauthorized: false
@@ -420,7 +428,7 @@ router.post('/send', (req, res) => {
         from: '"Creative Nature Playschool" <cnp.daily.report@gmail.com>', // sender address
         to: parent_emails, // list of receivers
         subject: "CNP Daily Report", // Subject line
-        cc: 'creativenatureplayschool@gmail.com',
+        cc: cc_email,
         text: "", // plain text body
         html: await ejs.renderFile('./views/emailTemplate.ejs', {
           name: name,
