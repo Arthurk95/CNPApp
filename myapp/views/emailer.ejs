@@ -212,17 +212,24 @@
 
                     
 
-                    <div id="stepTwo" class="contentWithSidebar flexColumn width100">
-                        <div class="width100 dark-content-BG flex flexAlignCenter width90Mobile center marginBottom20">
-                            <div id="sendEmailButton" class="buttonWithIcon width30 width90Mobile theme-color2-BG width40 center marginTop10 marginBottom10 disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); toggleElementID('spinner'); ">
-                                <p>Send Emails</p>
+                    <div id="stepTwo" class="contentWithSidebar flexColumn width100">   
+                        <div class="width100 dark-content-BG flex flexCenter flexAlignCenter flexCollapseMobile width90Mobile marginBottom20">
+                        <!-- <div class="width100 dark-content-BG flex flexAlignCenter width90Mobile center marginBottom20"> -->
+                            <div id="emailAddressDisplay">   
+                                <p class="light-text font25px marginRight10">Sender: <%- emailSender %></p>
+                            </div>
+                            <div id=emailPasswordDisplay">
+                                <input id="emailPasswordInput" type="text" placeholder="Email Password..." onkeyup="setSendButtonStatus()">
+                            </div>
+                            <div id="sendEmailButton" class="buttonWithIcon width30 width90Mobile theme-color2-BG width40 marginLeft10 marginTop10 marginBottom10 disabledButton" onclick="sendEmails(<%= JSON.stringify(reports) %>, <%= JSON.stringify(behaviors) %>); sendEmailSpinnerCheck();">
+                                <p>Send Email To Approved Recipients</p>
                                 <div style="display: none" id="spinner" class="spinning-loader marginLeft10 marginRight20"></div>
                             </div>
                         </div>
                         
                         <!-- Content -->
                         <div class="width90 center light-content-BG borderRadiusMedium hideOverflow marginBottom10"> 
-                            <div id="stepTwoTitle" class="heavyPadding theme-color1-light-BG flex spaceBetween flexAlignCenter flexWrap">
+                            <div id="stepTwoTitle" class="heavyPadding theme-color1-light-BG flex spaceBetween flexAlignCenter flexWrap theme-color4-light-BG">
                                 <p class="font30px light-text marginLeft10"></p>
                                 <p class="displayNone" id="currentStudentID"></p>
                                 <div id="reviewButton" class="buttonWithIcon theme-color2-light-BG" onclick="renderView(<%= JSON.stringify(behaviors) %>)">
@@ -240,7 +247,7 @@
                                         <div id="reviewData"></div>
                                     </div>
                                     <div class="flex flexCenter">
-                                        <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="studentApproved(this)">Approve</a>
+                                        <a class="formSubmitButton flexGrow1 maxWidth600px" onclick="studentApproved_DEV(this)">Approve</a>
                                     </div>
                                     
                                 </div>
@@ -282,9 +289,9 @@
                                                 <label for="<%= behavior.name %>" class="width20 width100Mobile"><%= behavior.name %></label>
                                                 
                                                 <div class="flex spaceAround flexAlignCenter relative width60 width100Mobile">
-                                                    <select id="<%= behavior.name%>Select" name="<%= behavior.name %>"></select>
+                                                    <select id="<%= behavior.name%>Select" name="<%= behavior.name %>" onchange="changeMade()"></select>
                                                     
-                                                    <textarea maxlength="500" style="display: none" id="<%=behavior.name %>-text-box" placeholder="<%=behavior.name %> Notes..."></textarea>
+                                                    <textarea maxlength="500" style="display: none" id="<%=behavior.name %>-text-box"  onkeydown="changeMade()" placeholder="<%=behavior.name %> Notes..."></textarea>
                                             
                                                     <a id="<%= behavior.name %>-note-button" onclick="toggleBetweenElements('<%=behavior.name %>-text-box', '<%= behavior.name %>Select'); toggleClassIfInputNotEmpty('<%=behavior.name %>-text-box', this, 'theme-color2-light-BG', 'theme-color4-light-BG');" class="marginLeft10 borderRadiusSmall theme-color4-light-BG lightPadding">
                                                         <i class="fas fa-sticky-note dark-text"></i>
@@ -317,7 +324,8 @@
                                         <i class="fas fa-caret-left"></i>
                                         <p>Back</p>
                                     </div>
-                                    <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>); toggleStyle(this, 'theme-color2-light-BG');">
+                                    <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved_DEV(<%= JSON.stringify(behaviors) %>);">
+                                        <!-- <div id="saveButtonStep2" class="buttonWithIcon" onclick="studentSaved(<%= JSON.stringify(behaviors) %>); toggleStyle(this, 'theme-color2-light-BG');"> -->
                                         <p>Save</p>
                                         <i class="fas fa-check"></i>
                                     </div>
@@ -331,7 +339,12 @@
                             <% if (reports.length > 0) { %>
                                 <script>passToJS(<%- JSON.stringify(reports) %>);</script>
                                 <% reports.forEach((report, index) => { %>
-                                    <li id="student<%= index %>" onclick="studentSelected(this, <%= index %>)"><%= report.name %></li>
+                                    <li id="student<%= index %>" class="unsaved" onclick="studentSelected(this, <%= index %>)">
+                                        <%= report.name %>
+                                        <div style="display: block" class="marginLeft10 marginRight10"id="unsavedDisplay<%= report.id %>">[NOT SAVED]</div>
+                                        <div style="display: none" class="marginLeft10 marginRight10" id="savedDisplay<%= report.id %>">[SAVED, PENDING APPROVAL]</div>
+                                        <div style="display: none" class="marginLeft10 marginRight10"id="approvedDisplay<%= report.id %>">[APPROVED]</div>
+                                    </li>
                                 <% }) %>
                             <% } else { %>
                                 <li>No Students</li>
@@ -352,6 +365,7 @@
         passHeaderToJS(<%- JSON.stringify(header) %>);
         passFooterToJS(<%- JSON.stringify(footer) %>);
         
+
         initEmailerVariables();
         
         
@@ -488,10 +502,6 @@
                 
             }
 
-            function behaviorNote(behavior){
-                console.log(behavior);
-            }
-
             // When the user clicks anywhere outside of the form window, close it
             window.onclick = function(event) {
                 if (event.target == formElement) {
@@ -554,6 +564,11 @@
                         return x;
                     }
 
+                    function encodeAmpBackslash(string) {
+                        var x = string.replace(/\&/g, "CLEANSED AMPERSAND STRING")
+                        return x;
+                    }
+
                     function escapeSpecialCharsHTML(string) {
                         var x = string.replace(/\&/g, "CLEANSED AMPERSAND STRING")
                             .replace(/\+/g, "CLEANSED ADDITION STRING")
@@ -566,7 +581,6 @@
 
             function getReminders() {
                 var remindersHTML = [];
-                console.log(reminders);
                 reminders.forEach(reminder => {
                     var temp;
                     try{ // contents is undefined if there are no reminders, causes error
@@ -590,64 +604,89 @@
                 (new Quill(tempCont)).setContents(JSON.parse(deltaParsed));
 
                 var result = tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
-                console.log(delta);
-                console.log(result);
                 return result;
             }
         </script>
 
         <script>
+            document.getElementById('emailPasswordInput').value = '';
+            document.getElementById('sendEmailButton').classList.add('disabledButton');
+            var tempEmail = <%- JSON.stringify(emailSender) %>;
+            if(tempEmail === 'cnp.daily.report@gmail.com') {
+                document.getElementById('emailPasswordInput').style.visibility = 'hidden';
+            }
+
             function sendEmails(students, todaysBehaviors, next){
-                console.log("sendEmails() ON HOLD**");
 
-                // var studentSuccessObjects = [];
+                if(!(document.getElementById('sendEmailButton').classList.contains('disabledButton'))) { //plus has to have values/turn green***HERE NEXT TIME
+                    console.log('approvedStudents');
+                    var approved_s = [];
+                    listOfStudents.forEach((s, index) => {
+                        if(approvedList[index] === true) {
+                            approved_s.push(s);
+                        }
+                    })
+                    console.log(approved_s);
 
-                // if(allStudentsApproved()){
-                //     var theUrl = window.location.href+'/send';
-                //     var header = getHeader();
-                //     var footer = getFooter();
+                    var studentSuccessObjects = [];
 
-                //     var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
-                //     var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
-                //     var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
-                //     var reminders_string = getReminders();
-                //     var universal_data = `summaryHTML=${summaryHTML}` + 
-                //                             `&snackHTML=${snackHTML}` + 
-                //                             `&lunchHTML=${lunchHTML}` +
-                //                             `&header=${header}` +
-                //                             `&footer=${footer}` +
-                //                             `&reminders=${reminders_string}`;
-                //     // console.log(Object.values(todaysBehaviors))
-                //     // console.log(Object.values(todaysBehaviors))
-                //     var behavior_names = [];
-                    
-                //     todaysBehaviors.forEach(behavior => {
-                //         behavior_names.push(behavior.name);
-                //     })
+                    var emailSender = <%- JSON.stringify(emailSender) %>;
+                    var emailPassword = document.getElementById('emailPasswordInput').value;
+                    emailPassword = encodeAmpBackslash(emailPassword);
+                    //encode emailPassword somehow
+                    // console.log(JSON.);
 
-                //     students.forEach(student => {
-                //         var necessary_behaviors = null;
-                //         var personalized_data = `&id=${student.id}` +
-                //                                 `&name=${student.name}` +
-                //                                 `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
-                //                                 `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
-                //                                 // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
-                //         function handleSuccessReport(data) {
-                //             data = JSON.parse(data);
-                //             studentSuccessObjects.push(data);
+                    // if(allStudentsApproved()){
+                        var theUrl = window.location.href+'/send';
+                        var header = getHeader();
+                        var footer = getFooter();
 
-                //             if(students.length === studentSuccessObjects.length) {
-                //                 //window.location.href = "/emailReport";
-                //                 handleEmailResults(studentSuccessObjects);
-                //             }
-                //         }
+                        var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
+                        var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
+                        var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
+                        var reminders_string = getReminders();
+                        var universal_data = `summaryHTML=${summaryHTML}` + 
+                                                `&snackHTML=${snackHTML}` + 
+                                                `&lunchHTML=${lunchHTML}` +
+                                                `&header=${header}` +
+                                                `&footer=${footer}` +
+                                                `&reminders=${reminders_string}` +
+                                                `&email=${emailSender}` +
+                                                `&emailPassword=${emailPassword}`;
+                        // console.log(Object.values(todaysBehaviors))
+                        // console.log(Object.values(todaysBehaviors))
+                        var behavior_names = [];
                         
-                //         httpPostAsync(theUrl, universal_data + personalized_data, handleSuccessReport);
-                //         // console.log(student.listOfBehaviors['AM Snack']);
+                        todaysBehaviors.forEach(behavior => {
+                            behavior_names.push(behavior.name);
+                        })
 
-                //     });
+                        // students.forEach(student => {
+                        approved_s.forEach(student => {
+                            var necessary_behaviors = null;
+                            var personalized_data = `&id=${student.id}` +
+                                                    `&name=${student.name}` +
+                                                    `&listOfActivities=${JSON.stringify(student.listOfActivities)}` +
+                                                    `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                                                    // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+                            function handleSuccessReport(data) {
+                                data = JSON.parse(data);
+                                studentSuccessObjects.push(data);
 
-                // }
+                                if(approved_s.length === studentSuccessObjects.length) {
+                                    //window.location.href = "/emailReport";
+                                    handleEmailResults(studentSuccessObjects);
+                                }
+                            }
+                            
+                            //add timeout here?
+                            httpPostAsync(theUrl, universal_data + personalized_data, handleSuccessReport);
+                            // console.log(student.listOfBehaviors['AM Snack']);
+
+                        });
+
+                    // }
+                }
             }
 
             function handleEmailResults(results) {
@@ -659,46 +698,65 @@
             }
 
             function renderView(todaysBehaviors){
-                var theUrl = window.location.href+'/render-email-view';
-                var header = getHeader();
-                var footer = getFooter();
-                // var reminders_string = JSON.stringify(reminders);                
-                    var reminders = getReminders();
-                    var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
-                    var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
-                    var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
-                    var reminders_string = getReminders();
-                    var universal_data = `summaryHTML=${summaryHTML}` + 
-                                            `&snackHTML=${snackHTML}` + 
-                                            `&lunchHTML=${lunchHTML}` +
-                                            `&header=${header}` +
-                                            `&footer=${footer}` +
-                                            `&reminders=${reminders}`;
-                var behavior_names = [];
-                
-                todaysBehaviors.forEach(behavior => {
-                    behavior_names.push(behavior.name);
-                })
+
+                if(!document.getElementById('reviewButton').classList.contains('disabledButton')) {
 
 
-                var necessary_behaviors = null;
+                    var theUrl = window.location.href+'/render-email-view';
+                    var header = getHeader();
+                    var footer = getFooter();
+                    // var reminders_string = JSON.stringify(reminders);                
+                        var reminders = getReminders();
+                        var summaryHTML = converQuillDeltaToHTML(summaryQuill.getContents())
+                        var snackHTML = converQuillDeltaToHTML(snackQuill.getContents())
+                        var lunchHTML = converQuillDeltaToHTML(lunchQuill.getContents())
+                        var reminders_string = getReminders();
+                        var universal_data = `summaryHTML=${summaryHTML}` + 
+                                                `&snackHTML=${snackHTML}` + 
+                                                `&lunchHTML=${lunchHTML}` +
+                                                `&header=${header}` +
+                                                `&footer=${footer}` +
+                                                `&reminders=${reminders}`;
+                    var behavior_names = [];
+                    
+                    todaysBehaviors.forEach(behavior => {
+                        behavior_names.push(behavior.name);
+                    })
 
-                var personalized_data = `&id=${currentStudentData.id}` +
-                                        `&name=${currentStudentData.name}` +
-                                        `&listOfActivities=${JSON.stringify(currentStudentData.listOfActivities)}` +
-                                        `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
-                                        // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
 
-                function handleResponse(data) {
-                    data = JSON.parse(data)
-                    // document.getElementById("reviewData").innerHTML = data.rendered_HTML;
-                    openReview(data.rendered_HTML);
+                    var necessary_behaviors = null;
+
+                    var personalized_data = `&id=${currentStudentData.id}` +
+                                            `&name=${currentStudentData.name}` +
+                                            `&listOfActivities=${JSON.stringify(currentStudentData.listOfActivities)}` +
+                                            `&todaysBehaviorNames=${JSON.stringify(behavior_names)}`;
+                                            // `&listOfBehaviors=${JSON.stringify(student.listOfBehaviors)}`; <-- have to re-pull this data in post in case there was an update
+
+                    function handleResponse(data) {
+                        data = JSON.parse(data)
+                        // document.getElementById("reviewData").innerHTML = data.rendered_HTML;
+                        openReview(data.rendered_HTML);
+                    }
+                    var callback = handleResponse;
+                    httpPostAsync(theUrl, universal_data + personalized_data, callback);
+                    // console.log(student.listOfBehaviors['AM Snack']);
                 }
-                var callback = handleResponse;
-                httpPostAsync(theUrl, universal_data + personalized_data, callback);
-                // console.log(student.listOfBehaviors['AM Snack']);
-
             }
+        </script>
+
+        <script>
+            //on load
+
+            //disable review button
+            if (!(document.getElementById('reviewButton').classList.contains('disabledButton'))) {
+                document.getElementById('reviewButton').classList.add('disabledButton');
+            }
+
+            // for(var i = 0; i < listOfStudents.length; i++) {
+            //     currentStudentIndex = i;
+            //     console.log(i);
+            //     setUnsavedStyle_DEV();
+            // }
         </script>
     </body>
 </html>

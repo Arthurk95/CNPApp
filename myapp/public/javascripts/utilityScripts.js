@@ -102,9 +102,12 @@ function checkboxClicked(element) {
     }
 }
 
-function checkStudentDayType(element, dayType){
-    if(dayType == 1){
-      element.classList.add("stripedBackground")
+function checkStudentDayType(element, dayType) {
+    var day = (new Date().toLocaleString('en-us', { weekday: 'long' }));
+    if (dayType[day] == 2) {
+        element.classList.add("stripedBackground")
+    } else if (dayType[day] == 1) {
+        element.classList.add("theme-color2-light-BG");
     }
   }
 
@@ -199,21 +202,24 @@ function toggleClassIfInputNotEmpty(inputID, element, className, oldClassName){
     }
 }
 
-function fillTodaysRosterPopup(ID, allStudents, todaysStudents){
+function fillTodaysRosterPopup(ID, allStudents, todaysStudents) {
     var elementToFill = document.getElementById(ID);
     for(var i = 0; i < allStudents.length; i++){
         // is allStudents[i].StudentID in todaysStudents
         // if not, add it to the popup
-        if(todaysStudents.some(student => student.StudentId === allStudents[i].StudentId)){}
-        else{
+        if (todaysStudents.some(student => student.StudentId === allStudents[i].StudentId)) {
+        }
+        else {
             var button = document.createElement('button');
             button.innerHTML = "<i class='light-text font25px fas fa-plus'></i>";
-            button.classList = "theme-color2-light-BG";
+            button.classList = "theme-color2-BG";
             button.setAttribute("onclick", "addToTodaysRoster(this, " + JSON.stringify(allStudents[i]) + ");");
             var li = document.createElement('li');
             li.classList = "spaceBetween light-content-BG";
             var p = document.createElement('p');
             p.innerHTML = allStudents[i].StudentName;
+            
+            checkStudentDayType(li, allStudents[i]);
 
             li.appendChild(p); li.appendChild(button);
             elementToFill.appendChild(li);

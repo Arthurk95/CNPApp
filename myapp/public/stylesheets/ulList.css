@@ -137,8 +137,10 @@
 .stripedBackground{
     background: repeating-linear-gradient(
         45deg,
-        white,
-        white 20px,
+        /* white,
+        white 20px, */
+        var(--ThemeColor2Light),
+        var(--ThemeColor2Light) 20px,
         var(--lightGray2) 20px,
         var(--lightGray2) 40px
       ) !important;

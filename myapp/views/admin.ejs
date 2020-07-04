@@ -43,6 +43,8 @@
                 Header</a>
               <a class="side-header-link side-header-submenu-link" onclick="emailSettings('editSignatureForm')">Edit
                 Signature</a>
+              <a class="side-header-link side-header-submenu-link" onclick="emailSenderFormPopUp('editEmailSenderForm')">Edit
+                Email Sender</a>
             </div>
           </div>
           <div class="flex flexColumn width100">
@@ -83,12 +85,13 @@
             <div class="heavyPadding maxHeight300px">
               <ul id="todays_students" class="ulList">
                 <% if (present.length > 0) {%>
-                <% present.forEach((student, index) => {  %>
-                <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= student.StudentName %></a>
-                <script>checkStudentDayType("today<%= student.StudentID %>", <%= student.DayType %>);</script>
-                <li id="today<%= student.StudentId %>" class="flex white-BG spaceBetween flexAlignCenter">
-                  <p><%= student.StudentName %></p>
-                  <button onclick="studentAbsent(this, <%= student.StudentId %>)" class="red-BG dark-text hoverable"><i
+                <% present.forEach((present_student, index) => {  %>
+                <a id="student<%= index %>" style="visibility: hidden; display: none;"><%= present_student.StudentName %></a>
+                <li id="today<%= present_student.StudentId %>" class="flex white-BG spaceBetween flexAlignCenter">
+                  <script>checkStudentDayType(document.getElementById("today<%= present_student.StudentId %>"), <%- JSON.stringify(present_student) %>);</script>
+                <!-- <li id="today<%= present_student.StudentId %>" class="flex white-BG spaceBetween flexAlignCenter"> -->
+                  <p><%= present_student.StudentName %></p>
+                  <button onclick="studentAbsent(this, <%= present_student.StudentId %>)" class="red-BG dark-text hoverable"><i
                       class="fas fa-question"></i></button>
 
                   <% }) %>
@@ -129,7 +132,7 @@
                 <% studentSpl = student.StudentName.split(" "); %>
                 <li class="profileList white-BG clickableItem" id="<%= index %>"
                   onclick="studentSelected(<%= student.StudentId %>)">
-                  <script>checkStudentDayType(document.getElementById("<%= index %>"), <%= student.DayType %>);</script>
+                  <script>checkStudentDayType(document.getElementById("<%= index %>"), <%- JSON.stringify(student) %>);</script>
                   <img class="leftCircle" src="/uploads/images/<%- student.Img %>"
                     onerror="this.src='/uploads/images/default.png'">
                   <p class="width80"><%= student.StudentName %></p>
@@ -806,6 +809,44 @@
             </div>
           </div> <!-- End edit signature form -->
 
+                  <!-- edit email sender form -->
+          <form id="editEmailSenderForm" class="formWindow">
+            <div class="formWindow-content">
+              <span class="close" onclick="closeForm()"><i class="fas fa-times"></i></span>
+              <p class="font50px marginBottom40 centerText theme-color2-light-text">Current Email: <%- emailSender %></p>
+              <div id="email-sender-container">
+                  <div>
+                    <h2>If using a Gmail account (other than the default), please follow these two steps to allow our app to send emails (emails will not send from the non-default account without these steps):</h2>
+                    <ol>
+                      <li>
+                        <a href="https://myaccount.google.com/lesssecureapps">Allow Less Secure Apps (Private Apps)</a>
+                      </li>
+                      <li>
+                        <a href="https://accounts.google.com/b/0/displayunlockcaptcha">Unlock Captcha</a>
+                      </li>
+                    </ol>
+                  </div>
+                  <div>
+                    <p id=emailSenderTitle>New Email:</p>
+                    <input id="emailSender" type="email" placeholder="Email" required>
+                  </div>
+              </div>
+
+              <div class="flex flexCenter">
+                <a id="emailSenderResetButton" class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit"
+                  onclick="resetEmailSender()">Reset To Default</a>
+                <a id="emailSenderButton" class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit"
+                  onclick="saveEmailSender(document.getElementById('editEmailSenderForm'))">Save</a>
+                <!-- <a class="formSubmitButton flexGrow1 maxWidth600px" id="newActivitySubmit" onclick="saveFooter()">Save</a> -->
+              </div>
+              <h3>
+                *Specified emails require you to enter your password on Step 2 of the Emailer page. This avoids the need to store
+                 your password in the database. If using a specified email is causing issues, click the "Reset To Default" button. This will reset the email to 
+                cnp.daily.report@gmail.com (a password will not need to be entered on the email page as it is automatically known by the app).
+              </h3>
+            </div>
+          </form> <!-- End edit email sender form -->
+
 
         </div>
       </div>
@@ -913,8 +954,8 @@
     newLi.classList.remove('main-BG');
     newLi.getElementsByTagName('p')[0].setAttribute("onclick", "studentAbsent(this, " + studentData.StudentId + ")"); // absent button
     newLi.getElementsByTagName('p')[0].innerHTML = studentData.StudentName; // student name
+    checkStudentDayType(newLi, studentData);
     list.appendChild(newLi);
-
     var theUrl = window.location.href + '/addroster';
     var data = "id=" + studentData.StudentId;
     var callback = reloadIt;
@@ -1248,6 +1289,49 @@
     httpPostAsync(theUrl, data, callback);
   }
 
+  function emailSenderFormPopUp(form) {
+    console.log('emailSenderFormPopUp()')
+    openForm(form);
+  }
+
+  var emailSenderValid = false;
+  // var emailSenderPasswordValid = false;
+  // var emailSenderPassword2Valid = false;
+
+  function saveEmailSender(form) {
+    if(form.emailSender.checkValidity() === false) {
+      document.getElementById('emailSenderTitle').innerHTML = '<p style="color:red"><strong>Please enter a valid email address</strong></p>'
+    } else {
+      document.getElementById('emailSenderTitle').innerHTML = '<p>New Email:</p>'
+      emailSenderValid = true;
+    }
+    
+    // if(form.emailSenderPassword.checkValidity() === false) {
+    //   document.getElementById('emailSenderPasswordTitle').innerHTML = '<p style="color:red"><strong>Please enter a password</strong></p>'
+    // } else {
+    //   document.getElementById('emailSenderPasswordTitle').innerHTML = '<p>Password:</p>'
+    //   emailSenderPasswordValid = true;
+    // }
+
+    // if(form.emailSenderPassword2.checkValidity() === false) {
+    //   document.getElementById('emailSenderPassword2Title').innerHTML = '<p style="color:red"><strong>Please confirm your password</strong></p>'
+    // } else {
+    //   document.getElementById('emailSenderPassword2Title').innerHTML = '<p>Confirm Password:</p>'
+    //   emailSenderPassword2Valid = true;
+    // }
+
+    if(emailSenderValid === true) {
+      var data = `email=${form.emailSender.value}`;
+      var callback = doNothing;
+      httpPostAsync(window.location.href + '/editEmailSender', data, reloadIt);
+
+    }
+  }
+  
+  function resetEmailSender() {
+    httpPostAsync(window.location.href + '/resetEmailSender', null, reloadIt);
+  }
+
   function escapeSpecialChars(string) {
     var x = string.replace(/\\/g, "\\\\")
       .replace(/\&/g, "CLEANSED AMPERSAND STRING")
@@ -1258,7 +1342,6 @@
       .replace(/\t/g, "\\t")
       .replace(/\f/g, "\\f");
 
-    console.log(`Formatted: ${x}`);
     return x;
   }
 

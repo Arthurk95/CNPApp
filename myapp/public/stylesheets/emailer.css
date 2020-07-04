@@ -178,6 +178,19 @@
     box-shadow: inset 0px 0px 4px var(--darkGray3);
 }
 
+/* Students info was saved */
+.saved{
+    background: var(--ThemeColor3Light) !important;
+    color: var(--LightTextColor) !important;
+    box-shadow: inset 0px 0px 4px var(--darkGray3);
+}
+
+.unsaved{
+    background: var(--ThemeColor4Light) !important;
+    color: var(--LightTextColor) !important;
+    box-shadow: inset 0px 0px 4px var(--darkGray3);
+}
+
 .activitiesList{
     margin: 0 20px;
     padding: 20px;

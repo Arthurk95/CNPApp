@@ -131,9 +131,16 @@
 <div class="email-template-container">
     <div class="section bg-gray margin-bottom-40px">
         <%- header %>
-        <div class="margin-bottom-20px">
-            <%- summary %>
+
+        <div class="value-section">
+            <table class="width100">
+                <tr>
+                    <td class="behavior-title">Today's Summary</td>
+                    <td class="behavior-value"><%- summary %></td>
+                </tr>
+            </table>
         </div>
+
         <div class="value-section">
             <table class="width100">
                 <tr>
