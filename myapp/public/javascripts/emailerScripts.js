@@ -620,8 +620,3 @@ function createTwoColumnDiv(left, right){
     div.appendChild(p2);
     return div;
 }
-
-  
-module.exports = {
-    getPass
-}
