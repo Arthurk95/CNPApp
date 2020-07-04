@@ -6,8 +6,6 @@ var ejs = require('ejs');
 
 /* GET home page. */
 router.get('/', auth.checkAuthenticated, (req, res) => {
-  console.log("Current logged in user:");
-  console.log(req.user);
   res.render('index');
   // res.render('index', { email: req.user.email });
 })
