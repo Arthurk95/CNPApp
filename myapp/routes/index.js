@@ -6,7 +6,11 @@ var ejs = require('ejs');
 
 /* GET home page. */
 router.get('/', auth.checkAuthenticated, (req, res) => {
-  res.render('index');
+  con.query(`SELECT NOW();`, function (err, timezone) {
+    var time = `${timezone[0]['NOW()']}`;
+    console.log(time);
+    res.render('index', { timezone: time });
+  });
   // res.render('index', { email: req.user.email });
 })
 
