@@ -502,7 +502,7 @@ function setUnsavedStyle_DEV() {
         document.getElementById('reviewButton').classList.add('disabledButton');
     }
     setSendButtonStatus();
-    document.getElementById('totalEmails').innerHTML = `(${approvedTotal()} Total)`;
+    // document.getElementById('totalEmails').innerHTML = `(${approvedTotal()} Total)`;
 }
 
 function setSavedStyle_DEV() {
@@ -537,7 +537,7 @@ function setSavedStyle_DEV() {
         document.getElementById('reviewButton').classList.remove('disabledButton');
     }
     setSendButtonStatus();
-    document.getElementById('totalEmails').innerHTML = `(${approvedTotal()} Total)`;
+    // document.getElementById('totalEmails').innerHTML = `(${approvedTotal()} Total)`;
 }
 
 function setApprovedStyle_DEV() {
