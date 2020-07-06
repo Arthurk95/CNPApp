@@ -6,9 +6,9 @@ const auth = require('../public/javascripts/loginScripts');
 router.get('/', auth.checkAuthenticated, function(req, res, next) {
   var sql = "SELECT MIN(CurrentDate) as startDate FROM cnp_data.DailyActivities;";
   con.query(sql, function(err,result){
-    sql = "SELECT * FROM cnp_data.Activities;";
+    sql = "SELECT * FROM cnp_data.Activities ORDER BY ActivityName ASC;";
     con.query(sql, function(err,a){
-      sql = "SELECT * FROM cnp_data.Students;";
+      sql = "SELECT * FROM cnp_data.Students ORDER BY StudentName ASC;";
       con.query(sql, function(err,s){
         res.render('stats', { title: 'Stats' , startDate: result[0].startDate, activities: JSON.stringify(a), students: JSON.stringify(s)});
       });
@@ -78,18 +78,27 @@ router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
       }
     }
   }
+  console.log('Prime SQL');
   console.log(sql);
   con.query(sql, function (err, primeVal) {
     con.query(sql2, function (err, betaVal) {
+      console.log('Beta SQL');
+      console.log(sql2);
       if(all && (prime == "Students" && beta == "Activities") || (prime == "Activities" && beta == "Students")){
-        con.query(sql4, function (err, extraVal){
-          if(weather == "all"){
+        con.query(sql4, function (err, extraVal) {
+          console.log('SQL 4');
+          console.log(sql4);
+          if (weather == "all") {
+            console.log('inputs');
+            console.log(inputs);
             values = {"primeval":primeVal,"betaval":betaVal,"inputs":inputs,"extras":extraVal};
             processData(values,res);
           }
           else{
             var sql3 = "SELECT * FROM cnp_data.Weather WHERE description like '" + weather + "' and dateTimes BETWEEN '" + start + "' AND '" + end + "';";
-            con.query(sql3, function (err, weatherVal){
+            console.log('SQL 3');
+            console.log(sql3);
+            con.query(sql3, function (err, weatherVal) {
               values = {"primeval":primeVal,"betaval":betaVal,"weatherVal":weatherVal,"inputs":inputs,"extras":extraVal};
               processData(values,res);
             });
@@ -105,7 +114,9 @@ router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
         else{
           var sql3 = "SELECT * FROM cnp_data.Weather WHERE description like '" + weather + "' and dateTimes BETWEEN '" + start + "' AND '" + end + "';";
           con.query(sql3, function (err, weatherVal){
-            values = {"primeval":primeVal,"betaval":betaVal,"weatherVal":weatherVal,"inputs":inputs};
+            console.log('SQL 3');
+            console.log(sql3);
+            values = { "primeval": primeVal, "betaval": betaVal, "weatherVal": weatherVal, "inputs": inputs };
             processData(values,res);
           });
         }
@@ -115,7 +126,6 @@ router.post('/getdata', auth.checkAuthenticated, function(req, res, next) {
 });
 
 function processData(data,res){
-
   var outputs = [];
   var meta = {};
   meta["caller"] = data.inputs.caller;
