@@ -228,16 +228,15 @@ router.post('/push-dailies', auth.checkAuthenticated, function (req, res, next) 
   var summary = req.body.summary_HTML;
   var snack = req.body.snack_HTML;
   var lunch = req.body.lunch_HTML;
-  summary = summary.replace(/CLEANSED AMPERSAND STRING/g, '&')
-    .replace(/CLEANSED ADDITION STRING/g, '+')
-    .replace(/CLEANSED APSTR STRING/g, "'");
-    snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
-    .replace(/CLEANSED ADDITION STRING/g, '+')
-    .replace(/CLEANSED APSTR STRING/g, "'");
-    lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
-    .replace(/CLEANSED ADDITION STRING/g, '+')
-    .replace(/CLEANSED APSTR STRING/g, "'");
-  
+  // summary = summary.replace(/CLEANSED AMPERSAND STRING/g, '&')
+  //   .replace(/CLEANSED ADDITION STRING/g, '+')
+  //   .replace(/CLEANSED APSTR STRING/g, "'");
+  //   snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
+  //   .replace(/CLEANSED ADDITION STRING/g, '+')
+  //   .replace(/CLEANSED APSTR STRING/g, "'");
+  //   lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
+  //   .replace(/CLEANSED ADDITION STRING/g, '+')
+  //   .replace(/CLEANSED APSTR STRING/g, "'");
     var sql_calls = [
       `CALL AddDailySummary('${summary}');`,
       `CALL AddDailyAmFood('${snack}');`,
@@ -405,7 +404,7 @@ router.post('/send', (req, res) => {
     })
     var cc_email = '';
     if (req.body.email === 'cnp.daily.report@gmail.com') {
-      cc_email = 'creativenatureplayschool@gmail.com';
+      // cc_email = 'creativenatureplayschool@gmail.com';
       req.body.emailPassword = process.env.EMAIL_PASSWORD;
     } else {
       req.body.emailPassword = req.body.emailPassword.replace(/CLEANSED AMPERSAND STRING/g, '&');
