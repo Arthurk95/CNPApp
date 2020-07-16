@@ -404,7 +404,7 @@ router.post('/send', (req, res) => {
     })
     var cc_email = '';
     if (req.body.email === 'cnp.daily.report@gmail.com') {
-      // cc_email = 'creativenatureplayschool@gmail.com';
+      cc_email = 'creativenatureplayschool@gmail.com';
       req.body.emailPassword = process.env.EMAIL_PASSWORD;
     } else {
       req.body.emailPassword = req.body.emailPassword.replace(/CLEANSED AMPERSAND STRING/g, '&');
