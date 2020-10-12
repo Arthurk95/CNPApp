@@ -1252,7 +1252,6 @@
       textData = (data.data[0].MainParagraphs);
       // textData = 'JSON.parse(textData);'
       textData = JSON.parse(textData);
-      console.log(textData)
     }
     if (data.form == "editHeaderForm") {
       headerQuill.setContents(textData);
@@ -1281,7 +1280,6 @@
     }
     else if (form == "signature") {
       textData = JSON.stringify(footerQuill.getContents())
-      console.log(textData);
       textData = escapeSpecialChars(textData);
       var data = "data=" + textData + "&form=" + form;
     }
@@ -1290,7 +1288,6 @@
   }
 
   function emailSenderFormPopUp(form) {
-    console.log('emailSenderFormPopUp()')
     openForm(form);
   }
 

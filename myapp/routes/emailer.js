@@ -3,6 +3,7 @@ var router = express.Router();
 const auth = require('../public/javascripts/loginScripts');
 const nodemailer = require('nodemailer');
 var ejs = require('ejs');
+const text_converter = require('../public/javascripts/textConversion')
 
 router.post('/emailReport', auth.checkAuthenticated, (req, res) => {
   var reports = JSON.parse(req.body.report);
@@ -228,15 +229,6 @@ router.post('/push-dailies', auth.checkAuthenticated, function (req, res, next) 
   var summary = req.body.summary_HTML;
   var snack = req.body.snack_HTML;
   var lunch = req.body.lunch_HTML;
-  // summary = summary.replace(/CLEANSED AMPERSAND STRING/g, '&')
-  //   .replace(/CLEANSED ADDITION STRING/g, '+')
-  //   .replace(/CLEANSED APSTR STRING/g, "'");
-  //   snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
-  //   .replace(/CLEANSED ADDITION STRING/g, '+')
-  //   .replace(/CLEANSED APSTR STRING/g, "'");
-  //   lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
-  //   .replace(/CLEANSED ADDITION STRING/g, '+')
-  //   .replace(/CLEANSED APSTR STRING/g, "'");
     var sql_calls = [
       `CALL AddDailySummary('${summary}');`,
       `CALL AddDailyAmFood('${snack}');`,
@@ -257,25 +249,6 @@ router.post('/push-dailies', auth.checkAuthenticated, function (req, res, next) 
   res.end();
   });
 
-// router.post('/push-summary', auth.checkAuthenticated, function (req, res, next) {
-//   var summary = req.body.text;
-//   summary = summary.replace(/CLEANSED AMPERSAND STRING/g, '&')
-//     .replace(/CLEANSED ADDITION STRING/g, '+')
-//     .replace(/CLEANSED APSTR STRING/g, "'");
-//   save_template_query = `CALL AddDailySummary('${summary}');`;
-//   con.query(save_template_query, function (err, result) {
-//     if (err) {
-//       console.log(`Unable to add [${summary}] to daily summary. ` + err);
-//       res.end();
-//     } else {
-//       console.log('Daily summary updated: ' + summary);
-//       res.end();
-//     }
-//   });
-
-
-// });
-
 router.post('/refresh-behaviors', auth.checkAuthenticated, function (req, res, next) {
   pull_daily_beh_query = `CALL PullDailyBehaviors(${req.body.id})`;
   con.query(pull_daily_beh_query, function (err, result) {
@@ -289,54 +262,17 @@ router.post('/refresh-behaviors', auth.checkAuthenticated, function (req, res, n
   });
 });
 
-
-// router.post('/push-am-snack', auth.checkAuthenticated, function (req, res, next) {
-//   var snack = req.body.text;
-//   snack = snack.replace(/CLEANSED AMPERSAND STRING/g, '&')
-//     .replace(/CLEANSED ADDITION STRING/g, '+')
-//     .replace(/CLEANSED APSTR STRING/g, "'");
-//   save_template_query = `CALL AddDailyAmFood('${snack}');`;
-
-//   con.query(save_template_query, function (err, result) {
-//     if (err) {
-//       console.log(`Unable to add [${snack}] to AM snack. ` + err);
-//       res.end();
-//     } else {
-//       console.log('AM snack updated: ' + snack);
-//       res.end();
-//     }
-//   });
-
-
-// });
-
-// router.post('/push-lunch', auth.checkAuthenticated, function (req, res, next) {
-//   var lunch = req.body.text;
-//   lunch = lunch.replace(/CLEANSED AMPERSAND STRING/g, '&')
-//     .replace(/CLEANSED ADDITION STRING/g, '+')
-//     .replace(/CLEANSED APSTR STRING/g, "'");
-//   save_template_query = `CALL AddDailyLunch('${lunch}');`;
-
-//   con.query(save_template_query, function (err, result) {
-//     if (err) {
-//       console.log(`Unable to add [${lunch}] to lunch. ` + err);
-//       res.end();
-//     } else {
-//       console.log('Lunch updated: ' + lunch);
-//       res.end();
-//     }
-//   });
-
-
-// });
-
 router.post('/push-behavior', auth.checkAuthenticated, function (req, res, next) {
+  // for (var key in req.body) {
+  //   req.body[key] = plain_text_to_db(req.body[key])
+  //   console.log(req.body[key])
+  // }
   var behavior_names = req.body.behaviorNames.split(',');
   var behavior_selection = req.body.studentsBehaviorSelection.split(',');
+  console.log(req.body.studentsBehaviorNotes)
   var behavior_notes = req.body.studentsBehaviorNotes.split(',');
-
   for (var i = 0; i < behavior_names.length; i++) {
-    push_behaviors_query = `CALL AddBehavior(${req.body.id}, "${behavior_names[i]}", "${behavior_selection[i]}", "${behavior_notes[i]}");`;
+    push_behaviors_query = `CALL AddBehavior(${req.body.id}, "${behavior_names[i]}", "${behavior_selection[i]}", "${text_converter.fixedEncodeURIComponent(behavior_notes[i])}");`;
     (function (query) {
       con.query(query, function (err, result) {
         if (err) {
@@ -399,7 +335,7 @@ router.post('/send', (req, res) => {
       personal_behavior_parsed.push({
         name: behavior_name,
         selection: personal_behaviors[behavior_name],
-        note: ('' + personal_behaviors[behavior_name + 'Note']).replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",")
+        note: ('' + (personal_behaviors[behavior_name + 'Note'] != null ? (unescape(personal_behaviors[behavior_name + 'Note'])).replace(/@@@/g, ",") : ''))//.replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",")
       })
     })
     var cc_email = '';
@@ -481,7 +417,7 @@ router.post('/render-email-view', (req, res) => {
       personal_behavior_parsed.push({
         name: behavior_name,
         selection: '' + personal_behaviors[behavior_name],
-        note: ('' + personal_behaviors[behavior_name + 'Note']).replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",")
+        note: ('' + (personal_behaviors[behavior_name + 'Note'] != null ? (unescape(personal_behaviors[behavior_name + 'Note'])).replace(/@@@/g, ",") : ''))//.replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",")
       })
     })
     var email_HTML = ejs.renderFile('./views/emailTemplate.ejs', {

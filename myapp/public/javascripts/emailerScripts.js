@@ -75,6 +75,8 @@ function studentSelected(listElement, index) {
     currentStudentIndex = index;
     currentStudentElement = listElement;
     currentStudentData = listOfStudents[index];
+    
+    
 
     populateData();
 }
@@ -140,7 +142,7 @@ function populateData(){
                 if(element != null && element != null){
                     if(element.name === behaviorKeys[i]){
                         element.value = behaviorValues[i];
-                        document.getElementById(behaviorKeys[i] + "-text-box").value = (behaviorValues[i + 1]).replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",");
+                        document.getElementById(behaviorKeys[i] + "-text-box").value = (unescape(behaviorValues[i + 1]).replace(/@@@/g, ","))//.replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",");
                         toggleClassIfInputNotEmpty(behaviorKeys[i] + "-text-box", document.getElementById(behaviorKeys[i] + "-note-button"), 'theme-color2-light-BG', 'theme-color4-light-BG');
                     }
                 }
@@ -354,6 +356,12 @@ function studentSaved(behaviors){
     httpPostAsync(`/emailer/student-unapproved/`, approveDB, null);
 }
 
+function fixedEncodeURIComponent(str) {
+    return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+      return '%' + c.charCodeAt(0).toString(16);
+    });
+  }
+
 function studentSaved_DEV(behaviors){
     var studentsBehaviorSelection = [];
     var studentsBehaviorNotes = [];
@@ -366,14 +374,21 @@ function studentSaved_DEV(behaviors){
             studentsBehaviorSelection.push("");
         }
         else {studentsBehaviorSelection.push(sel.options[sel.selectedIndex].text);}
-        studentsBehaviorNotes.push((note.value).replace(/\,/g, "CLEANSED COMMA STRING").replace(/\&/g, "CLEANSED AMPERSAND STRING"));
+        studentsBehaviorNotes.push((note.value).replace(/\,/g, "@@@"))//.replace(/\&/g, "CLEANSED AMPERSAND STRING"));
         behaviorNames.push(behaviors[i].name);
+
+        // console.log('fixedEncodeURIComponent(note.value)')
+        // console.log(fixedEncodeURIComponent(note.value))
+        // encoded_note = fixedEncodeURIComponent(note.value)
+        // console.log('unescape(encoded_note)')
+        // console.log(unescape(encoded_note))
+
     }
 
     /* Pass behaviors to DB for the student ID
     databaseWizardy(currentStudentData.id, studentsBehaviors);
     */
-   var db_data = `id=${currentStudentData.id}&behaviorNames=${behaviorNames}&studentsBehaviorSelection=${studentsBehaviorSelection}&studentsBehaviorNotes=${studentsBehaviorNotes}`;
+   var db_data = `id=${currentStudentData.id}&behaviorNames=${behaviorNames}&studentsBehaviorSelection=${studentsBehaviorSelection}&studentsBehaviorNotes=${fixedEncodeURIComponent(studentsBehaviorNotes)}`;
    httpPostAsync(`/emailer/push-behavior/`, db_data, null);
     
     savedList[currentStudentIndex] = true;
@@ -383,13 +398,6 @@ function studentSaved_DEV(behaviors){
 
     setSavedStyle_DEV();
 
-
-    // if(!savedList[currentStudentIndex]){ toggleSavedStyle(); } // isn't already saved
-    // approvedList[currentStudentIndex] = true; //was false, swapped to true
-    // toggleApprovedStyle();
-
-    // var approveDB = `id=${currentStudentData.id}`;
-    // httpPostAsync(`/emailer/student-unapproved/`, approveDB, null);
 }
 
 function toggleApprovedStyle(){
@@ -436,39 +444,6 @@ function changeMade() {
     // setSavedStyle_DEV();
     // setApprovedStyle_DEV();
 }
-
-// function setDefaultStyle_DEV() {
-
-//     if (stepTwoTitle.classList.contains(APPROVED_COLOR)) {
-//         toggleStyle(stepTwoTitle, APPROVED_COLOR);
-//         // toggleStyle(stepTwoTitle, DEFAULT_COLOR);
-//     } else if (stepTwoTitle.classList.contains(SAVED_COLOR)) {
-//         toggleStyle(stepTwoTitle, SAVED_COLOR);
-//         // toggleStyle(stepTwoTitle, DEFAULT_COLOR);
-//     }
-
-//     if (currentStudentElement.classList.contains("approved")) {
-//         currentStudentElement.classList.remove("approved");
-//     } else if (currentStudentElement.classList.contains("saved")) {
-//         currentStudentElement.classList.remove("saved");
-//     }
-
-//     var approvedDisplayType = document.getElementById(`approvedDisplay${currentStudentData.id}`).style.display;
-//     var savedDisplayType = document.getElementById(`savedDisplay${currentStudentData.id}`).style.display;
-
-//     if (approvedDisplayType === 'block') {
-//         document.getElementById(`approvedDisplay${currentStudentData.id}`).style.display = 'none';
-//     } else if (savedDisplayType === 'block') {
-//         document.getElementById(`savedDisplay${currentStudentData.id}`).style.display = 'none';
-//     }
-
-//     //set defaults
-//     stepTwoTitle.classList.add(DEFAULT_COLOR);
-//     document.getElementById(`unsavedDisplay${currentStudentData.id}`).style.display = 'block';
-//     if (!(document.getElementById('reviewButton').classList.contains('disabledButton'))) {
-//         document.getElementById('reviewButton').classList.add('disabledButton');
-//     }
-// }
 
 function setUnsavedStyle_DEV() {
     if (stepTwoTitle.classList.contains(APPROVED_COLOR)) {

@@ -339,7 +339,7 @@
                             <% if (reports.length > 0) { %>
                                 <script>passToJS(<%- JSON.stringify(reports) %>);</script>
                                 <% reports.forEach((report, index) => { %>
-                                    <li id="student<%= index %>" class="unsaved" onclick="studentSelected(this, <%= index %>)">
+                                    <li id="student<%= index %>" class="unsaved" onclick="hideAllNotes(<%= JSON.stringify(behaviors) %>); studentSelected(this, <%= index %>)">
                                         <%= report.name %>
                                         <div style="display: block" class="marginLeft10 marginRight10"id="unsavedDisplay<%= report.id %>">[NOT SAVED]</div>
                                         <div style="display: none" class="marginLeft10 marginRight10" id="savedDisplay<%= report.id %>">[SAVED, PENDING APPROVAL]</div>
@@ -619,14 +619,12 @@
             function sendEmails(students, todaysBehaviors, next){
 
                 if(!(document.getElementById('sendEmailButton').classList.contains('disabledButton'))) { //plus has to have values/turn green***HERE NEXT TIME
-                    console.log('approvedStudents');
                     var approved_s = [];
                     listOfStudents.forEach((s, index) => {
                         if(approvedList[index] === true) {
                             approved_s.push(s);
                         }
                     })
-                    console.log(approved_s);
 
                     var studentSuccessObjects = [];
 
@@ -759,6 +757,23 @@
             //     console.log(i);
             //     setUnsavedStyle_DEV();
             // }
+        </script>
+
+        <script>
+
+            function hideAllNotes(todaysBehaviors) {
+
+                var behavior_names = [];
+                        
+                todaysBehaviors.forEach(behavior => {
+                    curr_element = document.getElementById(behavior.name + '-text-box')
+                    if(!curr_element.style.display) {
+                        toggleBetweenElements(behavior.name + '-text-box', behavior.name + 'Select')
+                    }
+                    
+                })
+            }
+
         </script>
     </body>
 </html>
