@@ -142,7 +142,10 @@ function populateData(){
                 if(element != null && element != null){
                     if(element.name === behaviorKeys[i]){
                         element.value = behaviorValues[i];
-                        document.getElementById(behaviorKeys[i] + "-text-box").value = (unescape(behaviorValues[i + 1]).replace(/@@@/g, ","))//.replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",");
+                        (behaviorValues[i + 1] === null ? document.getElementById(behaviorKeys[i] + "-text-box").value = '' : 
+                            document.getElementById(behaviorKeys[i] + "-text-box").value = (unescape(behaviorValues[i + 1]).replace(/@@@/g, ","))
+                        )
+                        // document.getElementById(behaviorKeys[i] + "-text-box").value = (unescape(behaviorValues[i + 1]).replace(/@@@/g, ","))//.replace(/CLEANSED AMPERSAND STRING/g, "&").replace(/CLEANSED COMMA STRING/g, ",");
                         toggleClassIfInputNotEmpty(behaviorKeys[i] + "-text-box", document.getElementById(behaviorKeys[i] + "-note-button"), 'theme-color2-light-BG', 'theme-color4-light-BG');
                     }
                 }
